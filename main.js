@@ -53,12 +53,7 @@
     '.host-card',
     '.step',
     '.network-card',
-    '.proof-item',
-    '.hero__eyebrow',
-    '.hero__title',
-    '.hero__sub',
-    '.hero__ctas',
-    '.hero__stats'
+    '.proof-item'
   ];
 
   // Add reveal class to all targets

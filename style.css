@@ -817,6 +817,18 @@ ul { list-style: none; }
   transform: translateY(0);
 }
 
+/* --- HERO ENTRANCE ANIMATION --- */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__eyebrow { animation: heroFadeUp 0.7s var(--ease) 0.1s both; }
+.hero__title { animation: heroFadeUp 0.7s var(--ease) 0.2s both; }
+.hero__sub { animation: heroFadeUp 0.7s var(--ease) 0.35s both; }
+.hero__ctas { animation: heroFadeUp 0.7s var(--ease) 0.5s both; }
+.hero__stats { animation: heroFadeUp 0.7s var(--ease) 0.65s both; }
+
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
   .features__grid { grid-template-columns: repeat(2, 1fr); }
