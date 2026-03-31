@@ -1,0 +1,50 @@
+{
+  "name": "Guest Engine",
+  "description": "Two-sided guest placement and production platform for podcast and live show hosts and guests. Get booked, get produced, get everywhere.",
+  "url": "https://guestengine.live",
+  "provider": {
+    "organization": "Mornings in the Lab",
+    "url": "https://mitl.studio"
+  },
+  "version": "1.0.0",
+  "capabilities": {
+    "guest_booking": {
+      "description": "Book guest appearances on live shows across the MITL Live Network",
+      "endpoint": "https://ge.conversationos.live"
+    },
+    "guest_profiles": {
+      "description": "Create and manage permanent, SEO-indexed guest profiles",
+      "endpoint": "https://ge.conversationos.live"
+    },
+    "host_listing": {
+      "description": "List your show and receive AI-matched guest candidates",
+      "endpoint": "https://ge.conversationos.live"
+    },
+    "content_production": {
+      "description": "Full post-appearance content production: clips, social posts, transcripts, highlight reels",
+      "endpoint": "https://ge.conversationos.live"
+    },
+    "ai_producer": {
+      "description": "Sophia AI producer handles prep, booking, and green room briefing",
+      "endpoint": "https://ge.conversationos.live"
+    }
+  },
+  "authentication": {
+    "schemes": ["none"],
+    "notes": "Guest profiles are publicly browsable. Booking requires account creation."
+  },
+  "documentation": {
+    "llms_txt": "https://guestengine.live/llms.txt",
+    "llms_full_txt": "https://guestengine.live/llms-full.txt"
+  },
+  "parent_platform": {
+    "name": "ConversationOS",
+    "url": "https://conversationos.live",
+    "app_url": "https://app.conversationos.live"
+  },
+  "network": {
+    "name": "MITL Live Network",
+    "url": "https://mitl.studio",
+    "production_url": "https://production.mitl.studio"
+  }
+}

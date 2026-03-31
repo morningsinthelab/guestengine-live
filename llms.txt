@@ -1,0 +1,52 @@
+# Guest Engine
+
+> The only guest platform where you leave with content, not just a calendar invite.
+
+Guest Engine is a two-sided guest placement platform for podcast and live show hosts and guests. Built on ConversationOS.
+
+## What Guest Engine Does
+
+Guest Engine connects guests who want to be featured on live shows with hosts who need quality guests — and produces the entire experience end-to-end.
+
+### For Guests
+- Book appearances on live shows across the MITL Live Network
+- AI producer (Sophia) handles pre-show prep, topic angles, and green room briefing
+- Walk away with 7 deliverables: live appearance, 5 video clips, 10 social posts, full transcript, SEO profile page, backlinks, and highlight reel
+- One flat fee: $297 per appearance
+- Permanent, indexed profile page with SEO + GEO (Generative Engine Optimization)
+
+### For Hosts
+- List your show and set guest criteria
+- Receive AI-scored guest candidates in your pipeline
+- Sophia handles booking, scheduling, and prep packets
+- Full production stack: clips, transcripts, social posts, distribution
+- Revenue share on guest bookings
+- Powered by ConversationOS production engines
+
+## Platform Details
+- URL: https://guestengine.live
+- App: https://ge.conversationos.live
+- Parent Platform: https://conversationos.live
+- Network: https://mitl.studio
+- Production: https://production.mitl.studio
+
+## Pricing
+- Guest appearance: $297 (one-time, includes full content package)
+- Guest free profile: $0 (listed in directory)
+- Host listing: Free
+- Host pro tools: Available (ConversationOS integration)
+
+## Key Differentiators
+1. Production included — not just matchmaking
+2. SEO + GEO profiles indexed by Google and AI search engines
+3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character engines)
+4. Part of the MITL Live Network (1,000+ episodes, 700+ consecutive mornings, 3 years daily LIVE)
+5. AI producer Sophia handles the entire guest lifecycle
+
+## Contact
+- AI Producer: Sophia (via ge.conversationos.live)
+- Network: Mornings in the Lab
+- Platform: ConversationOS
+
+## Extended Documentation
+- [Full details](https://guestengine.live/llms-full.txt)

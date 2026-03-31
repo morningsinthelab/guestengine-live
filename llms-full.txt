@@ -1,0 +1,151 @@
+# Guest Engine — Full Documentation
+
+> The only guest platform where you leave with content, not just a calendar invite.
+
+Guest Engine is a two-sided guest placement and production platform. It connects guests seeking live show appearances with hosts who need quality guests — then produces the entire experience end-to-end. Unlike matchmaking platforms (PodMatch, Matchmaker.fm), Guest Engine includes full production: clips, social posts, transcripts, SEO profiles, and highlight reels.
+
+---
+
+## Platform Architecture
+
+Guest Engine is a product of ConversationOS — a modular show management platform with the following engines:
+
+| Engine | Function |
+|--------|----------|
+| Build Engine | Episode creation, show blueprints, rundowns |
+| Conversation Engine | Live show management, teleprompter, real-time tools |
+| Distribution Engine | Multi-platform publishing, scheduling, analytics |
+| Clip Engine | Automated clip generation, social optimization |
+| Narrative Engine | Transcript processing, content repurposing |
+| Character Engine | AI character management, personality systems |
+| Guest Engine | Guest booking, onboarding, production, off-boarding |
+
+---
+
+## Guest Experience (End-to-End)
+
+### Step 1: Sign Up
+Guest creates a profile at ge.conversationos.live. Profile includes bio, expertise, topics, links, and optional video pitch.
+
+### Step 2: Get Matched
+AI scores compatibility between guest profile and available shows. Factors: topic alignment, audience fit, conversation chemistry prediction, expertise level.
+
+### Step 3: Pre-Show Prep
+Sophia (AI producer) handles:
+- Topic angle development
+- Talking points and conversation starters
+- Green room briefing
+- Technical check and format overview
+- Guest prep packet delivery
+
+### Step 4: Go Live
+Guest appears on a show in the MITL Live Network. Format options include:
+- Center Stage (featured interview)
+- Deep Dive (long-form exploration)
+- Community Corner (community conversation)
+- Guest can participate remotely or in-studio
+
+### Step 5: Post-Production
+Within 48 hours, guest receives:
+1. Full recorded appearance (video + audio)
+2. 5 short-form video clips optimized for social platforms
+3. 10 pre-written social media posts (LinkedIn, X, Instagram)
+4. Complete searchable transcript
+5. Permanent SEO profile page on guestengine.live
+6. High-authority backlinks to guest's website
+7. Polished highlight reel for media kit / speaking page
+
+### Step 6: Profile Lives Forever
+Guest profile is permanently indexed by:
+- Google Search (traditional SEO)
+- AI search engines: Perplexity, ChatGPT, Gemini (Generative Engine Optimization)
+- Profile compounds in value over time as appearances accumulate
+
+---
+
+## Host Experience
+
+### Listing Your Show
+Hosts create a show profile with:
+- Show description, format, and audience
+- Guest criteria (topics, expertise level, audience size)
+- Scheduling availability
+- Content preferences
+
+### Guest Pipeline
+- AI-scored candidates appear in host's pipeline
+- Kanban workflow: New → Reviewing → Shortlisted → Accepted → Scheduled → Appeared
+- Accept/reject with one click
+- No cold DMs or pitch spam
+
+### Production Tools (via ConversationOS)
+- Sophia handles all booking logistics
+- Automated prep packet generation
+- Post-show clip generation via Clip Engine
+- Distribution via Distribution Engine
+- Transcript processing via Narrative Engine
+
+### Revenue Model for Hosts
+- Guests pay $297 per appearance
+- Hosts receive revenue share on bookings
+- Premium host tools available through ConversationOS subscription
+
+---
+
+## Pricing
+
+| Tier | Who | Price | Includes |
+|------|-----|-------|----------|
+| Guest Free Profile | Guest | $0 | Listed in directory, discoverable |
+| Guest Appearance | Guest | $297 (one-time) | Full appearance + 7-deliverable content package |
+| Host Listing | Host | Free | List show, receive guest applications |
+| Host Pro | Host | Contact for pricing | AI matching, Sophia booking, production stack |
+| ConversationOS | Host | Contact for pricing | Full show production platform |
+
+---
+
+## The MITL Live Network
+
+Guest Engine is the front door to the Mornings in the Lab Live Network:
+- 1,000+ episodes produced
+- 700+ consecutive mornings broadcasting
+- 3 years of daily LIVE content
+- Flagship: Mornings in the Lab with Keith & Jon
+- Multiple show formats across the network
+- Live, unscripted, authentic conversations
+
+---
+
+## URLs
+
+| Resource | URL |
+|----------|-----|
+| Guest Engine (brand) | https://guestengine.live |
+| Guest Engine (app) | https://ge.conversationos.live |
+| ConversationOS | https://conversationos.live |
+| ConversationOS App | https://app.conversationos.live |
+| MITL Studio | https://mitl.studio |
+| MITL Production | https://production.mitl.studio |
+
+---
+
+## Technical Integration
+
+Guest Engine is built on the ConversationOS platform and integrates with:
+- ConversationOS MCP Server (42+ tools)
+- Pipedrive (guest pipeline CRM)
+- Notion (guest curation database)
+- Apollo.io (guest enrichment)
+- LinkedIn Sales Navigator (guest discovery)
+- YouTube Data API (audience analytics)
+- Calendly (scheduling)
+- Google Workspace (communications)
+
+---
+
+## Contact & Booking
+
+- Book an appearance: https://ge.conversationos.live
+- AI Producer: Sophia (accessible through the platform)
+- Network inquiries: https://mitl.studio
+- Platform inquiries: https://conversationos.live
