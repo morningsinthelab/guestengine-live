@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guest Profile — Sarah Chen | Guest Engine</title>
+  <meta name="description" content="Sarah Chen — entrepreneur, author of 'Build Different,' and 3x founder. Guest profile on Guest Engine, powered by the MITL Live Network.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="canonical" href="https://guestengine.live/profile/sample/">
+  <style>
+    .profile { padding: clamp(6rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem); }
+    .profile__header { display: flex; gap: 2.5rem; align-items: flex-start; margin-bottom: 3rem; }
+    .profile__avatar {
+      width: 140px; height: 140px; min-width: 140px; border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(251,191,36,0.08) 100%);
+      border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--gold);
+    }
+    .profile__name {
+      font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.25rem);
+      line-height: 1.15; color: var(--text-primary); text-transform: uppercase; margin-bottom: 0.375rem;
+    }
+    .profile__title { font-size: 1rem; color: var(--text-body); margin-bottom: 0.75rem; }
+    .profile__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .profile__tag {
+      font-family: var(--font-display); font-size: 0.5625rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.75rem;
+      background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(251,191,36,0.2);
+      border-radius: var(--radius-sm);
+    }
+    .profile__bio { font-size: 0.9375rem; color: var(--text-body); line-height: 1.7; max-width: 600px; }
+    .profile__section { margin-bottom: 2.5rem; }
+    .profile__section-title {
+      font-family: var(--font-display); font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .profile__appearances { display: flex; flex-direction: column; gap: 1rem; }
+    .profile__appearance {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 1.5rem; display: flex; gap: 1.25rem; align-items: center;
+    }
+    .profile__appearance-thumb {
+      width: 120px; min-width: 120px; aspect-ratio: 16/9; background: var(--bg-alt);
+      border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1.5rem;
+    }
+    .profile__appearance-show {
+      font-family: var(--font-display); font-size: 0.5625rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;
+    }
+    .profile__appearance-title { font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+    .profile__appearance-date { font-size: 0.8125rem; color: var(--text-muted); }
+    .profile__clips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .profile__clip {
+      aspect-ratio: 9/16; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .profile__clip-icon { color: var(--gold); font-size: 1.5rem; }
+    .profile__clip-label {
+      font-family: var(--font-display); font-size: 0.5rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);
+    }
+    .profile__links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .profile__link {
+      display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;
+      color: var(--text-body); padding: 0.5rem 1rem; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius-md);
+      transition: all 0.2s var(--ease);
+    }
+    .profile__link:hover { border-color: var(--gold); color: var(--gold); }
+    .profile__link i { color: var(--gold); }
+    .profile__banner {
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(251,191,36,0.06) 100%);
+      border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem;
+      text-align: center; margin-top: 3rem;
+    }
+    .profile__banner-title {
+      font-family: var(--font-display); font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
+    }
+    .profile__banner-text { font-size: 0.9375rem; color: var(--text-body); margin-bottom: 1.25rem; }
+    @media (max-width: 768px) {
+      .profile__header { flex-direction: column; align-items: center; text-align: center; }
+      .profile__clips-grid { grid-template-columns: repeat(2, 1fr); }
+      .profile__appearance { flex-direction: column; text-align: center; }
+      .profile__links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo" aria-label="Guest Engine home">
+        <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="36" height="36" rx="6" fill="#fbbf24"/>
+          <text x="8" y="26" font-family="Syncopate, sans-serif" font-weight="700" font-size="22" fill="#020617">G</text>
+        </svg>
+        <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
+      </a>
+      <div class="nav__links" id="navLinks">
+        <a href="/#for-guests" class="nav__link">FOR GUESTS</a>
+        <a href="/#for-hosts" class="nav__link">FOR HOSTS</a>
+        <a href="/#how-it-works" class="nav__link">HOW IT WORKS</a>
+        <a href="/#network" class="nav__link">NETWORK</a>
+      </div>
+      <div class="nav__actions">
+        <a href="https://ge.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
+        <a href="https://ge.conversationos.live" class="btn btn--primary btn--sm">GET STARTED</a>
+      </div>
+      <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="profile">
+    <div class="container">
+
+      <div style="margin-bottom: 1.5rem;">
+        <a href="/" style="font-family: var(--font-display); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);">
+          <i class="fa-solid fa-arrow-left" style="margin-right: 0.375rem;"></i> SAMPLE PROFILE — THIS IS WHAT YOUR PAGE LOOKS LIKE
+        </a>
+      </div>
+
+      <div class="profile__header">
+        <div class="profile__avatar">SC</div>
+        <div>
+          <h1 class="profile__name">Sarah Chen</h1>
+          <p class="profile__title">Entrepreneur, Author, 3x Founder</p>
+          <div class="profile__tags">
+            <span class="profile__tag">Startups</span>
+            <span class="profile__tag">Leadership</span>
+            <span class="profile__tag">Product</span>
+            <span class="profile__tag">Fundraising</span>
+          </div>
+          <p class="profile__bio">Sarah Chen is the author of <em>Build Different</em> and the founder of three venture-backed companies. She's been featured on TechCrunch, Bloomberg, and the a16z podcast. On Mornings in the Lab, she talked about why most founders build the wrong thing first — and what she learned burning through $2M before finding product-market fit.</p>
+        </div>
+      </div>
+
+      <div class="profile__section">
+        <h2 class="profile__section-title">APPEARANCES</h2>
+        <div class="profile__appearances">
+          <div class="profile__appearance">
+            <div class="profile__appearance-thumb"><i class="fa-solid fa-play"></i></div>
+            <div>
+              <p class="profile__appearance-show">MORNINGS IN THE LAB</p>
+              <p class="profile__appearance-title">Why Most Founders Build the Wrong Thing First</p>
+              <p class="profile__appearance-date">March 18, 2026 &middot; Center Stage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile__section">
+        <h2 class="profile__section-title">CLIPS</h2>
+        <div class="profile__clips-grid">
+          <div class="profile__clip">
+            <i class="profile__clip-icon fa-solid fa-play-circle"></i>
+            <span class="profile__clip-label">CLIP 1 OF 5</span>
+          </div>
+          <div class="profile__clip">
+            <i class="profile__clip-icon fa-solid fa-play-circle"></i>
+            <span class="profile__clip-label">CLIP 2 OF 5</span>
+          </div>
+          <div class="profile__clip">
+            <i class="profile__clip-icon fa-solid fa-play-circle"></i>
+            <span class="profile__clip-label">CLIP 3 OF 5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile__section">
+        <h2 class="profile__section-title">LINKS</h2>
+        <div class="profile__links">
+          <a href="#" class="profile__link"><i class="fa-solid fa-globe"></i> sarahchen.com</a>
+          <a href="#" class="profile__link"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a href="#" class="profile__link"><i class="fa-brands fa-x-twitter"></i> @sarahchen</a>
+          <a href="#" class="profile__link"><i class="fa-solid fa-book"></i> Build Different</a>
+        </div>
+      </div>
+
+      <div class="profile__banner">
+        <p class="profile__banner-title">THIS IS A SAMPLE PROFILE</p>
+        <p class="profile__banner-text">Every Guest Engine guest gets a permanent, SEO-indexed profile page like this one — complete with clips, transcript, backlinks, and a highlight reel.</p>
+        <a href="https://ge.conversationos.live" class="btn btn--primary">Book Your Appearance — $297 <span class="btn__arrow">&rarr;</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" aria-label="Guest Engine home">
+            <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="36" height="36" rx="6" fill="#fbbf24"/>
+              <text x="8" y="26" font-family="Syncopate, sans-serif" font-weight="700" font-size="22" fill="#020617">G</text>
+            </svg>
+            <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
+          </a>
+          <p class="footer__tagline">The guest placement platform where you leave with content, not just a calendar invite. Powered by the MITL Live Network.</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Guest Engine</h4>
+          <a href="/authors/" class="footer__link">Authors & Speakers</a>
+          <a href="/coaches/" class="footer__link">Coaches & Mentors</a>
+          <a href="/founders/" class="footer__link">Founders</a>
+          <a href="/realestate/" class="footer__link">Real Estate</a>
+          <a href="/podcasters/" class="footer__link">Podcasters</a>
+          <a href="/consultants/" class="footer__link">Consultants</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">MITL Network</h4>
+          <a href="https://mitl.studio" class="footer__link" target="_blank" rel="noopener">MiTL Studio</a>
+          <a href="https://mornings.live" class="footer__link" target="_blank" rel="noopener">Mornings in the Lab</a>
+          <a href="https://keithbilous.com" class="footer__link" target="_blank" rel="noopener">Keith Bilous</a>
+          <a href="https://conversationos.live" class="footer__link" target="_blank" rel="noopener">ConversationOS</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 GUEST ENGINE. CREATED BY KEITH BILOUS. AI-POWERED MATCHING. HUMAN-LED PRODUCTION.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../main.js"></script>
+</body>
+</html>
