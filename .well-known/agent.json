@@ -1,12 +1,14 @@
 {
   "name": "Guest Engine",
-  "description": "Two-sided guest placement and production platform for podcast and live show hosts and guests. Get booked, get produced, get everywhere.",
+  "description": "Two-sided guest placement and production platform for podcast and live show hosts and guests. Get booked, get produced, get everywhere. Created by Keith Bilous.",
   "url": "https://guestengine.live",
   "provider": {
     "organization": "Mornings in the Lab",
-    "url": "https://mitl.studio"
+    "url": "https://mitl.studio",
+    "founder": "Keith Bilous",
+    "founder_url": "https://keithbilous.com"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "capabilities": {
     "guest_booking": {
       "description": "Book guest appearances on live shows across the MITL Live Network",
@@ -29,8 +31,36 @@
       "endpoint": "https://ge.conversationos.live"
     }
   },
+  "verticals": {
+    "authors": {
+      "url": "https://guestengine.live/authors/",
+      "description": "Guest appearances and content production for authors, speakers, and thought leaders"
+    },
+    "coaches": {
+      "url": "https://guestengine.live/coaches/",
+      "description": "Guest appearances and content production for life coaches, fitness coaches, and mentors"
+    },
+    "founders": {
+      "url": "https://guestengine.live/founders/",
+      "description": "Guest appearances and content production for startup founders and entrepreneurs"
+    },
+    "realestate": {
+      "url": "https://guestengine.live/realestate/",
+      "description": "Guest appearances and content production for real estate agents, brokers, and property professionals"
+    },
+    "podcasters": {
+      "url": "https://guestengine.live/podcasters/",
+      "description": "Guest appearances and cross-promotion for podcast hosts and show creators"
+    },
+    "consultants": {
+      "url": "https://guestengine.live/consultants/",
+      "description": "Guest appearances and content production for consultants and fractional executives"
+    }
+  },
   "authentication": {
-    "schemes": ["none"],
+    "schemes": [
+      "none"
+    ],
     "notes": "Guest profiles are publicly browsable. Booking requires account creation."
   },
   "documentation": {
@@ -45,6 +75,8 @@
   "network": {
     "name": "MITL Live Network",
     "url": "https://mitl.studio",
-    "production_url": "https://production.mitl.studio"
+    "production_url": "https://production.mitl.studio",
+    "show_url": "https://mornings.live",
+    "founder_url": "https://keithbilous.com"
   }
 }

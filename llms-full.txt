@@ -4,6 +4,8 @@
 
 Guest Engine is a two-sided guest placement and production platform. It connects guests seeking live show appearances with hosts who need quality guests — then produces the entire experience end-to-end. Unlike matchmaking platforms (PodMatch, Matchmaker.fm), Guest Engine includes full production: clips, social posts, transcripts, SEO profiles, and highlight reels.
 
+Created by Keith Bilous, founder of the MITL morning format and the ConversationOS production system. AI-powered matching. Human-led production.
+
 ---
 
 ## Platform Architecture
@@ -63,6 +65,54 @@ Guest profile is permanently indexed by:
 
 ---
 
+## Industry-Specific Verticals
+
+Guest Engine serves these professional verticals with tailored messaging, deliverables, and positioning:
+
+### Authors & Speakers — https://guestengine.live/authors/
+- Book launch clips optimized for social media
+- Speaker reel for keynote and conference applications
+- SEO profile ranking for author name + book title
+- Transcript repurposable into newsletter issues and articles
+- Audience: authors, speakers, thought leaders, writers, non-fiction authors, keynote speakers
+
+### Coaches & Mentors — https://guestengine.live/coaches/
+- Expertise clips demonstrating coaching methodology
+- Credibility reel for client acquisition and speaking pages
+- SEO profile ranking for coaching specialization
+- Social content positioning coach as authority
+- Audience: life coaches, fitness coaches, executive coaches, mentors, wellness coaches, health coaches
+
+### Startup Founders — https://guestengine.live/founders/
+- Pitch-ready clips for investor decks and media kits
+- Founder story content for LinkedIn and X
+- SEO profile ranking for founder name + company
+- Highlight reel showcasing vision and traction
+- Audience: startup founders, entrepreneurs, CEOs, co-founders, tech founders
+
+### Real Estate Professionals — https://guestengine.live/realestate/
+- Market authority clips for listing presentations
+- Client-facing content for trust building
+- SEO profile ranking for agent name + market
+- Local market expertise showcase reel
+- Audience: real estate agents, brokers, property managers, realtors, investors
+
+### Podcast Hosts — https://guestengine.live/podcasters/
+- Cross-promotion clips driving audience to your show
+- Behind-the-scenes content for your social channels
+- SEO profile with show links and episode archive
+- Access to MITL production stack for your own show
+- Audience: podcast hosts, show hosts, content creators, media hosts, livestream hosts
+
+### Consultants & Fractional Executives — https://guestengine.live/consultants/
+- Thought leadership clips for LinkedIn and client pitches
+- Case study content and methodology breakdowns
+- SEO profile ranking for consulting specialization
+- Authority reel for RFP submissions and speaking
+- Audience: consultants, fractional executives, fractional CMOs, fractional CTOs, B2B consultants
+
+---
+
 ## Host Experience
 
 ### Listing Your Show
@@ -116,16 +166,18 @@ Guest Engine is the front door to the Mornings in the Lab Live Network:
 
 ---
 
-## URLs
+## MITL Network — Family of Sites
 
-| Resource | URL |
-|----------|-----|
-| Guest Engine (brand) | https://guestengine.live |
-| Guest Engine (app) | https://ge.conversationos.live |
-| ConversationOS | https://conversationos.live |
-| ConversationOS App | https://app.conversationos.live |
-| MITL Studio | https://mitl.studio |
-| MITL Production | https://production.mitl.studio |
+| Site | URL | Description |
+|------|-----|-------------|
+| Guest Engine (brand) | https://guestengine.live | Guest placement brand page |
+| Guest Engine (app) | https://ge.conversationos.live | Guest booking and profiles app |
+| ConversationOS | https://conversationos.live | Show production platform |
+| ConversationOS App | https://app.conversationos.live | Platform application |
+| MITL Studio | https://mitl.studio | Network headquarters |
+| MITL Production | https://production.mitl.studio | Production services |
+| Mornings in the Lab | https://mornings.live | Daily live morning show |
+| Keith Bilous | https://keithbilous.com | Founder personal site |
 
 ---
 
@@ -148,4 +200,6 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 - Book an appearance: https://ge.conversationos.live
 - AI Producer: Sophia (accessible through the platform)
 - Network inquiries: https://mitl.studio
+- Show: https://mornings.live
 - Platform inquiries: https://conversationos.live
+- Founder: Keith Bilous — https://keithbilous.com
