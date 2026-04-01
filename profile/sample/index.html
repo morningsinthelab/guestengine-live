@@ -11,6 +11,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../../style.css">
   <link rel="canonical" href="https://guestengine.live/profile/sample/">
+
+  <!-- Structured Data: Person + ProfilePage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "url": "https://guestengine.live/profile/sample/",
+    "name": "Sarah Chen — Guest Engine Profile",
+    "description": "Sarah Chen — entrepreneur, author of Build Different, and 3x founder. Guest profile on Guest Engine, powered by the MITL Live Network.",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Sarah Chen",
+      "jobTitle": "Entrepreneur, Author, 3x Founder",
+      "description": "Author of Build Different. Featured on Mornings in the Lab discussing why most founders build the wrong thing first.",
+      "knowsAbout": ["Startups", "Leadership", "Product", "Fundraising"],
+      "url": "https://guestengine.live/profile/sample/",
+      "sameAs": []
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Guest Engine",
+      "url": "https://guestengine.live"
+    }
+  }
+  </script>
+
   <style>
     .profile { padding: clamp(6rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem); }
     .profile__header { display: flex; gap: 2.5rem; align-items: flex-start; margin-bottom: 3rem; }
