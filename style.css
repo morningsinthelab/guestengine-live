@@ -224,6 +224,7 @@ ul { list-style: none; }
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
+  padding-top: 5rem;
   padding-bottom: clamp(4rem, 8vw, 6rem);
   overflow: hidden;
 }
