@@ -1,0 +1,182 @@
+{
+  "authors": {
+    "who_for": {
+      "title": "THIS IS FOR YOU IF",
+      "items": [
+        "You're a non-fiction author with a book on Amazon that isn't getting found",
+        "You're a speaker who needs a media kit and highlight reel to land paid keynotes",
+        "You've pitched 30+ podcasts and heard back from two — neither had an audience",
+        "Your Google results show your Amazon listing and nothing else",
+        "You want AI search engines to recommend your book when someone asks about your topic",
+        "You're tired of PR firms quoting $3,000/month for press releases nobody reads"
+      ]
+    },
+    "price_anchor": {
+      "title": "WHAT AUTHOR VISIBILITY ACTUALLY COSTS",
+      "rows": [
+        {"label": "PR agency retainer", "value": "$3,000–$5,000/mo", "highlight": false},
+        {"label": "Podcast booking service (12 shows)", "value": "$8,000–$18,000", "highlight": false},
+        {"label": "Freelance social media manager", "value": "$1,500–$3,000/mo", "highlight": false},
+        {"label": "Author website SEO", "value": "$500–$2,000/mo", "highlight": false},
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+      ]
+    },
+    "faqs": [
+      {"q": "How long does my guest profile page stay live?", "a": "Forever. Your Guest Engine profile is a permanent, indexed page. It ranks on Google and is structured for AI search engines like Perplexity, ChatGPT, and Gemini. It compounds in authority over time — it doesn't expire, get archived, or disappear behind a paywall."},
+      {"q": "Will this help my Amazon book sales?", "a": "Yes. Your profile page links directly to your Amazon listing, your personal site, and your social profiles — creating high-authority backlinks that boost your domain ranking. When someone Googles your name, they'll find your Guest Engine profile alongside your Amazon page, giving them multiple ways to buy."},
+      {"q": "How is this different from a podcast booking agency?", "a": "Podcast booking agencies charge $3,500–$18,000 to get you on 8–24 shows. They handle the booking. That's it. No profile page, no clips, no SEO, no structured data. Guest Engine gives you a produced appearance, 5 clips, 10 social posts, a permanent SEO profile, backlinks, and a highlight reel — all for $297."},
+      {"q": "What if I've never been on a live show before?", "a": "That's exactly who this is for. Sophia, our AI producer, handles your prep — topic angles, talking points, and a green room briefing before you go live. You show up prepared. We handle the production."},
+      {"q": "Do AI search engines actually surface Guest Engine profiles?", "a": "Yes. Every profile includes structured data (JSON-LD schema) that explicitly tells AI search engines who you are, what you wrote, and what topics you're an authority on. This is called Generative Engine Optimization (GEO) — and most authors don't have it anywhere."}
+    ]
+  },
+  "coaches": {
+    "who_for": {
+      "title": "THIS IS FOR YOU IF",
+      "items": [
+        "You're a life coach, fitness coach, business coach, or mentor with real results but no video proof",
+        "Potential clients Google 'best [your type] coach' and you don't show up",
+        "You spend Sundays creating content that gets 12 likes and zero clients",
+        "Your competitors have produced video — you have a Canva website and a selfie reel",
+        "You know AI recommendation engines exist but don't know how to get listed on them",
+        "You've considered a social media manager but $1,500/month feels expensive for 3 posts a week"
+      ]
+    },
+    "price_anchor": {
+      "title": "WHAT COACH VISIBILITY ACTUALLY COSTS",
+      "rows": [
+        {"label": "Social media manager", "value": "$1,500–$3,000/mo", "highlight": false},
+        {"label": "Professional video production", "value": "$2,000–$5,000/session", "highlight": false},
+        {"label": "SEO consultant", "value": "$1,000–$3,000/mo", "highlight": false},
+        {"label": "Personal branding agency", "value": "$5,000–$10,000/mo", "highlight": false},
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+      ]
+    },
+    "faqs": [
+      {"q": "I'm not famous. Will anyone care about my profile?", "a": "Guest Engine profiles don't require fame — they require expertise. The profile is optimized to rank for your specialty, not your follower count. When someone Googles 'best mindset coach' or asks ChatGPT for recommendations, your structured profile is what surfaces you."},
+      {"q": "How does this help me get more coaching clients?", "a": "Two ways. First, the profile ranks on Google for your name and specialty — so potential clients find proof of your expertise before they ever message you. Second, the video clips and social posts give you months of content that demonstrates your value without you creating anything."},
+      {"q": "What's the time commitment?", "a": "45 minutes for the live appearance. Sophia handles your prep beforehand. Within 48 hours you receive 5 clips, 10 social posts, a full transcript, your SEO profile, and a highlight reel. That's a month of content from less than an hour of your time."},
+      {"q": "Will the video look professional?", "a": "This isn't a Zoom recording. It's a produced segment on a live broadcast network with 1,000+ episodes. Professional overlays, multi-camera production, and broadcast-quality audio. The kind of video that says 'credible' before they even hear what you say."},
+      {"q": "Can I use the clips on my own website and social media?", "a": "Yes. All clips, posts, transcript, and your highlight reel are yours to use however you want — website, Instagram, LinkedIn, email signature, intake page, speaker applications. No restrictions."}
+    ]
+  },
+  "founders": {
+    "who_for": {
+      "title": "THIS IS FOR YOU IF",
+      "items": [
+        "You're a startup founder or CEO who needs visibility but doesn't have time for content",
+        "Your investors want to see brand traction and your Google results are an accident",
+        "You know LinkedIn matters but can't spend 3 hours a day crafting posts",
+        "PR agencies quote $5K–$15K/month and you're pre-Series A",
+        "You want press-grade content without the press-grade budget",
+        "Partners and enterprise buyers Google you before the first meeting — and you need to control what they find"
+      ]
+    },
+    "price_anchor": {
+      "title": "WHAT FOUNDER VISIBILITY ACTUALLY COSTS",
+      "rows": [
+        {"label": "PR agency retainer", "value": "$5,000–$15,000/mo", "highlight": false},
+        {"label": "LinkedIn ghostwriter", "value": "$2,000–$5,000/mo", "highlight": false},
+        {"label": "Podcast booking agency", "value": "$3,500–$8,000", "highlight": false},
+        {"label": "Professional video production", "value": "$3,000–$10,000/day", "highlight": false},
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+      ]
+    },
+    "faqs": [
+      {"q": "My company is pre-revenue. Is this worth it?", "a": "Especially at pre-revenue. Investors Google founders before they take the meeting. A permanent profile with a produced video segment and structured data signals credibility — without a PR firm. $297 is less than your monthly AWS bill."},
+      {"q": "Will this actually show up when investors Google me?", "a": "Yes. Your Guest Engine profile is built to rank for your name. It includes structured data that explicitly tells Google and AI search engines who you are, what you're building, and why you're the authority. Most founders have a LinkedIn profile, a Crunchbase stub, and nothing else. This changes that."},
+      {"q": "I don't have time for content creation. How much of my time does this take?", "a": "45 minutes for the live conversation. That's it. Sophia preps you beforehand. We produce everything after — clips, posts, transcript, profile, highlight reel. You get a month of LinkedIn content from less than an hour."},
+      {"q": "How is this different from hiring a PR agency?", "a": "PR agencies charge $5K–$15K/month to pitch journalists who may never respond. They produce press releases, not content you can use. Guest Engine gives you a produced appearance, usable content assets, and a permanent indexed profile — for a one-time fee of $297."},
+      {"q": "Can I send my profile to investors and partners?", "a": "That's one of the primary use cases. Send the link before any call — it arrives before you do and sets the frame. Investors see a produced video, not a pitch deck. Partners see authority, not a cold email."}
+    ]
+  },
+  "realestate": {
+    "who_for": {
+      "title": "THIS IS FOR YOU IF",
+      "items": [
+        "You're a real estate agent or broker who looks exactly like every other agent in your market",
+        "You're spending $1,500/month on Zillow Premier Agent and competing with 40 headshots",
+        "You know video content wins but don't have time or budget to produce it",
+        "When someone Googles '[your city] real estate expert,' you're nowhere on the first page",
+        "You want to be the agent AI recommends when a buyer asks 'who should I use in [city]'",
+        "Your listing presentations need something more impressive than a Canva slide deck"
+      ]
+    },
+    "price_anchor": {
+      "title": "WHAT LOCAL AUTHORITY ACTUALLY COSTS",
+      "rows": [
+        {"label": "Zillow Premier Agent", "value": "$1,000–$3,000/mo", "highlight": false},
+        {"label": "Google Ads (local)", "value": "$1,500–$5,000/mo", "highlight": false},
+        {"label": "Professional video production", "value": "$2,000–$5,000/shoot", "highlight": false},
+        {"label": "Local SEO agency", "value": "$1,000–$2,500/mo", "highlight": false},
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+      ]
+    },
+    "faqs": [
+      {"q": "Will my profile rank for my city?", "a": "Yes. Your Guest Engine profile is optimized with local SEO signals — your city, market, and specialty are built into the structured data. When someone Googles '[your city] real estate expert,' your profile is built to compete for that result."},
+      {"q": "I already have a Zillow profile. Why do I need this?", "a": "Zillow is someone else's platform. You're competing with 40 agents on the same page, and they can bury you the moment a competitor pays more. Your Guest Engine profile is yours — permanently indexed, building authority over time, and not dependent on a monthly ad budget."},
+      {"q": "What kind of video content do I get?", "a": "A produced segment where you discuss local market trends, neighborhood expertise, and what buyers and sellers should know. This isn't a listing walkthrough — it's the kind of content that positions you as the community expert. Plus 5 short-form clips optimized for Instagram and LinkedIn."},
+      {"q": "How does this help me get listings?", "a": "Sellers Google agents before they call. Your profile shows up with a produced video, backlinks, and structured data. The agent who shows up as the local expert on Google gets the listing before it's even listed."},
+      {"q": "Can I use this in listing presentations?", "a": "Absolutely. Your highlight reel, your profile page, and your video segment are all assets you can embed in your listing presentation. It's proof you're the local authority — not just another agent with a license."}
+    ]
+  },
+  "podcasters": {
+    "who_for": {
+      "title": "THIS IS FOR YOU IF",
+      "items": [
+        "You host a podcast and your audience has plateaued — same 500 listeners every week",
+        "Guest swaps with same-size shows aren't moving the needle",
+        "You've tried Spotify ads and got listeners who churned after one episode",
+        "Your show doesn't appear when someone Googles '[your topic] podcast'",
+        "You want to see what a professional production stack looks like from the inside",
+        "You're curious about ConversationOS and want to experience it as a guest first"
+      ]
+    },
+    "price_anchor": {
+      "title": "WHAT PODCAST GROWTH ACTUALLY COSTS",
+      "rows": [
+        {"label": "Spotify / Facebook podcast ads", "value": "$500–$3,000/mo", "highlight": false},
+        {"label": "Podcast growth agency", "value": "$2,000–$5,000/mo", "highlight": false},
+        {"label": "Cross-promotion service", "value": "$500–$1,500/campaign", "highlight": false},
+        {"label": "Video podcast production upgrade", "value": "$3,000–$10,000", "highlight": false},
+        {"label": "Guest Engine (appearance on 1,000+ episode network)", "value": "$297 once", "highlight": true}
+      ]
+    },
+    "faqs": [
+      {"q": "How is this different from a podcast swap?", "a": "A swap is symmetric — you each promote to the same-size audience. Guest Engine is asymmetric. You appear on a network with 1,000+ episodes and a daily audience. Your listeners get introduced to a bigger stage. Their audience discovers your show."},
+      {"q": "Will this actually grow my audience?", "a": "A different stage reaches a different audience. The clips from your appearance drive listeners back to YOUR show. Your permanent profile indexes your show for search. This is compound distribution — not a one-time download bump."},
+      {"q": "What is ConversationOS?", "a": "The production stack behind the MITL Live Network — Build Engine, Clip Engine, Distribution Engine, Narrative Engine, and Character Engine. As a Guest Engine guest, you experience it firsthand. If you want it for your own show, that conversation starts after your appearance."},
+      {"q": "Can I use the clips to promote my own show?", "a": "Yes. All clips are yours. Use them on your show's social media, in your newsletter, on your website. They look like press coverage — not self-promotion."},
+      {"q": "I only have a small show. Do you accept small podcasters?", "a": "Show size doesn't matter. What matters is whether you have something interesting to say. Guest Engine is about curated conversations, not download counts."}
+    ]
+  },
+  "consultants": {
+    "who_for": {
+      "title": "THIS IS FOR YOU IF",
+      "items": [
+        "You're a consultant or fractional executive whose pipeline is 100% referral-dependent",
+        "When your referral network goes quiet, your revenue drops to zero",
+        "Cold outreach feels beneath you — because it is — but you don't have a better inbound strategy",
+        "Your Google results page is a LinkedIn profile and nothing that says 'expert'",
+        "Companies ask ChatGPT and Perplexity for recommendations and your name never comes up",
+        "You have the expertise to close any deal — you just can't get in the room without a warm intro"
+      ]
+    },
+    "price_anchor": {
+      "title": "WHAT INBOUND ACTUALLY COSTS",
+      "rows": [
+        {"label": "LinkedIn ghostwriter", "value": "$2,000–$5,000/mo", "highlight": false},
+        {"label": "SEO content agency", "value": "$3,000–$8,000/mo", "highlight": false},
+        {"label": "Cold outreach platform (Apollo, etc.)", "value": "$500–$2,000/mo", "highlight": false},
+        {"label": "Personal branding consultant", "value": "$5,000–$15,000/engagement", "highlight": false},
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+      ]
+    },
+    "faqs": [
+      {"q": "How does a profile page replace my referral pipeline?", "a": "It doesn't replace referrals — it supplements them with inbound. When someone Googles '[your specialty] consultant' or asks an AI tool for recommendations, your profile surfaces you. That's a lead that found YOU — not one that came through a favor."},
+      {"q": "I'm a fractional CFO/CTO/CMO. Is this relevant?", "a": "Especially relevant. Fractional executives need to be discoverable by companies who don't know they exist yet. Your profile is optimized to rank for your specific title and specialty — so when a CEO Googles 'fractional CFO for SaaS companies,' your name appears."},
+      {"q": "What do I actually talk about on the show?", "a": "Your expertise. The problems you solve. Your methodology. Sophia preps you with topic angles and talking points. This isn't a pitch — it's a conversation that demonstrates your authority. The best content is just you doing what you do, on camera, once."},
+      {"q": "Can I send my profile before client calls?", "a": "That's the power move. Send your Guest Engine profile link before every intro call. They see a produced video, your expertise on display, and a permanent indexed page — before you even get on Zoom. The frame is set before you open your mouth."},
+      {"q": "Will this work for my specific consulting niche?", "a": "The profile is structured with your specific specialty, methodology, and industry focus. Whether you're a supply chain consultant, a fractional CTO, or a leadership coach for executives — the structured data tells search engines exactly what you do and who you serve."}
+    ]
+  }
+}
