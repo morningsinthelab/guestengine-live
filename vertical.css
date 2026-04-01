@@ -1,0 +1,23 @@
+/* ============================================
+   VERTICAL PAGE OVERRIDES
+   Supplements style.css for /authors, /coaches, etc.
+   ============================================ */
+
+/* Vertical hero — slightly shorter than homepage */
+.hero--vertical {
+  min-height: 85vh;
+}
+
+/* 3-column feature grid for vertical pages (6 deliverables) */
+.features__grid--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .features__grid--3col { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .hero--vertical { min-height: 90svh; }
+  .features__grid--3col { grid-template-columns: 1fr; }
+}
