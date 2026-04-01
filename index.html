@@ -85,7 +85,11 @@
   <!-- HERO -->
   <header class="hero" id="hero">
     <div class="hero__bg">
-      <!-- Placeholder hero image - dark cinematic broadcast studio -->
+      <!-- HERO VIDEO: Replace src with your produced hero-video.mp4 -->
+      <video class="hero__video" autoplay muted loop playsinline poster="/assets/hero-poster.jpg">
+        <source src="/assets/hero-video.mp4" type="video/mp4">
+      </video>
+      <!-- Fallback: shown while video loads or if video fails -->
       <div class="hero__placeholder">
         <div class="hero__placeholder-grid">
           <div class="hero__placeholder-cell"></div>
@@ -359,6 +363,22 @@
       <div class="cta__buttons">
         <a href="https://ge.conversationos.live" class="btn btn--primary btn--lg">Get Featured — $297 <span class="btn__arrow">&rarr;</span></a>
         <a href="https://ge.conversationos.live" class="btn btn--outline btn--lg">List Your Show <span class="btn__arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL CAPTURE -->
+  <section class="capture reveal">
+    <div class="container">
+      <div class="capture__inner">
+        <div class="capture__text">
+          <h3 class="capture__title">Not ready to book? <span class="gold">Get the playbook.</span></h3>
+          <p class="capture__desc">A free guide to getting booked on live shows — what to say, how to prep, and how to turn one appearance into a month of content.</p>
+        </div>
+        <form class="capture__form" action="https://ge.conversationos.live" method="GET">
+          <input type="email" class="capture__input" placeholder="Enter your email" required aria-label="Email address">
+          <button type="submit" class="btn btn--primary">Get the Playbook <span class="btn__arrow">&rarr;</span></button>
+        </form>
       </div>
     </div>
   </section>

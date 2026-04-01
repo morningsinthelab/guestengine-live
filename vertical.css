@@ -20,10 +20,67 @@
   .features__grid--3col { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Cross-link strip — "Guest Engine is also for..." */
+.crosslinks {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
+  border-top: 1px solid var(--border);
+}
+
+.crosslinks__eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.crosslinks__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.crosslinks__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.625rem 1.125rem;
+  transition: all 0.2s var(--ease);
+}
+
+.crosslinks__link:hover {
+  border-color: rgba(251, 191, 36, 0.3);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.crosslinks__link i {
+  font-size: 0.75rem;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.crosslinks__link:hover i {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .hero--vertical {
     min-height: 100svh;
     padding-bottom: 3rem;
   }
   .features__grid--3col { grid-template-columns: 1fr; }
+  .crosslinks__grid { gap: 0.5rem; }
+  .crosslinks__link { font-size: 0.5625rem; padding: 0.5rem 0.875rem; }
 }
