@@ -3,12 +3,12 @@
    Supplements style.css for /authors, /coaches, etc.
    ============================================ */
 
-/* Vertical hero — align content from top instead of bottom */
+/* Vertical hero — match homepage: content anchored to bottom */
 .hero--vertical {
   min-height: 100vh;
-  align-items: flex-start;
-  padding-top: clamp(8rem, 12vw, 11rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  align-items: flex-end;
+  padding-top: 5rem;
+  padding-bottom: clamp(4rem, 8vw, 6rem);
 }
 
 /* 3-column feature grid for vertical pages (6 deliverables) */
@@ -23,8 +23,7 @@
 @media (max-width: 768px) {
   .hero--vertical {
     min-height: 100svh;
-    padding-top: 7rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
   }
   .features__grid--3col { grid-template-columns: 1fr; }
 }
