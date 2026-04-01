@@ -1,8 +1,8 @@
 # Guest Engine
 
-> The only guest platform where you leave with content, not just a calendar invite.
+> Where your professional identity lives on the internet. Permanently indexed. Discoverable everywhere.
 
-Guest Engine is a two-sided guest placement platform for podcast and live show hosts and guests. Built on ConversationOS by Keith Bilous, creator of the MiTL morning format.
+Guest Engine is a professional profile and content production platform. One live appearance produces a permanent, SEO-indexed profile page, video clips, social posts, transcript, backlinks, and highlight reel — discoverable on Google, Perplexity, ChatGPT, and Gemini. Built on ConversationOS by Keith Bilous, creator of the MiTL morning format.
 
 ## What Guest Engine Does
 
@@ -56,6 +56,15 @@ Guest Engine serves specific professional verticals with tailored positioning:
 4. Part of the MITL Live Network (1,000+ episodes, 700+ consecutive mornings, 3 years daily LIVE)
 5. AI producer Sophia handles the entire guest lifecycle
 6. Created by Keith Bilous — AI-powered matching, human-led production
+
+## Guides & Resources
+- [How to Get on Podcasts as an Author](https://guestengine.live/guides/author-podcast-booking/)
+- [How Coaches Get Clients Online](https://guestengine.live/guides/coach-visibility/)
+- [Founder Personal Brand Without LinkedIn](https://guestengine.live/guides/founder-personal-brand/)
+- [Real Estate Agent Authority Building](https://guestengine.live/guides/real-estate-authority/)
+- [How to Grow Your Podcast Audience](https://guestengine.live/guides/podcast-growth/)
+- [Consultant Inbound Without Referrals](https://guestengine.live/guides/consultant-inbound/)
+- [Sample Guest Profile](https://guestengine.live/profile/sample/)
 
 ## Contact
 - AI Producer: Sophia (via ge.conversationos.live)
