@@ -436,7 +436,7 @@
 
 
   <!-- CONTENT PACKAGE VISUAL -->
-  <section class="package reveal">
+  <section class="package">
     <div class="container">
       <p class="section__eyebrow">YOUR PROFESSIONAL PROFILE, PRODUCED</p>
       <h2 class="section__title">This is what your<br>professional identity<br><span class="gold">looks like online.</span></h2>
@@ -568,7 +568,7 @@
   </section>
 
   <!-- EMAIL CAPTURE -->
-  <section class="capture reveal">
+  <section class="capture">
     <div class="container">
       <div class="capture__inner">
         <div class="capture__text">
@@ -695,40 +695,6 @@
     <span>Talk to Sophia</span>
     <div class="sophia-fab__pulse"></div>
   </a>
-
-
-  <script>
-  // Content Calculator
-  (function() {
-    const hours = document.getElementById('calcHours');
-    const rate = document.getElementById('calcRate');
-    if (!hours || !rate) return;
-    function update() {
-      const h = parseInt(hours.value);
-      const r = parseInt(rate.value);
-      const monthly = h * r;
-      const annual = monthly * 12;
-      const save = monthly - 297;
-      document.getElementById('calcHoursVal').textContent = h + 'h';
-      document.getElementById('calcRateVal').textContent = '
-</html>
- + r;
-      document.getElementById('calcTimeVal').textContent = h + ' hours';
-      document.getElementById('calcCostVal').textContent = '
-</html>
- + monthly.toLocaleString();
-      document.getElementById('calcAnnualVal').textContent = '
-</html>
- + annual.toLocaleString();
-      document.getElementById('calcSaveVal').textContent = '
-</html>
- + Math.max(0, save).toLocaleString() + '/mo';
-    }
-    hours.addEventListener('input', update);
-    rate.addEventListener('input', update);
-    update();
-  })();
-  </script>
 
 </body>
 </html>
