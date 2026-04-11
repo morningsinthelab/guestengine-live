@@ -18,13 +18,13 @@
         {"label": "Podcast booking service (12 shows)", "value": "$8,000–$18,000", "highlight": false},
         {"label": "Freelance social media manager", "value": "$1,500–$3,000/mo", "highlight": false},
         {"label": "Author website SEO", "value": "$500–$2,000/mo", "highlight": false},
-        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$497 once", "highlight": true}
       ]
     },
     "faqs": [
       {"q": "How long does my guest profile page stay live?", "a": "Forever. Your Guest Engine profile is a permanent, indexed page. It ranks on Google and is structured for AI search engines like Perplexity, ChatGPT, and Gemini. It compounds in authority over time — it doesn't expire, get archived, or disappear behind a paywall."},
       {"q": "Will this help my Amazon book sales?", "a": "Yes. Your profile page links directly to your Amazon listing, your personal site, and your social profiles — creating high-authority backlinks that boost your domain ranking. When someone Googles your name, they'll find your Guest Engine profile alongside your Amazon page, giving them multiple ways to buy."},
-      {"q": "How is this different from a podcast booking agency?", "a": "Podcast booking agencies charge $3,500–$18,000 to get you on 8–24 shows. They handle the booking. That's it. No profile page, no clips, no SEO, no structured data. Guest Engine gives you a produced appearance, 5 clips, 10 social posts, a permanent SEO profile, backlinks, and a highlight reel — all for $297."},
+      {"q": "How is this different from a podcast booking agency?", "a": "Podcast booking agencies charge $3,500–$18,000 to get you on 8–24 shows. They handle the booking. That's it. No profile page, no clips, no SEO, no structured data. Guest Engine gives you a produced appearance, 5 clips, 10 social posts, a permanent SEO profile, backlinks, and a highlight reel — all for $497."},
       {"q": "What if I've never been on a live show before?", "a": "That's exactly who this is for. Sophia, our AI producer, handles your prep — topic angles, talking points, and a green room briefing before you go live. You show up prepared. We handle the production."},
       {"q": "Do AI search engines actually surface Guest Engine profiles?", "a": "Yes. Every profile includes structured data (JSON-LD schema) that explicitly tells AI search engines who you are, what you wrote, and what topics you're an authority on. This is called Generative Engine Optimization (GEO) — and most authors don't have it anywhere."}
     ]
@@ -48,7 +48,7 @@
         {"label": "Professional video production", "value": "$2,000–$5,000/session", "highlight": false},
         {"label": "SEO consultant", "value": "$1,000–$3,000/mo", "highlight": false},
         {"label": "Personal branding agency", "value": "$5,000–$10,000/mo", "highlight": false},
-        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$497 once", "highlight": true}
       ]
     },
     "faqs": [
@@ -78,14 +78,14 @@
         {"label": "LinkedIn ghostwriter", "value": "$2,000–$5,000/mo", "highlight": false},
         {"label": "Podcast booking agency", "value": "$3,500–$8,000", "highlight": false},
         {"label": "Professional video production", "value": "$3,000–$10,000/day", "highlight": false},
-        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$497 once", "highlight": true}
       ]
     },
     "faqs": [
-      {"q": "My company is pre-revenue. Is this worth it?", "a": "Especially at pre-revenue. Investors Google founders before they take the meeting. A permanent profile with a produced video segment and structured data signals credibility — without a PR firm. $297 is less than your monthly AWS bill."},
+      {"q": "My company is pre-revenue. Is this worth it?", "a": "Especially at pre-revenue. Investors Google founders before they take the meeting. A permanent profile with a produced video segment and structured data signals credibility — without a PR firm. $497 is less than your monthly AWS bill."},
       {"q": "Will this actually show up when investors Google me?", "a": "Yes. Your Guest Engine profile is built to rank for your name. It includes structured data that explicitly tells Google and AI search engines who you are, what you're building, and why you're the authority. Most founders have a LinkedIn profile, a Crunchbase stub, and nothing else. This changes that."},
       {"q": "I don't have time for content creation. How much of my time does this take?", "a": "45 minutes for the live conversation. That's it. Sophia preps you beforehand. We produce everything after — clips, posts, transcript, profile, highlight reel. You get a month of LinkedIn content from less than an hour."},
-      {"q": "How is this different from hiring a PR agency?", "a": "PR agencies charge $5K–$15K/month to pitch journalists who may never respond. They produce press releases, not content you can use. Guest Engine gives you a produced appearance, usable content assets, and a permanent indexed profile — for a one-time fee of $297."},
+      {"q": "How is this different from hiring a PR agency?", "a": "PR agencies charge $5K–$15K/month to pitch journalists who may never respond. They produce press releases, not content you can use. Guest Engine gives you a produced appearance, usable content assets, and a permanent indexed profile — for a one-time fee of $497."},
       {"q": "Can I send my profile to investors and partners?", "a": "That's one of the primary use cases. Send the link before any call — it arrives before you do and sets the frame. Investors see a produced video, not a pitch deck. Partners see authority, not a cold email."}
     ]
   },
@@ -108,7 +108,7 @@
         {"label": "Google Ads (local)", "value": "$1,500–$5,000/mo", "highlight": false},
         {"label": "Professional video production", "value": "$2,000–$5,000/shoot", "highlight": false},
         {"label": "Local SEO agency", "value": "$1,000–$2,500/mo", "highlight": false},
-        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$497 once", "highlight": true}
       ]
     },
     "faqs": [
@@ -138,7 +138,7 @@
         {"label": "Podcast growth agency", "value": "$2,000–$5,000/mo", "highlight": false},
         {"label": "Cross-promotion service", "value": "$500–$1,500/campaign", "highlight": false},
         {"label": "Video podcast production upgrade", "value": "$3,000–$10,000", "highlight": false},
-        {"label": "Guest Engine (appearance on 1,000+ episode network)", "value": "$297 once", "highlight": true}
+        {"label": "Guest Engine (appearance on 1,000+ episode network)", "value": "$497 once", "highlight": true}
       ]
     },
     "faqs": [
@@ -168,7 +168,7 @@
         {"label": "SEO content agency", "value": "$3,000–$8,000/mo", "highlight": false},
         {"label": "Cold outreach platform (Apollo, etc.)", "value": "$500–$2,000/mo", "highlight": false},
         {"label": "Personal branding consultant", "value": "$5,000–$15,000/engagement", "highlight": false},
-        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$297 once", "highlight": true}
+        {"label": "Guest Engine (one appearance + permanent profile)", "value": "$497 once", "highlight": true}
       ]
     },
     "faqs": [

@@ -21,7 +21,7 @@ const verticals = [
     ],
     painUs: [
       'Guaranteed live appearance on a daily show',
-      'One flat fee — $297, done',
+      'One flat fee — $497, done',
       'Professional clips for your book launch',
       'Highlight reel for speaking page & media kit',
       'SEO profile that ranks for your name + book title',
@@ -36,12 +36,12 @@ const verticals = [
       { icon: 'fa-solid fa-globe', title: 'Author Profile Page', desc: 'A permanent, indexed page that ranks for your name and book title. Compounds over time as AI search engines surface it.' },
       { icon: 'fa-solid fa-film', title: 'Speaker Reel', desc: 'A polished highlight reel for your speaking page, media kit, or conference applications. The thing that gets you booked for keynotes.' }
     ],
-    ctaText: 'Book Your Author Spotlight — $297',
+    ctaText: 'Book Your Author Spotlight — $497',
     ctaSubtext: 'Less than one hour with a PR firm. More content than a month of trying.',
     closingTitle: 'Your book deserves<br><span class="gold">an audience.</span>',
     closingSub: 'Stop pitching into the void. Show up once, walk away with a media kit, a content library, and a permanent profile that works while you write your next chapter.',
     metaTitle: 'Guest Engine for Authors — You Wrote the Book. We Give You the Stage.',
-    metaDesc: 'One live appearance gives authors a full content package — clips for your book launch, a speaker reel, an SEO profile, and a month of social content. $297 flat fee.'
+    metaDesc: 'One live appearance gives authors a full content package — clips for your book launch, a speaker reel, an SEO profile, and a month of social content. $497 flat fee.'
   },
   {
     slug: 'coaches',
@@ -59,7 +59,7 @@ const verticals = [
     ],
     painUs: [
       'One conversation becomes a month of content',
-      'One flat fee — $297, done',
+      'One flat fee — $497, done',
       '5 clips that demonstrate your expertise naturally',
       'SEO profile your next client finds when they Google you',
       '10 social posts — a month of content, no ring light required',
@@ -74,12 +74,12 @@ const verticals = [
       { icon: 'fa-solid fa-globe', title: 'Coach Profile Page', desc: 'A permanent page that ranks for your name + your niche. The page your next client finds before your Instagram.' },
       { icon: 'fa-solid fa-film', title: 'Credibility Reel', desc: 'A polished highlight reel for your website, your linktree, or your coaching intake page. Social proof that works 24/7.' }
     ],
-    ctaText: 'Book Your Expert Segment — $297',
+    ctaText: 'Book Your Expert Segment — $497',
     ctaSubtext: 'One client covers it. The content works for months.',
     closingTitle: 'Your expertise deserves<br><span class="gold">visibility.</span>',
     closingSub: 'Stop trading hours for content. Show up once, have a real conversation, and walk away with everything you need to be visible online for the next month.',
     metaTitle: 'Guest Engine for Coaches — Stop Creating. Start Being Seen.',
-    metaDesc: 'One live conversation gives coaches a full content package — expertise clips, social posts, an SEO profile, and a credibility reel. $297 flat fee.'
+    metaDesc: 'One live conversation gives coaches a full content package — expertise clips, social posts, an SEO profile, and a credibility reel. $497 flat fee.'
   },
   {
     slug: 'founders',
@@ -97,7 +97,7 @@ const verticals = [
     ],
     painUs: [
       'Guaranteed live appearance this month',
-      'One flat fee — $297, no retainer',
+      'One flat fee — $497, no retainer',
       '5 clips for LinkedIn and investor updates',
       'SEO profile = your "as featured on" page',
       'Highlight reel for pitch decks and speaking',
@@ -112,12 +112,12 @@ const verticals = [
       { icon: 'fa-solid fa-globe', title: 'Founder Profile Page', desc: 'A permanent page that ranks for your name + your company. The "as seen on" page that builds credibility with investors and partners.' },
       { icon: 'fa-solid fa-film', title: 'Pitch Reel', desc: 'A polished highlight reel for your pitch deck, your LinkedIn featured section, or your company\'s about page.' }
     ],
-    ctaText: 'Book Your Founder Spotlight — $297',
+    ctaText: 'Book Your Founder Spotlight — $497',
     ctaSubtext: 'Less than one day of a PR retainer. Content that lasts months.',
     closingTitle: 'Your story is the<br><span class="gold">pitch.</span>',
     closingSub: 'Investors, partners, and customers buy founders before they buy products. Show up, tell your story, and walk away with the content that makes you unforgettable.',
     metaTitle: 'Guest Engine for Founders — Press-Grade Content Without the PR Retainer.',
-    metaDesc: 'One live appearance gives founders clips, social posts, an SEO profile, and a pitch reel — no PR agency, no retainer. $297 flat fee.'
+    metaDesc: 'One live appearance gives founders clips, social posts, an SEO profile, and a pitch reel — no PR agency, no retainer. $497 flat fee.'
   },
   {
     slug: 'realestate',
@@ -135,7 +135,7 @@ const verticals = [
     ],
     painUs: [
       'One conversation = a month of local market content',
-      'One flat fee — $297, done',
+      'One flat fee — $497, done',
       '5 clips that position you as the local market expert',
       'SEO profile that ranks for "[Your Name] + [City] realtor"',
       '10 social posts tailored for real estate audiences',
@@ -150,12 +150,12 @@ const verticals = [
       { icon: 'fa-solid fa-globe', title: 'Agent Profile Page', desc: 'A permanent page that ranks for your name + your market. The page buyers and sellers find before your brokerage bio.' },
       { icon: 'fa-solid fa-film', title: 'Listing Presentation Reel', desc: 'A polished highlight reel for your listing presentations, your website, or your next recruiting conversation.' }
     ],
-    ctaText: 'Book Your Expert Segment — $297',
+    ctaText: 'Book Your Expert Segment — $497',
     ctaSubtext: 'One closing covers it. The content wins you the next 10 listings.',
     closingTitle: 'Own your market.<br><span class="gold">Online and off.</span>',
     closingSub: 'Stop being one of 50 agents who all look the same. Show up once, tell your story, and walk away with the content that makes you the obvious choice.',
     metaTitle: 'Guest Engine for Real Estate — Be the Agent Everyone Already Knows.',
-    metaDesc: 'One live appearance gives real estate agents video clips, social posts, an SEO profile, and a listing presentation reel. $297 flat fee.'
+    metaDesc: 'One live appearance gives real estate agents video clips, social posts, an SEO profile, and a listing presentation reel. $497 flat fee.'
   },
   {
     slug: 'podcasters',
@@ -173,7 +173,7 @@ const verticals = [
     ],
     painUs: [
       'Appear on a daily show with 1,000+ episodes',
-      'One flat fee — $297',
+      'One flat fee — $497',
       '5 clips that promote YOUR show to OUR audience',
       'Profile page that links directly to your podcast',
       'Cross-promotion to a live daily network',
@@ -188,12 +188,12 @@ const verticals = [
       { icon: 'fa-solid fa-globe', title: 'Podcaster Profile Page', desc: 'A permanent page linking to your show, your episodes, and your guest booking page. SEO juice that compounds.' },
       { icon: 'fa-solid fa-film', title: 'Sizzle Reel', desc: 'A highlight reel you can use to pitch yourself as a guest on other shows — or to recruit guests for your own.' }
     ],
-    ctaText: 'Book Your Cross-Promotion Spot — $297',
+    ctaText: 'Book Your Cross-Promotion Spot — $497',
     ctaSubtext: 'Grow your audience. Experience the production stack. See what\'s possible.',
     closingTitle: 'Your next 1,000 listeners<br><span class="gold">are in someone else\'s audience.</span>',
     closingSub: 'Stop posting episodes into the void. Show up on a stage that already has a crowd, and bring them back to yours.',
     metaTitle: 'Guest Engine for Podcasters — Grow Your Show From Someone Else\'s Stage.',
-    metaDesc: 'Appear as a guest on the MITL Live Network. Get cross-promotion clips, a podcaster profile, and a production stack demo. $297 flat fee.'
+    metaDesc: 'Appear as a guest on the MITL Live Network. Get cross-promotion clips, a podcaster profile, and a production stack demo. $497 flat fee.'
   },
   {
     slug: 'consultants',
@@ -211,7 +211,7 @@ const verticals = [
     ],
     painUs: [
       'One conversation = months of thought leadership content',
-      'One flat fee — $297, no ghostwriter retainer',
+      'One flat fee — $497, no ghostwriter retainer',
       '5 clips that demonstrate strategic thinking on camera',
       'SEO profile that ranks for your name + your specialty',
       '10 LinkedIn-optimized posts from a real conversation',
@@ -226,12 +226,12 @@ const verticals = [
       { icon: 'fa-solid fa-globe', title: 'Consultant Profile Page', desc: 'A permanent page that ranks for your name + your practice area. The page that shows up when a potential client Googles you.' },
       { icon: 'fa-solid fa-film', title: 'Authority Reel', desc: 'A polished highlight reel for proposals, your website, or your LinkedIn featured section. Credibility on demand.' }
     ],
-    ctaText: 'Book Your Strategy Segment — $297',
+    ctaText: 'Book Your Strategy Segment — $497',
     ctaSubtext: 'One engagement covers it. The content attracts the next ten.',
     closingTitle: 'Stop waiting for<br><span class="gold">referrals.</span>',
     closingSub: 'Build the digital presence that attracts clients between engagements. Show up once, walk away with the thought leadership library that positions you as the obvious choice.',
     metaTitle: 'Guest Engine for Consultants — Thought Leadership Without the Ghostwriter.',
-    metaDesc: 'One live conversation gives consultants LinkedIn clips, social posts, an SEO profile, and an authority reel. $297 flat fee.'
+    metaDesc: 'One live conversation gives consultants LinkedIn clips, social posts, an SEO profile, and an authority reel. $497 flat fee.'
   }
 ];
 

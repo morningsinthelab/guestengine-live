@@ -52,7 +52,7 @@ const calculatorHTML = `
           </div>
           <div class="calculator__row calculator__row--highlight">
             <span class="calculator__row-label">One Guest Engine appearance</span>
-            <span class="calculator__row-value">$297</span>
+            <span class="calculator__row-value">$497</span>
           </div>
           <div class="calculator__row calculator__row--highlight">
             <span class="calculator__row-label">Time investment</span>
@@ -145,7 +145,7 @@ const calcScript = `
       const r = parseInt(rate.value);
       const monthly = h * r;
       const annual = monthly * 12;
-      const save = monthly - 297;
+      const save = monthly - 497;
       document.getElementById('calcHoursVal').textContent = h + 'h';
       document.getElementById('calcRateVal').textContent = '$' + r;
       document.getElementById('calcTimeVal').textContent = h + ' hours';
@@ -187,7 +187,7 @@ home = home.replace('</body>', calcScript + '\n</body>');
 if (!home.includes('hero__pricing')) {
   home = home.replace(
     '      <div class="hero__stats">',
-    '      <p class="hero__pricing"><strong>$297</strong> — one appearance, everything included</p>\n      <div class="hero__stats">'
+    '      <p class="hero__pricing"><strong>$497</strong> — one appearance, everything included</p>\n      <div class="hero__stats">'
   );
 }
 

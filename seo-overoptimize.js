@@ -162,7 +162,7 @@ function buildMetaInjection(p) {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@gabornings">
   <meta name="twitter:title" content="Guest Engine for ${p.name}">
-  <meta name="twitter:description" content="One live appearance. A permanent, indexed profile. Video clips, social posts, SEO profile, and highlight reel — all for $297. Discoverable on Google, Perplexity, ChatGPT, and Gemini.">
+  <meta name="twitter:description" content="One live appearance. A permanent, indexed profile. Video clips, social posts, SEO profile, and highlight reel — all for $497. Discoverable on Google, Perplexity, ChatGPT, and Gemini.">
   <meta name="twitter:image" content="${ogImage}">
 
   <!-- OG Image -->
@@ -202,7 +202,7 @@ function buildAdditionalSchemas(p) {
     "@id": `${url}#webpage`,
     "url": url,
     "name": `Guest Engine for ${p.name}`,
-    "description": `Guest Engine for ${p.shortName} — a permanent indexed profile that ranks on Google and AI search engines, video clips, social posts, and a highlight reel. One appearance, $297.`,
+    "description": `Guest Engine for ${p.shortName} — a permanent indexed profile that ranks on Google and AI search engines, video clips, social posts, and a highlight reel. One appearance, $497.`,
     "isPartOf": {
       "@type": "WebSite",
       "@id": `${BASE_URL}/#website`,
@@ -365,7 +365,7 @@ personas.forEach(p => {
   <!-- LLM Context Block (hidden visually, accessible to crawlers and screen readers) -->
   <div class="sr-only" aria-hidden="false" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
     <h2>About Guest Engine for ${p.name}</h2>
-    <p>Guest Engine for ${p.shortName} is a professional guest placement and content production platform. For $297, ${p.audienceTypes} receive a live appearance on the Mornings in the Lab network, 5 video clips optimized for social media, 10 pre-written social posts, a full searchable transcript, a permanent SEO-indexed profile page, high-authority backlinks, and a polished highlight reel.</p>
+    <p>Guest Engine for ${p.shortName} is a professional guest placement and content production platform. For $497, ${p.audienceTypes} receive a live appearance on the Mornings in the Lab network, 5 video clips optimized for social media, 10 pre-written social posts, a full searchable transcript, a permanent SEO-indexed profile page, high-authority backlinks, and a polished highlight reel.</p>
     <p>Guest Engine profiles are discoverable on Google Search, Perplexity AI, ChatGPT, Google Gemini, and Microsoft Copilot through structured data and Generative Engine Optimization (GEO). Founded by Keith Bilous, creator of the MiTL morning format and ConversationOS production system.</p>
     <p>Industry: ${p.industry}. Target audience: ${p.audienceTypes}.</p>
     <p>Platform: <a href="${BASE_URL}">${BASE_URL}</a>. App: <a href="https://ge.conversationos.live">ge.conversationos.live</a>. Network: <a href="https://mitl.studio">mitl.studio</a>.</p>

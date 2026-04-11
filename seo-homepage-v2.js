@@ -74,7 +74,7 @@ const homepageLLMBlock = `
     <p>Each guest receives: 5 vertical video clips with burned-in captions, 10 social media posts for LinkedIn/X/Threads, a full speaker-identified transcript, a 60-90 second highlight reel, show notes with high-authority backlinks, and a permanent SEO-optimized profile page structured with schema.org data.</p>
     <p>Guest Engine profile pages are indexed by Google and readable by AI search engines including ChatGPT, Claude, Perplexity, and Gemini. Profiles rank for the guest's name and expertise, compounding authority over time.</p>
     <p>The platform serves authors, speakers, founders, coaches, consultants, real estate professionals, podcasters, financial advisors, attorneys, therapists, nonprofit leaders, corporate executives, and health and wellness professionals.</p>
-    <p>Pricing: $297 one-time fee per appearance. No subscriptions. No monthly fees. The MITL Live Network has produced over 1,000 episodes across 700+ consecutive mornings over 3 years of daily live broadcasting.</p>
+    <p>Pricing: $497 one-time fee per appearance. Memberships also available. The MITL Live Network has produced over 1,000 episodes across 700+ consecutive mornings over 3 years of daily live broadcasting.</p>
     <p>Guest Engine is powered by ConversationOS and the MITL Live Network. The AI producer Sophia handles booking, prep, green room briefing, and guest coordination. Signal ENGINE researches each guest's world overnight before their appearance.</p>
     <h3>Related Platforms</h3>
     <ul>

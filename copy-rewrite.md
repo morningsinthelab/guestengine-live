@@ -51,7 +51,7 @@ Your Amazon page is not a professional presence. It's a product listing buried u
 
 ### 4. Hero Pricing Line
 ```
-$297 — less than one hour with a PR firm, and your profile never expires.
+$497 — less than one hour with a PR firm, and your profile never expires.
 ```
 
 ---
@@ -136,7 +136,7 @@ Your competitors have a video that closes clients before the intro call. You hav
 
 ### 4. Hero Pricing Line
 ```
-$297 — less than one month of a social media manager who posts for the algorithm, not for clients.
+$497 — less than one month of a social media manager who posts for the algorithm, not for clients.
 ```
 
 ---
@@ -221,7 +221,7 @@ Your investors want brand traction. Your partners Google you before the first me
 
 ### 4. Hero Pricing Line
 ```
-$297 — less than one hour of a PR agency's time, and your profile indexes permanently.
+$497 — less than one hour of a PR agency's time, and your profile indexes permanently.
 ```
 
 ---
@@ -315,7 +315,7 @@ Every agent in your market has the same headshot, the same "I sell homes" bio, a
 
 ### 4. Hero Pricing Line
 ```
-$297 — less than one day of Google Ads that disappear the moment you stop paying.
+$497 — less than one day of Google Ads that disappear the moment you stop paying.
 ```
 
 ---
@@ -407,7 +407,7 @@ You're creating great content and talking to the same 500 listeners. Guest swaps
 
 ### 4. Hero Pricing Line
 ```
-$297 — less than one Facebook Ads campaign that reaches people who've never listened to a podcast.
+$497 — less than one Facebook Ads campaign that reaches people who've never listened to a podcast.
 ```
 
 ---
@@ -505,7 +505,7 @@ Your entire pipeline is people who already know you. When they stop calling, so 
 
 ### 4. Hero Pricing Line
 ```
-$297 — less than the cost of a single cold outreach sequence that nobody responds to anyway.
+$497 — less than the cost of a single cold outreach sequence that nobody responds to anyway.
 ```
 
 ---
@@ -636,7 +636,7 @@ The `<span class="gold">` line should always carry the **resolution, contrast, o
 ### AI Search Engine Mentions
 Per brief, all verticals explicitly name: **Google, Perplexity, ChatGPT, Gemini**. Authors page additionally names **Amazon**. Consultants and coaches name **LinkedIn** explicitly in the body copy.
 
-### The $297 Comparison Framework
+### The $497 Comparison Framework
 Each vertical's pricing line is calibrated to their specific spend context:
 - **Authors** → PR firm hourly rate
 - **Coaches** → Social media manager monthly cost

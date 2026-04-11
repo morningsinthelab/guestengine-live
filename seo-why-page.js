@@ -27,7 +27,7 @@ const newMetaBlock = `
 
   <!-- Twitter Card (full) -->
   <meta name="twitter:title" content="Why Guest Engine — Other Platforms Match You. We Produce You.">
-  <meta name="twitter:description" content="Guest marketplaces match you with a host and wish you luck. ConversationOS researches your world, briefs the host, produces you live, and delivers the content pack. $297 flat fee.">
+  <meta name="twitter:description" content="Guest marketplaces match you with a host and wish you luck. ConversationOS researches your world, briefs the host, produces you live, and delivers the content pack. $497 flat fee.">
 
   <!-- Robots & Indexing -->
   <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -173,7 +173,7 @@ const additionalSchemas = `
         "@type": "HowToStep",
         "position": 1,
         "name": "Book & Pay",
-        "text": "$297. One appearance. One content pack. One permanent profile. Choose your date on the Guest Engine platform."
+        "text": "$497. One appearance. One content pack. One permanent profile. Choose your date on the Guest Engine platform."
       },
       {
         "@type": "HowToStep",
@@ -198,7 +198,7 @@ const additionalSchemas = `
     "estimatedCost": {
       "@type": "MonetaryAmount",
       "currency": "USD",
-      "value": "297"
+      "value": "497"
     }
   }
   </script>`;
@@ -243,7 +243,7 @@ const whyLLMBlock = `
     <h3>The ConversationOS Difference</h3>
     <p>Signal ENGINE researches 30 days of community discourse around each guest overnight. The host walks in knowing what the audience is arguing about, what critics are saying, and the guest's best angle. The conversation is built around the guest's material — not random questions. After the appearance, ConversationOS handles clip generation, social post creation, transcript processing, and distribution automatically.</p>
     <h3>Pricing</h3>
-    <p>$297 one-time fee per appearance. No monthly subscription. No recurring charges. One appearance produces a permanent profile that compounds in SEO authority over time. Most guests would spend $500–$1,000 getting equivalent content produced independently.</p>
+    <p>$497 one-time fee per appearance. No monthly subscription. No recurring charges. One appearance produces a permanent profile that compounds in SEO authority over time. Most guests would spend $500–$1,000 getting equivalent content produced independently.</p>
     <h3>Guest-to-Host Pipeline</h3>
     <p>Guest Engine is the front door to becoming a host on the MITL Live Network. After experiencing ConversationOS as a guest, professionals can launch their own live show with the full production stack, their own guest pipeline, and their own audience.</p>
     <h3>Who This Is For</h3>

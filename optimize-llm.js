@@ -72,7 +72,7 @@ Object.values(verticals).forEach(v => {
     },
     "offers": {
       "@type": "Offer",
-      "price": "297",
+      "price": "497",
       "priceCurrency": "USD",
       "description": "One-time guest appearance with full content production package"
     },
@@ -151,7 +151,7 @@ Guest Engine connects guests who want to be featured on live shows with hosts wh
 - Book appearances on live shows across the MITL Live Network
 - AI producer (Sophia) handles pre-show prep, topic angles, and green room briefing
 - Walk away with 7 deliverables: live appearance, 5 video clips, 10 social posts, full transcript, SEO profile page, backlinks, and highlight reel
-- One flat fee: $297 per appearance
+- One flat fee: $497 per appearance
 - Permanent, indexed profile page with SEO + GEO (Generative Engine Optimization)
 
 ### For Hosts
@@ -183,7 +183,7 @@ Guest Engine serves specific professional verticals with tailored positioning:
 - Founder: https://keithbilous.com
 
 ## Pricing
-- Guest appearance: $297 (one-time, includes full content package)
+- Guest appearance: $497 (one-time, includes full content package)
 - Guest free profile: $0 (listed in directory)
 - Host listing: Free
 - Host pro tools: Available (ConversationOS integration)
@@ -350,7 +350,7 @@ Hosts create a show profile with:
 - Transcript processing via Narrative Engine
 
 ### Revenue Model for Hosts
-- Guests pay $297 per appearance
+- Guests pay $497 per appearance
 - Hosts receive revenue share on bookings
 - Premium host tools available through ConversationOS subscription
 
@@ -361,7 +361,7 @@ Hosts create a show profile with:
 | Tier | Who | Price | Includes |
 |------|-----|-------|----------|
 | Guest Free Profile | Guest | $0 | Listed in directory, discoverable |
-| Guest Appearance | Guest | $297 (one-time) | Full appearance + 7-deliverable content package |
+| Guest Appearance | Guest | $497 (one-time) | Full appearance + 7-deliverable content package |
 | Host Listing | Host | Free | List show, receive guest applications |
 | Host Pro | Host | Contact for pricing | AI matching, Sophia booking, production stack |
 | ConversationOS | Host | Contact for pricing | Full show production platform |

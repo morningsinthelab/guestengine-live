@@ -13,7 +13,7 @@ Guest Engine connects guests who want to be featured on live shows with hosts wh
 - AI producer (Sophia) handles pre-show prep, topic angles, and green room briefing
 - Signal ENGINE researches 30 days of community discourse around each guest overnight
 - Walk away with 7 deliverables: live appearance, 5 video clips, 10 social posts, full transcript, SEO profile page, backlinks, and highlight reel
-- One flat fee: $297 per appearance
+- One flat fee: $497 per appearance
 - Permanent, indexed profile page with SEO + GEO (Generative Engine Optimization)
 
 ### For Hosts
@@ -90,7 +90,7 @@ Show segments: Center Stage (deep spotlights), Conversation Desk (topic-driven p
 
 ## Pricing
 
-- Guest appearance: $297 (one-time, includes full content package)
+- Guest appearance: $497 (one-time, includes full content package)
 - Guest free profile: $0 (listed in directory)
 - Host listing: Free
 - Host pro tools: Available (ConversationOS integration)

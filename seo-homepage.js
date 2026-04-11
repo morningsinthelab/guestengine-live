@@ -17,7 +17,7 @@ const homeMeta = `
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@gabornings">
   <meta name="twitter:title" content="Guest Engine — Your Professional Profile, Produced and Indexed Forever">
-  <meta name="twitter:description" content="Other platforms book you on a show. We set the conversation before you arrive — research what your audience is arguing about, brief the host, and produce the whole thing live. $297.">
+  <meta name="twitter:description" content="Other platforms book you on a show. We set the conversation before you arrive — research what your audience is arguing about, brief the host, and produce the whole thing live. $497.">
   <meta name="twitter:image" content="https://guestengine.live/og-image.png">
 
   <!-- OG Extras -->
@@ -65,7 +65,7 @@ const homeSchemas = `
     "@id": "https://guestengine.live/#webpage",
     "url": "https://guestengine.live/",
     "name": "Guest Engine — Your Professional Profile, Produced and Indexed Forever",
-    "description": "The guest placement platform where you leave with content, not just a calendar invite. One live appearance produces a permanent SEO profile, video clips, social posts, and a highlight reel. $297.",
+    "description": "The guest placement platform where you leave with content, not just a calendar invite. One live appearance produces a permanent SEO profile, video clips, social posts, and a highlight reel. $497.",
     "isPartOf": {
       "@type": "WebSite",
       "@id": "https://guestengine.live/#website",
