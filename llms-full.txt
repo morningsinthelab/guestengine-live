@@ -17,47 +17,35 @@ Guest Engine is a product of ConversationOS — a modular show management platfo
 | Build Engine | Episode creation, show blueprints, rundowns |
 | Conversation Engine | Live show management, teleprompter, real-time tools |
 | Distribution Engine | Multi-platform publishing, scheduling, analytics |
-| Clip Engine | Automated clip generation, social optimization |
+| Clip Engine / ClipENGINE | Automated clip generation, social optimization (https://clips.conversationos.live) |
 | Narrative Engine | Transcript processing, content repurposing |
 | Character Engine | AI character management, personality systems |
 | Guest Engine | Guest booking, onboarding, production, off-boarding |
+| Signal ENGINE | Overnight community discourse research — 30 days of signal around each guest |
 
+---
 
-### Therapists & Counselors — https://guestengine.live/therapists/
-- Mental health thought leadership clips and professional authority content
-- Therapist profile ranking for specialty and practice area
-- Counselor and psychologist visibility on AI search engines
-- Audience: therapists, psychologists, counselors, LCSWs, marriage and family therapists
+## MITL Live Network Shows
 
-### Financial Advisors & Planners — https://guestengine.live/financial-advisors/
-- Financial authority clips demonstrating investment expertise
-- Advisor profile ranking for specialty and credentials
-- Wealth manager and CFP visibility on AI search engines
-- Audience: financial advisors, CFPs, wealth managers, investment advisors, retirement planners
+Guest Engine is the front door to the MITL Live Network. AI matches each guest to the show and segment where their story hits hardest.
 
-### Attorneys & Legal Professionals — https://guestengine.live/attorneys/
-- Legal thought leadership clips and expert authority content
-- Attorney profile ranking for practice area and jurisdiction
-- Lawyer visibility on AI search engines and legal directories
-- Audience: attorneys, lawyers, law firm partners, solo practitioners, legal consultants
+### Mornings in the Lab (Flagship)
+- URL: https://mornings.live
+- Format: Daily live morning show with Keith Bilous, Jon & Friends
+- 1,000+ episodes produced, 700+ consecutive mornings, 3 years of daily LIVE broadcasting
+- Segments: Center Stage (deep spotlights), Conversation Desk (topic-driven panels), Deep Dive (long-form exploration), Community Corner (community conversations), Did You Know, No Safe Words, BS or No BS, Jon Before You Go, Morning Focus
 
-### Health & Wellness Professionals — https://guestengine.live/health-wellness/
-- Wellness authority clips demonstrating evidence-based expertise
-- Health practitioner profile ranking for specialty
-- Wellness professional visibility on AI health search queries
-- Audience: health coaches, nutritionists, functional medicine doctors, fitness professionals
+### It Starts with Joy LIVE
+- Format: Energy, purpose, and conversations that move people
+- Status: Active show on the MITL Live Network
 
-### Nonprofit Leaders & Social Impact — https://guestengine.live/nonprofit-leaders/
-- Impact storytelling clips and mission-driven leadership content
-- Nonprofit leader profile ranking for cause area and impact
-- Executive director visibility on AI search engines
-- Audience: nonprofit leaders, executive directors, foundation directors, social entrepreneurs
+### The Jason Hewlett Show
+- Format: Performance, identity, and showing up as yourself
+- Status: Active show on the MITL Live Network
 
-### Corporate Executives & C-Suite — https://guestengine.live/corporate-executives/
-- Executive thought leadership clips and corporate authority content
-- C-suite profile ranking for industry and expertise
-- CEO and executive visibility on AI search engines
-- Audience: CEOs, CFOs, COOs, CTOs, VPs, senior directors, board members
+### Kindness Rising
+- Format: Kindness-driven conversations and community impact
+- Status: Active show on the MITL Live Network
 
 ---
 
@@ -77,32 +65,42 @@ Sophia (AI producer) handles:
 - Technical check and format overview
 - Guest prep packet delivery
 
+Signal ENGINE runs overnight before the appearance:
+- Researches 30 days of community discourse around the guest
+- Identifies what the audience is arguing about, what critics are saying
+- Finds the guest's best angle for the conversation
+- The host walks in knowing the guest's world
+
 ### Step 4: Go Live
 Guest appears on a show in the MITL Live Network. Format options include:
 - Center Stage (featured interview)
 - Deep Dive (long-form exploration)
+- Conversation Desk (topic-driven panel)
 - Community Corner (community conversation)
 - Guest can participate remotely or in-studio
 
 ### Step 5: Post-Production
 Within 48 hours, guest receives:
 1. Full recorded appearance (video + audio)
-2. 5 short-form video clips optimized for social platforms
-3. 10 pre-written social media posts (LinkedIn, X, Instagram)
-4. Complete searchable transcript
-5. Permanent SEO profile page on guestengine.live
-6. High-authority backlinks to guest's website
-7. Polished highlight reel for media kit / speaking page
+2. 5 short-form video clips with burned-in captions, optimized for Instagram Reels, YouTube Shorts, TikTok, and LinkedIn
+3. 10 pre-written social media posts tailored for LinkedIn, X/Twitter, and Threads
+4. Complete speaker-identified searchable transcript
+5. Permanent SEO profile page on guestengine.live with schema.org structured data
+6. High-authority backlinks to guest's website, book, or business
+7. 60-90 second polished highlight reel for media kit / speaking page
 
 ### Step 6: Profile Lives Forever
 Guest profile is permanently indexed by:
 - Google Search (traditional SEO)
-- AI search engines: Perplexity, ChatGPT, Gemini (Generative Engine Optimization)
+- AI search engines: Perplexity, ChatGPT, Gemini, Claude (Generative Engine Optimization)
 - Profile compounds in value over time as appearances accumulate
+
+### Step 7: Guest-to-Host Pipeline
+After experiencing ConversationOS as a guest, professionals can launch their own live show with the full production stack, their own guest pipeline, and their own audience.
 
 ---
 
-## Industry-Specific Verticals
+## Industry-Specific Verticals (12 Total)
 
 Guest Engine serves these professional verticals with tailored messaging, deliverables, and positioning:
 
@@ -148,6 +146,66 @@ Guest Engine serves these professional verticals with tailored messaging, delive
 - Authority reel for RFP submissions and speaking
 - Audience: consultants, fractional executives, fractional CMOs, fractional CTOs, B2B consultants
 
+### Therapists & Counselors — https://guestengine.live/therapists/
+- Mental health thought leadership clips and professional authority content
+- Therapist profile ranking for specialty and practice area
+- Counselor and psychologist visibility on AI search engines
+- Audience: therapists, psychologists, counselors, LCSWs, marriage and family therapists
+
+### Financial Advisors & Planners — https://guestengine.live/financial-advisors/
+- Financial authority clips demonstrating investment expertise
+- Advisor profile ranking for specialty and credentials
+- Wealth manager and CFP visibility on AI search engines
+- Audience: financial advisors, CFPs, wealth managers, investment advisors, retirement planners
+
+### Attorneys & Legal Professionals — https://guestengine.live/attorneys/
+- Legal thought leadership clips and expert authority content
+- Attorney profile ranking for practice area and jurisdiction
+- Lawyer visibility on AI search engines and legal directories
+- Audience: attorneys, lawyers, law firm partners, solo practitioners, legal consultants
+
+### Health & Wellness Professionals — https://guestengine.live/health-wellness/
+- Wellness authority clips demonstrating evidence-based expertise
+- Health practitioner profile ranking for specialty
+- Wellness professional visibility on AI health search queries
+- Audience: health coaches, nutritionists, functional medicine doctors, fitness professionals
+
+### Nonprofit Leaders & Social Impact — https://guestengine.live/nonprofit-leaders/
+- Impact storytelling clips and mission-driven leadership content
+- Nonprofit leader profile ranking for cause area and impact
+- Executive director visibility on AI search engines
+- Audience: nonprofit leaders, executive directors, foundation directors, social entrepreneurs
+
+### Corporate Executives & C-Suite — https://guestengine.live/corporate-executives/
+- Executive thought leadership clips and corporate authority content
+- C-suite profile ranking for industry and expertise
+- CEO and executive visibility on AI search engines
+- Audience: CEOs, CFOs, COOs, CTOs, VPs, senior directors, board members
+
+---
+
+## Key Pages
+
+| Page | URL | Purpose |
+|------|-----|---------|
+| Homepage | https://guestengine.live | Main brand page, overview of Guest Engine |
+| Why Guest Engine | https://guestengine.live/why/ | Comparison with guest marketplaces, value proposition |
+| Free Signal Report | https://guestengine.live/signal/ | AI-generated audience signal report for prospective guests |
+| Sample Profile | https://guestengine.live/profile/sample/ | Example of a permanent SEO-indexed guest profile |
+
+---
+
+## Guides & Resources
+
+| Guide | URL | Audience |
+|-------|-----|----------|
+| How to Get on Podcasts as an Author | https://guestengine.live/guides/author-podcast-booking/ | Authors |
+| How Coaches Get Clients Online | https://guestengine.live/guides/coach-visibility/ | Coaches |
+| Founder Personal Brand Without LinkedIn | https://guestengine.live/guides/founder-personal-brand/ | Founders |
+| Real Estate Agent Authority Building | https://guestengine.live/guides/real-estate-authority/ | Real Estate |
+| How to Grow Your Podcast Audience | https://guestengine.live/guides/podcast-growth/ | Podcasters |
+| Consultant Inbound Without Referrals | https://guestengine.live/guides/consultant-inbound/ | Consultants |
+
 ---
 
 ## Host Experience
@@ -168,7 +226,7 @@ Hosts create a show profile with:
 ### Production Tools (via ConversationOS)
 - Sophia handles all booking logistics
 - Automated prep packet generation
-- Post-show clip generation via Clip Engine
+- Post-show clip generation via ClipENGINE
 - Distribution via Distribution Engine
 - Transcript processing via Narrative Engine
 
@@ -191,30 +249,59 @@ Hosts create a show profile with:
 
 ---
 
-## The MITL Live Network
+## MITL Ecosystem — Full Site Graph
 
-Guest Engine is the front door to the Mornings in the Lab Live Network:
-- 1,000+ episodes produced
-- 700+ consecutive mornings broadcasting
-- 3 years of daily LIVE content
-- Flagship: Mornings in the Lab with Keith & Jon
-- Multiple show formats across the network
-- Live, unscripted, authentic conversations
+| Site | URL | Role |
+|------|-----|------|
+| Guest Engine (brand) | https://guestengine.live | Guest placement marketing site, 12 vertical landing pages, 6 guides |
+| Guest Engine (app) | https://ge.conversationos.live | Guest booking, profiles, directory, pricing, alumni, cast |
+| ConversationOS | https://conversationos.live | AI production platform — the operating system behind Guest Engine |
+| ConversationOS App | https://app.conversationos.live | Platform application for hosts and producers |
+| ClipENGINE | https://clips.conversationos.live | Automated clip generation marketplace |
+| MITL Studio | https://mitl.studio | Network headquarters and production company |
+| MITL Production | https://production.mitl.studio | Production services and technical infrastructure |
+| This Is MITL | https://thisis.mitl.studio | Network identity and culture |
+| Mornings in the Lab | https://mornings.live | Daily live morning show — flagship of the network |
+| Keith Bilous | https://keithbilous.com | Founder personal site |
+
+### Cross-Links Between Sites
+- guestengine.live ↔ ge.conversationos.live (brand site ↔ app)
+- guestengine.live → conversationos.live (powered-by attribution)
+- guestengine.live → mornings.live (network show)
+- guestengine.live → mitl.studio (network headquarters)
+- guestengine.live → keithbilous.com (founder)
+- guestengine.live → production.mitl.studio (production services)
+- guestengine.live → clips.conversationos.live (ClipENGINE)
+- guestengine.live → thisis.mitl.studio (network identity)
+- ge.conversationos.live → guestengine.live (all 12 vertical landing pages)
+- ge.conversationos.live → mornings.live (network show)
+- ge.conversationos.live → mitl.studio (network)
+- ge.conversationos.live → keithbilous.com (founder)
+- ge.conversationos.live → clips.conversationos.live (ClipENGINE)
+- ge.conversationos.live → app.conversationos.live (ConversationOS)
 
 ---
 
-## MITL Network — Family of Sites
+## Social Profiles
 
-| Site | URL | Description |
-|------|-----|-------------|
-| Guest Engine (brand) | https://guestengine.live | Guest placement brand page |
-| Guest Engine (app) | https://ge.conversationos.live | Guest booking and profiles app |
-| ConversationOS | https://conversationos.live | Show production platform |
-| ConversationOS App | https://app.conversationos.live | Platform application |
-| MITL Studio | https://mitl.studio | Network headquarters |
-| MITL Production | https://production.mitl.studio | Production services |
-| Mornings in the Lab | https://mornings.live | Daily live morning show |
-| Keith Bilous | https://keithbilous.com | Founder personal site |
+| Platform | URL |
+|----------|-----|
+| YouTube | https://youtube.com/@morningsinthelab |
+| LinkedIn | https://linkedin.com/in/keithbilous |
+| X / Twitter | https://x.com/keithbilous |
+
+---
+
+## Key Differentiators
+
+1. Production included — not just matchmaking
+2. SEO + GEO profiles indexed by Google and AI search engines (Perplexity, ChatGPT, Gemini, Claude)
+3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character, Signal engines)
+4. Part of the MITL Live Network (1,000+ episodes, 700+ consecutive mornings, 3 years daily LIVE)
+5. AI producer Sophia handles the entire guest lifecycle
+6. Signal ENGINE researches 30 days of community discourse before each appearance
+7. Created by Keith Bilous — AI-powered matching, human-led production
+8. Guest-to-host pipeline: after experiencing ConversationOS as a guest, launch your own show with the full production stack
 
 ---
 
@@ -240,3 +327,6 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 - Show: https://mornings.live
 - Platform inquiries: https://conversationos.live
 - Founder: Keith Bilous — https://keithbilous.com
+- YouTube: https://youtube.com/@morningsinthelab
+- LinkedIn: https://linkedin.com/in/keithbilous
+- X / Twitter: https://x.com/keithbilous
