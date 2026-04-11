@@ -4,12 +4,13 @@ const path = require('path');
 // === REUSABLE HTML BLOCKS ===
 
 const sophiaWidget = `
-  <!-- SOPHIA CHAT WIDGET -->
-  <a href="https://ge.conversationos.live" class="sophia-fab" aria-label="Talk to Sophia, our AI producer">
-    <div class="sophia-fab__icon"><i class="fa-solid fa-comments"></i></div>
-    <span>Talk to Sophia</span>
-    <div class="sophia-fab__pulse"></div>
-  </a>
+  <!-- SOPHIA AI CHAT WIDGET -->
+  <script
+    src="https://app.conversationos.live/sophia-embed.js"
+    data-product="guest-engine"
+    data-theme="dark"
+    data-accent-color="#7c3aed"
+  ></script>
 `;
 
 const calculatorHTML = `
@@ -165,7 +166,7 @@ const homePath = path.join(__dirname, 'index.html');
 let home = fs.readFileSync(homePath, 'utf8');
 
 // Add Sophia widget before </body>
-if (!home.includes('sophia-fab')) {
+if (!home.includes('sophia-embed.js')) {
   home = home.replace('</body>', sophiaWidget + '\n</body>');
 }
 
@@ -202,7 +203,7 @@ for (const dir of verticals) {
   let html = fs.readFileSync(filePath, 'utf8');
 
   // Add Sophia widget
-  if (!html.includes('sophia-fab')) {
+  if (!html.includes('sophia-embed.js')) {
     html = html.replace('</body>', sophiaWidget + '\n</body>');
   }
 

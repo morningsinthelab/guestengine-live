@@ -431,6 +431,14 @@ ${deliverablesHtml}
   </footer>
 
   <script src="../main.js"></script>
+
+  <!-- SOPHIA AI CHAT WIDGET -->
+  <script
+    src="https://app.conversationos.live/sophia-embed.js"
+    data-product="guest-engine"
+    data-theme="dark"
+    data-accent-color="#7c3aed"
+  ></script>
 </body>
 </html>`;
 }
