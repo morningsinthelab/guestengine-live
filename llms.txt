@@ -33,6 +33,12 @@ Guest Engine serves specific professional verticals with tailored positioning:
 - [Guest Engine for Real Estate](https://guestengine.live/realestate/) — Market authority clips, listing content, agent profiles
 - [Guest Engine for Podcasters](https://guestengine.live/podcasters/) — Cross-promotion, show clips, production stack access
 - [Guest Engine for Consultants](https://guestengine.live/consultants/) — Thought leadership clips, case study content, authority profiles
+- [Guest Engine for Therapists & Counselors](https://guestengine.live/therapists/) — Mental health thought leadership, therapist visibility, counselor content
+- [Guest Engine for Financial Advisors & Planners](https://guestengine.live/financial-advisors/) — Financial authority clips, wealth management visibility, advisor profiles
+- [Guest Engine for Attorneys & Legal Professionals](https://guestengine.live/attorneys/) — Legal thought leadership, attorney visibility, legal expert profiles
+- [Guest Engine for Health & Wellness Professionals](https://guestengine.live/health-wellness/) — Wellness authority, health practitioner visibility, evidence-based content
+- [Guest Engine for Nonprofit Leaders](https://guestengine.live/nonprofit-leaders/) — Impact storytelling, nonprofit visibility, mission-driven leadership profiles
+- [Guest Engine for Corporate Executives & C-Suite](https://guestengine.live/corporate-executives/) — Executive thought leadership, C-suite visibility, corporate authority profiles
 
 ## Platform Details
 - Brand site: https://guestengine.live

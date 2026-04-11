@@ -22,6 +22,43 @@ Guest Engine is a product of ConversationOS — a modular show management platfo
 | Character Engine | AI character management, personality systems |
 | Guest Engine | Guest booking, onboarding, production, off-boarding |
 
+
+### Therapists & Counselors — https://guestengine.live/therapists/
+- Mental health thought leadership clips and professional authority content
+- Therapist profile ranking for specialty and practice area
+- Counselor and psychologist visibility on AI search engines
+- Audience: therapists, psychologists, counselors, LCSWs, marriage and family therapists
+
+### Financial Advisors & Planners — https://guestengine.live/financial-advisors/
+- Financial authority clips demonstrating investment expertise
+- Advisor profile ranking for specialty and credentials
+- Wealth manager and CFP visibility on AI search engines
+- Audience: financial advisors, CFPs, wealth managers, investment advisors, retirement planners
+
+### Attorneys & Legal Professionals — https://guestengine.live/attorneys/
+- Legal thought leadership clips and expert authority content
+- Attorney profile ranking for practice area and jurisdiction
+- Lawyer visibility on AI search engines and legal directories
+- Audience: attorneys, lawyers, law firm partners, solo practitioners, legal consultants
+
+### Health & Wellness Professionals — https://guestengine.live/health-wellness/
+- Wellness authority clips demonstrating evidence-based expertise
+- Health practitioner profile ranking for specialty
+- Wellness professional visibility on AI health search queries
+- Audience: health coaches, nutritionists, functional medicine doctors, fitness professionals
+
+### Nonprofit Leaders & Social Impact — https://guestengine.live/nonprofit-leaders/
+- Impact storytelling clips and mission-driven leadership content
+- Nonprofit leader profile ranking for cause area and impact
+- Executive director visibility on AI search engines
+- Audience: nonprofit leaders, executive directors, foundation directors, social entrepreneurs
+
+### Corporate Executives & C-Suite — https://guestengine.live/corporate-executives/
+- Executive thought leadership clips and corporate authority content
+- C-suite profile ranking for industry and expertise
+- CEO and executive visibility on AI search engines
+- Audience: CEOs, CFOs, COOs, CTOs, VPs, senior directors, board members
+
 ---
 
 ## Guest Experience (End-to-End)
