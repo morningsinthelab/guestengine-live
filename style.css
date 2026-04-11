@@ -1141,7 +1141,7 @@ ul { list-style: none; }
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 3rem;
   margin-bottom: 3rem;
 }
@@ -1210,6 +1210,51 @@ ul { list-style: none; }
 }
 
 .footer__bottom a:hover { opacity: 0.8; }
+
+
+/* --- FOOTER SOCIAL ICONS --- */
+.footer__social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.footer__social-link {
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease);
+  display: flex;
+  align-items: center;
+}
+.footer__social-link:hover { color: var(--gold); }
+
+/* --- FOOTER ACCENT LINKS (Why, Signal) --- */
+.footer__link--accent {
+  color: var(--gold) !important;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+.footer__link--accent:hover { opacity: 0.8; }
+
+/* --- FOOTER UPCOMING SHOWS (unlinked) --- */
+.footer__link--upcoming {
+  color: var(--text-muted);
+  opacity: 0.5;
+  font-size: 0.8125rem;
+  cursor: default;
+}
+
+/* --- FOOTER FOUNDER LINK --- */
+.footer__founder-text a {
+  color: var(--gold);
+  transition: opacity 0.2s;
+}
+.footer__founder-text a:hover { opacity: 0.8; }
+
+/* --- FOOTER TAGLINE LINK --- */
+.footer__tagline a {
+  color: var(--gold);
+  transition: opacity 0.2s;
+}
+.footer__tagline a:hover { opacity: 0.8; }
 
 /* --- SCROLL ANIMATIONS --- */
 .reveal {
