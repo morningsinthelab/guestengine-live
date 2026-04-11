@@ -404,7 +404,7 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 - Apollo.io (guest enrichment)
 - LinkedIn Sales Navigator (guest discovery)
 - YouTube Data API (audience analytics)
-- Calendly (scheduling)
+- Sophia AI (conversational scheduling)
 - Google Workspace (communications)
 
 ---
