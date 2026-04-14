@@ -50,8 +50,8 @@
   <link rel="llms-txt" href="https://guestengine.live/llms.txt">
   <link rel="alternate" type="text/plain" href="https://guestengine.live/llms-full.txt" title="LLM Full Documentation">
 
-  <!-- Hero Image Preload -->
-  <link rel="preload" as="image" href="https://guestengine.live/assets/homepage-hero.png" fetchpriority="high">
+  <!-- Hero Video Thumbnail Preload -->
+  <link rel="preload" as="image" href="https://d1d3n03t5zntha.cloudfront.net/dd8b9dcb-2d53-457a-b805-538666eead01/media_stream-c71b0d83aee34829a0ea662d58b24be3.jpg?Expires=1776242559&Key-Pair-Id=KF9QU0MY16S3Y&Signature=FDZHDlcAIBGIdq~60uSxiFAs5RO5vO8rZiw0qYR2xXBlgDXDh6y9b77vhxuYQe5HFm9xvmBttEHUPvCJio1MfcdD4mBbY8vQMIYpyMaMF5dE82abULWI1dDf8EjmtgSdqkcLw6hJ32XtUPRzbzOZf~OHex~d7dbDFbT9H6UJ1l7sOiIAouk56vVVBvIsgKv1761GaKfdJ8M0pLOwc6RoJa4QI86zaDR8WTWfW-YP9TyE~Tzsr~QdzSNbouWtFa9fR35AslXCPnP2zIvwH0i8H2WTLsD4J~oXIEXoBgXGdfi32CR5ombM~7iRHUigjQ5D5pVm8liD5tL4CR3KJa3dWA__" fetchpriority="high">
 
   <!-- Fonts: Syncopate + Inter (family standard) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,9 +208,31 @@
 
   <!-- HERO -->
   <header class="hero" id="hero">
-    <div class="hero__bg" style="background-image: url('assets/homepage-hero.png'); background-size: cover; background-position: center center;">
+    <div class="hero__video-wrap">
+      <iframe 
+        id="hero-video"
+        class="hero__video-iframe"
+        src="https://share.descript.com/embed/HbX8ZmG1fOh?autoplay=1&loop=1"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        loading="eager"
+      ></iframe>
       <div class="hero__overlay"></div>
     </div>
+    <!-- Unmute button — top right -->
+    <button class="hero__unmute" id="heroUnmute" aria-label="Unmute video">
+      <svg class="hero__unmute-icon hero__unmute-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <svg class="hero__unmute-icon hero__unmute-icon--unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+    </button>
     <div class="hero__content">
       <h1 class="hero__title">
         Start the<br>
@@ -740,6 +762,36 @@
 
 
   <!-- SOPHIA AI CHAT WIDGET -->
+  <!-- Hero video unmute toggle -->
+  <script>
+  (function() {
+    var btn = document.getElementById('heroUnmute');
+    var iframe = document.getElementById('hero-video');
+    var muted = true;
+    if (!btn || !iframe) return;
+
+    var mutedIcon = btn.querySelector('.hero__unmute-icon--muted');
+    var unmutedIcon = btn.querySelector('.hero__unmute-icon--unmuted');
+
+    btn.addEventListener('click', function() {
+      muted = !muted;
+      // Toggle Descript embed audio via postMessage
+      iframe.contentWindow.postMessage({ type: muted ? 'mute' : 'unmute' }, '*');
+      // Also try the standard Descript command format
+      iframe.contentWindow.postMessage({ name: muted ? 'mute' : 'unmute' }, '*');
+      // Re-enable pointer events briefly so iframe can handle audio context
+      if (!muted) {
+        iframe.style.pointerEvents = 'auto';
+        setTimeout(function() { iframe.style.pointerEvents = 'none'; }, 2000);
+      }
+      // Toggle icons
+      mutedIcon.style.display = muted ? '' : 'none';
+      unmutedIcon.style.display = muted ? 'none' : '';
+      btn.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
+    });
+  })();
+  </script>
+
   <script 
     src="https://app.conversationos.live/sophia-embed.js" 
     data-product="guest-engine"

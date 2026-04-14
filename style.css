@@ -237,6 +237,26 @@ ul { list-style: none; }
   opacity: 1;
 }
 
+.hero__video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__video-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh; /* 16:9 ratio — always covers */
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border: 0;
+}
+
 .hero__video {
   position: absolute;
   inset: 0;
@@ -247,8 +267,41 @@ ul { list-style: none; }
   z-index: 0;
 }
 
+/* Unmute button — top right of hero */
+.hero__unmute {
+  position: absolute;
+  top: 6rem;
+  right: 1.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.hero__unmute:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.08);
+}
+
+.hero__unmute-icon {
+  width: 20px;
+  height: 20px;
+}
+
 @media (max-width: 768px) {
   .hero__video { object-position: 35% 40%; }
+  .hero__unmute { top: 5rem; right: 1rem; }
 }
 
 .hero__placeholder {
