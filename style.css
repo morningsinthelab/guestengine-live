@@ -244,6 +244,19 @@ ul { list-style: none; }
   overflow: hidden;
 }
 
+.hero__video-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh; /* 16:9 ratio — always covers */
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Prevents iframe from intercepting clicks */
+  border: 0;
+}
+
 .hero__video {
   position: absolute;
   inset: 0;

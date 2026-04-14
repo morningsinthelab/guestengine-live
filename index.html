@@ -209,15 +209,15 @@
   <!-- HERO -->
   <header class="hero" id="hero">
     <div class="hero__video-wrap">
-      <video 
+      <iframe 
         id="hero-video"
-        class="hero__video"
-        autoplay 
-        muted 
-        loop 
-        playsinline
-        poster="https://d1d3n03t5zntha.cloudfront.net/dd8b9dcb-2d53-457a-b805-538666eead01/media_stream-c71b0d83aee34829a0ea662d58b24be3.jpg?Expires=1776242559&Key-Pair-Id=KF9QU0MY16S3Y&Signature=FDZHDlcAIBGIdq~60uSxiFAs5RO5vO8rZiw0qYR2xXBlgDXDh6y9b77vhxuYQe5HFm9xvmBttEHUPvCJio1MfcdD4mBbY8vQMIYpyMaMF5dE82abULWI1dDf8EjmtgSdqkcLw6hJ32XtUPRzbzOZf~OHex~d7dbDFbT9H6UJ1l7sOiIAouk56vVVBvIsgKv1761GaKfdJ8M0pLOwc6RoJa4QI86zaDR8WTWfW-YP9TyE~Tzsr~QdzSNbouWtFa9fR35AslXCPnP2zIvwH0i8H2WTLsD4J~oXIEXoBgXGdfi32CR5ombM~7iRHUigjQ5D5pVm8liD5tL4CR3KJa3dWA__"
-      ></video>
+        class="hero__video-iframe"
+        src="https://share.descript.com/embed/HbX8ZmG1fOh"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        loading="eager"
+      ></iframe>
       <div class="hero__overlay"></div>
     </div>
     <!-- Unmute button — top right -->
@@ -762,42 +762,36 @@
 
 
   <!-- SOPHIA AI CHAT WIDGET -->
-  <!-- HLS.js for streaming Descript video -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
-  <!-- Hero video: HLS stream loader + unmute toggle -->
+  <!-- Hero video unmute toggle -->
   <script>
   (function() {
-    var video = document.getElementById('hero-video');
     var btn = document.getElementById('heroUnmute');
-    if (!video || !btn) return;
+    var iframe = document.getElementById('hero-video');
+    var muted = true;
+    if (!btn || !iframe) return;
 
-    var hlsUrl = 'https://api.descript.com/v2/published_projects/dd8b9dcb-2d53-457a-b805-538666eead01/hls?expiration=1776297599999&signature=68c0e73d68adeb0d62e977d5c9a9147f962e9ab49c5d501aba6dc976571815c2';
-
-    // Load HLS stream
-    if (Hls.isSupported()) {
-      var hls = new Hls({ startLevel: -1 });
-      hls.loadSource(hlsUrl);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function() {
-        video.play().catch(function() {});
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari native HLS
-      video.src = hlsUrl;
-      video.addEventListener('loadedmetadata', function() {
-        video.play().catch(function() {});
-      });
-    }
-
-    // Unmute / Mute toggle
     var mutedIcon = btn.querySelector('.hero__unmute-icon--muted');
     var unmutedIcon = btn.querySelector('.hero__unmute-icon--unmuted');
 
+    // Listen for messages from the Descript embed
+    window.addEventListener('message', function(e) {
+      if (e.origin.includes('descript.com')) {
+        // Descript embed loaded — enable pointer events briefly on unmute
+      }
+    });
+
     btn.addEventListener('click', function() {
-      video.muted = !video.muted;
-      mutedIcon.style.display = video.muted ? '' : 'none';
-      unmutedIcon.style.display = video.muted ? 'none' : '';
-      btn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+      muted = !muted;
+      // Enable pointer events on iframe so user can interact with Descript player to unmute
+      if (!muted) {
+        iframe.style.pointerEvents = 'auto';
+      } else {
+        iframe.style.pointerEvents = 'none';
+      }
+      // Toggle icons
+      mutedIcon.style.display = muted ? '' : 'none';
+      unmutedIcon.style.display = muted ? 'none' : '';
+      btn.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
     });
   })();
   </script>
