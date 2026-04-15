@@ -83,6 +83,10 @@
     const slug = getPersonaSlug();
     if (!slug) return;
 
+    // If page has a video hero, don't replace it with an image
+    const heroVideo = document.querySelector('.hero__video');
+    if (heroVideo && heroVideo.src) return;
+
     const variants = HERO_VARIANTS[slug];
     if (!variants || variants.length === 0) return;
 
