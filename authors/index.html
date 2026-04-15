@@ -888,12 +888,29 @@ document.querySelectorAll('.faq__question').forEach(btn => {
 </script>
   <script src="../hero-rotation.js"></script>
 
-  <!-- Hero video unmute toggle -->
+  <!-- Hero video: force play + unmute toggle -->
   <script>
   (function() {
     var video = document.getElementById('hero-video');
     var btn = document.getElementById('heroUnmute');
     if (!video || !btn) return;
+
+    // Force play — autoplay attribute can be unreliable
+    function tryPlay() {
+      video.muted = true;
+      var p = video.play();
+      if (p && p.catch) p.catch(function() {
+        // Retry on user interaction
+        document.addEventListener('click', function once() {
+          video.play();
+          document.removeEventListener('click', once);
+        });
+      });
+    }
+    if (video.readyState >= 2) { tryPlay(); }
+    else { video.addEventListener('loadeddata', tryPlay); }
+
+    // Unmute toggle
     var mutedIcon = btn.querySelector('.hero__unmute-icon--muted');
     var unmutedIcon = btn.querySelector('.hero__unmute-icon--unmuted');
     btn.addEventListener('click', function() {
