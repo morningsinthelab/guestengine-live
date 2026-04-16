@@ -274,31 +274,32 @@
   </script>
 </head>
 <body>
-
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="/" class="nav__logo" aria-label="Guest Engine home">
-        <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="36" height="36" rx="6" fill="#fbbf24"/>
-          <text x="8" y="26" font-family="Syncopate, sans-serif" font-weight="700" font-size="22" fill="#020617">G</text>
-        </svg>
-        <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
-      </a>
-      <div class="nav__links" id="navLinks">
-        <a href="/#for-guests" class="nav__link">FOR GUESTS</a>
-        <a href="/#for-hosts" class="nav__link">FOR HOSTS</a>
-        <a href="/#how-it-works" class="nav__link">HOW IT WORKS</a>
-        <a href="/#network" class="nav__link">NETWORK</a>
-      </div>
-      <div class="nav__actions">
-        <a href="https://ge.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--sm">GET STARTED</a>
-      </div>
-      <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="v2-header">
+    <a href="/" class="header-logo">
+      <span class="g-icon">G</span>
+      <span>
+        <span class="guest">GUEST</span><span class="engine">ENGINE</span>
+        <span class="sub">Conversations</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/directory/">Directory</a>
+      <a href="/marketplace/">Marketplace</a>
+      <a href="/shows/">Shows</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#network">Network</a>
+      <a href="/signal/">Signal</a>
+      <a href="/why/">Why</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="https://ge.conversationos.live" class="btn-login">Log In</a>
+      <a href="/join/" class="btn-signup">Sign Up</a>
     </div>
-  </nav>
+    <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
 
   <main id="main-content" role="main">
 

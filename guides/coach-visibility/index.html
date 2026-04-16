@@ -110,6 +110,71 @@
     .guide__price-label { font-size: 0.875rem; color: var(--text-body); }
     .guide__price-value { font-family: var(--font-display); font-size: 0.875rem; font-weight: 700; color: var(--text-primary); }
     .guide__price-row--highlight .guide__price-value { color: var(--gold); }
+  
+  /* -- V2 HEADER (unified) -- */
+  .v2-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 40px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(2,6,23,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  .v2-header .header-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 800; font-size: 18px;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    text-decoration: none; color: inherit;
+  }
+  .v2-header .header-logo .g-icon {
+    width: 32px; height: 32px;
+    background: #fbbf24; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #020617; font-weight: 900; font-size: 18px;
+  }
+  .v2-header .header-logo .guest { color: #fff; }
+  .v2-header .header-logo .engine { color: #fbbf24; }
+  .v2-header .header-logo .sub {
+    font-size: 9px; font-weight: 500; letter-spacing: 2px;
+    color: rgba(255,255,255,0.40); text-transform: uppercase;
+    display: block; margin-top: -2px;
+  }
+  .v2-header .nav-links { display: flex; align-items: center; gap: 28px; }
+  .v2-header .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: rgba(255,255,255,0.60); transition: color 0.2s; letter-spacing: 0.3px;
+    text-decoration: none;
+  }
+  .v2-header .nav-links a:hover { color: #fff; }
+  .v2-header .nav-links a.on { color: #fbbf24; }
+  .v2-header .nav-actions { display: flex; align-items: center; gap: 16px; }
+  .v2-header .btn-login {
+    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.60);
+    transition: color 0.2s; text-decoration: none;
+  }
+  .v2-header .btn-login:hover { color: #fff; }
+  .v2-header .btn-signup {
+    font-size: 14px; font-weight: 600;
+    padding: 8px 20px; background: #fbbf24; color: #020617;
+    border-radius: 6px; transition: background 0.2s; letter-spacing: 0.3px;
+    text-decoration: none;
+  }
+  .v2-header .btn-signup:hover { background: #f59e0b; }
+  .v2-header .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .v2-header .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; margin: 5px 0; transition: all 0.3s; }
+  @media (max-width: 1024px) {
+    .v2-header { padding: 0 20px; }
+    .v2-header .nav-links { display: none; }
+    .v2-header .nav-hamburger { display: block; }
+    .v2-header .nav-links.active {
+      display: flex; flex-direction: column;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(2,6,23,0.95); backdrop-filter: blur(20px);
+      padding: 24px; gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+  }
+
   </style>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -120,31 +185,32 @@
   <meta name="twitter:image" content="https://guestengine.live/og-image.png">
 </head>
 <body>
-
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="/" class="nav__logo" aria-label="Guest Engine home">
-        <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="36" height="36" rx="6" fill="#fbbf24"/>
-          <text x="8" y="26" font-family="Syncopate, sans-serif" font-weight="700" font-size="22" fill="#020617">G</text>
-        </svg>
-        <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
-      </a>
-      <div class="nav__links" id="navLinks">
-        <a href="/#for-guests" class="nav__link">FOR GUESTS</a>
-        <a href="/#for-hosts" class="nav__link">FOR HOSTS</a>
-        <a href="/#how-it-works" class="nav__link">HOW IT WORKS</a>
-        <a href="/#network" class="nav__link">NETWORK</a>
-      </div>
-      <div class="nav__actions">
-        <a href="https://ge.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--sm">GET STARTED</a>
-      </div>
-      <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+  <header class="v2-header">
+    <a href="/" class="header-logo">
+      <span class="g-icon">G</span>
+      <span>
+        <span class="guest">GUEST</span><span class="engine">ENGINE</span>
+        <span class="sub">Conversations</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/directory/">Directory</a>
+      <a href="/marketplace/">Marketplace</a>
+      <a href="/shows/">Shows</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#network">Network</a>
+      <a href="/signal/">Signal</a>
+      <a href="/why/">Why</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="https://ge.conversationos.live" class="btn-login">Log In</a>
+      <a href="/join/" class="btn-signup">Sign Up</a>
     </div>
-  </nav>
+    <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
 
   <main class="guide">
     <div class="container">
