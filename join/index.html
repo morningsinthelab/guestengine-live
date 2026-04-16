@@ -54,9 +54,9 @@
   /* ── HEADER ── */
   .header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 0 40px; height: 80px;
+    padding: 0 40px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
-    background: linear-gradient(to bottom, #020617 0%, #020617 25%, rgba(2,6,23,0.85) 50%, rgba(2,6,23,0.4) 75%, transparent 100%);
+    background: linear-gradient(to bottom, #020617 0%, rgba(2,6,23,0.8) 60%, transparent 100%);
   }
   .header-logo {
     display: flex; align-items: center; gap: 10px;
@@ -78,7 +78,7 @@
     display: block; margin-top: -2px;
   }
 
-  .header-logo-img { height: 72px; width: auto; display: block; mix-blend-mode: lighten; }
+  .header-logo-img { height: 40px; width: auto; display: block;  }
   .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-links a {
     font-size: 14px; font-weight: 500;
@@ -412,10 +412,10 @@
     .header { padding: 0 20px; }
     .nav-links { display: none; }
     .nav-hamburger { display: block; }
-    .header-logo-img { height: 48px; max-width: 170px; object-fit: contain; object-position: left; }
+    .header-logo-img { height: 32px; max-width: 140px; object-fit: contain; object-position: left; }
     .nav-links.active {
       display: flex; flex-direction: column;
-      position: fixed; top: 80px; left: 0; right: 0;
+      position: fixed; top: 64px; left: 0; right: 0;
       background: rgba(2,6,23,0.95); backdrop-filter: blur(20px);
       padding: 24px; gap: 16px;
     }
@@ -605,7 +605,7 @@
 
   <header class="header">
     <a href="/" class="header-logo">
-      <img src="/assets/ge-logo.jpg" alt="ConversationOS Guest Engine" class="header-logo-img">
+      <img src="/assets/ge-logo.png" alt="ConversationOS Guest Engine" class="header-logo-img">
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="/directory/">Directory</a>
@@ -669,7 +669,6 @@
       </div>
     </div>
   </section>
-
 
   <main class="wizard-page">
 
