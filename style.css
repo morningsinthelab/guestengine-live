@@ -78,6 +78,105 @@ ul { list-style: none; }
 
 .nav--hidden { transform: translateY(-100%); }
 
+/* --- V2 HEADER (used by verticals, guides, interior pages) --- */
+.v2-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom, #020617 0%, rgba(2,6,23,0.6) 50%, transparent 100%);
+  transition: all 0.5s ease;
+}
+.v2-header.scrolled {
+  background: rgba(2,6,23,0.8);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+.v2-header .header-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.v2-header .header-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.v2-header .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.v2-header .nav-links a {
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  transition: color 0.2s;
+  pointer-events: auto;
+}
+.v2-header .nav-links a:hover,
+.v2-header .nav-links a.on {
+  color: var(--gold);
+}
+.v2-header .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.v2-header .btn-login {
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  transition: color 0.2s;
+  pointer-events: auto;
+}
+.v2-header .btn-login:hover { color: #fff; }
+.v2-header .btn-signup {
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: #020617;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+  pointer-events: auto;
+}
+.v2-header .btn-signup:hover { background: var(--gold-hover); }
+.v2-header .nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  pointer-events: auto;
+}
+.v2-header .nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+@media (max-width: 1024px) {
+  .v2-header .nav-links { display: none; }
+  .v2-header .nav-actions { display: none; }
+  .v2-header .nav-hamburger { display: block; }
+}
+
 .nav__inner {
   max-width: var(--max-width);
   margin: 0 auto;

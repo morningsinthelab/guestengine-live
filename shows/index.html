@@ -141,7 +141,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(2,6,23,0.85);
+    background: linear-gradient(to bottom, #020617 0%, rgba(2,6,23,0.6) 50%, transparent 100%);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
@@ -756,49 +756,15 @@
   }
 
   
-  /* Page Title Section (below shared hero) */
-  .page-title-section {
-    padding: 64px 80px 48px;
-    text-align: center;
-    background: #020617;
-    position: relative;
-  }
-  .page-title__label {
-    font-family: 'Cabinet Grotesk', sans-serif;
-    font-size: 12px;
+  /* Hero label (eyebrow above main heading) */
+  .hero-label {
+    font-family: var(--font-display);
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: #fbbf24;
-    margin-bottom: 16px;
-  }
-  .page-title__heading {
-    font-family: 'Cabinet Grotesk', sans-serif;
-    font-weight: 900;
-    font-size: 48px;
-    line-height: 1.1;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-    color: #ffffff;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .page-title__heading .gold { color: #fbbf24; }
-  .page-title__desc {
-    font-size: 18px;
-    color: rgba(255,255,255,0.6);
-    max-width: 600px;
-    margin: 20px auto 0;
-    line-height: 1.6;
-  }
-  @media (max-width: 1024px) {
-    .page-title-section { padding: 48px 32px 36px; }
-    .page-title__heading { font-size: 36px; }
-  }
-  @media (max-width: 640px) {
-    .page-title-section { padding: 40px 20px 32px; }
-    .page-title__heading { font-size: 28px; }
-    .page-title__desc { font-size: 16px; }
+    margin-bottom: 12px;
   }
 
   </style>
@@ -857,24 +823,18 @@
       </svg>
     </button>
     <div class="hero-content">
+      <p class="hero-label">The Network</p>
       <h1>
-        START THE<br>
-        <span class="gold">CONVERSATION.</span><br>
-        WE SET IT UP.
+        CHOOSE YOUR<br>
+        <span class="gold">STAGE.</span>
       </h1>
       <p class="hero-sub">
-        One live appearance. A full production. A permanent authority profile &mdash; indexed everywhere.
+        Four live shows. Multiple formats. Every appearance is produced, clipped, and indexed &mdash; giving you permanent content and authority from a single booking.
       </p>
       <div class="hero-cta">
-        <a href="/join/" class="btn-primary">Get Featured &rarr;</a>
+        <a href="/join/" class="btn-primary">Book a Show &rarr;</a>
       </div>
     </div>
-  </section>
-  <!-- Page Title -->
-  <section class="page-title-section">
-    <div class="page-title__label">The Network</div>
-    <h2 class="page-title__heading">Choose Your <span class="gold">Stage</span></h2>
-    <p class="page-title__desc">Four live shows. Multiple formats. Every appearance is produced, clipped, and indexed — giving you permanent content and authority from a single booking.</p>
   </section>
 
 
