@@ -175,6 +175,95 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Guest Engine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Guest Engine is a professional guest placement and content production platform powered by ConversationOS. You book a live show appearance, our AI producer Sophia researches your world overnight, briefs the host, produces your conversation live, and delivers a complete content pack — 5 vertical video clips, 10 social posts, full transcript, highlight reel, and a permanent authority profile indexed by Google and AI search engines."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Guest Engine different from podcast booking agencies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Traditional booking agencies match you with hosts and leave. Guest Engine researches 30 days of community discourse around you before your appearance, briefs the host with your best material, produces the entire show live with a professional crew, and delivers finished content within 48 hours. You also get a permanent authority profile that ranks in search and AI assistants — not just a one-time episode link."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the $497 Single Appearance include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One produced live show appearance on a network show, plus: a Signal intelligence report researching your community discourse, 5 vertical video clips optimized for social, 10 ready-to-post social media posts, a full transcript, a highlight reel, and a permanent authority profile in the Guest Engine directory. Your profile is enriched from 10+ data sources and indexed by Google, ChatGPT, Gemini, Perplexity, and other AI search engines."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Signal Report?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Signal ENGINE is an AI-powered community intelligence tool. It researches 30 days of Reddit, X, and online discourse around you, your ideas, and your competitive landscape. You get a community sentiment score, top discussion themes, content opportunities, and a view of what your audience is actually talking about. Every guest gets a free Signal Brief — members and VIPs receive ongoing monthly or weekly reports."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What shows can I appear on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Guest Engine is part of the MITL Live Network. The flagship show is Mornings in the Lab, hosted by Keith Bilous — live every morning for 700+ consecutive days. The network also includes It Starts with Joy LIVE, The Jason Hewlett Show, and Kindness Rising. Each show has distinct segments like Center Stage, Deep Dive, Community Corner, and No Safe Words."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Member plan ($97/mo)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Member plan is $97/month and gives you monthly Signal intelligence reports, an AI digital twin character in the ConversationOS ecosystem, network discovery and matching, a member directory listing, and community access. It does not include a show appearance — it's designed for ongoing visibility and intelligence without booking a live conversation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the VIP plan ($297/mo)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "VIP is $297/month and includes everything in the Member plan plus quarterly produced show appearances, weekly Signal intelligence reports, access to Center Stage and Deep Dive segments, priority placement in the directory, and a premium authority profile. It's the full-service tier for professionals who want maximum visibility and recurring produced content."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my profile show up on ChatGPT, Gemini, and Perplexity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Guest Engine profiles are built with structured data (Schema.org JSON-LD), semantic HTML, and machine-readable metadata specifically designed for AI crawlers. Your profile is indexed by Google and readable by ChatGPT, Claude, Perplexity, Gemini, and other AI search engines. The site also publishes llms.txt, an MCP server manifest, and an agent.json — all standard protocols that AI assistants use to discover and surface your authority."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is ConversationOS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ConversationOS is the AI production platform that powers Guest Engine. It handles guest research, host briefing, live show production, content generation, and profile building. Sophia — the AI producer — coordinates everything from booking to green room prep to post-production delivery. ConversationOS turns live conversations into discoverable, compounding authority for every guest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is Guest Engine for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Guest Engine serves professionals who want to build authority through live conversation: authors, speakers, founders, coaches, consultants, real estate professionals, podcasters, financial advisors, attorneys, therapists, nonprofit leaders, corporate executives, and health and wellness professionals. If you have expertise worth sharing and want it produced, indexed, and discoverable — Guest Engine is built for you."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- V2 Homepage Redesign Styles -->
   <style>
   /* ============================================
@@ -514,6 +603,7 @@
     text-transform: uppercase;
     max-width: 800px;
     color: var(--text);
+    margin: 0;
   }
   .v2 .section-title .gold { color: var(--gold); }
 
@@ -1781,7 +1871,64 @@
     .v2 .host-value-grid { grid-template-columns: 1fr; }
     .v2 .host-cta-row { flex-direction: column; }
     .v2 .pricing-grid { max-width: 100%; }
+    .v2 .faq-grid { columns: 1; }
   }
+
+  /* FAQ Section */
+  .v2 .faq-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .v2 .faq-grid {
+    margin-top: 40px;
+    text-align: left;
+  }
+  .v2 .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .v2 .faq-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .v2 .faq-q {
+    padding: 20px 0;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+  .v2 .faq-q::-webkit-details-marker { display: none; }
+  .v2 .faq-q::after {
+    content: '+';
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--gold);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .v2 .faq-item[open] .faq-q::after {
+    content: '\2212';
+  }
+  .v2 .faq-q:hover { color: var(--gold); }
+  .v2 .faq-a {
+    padding: 0 0 20px;
+  }
+  .v2 .faq-a p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .v2 .faq-a a { color: var(--gold); text-decoration: none; }
+  .v2 .faq-a a:hover { text-decoration: underline; }
   </style>
 </head>
 <body class="v2">
@@ -1890,10 +2037,10 @@
        ============================ -->
   <section class="section" id="for-guests">
     <div class="section-label">For Guests</div>
-    <div class="section-title">
+    <h2 class="section-title">
       ONE LIVE CONVERSATION.<br>
       <span class="gold">A MONTH OF CONTENT. PRODUCED.</span>
-    </div>
+    </h2>
     <p class="section-desc">
       Stop creating from scratch. One live appearance on our network gives you everything you need to show up across every platform for weeks.
     </p>
@@ -1948,9 +2095,9 @@
   <section class="section showcase-section" id="pricing">
     <div class="showcase-header">
       <div class="section-label">See What You Get</div>
-      <div class="section-title">
+      <h2 class="section-title">
         REAL GUESTS. <span class="gold">REAL PAGES.</span>
-      </div>
+      </h2>
       <p class="section-desc">
         Every tier produces a living authority profile. The difference is depth, intelligence, and ongoing production.
       </p>
@@ -2051,9 +2198,9 @@
        ============================ -->
   <section class="section" id="how-it-works">
     <div class="section-label">How It Works</div>
-    <div class="section-title">
+    <h2 class="section-title">
       FOUR STEPS. <span class="gold">ZERO FRICTION.</span>
-    </div>
+    </h2>
 
     <div class="steps-grid">
       <div class="step-card">
@@ -2084,10 +2231,10 @@
        ============================ -->
   <section class="section" id="network">
     <div class="section-label">The Network</div>
-    <div class="section-title">
+    <h2 class="section-title">
       SET BY <span class="gold">CONVERSATIONOS.</span><br>
       LIVE ON THE MITL NETWORK.
-    </div>
+    </h2>
     <p class="section-desc">
       Guest Engine is the front door to a live daily broadcast network with 1,000+ episodes, 700+ consecutive mornings, and 3 years of daily LIVE content.
     </p>
@@ -2117,10 +2264,10 @@
        ============================ -->
   <section class="section-tight" style="background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="section-label">The Problem</div>
-    <div class="section-title">
+    <h2 class="section-title">
       OTHER PLATFORMS CONNECT YOU.<br>
       <span class="gold">WE SET THE CONVERSATION.</span>
-    </div>
+    </h2>
     <p class="section-desc">
       Booking platforms match you with a host and send you a calendar invite. That's it. ConversationOS researches your world before you arrive, briefs the host, produces the appearance live, and delivers the content pack after.
     </p>
@@ -2162,10 +2309,10 @@
       <div class="host-left">
         <div>
           <div class="section-label">For Hosts</div>
-          <div class="section-title">
+          <h2 class="section-title">
             YOUR SHOW RUNS ITSELF.<br>
             <span class="gold">YOU JUST SHOW UP.</span>
-          </div>
+          </h2>
           <p class="section-desc">
             ConversationOS handles everything &mdash; pre-production, guest booking, episode assembly, distribution, and growth. You focus on the conversation. We build the rest.
           </p>
@@ -2281,9 +2428,9 @@
        ============================ -->
   <section class="final-cta">
     <div class="section-label">Ready?</div>
-    <div class="section-title">
+    <h2 class="section-title">
       START THE <span class="gold">CONVERSATION.</span>
-    </div>
+    </h2>
     <p class="section-desc">
       One live appearance. A full content pack. A permanent authority profile. Everything produced.
     </p>
@@ -2303,6 +2450,87 @@
         <p>We research 30 days of community discourse around you, your ideas, and your category &mdash; then show you exactly what your best material is. Free.</p>
       </div>
       <a href="/signal/" class="lead-cta" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--gold);color:var(--bg);font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;border-radius:6px;transition:all 0.2s;margin-top:8px;">Get Your Signal Report <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============================
+       FAQ
+       ============================ -->
+  <section class="faq-section" id="faq">
+    <div class="section-label">Questions</div>
+    <h2 class="section-title">FREQUENTLY <span class="gold">ASKED.</span></h2>
+    <div class="faq-grid">
+
+      <details class="faq-item">
+        <summary class="faq-q">What is Guest Engine?</summary>
+        <div class="faq-a">
+          <p>Guest Engine is a professional guest placement and content production platform powered by ConversationOS. You book a live show appearance, our AI producer Sophia researches your world overnight, briefs the host, produces your conversation live, and delivers a complete content pack — 5 vertical video clips, 10 social posts, full transcript, highlight reel, and a permanent authority profile indexed by Google and AI search engines.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How is Guest Engine different from podcast booking agencies?</summary>
+        <div class="faq-a">
+          <p>Traditional booking agencies match you with hosts and leave. Guest Engine researches 30 days of community discourse around you before your appearance, briefs the host with your best material, produces the entire show live with a professional crew, and delivers finished content within 48 hours. You also get a permanent authority profile that ranks in search and AI assistants — not just a one-time episode link.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What does the $497 Single Appearance include?</summary>
+        <div class="faq-a">
+          <p>One produced live show appearance on a network show, plus: a Signal intelligence report researching your community discourse, 5 vertical video clips optimized for social, 10 ready-to-post social media posts, a full transcript, a highlight reel, and a permanent authority profile in the Guest Engine directory. Your profile is enriched from 10+ data sources and indexed by Google, ChatGPT, Gemini, Perplexity, and other AI search engines.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is a Signal Report?</summary>
+        <div class="faq-a">
+          <p>Signal ENGINE is our AI-powered community intelligence tool. It researches 30 days of Reddit, X, and online discourse around you, your ideas, and your competitive landscape. You get a community sentiment score, top discussion themes, content opportunities, and a view of what your audience is actually talking about. Every guest gets a free Signal Brief — members and VIPs receive ongoing monthly or weekly reports.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What shows can I appear on?</summary>
+        <div class="faq-a">
+          <p>Guest Engine is part of the MITL Live Network. The flagship show is Mornings in the Lab, hosted by Keith Bilous — live every morning for 700+ consecutive days. The network also includes It Starts with Joy LIVE, The Jason Hewlett Show, and Kindness Rising. Each show has distinct segments like Center Stage, Deep Dive, Community Corner, and No Safe Words. You can browse all shows at <a href="/shows/" style="color:var(--gold)">guestengine.live/shows</a>.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is the Member plan ($97/mo)?</summary>
+        <div class="faq-a">
+          <p>The Member plan is $97/month and gives you monthly Signal intelligence reports, an AI digital twin character in the ConversationOS ecosystem, network discovery and matching, a member directory listing, and community access. It does not include a show appearance — it's designed for ongoing visibility and intelligence without booking a live conversation.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is the VIP plan ($297/mo)?</summary>
+        <div class="faq-a">
+          <p>VIP is $297/month and includes everything in the Member plan plus quarterly produced show appearances, weekly Signal intelligence reports, access to Center Stage and Deep Dive segments, priority placement in the directory, and a premium authority profile. It's the full-service tier for professionals who want maximum visibility and recurring produced content.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Will my profile show up on ChatGPT, Gemini, and Perplexity?</summary>
+        <div class="faq-a">
+          <p>Yes. Guest Engine profiles are built with structured data (Schema.org JSON-LD), semantic HTML, and machine-readable metadata specifically designed for AI crawlers. Your profile is indexed by Google and readable by ChatGPT, Claude, Perplexity, Gemini, and other AI search engines. The site also publishes llms.txt, an MCP server manifest, and an agent.json — all standard protocols that AI assistants use to discover and surface your authority.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is ConversationOS?</summary>
+        <div class="faq-a">
+          <p>ConversationOS is the AI production platform that powers Guest Engine. It handles guest research, host briefing, live show production, content generation, and profile building. Sophia — the AI producer — coordinates everything from booking to green room prep to post-production delivery. ConversationOS turns live conversations into discoverable, compounding authority for every guest.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Who is Guest Engine for?</summary>
+        <div class="faq-a">
+          <p>Guest Engine serves professionals who want to build authority through live conversation: authors, speakers, founders, coaches, consultants, real estate professionals, podcasters, financial advisors, attorneys, therapists, nonprofit leaders, corporate executives, and health and wellness professionals. If you have expertise worth sharing and want it produced, indexed, and discoverable — Guest Engine is built for you.</p>
+        </div>
+      </details>
+
     </div>
   </section>
 
