@@ -71,21 +71,13 @@
     border-bottom:1px solid var(--card-border);
   }
   .header-logo {
-    display:flex; align-items:center; gap:10px;
-    font-family:var(--font-display); font-weight:800; font-size:18px;
-    letter-spacing:0.5px; text-transform:uppercase;
-    text-decoration:none; color:inherit;
+    display:flex; align-items:center;
+    text-decoration:none;
   }
-  .header-logo .g-icon {
-    width:32px; height:32px; background:var(--gold); border-radius:6px;
-    display:flex; align-items:center; justify-content:center;
-    color:#020617; font-weight:900; font-size:18px; flex-shrink:0;
-  }
-  .header-logo span.guest { color:#ffffff; }
-  .header-logo span.engine { color:var(--gold); }
-  .header-logo .sub {
-    font-size:9px; font-weight:500; letter-spacing:2px;
-    color:var(--m); text-transform:uppercase; display:block; margin-top:-2px;
+  .header-logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
   }
   .header .header-nav {
     display:flex; align-items:center; gap:28px;
@@ -614,11 +606,7 @@
 
 <header class="header">
     <a href="/" class="header-logo">
-      <span class="g-icon">G</span>
-      <span>
-        <span class="guest">GUEST</span><span class="engine">ENGINE</span>
-        <span class="sub">Conversations</span>
-      </span>
+      <img src="/assets/ge-logo.jpg" alt="ConversationOS Guest Engine" class="header-logo-img">
     </a>
     <nav class="header-nav">
       <a href="/directory/">Directory</a>

@@ -318,37 +318,11 @@
   .v2 .header-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
   }
-
-  .v2 .header-logo .g-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--gold);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--bg);
-    font-weight: 900;
-    font-size: 18px;
-  }
-
-  .v2 .header-logo span.guest { color: var(--text); }
-  .v2 .header-logo span.engine { color: var(--gold); }
-  .v2 .header-logo .sub {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
+  .v2 .header-logo-img {
+    height: 40px;
+    width: auto;
     display: block;
-    margin-top: -2px;
   }
 
   .v2 .nav-links {
@@ -1940,11 +1914,7 @@
        ============================ -->
   <header class="header">
     <a href="/" class="header-logo">
-      <span class="g-icon">G</span>
-      <span>
-        <span class="guest">GUEST</span><span class="engine">ENGINE</span>
-        <span class="sub">Conversations</span>
-      </span>
+      <img src="/assets/ge-logo.jpg" alt="ConversationOS Guest Engine" class="header-logo-img">
     </a>
     <nav class="nav-links">
       <a href="/directory/">Directory</a>
@@ -2577,8 +2547,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">
-          <span class="g-icon">G</span>
-          <span>GUEST<span style="color:var(--gold)">ENGINE</span></span>
+          <img src="/assets/ge-logo.jpg" alt="ConversationOS Guest Engine" style="height:36px;width:auto;">
         </div>
         <p>The intelligence-powered authority platform for live conversations. Enrichment, production, and permanent visibility &mdash; powered by <a href="https://conversationos.live" target="_blank" rel="noopener" style="color:var(--gold)">ConversationOS</a>.</p>
         <p class="founder-line">
