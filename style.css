@@ -86,7 +86,8 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0 40px;
+  height: 64px;
   background: linear-gradient(to bottom, #020617 0%, rgba(2,6,23,0.8) 60%, transparent 100%);
   transition: all 0.5s ease;
 }
@@ -105,57 +106,52 @@ ul { list-style: none; }
   height: 40px;
   width: auto;
   display: block;
-  
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.6));
 }
 .v2-header .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 28px;
 }
 .v2-header .nav-links a {
-  font-family: var(--font-display);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  color: rgba(255,255,255,0.60);
   transition: color 0.2s;
-  pointer-events: auto;
+  text-decoration: none;
 }
-.v2-header .nav-links a:hover,
-.v2-header .nav-links a.on {
-  color: var(--gold);
-}
+.v2-header .nav-links a:hover { color: #fff; }
+.v2-header .nav-links a.on { color: #fbbf24; }
 .v2-header .nav-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 .v2-header .btn-login {
-  font-family: var(--font-display);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  color: rgba(255,255,255,0.60);
   transition: color 0.2s;
-  pointer-events: auto;
+  text-decoration: none;
 }
 .v2-header .btn-login:hover { color: #fff; }
 .v2-header .btn-signup {
-  font-family: var(--font-display);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--gold);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  background: #fbbf24;
   color: #020617;
-  padding: 0.625rem 1.5rem;
-  border-radius: var(--radius-md);
+  padding: 8px 20px;
+  border-radius: 6px;
   transition: background 0.2s;
-  pointer-events: auto;
+  text-decoration: none;
+  display: inline-block;
 }
-.v2-header .btn-signup:hover { background: var(--gold-hover); }
+.v2-header .btn-signup:hover { background: #f59e0b; }
 .v2-header .nav-hamburger {
   display: none;
   background: none;
@@ -173,6 +169,7 @@ ul { list-style: none; }
   transition: 0.3s;
 }
 @media (max-width: 1024px) {
+  .v2-header { padding: 0 20px; }
   .v2-header .nav-links { display: none; }
   .v2-header .nav-actions { display: none; }
   .v2-header .nav-hamburger { display: block; }

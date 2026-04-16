@@ -23,7 +23,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <link rel="stylesheet" href="../style.css?v=20260416">
+  <link rel="stylesheet" href="../style.css?v=20260416b">
 
   <style>
     /* ─── V2 Header (unified nav) ─── */
@@ -59,10 +59,10 @@
       display: block; margin-top: -2px;
     }
 
-  .v2-header .header-logo-img { height: 40px; width: auto; display: block;  }
+  .v2-header .header-logo-img { height: 40px; width: auto; display: block; filter: drop-shadow(0 0 8px rgba(0,0,0,0.6)); }
     .v2-header .nav-links { display: flex; align-items: center; gap: 28px; }
     .v2-header .nav-links a {
-      font-size: 14px; font-weight: 500;
+      font-size: 14px; font-weight: 500; text-transform: none;
       color: rgba(255,255,255,0.60); transition: color 0.2s;
       letter-spacing: 0.3px; text-decoration: none;
     }
@@ -70,12 +70,12 @@
     .v2-header .nav-links a.on { color: var(--gold, #fbbf24); }
     .v2-header .nav-actions { display: flex; align-items: center; gap: 16px; }
     .v2-header .btn-login {
-      font-size: 14px; font-weight: 500;
+      font-size: 14px; font-weight: 500; text-transform: none;
       color: rgba(255,255,255,0.60); transition: color 0.2s; text-decoration: none;
     }
     .v2-header .btn-login:hover { color: #fff; }
     .v2-header .btn-signup {
-      font-size: 14px; font-weight: 600;
+      font-size: 14px; font-weight: 600; text-transform: none;
       padding: 8px 20px; background: var(--gold, #fbbf24);
       color: var(--bg, #020617); border-radius: 6px;
       transition: background 0.2s; letter-spacing: 0.3px;
