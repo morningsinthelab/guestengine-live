@@ -2,46 +2,6 @@
 // GUEST ENGINE — guestengine.live
 // ============================================
 
-// --- Nav scroll behavior ---
-(function() {
-  const nav = document.getElementById('nav');
-  let lastScroll = 0;
-  let ticking = false;
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > 80 && currentScroll > lastScroll) {
-          nav.classList.add('nav--hidden');
-        } else {
-          nav.classList.remove('nav--hidden');
-        }
-        lastScroll = currentScroll;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  // Mobile menu toggle
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
-
-  toggle.addEventListener('click', () => {
-    links.classList.toggle('active');
-    toggle.classList.toggle('active');
-  });
-
-  // Close mobile menu on link click
-  links.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      links.classList.remove('active');
-      toggle.classList.remove('active');
-    });
-  });
-})();
-
 // --- Scroll reveal ---
 (function() {
   const revealTargets = [
@@ -89,7 +49,7 @@
   });
 })();
 
-// --- Smooth scroll offset for fixed nav ---
+// --- Smooth scroll offset for fixed header ---
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();

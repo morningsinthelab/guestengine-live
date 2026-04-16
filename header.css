@@ -1,0 +1,257 @@
+/* ============================================
+   SHARED HEADER — Guest Engine
+   Single source of truth for all page headers.
+   ============================================ */
+
+.ge-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  background: linear-gradient(
+    to bottom,
+    #020617 0%,
+    rgba(2, 6, 23, 0.60) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: background 0.5s ease, backdrop-filter 0.5s ease, border-bottom 0.5s ease, box-shadow 0.5s ease;
+}
+
+.ge-header > * {
+  pointer-events: auto;
+}
+
+.ge-header.scrolled {
+  background: rgba(2, 6, 23, 0.80);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+}
+
+/* --- Logo (HTML/CSS, no image) --- */
+.ge-header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.ge-header__logo-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.ge-header__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.ge-header__logo-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.ge-header__logo-title span {
+  font-weight: 400;
+}
+
+.ge-header__logo-title strong {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ge-header__logo-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 1px;
+}
+
+/* --- Nav Links --- */
+.ge-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.ge-header__nav a {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.60);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.ge-header__nav a:hover {
+  color: #ffffff;
+}
+
+.ge-header__nav a.on {
+  color: #fbbf24;
+}
+
+/* --- Action Buttons --- */
+.ge-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ge-header__login {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.60);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.ge-header__login:hover {
+  color: #ffffff;
+}
+
+.ge-header__signup {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  background: #fbbf24;
+  color: #020617;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.ge-header__signup:hover {
+  background: #f59e0b;
+}
+
+/* --- Hamburger (mobile) --- */
+.ge-header__hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  pointer-events: auto;
+}
+
+.ge-header__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  margin: 5px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ge-header__hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.ge-header__hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.ge-header__hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Mobile overlay --- */
+.ge-header__mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(2, 6, 23, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.ge-header__mobile-overlay.active {
+  display: flex;
+}
+
+.ge-header__mobile-overlay a {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ge-header__mobile-overlay a:hover {
+  color: #ffffff;
+}
+
+.ge-header__mobile-overlay a.on {
+  color: #fbbf24;
+}
+
+.ge-header__mobile-overlay .ge-header__signup {
+  margin-top: 8px;
+  font-size: 16px;
+  padding: 12px 32px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .ge-header {
+    padding: 0 20px;
+  }
+
+  .ge-header__nav {
+    display: none;
+  }
+
+  .ge-header__actions {
+    display: none;
+  }
+
+  .ge-header__hamburger {
+    display: block;
+  }
+
+  .ge-header__logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ge-header__logo-title {
+    font-size: 14px;
+  }
+
+  .ge-header__logo-subtitle {
+    font-size: 8px;
+  }
+}

@@ -27,81 +27,7 @@
 
   <style>
     /* ─── V2 Header (unified nav) ─── */
-    .v2-header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 0 40px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(to bottom, #020617 0%, rgba(2,6,23,0.8) 60%, transparent 100%);
-    }
-    .v2-header .header-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-family: 'Cabinet Grotesk', 'Syncopate', sans-serif;
-      font-weight: 800; font-size: 18px;
-      letter-spacing: 0.5px; text-transform: uppercase;
-      text-decoration: none; color: inherit;
-    }
-    .v2-header .header-logo .g-icon {
-      width: 32px; height: 32px;
-      background: var(--gold, #fbbf24); border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--bg, #020617); font-weight: 900; font-size: 18px;
-    }
-    .v2-header .header-logo .guest { color: #fff; }
-    .v2-header .header-logo .engine { color: var(--gold, #fbbf24); }
-    .v2-header .header-logo .sub {
-      font-size: 9px; font-weight: 500; letter-spacing: 2px;
-      color: rgba(255,255,255,0.40); text-transform: uppercase;
-      display: block; margin-top: -2px;
-    }
 
-  .v2-header .header-logo-img { height: 40px; width: auto; display: block; filter: drop-shadow(0 0 8px rgba(0,0,0,0.6)); }
-    .v2-header .nav-links { display: flex; align-items: center; gap: 28px; }
-    .v2-header .nav-links a {
-      font-size: 14px; font-weight: 500; text-transform: none;
-      color: rgba(255,255,255,0.60); transition: color 0.2s;
-      letter-spacing: 0.3px; text-decoration: none;
-    }
-    .v2-header .nav-links a:hover { color: #fff; }
-    .v2-header .nav-links a.on { color: var(--gold, #fbbf24); }
-    .v2-header .nav-actions { display: flex; align-items: center; gap: 16px; }
-    .v2-header .btn-login {
-      font-size: 14px; font-weight: 500; text-transform: none;
-      color: rgba(255,255,255,0.60); transition: color 0.2s; text-decoration: none;
-    }
-    .v2-header .btn-login:hover { color: #fff; }
-    .v2-header .btn-signup {
-      font-size: 14px; font-weight: 600; text-transform: none;
-      padding: 8px 20px; background: var(--gold, #fbbf24);
-      color: var(--bg, #020617); border-radius: 6px;
-      transition: background 0.2s; letter-spacing: 0.3px;
-      display: inline-block; text-decoration: none;
-    }
-    .v2-header .btn-signup:hover { background: #f59e0b; }
-    .v2-header .nav-hamburger {
-      display: none; background: none; border: none;
-      cursor: pointer; padding: 4px;
-    }
-    .v2-header .nav-hamburger span {
-      display: block; width: 22px; height: 2px;
-      background: #fff; margin: 5px 0; transition: all 0.3s;
-    }
-    @media (max-width: 1024px) {
-      .v2-header { padding: 0 20px; }
-      .v2-header .nav-links { display: none; }
-      .v2-header .nav-hamburger { display: block; }
-      .v2-header .header-logo-img { height: 32px; max-width: 140px; object-fit: contain; object-position: left; }
-      .v2-header .nav-links.active {
-        display: flex; flex-direction: column;
-        position: fixed; top: 64px; left: 0; right: 0;
-        background: rgba(2,6,23,0.95); backdrop-filter: blur(20px);
-        padding: 24px; gap: 16px;
-      }
-    }
 
     /* ─── Signal Page Styles ─── */
 
@@ -641,32 +567,56 @@
     }
   }
   </script>
+  <link rel="stylesheet" href="../header.css">
 </head>
 <body class="signal-page">
 
-  <!-- NAV -->
-  <header class="header v2-header">
-    <a href="/" class="header-logo">
-      <img src="/assets/ge-logo.png" alt="ConversationOS Guest Engine" class="header-logo-img">
+  <header class="ge-header" id="geHeader">
+    <a href="/" class="ge-header__logo">
+      <svg class="ge-header__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="8" fill="#fbbf24"/>
+      <path d="M18 8C12.48 8 8 11.58 8 16c0 2.52 1.47 4.77 3.75 6.24-.13 1.53-.73 2.94-1.7 3.9a.5.5 0 00.36.86c2.07-.07 3.97-.87 5.36-2.07.7.1 1.42.07 2.23.07 5.52 0 10-3.58 10-8s-4.48-8-10-8z" fill="#020617"/>
+      <text x="18" y="20.5" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">C</text>
+    </svg>
+      <div class="ge-header__logo-text">
+        <div class="ge-header__logo-title"><span>Guest </span><strong>ENGINE</strong></div>
+        <div class="ge-header__logo-subtitle">ConversationOS</div>
+      </div>
     </a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="ge-header__nav" id="geNav">
       <a href="/directory/">Directory</a>
       <a href="/marketplace/">Marketplace</a>
       <a href="/shows/">Shows</a>
       <a href="/#pricing">Pricing</a>
       <a href="/#network">Network</a>
-      <a href="/signal/" class="on">Signal</a>
+      <a href="/signal/">Signal</a>
       <a href="/why/">Why</a>
       <a href="/join/">Join</a>
     </nav>
-    <div class="nav-actions">
-      <a href="https://ge.conversationos.live" class="btn-login">Log In</a>
-      <a href="/join/" class="btn-signup">Sign Up</a>
+    <div class="ge-header__actions">
+      <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
+      <a href="/join/" class="ge-header__signup">Sign Up</a>
     </div>
-    <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+    <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
   </header>
+  <div class="ge-header__mobile-overlay" id="geMobileMenu">
+    <a href="/directory/">Directory</a>
+    <a href="/marketplace/">Marketplace</a>
+    <a href="/shows/">Shows</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#network">Network</a>
+    <a href="/signal/">Signal</a>
+    <a href="/why/">Why</a>
+    <a href="/join/">Join</a>
+    <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
+    <a href="/join/" class="ge-header__signup">Sign Up</a>
+  </div>
+
+
+  <!-- NAV -->
+  
 
   <!-- HERO -->
 
@@ -1023,5 +973,6 @@
   })();
   </script>
 
+  <script src="../header.js"></script>
 </body>
 </html>
