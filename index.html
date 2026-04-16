@@ -2433,6 +2433,27 @@
   })();
   </script>
 
+  <!-- Scroll to hash anchor on page load (for cross-page links like /#pricing) -->
+  <script>
+  (function() {
+    if (!window.location.hash) return;
+    function scrollToHash() {
+      var el = document.querySelector(window.location.hash);
+      if (el) {
+        var headerOffset = 80;
+        var top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }
+    // Wait for page to fully render, then scroll
+    if (document.readyState === 'complete') {
+      setTimeout(scrollToHash, 100);
+    } else {
+      window.addEventListener('load', function() { setTimeout(scrollToHash, 100); });
+    }
+  })();
+  </script>
+
   <!-- SOPHIA AI CHAT WIDGET -->
   <script
     src="https://app.conversationos.live/sophia-embed.js"
