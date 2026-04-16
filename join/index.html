@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join Guest Engine — Book Your Appearance</title>
-  <meta name="description" content="Choose your tier, select your show and segment, and book your guest appearance. One live conversation produces a permanent authority profile, video clips, and social content.">
+  <meta name="description" content="Join Guest Engine. Choose your tier, select your show, and get started. One live conversation produces a permanent authority profile, video clips, and social content.">
 
-  <meta property="og:title" content="Join Guest Engine — Book Your Appearance">
+  <meta property="og:title" content="Join Guest Engine">
   <meta property="og:description" content="Choose your tier, select your show, and book your guest appearance.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://guestengine.live/join/">
@@ -196,6 +196,11 @@
     font-size: 13px; color: var(--text-tertiary);
     margin-bottom: 16px;
   }
+  .tier-card__subtitle {
+    font-size: 13px; color: var(--gold);
+    font-weight: 600; margin-bottom: 16px;
+    letter-spacing: 0.3px;
+  }
   .tier-card__features {
     list-style: none; text-align: left;
     font-size: 14px; color: var(--text-secondary);
@@ -205,7 +210,7 @@
     display: flex; align-items: flex-start; gap: 8px;
   }
   .tier-card__features li::before {
-    content: '✓'; color: var(--gold);
+    content: '\2713'; color: var(--gold);
     font-weight: 700; flex-shrink: 0;
   }
 
@@ -224,20 +229,14 @@
   .show-option__img {
     width: 120px; height: 100px; flex-shrink: 0; overflow: hidden;
   }
-  .show-option__img img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
+  .show-option__img img { width: 100%; height: 100%; object-fit: cover; }
   .show-option__info { padding: 16px; }
   .show-option__name {
     font-family: var(--font-display);
     font-weight: 700; font-size: 15px; text-transform: uppercase;
   }
-  .show-option__host {
-    font-size: 12px; color: var(--text-tertiary); margin-top: 2px;
-  }
-  .show-option__tags {
-    display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
-  }
+  .show-option__host { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+  .show-option__tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
   .show-option__tags span {
     padding: 2px 8px; background: var(--surface);
     border: 1px solid var(--border); border-radius: 3px;
@@ -257,9 +256,7 @@
   }
   .segment-option:hover { border-color: var(--border-strong); transform: translateY(-2px); }
   .segment-option.selected { border-color: var(--gold); background: rgba(251,191,36,0.06); }
-  .segment-option.disabled {
-    opacity: 0.35; pointer-events: none;
-  }
+  .segment-option.disabled { opacity: 0.35; pointer-events: none; }
   .segment-option__icon {
     width: 40px; height: 40px; border-radius: 8px;
     background: var(--gold-dim);
@@ -280,6 +277,51 @@
     margin-top: 8px; line-height: 1.5;
   }
 
+  /* Details form */
+  .details-form {
+    max-width: 520px;
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .form-group label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    transition: border-color 0.2s;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-tertiary);
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .form-note {
+    font-size: 13px; color: var(--text-tertiary);
+    margin-top: 6px; line-height: 1.4;
+  }
+
   /* Summary step */
   .summary-card {
     background: var(--card-bg); border: 1px solid var(--border);
@@ -298,7 +340,7 @@
   }
   .summary-row .value {
     font-family: var(--font-display);
-    font-weight: 700; font-size: 16px;
+    font-weight: 700; font-size: 16px; text-align: right;
   }
   .summary-total {
     display: flex; justify-content: space-between; align-items: center;
@@ -346,45 +388,21 @@
   .btn-next:disabled { opacity: 0.4; pointer-events: none; }
 
   /* ── FOOTER ── */
-  .footer-v2 {
-    padding: 64px 80px; border-top: 1px solid var(--border); background: var(--bg);
-  }
-  .footer-grid {
-    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
-  }
-  .footer-brand .logo {
-    font-family: var(--font-display); font-weight: 800; font-size: 16px;
-    text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
-  }
-  .footer-brand .logo .g-icon {
-    width: 28px; height: 28px; background: var(--gold); border-radius: 5px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--bg); font-weight: 900; font-size: 16px;
-  }
+  .footer-v2 { padding: 64px 80px; border-top: 1px solid var(--border); background: var(--bg); }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; }
+  .footer-brand .logo { font-family: var(--font-display); font-weight: 800; font-size: 16px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .footer-brand .logo .g-icon { width: 28px; height: 28px; background: var(--gold); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--bg); font-weight: 900; font-size: 16px; }
   .footer-brand > p { font-size: 14px; color: var(--text-tertiary); line-height: 1.6; max-width: 280px; }
   .footer-brand .founder-line { margin-top: 16px; font-size: 12px; color: var(--text-tertiary); }
   .footer-brand .founder-line a { color: var(--gold); }
   .footer-social { display: flex; gap: 12px; margin-top: 16px; }
-  .footer-social a {
-    width: 32px; height: 32px; border-radius: 6px;
-    background: var(--surface); border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-secondary); transition: all 0.2s;
-  }
+  .footer-social a { width: 32px; height: 32px; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all 0.2s; }
   .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
   .footer-social a svg { width: 16px; height: 16px; }
-  .footer-col h4 {
-    font-family: var(--font-display); font-weight: 700; font-size: 12px;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--text-tertiary); margin-bottom: 16px;
-  }
+  .footer-col h4 { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 16px; }
   .footer-col a { display: block; font-size: 14px; color: var(--text-secondary); padding: 4px 0; transition: color 0.2s; }
   .footer-col a:hover { color: var(--gold); }
-  .footer-bottom {
-    margin-top: 48px; padding-top: 24px;
-    border-top: 1px solid var(--border);
-    font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.5px;
-  }
+  .footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.5px; }
   .footer-bottom a { color: var(--gold); }
 
   /* ── RESPONSIVE ── */
@@ -446,88 +464,80 @@
 
   <main class="wizard-page">
 
-    <!-- PROGRESS BAR -->
-    <div class="progress">
-      <div class="progress-step active" data-step="1">
-        <span class="step-num">1</span>
-        <span>Tier</span>
-      </div>
-      <div class="progress-line" data-line="1"></div>
-      <div class="progress-step" data-step="2">
-        <span class="step-num">2</span>
-        <span>Show</span>
-      </div>
-      <div class="progress-line" data-line="2"></div>
-      <div class="progress-step" data-step="3">
-        <span class="step-num">3</span>
-        <span>Segment</span>
-      </div>
-      <div class="progress-line" data-line="3"></div>
-      <div class="progress-step" data-step="4">
-        <span class="step-num">4</span>
-        <span>Confirm</span>
-      </div>
+    <!-- PROGRESS BAR (dynamic — labels change based on tier) -->
+    <div class="progress" id="progressBar">
+      <!-- Populated by JS based on tier -->
     </div>
 
-    <!-- STEP 1: TIER -->
-    <div class="step active" id="step1">
+    <!-- ═══════════════════════════════════════
+         STEP 1: CHOOSE TIER (all paths start here)
+         ═══════════════════════════════════════ -->
+    <div class="step active" id="step-tier">
       <div class="step-label">Step 1</div>
       <h2>Choose Your <span class="gold">Tier</span></h2>
-      <p class="step-desc">Every tier gets you a produced appearance, authority profile, and content pack. Higher tiers unlock premium segments and recurring intelligence.</p>
+      <p class="step-desc">Each tier is a different product. Pick the one that fits where you are right now.</p>
 
       <div class="tier-grid">
-        <div class="tier-card" data-tier="single" data-price="$497" data-billing="one-time">
+        <!-- SINGLE -->
+        <div class="tier-card" data-tier="single">
           <div class="tier-card__name">Single Appearance</div>
           <div class="tier-card__price">$497</div>
           <div class="tier-card__billing">One-time</div>
+          <div class="tier-card__subtitle">One show. Full production.</div>
           <ul class="tier-card__features">
             <li>1 produced live appearance</li>
-            <li>Authority profile page</li>
-            <li>5 video clips</li>
-            <li>10 social posts</li>
+            <li>Permanent authority profile</li>
+            <li>5 vertical video clips</li>
+            <li>10 social media posts</li>
             <li>Full transcript</li>
             <li>Highlight reel</li>
           </ul>
         </div>
 
-        <div class="tier-card recommended" data-tier="member" data-price="$97/mo" data-billing="monthly">
+        <!-- MEMBER -->
+        <div class="tier-card recommended" data-tier="member">
           <div class="tier-card__name">Member</div>
           <div class="tier-card__price">$97</div>
           <div class="tier-card__billing">Per month</div>
+          <div class="tier-card__subtitle">Intelligence + visibility. No appearance.</div>
           <ul class="tier-card__features">
-            <li>Everything in Single</li>
-            <li>Monthly Signal intelligence</li>
-            <li>Digital twin character</li>
-            <li>Network discovery</li>
-            <li>Community Corner access</li>
+            <li>Monthly Signal intelligence report</li>
+            <li>AI digital twin character</li>
+            <li>Network discovery &amp; matching</li>
             <li>Member directory listing</li>
+            <li>Community access</li>
+            <li>Book appearances separately</li>
           </ul>
         </div>
 
-        <div class="tier-card" data-tier="vip" data-price="$297/mo" data-billing="monthly">
+        <!-- VIP -->
+        <div class="tier-card" data-tier="vip">
           <div class="tier-card__name">VIP</div>
           <div class="tier-card__price">$297</div>
           <div class="tier-card__billing">Per month</div>
+          <div class="tier-card__subtitle">Everything. Appearances included.</div>
           <ul class="tier-card__features">
-            <li>Everything in Member</li>
+            <li>Quarterly produced appearances</li>
             <li>Weekly intelligence reports</li>
-            <li>Quarterly appearances included</li>
-            <li>Center Stage & Deep Dive</li>
+            <li>Center Stage &amp; Deep Dive access</li>
             <li>Priority placement</li>
             <li>Premium authority profile</li>
+            <li>Everything in Member</li>
           </ul>
         </div>
       </div>
 
       <div class="wizard-nav">
         <div></div>
-        <button class="btn-next" id="next1" disabled>Select Show <i class="fas fa-arrow-right"></i></button>
+        <button class="btn-next" id="nextTier" disabled>Next <i class="fas fa-arrow-right"></i></button>
       </div>
     </div>
 
-    <!-- STEP 2: SHOW -->
-    <div class="step" id="step2">
-      <div class="step-label">Step 2</div>
+    <!-- ═══════════════════════════════════════
+         STEP: PICK SHOW (Single + VIP only)
+         ═══════════════════════════════════════ -->
+    <div class="step" id="step-show">
+      <div class="step-label" id="showStepLabel">Step 2</div>
       <h2>Pick Your <span class="gold">Show</span></h2>
       <p class="step-desc">Which show do you want to appear on? Each show has its own audience, tone, and format.</p>
 
@@ -540,7 +550,6 @@
             <div class="show-option__tags"><span>Business</span><span>Leadership</span><span>Tech</span></div>
           </div>
         </div>
-
         <div class="show-option" data-show="it-starts-with-joy" data-show-name="It Starts with Joy LIVE">
           <div class="show-option__img"><img src="/shows/joy-hero.jpg" alt="It Starts with Joy LIVE" loading="lazy"></div>
           <div class="show-option__info">
@@ -549,7 +558,6 @@
             <div class="show-option__tags"><span>Lifestyle</span><span>Health</span><span>Leadership</span></div>
           </div>
         </div>
-
         <div class="show-option" data-show="kindness-rising" data-show-name="Kindness Rising">
           <div class="show-option__img"><img src="/shows/kindness-hero.jpg" alt="Kindness Rising" loading="lazy"></div>
           <div class="show-option__info">
@@ -558,7 +566,6 @@
             <div class="show-option__tags"><span>Lifestyle</span><span>Leadership</span><span>Education</span></div>
           </div>
         </div>
-
         <div class="show-option" data-show="jason-hewlett" data-show-name="The Jason Hewlett Show">
           <div class="show-option__img"><img src="/shows/hewlett-hero.jpg" alt="The Jason Hewlett Show" loading="lazy"></div>
           <div class="show-option__info">
@@ -570,16 +577,18 @@
       </div>
 
       <div class="wizard-nav">
-        <button class="btn-back" id="back2"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="btn-next" id="next2" disabled>Select Segment <i class="fas fa-arrow-right"></i></button>
+        <button class="btn-back" data-back="tier"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn-next" id="nextShow" disabled>Select Segment <i class="fas fa-arrow-right"></i></button>
       </div>
     </div>
 
-    <!-- STEP 3: SEGMENT -->
-    <div class="step" id="step3">
-      <div class="step-label">Step 3</div>
+    <!-- ═══════════════════════════════════════
+         STEP: SELECT SEGMENT (Single + VIP only)
+         ═══════════════════════════════════════ -->
+    <div class="step" id="step-segment">
+      <div class="step-label" id="segmentStepLabel">Step 3</div>
       <h2>Select Your <span class="gold">Segment</span></h2>
-      <p class="step-desc">Each segment is a different format designed for different goals. Available segments depend on your tier.</p>
+      <p class="step-desc">Each segment is a different format. Available segments depend on your tier.</p>
 
       <div class="segment-grid" id="segmentGrid">
         <div class="segment-option" data-segment="center-stage" data-segment-name="Center Stage" data-requires="vip">
@@ -588,35 +597,30 @@
           <div class="segment-option__name">Center Stage</div>
           <p class="segment-option__desc">The flagship interview. Long-form, high-production. Maximum content output and authority positioning.</p>
         </div>
-
         <div class="segment-option" data-segment="deep-dive" data-segment-name="Deep Dive" data-requires="vip">
           <div class="segment-option__icon"><i class="fas fa-magnifying-glass"></i></div>
           <div class="segment-option__tier">VIP Segment</div>
           <div class="segment-option__name">Deep Dive</div>
           <p class="segment-option__desc">Focused, expert-level conversation on a single topic. Built for depth, not breadth.</p>
         </div>
-
         <div class="segment-option" data-segment="community-corner" data-segment-name="Community Corner" data-requires="member">
           <div class="segment-option__icon"><i class="fas fa-people-group"></i></div>
-          <div class="segment-option__tier">Member Segment</div>
+          <div class="segment-option__tier">Member+ Segment</div>
           <div class="segment-option__name">Community Corner</div>
           <p class="segment-option__desc">Conversational, community-driven. Share your story and leave with content you can use immediately.</p>
         </div>
-
         <div class="segment-option" data-segment="no-safe-words" data-segment-name="No Safe Words" data-requires="member">
           <div class="segment-option__icon"><i class="fas fa-fire"></i></div>
-          <div class="segment-option__tier">Member Segment</div>
+          <div class="segment-option__tier">Member+ Segment</div>
           <div class="segment-option__name">No Safe Words</div>
-          <p class="segment-option__desc">Unfiltered, high-energy debate format. No scripts, no safety nets. Take a position and defend it live.</p>
+          <p class="segment-option__desc">Unfiltered, high-energy debate format. No scripts, no safety nets.</p>
         </div>
-
         <div class="segment-option" data-segment="bs-or-no-bs" data-segment-name="BS or No BS" data-requires="single">
           <div class="segment-option__icon"><i class="fas fa-trophy"></i></div>
           <div class="segment-option__tier">All Tiers</div>
           <div class="segment-option__name">BS or No BS</div>
-          <p class="segment-option__desc">Quick-hit segment. Call out industry trends as real or hype. Fast, opinionated, and highly clippable.</p>
+          <p class="segment-option__desc">Quick-hit segment. Call out industry trends as real or hype. Fast, opinionated, highly clippable.</p>
         </div>
-
         <div class="segment-option" data-segment="did-you-know" data-segment-name="Did You Know" data-requires="single">
           <div class="segment-option__icon"><i class="fas fa-lightbulb"></i></div>
           <div class="segment-option__tier">All Tiers</div>
@@ -626,38 +630,60 @@
       </div>
 
       <div class="wizard-nav">
-        <button class="btn-back" id="back3"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="btn-next" id="next3" disabled>Review & Pay <i class="fas fa-arrow-right"></i></button>
+        <button class="btn-back" data-back="show"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn-next" id="nextSegment" disabled>Review &amp; Pay <i class="fas fa-arrow-right"></i></button>
       </div>
     </div>
 
-    <!-- STEP 4: CONFIRM -->
-    <div class="step" id="step4">
-      <div class="step-label">Step 4</div>
-      <h2>Confirm & <span class="gold">Pay</span></h2>
-      <p class="step-desc">Review your selections. You'll be taken to secure checkout to complete your booking.</p>
+    <!-- ═══════════════════════════════════════
+         STEP: YOUR DETAILS (Member only)
+         ═══════════════════════════════════════ -->
+    <div class="step" id="step-details">
+      <div class="step-label">Step 2</div>
+      <h2>Tell Us About <span class="gold">You</span></h2>
+      <p class="step-desc">We use this to start your Signal intelligence research, build your digital twin, and list you in the network directory.</p>
 
-      <div class="summary-card">
-        <div class="summary-row">
-          <span class="label">Tier</span>
-          <span class="value" id="sumTier">—</span>
+      <div class="details-form">
+        <div class="form-group">
+          <label for="detailName">Full Name</label>
+          <input type="text" id="detailName" placeholder="Your full name" required>
         </div>
-        <div class="summary-row">
-          <span class="label">Show</span>
-          <span class="value" id="sumShow">—</span>
+        <div class="form-group">
+          <label for="detailEmail">Email Address</label>
+          <input type="email" id="detailEmail" placeholder="you@example.com" required>
         </div>
-        <div class="summary-row">
-          <span class="label">Segment</span>
-          <span class="value" id="sumSegment">—</span>
+        <div class="form-group">
+          <label for="detailLinkedin">LinkedIn URL</label>
+          <input type="url" id="detailLinkedin" placeholder="https://linkedin.com/in/yourname">
+          <p class="form-note">Used for Signal research and authority enrichment.</p>
         </div>
-        <div class="summary-total">
-          <span class="label">Total</span>
-          <span class="value" id="sumPrice">—</span>
+        <div class="form-group">
+          <label for="detailTopic">Your Main Topic</label>
+          <input type="text" id="detailTopic" placeholder='e.g. "leadership for men" or "real estate investing"'>
+          <p class="form-note">The category you want to be known for. We research discourse around this.</p>
         </div>
       </div>
 
       <div class="wizard-nav">
-        <button class="btn-back" id="back4"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn-back" data-back="tier"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn-next" id="nextDetails" disabled>Review &amp; Pay <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         STEP: CONFIRM & PAY (all paths end here)
+         ═══════════════════════════════════════ -->
+    <div class="step" id="step-confirm">
+      <div class="step-label" id="confirmStepLabel">Step 4</div>
+      <h2>Confirm &amp; <span class="gold">Pay</span></h2>
+      <p class="step-desc">Review your selections. You'll be taken to secure checkout to complete your booking.</p>
+
+      <div class="summary-card" id="summaryCard">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="wizard-nav">
+        <button class="btn-back" id="backConfirm"><i class="fas fa-arrow-left"></i> Back</button>
         <button class="btn-next" id="checkoutBtn">Proceed to Payment <i class="fas fa-lock"></i></button>
       </div>
     </div>
@@ -672,10 +698,8 @@
           <span class="g-icon">G</span>
           <span>GUEST<span style="color:var(--gold)">ENGINE</span></span>
         </div>
-        <p>The intelligence-powered authority platform for live conversations. Enrichment, production, and permanent visibility &mdash; powered by <a href="https://conversationos.live" target="_blank" rel="noopener" style="color:var(--gold)">ConversationOS</a>.</p>
-        <p class="founder-line">
-          Founded by <a href="https://keithbilous.com" target="_blank" rel="noopener">Keith Bilous</a>, creator of the MiTL morning format and the ConversationOS production system.
-        </p>
+        <p>The intelligence-powered authority platform for live conversations &mdash; powered by <a href="https://conversationos.live" target="_blank" rel="noopener" style="color:var(--gold)">ConversationOS</a>.</p>
+        <p class="founder-line">Founded by <a href="https://keithbilous.com" target="_blank" rel="noopener">Keith Bilous</a>.</p>
         <div class="footer-social">
           <a href="https://youtube.com/@morningsinthelab" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
           <a href="https://linkedin.com/in/keithbilous" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
@@ -688,8 +712,6 @@
         <a href="/coaches/">Coaches & Mentors</a>
         <a href="/founders/">Founders</a>
         <a href="/realestate/">Real Estate</a>
-        <a href="/podcasters/">Podcasters</a>
-        <a href="/consultants/">Consultants</a>
         <a href="/why/" style="color:var(--gold)">Why Guest Engine</a>
         <a href="/signal/" style="color:var(--gold)">Free Signal Report</a>
       </div>
@@ -703,79 +725,144 @@
       <div class="footer-col">
         <h4>MiTL Ecosystem</h4>
         <a href="https://mitl.studio" target="_blank" rel="noopener">MiTL Studio</a>
-        <a href="https://mornings.live" target="_blank" rel="noopener">mornings.live</a>
-        <a href="https://keithbilous.com" target="_blank" rel="noopener">keithbilous.com</a>
         <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a>
         <a href="https://ge.conversationos.live" target="_blank" rel="noopener">Guest Engine App</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 GUEST ENGINE. CREATED BY <a href="https://keithbilous.com" target="_blank" rel="noopener">KEITH BILOUS</a>. AI-POWERED MATCHING. HUMAN-LED PRODUCTION. &mdash; Powered by <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a>.</p>
+      <p>&copy; 2026 GUEST ENGINE. CREATED BY <a href="https://keithbilous.com" target="_blank" rel="noopener">KEITH BILOUS</a>. &mdash; Powered by <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a>.</p>
     </div>
   </footer>
 
   <script>
   (function() {
-    // ── State ──
-    var state = { tier: null, show: null, segment: null, price: null, billing: null, showName: null, segmentName: null };
-    var currentStep = 1;
-
-    // ── Tier access rules ──
-    var tierAccess = {
-      'single': ['single'],
-      'member': ['single', 'member'],
-      'vip':    ['single', 'member', 'vip']
+    // ══════════════════════════════════════
+    // STATE
+    // ══════════════════════════════════════
+    var state = {
+      tier: null,
+      show: null, showName: null,
+      segment: null, segmentName: null,
+      name: '', email: '', linkedin: '', topic: '',
+      price: null, billing: null
     };
 
-    var tierLabels = { 'single': 'Single Appearance', 'member': 'Member', 'vip': 'VIP' };
+    var tierData = {
+      single:  { label: 'Single Appearance', price: '$497', billing: 'one-time' },
+      member:  { label: 'Member', price: '$97/mo', billing: 'monthly' },
+      vip:     { label: 'VIP', price: '$297/mo', billing: 'monthly' }
+    };
 
-    // ── Progress ──
-    function updateProgress() {
-      document.querySelectorAll('.progress-step').forEach(function(el) {
-        var s = parseInt(el.dataset.step);
-        el.classList.remove('active', 'done');
-        if (s === currentStep) el.classList.add('active');
-        else if (s < currentStep) el.classList.add('done');
-      });
-      document.querySelectorAll('.progress-line').forEach(function(el) {
-        var l = parseInt(el.dataset.line);
-        el.classList.toggle('done', l < currentStep);
-      });
+    // Which tiers unlock which segment requirements
+    var tierAccess = {
+      single: ['single'],
+      member: ['single', 'member'],
+      vip:    ['single', 'member', 'vip']
+    };
+
+    // ══════════════════════════════════════
+    // FLOW DEFINITIONS
+    // ══════════════════════════════════════
+    // Single/VIP: tier → show → segment → confirm
+    // Member:     tier → details → confirm
+    var flows = {
+      single: ['tier', 'show', 'segment', 'confirm'],
+      member: ['tier', 'details', 'confirm'],
+      vip:    ['tier', 'show', 'segment', 'confirm']
+    };
+
+    var currentStepId = 'tier';
+
+    function getFlow() { return flows[state.tier] || flows.single; }
+    function getStepIndex() { return getFlow().indexOf(currentStepId); }
+    function getTotalSteps() { return getFlow().length; }
+
+    // ══════════════════════════════════════
+    // PROGRESS BAR
+    // ══════════════════════════════════════
+    var stepLabels = {
+      tier: 'Tier', show: 'Show', segment: 'Segment',
+      details: 'Details', confirm: 'Confirm'
+    };
+
+    function renderProgress() {
+      var flow = getFlow();
+      var idx = getStepIndex();
+      var bar = document.getElementById('progressBar');
+      var html = '';
+      for (var i = 0; i < flow.length; i++) {
+        var cls = i === idx ? 'active' : (i < idx ? 'done' : '');
+        html += '<div class="progress-step ' + cls + '" data-step="' + i + '">';
+        html += '<span class="step-num">' + (i + 1) + '</span>';
+        html += '<span>' + stepLabels[flow[i]] + '</span>';
+        html += '</div>';
+        if (i < flow.length - 1) {
+          html += '<div class="progress-line' + (i < idx ? ' done' : '') + '"></div>';
+        }
+      }
+      bar.innerHTML = html;
     }
 
-    function goTo(step) {
+    // ══════════════════════════════════════
+    // NAVIGATION
+    // ══════════════════════════════════════
+    function goToStep(stepId) {
       document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
-      document.getElementById('step' + step).classList.add('active');
-      currentStep = step;
-      updateProgress();
+      document.getElementById('step-' + stepId).classList.add('active');
+      currentStepId = stepId;
+      renderProgress();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ── Step 1: Tier ──
+    // Back buttons
+    document.querySelectorAll('[data-back]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        goToStep(btn.dataset.back);
+      });
+    });
+
+    // ══════════════════════════════════════
+    // STEP 1: TIER SELECTION
+    // ══════════════════════════════════════
     document.querySelectorAll('.tier-card').forEach(function(card) {
       card.addEventListener('click', function() {
         document.querySelectorAll('.tier-card').forEach(function(c) { c.classList.remove('selected'); });
         card.classList.add('selected');
         state.tier = card.dataset.tier;
-        state.price = card.dataset.price;
-        state.billing = card.dataset.billing;
-        document.getElementById('next1').disabled = false;
+        state.price = tierData[state.tier].price;
+        state.billing = tierData[state.tier].billing;
+        document.getElementById('nextTier').disabled = false;
+
+        // Update button text based on tier
+        var btn = document.getElementById('nextTier');
+        if (state.tier === 'member') {
+          btn.innerHTML = 'Enter Your Details <i class="fas fa-arrow-right"></i>';
+        } else {
+          btn.innerHTML = 'Select Show <i class="fas fa-arrow-right"></i>';
+        }
       });
     });
-    document.getElementById('next1').addEventListener('click', function() { goTo(2); });
 
-    // ── Step 2: Show ──
+    document.getElementById('nextTier').addEventListener('click', function() {
+      var flow = getFlow();
+      goToStep(flow[1]); // show for single/vip, details for member
+    });
+
+    // ══════════════════════════════════════
+    // STEP: SHOW SELECTION (Single + VIP)
+    // ══════════════════════════════════════
     document.querySelectorAll('.show-option').forEach(function(opt) {
       opt.addEventListener('click', function() {
         document.querySelectorAll('.show-option').forEach(function(o) { o.classList.remove('selected'); });
         opt.classList.add('selected');
         state.show = opt.dataset.show;
         state.showName = opt.dataset.showName;
-        document.getElementById('next2').disabled = false;
+        document.getElementById('nextShow').disabled = false;
       });
     });
-    document.getElementById('next2').addEventListener('click', function() {
-      // Update segment availability based on tier
+
+    document.getElementById('nextShow').addEventListener('click', function() {
+      // Update segment availability
       var allowed = tierAccess[state.tier] || [];
       document.querySelectorAll('.segment-option').forEach(function(seg) {
         var requires = seg.dataset.requires;
@@ -786,15 +873,15 @@
           seg.classList.remove('selected');
         }
       });
-      // Reset segment selection
       state.segment = null;
       state.segmentName = null;
-      document.getElementById('next3').disabled = true;
-      goTo(3);
+      document.getElementById('nextSegment').disabled = true;
+      goToStep('segment');
     });
-    document.getElementById('back2').addEventListener('click', function() { goTo(1); });
 
-    // ── Step 3: Segment ──
+    // ══════════════════════════════════════
+    // STEP: SEGMENT SELECTION (Single + VIP)
+    // ══════════════════════════════════════
     document.querySelectorAll('.segment-option').forEach(function(seg) {
       seg.addEventListener('click', function() {
         if (seg.classList.contains('disabled')) return;
@@ -802,44 +889,119 @@
         seg.classList.add('selected');
         state.segment = seg.dataset.segment;
         state.segmentName = seg.dataset.segmentName;
-        document.getElementById('next3').disabled = false;
+        document.getElementById('nextSegment').disabled = false;
       });
     });
-    document.getElementById('next3').addEventListener('click', function() {
-      // Populate summary
-      document.getElementById('sumTier').textContent = tierLabels[state.tier] || state.tier;
-      document.getElementById('sumShow').textContent = state.showName || state.show;
-      document.getElementById('sumSegment').textContent = state.segmentName || state.segment;
-      document.getElementById('sumPrice').textContent = state.price;
-      goTo(4);
-    });
-    document.getElementById('back3').addEventListener('click', function() { goTo(2); });
 
-    // ── Step 4: Confirm & Checkout ──
-    document.getElementById('back4').addEventListener('click', function() { goTo(3); });
+    document.getElementById('nextSegment').addEventListener('click', function() {
+      buildSummary();
+      goToStep('confirm');
+    });
+
+    // ══════════════════════════════════════
+    // STEP: DETAILS FORM (Member only)
+    // ══════════════════════════════════════
+    var detailFields = ['detailName', 'detailEmail', 'detailLinkedin', 'detailTopic'];
+    detailFields.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', function() {
+          state.name = document.getElementById('detailName').value.trim();
+          state.email = document.getElementById('detailEmail').value.trim();
+          state.linkedin = document.getElementById('detailLinkedin').value.trim();
+          state.topic = document.getElementById('detailTopic').value.trim();
+
+          // Require name and email at minimum
+          var valid = state.name.length > 0 && state.email.length > 0 && state.email.indexOf('@') > 0;
+          document.getElementById('nextDetails').disabled = !valid;
+        });
+      }
+    });
+
+    document.getElementById('nextDetails').addEventListener('click', function() {
+      buildSummary();
+      goToStep('confirm');
+    });
+
+    // ══════════════════════════════════════
+    // STEP: CONFIRM & PAY
+    // ══════════════════════════════════════
+    function buildSummary() {
+      var card = document.getElementById('summaryCard');
+      var html = '';
+
+      html += '<div class="summary-row"><span class="label">Tier</span><span class="value">' + tierData[state.tier].label + '</span></div>';
+
+      if (state.tier === 'member') {
+        // Member summary — show details
+        html += '<div class="summary-row"><span class="label">Name</span><span class="value">' + escHtml(state.name) + '</span></div>';
+        html += '<div class="summary-row"><span class="label">Email</span><span class="value">' + escHtml(state.email) + '</span></div>';
+        if (state.topic) {
+          html += '<div class="summary-row"><span class="label">Topic</span><span class="value">' + escHtml(state.topic) + '</span></div>';
+        }
+        // What happens next
+        html += '<div style="padding:16px 0 0;border-top:1px solid var(--border);margin-top:8px;">';
+        html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Signal ENGINE starts researching your world. Within 48 hours you\'ll have your first intelligence report, your digital twin begins building, and your directory listing goes live.</p>';
+        html += '</div>';
+      } else {
+        // Single/VIP summary — show + segment
+        html += '<div class="summary-row"><span class="label">Show</span><span class="value">' + (state.showName || '—') + '</span></div>';
+        html += '<div class="summary-row"><span class="label">Segment</span><span class="value">' + (state.segmentName || '—') + '</span></div>';
+        // What happens next
+        html += '<div style="padding:16px 0 0;border-top:1px solid var(--border);margin-top:8px;">';
+        html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Sophia will reach out within 24 hours to book your appearance slot. Signal ENGINE starts researching your world immediately.</p>';
+        html += '</div>';
+      }
+
+      html += '<div class="summary-total"><span class="label">Total</span><span class="value">' + state.price + '</span></div>';
+      card.innerHTML = html;
+
+      // Update confirm step label
+      var flow = getFlow();
+      document.getElementById('confirmStepLabel').textContent = 'Step ' + flow.length;
+    }
+
+    function escHtml(s) {
+      var d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // Back from confirm — go to previous step in flow
+    document.getElementById('backConfirm').addEventListener('click', function() {
+      var flow = getFlow();
+      var confirmIdx = flow.indexOf('confirm');
+      if (confirmIdx > 0) goToStep(flow[confirmIdx - 1]);
+    });
+
+    // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', function() {
-      // Build signup URL with selections
-      var params = new URLSearchParams({
-        ref: 'join',
-        tier: state.tier,
-        show: state.show,
-        segment: state.segment
-      });
-      window.location.href = 'https://ge.conversationos.live/signup?' + params.toString();
+      var params = { ref: 'join', tier: state.tier };
+      if (state.show) params.show = state.show;
+      if (state.segment) params.segment = state.segment;
+      if (state.name) params.name = state.name;
+      if (state.email) params.email = state.email;
+      if (state.topic) params.topic = state.topic;
+
+      var qs = new URLSearchParams(params).toString();
+      window.location.href = 'https://ge.conversationos.live/signup?' + qs;
     });
 
-    // ── Mobile nav ──
+    // ══════════════════════════════════════
+    // INIT
+    // ══════════════════════════════════════
+    renderProgress();
+
+    // Mobile nav
     var toggle = document.getElementById('navToggle');
     var navLinks = document.getElementById('navLinks');
     if (toggle && navLinks) {
       toggle.addEventListener('click', function() {
         navLinks.classList.toggle('active');
-        toggle.classList.toggle('active');
       });
       navLinks.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() {
           navLinks.classList.remove('active');
-          toggle.classList.remove('active');
         });
       });
     }
