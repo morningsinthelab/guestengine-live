@@ -118,7 +118,7 @@
   /* -- V2 HEADER (unified) -- */
   .v2-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 0 40px; height: 64px;
+    padding: 0 40px; height: 80px;
     display: flex; align-items: center; justify-content: space-between;
     background: linear-gradient(to bottom, #020617 0%, rgba(2,6,23,0.6) 50%, transparent 100%);
   }
@@ -143,7 +143,7 @@
     display: block; margin-top: -2px;
   }
 
-  .v2-header .header-logo-img { height: 52px; width: auto; display: block; }
+  .v2-header .header-logo-img { height: 72px; width: auto; display: block; }
   .v2-header .nav-links { display: flex; align-items: center; gap: 28px; }
   .v2-header .nav-links a {
     font-size: 14px; font-weight: 500;
@@ -171,10 +171,10 @@
     .v2-header { padding: 0 20px; }
     .v2-header .nav-links { display: none; }
     .v2-header .nav-hamburger { display: block; }
-      .v2-header .header-logo-img { height: 36px; max-width: 120px; object-fit: contain; object-position: left; }
+      .v2-header .header-logo-img { height: 48px; max-width: 170px; object-fit: contain; object-position: left; }
     .v2-header .nav-links.active {
       display: flex; flex-direction: column;
-      position: fixed; top: 64px; left: 0; right: 0;
+      position: fixed; top: 80px; left: 0; right: 0;
       background: rgba(2,6,23,0.95); backdrop-filter: blur(20px);
       padding: 24px; gap: 16px;
     }
