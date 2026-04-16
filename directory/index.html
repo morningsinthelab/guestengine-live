@@ -697,11 +697,15 @@
 
   function getExpertise(guest) {
     var exp = parseJSON(guest.expertise);
-    if (exp && Array.isArray(exp) && exp.length) return exp;
+    if (exp && Array.isArray(exp) && exp.length) return filterSegments(exp);
     var t = parseJSON(guest.topics);
-    if (t && Array.isArray(t)) return t;
-    if (Array.isArray(guest.topics)) return guest.topics;
+    if (t && Array.isArray(t)) return filterSegments(t);
+    if (Array.isArray(guest.topics)) return filterSegments(guest.topics);
     return [];
+  }
+
+  function filterSegments(arr) {
+    return arr.filter(function(t) { return !SEG_MAP[t]; });
   }
 
   function getAppearances(guest) {

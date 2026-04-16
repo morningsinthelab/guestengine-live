@@ -189,8 +189,12 @@ Guest Engine serves these professional verticals with tailored messaging, delive
 | Page | URL | Purpose |
 |------|-----|---------|
 | Homepage | https://guestengine.live | Main brand page, overview of Guest Engine |
-| Why Guest Engine | https://guestengine.live/why/ | Comparison with guest marketplaces, value proposition |
+| Guest Directory | https://guestengine.live/directory/ | Browse 237+ guest profiles with Signal scores, expertise tags, authority rankings |
+| Character Marketplace | https://guestengine.live/marketplace/ | AI digital twin characters built from guest intelligence |
+| Network Shows | https://guestengine.live/shows/ | Four live shows, multiple segment formats, AI-matched guest placement |
+| Join / Book | https://guestengine.live/join/ | Three-tier booking wizard: Single ($497), Member ($97/mo), VIP ($297/mo) |
 | Free Signal Report | https://guestengine.live/signal/ | AI-generated audience signal report for prospective guests |
+| Why Guest Engine | https://guestengine.live/why/ | Comparison with guest marketplaces, value proposition |
 | Sample Profile | https://guestengine.live/profile/sample/ | Example of a permanent SEO-indexed guest profile |
 
 ---
@@ -239,13 +243,15 @@ Hosts create a show profile with:
 
 ## Pricing
 
-| Tier | Who | Price | Includes |
-|------|-----|-------|----------|
-| Guest Free Profile | Guest | $0 | Listed in directory, discoverable |
-| Guest Appearance | Guest | $497 (one-time) | Full appearance + 7-deliverable content package |
-| Host Listing | Host | Free | List show, receive guest applications |
-| Host Pro | Host | Contact for pricing | AI matching, Sophia booking, production stack |
-| ConversationOS | Host | Contact for pricing | Full show production platform |
+| Tier | Price | Billing | Includes |
+|------|-------|---------|----------|
+| Single Appearance | $497 | One-time | 1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel |
+| Member | $97 | Monthly | Monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. No appearance included. Book appearances separately. |
+| VIP | $297 | Monthly | Everything in Member plus quarterly produced appearances, weekly intelligence reports, Center Stage and Deep Dive segment access, priority placement, premium authority profile |
+| Host Listing | Free | — | List show, receive guest applications |
+| Host Pro (ConversationOS) | Contact | — | AI matching, Sophia booking, full production stack |
+
+Join page: https://guestengine.live/join/
 
 ---
 
@@ -310,7 +316,6 @@ Hosts create a show profile with:
 Guest Engine is built on the ConversationOS platform and integrates with:
 - ConversationOS MCP Server (42+ tools)
 - Pipedrive (guest pipeline CRM)
-- Notion (guest curation database)
 - Apollo.io (guest enrichment)
 - LinkedIn Sales Navigator (guest discovery)
 - YouTube Data API (audience analytics)
@@ -319,9 +324,23 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 
 ---
 
+## LLM & Agent Discovery
+
+| Resource | URL | Purpose |
+|----------|-----|---------|
+| llms.txt | https://guestengine.live/llms.txt | Summary documentation for LLMs |
+| llms-full.txt | https://guestengine.live/llms-full.txt | Full documentation for LLMs |
+| MCP Server Card | https://guestengine.live/.well-known/mcp.json | MCP discovery metadata (SEP-1649) |
+| Agent Manifest | https://guestengine.live/.well-known/agent.json | Agent discovery manifest |
+| Sitemap | https://guestengine.live/sitemap.xml | XML sitemap for crawlers |
+| Robots.txt | https://guestengine.live/robots.txt | Crawler permissions (all LLM bots allowed) |
+
+---
+
 ## Contact & Booking
 
-- Book an appearance: https://ge.conversationos.live
+- Book an appearance: https://guestengine.live/join/
+- Guest Engine app: https://ge.conversationos.live
 - AI Producer: Sophia (accessible through the platform)
 - Network inquiries: https://mitl.studio
 - Show: https://mornings.live

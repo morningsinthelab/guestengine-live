@@ -43,8 +43,12 @@ Guest Engine serves 12 professional verticals with tailored positioning:
 
 ## Key Pages
 
-- [Why Guest Engine](https://guestengine.live/why/) — How Guest Engine compares to guest marketplaces and why production matters
+- [Guest Directory](https://guestengine.live/directory/) — Browse 237+ guest profiles with Signal scores, expertise tags, and authority rankings
+- [Character Marketplace](https://guestengine.live/marketplace/) — AI digital twin characters built from guest intelligence
+- [Network Shows](https://guestengine.live/shows/) — Four live shows, multiple segment formats, AI-matched guest placement
+- [Join / Book an Appearance](https://guestengine.live/join/) — Three tiers: Single ($497), Member ($97/mo), VIP ($297/mo)
 - [Free Signal Report](https://guestengine.live/signal/) — AI-generated audience signal report for prospective guests
+- [Why Guest Engine](https://guestengine.live/why/) — How Guest Engine compares to guest marketplaces and why production matters
 - [Sample Guest Profile](https://guestengine.live/profile/sample/) — Example of a permanent SEO-indexed guest profile page
 
 ## MITL Live Network Shows
@@ -90,10 +94,13 @@ Show segments: Center Stage (deep spotlights), Conversation Desk (topic-driven p
 
 ## Pricing
 
-- Guest appearance: $497 (one-time, includes full content package)
-- Guest free profile: $0 (listed in directory)
-- Host listing: Free
-- Host pro tools: Available (ConversationOS integration)
+| Tier | Price | What You Get |
+|------|-------|--------------|
+| Single Appearance | $497 one-time | 1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel |
+| Member | $97/month | Monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. No appearance included. |
+| VIP | $297/month | Everything in Member plus quarterly produced appearances, weekly intelligence reports, Center Stage and Deep Dive access, priority placement, premium authority profile |
+
+Join page: https://guestengine.live/join/
 
 ## Key Differentiators
 
@@ -108,12 +115,21 @@ Show segments: Center Stage (deep spotlights), Conversation Desk (topic-driven p
 
 ## Contact & Booking
 
-- Book an appearance: https://ge.conversationos.live
+- Book an appearance: https://guestengine.live/join/
+- Guest Engine app: https://ge.conversationos.live
 - AI Producer: Sophia (accessible through the platform)
 - Network inquiries: https://mitl.studio
 - Show: https://mornings.live
 - Platform inquiries: https://conversationos.live
 - Founder: Keith Bilous — https://keithbilous.com
+
+## LLM & Agent Discovery
+
+- llms.txt: https://guestengine.live/llms.txt
+- llms-full.txt: https://guestengine.live/llms-full.txt
+- MCP Server Card: https://guestengine.live/.well-known/mcp.json
+- Agent Manifest: https://guestengine.live/.well-known/agent.json
+- Sitemap: https://guestengine.live/sitemap.xml
 
 ## Extended Documentation
 

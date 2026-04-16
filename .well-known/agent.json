@@ -1,34 +1,60 @@
 {
   "name": "Guest Engine",
-  "description": "Two-sided guest placement and production platform for podcast and live show hosts and guests. Get booked, get produced, get everywhere. Created by Keith Bilous.",
+  "description": "Guest placement, content production, and authority profile platform. Book live show appearances, receive produced content, and build permanent indexed profiles. Part of the MITL Live Network, powered by ConversationOS. Created by Keith Bilous.",
   "url": "https://guestengine.live",
+  "version": "2.0.0",
   "provider": {
     "organization": "Mornings in the Lab",
     "url": "https://mitl.studio",
     "founder": "Keith Bilous",
     "founder_url": "https://keithbilous.com"
   },
-  "version": "1.1.0",
   "capabilities": {
     "guest_booking": {
-      "description": "Book guest appearances on live shows across the MITL Live Network",
-      "endpoint": "https://ge.conversationos.live"
+      "description": "Book guest appearances on live shows across the MITL Live Network. Three tiers: Single Appearance ($497 one-time), Member ($97/mo for intelligence and visibility), VIP ($297/mo for everything including quarterly appearances).",
+      "join_url": "https://guestengine.live/join/",
+      "app_url": "https://ge.conversationos.live"
     },
-    "guest_profiles": {
-      "description": "Create and manage permanent, SEO-indexed guest profiles",
-      "endpoint": "https://ge.conversationos.live"
+    "guest_directory": {
+      "description": "Browse 237+ guest profiles with Signal scores, expertise tags, and authority rankings. Filterable by category, expertise, and score.",
+      "url": "https://guestengine.live/directory/"
     },
-    "host_listing": {
-      "description": "List your show and receive AI-matched guest candidates",
-      "endpoint": "https://ge.conversationos.live"
+    "character_marketplace": {
+      "description": "Browse AI digital twin characters built from guest appearances and intelligence research.",
+      "url": "https://guestengine.live/marketplace/"
+    },
+    "network_shows": {
+      "description": "Four live shows across the MITL Live Network: Mornings in the Lab (flagship), It Starts with Joy LIVE, The Jason Hewlett Show, Kindness Rising. Multiple segment formats including Center Stage, Deep Dive, Community Corner, No Safe Words, BS or No BS, Did You Know.",
+      "url": "https://guestengine.live/shows/"
+    },
+    "signal_intelligence": {
+      "description": "Signal ENGINE researches 30 days of community discourse around each guest. Free Signal Report available for prospective guests to see what AI knows about their world.",
+      "url": "https://guestengine.live/signal/"
     },
     "content_production": {
-      "description": "Full post-appearance content production: clips, social posts, transcripts, highlight reels",
+      "description": "Full post-appearance content production: 5 vertical video clips, 10 social media posts, full transcript, highlight reel, permanent authority profile page.",
       "endpoint": "https://ge.conversationos.live"
     },
     "ai_producer": {
-      "description": "Sophia AI producer handles prep, booking, and green room briefing",
+      "description": "Sophia AI producer handles pre-show prep, topic angles, talking points, green room briefing, and guest coordination.",
       "endpoint": "https://ge.conversationos.live"
+    }
+  },
+  "pricing": {
+    "single_appearance": {
+      "price": "$497",
+      "billing": "one-time",
+      "includes": "1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel"
+    },
+    "member": {
+      "price": "$97",
+      "billing": "monthly",
+      "includes": "Monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access"
+    },
+    "vip": {
+      "price": "$297",
+      "billing": "monthly",
+      "includes": "Everything in Member plus quarterly produced appearances, weekly intelligence reports, Center Stage and Deep Dive access, priority placement, premium authority profile"
     }
   },
   "verticals": {
@@ -55,17 +81,40 @@
     "consultants": {
       "url": "https://guestengine.live/consultants/",
       "description": "Guest appearances and content production for consultants and fractional executives"
+    },
+    "therapists": {
+      "url": "https://guestengine.live/therapists/",
+      "description": "Guest appearances for therapists, psychologists, and counselors"
+    },
+    "financial_advisors": {
+      "url": "https://guestengine.live/financial-advisors/",
+      "description": "Guest appearances for financial advisors, CFPs, and wealth managers"
+    },
+    "attorneys": {
+      "url": "https://guestengine.live/attorneys/",
+      "description": "Guest appearances for attorneys and legal professionals"
+    },
+    "health_wellness": {
+      "url": "https://guestengine.live/health-wellness/",
+      "description": "Guest appearances for health and wellness professionals"
+    },
+    "nonprofit_leaders": {
+      "url": "https://guestengine.live/nonprofit-leaders/",
+      "description": "Guest appearances for nonprofit leaders and social impact executives"
+    },
+    "corporate_executives": {
+      "url": "https://guestengine.live/corporate-executives/",
+      "description": "Guest appearances for C-suite executives and corporate leaders"
     }
   },
   "authentication": {
-    "schemes": [
-      "none"
-    ],
-    "notes": "Guest profiles are publicly browsable. Booking requires account creation."
+    "schemes": ["none"],
+    "notes": "Guest profiles and directory are publicly browsable. Booking requires account creation at ge.conversationos.live."
   },
   "documentation": {
     "llms_txt": "https://guestengine.live/llms.txt",
-    "llms_full_txt": "https://guestengine.live/llms-full.txt"
+    "llms_full_txt": "https://guestengine.live/llms-full.txt",
+    "mcp_server_card": "https://guestengine.live/.well-known/mcp.json"
   },
   "parent_platform": {
     "name": "ConversationOS",

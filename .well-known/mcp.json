@@ -1,0 +1,117 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server-card/v1.0",
+  "version": "1.0",
+  "protocolVersion": "2025-06-18",
+  "serverInfo": {
+    "name": "Guest Engine",
+    "version": "2.0.0",
+    "description": "Guest placement, content production, and authority profile platform. Book live show appearances, receive produced content, and build permanent indexed profiles. Part of the MITL Live Network, powered by ConversationOS.",
+    "homepage": "https://guestengine.live",
+    "documentation": "https://guestengine.live/llms-full.txt",
+    "logo": "https://guestengine.live/og-image.png",
+    "contact": "https://keithbilous.com"
+  },
+  "capabilities": {
+    "tools": false,
+    "resources": true,
+    "prompts": false
+  },
+  "resources": {
+    "summary": "https://guestengine.live/llms.txt",
+    "full_documentation": "https://guestengine.live/llms-full.txt",
+    "agent_manifest": "https://guestengine.live/.well-known/agent.json",
+    "sitemap": "https://guestengine.live/sitemap.xml",
+    "robots": "https://guestengine.live/robots.txt"
+  },
+  "provider": {
+    "organization": "Mornings in the Lab",
+    "url": "https://mitl.studio",
+    "founder": "Keith Bilous",
+    "founder_url": "https://keithbilous.com"
+  },
+  "related_services": {
+    "guest_engine_app": {
+      "url": "https://ge.conversationos.live",
+      "description": "Guest Engine application — booking, profiles, directory, marketplace"
+    },
+    "conversationos": {
+      "url": "https://conversationos.live",
+      "description": "ConversationOS — the AI production platform powering Guest Engine"
+    },
+    "conversationos_app": {
+      "url": "https://app.conversationos.live",
+      "description": "ConversationOS application — hosts and producers"
+    },
+    "clip_engine": {
+      "url": "https://clips.conversationos.live",
+      "description": "ClipENGINE — automated clip generation marketplace"
+    }
+  },
+  "content_graph": {
+    "homepage": "https://guestengine.live/",
+    "directory": "https://guestengine.live/directory/",
+    "marketplace": "https://guestengine.live/marketplace/",
+    "shows": "https://guestengine.live/shows/",
+    "signal": "https://guestengine.live/signal/",
+    "join": "https://guestengine.live/join/",
+    "why": "https://guestengine.live/why/",
+    "verticals": {
+      "authors": "https://guestengine.live/authors/",
+      "coaches": "https://guestengine.live/coaches/",
+      "founders": "https://guestengine.live/founders/",
+      "realestate": "https://guestengine.live/realestate/",
+      "podcasters": "https://guestengine.live/podcasters/",
+      "consultants": "https://guestengine.live/consultants/",
+      "therapists": "https://guestengine.live/therapists/",
+      "financial_advisors": "https://guestengine.live/financial-advisors/",
+      "attorneys": "https://guestengine.live/attorneys/",
+      "health_wellness": "https://guestengine.live/health-wellness/",
+      "nonprofit_leaders": "https://guestengine.live/nonprofit-leaders/",
+      "corporate_executives": "https://guestengine.live/corporate-executives/"
+    }
+  },
+  "pricing": {
+    "single_appearance": {
+      "price": "$497",
+      "billing": "one-time",
+      "description": "One produced live show appearance with full content package: 5 video clips, 10 social posts, transcript, highlight reel, permanent authority profile"
+    },
+    "member": {
+      "price": "$97/month",
+      "billing": "monthly",
+      "description": "Monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. No appearance included."
+    },
+    "vip": {
+      "price": "$297/month",
+      "billing": "monthly",
+      "description": "Everything in Member plus quarterly produced appearances, weekly intelligence reports, Center Stage and Deep Dive segment access, priority placement, premium authority profile"
+    }
+  },
+  "network_shows": [
+    {
+      "name": "Mornings in the Lab",
+      "host": "Keith Bilous",
+      "url": "https://mornings.live",
+      "status": "flagship",
+      "categories": ["Business", "Leadership", "Tech"]
+    },
+    {
+      "name": "It Starts with Joy LIVE",
+      "host": "Sheryl Raphael Whitaker",
+      "status": "active",
+      "categories": ["Lifestyle", "Health", "Leadership"]
+    },
+    {
+      "name": "The Jason Hewlett Show",
+      "host": "Jason Hewlett",
+      "status": "active",
+      "categories": ["Entertainment", "Leadership", "Business"]
+    },
+    {
+      "name": "Kindness Rising",
+      "host": "Network",
+      "status": "active",
+      "categories": ["Lifestyle", "Leadership", "Education"]
+    }
+  ]
+}
