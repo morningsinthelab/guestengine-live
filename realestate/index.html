@@ -387,6 +387,52 @@
     .hero-cta { flex-direction: column; }
   }
 
+  
+  /* Page Title Section (below shared hero) */
+  .page-title-section {
+    padding: 64px 80px 48px;
+    text-align: center;
+    background: #020617;
+    position: relative;
+  }
+  .page-title__label {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fbbf24;
+    margin-bottom: 16px;
+  }
+  .page-title__heading {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .page-title__heading .gold { color: #fbbf24; }
+  .page-title__desc {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    max-width: 600px;
+    margin: 20px auto 0;
+    line-height: 1.6;
+  }
+  @media (max-width: 1024px) {
+    .page-title-section { padding: 48px 32px 36px; }
+    .page-title__heading { font-size: 36px; }
+  }
+  @media (max-width: 640px) {
+    .page-title-section { padding: 40px 20px 32px; }
+    .page-title__heading { font-size: 28px; }
+    .page-title__desc { font-size: 16px; }
+  }
+
   </style>
 </head>
 <body>
@@ -474,6 +520,12 @@
       </div>
     </div>
   </section>
+  <!-- Page Title -->
+  <section class="page-title-section">
+    <div class="page-title__label">For Real Estate</div>
+    <h2 class="page-title__heading">EVERY AGENT LOOKS THE SAME.<br><span class="gold">YOU WON'T.</span></h2>
+  </section>
+
 
 
   <section style="background: var(--bg); padding: 3rem 0 4rem;">
