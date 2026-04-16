@@ -175,6 +175,7 @@ ul { list-style: none; }
   .v2-header .nav-links { display: none; }
   .v2-header .nav-actions { display: none; }
   .v2-header .nav-hamburger { display: block; }
+  .v2-header .header-logo-img { height: 36px; max-width: 120px; object-fit: contain; object-position: left; }
 }
 
 .nav__inner {
