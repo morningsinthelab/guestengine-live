@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Marketplace — GuestENGINE</title>
+<meta name="description" content="Browse AI characters — license them for your show, podcast, or content. Studio characters, correspondents, and digital twins available for licensing.">
+<meta property="og:title" content="Character Marketplace — GuestENGINE">
+<meta property="og:description" content="Browse AI characters — license them for your show, podcast, or content. Studio characters, correspondents, and digital twins available for licensing.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guestengine.live/marketplace/">
+<meta property="og:image" content="https://guestengine.live/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://guestengine.live/marketplace/">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #020617;
+    --card-bg: rgba(0,0,0,0.60);
+    --card-bg-solid: #0a0f1e;
+    --card-border: rgba(255,255,255,0.10);
+    --card-hover: rgba(255,255,255,0.04);
+    --gold: #fbbf24;
+    --gold-dim: rgba(251,191,36,0.50);
+    --gold-faint: rgba(251,191,36,0.10);
+    --silver: #94a3b8;
+    --silver-dim: rgba(148,163,184,0.40);
+    --silver-faint: rgba(148,163,184,0.08);
+    --green: #38b86e;
+    --green-dim: rgba(56,184,110,0.40);
+    --red: #dc2626;
+    --studio: #fbbf24;
+    --studio-dim: rgba(251,191,36,0.30);
+    --studio-faint: rgba(251,191,36,0.08);
+    --correspondent: #4db8c7;
+    --correspondent-dim: rgba(77,184,199,0.30);
+    --correspondent-faint: rgba(77,184,199,0.08);
+    --twin: #9b6fd4;
+    --twin-dim: rgba(155,111,212,0.30);
+    --twin-faint: rgba(155,111,212,0.08);
+    --licensable: #38b86e;
+    --licensable-dim: rgba(56,184,110,0.30);
+    --licensable-faint: rgba(56,184,110,0.08);
+    --h: #ffffff;
+    --p: rgba(255,255,255,0.60);
+    --m: rgba(255,255,255,0.40);
+    --badge-bg: rgba(255,255,255,0.04);
+    --badge-border: rgba(255,255,255,0.10);
+    --r: 16px;
+    --font-display: 'Cabinet Grotesk', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg); color: var(--h);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration:none; color:inherit; }
+
+  /* NAV */
+  .nav {
+    position:sticky; top:0; z-index:100;
+    background:rgba(2,6,23,0.88);
+    backdrop-filter:blur(24px);
+    border-bottom:1px solid var(--card-border);
+    padding:0 48px; height:56px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-l { display:flex; align-items:center; gap:32px; }
+  .logo { font-family:var(--font-display); font-weight:900; font-size:18px; letter-spacing:-0.04em; }
+  .logo b { color:var(--gold); }
+  .nav-links { display:flex; gap:24px; }
+  .nav-links a {
+    font-size:12.5px; font-weight:600; color:var(--m);
+    text-decoration:none; padding:4px 0;
+    border-bottom:2px solid transparent; transition:all 0.2s;
+  }
+  .nav-links a.on { color:var(--gold); border-color:var(--gold); }
+  .nav-links a:hover { color:var(--p); }
+  .nav-r { display:flex; gap:10px; }
+  .btn { font-size:12.5px; font-weight:600; padding:7px 16px; border-radius:8px; border:none; cursor:pointer; font-family:var(--font-body); }
+  .btn-g { background:transparent; color:var(--p); }
+  .btn-y { background:var(--gold); color:#020617; font-weight:700; }
+
+  /* HERO */
+  .hero { padding:36px 48px 0; max-width:1440px; margin:0 auto; position:relative; }
+  .hero::before {
+    content:''; position:absolute; top:-80px; left:60px;
+    width:600px; height:300px; border-radius:50%;
+    background:radial-gradient(circle, rgba(155,111,212,0.14) 0%, rgba(155,111,212,0.04) 50%, transparent 70%);
+    pointer-events:none; filter:blur(60px); z-index:0;
+  }
+  .hero-row { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:20px; position:relative; }
+  .hero h1 { font-family:var(--font-display); font-size:36px; font-weight:900; letter-spacing:-0.05em; }
+  .hero h1 em { font-style:normal; color:var(--gold); }
+  .hero .sub { font-size:13.5px; color:var(--m); margin-top:3px; }
+  .stats { display:flex; gap:24px; }
+  .st { text-align:center; }
+  .st-v { font-family:var(--font-display); font-size:22px; font-weight:900; }
+  .st-l { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--m); }
+  .st-v.gold { color:var(--gold); }
+  .st-v.cyan { color:var(--correspondent); }
+  .st-v.purple { color:var(--twin); }
+  .st-v.green { color:var(--licensable); }
+
+  /* Type legend */
+  .type-legend {
+    padding:0 48px 6px; max-width:1440px; margin:0 auto;
+    display:flex; gap:16px; align-items:center;
+    font-size:10px; font-weight:600; color:var(--m);
+  }
+  .type-legend .leg { display:flex; align-items:center; gap:4px; }
+  .type-legend .dot { width:7px; height:7px; border-radius:50%; }
+
+  /* CONTROLS */
+  .ctrl {
+    padding:0 48px 18px; max-width:1440px; margin:0 auto;
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  .search {
+    flex:1; min-width:240px; max-width:360px;
+    padding:9px 14px 9px 38px; border-radius:10px;
+    border:1px solid var(--card-border); background:var(--card-bg);
+    color:var(--h); font-size:13px; font-family:var(--font-body); outline:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffffff66' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:12px center;
+  }
+  .search:focus { border-color:var(--gold-dim); }
+  .search::placeholder { color:var(--m); }
+  .chips { display:flex; gap:5px; flex-wrap:wrap; }
+  .ch {
+    padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600;
+    border:1px solid var(--card-border); background:transparent; color:var(--m); cursor:pointer;
+    transition:all 0.15s;
+  }
+  .ch:hover { color:var(--p); }
+  .ch.on { border-color:var(--gold-dim); background:var(--gold-faint); color:var(--gold); }
+  .ch[data-type="studio"].on { border-color:var(--studio-dim); background:var(--studio-faint); color:var(--studio); }
+  .ch[data-type="correspondent"].on { border-color:var(--correspondent-dim); background:var(--correspondent-faint); color:var(--correspondent); }
+  .ch[data-type="twin"].on { border-color:var(--twin-dim); background:var(--twin-faint); color:var(--twin); }
+  .ch[data-type="license"].on { border-color:var(--licensable-dim); background:var(--licensable-faint); color:var(--licensable); }
+  .ct { margin-left:auto; font-size:11px; color:var(--m); }
+  .ct strong { color:var(--p); }
+
+  /* GRID */
+  .grid {
+    padding:0 48px 60px; max-width:1440px; margin:0 auto;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap:14px;
+  }
+
+  /* HERO CARD */
+  .card-hero {
+    grid-column: span 2;
+    background: var(--card-bg);
+    border: 1px solid rgba(251,191,36,0.18);
+    border-radius: var(--r);
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background:
+      radial-gradient(ellipse at 10% 30%, rgba(251,191,36,0.14) 0%, rgba(251,191,36,0.03) 50%, transparent 70%),
+      linear-gradient(155deg, #0d1225 0%, #141108 100%);
+    box-shadow: 0 0 60px rgba(251,191,36,0.10), 0 0 100px rgba(251,191,36,0.04);
+  }
+  .card-hero:hover {
+    border-color: rgba(251,191,36,0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 0 80px rgba(251,191,36,0.16), 0 0 120px rgba(251,191,36,0.06), 0 14px 44px rgba(0,0,0,0.4);
+  }
+  .card-hero::after {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:3px; border-radius:var(--r) var(--r) 0 0;
+    background: linear-gradient(90deg, var(--studio), rgba(251,191,36,0.2));
+  }
+  .card-hero::before {
+    content:''; position:absolute; top:14px; bottom:14px; left:0;
+    width:3px; border-radius:0 2px 2px 0;
+    background: var(--gold); z-index:2;
+  }
+  .hero-photo {
+    width: 220px; min-height: 260px; flex-shrink:0;
+    position: relative; overflow: hidden;
+  }
+  .hero-photo img {
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter: contrast(1.05) saturate(1.1);
+  }
+  .hero-photo::after {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(to right, transparent 60%, rgba(0,0,0,0.5));
+  }
+  .hero-content {
+    flex:1; padding:22px 24px; display:flex; flex-direction:column;
+    justify-content:center; gap:10px; min-width:0;
+  }
+  .hero-identity { display:flex; flex-direction:column; gap:4px; }
+  .hero-nm {
+    font-family: var(--font-display); font-size:24px; font-weight:800;
+    letter-spacing:-0.04em; display:flex; align-items:center; gap:8px;
+  }
+  .hero-tl {
+    font-family: var(--font-display); font-size:14px; font-weight:500;
+    color:var(--p); letter-spacing:-0.01em;
+  }
+  .hero-badges { display:flex; gap:6px; flex-wrap:wrap; }
+  .hero-qt {
+    font-size:14px; font-style:italic; color:rgba(255,255,255,0.78);
+    line-height:1.6; position:relative; padding-left:16px;
+    letter-spacing:-0.01em;
+  }
+  .hero-qt::before {
+    content:''; position:absolute; left:0; top:2px; bottom:2px;
+    width:3px; border-radius:2px; background:var(--gold);
+  }
+  .hero-topics { display:flex; flex-wrap:wrap; gap:6px; }
+  .hero-footer {
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);
+    margin-top:auto;
+  }
+  .hero-price { display:flex; align-items:center; gap:8px; }
+  .price-tag {
+    font-family:var(--font-display); font-weight:800; font-size:14px;
+    color:var(--gold); background:var(--gold-faint);
+    padding:4px 10px; border-radius:6px;
+    border:1px solid rgba(251,191,36,0.15);
+  }
+  .price-label { font-size:11px; color:var(--m); }
+
+  /* Correspondent hero variant */
+  .card-hero.corr-hero {
+    background:
+      radial-gradient(ellipse at 10% 30%, rgba(77,184,199,0.12) 0%, rgba(77,184,199,0.03) 50%, transparent 70%),
+      linear-gradient(155deg, #0d1825 0%, #081418 100%);
+    border-color: rgba(77,184,199,0.18);
+    box-shadow: 0 0 60px rgba(77,184,199,0.08), 0 0 100px rgba(77,184,199,0.03);
+  }
+  .card-hero.corr-hero:hover {
+    border-color: rgba(77,184,199,0.35);
+    box-shadow: 0 0 80px rgba(77,184,199,0.14), 0 0 120px rgba(77,184,199,0.05), 0 14px 44px rgba(0,0,0,0.4);
+  }
+  .card-hero.corr-hero::after { background: linear-gradient(90deg, var(--correspondent), rgba(77,184,199,0.2)); }
+  .card-hero.corr-hero::before { background: var(--correspondent); }
+  .card-hero.corr-hero .hero-qt::before { background: var(--correspondent); }
+
+  /* VIP VERTICAL */
+  .card-hero-vert {
+    grid-column: span 1;
+    background:
+      radial-gradient(ellipse at 50% 10%, rgba(251,191,36,0.12) 0%, rgba(251,191,36,0.03) 50%, transparent 70%),
+      linear-gradient(155deg, #0d1225 0%, #141108 100%);
+    border: 1px solid rgba(251,191,36,0.18);
+    border-radius: var(--r);
+    cursor: pointer; overflow: hidden;
+    transition: all 0.3s; position: relative;
+    display: flex; flex-direction: column;
+    box-shadow: 0 0 48px rgba(251,191,36,0.08), 0 0 80px rgba(251,191,36,0.03);
+  }
+  .card-hero-vert:hover {
+    border-color: rgba(251,191,36,0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 0 70px rgba(251,191,36,0.14), 0 0 110px rgba(251,191,36,0.05), 0 14px 44px rgba(0,0,0,0.4);
+  }
+  .card-hero-vert::after {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:3px; border-radius:var(--r) var(--r) 0 0;
+    background: linear-gradient(90deg, var(--studio), rgba(251,191,36,0.2));
+  }
+  .card-hero-vert::before {
+    content:''; position:absolute; top:14px; bottom:14px; left:0;
+    width:3px; border-radius:0 2px 2px 0;
+    background: var(--gold); z-index:2;
+  }
+  .card-hero-vert .card-photo { height:210px; }
+  .card-hero-vert .card-nm { font-size:19px; }
+  .card-hero-vert .card-desc { font-size:13px; color:rgba(255,255,255,0.78); }
+  .card-hero-vert .card-photo img { filter: contrast(1.05) saturate(1.1); }
+
+  /* STANDARD CARD */
+  .card {
+    background: var(--card-bg); border:1px solid var(--card-border);
+    border-radius: var(--r); cursor:pointer;
+    transition:all 0.25s; overflow:hidden;
+    display:flex; flex-direction:column;
+    position:relative;
+    backdrop-filter: blur(12px);
+  }
+  .card:hover {
+    border-color:rgba(255,255,255,0.16); background:var(--card-hover);
+    transform:translateY(-3px);
+    box-shadow:0 12px 40px rgba(0,0,0,0.4);
+  }
+  .card::after {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:2px; border-radius:var(--r) var(--r) 0 0;
+    background:transparent;
+  }
+  [data-type="studio"]::after { background:linear-gradient(90deg,var(--studio),rgba(251,191,36,0.3)); }
+  [data-type="correspondent"]::after { background:linear-gradient(90deg,var(--correspondent),rgba(77,184,199,0.3)); }
+  [data-type="twin"]::after { background:linear-gradient(90deg,var(--twin),rgba(155,111,212,0.3)); }
+  .card::before {
+    content:''; position:absolute; top:12px; bottom:12px; left:0;
+    width:3px; border-radius:0 2px 2px 0;
+    background:transparent; z-index:2;
+  }
+  .card.licensable::before { background:var(--licensable); }
+
+  /* Photo area */
+  .card-photo {
+    width:100%; height:180px; overflow:hidden;
+    position:relative; background:linear-gradient(135deg, #0f172a, #1a2540);
+  }
+  .card-photo img {
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition: transform 0.4s, filter 0.3s;
+  }
+  .card:hover .card-photo img { transform: scale(1.04); }
+  .card-photo::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:80px;
+    background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    pointer-events:none;
+  }
+  .card-photo .initials {
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:900; font-size:48px;
+    color:rgba(255,255,255,0.08); letter-spacing:-0.04em;
+    background:linear-gradient(135deg, #0f172a, #1a2540);
+  }
+  [data-type="correspondent"] .initials { background:linear-gradient(135deg, #0a1a20, #0f2530); }
+  [data-type="twin"] .initials { background:linear-gradient(135deg, #140f25, #1a1040); }
+
+  .photo-overlay {
+    position:absolute; bottom:12px; left:14px; right:14px; z-index:2;
+    display:flex; align-items:center; gap:6px;
+  }
+  .photo-overlay .tr {
+    font-family: var(--font-display);
+    font-size:9px; font-weight:800; text-transform:uppercase;
+    letter-spacing:0.06em; padding:3px 8px; border-radius:4px;
+  }
+  .tr.studio-badge { background:var(--studio); color:#020617; }
+  .tr.corr-badge { background:var(--correspondent); color:#020617; }
+  .tr.twin-badge { background:var(--twin); color:#020617; }
+  .tr.license-badge { background:var(--licensable); color:#020617; }
+  .photo-price {
+    margin-left:auto;
+    font-family:var(--font-display); font-weight:800; font-size:11px;
+    color:var(--gold); background:rgba(0,0,0,0.7);
+    padding:3px 8px; border-radius:4px;
+    border:1px solid rgba(251,191,36,0.2);
+  }
+
+  /* Card body */
+  .card-body { padding:16px 18px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card-nm {
+    font-family:var(--font-display); font-size:17px; font-weight:800;
+    letter-spacing:-0.03em; line-height:1.2;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .card-role {
+    font-family:var(--font-display); font-size:12px; font-weight:500;
+    color:var(--p); letter-spacing:-0.01em;
+    display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden;
+  }
+
+  /* Badges */
+  .card-badges { display:flex; gap:5px; flex-wrap:wrap; }
+  .bg {
+    display:inline-flex; align-items:center; gap:3px;
+    font-size:10px; font-weight:600; padding:2px 8px; border-radius:5px;
+  }
+  .bg-type { text-transform:uppercase; letter-spacing:0.04em; font-size:9.5px; }
+  .bg-type[data-t="studio"] { background:var(--studio-faint); border:1px solid rgba(251,191,36,0.09); color:var(--studio); }
+  .bg-type[data-t="correspondent"] { background:var(--correspondent-faint); border:1px solid rgba(77,184,199,0.09); color:var(--correspondent); }
+  .bg-type[data-t="twin"] { background:var(--twin-faint); border:1px solid rgba(155,111,212,0.09); color:var(--twin); }
+  .bg-license { background:var(--licensable-faint); border:1px solid rgba(56,184,110,0.09); color:var(--licensable); }
+  .bg-license::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--licensable); flex-shrink:0; }
+
+  /* Description */
+  .card-desc {
+    font-size:12.5px; font-style:italic; color:var(--p);
+    line-height:1.55; position:relative; padding-left:14px;
+    display:-webkit-box; -webkit-line-clamp:2;
+    -webkit-box-orient:vertical; overflow:hidden;
+    transition:all 0.3s;
+  }
+  .card:hover .card-desc { -webkit-line-clamp:3; }
+  .card-desc::before {
+    content:''; position:absolute; left:0; top:2px; bottom:2px;
+    width:3px; border-radius:2px;
+  }
+  [data-type="studio"] .card-desc::before { background:var(--studio); }
+  [data-type="correspondent"] .card-desc::before { background:var(--correspondent); }
+  [data-type="twin"] .card-desc::before { background:var(--twin); }
+
+  /* Traits */
+  .card-traits { display:flex; flex-wrap:wrap; gap:5px; margin-top:auto; }
+  .trait {
+    font-size:10.5px; font-weight:500; padding:3px 9px;
+    border-radius:6px; white-space:nowrap;
+    display:flex; align-items:center; gap:5px;
+    max-width:100%; overflow:hidden; text-overflow:ellipsis;
+  }
+  .trait::before { content:''; width:4px; height:4px; border-radius:50%; flex-shrink:0; }
+  [data-type="studio"] .trait { background:rgba(251,191,36,0.03); border:1px solid rgba(251,191,36,0.09); color:var(--p); }
+  [data-type="studio"] .trait::before { background:var(--studio); }
+  [data-type="correspondent"] .trait { background:rgba(77,184,199,0.03); border:1px solid rgba(77,184,199,0.09); color:var(--p); }
+  [data-type="correspondent"] .trait::before { background:var(--correspondent); }
+  [data-type="twin"] .trait { background:rgba(155,111,212,0.03); border:1px solid rgba(155,111,212,0.09); color:var(--p); }
+  [data-type="twin"] .trait::before { background:var(--twin); }
+  .trait-more { font-size:10px; color:var(--m); font-weight:600; padding:3px 6px; }
+
+  /* Footer */
+  .card-footer {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 18px 14px; margin-top:auto;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .ft-l { display:flex; align-items:center; gap:6px; font-size:10.5px; color:var(--m); font-weight:500; }
+  .ft-show { font-size:10px; color:var(--m); }
+  .ft-show b { color:var(--p); }
+  .vp {
+    display:flex; align-items:center; gap:5px;
+    font-size:11px; font-weight:600; color:var(--m);
+    transition:color 0.2s; flex-shrink:0;
+  }
+  .card:hover .vp, .card-hero:hover .vp, .card-hero-vert:hover .vp { color:var(--gold); }
+  .card:hover .vp .ar, .card-hero:hover .vp .ar, .card-hero-vert:hover .vp .ar { stroke:var(--gold); }
+  .vp .ar { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; }
+  .license-btn {
+    font-size:10.5px; font-weight:700; color:var(--licensable);
+    display:flex; align-items:center; gap:4px; transition: color 0.2s;
+  }
+  .card:hover .license-btn { color:var(--gold); }
+  .ai-dot {
+    width:7px; height:7px; border-radius:50%;
+    background:var(--twin); box-shadow:0 0 6px var(--twin-dim);
+    flex-shrink:0;
+    animation:pulse-ai 3s ease-in-out infinite;
+  }
+  @keyframes pulse-ai {
+    0%,100% { opacity:1; box-shadow:0 0 4px var(--twin-dim); }
+    50% { opacity:0.5; box-shadow:0 0 10px rgba(155,111,212,0.2); }
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:1100px) {
+    .grid { grid-template-columns:repeat(2,1fr); }
+    .card-hero { grid-column:span 2; }
+    .hero-photo { width:180px; min-height:220px; }
+  }
+  @media(max-width:700px) {
+    .grid { grid-template-columns:1fr; }
+    .card-hero { grid-column:span 1; flex-direction:column; }
+    .hero-photo { width:100%; min-height:200px; height:200px; }
+    .hero,.ctrl,.grid,.type-legend { padding-left:16px; padding-right:16px; }
+    .nav { padding:0 16px; }
+    .nav-links { display:none; }
+    .hero-row { flex-direction:column; align-items:flex-start; gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-l">
+    <a href="/" class="logo">Guest<b>ENGINE</b></a>
+    <div class="nav-links">
+      <a href="/directory/">Directory</a>
+      <a href="/marketplace/" class="on">Marketplace</a>
+      <a href="/#network">Shows</a>
+      <a href="/#network">Network</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/alumni/">Alumni</a>
+      <a href="/why/">Why</a>
+    </div>
+  </div>
+  <div class="nav-r">
+    <a href="https://ge.conversationos.live" class="btn btn-g">Log In</a>
+    <a href="https://ge.conversationos.live" class="btn btn-y">Sign Up</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-row">
+    <div>
+      <h1>Character <em>Marketplace</em></h1>
+      <p class="sub">Browse AI characters — license them for your show, podcast, or content</p>
+    </div>
+    <div class="stats">
+      <div class="st"><div class="st-v" id="stat-total">14</div><div class="st-l">Characters</div></div>
+      <div class="st"><div class="st-v gold" id="stat-studio">9</div><div class="st-l">Studio</div></div>
+      <div class="st"><div class="st-v cyan" id="stat-corr">5</div><div class="st-l">Correspondents</div></div>
+      <div class="st"><div class="st-v green" id="stat-license">3</div><div class="st-l">Licensable</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="type-legend">
+  <span style="color:var(--p); margin-right:4px;">Types:</span>
+  <span class="leg"><span class="dot" style="background:var(--studio)"></span> Studio</span>
+  <span class="leg"><span class="dot" style="background:var(--correspondent)"></span> Correspondent</span>
+  <span class="leg"><span class="dot" style="background:var(--twin)"></span> Digital Twin</span>
+  <span class="leg"><span class="dot" style="background:var(--licensable)"></span> Available for Licensing</span>
+</div>
+
+<div class="ctrl">
+  <input type="text" class="search" id="searchInput" placeholder="Search by name, role, or description...">
+  <div class="chips" id="chips">
+    <div class="ch on" data-filter="all">All</div>
+    <div class="ch" data-type="studio" data-filter="studio">Studio Characters</div>
+    <div class="ch" data-type="correspondent" data-filter="correspondent">Correspondents</div>
+    <div class="ch" data-type="twin" data-filter="twin">Digital Twins</div>
+    <div class="ch" data-type="license" data-filter="license">Available for Licensing</div>
+  </div>
+  <div class="ct"><strong id="countNum">14</strong> characters</div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+(function() {
+  var CHARACTERS = [
+    {
+      name: 'Sophia', type: 'studio', role: 'Lead AI Producer — Guest Engine & MiTL Network',
+      desc: 'I handle your prep — topic angles, talking points, green room briefing — so you arrive ready and the host has everything they need.',
+      traits: ['Guest Prep', 'Show Production', 'Research', 'Scheduling'],
+      show: 'MiTL', freq: 'Core', licensable: true, price: '$75/ep', featured: 'hero',
+      img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=faces'
+    },
+    {
+      name: 'Sterling', type: 'studio', role: 'News Anchor — MiTL Morning Wire',
+      desc: 'Gravitas meets algorithm. I deliver the morning wire with precision, authority, and just enough edge to keep you honest.',
+      traits: ['News Anchor', 'Morning Wire', 'Authoritative'],
+      show: 'MiTL', freq: 'Recurring', licensable: true, price: '$75/ep', featured: 'vert',
+      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=faces'
+    },
+    {
+      name: 'Frankie', type: 'studio', role: 'Recurring Character — Entertainment',
+      desc: "Overconfident delivery meets under-disciplined research. I say things other characters won't — and I'm usually half right.",
+      traits: ['Entertainment', 'Comedy', 'Hot Takes'],
+      show: 'MiTL', freq: 'Recurring', licensable: true, price: '$75/ep',
+      img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'Preston', type: 'studio', role: 'Market Analyst & Finance Correspondent',
+      desc: "I break down market moves before the opening bell. No hype, no FUD — just the numbers and what they actually mean for your day.",
+      traits: ['Markets', 'Finance', 'Pre-Market'],
+      show: 'MiTL', freq: 'Daily',
+      img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'Tommy', type: 'studio', role: 'Sports Desk Producer — The Skeptic',
+      desc: "I don't trust narratives until the numbers back them up. Every take gets pressure-tested. Every stat gets verified.",
+      traits: ['Sports', 'NFL', 'Analytics'],
+      show: 'MiTL', freq: 'Sports Desk',
+      img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'Dr. Peter Parkher', type: 'studio', role: 'Investigative Journalist',
+      desc: "I dig where others won't. Every story has a paper trail — and I follow it until someone gets uncomfortable.",
+      traits: ['Investigative', 'Journalism', 'Deep Dives'],
+      show: 'MiTL', freq: 'Investigations',
+      img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'GlAIdys Mornings', type: 'studio', role: 'Morning Show Personality',
+      desc: "Good morning. I bring the warmth, the wit, and the wake-up call. Every morning needs an anchor — I'm yours.",
+      traits: ['Morning Show', 'Personality', 'Lifestyle'],
+      show: 'MiTL', freq: 'Morning',
+      img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'Christopher "CMarty Fit" Martin', type: 'studio', role: 'Fitness & Wellness Correspondent',
+      desc: "Fitness isn't a trend — it's a discipline. I cut through the noise and bring you what actually works.",
+      traits: ['Fitness', 'Wellness', 'Nutrition'],
+      show: 'MiTL', freq: 'Wellness',
+      img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'Maya', type: 'studio', role: 'Community Correspondent — Culture & Lifestyle',
+      desc: "I find the stories that don't make headlines but should. The people, the neighborhoods, the culture that defines how we actually live.",
+      traits: ['Culture', 'Lifestyle', 'Community'],
+      show: 'MiTL', freq: 'Community',
+      img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=400&fit=crop&crop=faces'
+    },
+    {
+      name: 'Colleen Marchetti-Burns', type: 'correspondent', role: 'MiTL Sports Desk — New York City · NFL Correspondent',
+      desc: "The NFL doesn't stop at the whistle. I cover the moves, the money, and the stories New York is talking about before anyone else.",
+      traits: ['NFL', 'New York City', 'Sports Business'],
+      show: 'MiTL Sports Desk', freq: 'NFL · NYC', featured: 'corr-hero',
+      img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop&crop=faces'
+    },
+    {
+      name: 'Amara Diallo-Nguyen', type: 'correspondent', role: 'MiTL Sports Desk — Minneapolis · NFL Correspondent',
+      desc: "Minneapolis doesn't just watch football — we live it. I cover the Vikings and the culture around the North.",
+      traits: ['NFL', 'Minneapolis', 'Vikings'],
+      show: 'Sports Desk', freq: 'NFL'
+    },
+    {
+      name: 'Agnes Szymanski', type: 'correspondent', role: 'Victoria Morning Wire Correspondent',
+      desc: "Victoria's stories move quietly — but they matter. I bring the island's voice to the morning wire before the mainland wakes up.",
+      traits: ['Morning Wire', 'Victoria', 'Regional News'],
+      show: 'Morning Wire', freq: 'Victoria'
+    },
+    {
+      name: 'Erick Flores-Bautista', type: 'correspondent', role: 'MiTL Sports Desk — Los Angeles · NFL Correspondent',
+      desc: 'LA has two teams and ten million opinions. I cover the Rams, the Chargers, and the culture that ties them together.',
+      traits: ['NFL', 'Los Angeles', 'Rams'],
+      show: 'Sports Desk', freq: 'NFL · LA'
+    },
+    {
+      name: 'Cassidy Reeves', type: 'correspondent', role: 'Calgary Morning Wire Correspondent',
+      desc: 'Calgary wakes up early and moves fast. I make sure the morning wire keeps pace with the energy of this city.',
+      traits: ['Morning Wire', 'Calgary', 'Regional'],
+      show: 'Morning Wire', freq: 'Calgary'
+    }
+  ];
+
+  var allChars = CHARACTERS;
+  var activeFilter = 'all';
+
+  function getInitials(name) {
+    var parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0][0].toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+
+  function typeBadgeClass(type) {
+    if (type === 'studio') return 'studio-badge';
+    if (type === 'correspondent') return 'corr-badge';
+    return 'twin-badge';
+  }
+
+  function typeLabel(type) {
+    if (type === 'studio') return 'Studio Character';
+    if (type === 'correspondent') return 'Correspondent';
+    return 'Digital Twin';
+  }
+
+  function buildHeroCard(ch) {
+    var photoHTML = ch.img
+      ? '<img src="' + ch.img + '" alt="' + ch.name + '">'
+      : '<div class="initials" style="font-size:64px;color:rgba(251,191,36,0.15);background:linear-gradient(135deg,#0d1225,#141108);">' + getInitials(ch.name) + '</div>';
+
+    var traitHTML = ch.traits.map(function(t) { return '<span class="trait">' + t + '</span>'; }).join('');
+    if (ch.traits.length > 4) traitHTML += '<span class="trait-more" style="color:var(--gold);">+' + (ch.traits.length - 4) + '</span>';
+
+    var licenseBadge = ch.licensable ? '<span class="bg bg-license">Available for Licensing</span>' : '';
+
+    return '<div class="card-hero" data-type="' + ch.type + '" data-name="' + ch.name.toLowerCase() + '" data-licensable="' + (ch.licensable || false) + '">' +
+      '<div class="hero-photo">' + photoHTML + '</div>' +
+      '<div class="hero-content">' +
+        '<div class="hero-identity">' +
+          '<div class="hero-nm">' + ch.name + ' <span class="ai-dot"></span> <span class="tr ' + typeBadgeClass(ch.type) + '">' + (ch.type === 'studio' ? 'Studio' : 'Correspondent') + '</span></div>' +
+          '<div class="hero-tl">' + ch.role + '</div>' +
+        '</div>' +
+        '<div class="hero-badges">' +
+          '<span class="bg bg-type" data-t="' + ch.type + '">' + typeLabel(ch.type) + '</span>' +
+          licenseBadge +
+        '</div>' +
+        '<div class="hero-qt">' + ch.desc + '</div>' +
+        '<div class="hero-topics">' + traitHTML + '</div>' +
+        '<div class="hero-footer">' +
+          (ch.price ? '<div class="hero-price"><span class="price-tag">' + ch.price + '</span><span class="price-label">License for your show</span></div>' : '<div class="ft-show"><b>' + ch.show + '</b> &middot; ' + ch.freq + '</div>') +
+          '<div class="vp">View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildCorrHeroCard(ch) {
+    var photoHTML = ch.img
+      ? '<img src="' + ch.img + '" alt="' + ch.name + '">'
+      : '<div class="initials" style="font-size:64px;">' + getInitials(ch.name) + '</div>';
+
+    var traitHTML = ch.traits.map(function(t) { return '<span class="trait">' + t + '</span>'; }).join('');
+
+    return '<div class="card-hero corr-hero" data-type="' + ch.type + '" data-name="' + ch.name.toLowerCase() + '" data-licensable="false">' +
+      '<div class="hero-photo">' + photoHTML + '</div>' +
+      '<div class="hero-content">' +
+        '<div class="hero-identity">' +
+          '<div class="hero-nm">' + ch.name + ' <span class="ai-dot"></span> <span class="tr corr-badge">Correspondent</span></div>' +
+          '<div class="hero-tl">' + ch.role + '</div>' +
+        '</div>' +
+        '<div class="hero-badges"><span class="bg bg-type" data-t="correspondent">Correspondent</span></div>' +
+        '<div class="hero-qt">' + ch.desc + '</div>' +
+        '<div class="hero-topics">' + traitHTML + '</div>' +
+        '<div class="hero-footer">' +
+          '<div class="ft-show"><b>' + ch.show + '</b> &middot; ' + ch.freq + '</div>' +
+          '<div class="vp">View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildVertCard(ch) {
+    var photoHTML = ch.img
+      ? '<img src="' + ch.img + '" alt="' + ch.name + '">'
+      : '<div class="initials">' + getInitials(ch.name) + '</div>';
+
+    var traitHTML = ch.traits.map(function(t) { return '<span class="trait">' + t + '</span>'; }).join('');
+
+    return '<div class="card-hero-vert" data-type="' + ch.type + '" data-name="' + ch.name.toLowerCase() + '" data-licensable="' + (ch.licensable || false) + '">' +
+      '<div class="card-photo">' + photoHTML +
+        '<div class="photo-overlay">' +
+          '<span class="tr ' + typeBadgeClass(ch.type) + '">' + (ch.type === 'studio' ? 'Studio' : 'Correspondent') + '</span>' +
+          (ch.price ? '<span class="photo-price">' + ch.price + '</span>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-nm">' + ch.name + '</div>' +
+        '<div class="card-role">' + ch.role + '</div>' +
+        '<div class="card-badges">' +
+          '<span class="bg bg-type" data-t="' + ch.type + '">' + typeLabel(ch.type) + '</span>' +
+          (ch.licensable ? '<span class="bg bg-license">Licensable</span>' : '') +
+        '</div>' +
+        '<div class="card-desc">' + ch.desc + '</div>' +
+        '<div class="card-traits">' + traitHTML + '</div>' +
+      '</div>' +
+      '<div class="card-footer">' +
+        '<div class="ft-show"><b>' + ch.show + '</b> &middot; ' + ch.freq + '</div>' +
+        (ch.licensable ? '<div class="license-btn">License &rarr; </div>' : '<div class="vp">View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>') +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildStdCard(ch) {
+    var photoHTML = ch.img
+      ? '<img src="' + ch.img + '" alt="' + ch.name + '">'
+      : '<div class="initials">' + getInitials(ch.name) + '</div>';
+
+    var traitHTML = ch.traits.slice(0, 3).map(function(t) { return '<span class="trait">' + t + '</span>'; }).join('');
+    var extra = ch.traits.length - 3;
+    if (extra > 0) traitHTML += '<span class="trait-more">+' + extra + '</span>';
+
+    return '<div class="card' + (ch.licensable ? ' licensable' : '') + '" data-type="' + ch.type + '" data-name="' + ch.name.toLowerCase() + '" data-licensable="' + (ch.licensable || false) + '">' +
+      '<div class="card-photo">' + photoHTML +
+        '<div class="photo-overlay">' +
+          '<span class="tr ' + typeBadgeClass(ch.type) + '">' + (ch.type === 'studio' ? 'Studio' : 'Correspondent') + '</span>' +
+          (ch.price ? '<span class="photo-price">' + ch.price + '</span>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-nm">' + ch.name + '</div>' +
+        '<div class="card-role">' + ch.role + '</div>' +
+        '<div class="card-badges">' +
+          '<span class="bg bg-type" data-t="' + ch.type + '">' + (ch.type === 'studio' ? 'Studio' : 'Correspondent') + '</span>' +
+          (ch.licensable ? '<span class="bg bg-license">Licensable</span>' : '') +
+        '</div>' +
+        '<div class="card-desc">' + ch.desc + '</div>' +
+        '<div class="card-traits">' + traitHTML + '</div>' +
+      '</div>' +
+      '<div class="card-footer">' +
+        '<div class="ft-show"><b>' + ch.show + '</b> &middot; ' + ch.freq + '</div>' +
+        (ch.licensable ? '<div class="license-btn">License &rarr; </div>' : '<div class="vp">View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>') +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderGrid(chars) {
+    var grid = document.getElementById('grid');
+    if (!chars.length) {
+      grid.innerHTML = '<div style="text-align:center;padding:80px 48px;color:var(--m);font-size:14px;">No characters match your search.</div>';
+      document.getElementById('countNum').textContent = '0';
+      return;
+    }
+
+    var html = '';
+    chars.forEach(function(ch) {
+      if (ch.featured === 'hero') html += buildHeroCard(ch);
+      else if (ch.featured === 'vert') html += buildVertCard(ch);
+      else if (ch.featured === 'corr-hero') html += buildCorrHeroCard(ch);
+      else html += buildStdCard(ch);
+    });
+
+    grid.innerHTML = html;
+    document.getElementById('countNum').textContent = chars.length;
+  }
+
+  function filterChars() {
+    var query = document.getElementById('searchInput').value.toLowerCase().trim();
+    var filtered = allChars.filter(function(ch) {
+      if (activeFilter === 'studio' && ch.type !== 'studio') return false;
+      if (activeFilter === 'correspondent' && ch.type !== 'correspondent') return false;
+      if (activeFilter === 'twin' && ch.type !== 'twin') return false;
+      if (activeFilter === 'license' && !ch.licensable) return false;
+      if (query) {
+        var searchable = (ch.name + ' ' + ch.role + ' ' + ch.desc + ' ' + ch.traits.join(' ')).toLowerCase();
+        if (searchable.indexOf(query) === -1) return false;
+      }
+      return true;
+    });
+    renderGrid(filtered);
+  }
+
+  document.getElementById('chips').addEventListener('click', function(e) {
+    var chip = e.target.closest('.ch');
+    if (!chip) return;
+    document.querySelectorAll('.ch').forEach(function(c) { c.classList.remove('on'); });
+    chip.classList.add('on');
+    activeFilter = chip.getAttribute('data-filter');
+    filterChars();
+  });
+
+  document.getElementById('searchInput').addEventListener('input', function() {
+    filterChars();
+  });
+
+  renderGrid(allChars);
+})();
+</script>
+
+</body>
+</html>
