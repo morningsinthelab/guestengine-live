@@ -323,6 +323,22 @@
     height: 100%;
     object-fit: cover;
     object-position: center center;
+    transition: opacity 0.8s ease;
+  }
+
+  .v2 .hero__section-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: 1;
+  }
+  .v2 .hero__section-img.active {
+    opacity: 1;
   }
 
   .v2 .hero__overlay {
@@ -1815,42 +1831,7 @@
   .v2 .faq-a a { color: var(--gold); text-decoration: none; }
   .v2 .faq-a a:hover { text-decoration: underline; }
   
-  /* Section hero backgrounds */
-  #pricing {
-    position: relative;
-    background: url('/assets/heroes/hero-pricing.jpg') center center / cover no-repeat;
-  }
-  #pricing::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(2,6,23,0.92) 0%,
-      rgba(2,6,23,0.85) 50%,
-      rgba(2,6,23,0.92) 100%
-    );
-    z-index: 0;
-  }
-  #pricing > * { position: relative; z-index: 1; }
 
-  #network {
-    position: relative;
-    background: url('/assets/heroes/hero-network.jpg') center center / cover no-repeat;
-  }
-  #network::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(2,6,23,0.90) 0%,
-      rgba(2,6,23,0.82) 50%,
-      rgba(2,6,23,0.90) 100%
-    );
-    z-index: 0;
-  }
-  #network > * { position: relative; z-index: 1; }
 
   </style>
   <link rel="stylesheet" href="./header.css?v=1776385427">
@@ -1917,6 +1898,8 @@
         preload="auto"
         src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/1776215252920-6cbf79537687-guestengine-hero.mp4"
       ></video>
+      <!-- Section-triggered hero images (crossfade on scroll) -->
+      <img id="hero-section-img" class="hero__section-img" src="" alt="" aria-hidden="true">
       <div class="hero__overlay"></div>
     </div>
     <button class="hero__unmute" id="heroUnmute" aria-label="Unmute video">
@@ -2613,6 +2596,105 @@
       setTimeout(scrollToHash, 100);
     } else {
       window.addEventListener('load', function() { setTimeout(scrollToHash, 100); });
+    }
+  })();
+  </script>
+
+  <!-- Scroll-triggered hero swap for Pricing & Network -->
+  <script>
+  (function() {
+    var sectionHeroes = {
+      'pricing': '/assets/heroes/hero-pricing.jpg',
+      'network': '/assets/heroes/hero-network.jpg'
+    };
+    var heroImg = document.getElementById('hero-section-img');
+    var heroVideo = document.getElementById('hero-video');
+    if (!heroImg || !heroVideo) return;
+
+    // Preload images
+    Object.values(sectionHeroes).forEach(function(src) {
+      var img = new Image();
+      img.src = src;
+    });
+
+    var activeSection = null;
+
+    function activateHero(sectionId) {
+      if (activeSection === sectionId) return;
+      activeSection = sectionId;
+      if (sectionId && sectionHeroes[sectionId]) {
+        heroImg.src = sectionHeroes[sectionId];
+        heroImg.classList.add('active');
+      } else {
+        heroImg.classList.remove('active');
+      }
+    }
+
+    // Watch each section
+    var observer = new IntersectionObserver(function(entries) {
+      // Find the topmost visible section
+      var visible = [];
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          visible.push(entry.target.id);
+        }
+      });
+
+      // Check all tracked sections for current visibility
+      var found = null;
+      var sections = Object.keys(sectionHeroes);
+      for (var i = 0; i < sections.length; i++) {
+        var el = document.getElementById(sections[i]);
+        if (el) {
+          var rect = el.getBoundingClientRect();
+          // Section is "active" when its top half is in the viewport
+          if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
+            found = sections[i];
+            break;
+          }
+        }
+      }
+      activateHero(found);
+    }, {
+      threshold: [0, 0.1, 0.25, 0.5],
+      rootMargin: '0px'
+    });
+
+    Object.keys(sectionHeroes).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Also check on scroll for smooth transitions
+    var scrollTick = false;
+    window.addEventListener('scroll', function() {
+      if (!scrollTick) {
+        scrollTick = true;
+        requestAnimationFrame(function() {
+          var found = null;
+          var sections = Object.keys(sectionHeroes);
+          for (var i = 0; i < sections.length; i++) {
+            var el = document.getElementById(sections[i]);
+            if (el) {
+              var rect = el.getBoundingClientRect();
+              if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
+                found = sections[i];
+                break;
+              }
+            }
+          }
+          activateHero(found);
+          scrollTick = false;
+        });
+      }
+    }, { passive: true });
+
+    // Handle direct hash navigation (e.g. guestengine.live/#pricing)
+    if (window.location.hash) {
+      var hashId = window.location.hash.substring(1);
+      if (sectionHeroes[hashId]) {
+        setTimeout(function() { activateHero(hashId); }, 200);
+      }
     }
   })();
   </script>
