@@ -1814,6 +1814,44 @@
   }
   .v2 .faq-a a { color: var(--gold); text-decoration: none; }
   .v2 .faq-a a:hover { text-decoration: underline; }
+  
+  /* Section hero backgrounds */
+  #pricing {
+    position: relative;
+    background: url('/assets/heroes/hero-pricing.jpg') center center / cover no-repeat;
+  }
+  #pricing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(2,6,23,0.92) 0%,
+      rgba(2,6,23,0.85) 50%,
+      rgba(2,6,23,0.92) 100%
+    );
+    z-index: 0;
+  }
+  #pricing > * { position: relative; z-index: 1; }
+
+  #network {
+    position: relative;
+    background: url('/assets/heroes/hero-network.jpg') center center / cover no-repeat;
+  }
+  #network::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(2,6,23,0.90) 0%,
+      rgba(2,6,23,0.82) 50%,
+      rgba(2,6,23,0.90) 100%
+    );
+    z-index: 0;
+  }
+  #network > * { position: relative; z-index: 1; }
+
   </style>
   <link rel="stylesheet" href="./header.css?v=1776385427">
 </head>
