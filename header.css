@@ -37,52 +37,17 @@
   pointer-events: auto;
 }
 
-/* --- Logo (HTML/CSS, no image) --- */
+/* --- Logo (PNG image) --- */
 .ge-header__logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
   text-decoration: none;
 }
 
-.ge-header__logo-icon {
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-}
-
-.ge-header__logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.ge-header__logo-title {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 16px;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-}
-
-.ge-header__logo-title span {
-  font-weight: 400;
-}
-
-.ge-header__logo-title strong {
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.ge-header__logo-subtitle {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: 1px;
+.ge-header__logo-img {
+  height: 56px;
+  width: auto;
 }
 
 /* --- Nav Links --- */
@@ -242,16 +207,7 @@
     display: block;
   }
 
-  .ge-header__logo-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .ge-header__logo-title {
-    font-size: 14px;
-  }
-
-  .ge-header__logo-subtitle {
-    font-size: 8px;
+  .ge-header__logo-img {
+    height: 44px;
   }
 }
