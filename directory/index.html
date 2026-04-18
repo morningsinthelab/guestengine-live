@@ -194,7 +194,7 @@
   }
   .hero-photo img {
     width:100%; height:100%; object-fit:cover; display:block;
-    object-position: center 20%;
+    object-position: center 15%;
     filter: contrast(1.05) saturate(1.1);
   }
   .hero-photo .initials-lg {
@@ -312,7 +312,7 @@
   }
   .card-photo img {
     width:100%; height:100%; object-fit:cover; display:block;
-    object-position: center 20%;
+    object-position: center 15%;
     transition: transform 0.4s, filter 0.3s;
   }
   .card:hover .card-photo img { transform: scale(1.04); }
@@ -1203,74 +1203,136 @@
   <!-- Face-aware focal point adjustment -->
   <script>
   (function() {
-    // Use FaceDetector API (Chromium) for precise face positioning
-    // Falls back to smart heuristic for other browsers
     var HAS_FACE_DETECTOR = typeof window.FaceDetector === 'function';
-    var detector = HAS_FACE_DETECTOR ? new FaceDetector({ fastMode: true, maxDetectedFaces: 1 }) : null;
+    var detector = null;
+    try { if (HAS_FACE_DETECTOR) detector = new FaceDetector({ fastMode: true, maxDetectedFaces: 1 }); } catch(e) {}
+
+    // Canvas-based skin-tone detection fallback
+    function findFaceRegionCanvas(img) {
+      try {
+        var c = document.createElement('canvas');
+        // Downsample for speed
+        var w = Math.min(img.naturalWidth, 100);
+        var h = Math.round(w * img.naturalHeight / img.naturalWidth);
+        c.width = w; c.height = h;
+        var ctx = c.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(img, 0, 0, w, h);
+        var data;
+        try { data = ctx.getImageData(0, 0, w, h).data; }
+        catch(e) { return null; } // CORS-tainted canvas
+
+        // Scan for skin-tone pixels in horizontal bands
+        var bands = 10;
+        var bandH = Math.floor(h / bands);
+        var scores = new Array(bands).fill(0);
+
+        for (var y = 0; y < h; y++) {
+          for (var x = 0; x < w; x++) {
+            var i = (y * w + x) * 4;
+            var r = data[i], g = data[i+1], b = data[i+2];
+            // Skin-tone heuristic (works across diverse skin tones)
+            if (r > 60 && g > 40 && b > 20 &&
+                r > g && r > b &&
+                (r - g) > 5 && (r - b) > 10 &&
+                Math.abs(r - g) < 130 &&
+                r < 250 && g < 230 && b < 210) {
+              var band = Math.min(Math.floor(y / bandH), bands - 1);
+              scores[band]++;
+            }
+          }
+        }
+
+        // Find the band with highest skin-tone concentration
+        var maxScore = 0, maxBand = 2; // default upper third
+        for (var b = 0; b < bands; b++) {
+          if (scores[b] > maxScore) { maxScore = scores[b]; maxBand = b; }
+        }
+
+        // Need minimum skin pixels to be confident
+        if (maxScore < (w * bandH * 0.03)) return null;
+
+        // Return center of highest-scoring band as percentage
+        return ((maxBand + 0.5) / bands) * 100;
+      } catch(e) { return null; }
+    }
 
     function adjustFocalPoint(img) {
       if (!img.naturalWidth || !img.naturalHeight) return;
+      if (img.dataset.focalSet) return; // already processed
       var container = img.parentElement;
       if (!container) return;
       var containerW = container.offsetWidth;
       var containerH = container.offsetHeight;
+      if (!containerW || !containerH) return;
       var imgW = img.naturalWidth;
       var imgH = img.naturalHeight;
 
-      // Determine scale factor (object-fit:cover)
       var scaleX = containerW / imgW;
       var scaleY = containerH / imgH;
       var scale = Math.max(scaleX, scaleY);
-      var scaledW = imgW * scale;
       var scaledH = imgH * scale;
 
-      // Only adjust if image is taller than container (vertical crop)
-      if (scaledH <= containerH + 2) return;
+      // Only adjust if image is taller than container (vertical crop happens)
+      if (scaledH <= containerH + 2) { img.dataset.focalSet = '1'; return; }
 
+      function applyPosition(posY) {
+        // Bias upward slightly to show forehead/hair above face
+        posY = Math.max(0, Math.min(100, posY - 8));
+        img.style.objectPosition = 'center ' + posY + '%';
+        img.dataset.focalSet = '1';
+      }
+
+      // Try FaceDetector API first (Chrome/Edge)
       if (detector) {
         detector.detect(img).then(function(faces) {
-          if (faces.length === 0) return; // keep CSS default (20%)
-          var face = faces[0].boundingBox;
-          // Face center Y as percentage of image height
-          var faceCenterY = (face.y + face.height / 2) / imgH;
-          // Convert to object-position percentage
-          // Map face center to container center, clamped to valid range
-          var maxShift = (scaledH - containerH) / scaledH;
-          var posY = Math.max(0, Math.min(100, faceCenterY * 100));
-          // Bias slightly upward to show forehead/hair
-          posY = Math.max(0, posY - 5);
-          img.style.objectPosition = 'center ' + posY + '%';
-        }).catch(function() {}); // silently fail
+          if (faces.length > 0) {
+            var face = faces[0].boundingBox;
+            var faceCenterY = (face.y + face.height / 2) / imgH * 100;
+            applyPosition(faceCenterY);
+          } else {
+            // Fallback to canvas analysis
+            var canvasY = findFaceRegionCanvas(img);
+            if (canvasY !== null) applyPosition(canvasY);
+            else img.dataset.focalSet = '1';
+          }
+        }).catch(function() {
+          var canvasY = findFaceRegionCanvas(img);
+          if (canvasY !== null) applyPosition(canvasY);
+          else img.dataset.focalSet = '1';
+        });
+      } else {
+        // No FaceDetector — use canvas skin-tone analysis
+        var canvasY = findFaceRegionCanvas(img);
+        if (canvasY !== null) applyPosition(canvasY);
+        else img.dataset.focalSet = '1';
       }
     }
 
-    // Observe new images added to the grid
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(m) {
-        m.addedNodes.forEach(function(node) {
-          if (node.nodeType !== 1) return;
-          var imgs = node.querySelectorAll ? node.querySelectorAll('.card-photo img, .hero-photo img') : [];
-          imgs.forEach(function(img) {
-            if (img.complete) {
-              adjustFocalPoint(img);
-            } else {
-              img.addEventListener('load', function() { adjustFocalPoint(img); });
-            }
-          });
-        });
+    // Process images with a slight delay to ensure layout is settled
+    function processImages(root) {
+      var imgs = (root || document).querySelectorAll('.card-photo img, .hero-photo img');
+      imgs.forEach(function(img) {
+        if (img.dataset.focalSet) return;
+        if (img.complete && img.naturalWidth) {
+          adjustFocalPoint(img);
+        } else {
+          img.addEventListener('load', function() { adjustFocalPoint(img); }, { once: true });
+        }
       });
-    });
+    }
 
+    // Observe new cards added during pagination
+    var observer = new MutationObserver(function(mutations) {
+      var hasNew = false;
+      mutations.forEach(function(m) {
+        if (m.addedNodes.length) hasNew = true;
+      });
+      if (hasNew) setTimeout(function() { processImages(); }, 200);
+    });
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // Also process any images already in the DOM
-    document.querySelectorAll('.card-photo img, .hero-photo img').forEach(function(img) {
-      if (img.complete) {
-        adjustFocalPoint(img);
-      } else {
-        img.addEventListener('load', function() { adjustFocalPoint(img); });
-      }
-    });
+    // Initial pass after a short delay
+    setTimeout(function() { processImages(); }, 500);
   })();
   </script>
 
