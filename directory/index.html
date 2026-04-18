@@ -194,6 +194,7 @@
   }
   .hero-photo img {
     width:100%; height:100%; object-fit:cover; display:block;
+    object-position: center 20%;
     filter: contrast(1.05) saturate(1.1);
   }
   .hero-photo .initials-lg {
@@ -311,6 +312,7 @@
   }
   .card-photo img {
     width:100%; height:100%; object-fit:cover; display:block;
+    object-position: center 20%;
     transition: transform 0.4s, filter 0.3s;
   }
   .card:hover .card-photo img { transform: scale(1.04); }
@@ -1194,6 +1196,80 @@
       mutedIcon.style.display = video.muted ? '' : 'none';
       unmutedIcon.style.display = video.muted ? 'none' : '';
       btn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+    });
+  })();
+  </script>
+
+  <!-- Face-aware focal point adjustment -->
+  <script>
+  (function() {
+    // Use FaceDetector API (Chromium) for precise face positioning
+    // Falls back to smart heuristic for other browsers
+    var HAS_FACE_DETECTOR = typeof window.FaceDetector === 'function';
+    var detector = HAS_FACE_DETECTOR ? new FaceDetector({ fastMode: true, maxDetectedFaces: 1 }) : null;
+
+    function adjustFocalPoint(img) {
+      if (!img.naturalWidth || !img.naturalHeight) return;
+      var container = img.parentElement;
+      if (!container) return;
+      var containerW = container.offsetWidth;
+      var containerH = container.offsetHeight;
+      var imgW = img.naturalWidth;
+      var imgH = img.naturalHeight;
+
+      // Determine scale factor (object-fit:cover)
+      var scaleX = containerW / imgW;
+      var scaleY = containerH / imgH;
+      var scale = Math.max(scaleX, scaleY);
+      var scaledW = imgW * scale;
+      var scaledH = imgH * scale;
+
+      // Only adjust if image is taller than container (vertical crop)
+      if (scaledH <= containerH + 2) return;
+
+      if (detector) {
+        detector.detect(img).then(function(faces) {
+          if (faces.length === 0) return; // keep CSS default (20%)
+          var face = faces[0].boundingBox;
+          // Face center Y as percentage of image height
+          var faceCenterY = (face.y + face.height / 2) / imgH;
+          // Convert to object-position percentage
+          // Map face center to container center, clamped to valid range
+          var maxShift = (scaledH - containerH) / scaledH;
+          var posY = Math.max(0, Math.min(100, faceCenterY * 100));
+          // Bias slightly upward to show forehead/hair
+          posY = Math.max(0, posY - 5);
+          img.style.objectPosition = 'center ' + posY + '%';
+        }).catch(function() {}); // silently fail
+      }
+    }
+
+    // Observe new images added to the grid
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        m.addedNodes.forEach(function(node) {
+          if (node.nodeType !== 1) return;
+          var imgs = node.querySelectorAll ? node.querySelectorAll('.card-photo img, .hero-photo img') : [];
+          imgs.forEach(function(img) {
+            if (img.complete) {
+              adjustFocalPoint(img);
+            } else {
+              img.addEventListener('load', function() { adjustFocalPoint(img); });
+            }
+          });
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Also process any images already in the DOM
+    document.querySelectorAll('.card-photo img, .hero-photo img').forEach(function(img) {
+      if (img.complete) {
+        adjustFocalPoint(img);
+      } else {
+        img.addEventListener('load', function() { adjustFocalPoint(img); });
+      }
     });
   })();
   </script>
