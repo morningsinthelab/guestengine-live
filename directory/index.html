@@ -479,8 +479,9 @@
 
   /* Social icons */
   .sc { display:flex; gap:4px; }
+  .sc span { cursor:pointer; display:inline-flex; }
   .sc svg { width:13px; height:13px; fill:var(--m); opacity:0.4; cursor:pointer; transition:opacity 0.15s; }
-  .sc svg:hover { opacity:0.7; }
+  .sc span:hover svg { opacity:0.7; }
 
   /* Loading state */
   .loading { text-align:center; padding:80px 48px; color:var(--m); font-size:14px; }
@@ -827,14 +828,14 @@
     if (!socialLinks || typeof socialLinks !== 'object') return '';
     var icons = '';
     if (socialLinks.linkedin) {
-      icons += '<a href="' + socialLinks.linkedin + '" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 110-3.12 1.56 1.56 0 010 3.12zM18.91 18.74h-3v-4.26c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39v4.34h-3v-9h2.89v1.36h.04a3.16 3.16 0 012.85-1.56c3.04 0 3.6 2 3.6 4.61v4.59z"/></svg></a>';
+      icons += '<span data-href="' + socialLinks.linkedin + '" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.href,\'_blank\')"><svg viewBox="0 0 24 24"><path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 110-3.12 1.56 1.56 0 010 3.12zM18.91 18.74h-3v-4.26c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39v4.34h-3v-9h2.89v1.36h.04a3.16 3.16 0 012.85-1.56c3.04 0 3.6 2 3.6 4.61v4.59z"/></svg></span>';
     }
     if (socialLinks.twitter || socialLinks.x) {
       var url = socialLinks.twitter || socialLinks.x;
-      icons += '<a href="' + url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>';
+      icons += '<span data-href="' + url + '" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.href,\'_blank\')"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"/></svg></span>';
     }
     if (socialLinks.youtube) {
-      icons += '<a href="' + socialLinks.youtube + '" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#020617"/></svg></a>';
+      icons += '<span data-href="' + socialLinks.youtube + '" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.href,\'_blank\')"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#020617"/></svg></span>';
     }
     if (!icons) return '';
     return '<div class="sc">' + icons + '</div>';
