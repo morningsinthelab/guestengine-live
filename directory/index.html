@@ -1786,7 +1786,7 @@ img { max-width: 100%; display: block; }
     if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
 
     var badges = '';
-    if (!isFree) badges += '<span class="bg bg-s">Signal Verified</span>';
+    if (guest.hasSignal) badges += '<span class="bg bg-s">Signal Verified</span>';
     badges += '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>';
 
     return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
