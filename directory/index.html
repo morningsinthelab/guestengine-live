@@ -521,7 +521,7 @@ img { max-width: 100%; display: block; }
 }
 .grid-vip {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -534,8 +534,8 @@ img { max-width: 100%; display: block; }
 .grid-vip::-webkit-scrollbar-track { background: transparent; }
 .grid-vip::-webkit-scrollbar-thumb { background: rgba(251,191,36,0.30); border-radius: 4px; }
 .grid-vip > .card {
-  flex: 0 0 calc(50% - 10px);
-  min-width: 340px;
+  flex: 0 0 280px;
+  max-width: 280px;
   scroll-snap-align: start;
 }
 
@@ -598,12 +598,19 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(90deg, #fde68a 0%, #fbbf24 50%, #d97706 100%);
   height: 2px;
 }
-.card.tier-vip .card-photo { height: 300px; }
+.card.tier-vip .card-photo { height: 200px; }
 .card.tier-vip .card-photo img { filter: brightness(1.12) contrast(1.10); }
-.card.tier-vip .card-nm { font-size: 24px; }
-.card.tier-vip .card-tl { font-size: 14px; color: rgba(255,255,255,0.82); font-weight: 500; }
-.card.tier-vip .card-qt { border-left-color: var(--gold); color: #ffffff; font-size: 16px; }
-.card.tier-vip .card-footer { border-top-color: rgba(251,191,36,0.18); }
+.card.tier-vip .card-nm { font-size: 19px; }
+.card.tier-vip .card-tl { font-size: 12.5px; color: rgba(255,255,255,0.78); font-weight: 500; -webkit-line-clamp: 1; }
+.card.tier-vip .card-body { padding: 14px 16px 10px; gap: 6px; }
+.card.tier-vip .card-qt { border-left-color: var(--gold); color: #ffffff; font-size: 13px; -webkit-line-clamp: 2; }
+.card.tier-vip .card-badges { gap: 4px; }
+.card.tier-vip .bg { font-size: 9px; padding: 3px 7px; }
+.card.tier-vip .card-topics { gap: 3px; }
+.card.tier-vip .tp { font-size: 9px; padding: 2px 5px; max-width: 140px; }
+.card.tier-vip .card-footer { border-top-color: rgba(251,191,36,0.18); padding: 8px 16px 12px; }
+.card.tier-vip .card-footer .ft-l { font-size: 11px; }
+.card.tier-vip .vp { font-size: 12px; }
 .card.tier-vip .photo-vd {
   box-shadow: 0 0 0 2px rgba(16,185,129,0.28), 0 0 14px rgba(16,185,129,0.55);
 }
@@ -1331,7 +1338,7 @@ img { max-width: 100%; display: block; }
   .hero-row { grid-template-columns: 1fr; gap: 24px; align-items: flex-start; }
   .stats { justify-content: flex-start; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-vip > .card { flex: 0 0 calc(50% - 10px); min-width: 300px; }
+  .grid-vip > .card { flex: 0 0 260px; max-width: 260px; }
   .ctrl {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1348,7 +1355,7 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 700px) {
   .grid { grid-template-columns: 1fr; }
-  .grid-vip > .card { flex: 0 0 85%; min-width: 280px; }
+  .grid-vip > .card { flex: 0 0 240px; max-width: 240px; }
   .card-hero { grid-template-columns: 1fr; }
   .hero-photo { min-height: 260px; height: 260px; }
   .hero-photo img { height: 100%; }
@@ -1509,7 +1516,7 @@ img { max-width: 100%; display: block; }
 </div>
 <script>
 (function() {
-  var EXCLUDED_SLUGS = ['keith-bilous','jon-andersen','sheryl-raphael-whitaker','jason-hewlett','jeremy-barker','rich-ingram','oscar-smith'];
+  var EXCLUDED_SLUGS = ['jason-hewlett','jeremy-barker','rich-ingram','oscar-smith'];
 
   var SEG_MAP = {
     'Center Stage': 'cs',
