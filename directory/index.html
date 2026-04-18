@@ -1115,7 +1115,12 @@
       slug: g.slug || '',
       headline: g.headline || '',
       bio: displayQuote,
-      headshotUrl: g.authorityThumbnail || g.headshotUrl || '',
+      headshotUrl: (function(u) {
+        if (!u) return '';
+        // Upgrade low-res LinkedIn photos to 400x400
+        return u.replace('shrink_200_200', 'shrink_400_400')
+                .replace('scale_200_200', 'scale_400_400');
+      })(g.authorityThumbnail || g.headshotUrl || ''),
       tier: g.tier === 'featured' ? 'member' : (g.tier || 'free'),
       topics: g.topics,
       expertise: g.topicsExpertise || g.expertise,
