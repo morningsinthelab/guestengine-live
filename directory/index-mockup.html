@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guest Directory — Guest Engine | ConversationOS</title>
-<meta name="description" content="Discover expert guests for your show or podcast. Browse guests across Center Stage and more segments on the ConversationOS network.">
+<meta name="description" content="Discover expert guests for your show or podcast. Browse verified guests across Center Stage, Deep Dive, Community Corner, and more segments.">
 <meta property="og:title" content="Guest Directory — GuestENGINE">
-<meta property="og:description" content="Discover expert guests for your show or podcast. Browse guests across Center Stage and more segments on the ConversationOS network.">
+<meta property="og:description" content="Discover expert guests for your show or podcast. Browse verified guests across Center Stage, Deep Dive, Community Corner, and more segments.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guestengine.live/directory/">
 <meta property="og:image" content="https://guestengine.live/og-image.png">
@@ -35,6 +35,13 @@
   --vip-border-hover: rgba(251,191,36,0.60);
   --vip-glow: 0 0 0 1px rgba(251,191,36,0.15), 0 12px 40px rgba(251,191,36,0.08), 0 2px 8px rgba(0,0,0,0.4);
   --vip-glow-hover: 0 0 0 1px rgba(251,191,36,0.35), 0 20px 60px rgba(251,191,36,0.18), 0 6px 20px rgba(0,0,0,0.5);
+
+  --feat-bg: #161e30;
+  --feat-bg-hover: #1c2540;
+  --feat-border: rgba(148,163,184,0.20);
+  --feat-border-hover: rgba(148,163,184,0.45);
+  --feat-shadow: 0 2px 10px rgba(0,0,0,0.3), 0 0 0 1px rgba(148,163,184,0.05);
+  --feat-shadow-hover: 0 14px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(148,163,184,0.20);
 
   --member-bg: #171c2e;
   --member-bg-hover: #1e2440;
@@ -439,6 +446,18 @@ img { max-width: 100%; display: block; }
 .section-head-vip {
   border-bottom: 1px solid rgba(251,191,36,0.30);
 }
+.section-head-member {
+  border-bottom: 1px solid rgba(192,192,220,0.25);
+}
+.section-head-member .section-label {
+  color: var(--member-accent);
+  opacity: 0.90;
+}
+.section-head-member h2 .count {
+  color: var(--member-accent);
+  border-color: rgba(192,192,220,0.30);
+  background: rgba(192,192,220,0.06);
+}
 .tier-section:last-child .section-head {
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
@@ -566,8 +585,8 @@ img { max-width: 100%; display: block; }
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--free-bg);
-  border: 1px solid var(--free-border);
+  background: var(--feat-bg);
+  border: 1px solid var(--feat-border);
   border-radius: 16px;
   overflow: hidden;
   color: inherit;
@@ -576,7 +595,7 @@ img { max-width: 100%; display: block; }
               border-color 0.28s ease,
               background 0.28s ease,
               box-shadow 0.28s ease;
-  box-shadow: var(--free-shadow);
+  box-shadow: var(--feat-shadow);
   isolation: isolate;
 }
 
@@ -635,9 +654,9 @@ img { max-width: 100%; display: block; }
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: var(--free-border-hover);
-  background: var(--free-bg-hover);
-  box-shadow: var(--free-shadow-hover);
+  border-color: var(--feat-border-hover);
+  background: var(--feat-bg-hover);
+  box-shadow: var(--feat-shadow-hover);
 }
 
 /* ============================================================
@@ -722,6 +741,11 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
   color: #1a1410;
   box-shadow: 0 4px 14px rgba(251,191,36,0.35), 0 0 0 1px rgba(251,191,36,0.5);
+}
+.tr.ft {
+  background: rgba(96,165,250,0.22);
+  color: #bfdbfe;
+  border: 1px solid rgba(96,165,250,0.45);
 }
 .tr.mt {
   background: linear-gradient(180deg, rgba(192,192,220,0.30) 0%, rgba(140,140,170,0.25) 100%);
@@ -811,6 +835,18 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-family: var(--f-body);
+}
+.bg-s {
+  background: rgba(16,185,129,0.12);
+  color: #6ee7b7;
+  border: 1px solid rgba(16,185,129,0.28);
+}
+.bg-s::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: var(--signal);
+  box-shadow: 0 0 6px rgba(16,185,129,0.7);
 }
 /* Member badge — silver/platinum tone */
 .bg-m {
@@ -1028,6 +1064,20 @@ img { max-width: 100%; display: block; }
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: translate(-50%, -60%) rotate(45deg);
+}
+
+/* ============================================================
+   TIER: FEATURED (.card.tier-feat) — default featured look already
+   ============================================================ */
+.card.tier-feat {
+  background: var(--feat-bg);
+  border-color: var(--feat-border);
+  box-shadow: var(--feat-shadow);
+}
+.card.tier-feat:hover {
+  background: var(--feat-bg-hover);
+  border-color: var(--feat-border-hover);
+  box-shadow: var(--feat-shadow-hover);
 }
 
 /* ============================================================
@@ -1429,17 +1479,17 @@ img { max-width: 100%; display: block; }
     </a>
     <nav class="ge-header__nav" id="geNav">
       <a href="/directory/">Directory</a>
-      <a href="https://guestengine.live/marketplace/">Marketplace</a>
-      <a href="https://guestengine.live/shows/">Shows</a>
-      <a href="https://guestengine.live/#pricing">Pricing</a>
-      <a href="https://guestengine.live/#network">Network</a>
-      <a href="https://guestengine.live/signal/">Signal</a>
-      <a href="https://guestengine.live/why/">Why</a>
-      <a href="https://guestengine.live/join/">Join</a>
+      <a href="/marketplace/">Marketplace</a>
+      <a href="/shows/">Shows</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#network">Network</a>
+      <a href="/signal/">Signal</a>
+      <a href="/why/">Why</a>
+      <a href="/join/">Join</a>
     </nav>
     <div class="ge-header__actions">
       <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
-      <a href="https://guestengine.live/join/" class="ge-header__signup">Sign Up</a>
+      <a href="/join/" class="ge-header__signup">Sign Up</a>
     </div>
     <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -1447,15 +1497,15 @@ img { max-width: 100%; display: block; }
   </header>
   <div class="ge-header__mobile-overlay" id="geMobileMenu">
     <a href="/directory/">Directory</a>
-    <a href="https://guestengine.live/marketplace/">Marketplace</a>
-    <a href="https://guestengine.live/shows/">Shows</a>
-    <a href="https://guestengine.live/#pricing">Pricing</a>
-    <a href="https://guestengine.live/#network">Network</a>
-    <a href="https://guestengine.live/signal/">Signal</a>
-    <a href="https://guestengine.live/why/">Why</a>
-    <a href="https://guestengine.live/join/">Join</a>
+    <a href="/marketplace/">Marketplace</a>
+    <a href="/shows/">Shows</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#network">Network</a>
+    <a href="/signal/">Signal</a>
+    <a href="/why/">Why</a>
+    <a href="/join/">Join</a>
     <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
-    <a href="https://guestengine.live/join/" class="ge-header__signup">Sign Up</a>
+    <a href="/join/" class="ge-header__signup">Sign Up</a>
   </div>
 
   <!-- ============================
@@ -1492,6 +1542,7 @@ img { max-width: 100%; display: block; }
       </div>
       <div class="stats" id="stats">
         <div class="st"><div class="st-v" id="stat-guests">--</div><div class="st-l">Guests</div></div>
+        <div class="st"><div class="st-v" id="stat-verified">--</div><div class="st-l">Verified</div></div>
         <div class="st"><div class="st-v" id="stat-shows">--</div><div class="st-l">Shows</div></div>
       </div>
     </div>
@@ -1505,8 +1556,11 @@ img { max-width: 100%; display: block; }
   <div class="chips" id="chips">
     <div class="ch on" data-filter="all">All</div>
     <div class="ch" data-filter="cs">Center Stage</div>
+    <div class="ch" data-seg="dd" data-filter="dd">Deep Dive</div>
+    <div class="ch" data-seg="cc" data-filter="cc">Community</div>
     <div class="ch" data-filter="vip">VIP</div>
-    <div class="ch" data-filter="featured">Members</div>
+    <div class="ch" data-filter="featured">Featured</div>
+    <div class="ch" data-filter="verified">Verified</div>
   </div>
   <div class="ct"><strong id="countNum">--</strong> guests</div>
 </div>
@@ -1525,7 +1579,7 @@ img { max-width: 100%; display: block; }
 <!-- SSR-friendly hidden content for crawlers — dynamically populated -->
 <div id="ssr-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
   <h2>Guest Engine Directory — Expert Podcast Guests</h2>
-  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Filter by segment, tier (VIP, Members, Appearances), or search by name and expertise. Powered by ConversationOS.</p>
+  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Guests span multiple segments including Center Stage, Deep Dive, Community Corner, No Safe Words, and Did You Know. Filter by segment, tier (VIP, Featured, Free), or search by name and expertise. Powered by ConversationOS.</p>
 </div>
 <script>
 (function() {
@@ -1768,13 +1822,15 @@ img { max-width: 100%; display: block; }
     var expertise = getExpertise(guest);
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
     var isVIP = guest.tier === 'vip';
+    var isMember = guest.tier === 'member-recurring';
     var isFeatured = guest.tier === 'member';
     var isFree = guest.tier === 'free';
     var profileUrl = 'https://ge.conversationos.live/guests/' + guest.slug;
 
     var tierClass = '';
     if (isVIP) tierClass = ' tier-vip';
-    else if (isFeatured) tierClass = ' tier-member';
+    else if (isMember) tierClass = ' tier-member';
+    else if (isFeatured) tierClass = ' tier-feat';
     else if (isFree) tierClass = ' tier-free';
 
     var photoHTML;
@@ -1786,7 +1842,8 @@ img { max-width: 100%; display: block; }
 
     var tierBadge = '';
     if (isVIP) tierBadge = '<span class="tr vt">VIP</span>';
-    else if (isFeatured) tierBadge = '<span class="tr mt">Member</span>';
+    else if (isMember) tierBadge = '<span class="tr mt">Member</span>';
+    else if (isFeatured) tierBadge = '<span class="tr ft">Featured</span>';
 
     var verifiedDot = !isFree ? '<span class="photo-vd"></span>' : '<span class="photo-vd-ghost"></span>';
 
@@ -1797,7 +1854,7 @@ img { max-width: 100%; display: block; }
     if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
 
     var badges = '';
-    if (isFeatured) badges += '<span class="bg bg-m">Member</span>';
+    if (isMember) badges += '<span class="bg bg-m">Monthly Intel</span>';
     badges += '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>';
 
     return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
@@ -1838,7 +1895,14 @@ img { max-width: 100%; display: block; }
       return;
     }
 
+    /* MOCKUP: Simulate member-recurring tier for a few guests to show differentiation */
+    var MOCK_MEMBERS = ['nino-fincher','dave-sanderson','martin-parnell','robbie-britton','saul-colt','greg-schwem','adam-carral'];
+    guests.forEach(function(g) {
+      if (MOCK_MEMBERS.indexOf(g.slug) !== -1) g.tier = 'member-recurring';
+    });
+
     var vips = guests.filter(function(g) { return g.tier === 'vip'; });
+    var members = guests.filter(function(g) { return g.tier === 'member-recurring'; });
     var featured = guests.filter(function(g) { return g.tier === 'member'; });
     var free = guests.filter(function(g) { return g.tier === 'free'; });
 
@@ -1846,6 +1910,7 @@ img { max-width: 100%; display: block; }
     function sortByApps(a, b) {
       return getAppearances(b).length - getAppearances(a).length;
     }
+    members.sort(sortByApps);
     featured.sort(sortByApps);
     free.sort(sortByApps);
 
@@ -1859,7 +1924,7 @@ img { max-width: 100%; display: block; }
       html +=     '<div class="section-label">Tier 01</div>';
       html +=     '<h2><span class="vipAccent">VIP</span> Guests<span class="count">' + vips.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">The show\'s most trusted voices. Premium placement, full media kits, and authority profiles.</p>';
+      html +=   '<p class="section-sub">The show\'s most trusted voices. Premium placement, weekly Signal intelligence, and priority access.</p>';
       html += '</div>';
       html += '<div class="grid grid-vip">';
       for (var i = 0; i < vips.length; i++) {
@@ -1869,15 +1934,33 @@ img { max-width: 100%; display: block; }
       html += '</section>';
     }
 
-    // --- FEATURED SECTION ---
+    // --- MEMBER SECTION ---
+    if (members.length > 0) {
+      html += '<section class="tier-section">';
+      html += '<div class="section-head section-head-member">';
+      html +=   '<div class="section-head-left">';
+      html +=     '<div class="section-label">Tier 02</div>';
+      html +=     '<h2>Members<span class="count">' + members.length + '</span></h2>';
+      html +=   '</div>';
+      html +=   '<p class="section-sub">Active subscribers with monthly Signal intelligence and network discovery.</p>';
+      html += '</div>';
+      html += '<div class="grid">';
+      for (var m = 0; m < members.length; m++) {
+        html += buildCard(members[m]);
+      }
+      html += '</div>';
+      html += '</section>';
+    }
+
+    // --- FEATURED / APPEARANCES SECTION ---
     if (featured.length > 0) {
       html += '<section class="tier-section">';
       html += '<div class="section-head">';
       html +=   '<div class="section-head-left">';
-      html +=     '<div class="section-label">Tier 02</div>';
-      html +=     '<h2>Members<span class="count">' + featured.length + '</span></h2>';
+      html +=     '<div class="section-label">Tier 03</div>';
+      html +=     '<h2>Appearances<span class="count">' + featured.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">Active members with recurring access, deep domain authority, and priority placement across the network.</p>';
+      html +=   '<p class="section-sub">Guests with produced show appearances and permanent authority profiles.</p>';
       html += '</div>';
       html += '<div class="grid">';
       for (var j = 0; j < featured.length; j++) {
@@ -1892,10 +1975,10 @@ img { max-width: 100%; display: block; }
       html += '<section class="tier-section">';
       html += '<div class="section-head">';
       html +=   '<div class="section-head-left">';
-      html +=     '<div class="section-label">Tier 03</div>';
-      html +=     '<h2>Appearances<span class="count">' + free.length + '</span></h2>';
+      html +=     '<div class="section-label">Tier 04</div>';
+      html +=     '<h2>Directory<span class="count">' + free.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">Guests who have appeared on a ConversationOS show. Single-appearance access and directory listing.</p>';
+      html +=   '<p class="section-sub">The full network of guests who have appeared on a ConversationOS show.</p>';
       html += '</div>';
       html += '<div class="grid">';
       for (var k = 0; k < free.length; k++) {
@@ -1914,7 +1997,8 @@ img { max-width: 100%; display: block; }
     var filtered = allGuests.filter(function(g) {
       if (activeFilter === 'vip' && g.tier !== 'vip') return false;
       if (activeFilter === 'featured' && g.tier !== 'member') return false;
-      if (['cs','ns','dk'].indexOf(activeFilter) !== -1) {
+      if (activeFilter === 'verified' && g.tier === 'free') return false;
+      if (['cs','dd','cc','ns','dk'].indexOf(activeFilter) !== -1) {
         if (getSegCode(g.topics) !== activeFilter) return false;
       }
       if (query) {
@@ -2009,18 +2093,14 @@ img { max-width: 100%; display: block; }
     var fetched = await fetchAllGuests();
 
     var guests = fetched.filter(function(g) {
-      if (EXCLUDED_SLUGS.indexOf(g.slug) !== -1) return false;
-      // Exclude guests who never appeared on the show
-      var apps = getAppearances(g);
-      if (!apps.length) return false;
-      // Exclude Community Corner guests
-      if (getSegCode(g.topics) === 'cc') return false;
-      return true;
+      return EXCLUDED_SLUGS.indexOf(g.slug) === -1;
     });
 
     allGuests = guests;
 
     document.getElementById('stat-guests').textContent = guests.length;
+    var verified = guests.filter(function(g) { return g.tier !== 'free'; }).length;
+    document.getElementById('stat-verified').textContent = verified;
     var shows = new Set();
     guests.forEach(function(g) {
       var apps = getAppearances(g);
