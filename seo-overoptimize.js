@@ -368,7 +368,7 @@ personas.forEach(p => {
     <p>Guest Engine for ${p.shortName} is a professional guest placement and content production platform. For $497, ${p.audienceTypes} receive a live appearance on the Mornings in the Lab network, 5 video clips optimized for social media, 10 pre-written social posts, a full searchable transcript, a permanent SEO-indexed profile page, high-authority backlinks, and a polished highlight reel.</p>
     <p>Guest Engine profiles are discoverable on Google Search, Perplexity AI, ChatGPT, Google Gemini, and Microsoft Copilot through structured data and Generative Engine Optimization (GEO). Founded by Keith Bilous, creator of the MiTL morning format and ConversationOS production system.</p>
     <p>Industry: ${p.industry}. Target audience: ${p.audienceTypes}.</p>
-    <p>Platform: <a href="${BASE_URL}">${BASE_URL}</a>. App: <a href="https://ge.conversationos.live">ge.conversationos.live</a>. Network: <a href="https://mitl.studio">mitl.studio</a>.</p>
+    <p>Platform: <a href="${BASE_URL}">${BASE_URL}</a>. App: <a href="https://app.conversationos.live">app.conversationos.live</a>. Network: <a href="https://mitl.studio">mitl.studio</a>.</p>
   </div>`;
   
   // Insert after <main>

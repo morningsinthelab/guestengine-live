@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guest Profile | Guest Engine</title>
+  <meta name="description" content="Guest profile on Guest Engine, powered by the MiTL Live Network.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/style.css?v=20260419">
+  <link rel="stylesheet" href="/header.css?v=20260419">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@gabornings">
+  <!-- Dynamic OG tags injected by JS -->
+  <style>
+  /* ── Loading state ───────────────────────── */
+  .profile-loading {
+    min-height: 80vh; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+  }
+  .profile-loading__spinner {
+    width: 40px; height: 40px; border: 3px solid rgba(251,191,36,0.15);
+    border-top-color: #fbbf24; border-radius: 50%; animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .profile-loading__text {
+    font-family: 'Syncopate', sans-serif; font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+  }
+
+  /* ── Hero ─────────────────────────────────── */
+  .p-hero {
+    position: relative; min-height: 70vh; display: flex; align-items: flex-end;
+    overflow: hidden; background: #050914;
+  }
+  .p-hero__bg {
+    position: absolute; inset: 0; background-size: cover; background-position: center top;
+    filter: brightness(0.7); transition: opacity 0.6s ease;
+  }
+  .p-hero__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, #050914 0%, rgba(5,9,20,0.7) 40%, rgba(5,9,20,0.3) 70%, rgba(5,9,20,0.4) 100%);
+  }
+  .p-hero__content {
+    position: relative; z-index: 2; padding: 0 clamp(20px,5vw,80px) clamp(40px,6vw,80px);
+    max-width: 900px; width: 100%;
+  }
+  .p-hero__segment {
+    font-family: 'Syncopate', sans-serif; font-size: 0.5625rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #fbbf24; margin-bottom: 0.75rem;
+  }
+  .p-hero__name {
+    font-family: 'Syncopate', sans-serif; font-weight: 700;
+    font-size: clamp(2rem,5vw,3.5rem); line-height: 1.05; text-transform: uppercase;
+    color: #fff; margin: 0 0 0.75rem;
+  }
+  .p-hero__headline {
+    font-size: clamp(0.9rem,1.5vw,1.1rem); color: rgba(255,255,255,0.65);
+    max-width: 600px; line-height: 1.6;
+  }
+  .p-hero__video-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem; margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 60px; color: #fbbf24; font-family: 'Syncopate', sans-serif;
+    font-size: 0.5rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+  }
+  .p-hero__video-btn:hover { background: rgba(251,191,36,0.25); border-color: #fbbf24; }
+  .p-hero__play-icon {
+    width: 36px; height: 36px; border-radius: 50%; background: #fbbf24;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .p-hero__play-icon svg { width: 14px; height: 14px; fill: #050914; margin-left: 2px; }
+
+  /* ── Main content ────────────────────────── */
+  .p-body { padding: clamp(2rem,4vw,4rem) 0; }
+  .p-body .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px,3vw,40px); }
+
+  .p-back {
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;
+    font-family: 'Syncopate', sans-serif; font-size: 0.5625rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .p-back:hover { color: #fbbf24; }
+
+  /* ── Profile card ────────────────────────── */
+  .p-card {
+    display: flex; gap: 2.5rem; align-items: flex-start; margin-bottom: 3rem;
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 2rem;
+  }
+  .p-card__photo {
+    width: 140px; height: 140px; min-width: 140px; border-radius: 12px;
+    overflow: hidden; border: 2px solid rgba(251,191,36,0.2);
+  }
+  .p-card__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .p-card__initials {
+    width: 140px; height: 140px; min-width: 140px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(251,191,36,0.08));
+    border: 2px solid rgba(251,191,36,0.2); display: flex; align-items: center;
+    justify-content: center; font-family: 'Syncopate', sans-serif; font-size: 3rem;
+    font-weight: 700; color: #fbbf24;
+  }
+  .p-card__info { flex: 1; }
+  .p-card__name {
+    font-family: 'Syncopate', sans-serif; font-weight: 700;
+    font-size: clamp(1.25rem,2.5vw,1.75rem); line-height: 1.15;
+    color: #fff; text-transform: uppercase; margin: 0 0 0.375rem;
+  }
+  .p-card__title { font-size: 0.9375rem; color: rgba(255,255,255,0.55); margin-bottom: 1rem; }
+  .p-card__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .p-card__tag {
+    font-family: 'Syncopate', sans-serif; font-size: 0.5rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.75rem;
+    background: rgba(251,191,36,0.08); color: #fbbf24;
+    border: 1px solid rgba(251,191,36,0.15); border-radius: 6px;
+  }
+  .p-card__tier {
+    display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.75rem;
+    border-radius: 60px; font-family: 'Syncopate', sans-serif; font-size: 0.4375rem;
+    font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .p-card__tier--vip { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+  .p-card__tier--member { background: rgba(99,102,241,0.12); color: #818cf8; border: 1px solid rgba(99,102,241,0.25); }
+  .p-card__tier--free { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.1); }
+  .p-card__bio { font-size: 0.9375rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  /* ── Sections ────────────────────────────── */
+  .p-section { margin-bottom: 3rem; }
+  .p-section__title {
+    font-family: 'Syncopate', sans-serif; font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #fbbf24; margin-bottom: 1.25rem;
+  }
+
+  /* ── Key Insights (quotes) ───────────────── */
+  .p-insights { display: flex; flex-direction: column; gap: 1.25rem; }
+  .p-insight {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+    border-left: 3px solid rgba(251,191,36,0.4); border-radius: 0 12px 12px 0;
+    padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+  }
+  .p-insight__quote {
+    font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.7;
+    font-style: italic; margin-bottom: 0.75rem;
+  }
+  .p-insight__context { font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+  .p-insight__topic {
+    display: inline-block; margin-top: 0.5rem; font-family: 'Syncopate', sans-serif;
+    font-size: 0.4375rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(251,191,36,0.6); padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.06);
+    border-radius: 4px;
+  }
+
+  /* ── Appearances ─────────────────────────── */
+  .p-appearances { display: flex; flex-direction: column; gap: 1rem; }
+  .p-appearance {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; gap: 1.25rem;
+    align-items: center; text-decoration: none; transition: all 0.2s ease;
+  }
+  .p-appearance:hover { border-color: rgba(251,191,36,0.3); background: rgba(255,255,255,0.03); }
+  .p-appearance__thumb {
+    width: 100px; min-width: 100px; aspect-ratio: 16/9; background: rgba(255,255,255,0.03);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .p-appearance__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .p-appearance__thumb-play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.3);
+  }
+  .p-appearance__thumb-play svg { width: 24px; height: 24px; fill: #fbbf24; }
+  .p-appearance__show {
+    font-family: 'Syncopate', sans-serif; font-size: 0.5rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+    margin-bottom: 0.25rem;
+  }
+  .p-appearance__segment {
+    font-size: 0.875rem; font-weight: 600; color: #fff; margin-bottom: 0.25rem;
+  }
+  .p-appearance__date { font-size: 0.8125rem; color: rgba(255,255,255,0.35); }
+
+  /* ── Video embed ─────────────────────────── */
+  .p-video { margin-bottom: 3rem; }
+  .p-video__wrap {
+    position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 12px;
+    overflow: hidden; border: 1px solid rgba(255,255,255,0.06);
+  }
+  .p-video__wrap iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+  }
+
+  /* ── FAQ ──────────────────────────────────── */
+  .p-faqs { display: flex; flex-direction: column; gap: 0.75rem; }
+  .p-faq {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; overflow: hidden;
+  }
+  .p-faq__q {
+    width: 100%; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between;
+    align-items: center; gap: 1rem; cursor: pointer; background: none; border: none;
+    font-size: 0.9375rem; font-weight: 600; color: #fff; text-align: left;
+    transition: color 0.2s;
+  }
+  .p-faq__q:hover { color: #fbbf24; }
+  .p-faq__chevron { width: 16px; height: 16px; color: rgba(255,255,255,0.3); flex-shrink: 0; transition: transform 0.3s ease; }
+  .p-faq.open .p-faq__chevron { transform: rotate(180deg); }
+  .p-faq__a {
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+  }
+  .p-faq.open .p-faq__a { max-height: 600px; }
+  .p-faq__a-inner {
+    padding: 0 1.5rem 1.25rem; font-size: 0.875rem; color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* ── Links ───────────────────────────────── */
+  .p-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .p-link {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1rem;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; font-size: 0.8125rem; color: rgba(255,255,255,0.6);
+    text-decoration: none; transition: all 0.2s ease;
+  }
+  .p-link:hover { border-color: rgba(251,191,36,0.4); color: #fbbf24; }
+  .p-link i, .p-link svg { color: #fbbf24; width: 16px; }
+
+  /* ── Knows About ─────────────────────────── */
+  .p-knows { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .p-knows__item {
+    font-size: 0.8125rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── CTA banner ──────────────────────────── */
+  .p-cta {
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(251,191,36,0.05));
+    border: 1px solid rgba(251,191,36,0.15); border-radius: 16px; padding: 2.5rem;
+    text-align: center; margin-top: 2rem;
+  }
+  .p-cta__title {
+    font-family: 'Syncopate', sans-serif; font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+    margin-bottom: 0.75rem;
+  }
+  .p-cta__text { font-size: 0.9375rem; color: rgba(255,255,255,0.55); margin-bottom: 1.5rem; line-height: 1.6; }
+  .p-cta__btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;
+    background: #fbbf24; color: #050914; font-family: 'Syncopate', sans-serif;
+    font-weight: 700; font-size: 0.625rem; letter-spacing: 0.15em; text-transform: uppercase;
+    border-radius: 8px; text-decoration: none; transition: background 0.2s;
+  }
+  .p-cta__btn:hover { background: #f59e0b; }
+
+  /* ── Not Found ───────────────────────────── */
+  .p-notfound {
+    min-height: 60vh; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem; text-align: center; padding: 2rem;
+  }
+  .p-notfound__title {
+    font-family: 'Syncopate', sans-serif; font-size: 1.5rem; font-weight: 700;
+    text-transform: uppercase; color: #fff;
+  }
+  .p-notfound__text { color: rgba(255,255,255,0.5); }
+
+  /* ── Responsive ──────────────────────────── */
+  @media (max-width: 768px) {
+    .p-card { flex-direction: column; align-items: center; text-align: center; }
+    .p-card__tags { justify-content: center; }
+    .p-appearance { flex-direction: column; text-align: center; }
+    .p-links { justify-content: center; }
+    .p-hero { min-height: 50vh; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="ge-header" id="geHeader">
+    <a href="/" class="ge-header__logo">
+      <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon"><div class="ge-header__logo-text"><span class="ge-header__logo-cos">ConversationOS</span><div class="ge-header__logo-ge"><span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span></div></div>
+    </a>
+    <nav class="ge-header__nav" id="geNav">
+      <a href="/directory/">Directory</a>
+      <a href="/marketplace/">Marketplace</a>
+      <a href="/shows/">Shows</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#network">Network</a>
+      <a href="/signal/">Signal</a>
+      <a href="/why/">Why</a>
+      <a href="/join/">Join</a>
+    </nav>
+    <div class="ge-header__actions">
+      <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
+      <a href="/join/" class="ge-header__signup">Sign Up</a>
+    </div>
+    <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="ge-header__mobile-overlay" id="geMobileMenu">
+    <a href="/directory/">Directory</a>
+    <a href="/marketplace/">Marketplace</a>
+    <a href="/shows/">Shows</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#network">Network</a>
+    <a href="/signal/">Signal</a>
+    <a href="/why/">Why</a>
+    <a href="/join/">Join</a>
+    <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
+    <a href="/join/" class="ge-header__signup">Sign Up</a>
+  </div>
+
+  <!-- LOADING STATE -->
+  <div id="profile-loading" class="profile-loading">
+    <div class="profile-loading__spinner"></div>
+    <div class="profile-loading__text">Loading profile</div>
+  </div>
+
+  <!-- NOT FOUND STATE (hidden) -->
+  <div id="profile-notfound" style="display:none">
+    <div class="p-notfound">
+      <h1 class="p-notfound__title">Profile not found</h1>
+      <p class="p-notfound__text">This guest profile doesn't exist or isn't public yet.</p>
+      <a href="/directory/" class="p-cta__btn" style="margin-top:1rem">Browse Directory &rarr;</a>
+    </div>
+  </div>
+
+  <!-- PROFILE CONTENT (hidden until loaded) -->
+  <div id="profile-content" style="display:none">
+
+    <!-- HERO -->
+    <section class="p-hero" id="p-hero">
+      <div class="p-hero__bg" id="p-hero-bg"></div>
+      <div class="p-hero__overlay"></div>
+      <div class="p-hero__content">
+        <div class="p-hero__segment" id="p-hero-segment"></div>
+        <h1 class="p-hero__name" id="p-hero-name"></h1>
+        <p class="p-hero__headline" id="p-hero-headline"></p>
+        <a id="p-hero-video-btn" class="p-hero__video-btn" style="display:none" target="_blank">
+          <span class="p-hero__play-icon"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span>
+          Watch Center Stage Interview
+        </a>
+      </div>
+    </section>
+
+    <!-- BODY -->
+    <section class="p-body">
+      <div class="container">
+
+        <a href="/directory/" class="p-back"><i class="fa-solid fa-arrow-left"></i> Back to Directory</a>
+
+        <!-- Profile Card -->
+        <div class="p-card" id="p-card">
+          <div id="p-card-photo"></div>
+          <div class="p-card__info">
+            <div id="p-card-tier"></div>
+            <h2 class="p-card__name" id="p-card-name"></h2>
+            <p class="p-card__title" id="p-card-title"></p>
+            <div class="p-card__tags" id="p-card-tags"></div>
+            <div class="p-card__bio" id="p-card-bio"></div>
+          </div>
+        </div>
+
+        <!-- Center Stage Video Embed -->
+        <div class="p-video" id="p-video-section" style="display:none">
+          <div class="p-section__title">CENTER STAGE INTERVIEW</div>
+          <div class="p-video__wrap" id="p-video-wrap"></div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="p-section" id="p-insights-section" style="display:none">
+          <div class="p-section__title">KEY INSIGHTS</div>
+          <div class="p-insights" id="p-insights"></div>
+        </div>
+
+        <!-- Appearances -->
+        <div class="p-section" id="p-appearances-section" style="display:none">
+          <div class="p-section__title">APPEARANCES</div>
+          <div class="p-appearances" id="p-appearances"></div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="p-section" id="p-faq-section" style="display:none">
+          <div class="p-section__title">FREQUENTLY ASKED</div>
+          <div class="p-faqs" id="p-faqs"></div>
+        </div>
+
+        <!-- Knows About -->
+        <div class="p-section" id="p-knows-section" style="display:none">
+          <div class="p-section__title">EXPERTISE</div>
+          <div class="p-knows" id="p-knows"></div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="p-section" id="p-links-section" style="display:none">
+          <div class="p-section__title">CONNECT</div>
+          <div class="p-links" id="p-links"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="p-cta">
+          <p class="p-cta__title">GUEST ENGINE</p>
+          <p class="p-cta__text">Every Guest Engine guest gets a permanent, SEO-indexed profile page — complete with clips, transcript highlights, backlinks, and a highlight reel.</p>
+          <a href="/join/" class="p-cta__btn">Get Featured &rarr;</a>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo" aria-label="Site footer" itemscope itemtype="https://schema.org/WPFooter">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" aria-label="Guest Engine home">
+            <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="36" height="36" rx="6" fill="#fbbf24"/>
+              <text x="8" y="26" font-family="Syncopate, sans-serif" font-weight="700" font-size="22" fill="#020617">G</text>
+            </svg>
+            <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
+          </a>
+          <p class="footer__tagline">The live conversation platform where we set the stage, set the conversation, and set you up &mdash; powered by <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a>.</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Guest Engine</h4>
+          <a href="/directory/" class="footer__link">Guest Directory</a>
+          <a href="/marketplace/" class="footer__link">Marketplace</a>
+          <a href="/join/" class="footer__link">Get Featured</a>
+          <a href="/signal/" class="footer__link">Signal Report</a>
+          <a href="/why/" class="footer__link">Why Guest Engine</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Network</h4>
+          <a href="https://mornings.live" class="footer__link" target="_blank" rel="noopener">Mornings in the Lab</a>
+          <a href="https://keithbilous.com" class="footer__link" target="_blank" rel="noopener">keithbilous.com</a>
+          <a href="https://conversationos.live" class="footer__link" target="_blank" rel="noopener">ConversationOS</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 GUEST ENGINE &mdash; Powered by <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+  <script src="/header.js"></script>
+
+  <script>
+  (function() {
+    var API = 'https://app.conversationos.live/api/guest-marketplace';
+    var slug = getSlug();
+
+    if (!slug) return showNotFound();
+
+    // Fetch profile + enrichment in parallel
+    Promise.all([
+      fetch(API + '/directory/' + slug).then(ok),
+      fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
+      fetch(API + '/authority-visuals/' + slug).then(ok).catch(function() { return null; }),
+    ]).then(function(results) {
+      var profile = results[0];
+      var authority = results[1];
+      var visuals = results[2];
+
+      if (!profile) return showNotFound();
+      render(profile, authority, visuals);
+    }).catch(function() {
+      showNotFound();
+    });
+
+    function ok(r) { return r.ok ? r.json() : null; }
+
+    function getSlug() {
+      var p = window.location.pathname.replace(/\/+$/, '').split('/');
+      // /profile/slug or /profile/slug/
+      var idx = p.indexOf('profile');
+      return idx >= 0 && p[idx + 1] ? p[idx + 1] : null;
+    }
+
+    function showNotFound() {
+      document.getElementById('profile-loading').style.display = 'none';
+      document.getElementById('profile-notfound').style.display = 'block';
+    }
+
+    function parseJSON(val) {
+      if (!val) return null;
+      if (typeof val === 'object') return val;
+      try { return JSON.parse(val); } catch(e) { return null; }
+    }
+
+    function formatDate(d) {
+      if (!d) return '';
+      var date = new Date(d + 'T00:00:00');
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+    }
+
+    function render(profile, authority, visuals) {
+      var name = profile.guestName || 'Guest';
+      var headline = (authority && authority.job_title) || profile.headline || '';
+      var bio = (authority && authority.authority_bio) || profile.bio || '';
+      var topics = parseJSON(profile.topics) || [];
+      var expertise = parseJSON(profile.expertise) || [];
+      var socials = parseJSON(profile.socialLinks) || {};
+      var appearances = parseJSON(profile.pastAppearances) || [];
+      var insights = (authority && authority.key_insights) || [];
+      var faqs = (authority && authority.faqs) || [];
+      var knowsAbout = (authority && authority.knows_about) || [];
+      var csVideo = profile.centerStageVideoId;
+      var images = (visuals && visuals.images) || [];
+
+      // Set page title + meta
+      document.title = name + ' — ' + headline + ' | Guest Engine';
+      setMeta('description', bio.substring(0, 200) + '...');
+      setOG('og:title', name + ' — ' + headline + ' | Guest Engine');
+      setOG('og:description', bio.substring(0, 200) + '...');
+      setOG('og:image', profile.headshotUrl || '');
+      setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
+      setOG('og:type', 'profile');
+
+      // Hero
+      var heroImg = findImage(images, 'authority_portrait') || findImage(images, 'episode_art') || profile.headshotUrl;
+      if (heroImg) {
+        document.getElementById('p-hero-bg').style.backgroundImage = 'url(' + heroImg + ')';
+      }
+      var segment = '';
+      if (topics.length && topics[0] !== 'Community Corner') segment = topics[0];
+      document.getElementById('p-hero-segment').textContent = segment ? 'MiTL LIVE NETWORK · ' + segment : 'MiTL LIVE NETWORK';
+      document.getElementById('p-hero-name').textContent = name;
+      document.getElementById('p-hero-headline').textContent = headline;
+      if (csVideo) {
+        var btn = document.getElementById('p-hero-video-btn');
+        btn.href = 'https://www.youtube.com/watch?v=' + csVideo;
+        btn.style.display = 'inline-flex';
+      }
+
+      // Card
+      if (profile.headshotUrl) {
+        document.getElementById('p-card-photo').innerHTML = '<div class="p-card__photo"><img src="' + esc(profile.headshotUrl) + '" alt="' + esc(name) + '"></div>';
+      } else {
+        var initials = name.split(' ').map(function(w) { return w[0]; }).join('').substring(0, 2);
+        document.getElementById('p-card-photo').innerHTML = '<div class="p-card__initials">' + esc(initials) + '</div>';
+      }
+
+      // Tier badge
+      var tierClass = profile.tier === 'vip' ? 'vip' : profile.tier === 'member' ? 'member' : 'free';
+      var tierLabel = profile.tier === 'vip' ? '★ VIP' : profile.tier === 'member' ? 'MEMBER' : 'DIRECTORY';
+      document.getElementById('p-card-tier').innerHTML = '<span class="p-card__tier p-card__tier--' + tierClass + '">' + tierLabel + '</span>';
+
+      document.getElementById('p-card-name').textContent = name;
+      document.getElementById('p-card-title').textContent = headline;
+
+      var tagsHtml = '';
+      var allTopics = knowsAbout.length ? knowsAbout.slice(0, 6) : (expertise.length ? expertise : topics);
+      allTopics.forEach(function(t) {
+        tagsHtml += '<span class="p-card__tag">' + esc(t) + '</span>';
+      });
+      document.getElementById('p-card-tags').innerHTML = tagsHtml;
+      document.getElementById('p-card-bio').innerHTML = bio.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+
+      // Center Stage Video
+      if (csVideo) {
+        document.getElementById('p-video-section').style.display = 'block';
+        document.getElementById('p-video-wrap').innerHTML = '<iframe src="https://www.youtube.com/embed/' + csVideo + '?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+      }
+
+      // Key Insights
+      if (insights.length) {
+        document.getElementById('p-insights-section').style.display = 'block';
+        var insHtml = '';
+        insights.slice(0, 5).forEach(function(ins) {
+          insHtml += '<div class="p-insight">';
+          insHtml += '<div class="p-insight__quote">"' + esc(ins.quote || '') + '"</div>';
+          if (ins.context) insHtml += '<div class="p-insight__context">' + esc(ins.context) + '</div>';
+          if (ins.topic) insHtml += '<span class="p-insight__topic">' + esc(ins.topic) + '</span>';
+          insHtml += '</div>';
+        });
+        document.getElementById('p-insights').innerHTML = insHtml;
+      }
+
+      // Appearances
+      if (appearances.length) {
+        document.getElementById('p-appearances-section').style.display = 'block';
+        var appHtml = '';
+        appearances.forEach(function(a) {
+          var isLink = !!a.link;
+          var tag = isLink ? 'a' : 'div';
+          var href = isLink ? ' href="' + esc(a.link) + '" target="_blank"' : '';
+          var videoId = a.link ? extractYTId(a.link) : null;
+          var thumbUrl = videoId ? 'https://img.youtube.com/vi/' + videoId + '/mqdefault.jpg' : '';
+
+          appHtml += '<' + tag + ' class="p-appearance"' + href + '>';
+          appHtml += '<div class="p-appearance__thumb">';
+          if (thumbUrl) {
+            appHtml += '<img src="' + thumbUrl + '" alt="" loading="lazy">';
+            appHtml += '<div class="p-appearance__thumb-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>';
+          } else {
+            appHtml += '<i class="fa-solid fa-play" style="color:#fbbf24;font-size:1.25rem"></i>';
+          }
+          appHtml += '</div>';
+          appHtml += '<div>';
+          appHtml += '<div class="p-appearance__show">' + esc(a.showName || 'MiTL Live Network') + '</div>';
+          appHtml += '<div class="p-appearance__segment">' + esc(a.segment || 'Guest Appearance') + '</div>';
+          appHtml += '<div class="p-appearance__date">' + formatDate(a.date) + '</div>';
+          appHtml += '</div>';
+          appHtml += '</' + tag + '>';
+        });
+        document.getElementById('p-appearances').innerHTML = appHtml;
+      }
+
+      // FAQ
+      if (faqs.length) {
+        document.getElementById('p-faq-section').style.display = 'block';
+        var faqHtml = '';
+        faqs.forEach(function(f, i) {
+          faqHtml += '<div class="p-faq" id="faq-' + i + '">';
+          faqHtml += '<button class="p-faq__q" onclick="toggleFaq(' + i + ')">';
+          faqHtml += '<span>' + esc(f.question) + '</span>';
+          faqHtml += '<svg class="p-faq__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+          faqHtml += '</button>';
+          faqHtml += '<div class="p-faq__a"><div class="p-faq__a-inner">' + esc(f.answer) + '</div></div>';
+          faqHtml += '</div>';
+        });
+        document.getElementById('p-faqs').innerHTML = faqHtml;
+      }
+
+      // Knows About
+      if (knowsAbout.length) {
+        document.getElementById('p-knows-section').style.display = 'block';
+        var knowsHtml = '';
+        knowsAbout.forEach(function(k) {
+          knowsHtml += '<div class="p-knows__item">' + esc(k) + '</div>';
+        });
+        document.getElementById('p-knows').innerHTML = knowsHtml;
+      }
+
+      // Social Links
+      var linkMap = {
+        linkedin: { icon: 'fa-brands fa-linkedin', label: 'LinkedIn' },
+        twitter: { icon: 'fa-brands fa-x-twitter', label: 'X' },
+        website: { icon: 'fa-solid fa-globe', label: 'Website' },
+        youtube: { icon: 'fa-brands fa-youtube', label: 'YouTube' },
+        instagram: { icon: 'fa-brands fa-instagram', label: 'Instagram' },
+        facebook: { icon: 'fa-brands fa-facebook', label: 'Facebook' },
+        tiktok: { icon: 'fa-brands fa-tiktok', label: 'TikTok' },
+        substack: { icon: 'fa-solid fa-newspaper', label: 'Substack' },
+        roam: { icon: 'fa-solid fa-video', label: 'Ro.am' },
+      };
+      var hasLinks = false;
+      var linksHtml = '';
+      Object.keys(socials).forEach(function(key) {
+        var url = socials[key];
+        if (!url) return;
+        var m = linkMap[key] || { icon: 'fa-solid fa-link', label: key };
+        linksHtml += '<a href="' + esc(url) + '" class="p-link" target="_blank" rel="noopener"><i class="' + m.icon + '"></i> ' + m.label + '</a>';
+        hasLinks = true;
+      });
+      if (hasLinks) {
+        document.getElementById('p-links-section').style.display = 'block';
+        document.getElementById('p-links').innerHTML = linksHtml;
+      }
+
+      // Inject structured data
+      injectStructuredData(profile, authority, visuals);
+
+      // Show content
+      document.getElementById('profile-loading').style.display = 'none';
+      document.getElementById('profile-content').style.display = 'block';
+    }
+
+    function findImage(images, type) {
+      for (var i = 0; i < images.length; i++) {
+        if (images[i].type === type) return images[i].url;
+      }
+      return null;
+    }
+
+    function extractYTId(url) {
+      if (!url) return null;
+      var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/);
+      return m ? m[1] : null;
+    }
+
+    function esc(s) {
+      if (!s) return '';
+      var d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function setMeta(name, content) {
+      var el = document.querySelector('meta[name="' + name + '"]');
+      if (el) el.setAttribute('content', content);
+    }
+    function setOG(prop, content) {
+      var el = document.querySelector('meta[property="' + prop + '"]');
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('property', prop);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    }
+
+    function injectStructuredData(profile, authority, visuals) {
+      var name = profile.guestName || '';
+      var headline = (authority && authority.job_title) || profile.headline || '';
+      var bio = (authority && authority.authority_bio) || profile.bio || '';
+      var knowsAbout = (authority && authority.knows_about) || [];
+      var sameAs = (authority && authority.same_as) || [];
+      var faqs = (authority && authority.faqs) || [];
+
+      var schema = {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Person',
+            '@id': 'https://guestengine.live/profile/' + profile.slug + '#person',
+            name: name,
+            url: 'https://guestengine.live/profile/' + profile.slug,
+            jobTitle: headline,
+            description: bio.substring(0, 500),
+            image: profile.headshotUrl || undefined,
+            knowsAbout: knowsAbout,
+            sameAs: sameAs,
+          },
+          {
+            '@type': 'ProfilePage',
+            '@id': 'https://guestengine.live/profile/' + profile.slug,
+            name: name + ' — ' + headline + ' | Guest Engine',
+            url: 'https://guestengine.live/profile/' + profile.slug,
+            about: { '@id': 'https://guestengine.live/profile/' + profile.slug + '#person' },
+            isPartOf: { '@type': 'WebSite', name: 'Guest Engine', url: 'https://guestengine.live' },
+          }
+        ]
+      };
+
+      // Add FAQ schema
+      if (faqs.length) {
+        schema['@graph'].push({
+          '@type': 'FAQPage',
+          '@id': 'https://guestengine.live/profile/' + profile.slug + '#faq',
+          mainEntity: faqs.map(function(f) {
+            return {
+              '@type': 'Question',
+              name: f.question,
+              acceptedAnswer: { '@type': 'Answer', text: f.answer }
+            };
+          })
+        });
+      }
+
+      // Add video schema
+      if (profile.centerStageVideoId) {
+        schema['@graph'].push({
+          '@type': 'VideoObject',
+          name: name + ' — Center Stage Interview | Mornings in the Lab',
+          thumbnailUrl: 'https://img.youtube.com/vi/' + profile.centerStageVideoId + '/maxresdefault.jpg',
+          contentUrl: 'https://www.youtube.com/watch?v=' + profile.centerStageVideoId,
+          embedUrl: 'https://www.youtube.com/embed/' + profile.centerStageVideoId,
+          publisher: { '@type': 'Organization', name: 'Mornings in the Lab', url: 'https://mornings.live' }
+        });
+      }
+
+      var el = document.createElement('script');
+      el.type = 'application/ld+json';
+      el.textContent = JSON.stringify(schema);
+      document.head.appendChild(el);
+    }
+  })();
+
+  function toggleFaq(i) {
+    var el = document.getElementById('faq-' + i);
+    if (el) el.classList.toggle('open');
+  }
+  </script>
+
+  <!-- SOPHIA AI CHAT WIDGET -->
+  <script
+    src="https://app.conversationos.live/sophia-embed.js"
+    data-product="guest-engine"
+    data-theme="dark"
+    data-accent-color="#7c3aed"
+  ></script>
+
+</body>
+</html>

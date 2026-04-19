@@ -52,7 +52,7 @@ Guest Engine is the front door to the MITL Live Network. AI matches each guest t
 ## Guest Experience (End-to-End)
 
 ### Step 1: Sign Up
-Guest creates a profile at ge.conversationos.live. Profile includes bio, expertise, topics, links, and optional video pitch.
+Guest creates a profile at app.conversationos.live. Profile includes bio, expertise, topics, links, and optional video pitch.
 
 ### Step 2: Get Matched
 AI scores compatibility between guest profile and available shows. Factors: topic alignment, audience fit, conversation chemistry prediction, expertise level.
@@ -260,7 +260,7 @@ Join page: https://guestengine.live/join/
 | Site | URL | Role |
 |------|-----|------|
 | Guest Engine (brand) | https://guestengine.live | Guest placement marketing site, 12 vertical landing pages, 6 guides |
-| Guest Engine (app) | https://ge.conversationos.live | Guest booking, profiles, directory, pricing, alumni, cast |
+| Guest Engine (app) | https://guestengine.live | Guest booking, profiles, directory, pricing, alumni, cast |
 | ConversationOS | https://conversationos.live | AI production platform — the operating system behind Guest Engine |
 | ConversationOS App | https://app.conversationos.live | Platform application for hosts and producers |
 | ClipENGINE | https://clips.conversationos.live | Automated clip generation marketplace |
@@ -271,7 +271,7 @@ Join page: https://guestengine.live/join/
 | Keith Bilous | https://keithbilous.com | Founder personal site |
 
 ### Cross-Links Between Sites
-- guestengine.live ↔ ge.conversationos.live (brand site ↔ app)
+- guestengine.live ↔ app.conversationos.live (brand site ↔ app)
 - guestengine.live → conversationos.live (powered-by attribution)
 - guestengine.live → mornings.live (network show)
 - guestengine.live → mitl.studio (network headquarters)
@@ -279,12 +279,12 @@ Join page: https://guestengine.live/join/
 - guestengine.live → production.mitl.studio (production services)
 - guestengine.live → clips.conversationos.live (ClipENGINE)
 - guestengine.live → thisis.mitl.studio (network identity)
-- ge.conversationos.live → guestengine.live (all 12 vertical landing pages)
-- ge.conversationos.live → mornings.live (network show)
-- ge.conversationos.live → mitl.studio (network)
-- ge.conversationos.live → keithbilous.com (founder)
-- ge.conversationos.live → clips.conversationos.live (ClipENGINE)
-- ge.conversationos.live → app.conversationos.live (ConversationOS)
+- app.conversationos.live → guestengine.live (all 12 vertical landing pages)
+- app.conversationos.live → mornings.live (network show)
+- app.conversationos.live → mitl.studio (network)
+- app.conversationos.live → keithbilous.com (founder)
+- app.conversationos.live → clips.conversationos.live (ClipENGINE)
+- app.conversationos.live → app.conversationos.live (ConversationOS)
 
 ---
 
@@ -340,7 +340,7 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 ## Contact & Booking
 
 - Book an appearance: https://guestengine.live/join/
-- Guest Engine app: https://ge.conversationos.live
+- Guest Engine app: https://guestengine.live
 - AI Producer: Sophia (accessible through the platform)
 - Network inquiries: https://mitl.studio
 - Show: https://mornings.live

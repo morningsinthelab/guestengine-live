@@ -175,7 +175,7 @@ Guest Engine serves specific professional verticals with tailored positioning:
 
 ## Platform Details
 - Brand site: https://guestengine.live
-- App: https://ge.conversationos.live
+- App: https://app.conversationos.live
 - Parent Platform: https://conversationos.live
 - Network: https://mitl.studio
 - Production: https://production.mitl.studio
@@ -197,7 +197,7 @@ Guest Engine serves specific professional verticals with tailored positioning:
 6. Created by Keith Bilous — AI-powered matching, human-led production
 
 ## Contact
-- AI Producer: Sophia (via ge.conversationos.live)
+- AI Producer: Sophia (via app.conversationos.live)
 - Network: Mornings in the Lab (mornings.live)
 - Platform: ConversationOS (conversationos.live)
 - Founder: Keith Bilous (keithbilous.com)
@@ -241,7 +241,7 @@ Guest Engine is a product of ConversationOS — a modular show management platfo
 ## Guest Experience (End-to-End)
 
 ### Step 1: Sign Up
-Guest creates a profile at ge.conversationos.live. Profile includes bio, expertise, topics, links, and optional video pitch.
+Guest creates a profile at app.conversationos.live. Profile includes bio, expertise, topics, links, and optional video pitch.
 
 ### Step 2: Get Matched
 AI scores compatibility between guest profile and available shows. Factors: topic alignment, audience fit, conversation chemistry prediction, expertise level.
@@ -385,7 +385,7 @@ Guest Engine is the front door to the Mornings in the Lab Live Network:
 | Site | URL | Description |
 |------|-----|-------------|
 | Guest Engine (brand) | https://guestengine.live | Guest placement brand page |
-| Guest Engine (app) | https://ge.conversationos.live | Guest booking and profiles app |
+| Guest Engine (app) | https://app.conversationos.live | Guest booking and profiles app |
 | ConversationOS | https://conversationos.live | Show production platform |
 | ConversationOS App | https://app.conversationos.live | Platform application |
 | MITL Studio | https://mitl.studio | Network headquarters |
@@ -411,7 +411,7 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 
 ## Contact & Booking
 
-- Book an appearance: https://ge.conversationos.live
+- Book an appearance: https://app.conversationos.live
 - AI Producer: Sophia (accessible through the platform)
 - Network inquiries: https://mitl.studio
 - Show: https://mornings.live
@@ -481,23 +481,23 @@ const agentJson = {
   "capabilities": {
     "guest_booking": {
       "description": "Book guest appearances on live shows across the MITL Live Network",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     },
     "guest_profiles": {
       "description": "Create and manage permanent, SEO-indexed guest profiles",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     },
     "host_listing": {
       "description": "List your show and receive AI-matched guest candidates",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     },
     "content_production": {
       "description": "Full post-appearance content production: clips, social posts, transcripts, highlight reels",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     },
     "ai_producer": {
       "description": "Sophia AI producer handles prep, booking, and green room briefing",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     }
   },
   "verticals": {

@@ -282,8 +282,8 @@ function generatePage(v) {
         <a href="/#network" class="nav__link">Network</a>
       </div>
       <div class="nav__actions">
-        <a href="https://ge.conversationos.live" class="nav__link nav__link--login">Log In</a>
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--sm">Get Started</a>
+        <a href="https://app.conversationos.live" class="nav__link nav__link--login">Log In</a>
+        <a href="/join/" class="btn btn--primary btn--sm">Get Started</a>
       </div>
       <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -310,7 +310,7 @@ function generatePage(v) {
       <h1 class="hero__title">${v.title}</h1>
       <p class="hero__sub">${v.subtitle}</p>
       <div class="hero__ctas">
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--lg">${v.ctaText.split('—')[0].trim()} <span class="btn__arrow">&rarr;</span></a>
+        <a href="/join/" class="btn btn--primary btn--lg">${v.ctaText.split('—')[0].trim()} <span class="btn__arrow">&rarr;</span></a>
       </div>
     </div>
   </header>
@@ -346,7 +346,7 @@ ${painUsHtml}
 ${deliverablesHtml}
       </div>
       <div class="section__cta">
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--lg">${v.ctaText} <span class="btn__arrow">&rarr;</span></a>
+        <a href="/join/" class="btn btn--primary btn--lg">${v.ctaText} <span class="btn__arrow">&rarr;</span></a>
         <p class="section__cta-note">${v.ctaSubtext}</p>
       </div>
     </div>
@@ -390,7 +390,7 @@ ${deliverablesHtml}
       <h2 class="section__title section__title--center">${v.closingTitle}</h2>
       <p class="section__sub section__sub--center">${v.closingSub}</p>
       <div class="cta__buttons">
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--lg">${v.ctaText} <span class="btn__arrow">&rarr;</span></a>
+        <a href="/join/" class="btn btn--primary btn--lg">${v.ctaText} <span class="btn__arrow">&rarr;</span></a>
       </div>
     </div>
   </section>

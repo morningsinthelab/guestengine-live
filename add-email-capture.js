@@ -28,7 +28,7 @@ for (const v of verticals) {
           <h3 class="capture__title">${v.title} <span class="gold">${v.gold}</span></h3>
           <p class="capture__desc">${v.desc}</p>
         </div>
-        <form class="capture__form" action="https://ge.conversationos.live" method="GET">
+        <form class="capture__form" action="/join/" method="GET">
           <input type="email" class="capture__input" placeholder="Enter your email" required aria-label="Email address">
           <button type="submit" class="btn btn--primary">Get the Playbook <span class="btn__arrow">&rarr;</span></button>
         </form>

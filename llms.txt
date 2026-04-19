@@ -67,7 +67,7 @@ Show segments: Center Stage (deep spotlights), Conversation Desk (topic-driven p
 | Site | URL | Role |
 |------|-----|------|
 | Guest Engine (brand) | https://guestengine.live | Guest placement marketing site, vertical landing pages, guides |
-| Guest Engine (app) | https://ge.conversationos.live | Guest booking, profiles, directory, pricing, alumni |
+| Guest Engine (app) | https://guestengine.live | Guest booking, profiles, directory, pricing, alumni |
 | ConversationOS | https://conversationos.live | AI production platform — the operating system behind Guest Engine |
 | ConversationOS App | https://app.conversationos.live | Platform application for hosts and producers |
 | ClipENGINE | https://clips.conversationos.live | Automated clip generation marketplace |
@@ -116,7 +116,7 @@ Join page: https://guestengine.live/join/
 ## Contact & Booking
 
 - Book an appearance: https://guestengine.live/join/
-- Guest Engine app: https://ge.conversationos.live
+- Guest Engine app: https://guestengine.live
 - AI Producer: Sophia (accessible through the platform)
 - Network inquiries: https://mitl.studio
 - Show: https://mornings.live

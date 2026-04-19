@@ -1438,7 +1438,7 @@ img { max-width: 100%; display: block; }
       <a href="https://guestengine.live/join/">Join</a>
     </nav>
     <div class="ge-header__actions">
-      <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
+      <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
       <a href="https://guestengine.live/join/" class="ge-header__signup">Sign Up</a>
     </div>
     <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
@@ -1454,7 +1454,7 @@ img { max-width: 100%; display: block; }
     <a href="https://guestengine.live/signal/">Signal</a>
     <a href="https://guestengine.live/why/">Why</a>
     <a href="https://guestengine.live/join/">Join</a>
-    <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
+    <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
     <a href="https://guestengine.live/join/" class="ge-header__signup">Sign Up</a>
   </div>
 
@@ -1661,7 +1661,7 @@ img { max-width: 100%; display: block; }
     var apps = getAppearances(guest);
     var expertise = getExpertise(guest);
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
-    var profileUrl = 'https://ge.conversationos.live/guests/' + guest.slug;
+    var profileUrl = '/profile/' + guest.slug;
 
     var photoHTML;
     if (guest.headshotUrl) {
@@ -1715,7 +1715,7 @@ img { max-width: 100%; display: block; }
     var apps = getAppearances(guest);
     var expertise = getExpertise(guest);
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
-    var profileUrl = 'https://ge.conversationos.live/guests/' + guest.slug;
+    var profileUrl = '/profile/' + guest.slug;
 
     var photoHTML;
     if (guest.headshotUrl) {
@@ -1770,7 +1770,7 @@ img { max-width: 100%; display: block; }
     var isVIP = guest.tier === 'vip';
     var isFeatured = guest.tier === 'member';
     var isFree = guest.tier === 'free';
-    var profileUrl = 'https://ge.conversationos.live/guests/' + guest.slug;
+    var profileUrl = '/profile/' + guest.slug;
 
     var tierClass = '';
     if (isVIP) tierClass = ' tier-vip';

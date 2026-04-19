@@ -37,8 +37,8 @@ function getHomepageNav() {
         <a href="#network" class="nav__link">NETWORK</a>
       </div>
       <div class="nav__actions">
-        <a href="https://ge.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--sm">GET STARTED</a>
+        <a href="https://app.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
+        <a href="/join/" class="btn btn--primary btn--sm">GET STARTED</a>
       </div>
       <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -65,8 +65,8 @@ function getVerticalNav() {
         <a href="/#network" class="nav__link">NETWORK</a>
       </div>
       <div class="nav__actions">
-        <a href="https://ge.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
-        <a href="https://ge.conversationos.live" class="btn btn--primary btn--sm">GET STARTED</a>
+        <a href="https://app.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
+        <a href="/join/" class="btn btn--primary btn--sm">GET STARTED</a>
       </div>
       <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -112,7 +112,7 @@ function getFooter(prefix) {
           <a href="https://keithbilous.com" class="footer__link" target="_blank" rel="noopener">Keith Bilous</a>
           <a href="https://production.mitl.studio" class="footer__link" target="_blank" rel="noopener">Production</a>
           <a href="https://conversationos.live" class="footer__link" target="_blank" rel="noopener">ConversationOS</a>
-          <a href="https://ge.conversationos.live" class="footer__link" target="_blank" rel="noopener">Guest Engine App</a>
+          <a href="https://app.conversationos.live" class="footer__link" target="_blank" rel="noopener">Guest Engine App</a>
         </div>
       </div>
       <div class="footer__bottom">

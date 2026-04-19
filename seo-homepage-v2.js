@@ -82,7 +82,7 @@ const homepageLLMBlock = `
       <li>MITL Studio — the production network: https://mitl.studio</li>
       <li>Mornings in the Lab — the flagship daily show: https://mornings.live</li>
       <li>Keith Bilous — founder: https://keithbilous.com</li>
-      <li>Guest Engine App — book and manage appearances: https://ge.conversationos.live</li>
+      <li>Guest Engine App — book and manage appearances: https://app.conversationos.live</li>
     </ul>
     <h3>Verticals Served</h3>
     <ul>

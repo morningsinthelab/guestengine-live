@@ -65,7 +65,7 @@ const GOLDEN_FOOTER = `  <!-- FOOTER -->
           <a href="https://mornings.live" class="footer__link" target="_blank" rel="noopener">mornings.live</a>
           <a href="https://keithbilous.com" class="footer__link" target="_blank" rel="noopener">keithbilous.com</a>
           <a href="https://conversationos.live" class="footer__link" target="_blank" rel="noopener">ConversationOS</a>
-          <a href="https://ge.conversationos.live" class="footer__link" target="_blank" rel="noopener">Guest Engine App</a>
+          <a href="https://app.conversationos.live" class="footer__link" target="_blank" rel="noopener">Guest Engine App</a>
           <a href="https://clips.conversationos.live" class="footer__link" target="_blank" rel="noopener">ClipENGINE</a>
           <a href="https://production.mitl.studio" class="footer__link" target="_blank" rel="noopener">Production</a>
           <a href="https://thisis.mitl.studio" class="footer__link" target="_blank" rel="noopener">thisis.mitl.studio</a>
