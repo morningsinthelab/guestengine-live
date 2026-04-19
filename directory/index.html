@@ -36,12 +36,13 @@
   --vip-glow: 0 0 0 1px rgba(251,191,36,0.15), 0 12px 40px rgba(251,191,36,0.08), 0 2px 8px rgba(0,0,0,0.4);
   --vip-glow-hover: 0 0 0 1px rgba(251,191,36,0.35), 0 20px 60px rgba(251,191,36,0.18), 0 6px 20px rgba(0,0,0,0.5);
 
-  --feat-bg: #161e30;
-  --feat-bg-hover: #1c2540;
-  --feat-border: rgba(148,163,184,0.20);
-  --feat-border-hover: rgba(148,163,184,0.45);
-  --feat-shadow: 0 2px 10px rgba(0,0,0,0.3), 0 0 0 1px rgba(148,163,184,0.05);
-  --feat-shadow-hover: 0 14px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(148,163,184,0.20);
+  --member-bg: #171c2e;
+  --member-bg-hover: #1e2440;
+  --member-border: rgba(192,192,220,0.18);
+  --member-border-hover: rgba(192,192,220,0.40);
+  --member-shadow: 0 2px 10px rgba(0,0,0,0.3), 0 0 0 1px rgba(192,192,220,0.08);
+  --member-shadow-hover: 0 14px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(192,192,220,0.25);
+  --member-accent: #c0c0dc;
 
   --free-bg: #111826;
   --free-bg-hover: #172033;
@@ -722,10 +723,11 @@ img { max-width: 100%; display: block; }
   color: #1a1410;
   box-shadow: 0 4px 14px rgba(251,191,36,0.35), 0 0 0 1px rgba(251,191,36,0.5);
 }
-.tr.ft {
-  background: rgba(96,165,250,0.22);
-  color: #bfdbfe;
-  border: 1px solid rgba(96,165,250,0.45);
+.tr.mt {
+  background: linear-gradient(180deg, rgba(192,192,220,0.30) 0%, rgba(140,140,170,0.25) 100%);
+  color: #d4d4e8;
+  border: 1px solid rgba(192,192,220,0.45);
+  box-shadow: 0 2px 8px rgba(192,192,220,0.15);
 }
 
 /* Verified dot on photo */
@@ -810,17 +812,18 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   font-family: var(--f-body);
 }
-.bg-s {
-  background: rgba(16,185,129,0.12);
-  color: #6ee7b7;
-  border: 1px solid rgba(16,185,129,0.28);
+/* Member badge — silver/platinum tone */
+.bg-m {
+  background: rgba(192,192,220,0.10);
+  color: #c0c0dc;
+  border: 1px solid rgba(192,192,220,0.30);
 }
-.bg-s::before {
+.bg-m::before {
   content: "";
   width: 6px; height: 6px;
   border-radius: 999px;
-  background: var(--signal);
-  box-shadow: 0 0 6px rgba(16,185,129,0.7);
+  background: #c0c0dc;
+  box-shadow: 0 0 6px rgba(192,192,220,0.5);
 }
 .bg-seg {
   background: rgba(255,255,255,0.04);
@@ -1028,17 +1031,31 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   TIER: FEATURED (.card.tier-feat) — default featured look already
+   TIER: MEMBER (.card.tier-member) — silver/platinum accent, left border
    ============================================================ */
-.card.tier-feat {
-  background: var(--feat-bg);
-  border-color: var(--feat-border);
-  box-shadow: var(--feat-shadow);
+.card.tier-member {
+  background: var(--member-bg);
+  border-color: var(--member-border);
+  box-shadow: var(--member-shadow);
+  border-left: 3px solid var(--member-accent);
 }
-.card.tier-feat:hover {
-  background: var(--feat-bg-hover);
-  border-color: var(--feat-border-hover);
-  box-shadow: var(--feat-shadow-hover);
+.card.tier-member:hover {
+  background: var(--member-bg-hover);
+  border-color: var(--member-border-hover);
+  box-shadow: var(--member-shadow-hover);
+  border-left: 3px solid var(--member-accent);
+}
+.card.tier-member::before {
+  background: linear-gradient(90deg, rgba(192,192,220,0.5) 0%, rgba(192,192,220,0.0) 100%);
+}
+.card.tier-member .card-footer {
+  border-top-color: rgba(192,192,220,0.12);
+}
+.card.tier-member .vp {
+  color: var(--member-accent);
+}
+.card.tier-member .vp .pc {
+  background: var(--member-accent);
 }
 
 /* ============================================================
@@ -1412,17 +1429,17 @@ img { max-width: 100%; display: block; }
     </a>
     <nav class="ge-header__nav" id="geNav">
       <a href="/directory/">Directory</a>
-      <a href="/marketplace/">Marketplace</a>
-      <a href="/shows/">Shows</a>
-      <a href="/#pricing">Pricing</a>
-      <a href="/#network">Network</a>
-      <a href="/signal/">Signal</a>
-      <a href="/why/">Why</a>
-      <a href="/join/">Join</a>
+      <a href="https://guestengine.live/marketplace/">Marketplace</a>
+      <a href="https://guestengine.live/shows/">Shows</a>
+      <a href="https://guestengine.live/#pricing">Pricing</a>
+      <a href="https://guestengine.live/#network">Network</a>
+      <a href="https://guestengine.live/signal/">Signal</a>
+      <a href="https://guestengine.live/why/">Why</a>
+      <a href="https://guestengine.live/join/">Join</a>
     </nav>
     <div class="ge-header__actions">
       <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
-      <a href="/join/" class="ge-header__signup">Sign Up</a>
+      <a href="https://guestengine.live/join/" class="ge-header__signup">Sign Up</a>
     </div>
     <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -1430,15 +1447,15 @@ img { max-width: 100%; display: block; }
   </header>
   <div class="ge-header__mobile-overlay" id="geMobileMenu">
     <a href="/directory/">Directory</a>
-    <a href="/marketplace/">Marketplace</a>
-    <a href="/shows/">Shows</a>
-    <a href="/#pricing">Pricing</a>
-    <a href="/#network">Network</a>
-    <a href="/signal/">Signal</a>
-    <a href="/why/">Why</a>
-    <a href="/join/">Join</a>
+    <a href="https://guestengine.live/marketplace/">Marketplace</a>
+    <a href="https://guestengine.live/shows/">Shows</a>
+    <a href="https://guestengine.live/#pricing">Pricing</a>
+    <a href="https://guestengine.live/#network">Network</a>
+    <a href="https://guestengine.live/signal/">Signal</a>
+    <a href="https://guestengine.live/why/">Why</a>
+    <a href="https://guestengine.live/join/">Join</a>
     <a href="https://ge.conversationos.live" class="ge-header__login">Log In</a>
-    <a href="/join/" class="ge-header__signup">Sign Up</a>
+    <a href="https://guestengine.live/join/" class="ge-header__signup">Sign Up</a>
   </div>
 
   <!-- ============================
@@ -1492,7 +1509,7 @@ img { max-width: 100%; display: block; }
     <div class="ch" data-seg="dd" data-filter="dd">Deep Dive</div>
     <div class="ch" data-seg="cc" data-filter="cc">Community</div>
     <div class="ch" data-filter="vip">VIP</div>
-    <div class="ch" data-filter="featured">Featured</div>
+    <div class="ch" data-filter="featured">Members</div>
     <div class="ch" data-filter="verified">Verified</div>
   </div>
   <div class="ct"><strong id="countNum">--</strong> guests</div>
@@ -1512,7 +1529,7 @@ img { max-width: 100%; display: block; }
 <!-- SSR-friendly hidden content for crawlers — dynamically populated -->
 <div id="ssr-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
   <h2>Guest Engine Directory — Expert Podcast Guests</h2>
-  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Guests span multiple segments including Center Stage, Deep Dive, Community Corner, No Safe Words, and Did You Know. Filter by segment, tier (VIP, Featured, Free), or search by name and expertise. Powered by ConversationOS.</p>
+  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Guests span multiple segments including Center Stage, Deep Dive, Community Corner, No Safe Words, and Did You Know. Filter by segment, tier (VIP, Members, Appearances), or search by name and expertise. Powered by ConversationOS.</p>
 </div>
 <script>
 (function() {
@@ -1673,7 +1690,6 @@ img { max-width: 100%; display: block; }
           '<div class="hero-tl">' + escapeHtml(guest.headline || '') + '</div>' +
         '</div>' +
         '<div class="hero-badges">' +
-          '<span class="bg bg-s">Signal Verified</span>' +
           '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>' +
         '</div>' +
         (guest.bio ? '<div class="hero-qt">&ldquo;' + escapeHtml(guest.bio) + '&rdquo;</div>' : '') +
@@ -1726,7 +1742,6 @@ img { max-width: 100%; display: block; }
         '<div class="card-nm">' + escapeHtml(guest.guestName) + '</div>' +
         '<div class="card-tl">' + escapeHtml(guest.headline || '') + '</div>' +
         '<div class="card-badges">' +
-          '<span class="bg bg-s">Signal Verified</span>' +
           '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>' +
         '</div>' +
         (guest.bio ? '<div class="card-qt">&ldquo;' + escapeHtml(guest.bio) + '&rdquo;</div>' : '') +
@@ -1763,7 +1778,7 @@ img { max-width: 100%; display: block; }
 
     var tierClass = '';
     if (isVIP) tierClass = ' tier-vip';
-    else if (isFeatured) tierClass = ' tier-feat';
+    else if (isFeatured) tierClass = ' tier-member';
     else if (isFree) tierClass = ' tier-free';
 
     var photoHTML;
@@ -1775,7 +1790,7 @@ img { max-width: 100%; display: block; }
 
     var tierBadge = '';
     if (isVIP) tierBadge = '<span class="tr vt">VIP</span>';
-    else if (isFeatured) tierBadge = '<span class="tr ft">Featured</span>';
+    else if (isFeatured) tierBadge = '<span class="tr mt">Member</span>';
 
     var verifiedDot = !isFree ? '<span class="photo-vd"></span>' : '<span class="photo-vd-ghost"></span>';
 
@@ -1786,7 +1801,7 @@ img { max-width: 100%; display: block; }
     if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
 
     var badges = '';
-    if (guest.hasSignal) badges += '<span class="bg bg-s">Signal Verified</span>';
+    if (isFeatured) badges += '<span class="bg bg-m">Member</span>';
     badges += '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>';
 
     return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
@@ -1848,7 +1863,7 @@ img { max-width: 100%; display: block; }
       html +=     '<div class="section-label">Tier 01</div>';
       html +=     '<h2><span class="vipAccent">VIP</span> Guests<span class="count">' + vips.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">The show\'s most trusted voices. Premium placement, full media kits, and signal-verified authority.</p>';
+      html +=   '<p class="section-sub">The show\'s most trusted voices. Premium placement, full media kits, and verified authority.</p>';
       html += '</div>';
       html += '<div class="grid grid-vip">';
       for (var i = 0; i < vips.length; i++) {
@@ -1864,9 +1879,9 @@ img { max-width: 100%; display: block; }
       html += '<div class="section-head">';
       html +=   '<div class="section-head-left">';
       html +=     '<div class="section-label">Tier 02</div>';
-      html +=     '<h2>Featured<span class="count">' + featured.length + '</span></h2>';
+      html +=     '<h2>Members<span class="count">' + featured.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">Signal-verified members with deep domain authority and active engagement across the network.</p>';
+      html +=   '<p class="section-sub">Active members with recurring access, deep domain authority, and priority placement across the network.</p>';
       html += '</div>';
       html += '<div class="grid">';
       for (var j = 0; j < featured.length; j++) {
@@ -1882,9 +1897,9 @@ img { max-width: 100%; display: block; }
       html += '<div class="section-head">';
       html +=   '<div class="section-head-left">';
       html +=     '<div class="section-label">Tier 03</div>';
-      html +=     '<h2>Directory<span class="count">' + free.length + '</span></h2>';
+      html +=     '<h2>Appearances<span class="count">' + free.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">The full network of guests who have appeared on a ConversationOS show.</p>';
+      html +=   '<p class="section-sub">Guests who have appeared on a ConversationOS show. Single-appearance access and directory listing.</p>';
       html += '</div>';
       html += '<div class="grid">';
       for (var k = 0; k < free.length; k++) {
