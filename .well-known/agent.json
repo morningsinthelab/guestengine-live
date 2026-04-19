@@ -13,7 +13,7 @@
     "guest_booking": {
       "description": "Book guest appearances on live shows across the MITL Live Network. Three tiers: Single Appearance ($497 one-time), Member ($97/mo for intelligence and visibility), VIP ($297/mo for everything including quarterly appearances).",
       "join_url": "https://guestengine.live/join/",
-      "app_url": "https://ge.conversationos.live"
+      "app_url": "https://app.conversationos.live"
     },
     "guest_directory": {
       "description": "Browse 237+ guest profiles with Signal scores, expertise tags, and authority rankings. Filterable by category, expertise, and score.",
@@ -33,11 +33,11 @@
     },
     "content_production": {
       "description": "Full post-appearance content production: 5 vertical video clips, 10 social media posts, full transcript, highlight reel, permanent authority profile page.",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     },
     "ai_producer": {
       "description": "Sophia AI producer handles pre-show prep, topic angles, talking points, green room briefing, and guest coordination.",
-      "endpoint": "https://ge.conversationos.live"
+      "endpoint": "https://app.conversationos.live"
     }
   },
   "pricing": {
@@ -109,7 +109,7 @@
   },
   "authentication": {
     "schemes": ["none"],
-    "notes": "Guest profiles and directory are publicly browsable. Booking requires account creation at ge.conversationos.live."
+    "notes": "Guest profiles and directory are publicly browsable. Booking requires account creation at app.conversationos.live."
   },
   "documentation": {
     "llms_txt": "https://guestengine.live/llms.txt",
