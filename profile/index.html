@@ -576,13 +576,29 @@
     // Guest-specific story images (generated per guest)
     var STORY_IMAGES = {
       'ej-snyder': {
-        military: '/assets/guests/ej-snyder/military.jpg',
-        survival: '/assets/guests/ej-snyder/survival.jpg',
-        entrepreneur: '/assets/guests/ej-snyder/entrepreneur.jpg',
-        pickles: '/assets/guests/ej-snyder/freedom-pickles.jpg',
-        speaker: '/assets/guests/ej-snyder/speaker.jpg',
-        reflection: '/assets/guests/ej-snyder/reflection.jpg',
+        images: [
+          '/assets/guests/ej-snyder/military.jpg',
+          '/assets/guests/ej-snyder/survival.jpg',
+          '/assets/guests/ej-snyder/entrepreneur.jpg',
+          '/assets/guests/ej-snyder/freedom-pickles.jpg',
+          '/assets/guests/ej-snyder/speaker.jpg',
+          '/assets/guests/ej-snyder/reflection.jpg',
+        ],
+        labels: ['The Soldier', 'The Survivor', 'The Entrepreneur', 'The Mission', 'The Voice', 'The Horizon'],
         video: '/assets/guests/ej-snyder/wilderness-walk.mp4',
+        videoAfter: 1,
+      },
+      'tommy-rhee': {
+        images: [
+          '/assets/guests/tommy-rhee/chiropractor.jpg',
+          '/assets/guests/tommy-rhee/veteran.jpg',
+          '/assets/guests/tommy-rhee/scientist.jpg',
+          '/assets/guests/tommy-rhee/sideline.jpg',
+          '/assets/guests/tommy-rhee/founder.jpg',
+        ],
+        labels: ['The Healer', 'The Veteran', 'The Scientist', 'The Sideline', 'The Founder'],
+        video: '/assets/guests/tommy-rhee/clinic-walk.mp4',
+        videoAfter: 1,
       }
     };
 
@@ -722,29 +738,24 @@
       var storyEl = document.getElementById('p-story');
       var storyHtml = '';
 
-      // Map insights to story image keys
-      var chapterImageKeys = ['military', 'survival', 'entrepreneur', 'pickles', 'speaker', 'reflection'];
-      var chapterLabels = ['The Soldier', 'The Survivor', 'The Entrepreneur', 'The Mission', 'The Voice', 'The Horizon'];
-
-      if (storyImgs && insights.length) {
-        // Build visual chapters from insights paired with images
-        var chapterCount = Math.min(insights.length, chapterImageKeys.length);
+      if (storyImgs && storyImgs.images && insights.length) {
+        var chapterCount = Math.min(insights.length, storyImgs.images.length);
+        var labels = storyImgs.labels || [];
+        var videoAfter = storyImgs.videoAfter != null ? storyImgs.videoAfter : 1;
 
         for (var ci = 0; ci < chapterCount; ci++) {
           var ins = insights[ci];
-          var imgKey = chapterImageKeys[ci];
-          var imgUrl = storyImgs[imgKey];
-          var label = chapterLabels[ci] || 'Chapter ' + (ci + 1);
+          var imgUrl = storyImgs.images[ci];
+          var label = labels[ci] || 'Chapter ' + (ci + 1);
 
           if (!imgUrl) continue;
 
-          // Insert video chapter after the 2nd image chapter (between Survivor and Entrepreneur)
-          if (ci === 2 && storyImgs.video) {
+          // Insert video chapter after specified index
+          if (ci === videoAfter + 1 && storyImgs.video) {
             storyHtml += '<div class="p-video-chapter p-reveal">';
             storyHtml += '<video autoplay muted loop playsinline><source src="'+storyImgs.video+'" type="video/mp4"></video>';
             storyHtml += '<div class="p-video-chapter__overlay"><div class="p-video-chapter__text">';
             storyHtml += '<div class="p-video-chapter__label">'+esc(name)+'</div>';
-            // Use a short bio excerpt for the video overlay
             var shortBio = bio.split('.').slice(0,2).join('.') + '.';
             storyHtml += '<div class="p-video-chapter__quote">"'+esc(shortBio)+'"</div>';
             storyHtml += '</div></div></div>';
