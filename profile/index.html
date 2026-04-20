@@ -680,8 +680,12 @@
       setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
       setOG('og:type', 'profile');
 
-      // ── HERO — use episode_art as primary, authority_portrait as fallback
-      var heroImg = findImage(images, 'episode_art') || findImage(images, 'authority_portrait') || profile.headshotUrl;
+      // ── HERO — use YouTube maxresdefault (cinematic episode title art) as primary
+      var heroImg;
+      if (csVideo) {
+        heroImg = 'https://img.youtube.com/vi/' + csVideo + '/maxresdefault.jpg';
+      }
+      if (!heroImg) heroImg = findImage(images, 'episode_art') || findImage(images, 'authority_portrait') || profile.headshotUrl;
       if (heroImg) {
         document.getElementById('p-hero-bg').style.backgroundImage = 'url(' + heroImg + ')';
       }
