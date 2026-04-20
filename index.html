@@ -1832,6 +1832,49 @@
   .v2 .faq-a a:hover { text-decoration: underline; }
 
 
+  /* Lightbox overlay for pricing mockups */
+  .showcase-screen { cursor: zoom-in; position: relative; }
+  .showcase-screen::after {
+    content: '\e8ff'; /* expand icon placeholder */
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0);
+    transition: background .2s;
+  }
+  .showcase-screen:hover::after {
+    background: rgba(0,0,0,.15);
+  }
+  .lb-overlay {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,.92);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity .3s, visibility .3s;
+    cursor: zoom-out;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+  .lb-overlay.active { opacity: 1; visibility: visible; }
+  .lb-overlay img {
+    max-width: 92vw; max-height: 92vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 60px rgba(0,0,0,.6);
+    transform: scale(.92); transition: transform .35s cubic-bezier(.22,1,.36,1);
+  }
+  .lb-overlay.active img { transform: scale(1); }
+  .lb-close {
+    position: absolute; top: 20px; right: 28px;
+    font-size: 32px; color: #fff; cursor: pointer;
+    opacity: .6; transition: opacity .2s;
+    font-family: sans-serif; line-height: 1;
+  }
+  .lb-close:hover { opacity: 1; }
+  .lb-label {
+    position: absolute; bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,.7); font-size: 14px;
+    letter-spacing: 1px; text-transform: uppercase;
+    font-family: var(--font-body);
+  }
   </style>
   <link rel="stylesheet" href="./header.css?v=1776710000">
 </head>
@@ -2670,5 +2713,46 @@
     data-accent-color="#7c3aed"
   ></script>
   <script src="./header.js"></script>
+
+<!-- Lightbox for pricing mockups -->
+<div class="lb-overlay" id="lb-overlay">
+  <span class="lb-close">&times;</span>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-label" id="lb-label"></div>
+</div>
+<script>
+(function(){
+  var overlay = document.getElementById('lb-overlay');
+  var lbImg = document.getElementById('lb-img');
+  var lbLabel = document.getElementById('lb-label');
+  document.querySelectorAll('.showcase-screen').forEach(function(screen){
+    screen.addEventListener('click', function(){
+      var img = screen.querySelector('img');
+      if (!img) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      // Get guest name from the meta below
+      var col = screen.closest('.showcase-col');
+      var name = col ? col.querySelector('.showcase-name') : null;
+      var tier = col ? col.querySelector('.showcase-tier-badge') : null;
+      lbLabel.textContent = (name ? name.textContent : '') + (tier ? ' — ' + tier.textContent.trim() : '');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLB(){
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  overlay.addEventListener('click', function(e){
+    if (e.target === lbImg) return;
+    closeLB();
+  });
+  overlay.querySelector('.lb-close').addEventListener('click', closeLB);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLB();
+  });
+})();
+</script>
 </body>
 </html>
