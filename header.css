@@ -51,6 +51,51 @@
   width: auto;
 }
 
+.ge-header__logo-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.ge-header__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.ge-header__logo-cos {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.ge-header__logo-ge {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 1px;
+}
+
+.ge-header__logo-guest {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #fbbf24;
+  text-transform: uppercase;
+}
+
+.ge-header__logo-engine {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #fbbf24;
+  text-transform: uppercase;
+}
+
 /* --- Nav Links --- */
 .ge-header__nav {
   display: flex;
@@ -210,5 +255,16 @@
 
   .ge-header__logo-img {
     height: 28px;
+  }
+  .ge-header__logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+  .ge-header__logo-cos {
+    font-size: 11px;
+  }
+  .ge-header__logo-guest,
+  .ge-header__logo-engine {
+    font-size: 9px;
   }
 }
