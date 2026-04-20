@@ -44,7 +44,7 @@
     letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);
   }
 
-  /* ── HERO ───────────────────────────────── */
+  /* ── HERO (UNTOUCHED) ──────────────────── */
   .p-hero {
     position:relative; height:100vh; min-height:600px; display:flex;
     align-items:flex-end; overflow:hidden; background:var(--bg);
@@ -92,7 +92,7 @@
 
   /* ── BODY ───────────────────────────────── */
   .p-body { padding:0 0 4rem; }
-  .p-container { max-width:1000px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
+  .p-container { max-width:1100px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
 
   .p-back {
     display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:1.5rem;
@@ -102,10 +102,10 @@
   }
   .p-back:hover { color:var(--gold); }
 
-  /* ── Stat Bar — tier + score + social compact row ── */
+  /* ── Stat Bar ────────────────────────────── */
   .p-statbar {
     display:flex; align-items:center; gap:1.5rem; padding:1rem 0 1.5rem;
-    border-bottom:1px solid var(--border); margin-bottom:2rem; flex-wrap:wrap;
+    border-bottom:1px solid var(--border); margin-bottom:2.5rem; flex-wrap:wrap;
   }
   .p-statbar__photo {
     width:56px; height:56px; min-width:56px; border-radius:10px;
@@ -155,28 +155,28 @@
   }
   .p-statbar__link:hover { border-color:var(--gold-dim); color:var(--gold); }
 
-  /* ── Signal Brief — full-width banner ──── */
+  /* ── Signal Brief — visual infographic ─── */
   .p-signal {
-    display:flex; align-items:center; gap:1.25rem; margin-bottom:2rem;
+    display:flex; align-items:center; gap:1.5rem; margin-bottom:3rem;
     background:linear-gradient(135deg,rgba(251,191,36,0.04),rgba(255,255,255,0.01));
-    border:1px solid rgba(251,191,36,0.12); border-radius:12px; padding:1rem 1.25rem;
+    border:1px solid rgba(251,191,36,0.12); border-radius:16px; padding:1.25rem 1.5rem;
   }
-  .p-signal__ring {
-    width:52px; height:52px; min-width:52px; border-radius:50%;
-    border:3px solid var(--gold-dim); display:flex; align-items:center;
-    justify-content:center;
-  }
-  .p-signal__num {
-    font-family:var(--font-display); font-weight:700; font-size:1.125rem; color:var(--gold);
+  .p-signal__ring-wrap { position:relative; width:72px; height:72px; min-width:72px; }
+  .p-signal__ring-svg { width:72px; height:72px; transform:rotate(-90deg); }
+  .p-signal__ring-bg { fill:none; stroke:rgba(251,191,36,0.1); stroke-width:5; }
+  .p-signal__ring-fill { fill:none; stroke:var(--gold); stroke-width:5; stroke-linecap:round; transition:stroke-dashoffset 1.5s ease; }
+  .p-signal__ring-num {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:700; font-size:1.25rem; color:var(--gold);
   }
   .p-signal__info { flex:1; }
   .p-signal__title {
     font-family:var(--font-display); font-size:0.5rem; font-weight:700;
-    letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:2px;
+    letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:4px;
   }
-  .p-signal__desc { font-size:0.8125rem; color:var(--text-muted); }
+  .p-signal__desc { font-size:0.8125rem; color:var(--text-muted); line-height:1.5; }
   .p-signal__btn {
-    display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
+    display:inline-flex; align-items:center; gap:6px; padding:10px 20px;
     background:var(--gold-faint); border:1px solid rgba(251,191,36,0.18);
     border-radius:8px; color:var(--gold); font-family:var(--font-display);
     font-size:0.45rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
@@ -185,28 +185,75 @@
   .p-signal__btn:hover { background:rgba(251,191,36,0.12); border-color:var(--gold); }
   .p-signal__btn i { font-size:11px; }
 
-  /* ── Bio — condensed with expand ───────── */
-  .p-bio { margin-bottom:2rem; }
-  .p-bio__text {
-    font-size:0.9375rem; color:var(--text-secondary); line-height:1.8;
-    max-height:10em; overflow:hidden; position:relative;
-    transition:max-height 0.5s ease;
+  /* ── Story Chapter — image + quote side by side ── */
+  .p-chapter {
+    display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:0;
+    min-height:420px; overflow:hidden; border-radius:0;
   }
-  .p-bio__text.expanded { max-height:none; }
-  .p-bio__text:not(.expanded)::after {
-    content:''; position:absolute; bottom:0; left:0; right:0; height:4em;
-    background:linear-gradient(to top, var(--bg), transparent);
-    pointer-events:none;
+  .p-chapter:nth-child(even) .p-chapter__img { order:2; }
+  .p-chapter:nth-child(even) .p-chapter__content { order:1; }
+  .p-chapter__img {
+    position:relative; overflow:hidden; min-height:420px;
   }
-  .p-bio__text p { margin-bottom:0.75rem; }
-  .p-bio__toggle {
-    display:inline-flex; align-items:center; gap:6px; margin-top:0.75rem;
+  .p-chapter__img img {
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform 0.6s ease;
+  }
+  .p-chapter__img:hover img { transform:scale(1.03); }
+  .p-chapter__content {
+    display:flex; flex-direction:column; justify-content:center;
+    padding:3rem 2.5rem; background:var(--card);
+    border:1px solid var(--border);
+  }
+  .p-chapter__label {
+    font-family:var(--font-display); font-size:0.45rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:1rem; opacity:0.7;
+  }
+  .p-chapter__quote {
+    font-size:1.25rem; color:rgba(255,255,255,0.9); line-height:1.6;
+    font-style:italic; margin-bottom:1rem; font-weight:300;
+  }
+  .p-chapter__context {
+    font-size:0.875rem; color:var(--text-muted); line-height:1.7;
+  }
+  .p-chapter__topic {
+    display:inline-block; margin-top:1rem; font-family:var(--font-display);
+    font-size:0.4rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+    color:rgba(251,191,36,0.6); padding:4px 10px; background:var(--gold-faint);
+    border-radius:4px;
+  }
+
+  /* ── Video Chapter — full-width cinematic ── */
+  .p-video-chapter {
+    position:relative; width:100vw; margin-left:calc(-50vw + 50%);
+    margin-bottom:0; overflow:hidden; height:500px;
+  }
+  .p-video-chapter video {
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .p-video-chapter__overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to right, rgba(5,9,20,0.85) 0%, rgba(5,9,20,0.3) 50%, rgba(5,9,20,0.85) 100%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .p-video-chapter__text {
+    text-align:center; max-width:600px; padding:2rem;
+  }
+  .p-video-chapter__label {
     font-family:var(--font-display); font-size:0.5rem; font-weight:700;
-    letter-spacing:0.15em; text-transform:uppercase; color:var(--gold);
-    cursor:pointer; background:none; border:none; padding:0;
-    transition:opacity 0.2s;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:0.75rem;
   }
-  .p-bio__toggle:hover { opacity:0.7; }
+  .p-video-chapter__quote {
+    font-size:1.375rem; color:var(--text); line-height:1.6;
+    font-style:italic; font-weight:300;
+  }
+
+  /* ── Story Chapters Container ────────────── */
+  .p-story {
+    width:100vw; margin-left:calc(-50vw + 50%); margin-bottom:3rem;
+  }
 
   /* ── Section title ─────────────────────── */
   .p-section { margin-bottom:2.5rem; }
@@ -217,59 +264,32 @@
     border-bottom:1px solid rgba(251,191,36,0.1);
   }
 
-  /* ── Key Insights — featured quotes ────── */
-  .p-insights { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-  .p-insight {
-    background:var(--card); border:1px solid var(--border);
-    border-radius:12px; padding:1.25rem;
-    transition:border-color 0.2s;
-  }
-  .p-insight:hover { border-color:rgba(251,191,36,0.15); }
-  .p-insight:first-child { grid-column:span 2; }
-  .p-insight__quote {
-    font-size:1rem; color:rgba(255,255,255,0.85); line-height:1.7;
-    font-style:italic; margin-bottom:0.75rem;
-  }
-  .p-insight:first-child .p-insight__quote { font-size:1.125rem; }
-  .p-insight__context { font-size:0.8125rem; color:var(--text-muted); line-height:1.6; }
-  .p-insight__topic {
-    display:inline-block; margin-top:0.5rem; font-family:var(--font-display);
-    font-size:0.4rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
-    color:rgba(251,191,36,0.6); padding:3px 8px; background:var(--gold-faint);
-    border-radius:4px;
-  }
-
-  /* ── Video embed ───────────────────────── */
-  .p-video { margin-bottom:2.5rem; }
-  .p-video__wrap {
-    position:relative; width:100%; padding-bottom:56.25%; border-radius:12px;
-    overflow:hidden; border:1px solid var(--border);
-  }
-  .p-video__wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-  /* ── Appearances ───────────────────────── */
-  .p-appearances { display:flex; flex-direction:column; gap:0.75rem; }
+  /* ── Appearances — visual cards ─────────── */
+  .p-appearances { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
   .p-appearance {
     background:var(--card); border:1px solid var(--border);
-    border-radius:12px; padding:1rem 1.25rem; display:flex; gap:1rem;
-    align-items:center; text-decoration:none; transition:all 0.2s;
+    border-radius:12px; overflow:hidden; text-decoration:none; transition:all 0.3s;
+    display:flex; flex-direction:column;
   }
-  .p-appearance:hover { border-color:var(--gold-dim); background:rgba(255,255,255,0.03); }
+  .p-appearance:hover { border-color:var(--gold-dim); transform:translateY(-2px); }
   .p-appearance__thumb {
-    width:80px; min-width:80px; aspect-ratio:16/9; background:rgba(255,255,255,0.03);
-    border-radius:8px; overflow:hidden; position:relative;
+    width:100%; aspect-ratio:16/9; background:rgba(255,255,255,0.03);
+    overflow:hidden; position:relative;
   }
-  .p-appearance__thumb img { width:100%; height:100%; object-fit:cover; }
+  .p-appearance__thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+  .p-appearance:hover .p-appearance__thumb img { transform:scale(1.05); }
   .p-appearance__thumb-play {
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    background:rgba(0,0,0,0.3);
+    background:rgba(0,0,0,0.35); opacity:0; transition:opacity 0.3s;
   }
-  .p-appearance__thumb-play svg { width:20px; height:20px; fill:var(--gold); }
+  .p-appearance:hover .p-appearance__thumb-play { opacity:1; }
+  .p-appearance__thumb-play svg { width:40px; height:40px; fill:var(--gold); }
+  .p-appearance__info { padding:1rem 1.25rem; }
   .p-appearance__show {
     font-family:var(--font-display); font-size:0.45rem; font-weight:700;
-    letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;
   }
-  .p-appearance__segment { font-size:0.875rem; font-weight:600; color:var(--text); margin-bottom:2px; }
+  .p-appearance__segment { font-size:0.9375rem; font-weight:600; color:var(--text); margin-bottom:4px; }
   .p-appearance__date { font-size:0.8125rem; color:var(--text-muted); }
 
   /* ── FAQ ────────────────────────────────── */
@@ -289,17 +309,19 @@
   .p-faq.open .p-faq__a { max-height:600px; }
   .p-faq__a-inner { padding:0 1.25rem 1rem; font-size:0.875rem; color:var(--text-secondary); line-height:1.7; }
 
-  /* ── Expertise ─────────────────────────── */
+  /* ── Expertise — visual grid ───────────── */
   .p-knows { display:flex; flex-wrap:wrap; gap:0.5rem; }
   .p-knows__item {
-    font-size:0.8125rem; padding:0.4rem 0.875rem; background:var(--card);
+    font-size:0.8125rem; padding:0.5rem 1rem; background:var(--card);
     border:1px solid var(--border); border-radius:8px; color:var(--text-muted);
+    transition:all 0.2s;
   }
+  .p-knows__item:hover { border-color:var(--gold-dim); color:var(--gold); }
 
   /* ── CTA ────────────────────────────────── */
   .p-cta {
     background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(251,191,36,0.05));
-    border:1px solid rgba(251,191,36,0.15); border-radius:12px; padding:2rem;
+    border:1px solid rgba(251,191,36,0.15); border-radius:12px; padding:2.5rem;
     text-align:center; margin-top:1rem;
   }
   .p-cta__label {
@@ -331,11 +353,22 @@
     .p-hero__content { padding:0 24px 48px; }
     .p-statbar { gap:1rem; }
     .p-statbar__links { margin-left:0; width:100%; justify-content:flex-start; }
-    .p-insights { grid-template-columns:1fr; }
-    .p-insight:first-child { grid-column:span 1; }
+    .p-chapter { grid-template-columns:1fr; min-height:auto; }
+    .p-chapter__img { min-height:260px; }
+    .p-chapter:nth-child(even) .p-chapter__img { order:1; }
+    .p-chapter:nth-child(even) .p-chapter__content { order:2; }
+    .p-chapter__content { padding:2rem 1.5rem; }
+    .p-video-chapter { height:350px; }
     .p-signal { flex-direction:column; text-align:center; }
-    .p-appearance { flex-direction:column; text-align:center; }
+    .p-appearances { grid-template-columns:1fr; }
   }
+
+  /* ── Scroll animations ─────────────────── */
+  .p-reveal {
+    opacity:0; transform:translateY(30px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .p-reveal.visible { opacity:1; transform:translateY(0); }
   </style>
 </head>
 <body>
@@ -390,7 +423,7 @@
   <!-- PROFILE -->
   <div id="profile-content" style="display:none">
 
-    <!-- HERO -->
+    <!-- HERO (UNTOUCHED) -->
     <section class="p-hero" id="p-hero">
       <div class="p-hero__bg" id="p-hero-bg"></div>
       <div class="p-hero__overlay"></div>
@@ -411,7 +444,7 @@
 
         <a href="/directory/" class="p-back"><i class="fa-solid fa-arrow-left"></i> Back to Directory</a>
 
-        <!-- Stat Bar — photo, name, tier, score, social icons -->
+        <!-- Stat Bar -->
         <div class="p-statbar" id="p-statbar">
           <div id="p-sb-photo"></div>
           <div class="p-statbar__meta">
@@ -426,61 +459,52 @@
           <div class="p-statbar__links" id="p-sb-links"></div>
         </div>
 
-        <!-- Signal Brief -->
-        <div class="p-signal" id="p-signal" style="display:none">
-          <div class="p-signal__ring">
-            <span class="p-signal__num" id="p-signal-score"></span>
+        <!-- Signal Brief — SVG ring infographic -->
+        <div class="p-signal p-reveal" id="p-signal" style="display:none">
+          <div class="p-signal__ring-wrap">
+            <svg class="p-signal__ring-svg" viewBox="0 0 72 72">
+              <circle class="p-signal__ring-bg" cx="36" cy="36" r="30"/>
+              <circle class="p-signal__ring-fill" id="p-signal-ring" cx="36" cy="36" r="30"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <span class="p-signal__ring-num" id="p-signal-score">0</span>
           </div>
           <div class="p-signal__info">
             <div class="p-signal__title">Signal Brief</div>
-            <div class="p-signal__desc" id="p-signal-desc">Authority intelligence report — topics, audience overlap, and narrative potential.</div>
+            <div class="p-signal__desc">Authority intelligence report — topics, audience overlap, and narrative potential.</div>
           </div>
           <a class="p-signal__btn" id="p-signal-btn" href="#" onclick="alert('Sign in to download the full Signal Brief PDF.');return false;">
             <i class="fa-solid fa-file-arrow-down"></i> Download PDF
           </a>
         </div>
 
-        <!-- Bio — condensed -->
-        <div class="p-bio p-section" id="p-bio-section">
-          <div class="p-section__title">ABOUT</div>
-          <div class="p-bio__text" id="p-bio"></div>
-          <button class="p-bio__toggle" id="p-bio-toggle" onclick="toggleBio()">
-            Read more <i class="fa-solid fa-chevron-down" style="font-size:10px"></i>
-          </button>
-        </div>
+      </div>
 
-        <!-- Key Insights -->
-        <div class="p-section" id="p-insights-section" style="display:none">
-          <div class="p-section__title">KEY INSIGHTS</div>
-          <div class="p-insights" id="p-insights"></div>
-        </div>
+      <!-- STORY CHAPTERS — full-bleed visual narrative -->
+      <div class="p-story" id="p-story"></div>
 
-        <!-- Center Stage Video -->
-        <div class="p-video p-section" id="p-video-section" style="display:none">
-          <div class="p-section__title">CENTER STAGE INTERVIEW</div>
-          <div class="p-video__wrap" id="p-video-wrap"></div>
-        </div>
+      <div class="p-container">
 
         <!-- Appearances -->
-        <div class="p-section" id="p-appearances-section" style="display:none">
+        <div class="p-section p-reveal" id="p-appearances-section" style="display:none">
           <div class="p-section__title">APPEARANCES</div>
           <div class="p-appearances" id="p-appearances"></div>
         </div>
 
         <!-- FAQ -->
-        <div class="p-section" id="p-faq-section" style="display:none">
+        <div class="p-section p-reveal" id="p-faq-section" style="display:none">
           <div class="p-section__title">FREQUENTLY ASKED</div>
           <div class="p-faqs" id="p-faqs"></div>
         </div>
 
         <!-- Expertise -->
-        <div class="p-section" id="p-knows-section" style="display:none">
+        <div class="p-section p-reveal" id="p-knows-section" style="display:none">
           <div class="p-section__title">EXPERTISE</div>
           <div class="p-knows" id="p-knows"></div>
         </div>
 
         <!-- CTA -->
-        <div class="p-cta">
+        <div class="p-cta p-reveal">
           <p class="p-cta__label">GUEST ENGINE</p>
           <p class="p-cta__text">Every Guest Engine guest gets a permanent, SEO-indexed profile page — complete with clips, transcript highlights, backlinks, and a highlight reel.</p>
           <a href="/join/" class="p-cta__btn">Get Featured &rarr;</a>
@@ -529,23 +553,38 @@
   <script src="/header.js"></script>
 
   <script>
-  function toggleBio() {
-    var bio = document.getElementById('p-bio');
-    var btn = document.getElementById('p-bio-toggle');
-    bio.classList.toggle('expanded');
-    btn.innerHTML = bio.classList.contains('expanded')
-      ? 'Read less <i class="fa-solid fa-chevron-up" style="font-size:10px"></i>'
-      : 'Read more <i class="fa-solid fa-chevron-down" style="font-size:10px"></i>';
-  }
   function toggleFaq(i) {
     var el = document.getElementById('faq-' + i);
     if (el) el.classList.toggle('open');
   }
 
+  // Scroll reveal
+  (function(){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+    }, {threshold:0.15});
+    function initReveal(){ document.querySelectorAll('.p-reveal').forEach(function(el){ obs.observe(el); }); }
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(initReveal, 100); });
+    window._initReveal = initReveal;
+  })();
+
   (function() {
     var API = 'https://app.conversationos.live/api/guest-marketplace';
     var slug = getSlug();
     if (!slug) return showNotFound();
+
+    // Guest-specific story images (generated per guest)
+    var STORY_IMAGES = {
+      'ej-snyder': {
+        military: '/assets/guests/ej-snyder/military.jpg',
+        survival: '/assets/guests/ej-snyder/survival.jpg',
+        entrepreneur: '/assets/guests/ej-snyder/entrepreneur.jpg',
+        pickles: '/assets/guests/ej-snyder/freedom-pickles.jpg',
+        speaker: '/assets/guests/ej-snyder/speaker.jpg',
+        reflection: '/assets/guests/ej-snyder/reflection.jpg',
+        video: '/assets/guests/ej-snyder/wilderness-walk.mp4',
+      }
+    };
 
     Promise.all([
       fetch(API + '/directory/' + slug).then(ok),
@@ -610,6 +649,7 @@
       var csVideo = profile.centerStageVideoId;
       var images = (visuals && visuals.images) || [];
       var score = profile.guestScore;
+      var storyImgs = STORY_IMAGES[slug] || null;
 
       // Meta
       document.title = name + ' — ' + headline + ' | Guest Engine';
@@ -620,7 +660,7 @@
       setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
       setOG('og:type', 'profile');
 
-      // ── HERO
+      // ── HERO (UNTOUCHED)
       var heroImg = csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : (findImage(images,'episode_art') || findImage(images,'authority_portrait') || profile.headshotUrl);
       if (heroImg) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+heroImg+')';
       var seg = (topics.length && topics[0] !== 'Community Corner') ? topics[0] : '';
@@ -652,7 +692,7 @@
         document.getElementById('p-sb-score-num').textContent = score;
       }
 
-      // Social icons in stat bar
+      // Social icons
       var linkMap = {
         linkedin:{icon:'fa-brands fa-linkedin',label:'LinkedIn'},twitter:{icon:'fa-brands fa-x-twitter',label:'X'},
         website:{icon:'fa-solid fa-globe',label:'Website'},youtube:{icon:'fa-brands fa-youtube',label:'YouTube'},
@@ -667,49 +707,95 @@
       });
       document.getElementById('p-sb-links').innerHTML = linksHtml;
 
-      // ── Signal Brief
+      // ── Signal Brief — animated ring
       if (score && score > 0) {
         document.getElementById('p-signal').style.display = 'flex';
         document.getElementById('p-signal-score').textContent = score;
+        var circumference = 2 * Math.PI * 30; // r=30
+        var offset = circumference - (score / 100) * circumference;
+        setTimeout(function(){
+          document.getElementById('p-signal-ring').style.strokeDashoffset = offset;
+        }, 300);
       }
 
-      // ── Bio (condensed)
-      var bioHtml = bio.split('\n\n').map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>'}).join('');
-      document.getElementById('p-bio').innerHTML = bioHtml;
+      // ── STORY CHAPTERS — visual narrative
+      var storyEl = document.getElementById('p-story');
+      var storyHtml = '';
 
-      // ── Key Insights
-      if (insights.length) {
-        document.getElementById('p-insights-section').style.display = 'block';
-        var insHtml = '';
-        insights.slice(0,5).forEach(function(ins) {
-          insHtml += '<div class="p-insight">';
-          insHtml += '<div class="p-insight__quote">"'+esc(ins.quote||'')+'"</div>';
-          if (ins.context) insHtml += '<div class="p-insight__context">'+esc(ins.context)+'</div>';
-          if (ins.topic) insHtml += '<span class="p-insight__topic">'+esc(ins.topic)+'</span>';
-          insHtml += '</div>';
+      // Map insights to story image keys
+      var chapterImageKeys = ['military', 'survival', 'entrepreneur', 'pickles', 'speaker', 'reflection'];
+      var chapterLabels = ['The Soldier', 'The Survivor', 'The Entrepreneur', 'The Mission', 'The Voice', 'The Horizon'];
+
+      if (storyImgs && insights.length) {
+        // Build visual chapters from insights paired with images
+        var chapterCount = Math.min(insights.length, chapterImageKeys.length);
+
+        for (var ci = 0; ci < chapterCount; ci++) {
+          var ins = insights[ci];
+          var imgKey = chapterImageKeys[ci];
+          var imgUrl = storyImgs[imgKey];
+          var label = chapterLabels[ci] || 'Chapter ' + (ci + 1);
+
+          if (!imgUrl) continue;
+
+          // Insert video chapter after the 2nd image chapter (between Survivor and Entrepreneur)
+          if (ci === 2 && storyImgs.video) {
+            storyHtml += '<div class="p-video-chapter p-reveal">';
+            storyHtml += '<video autoplay muted loop playsinline><source src="'+storyImgs.video+'" type="video/mp4"></video>';
+            storyHtml += '<div class="p-video-chapter__overlay"><div class="p-video-chapter__text">';
+            storyHtml += '<div class="p-video-chapter__label">'+esc(name)+'</div>';
+            // Use a short bio excerpt for the video overlay
+            var shortBio = bio.split('.').slice(0,2).join('.') + '.';
+            storyHtml += '<div class="p-video-chapter__quote">"'+esc(shortBio)+'"</div>';
+            storyHtml += '</div></div></div>';
+          }
+
+          storyHtml += '<div class="p-chapter p-reveal">';
+          storyHtml += '<div class="p-chapter__img"><img src="'+imgUrl+'" alt="'+esc(name)+' — '+esc(label)+'" loading="lazy"></div>';
+          storyHtml += '<div class="p-chapter__content">';
+          storyHtml += '<div class="p-chapter__label">'+esc(label)+'</div>';
+          storyHtml += '<div class="p-chapter__quote">"'+esc(ins.quote || '')+'"</div>';
+          if (ins.context) storyHtml += '<div class="p-chapter__context">'+esc(ins.context)+'</div>';
+          if (ins.topic) storyHtml += '<span class="p-chapter__topic">'+esc(ins.topic)+'</span>';
+          storyHtml += '</div></div>';
+        }
+      } else if (insights.length) {
+        // Fallback: no story images, use authority visuals as backgrounds
+        var fallbackImgs = [
+          findImage(images, 'authority_portrait'),
+          findImage(images, 'quote_card_bg'),
+          findImage(images, 'topic_landscape'),
+          findImage(images, 'episode_art'),
+        ].filter(Boolean);
+
+        insights.slice(0, 6).forEach(function(ins, idx) {
+          var bgImg = fallbackImgs[idx % fallbackImgs.length] || '';
+          storyHtml += '<div class="p-chapter p-reveal">';
+          if (bgImg) {
+            storyHtml += '<div class="p-chapter__img"><img src="'+bgImg+'" alt="" loading="lazy"></div>';
+          }
+          storyHtml += '<div class="p-chapter__content"' + (!bgImg ? ' style="grid-column:span 2"' : '') + '>';
+          storyHtml += '<div class="p-chapter__label">'+(ins.topic ? esc(ins.topic) : 'Insight')+'</div>';
+          storyHtml += '<div class="p-chapter__quote">"'+esc(ins.quote || '')+'"</div>';
+          if (ins.context) storyHtml += '<div class="p-chapter__context">'+esc(ins.context)+'</div>';
+          storyHtml += '</div></div>';
         });
-        document.getElementById('p-insights').innerHTML = insHtml;
       }
+      storyEl.innerHTML = storyHtml;
 
-      // ── Video embed
-      if (csVideo) {
-        document.getElementById('p-video-section').style.display = 'block';
-        document.getElementById('p-video-wrap').innerHTML = '<iframe src="https://www.youtube.com/embed/'+csVideo+'?rel=0" allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>';
-      }
-
-      // ── Appearances
+      // ── Appearances (visual cards, NOT duplicate of CS video)
       if (appearances.length) {
         document.getElementById('p-appearances-section').style.display = 'block';
         var appH = '';
         appearances.forEach(function(a) {
           var isL = !!a.link, tag = isL?'a':'div', href = isL?' href="'+esc(a.link)+'" target="_blank"':'';
           var vid = a.link ? extractYTId(a.link) : null;
-          var th = vid ? 'https://img.youtube.com/vi/'+vid+'/mqdefault.jpg' : '';
+          var th = vid ? 'https://img.youtube.com/vi/'+vid+'/maxresdefault.jpg' : '';
           appH += '<'+tag+' class="p-appearance"'+href+'>';
           appH += '<div class="p-appearance__thumb">';
           if (th) { appH += '<img src="'+th+'" alt="" loading="lazy"><div class="p-appearance__thumb-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>'; }
-          else { appH += '<i class="fa-solid fa-play" style="color:var(--gold);font-size:1rem"></i>'; }
-          appH += '</div><div>';
+          else { appH += '<div style="display:flex;align-items:center;justify-content:center;height:100%"><i class="fa-solid fa-play" style="color:var(--gold);font-size:1.5rem"></i></div>'; }
+          appH += '</div><div class="p-appearance__info">';
           appH += '<div class="p-appearance__show">'+esc(a.showName||'MiTL Live Network')+'</div>';
           appH += '<div class="p-appearance__segment">'+esc(a.segment||'Guest Appearance')+'</div>';
           appH += '<div class="p-appearance__date">'+formatDate(a.date)+'</div>';
@@ -745,6 +831,9 @@
       // Show
       document.getElementById('profile-loading').style.display = 'none';
       document.getElementById('profile-content').style.display = 'block';
+
+      // Re-init scroll reveal for dynamically added elements
+      if (window._initReveal) setTimeout(window._initReveal, 50);
     }
 
     function injectSchema(profile, authority) {
