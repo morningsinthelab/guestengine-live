@@ -879,12 +879,10 @@
 
       // ── SIGNAL BREAKDOWN — dimensional bars + improvement actions
       if (score && score > 0) {
-        var appearances = profile.pastAppearances;
-        if (typeof appearances === 'string') try { appearances = JSON.parse(appearances); } catch(e) { appearances = []; }
-        appearances = appearances || [];
+        // appearances already parsed at top of render()
         var socialObj = socials || {};
         var socialCount = Object.keys(socialObj).filter(function(k){ return !!socialObj[k]; }).length;
-        var expertiseCount = (authorityData && authorityData.knows_about) ? authorityData.knows_about.length : (profile.expertise ? profile.expertise.length : 0);
+        var expertiseCount = knowsAbout.length || (profile.expertise ? profile.expertise.length : 0);
         var hasTwin = profile.twinStatus && profile.twinStatus !== 'none';
         var hasCharacter = !!profile.characterId;
         var tierLevel = profile.tier === 'vip' ? 3 : profile.tier === 'member' ? 2 : profile.tier === 'featured' ? 1 : 0;
@@ -920,9 +918,9 @@
         });
 
         // Public Discourse: based on authority data richness (FAQs, insights, topics)
-        var faqCount = (authorityData && authorityData.faqs) ? authorityData.faqs.length : 0;
+        var faqCount = faqs.length;
         var insightCount = insights.length;
-        var topicCount = (authorityData && authorityData.conversation_topics) ? authorityData.conversation_topics.length : 0;
+        var topicCount = (authority && authority.conversation_topics) ? authority.conversation_topics.length : 0;
         var pdScore = Math.min(25, Math.round((faqCount * 2) + (insightCount * 1.5) + (topicCount * 1)));
         dims.push({
           label: 'Public Discourse', score: pdScore, max: 25,
