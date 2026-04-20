@@ -15,25 +15,39 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@gabornings">
   <style>
-  /* ── Loading ──────────────────────────────── */
+  :root {
+    --gold: #fbbf24;
+    --gold-dim: rgba(251,191,36,0.3);
+    --gold-faint: rgba(251,191,36,0.06);
+    --bg: #050914;
+    --card: rgba(255,255,255,0.02);
+    --border: rgba(255,255,255,0.06);
+    --text: #fff;
+    --text-secondary: rgba(255,255,255,0.55);
+    --text-muted: rgba(255,255,255,0.35);
+    --font-display: 'Syncopate', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  /* ── Loading ────────────────────────────── */
   .profile-loading {
     min-height:80vh; display:flex; align-items:center; justify-content:center;
     flex-direction:column; gap:1rem;
   }
   .profile-loading__spinner {
     width:40px; height:40px; border:3px solid rgba(251,191,36,0.15);
-    border-top-color:#fbbf24; border-radius:50%; animation:spin 0.8s linear infinite;
+    border-top-color:var(--gold); border-radius:50%; animation:spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform:rotate(360deg); } }
   .profile-loading__text {
-    font-family:'Syncopate',sans-serif; font-size:0.625rem; font-weight:700;
-    letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4);
+    font-family:var(--font-display); font-size:0.625rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);
   }
 
-  /* ── HERO — Full-bleed cinematic episode art ── */
+  /* ── HERO ───────────────────────────────── */
   .p-hero {
     position:relative; height:100vh; min-height:600px; display:flex;
-    align-items:flex-end; overflow:hidden; background:#050914;
+    align-items:flex-end; overflow:hidden; background:var(--bg);
   }
   .p-hero__bg {
     position:absolute; inset:0; background-size:cover; background-position:center center;
@@ -42,320 +56,284 @@
   .p-hero__overlay {
     position:absolute; inset:0;
     background:
-      linear-gradient(to top, rgba(5,9,20,1) 0%, rgba(5,9,20,0.7) 30%, rgba(5,9,20,0.15) 60%, rgba(5,9,20,0.35) 100%),
+      linear-gradient(to top, var(--bg) 0%, rgba(5,9,20,0.75) 25%, rgba(5,9,20,0.15) 55%, rgba(5,9,20,0.35) 100%),
       linear-gradient(to right, rgba(5,9,20,0.6) 0%, rgba(5,9,20,0) 50%);
   }
   .p-hero__content {
     position:relative; z-index:2; padding:0 80px 80px; max-width:900px; width:100%;
   }
-  .p-hero__show {
-    font-family:'Syncopate',sans-serif; font-size:0.5625rem; font-weight:700;
-    letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5);
-    margin-bottom:8px; display:flex; align-items:center; gap:8px;
+  .p-hero__segment {
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted);
+    margin-bottom:8px;
   }
-  .p-hero__show img { height:18px; opacity:0.6; }
   .p-hero__name {
-    font-family:'Syncopate',sans-serif; font-weight:700;
+    font-family:var(--font-display); font-weight:700;
     font-size:clamp(2.5rem,6vw,4.5rem); line-height:1.0; text-transform:uppercase;
-    color:#fff; margin:0 0 12px; letter-spacing:-1px;
+    color:var(--text); margin:0 0 12px; letter-spacing:-1px;
   }
   .p-hero__headline {
-    font-size:clamp(1rem,1.5vw,1.2rem); color:rgba(255,255,255,0.6);
+    font-size:clamp(1rem,1.5vw,1.15rem); color:var(--text-secondary);
     max-width:600px; line-height:1.6; margin-bottom:24px;
   }
-  .p-hero__actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-
   .p-hero__play-btn {
     display:inline-flex; align-items:center; gap:12px; padding:12px 24px;
-    background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.3);
-    border-radius:60px; color:#fbbf24; font-family:'Syncopate',sans-serif;
+    background:rgba(251,191,36,0.12); border:1px solid var(--gold-dim);
+    border-radius:60px; color:var(--gold); font-family:var(--font-display);
     font-size:0.5rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
     cursor:pointer; transition:all 0.3s ease; text-decoration:none;
   }
-  .p-hero__play-btn:hover { background:rgba(251,191,36,0.25); border-color:#fbbf24; }
+  .p-hero__play-btn:hover { background:rgba(251,191,36,0.25); border-color:var(--gold); }
   .p-hero__play-circle {
-    width:36px; height:36px; border-radius:50%; background:#fbbf24;
+    width:36px; height:36px; border-radius:50%; background:var(--gold);
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .p-hero__play-circle svg { width:14px; height:14px; fill:#050914; margin-left:2px; }
+  .p-hero__play-circle svg { width:14px; height:14px; fill:var(--bg); margin-left:2px; }
 
-  .p-hero__sophia-btn {
-    display:inline-flex; align-items:center; gap:8px; padding:12px 24px;
-    background:rgba(124,58,237,0.15); border:1px solid rgba(124,58,237,0.35);
-    border-radius:60px; color:#a78bfa; font-family:'Syncopate',sans-serif;
-    font-size:0.5rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
-    cursor:pointer; transition:all 0.3s ease; text-decoration:none;
-  }
-  .p-hero__sophia-btn:hover { background:rgba(124,58,237,0.3); border-color:#a78bfa; }
-  .p-hero__sophia-btn i { font-size:14px; }
-
-  /* ── BODY ─────────────────────────────────── */
+  /* ── BODY ───────────────────────────────── */
   .p-body { padding:0 0 4rem; }
-  .p-container { max-width:1100px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
+  .p-container { max-width:1000px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
 
   .p-back {
-    display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:2rem;
-    font-family:'Syncopate',sans-serif; font-size:0.5625rem; font-weight:700;
-    letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.35);
+    display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:1.5rem;
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);
     text-decoration:none; transition:color 0.2s; padding-top:2rem;
   }
-  .p-back:hover { color:#fbbf24; }
+  .p-back:hover { color:var(--gold); }
 
-  /* ── Identity Card — compact, premium ─────── */
-  .p-identity {
-    display:flex; gap:1.5rem; align-items:center; margin-bottom:2.5rem;
-    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
-    border-radius:16px; padding:1.25rem 1.5rem;
+  /* ── Stat Bar — tier + score + social compact row ── */
+  .p-statbar {
+    display:flex; align-items:center; gap:1.5rem; padding:1rem 0 1.5rem;
+    border-bottom:1px solid var(--border); margin-bottom:2rem; flex-wrap:wrap;
   }
-  .p-identity__photo {
-    width:80px; height:80px; min-width:80px; border-radius:12px;
+  .p-statbar__photo {
+    width:56px; height:56px; min-width:56px; border-radius:10px;
     overflow:hidden; border:2px solid rgba(251,191,36,0.2);
   }
-  .p-identity__photo img { width:100%; height:100%; object-fit:cover; }
-  .p-identity__initials {
-    width:80px; height:80px; min-width:80px; border-radius:12px;
-    background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(251,191,36,0.08));
+  .p-statbar__photo img { width:100%; height:100%; object-fit:cover; }
+  .p-statbar__initials {
+    width:56px; height:56px; min-width:56px; border-radius:10px;
+    background:linear-gradient(135deg,rgba(255,255,255,0.03),var(--gold-faint));
     border:2px solid rgba(251,191,36,0.2); display:flex; align-items:center;
-    justify-content:center; font-family:'Syncopate',sans-serif; font-size:1.75rem;
-    font-weight:700; color:#fbbf24;
+    justify-content:center; font-family:var(--font-display); font-size:1.25rem;
+    font-weight:700; color:var(--gold);
   }
-  .p-identity__info { flex:1; min-width:0; }
-  .p-identity__top { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
-  .p-identity__name {
-    font-family:'Syncopate',sans-serif; font-weight:700; font-size:1.125rem;
-    color:#fff; text-transform:uppercase; line-height:1.15;
+  .p-statbar__meta { flex:1; min-width:0; }
+  .p-statbar__name {
+    font-family:var(--font-display); font-weight:700; font-size:0.875rem;
+    color:var(--text); text-transform:uppercase; line-height:1.2;
   }
-  .p-identity__tier {
-    display:inline-flex; align-items:center; gap:4px; padding:3px 10px;
-    border-radius:60px; font-family:'Syncopate',sans-serif; font-size:0.4rem;
+  .p-statbar__title { font-size:0.8125rem; color:var(--text-secondary); margin-top:2px; }
+  .p-statbar__tier {
+    display:inline-flex; align-items:center; gap:4px; padding:4px 12px;
+    border-radius:60px; font-family:var(--font-display); font-size:0.4rem;
     font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
   }
-  .p-identity__tier--vip { background:rgba(251,191,36,0.15); color:#fbbf24; border:1px solid rgba(251,191,36,0.3); }
-  .p-identity__tier--member { background:rgba(99,102,241,0.12); color:#818cf8; border:1px solid rgba(99,102,241,0.25); }
-  .p-identity__tier--featured { background:rgba(251,191,36,0.08); color:#fbbf24; border:1px solid rgba(251,191,36,0.15); }
-  .p-identity__tier--free { background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1); }
-  .p-identity__title { font-size:0.875rem; color:rgba(255,255,255,0.5); line-height:1.5; }
-  .p-identity__tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
-  .p-identity__tag {
-    font-family:'Syncopate',sans-serif; font-size:0.4rem; font-weight:700;
-    letter-spacing:0.12em; text-transform:uppercase; padding:3px 8px;
-    background:rgba(251,191,36,0.06); color:rgba(251,191,36,0.7);
-    border:1px solid rgba(251,191,36,0.12); border-radius:4px;
+  .p-statbar__tier--vip { background:rgba(251,191,36,0.15); color:var(--gold); border:1px solid var(--gold-dim); }
+  .p-statbar__tier--member { background:rgba(99,102,241,0.12); color:#818cf8; border:1px solid rgba(99,102,241,0.25); }
+  .p-statbar__tier--featured { background:var(--gold-faint); color:var(--gold); border:1px solid rgba(251,191,36,0.15); }
+  .p-statbar__tier--free { background:rgba(255,255,255,0.05); color:var(--text-muted); border:1px solid var(--border); }
+  .p-statbar__score {
+    display:flex; align-items:center; gap:8px; padding:6px 14px;
+    background:var(--gold-faint); border:1px solid rgba(251,191,36,0.12);
+    border-radius:10px;
   }
-  .p-identity__cta {
-    margin-left:auto; display:flex; flex-direction:column; gap:8px; align-items:flex-end; flex-shrink:0;
+  .p-statbar__score-num {
+    font-family:var(--font-display); font-weight:700; font-size:1.25rem; color:var(--gold);
   }
-  .p-identity__sophia {
-    display:inline-flex; align-items:center; gap:6px; padding:10px 20px;
-    background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(124,58,237,0.1));
-    border:1px solid rgba(124,58,237,0.35); border-radius:8px; color:#a78bfa;
-    font-family:'Syncopate',sans-serif; font-size:0.5rem; font-weight:700;
-    letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
-    transition:all 0.3s; cursor:pointer; white-space:nowrap;
+  .p-statbar__score-label {
+    font-family:var(--font-display); font-size:0.4rem; font-weight:700;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);
+    line-height:1.3;
   }
-  .p-identity__sophia:hover { background:rgba(124,58,237,0.3); border-color:#a78bfa; }
-  .p-identity__sophia i { font-size:12px; }
+  .p-statbar__links { display:flex; gap:8px; margin-left:auto; }
+  .p-statbar__link {
+    width:34px; height:34px; border-radius:8px; display:flex; align-items:center;
+    justify-content:center; background:var(--card); border:1px solid var(--border);
+    color:var(--text-muted); font-size:14px; text-decoration:none; transition:all 0.2s;
+  }
+  .p-statbar__link:hover { border-color:var(--gold-dim); color:var(--gold); }
 
-  /* ── Signal Brief ─────────────────────────── */
+  /* ── Signal Brief — full-width banner ──── */
   .p-signal {
-    display:flex; align-items:center; gap:1.5rem; margin-bottom:2.5rem;
+    display:flex; align-items:center; gap:1.25rem; margin-bottom:2rem;
     background:linear-gradient(135deg,rgba(251,191,36,0.04),rgba(255,255,255,0.01));
-    border:1px solid rgba(251,191,36,0.12); border-radius:16px; padding:1.25rem 1.5rem;
+    border:1px solid rgba(251,191,36,0.12); border-radius:12px; padding:1rem 1.25rem;
   }
-  .p-signal__score-ring {
-    width:72px; height:72px; min-width:72px; border-radius:50%;
-    border:3px solid rgba(251,191,36,0.3); display:flex; align-items:center;
-    justify-content:center; position:relative;
+  .p-signal__ring {
+    width:52px; height:52px; min-width:52px; border-radius:50%;
+    border:3px solid var(--gold-dim); display:flex; align-items:center;
+    justify-content:center;
   }
-  .p-signal__score-value {
-    font-family:'Syncopate',sans-serif; font-weight:700; font-size:1.5rem; color:#fbbf24;
+  .p-signal__num {
+    font-family:var(--font-display); font-weight:700; font-size:1.125rem; color:var(--gold);
   }
   .p-signal__info { flex:1; }
-  .p-signal__label {
-    font-family:'Syncopate',sans-serif; font-size:0.5625rem; font-weight:700;
-    letter-spacing:0.2em; text-transform:uppercase; color:#fbbf24; margin-bottom:4px;
+  .p-signal__title {
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:2px;
   }
-  .p-signal__desc { font-size:0.8125rem; color:rgba(255,255,255,0.45); line-height:1.5; }
-  .p-signal__date { font-size:0.75rem; color:rgba(255,255,255,0.3); margin-top:2px; }
-  .p-signal__download {
-    display:inline-flex; align-items:center; gap:6px; padding:10px 20px;
-    background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.2);
-    border-radius:8px; color:#fbbf24; font-family:'Syncopate',sans-serif;
-    font-size:0.5rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  .p-signal__desc { font-size:0.8125rem; color:var(--text-muted); }
+  .p-signal__btn {
+    display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
+    background:var(--gold-faint); border:1px solid rgba(251,191,36,0.18);
+    border-radius:8px; color:var(--gold); font-family:var(--font-display);
+    font-size:0.45rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
     text-decoration:none; transition:all 0.3s; cursor:pointer; white-space:nowrap;
   }
-  .p-signal__download:hover { background:rgba(251,191,36,0.15); border-color:#fbbf24; }
-  .p-signal__download i { font-size:12px; }
+  .p-signal__btn:hover { background:rgba(251,191,36,0.12); border-color:var(--gold); }
+  .p-signal__btn i { font-size:11px; }
 
-  /* ── Two-column layout ────────────────────── */
-  .p-grid { display:grid; grid-template-columns:1fr 340px; gap:2.5rem; margin-bottom:2.5rem; }
-
-  /* Bio column */
+  /* ── Bio — condensed with expand ───────── */
+  .p-bio { margin-bottom:2rem; }
   .p-bio__text {
-    font-size:0.9375rem; color:rgba(255,255,255,0.55); line-height:1.8;
+    font-size:0.9375rem; color:var(--text-secondary); line-height:1.8;
+    max-height:10em; overflow:hidden; position:relative;
+    transition:max-height 0.5s ease;
   }
-  .p-bio__text p { margin-bottom:1rem; }
-  .p-bio__text p:last-child { margin-bottom:0; }
+  .p-bio__text.expanded { max-height:none; }
+  .p-bio__text:not(.expanded)::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:4em;
+    background:linear-gradient(to top, var(--bg), transparent);
+    pointer-events:none;
+  }
+  .p-bio__text p { margin-bottom:0.75rem; }
+  .p-bio__toggle {
+    display:inline-flex; align-items:center; gap:6px; margin-top:0.75rem;
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--gold);
+    cursor:pointer; background:none; border:none; padding:0;
+    transition:opacity 0.2s;
+  }
+  .p-bio__toggle:hover { opacity:0.7; }
 
-  /* Sidebar */
-  .p-sidebar { display:flex; flex-direction:column; gap:1.25rem; }
-  .p-sidebar__card {
-    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
-    border-radius:12px; padding:1.25rem;
-  }
-  .p-sidebar__title {
-    font-family:'Syncopate',sans-serif; font-size:0.5rem; font-weight:700;
-    letter-spacing:0.18em; text-transform:uppercase; color:#fbbf24; margin-bottom:12px;
-  }
-  .p-sidebar__link {
-    display:flex; align-items:center; gap:8px; padding:8px 0;
-    font-size:0.8125rem; color:rgba(255,255,255,0.55); text-decoration:none;
-    transition:color 0.2s; border-bottom:1px solid rgba(255,255,255,0.04);
-  }
-  .p-sidebar__link:last-child { border-bottom:none; }
-  .p-sidebar__link:hover { color:#fbbf24; }
-  .p-sidebar__link i { color:#fbbf24; width:16px; text-align:center; font-size:14px; }
-
-  .p-sidebar__yt {
-    position:relative; width:100%; padding-bottom:56.25%; border-radius:8px;
-    overflow:hidden; border:1px solid rgba(255,255,255,0.06);
-  }
-  .p-sidebar__yt iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-  .p-sidebar__press-img {
-    width:100%; border-radius:8px; margin-bottom:8px;
-    border:1px solid rgba(255,255,255,0.06);
-  }
-
-  /* ── Section titles ─────────────────────────  */
+  /* ── Section title ─────────────────────── */
   .p-section { margin-bottom:2.5rem; }
   .p-section__title {
-    font-family:'Syncopate',sans-serif; font-size:0.625rem; font-weight:700;
-    letter-spacing:0.2em; text-transform:uppercase; color:#fbbf24; margin-bottom:1.25rem;
+    font-family:var(--font-display); font-size:0.5625rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:1rem; padding-bottom:0.5rem;
+    border-bottom:1px solid rgba(251,191,36,0.1);
   }
 
-  /* ── Video embed (full width) ───────────────  */
-  .p-video { margin-bottom:2.5rem; }
-  .p-video__wrap {
-    position:relative; width:100%; padding-bottom:56.25%; border-radius:12px;
-    overflow:hidden; border:1px solid rgba(255,255,255,0.06);
-  }
-  .p-video__wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-  /* ── Key Insights ───────────────────────────  */
-  .p-insights { display:flex; flex-direction:column; gap:1rem; }
+  /* ── Key Insights — featured quotes ────── */
+  .p-insights { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
   .p-insight {
-    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
-    border-left:3px solid rgba(251,191,36,0.4); border-radius:0 12px 12px 0;
-    padding:1.25rem 1.25rem 1.25rem 1.5rem;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:1.25rem;
+    transition:border-color 0.2s;
   }
+  .p-insight:hover { border-color:rgba(251,191,36,0.15); }
+  .p-insight:first-child { grid-column:span 2; }
   .p-insight__quote {
     font-size:1rem; color:rgba(255,255,255,0.85); line-height:1.7;
-    font-style:italic; margin-bottom:0.5rem;
+    font-style:italic; margin-bottom:0.75rem;
   }
-  .p-insight__context { font-size:0.8125rem; color:rgba(255,255,255,0.4); line-height:1.6; }
+  .p-insight:first-child .p-insight__quote { font-size:1.125rem; }
+  .p-insight__context { font-size:0.8125rem; color:var(--text-muted); line-height:1.6; }
   .p-insight__topic {
-    display:inline-block; margin-top:0.5rem; font-family:'Syncopate',sans-serif;
-    font-size:0.4375rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
-    color:rgba(251,191,36,0.6); padding:3px 8px; background:rgba(251,191,36,0.06);
+    display:inline-block; margin-top:0.5rem; font-family:var(--font-display);
+    font-size:0.4rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+    color:rgba(251,191,36,0.6); padding:3px 8px; background:var(--gold-faint);
     border-radius:4px;
   }
 
-  /* ── Appearances ────────────────────────────  */
+  /* ── Video embed ───────────────────────── */
+  .p-video { margin-bottom:2.5rem; }
+  .p-video__wrap {
+    position:relative; width:100%; padding-bottom:56.25%; border-radius:12px;
+    overflow:hidden; border:1px solid var(--border);
+  }
+  .p-video__wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+  /* ── Appearances ───────────────────────── */
   .p-appearances { display:flex; flex-direction:column; gap:0.75rem; }
   .p-appearance {
-    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
-    border-radius:12px; padding:1rem 1.25rem; display:flex; gap:1.25rem;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:1rem 1.25rem; display:flex; gap:1rem;
     align-items:center; text-decoration:none; transition:all 0.2s;
   }
-  .p-appearance:hover { border-color:rgba(251,191,36,0.3); background:rgba(255,255,255,0.03); }
+  .p-appearance:hover { border-color:var(--gold-dim); background:rgba(255,255,255,0.03); }
   .p-appearance__thumb {
-    width:100px; min-width:100px; aspect-ratio:16/9; background:rgba(255,255,255,0.03);
-    border-radius:8px; display:flex; align-items:center; justify-content:center;
-    overflow:hidden; position:relative;
+    width:80px; min-width:80px; aspect-ratio:16/9; background:rgba(255,255,255,0.03);
+    border-radius:8px; overflow:hidden; position:relative;
   }
   .p-appearance__thumb img { width:100%; height:100%; object-fit:cover; }
   .p-appearance__thumb-play {
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     background:rgba(0,0,0,0.3);
   }
-  .p-appearance__thumb-play svg { width:24px; height:24px; fill:#fbbf24; }
+  .p-appearance__thumb-play svg { width:20px; height:20px; fill:var(--gold); }
   .p-appearance__show {
-    font-family:'Syncopate',sans-serif; font-size:0.5rem; font-weight:700;
-    letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.35);
-    margin-bottom:2px;
+    font-family:var(--font-display); font-size:0.45rem; font-weight:700;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;
   }
-  .p-appearance__segment { font-size:0.875rem; font-weight:600; color:#fff; margin-bottom:2px; }
-  .p-appearance__date { font-size:0.8125rem; color:rgba(255,255,255,0.35); }
+  .p-appearance__segment { font-size:0.875rem; font-weight:600; color:var(--text); margin-bottom:2px; }
+  .p-appearance__date { font-size:0.8125rem; color:var(--text-muted); }
 
-  /* ── FAQ ─────────────────────────────────────  */
-  .p-faqs { display:flex; flex-direction:column; gap:0.75rem; }
+  /* ── FAQ ────────────────────────────────── */
+  .p-faqs { display:flex; flex-direction:column; gap:0.5rem; }
   .p-faq {
-    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
-    border-radius:12px; overflow:hidden;
+    background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden;
   }
   .p-faq__q {
-    width:100%; padding:1.125rem 1.25rem; display:flex; justify-content:space-between;
+    width:100%; padding:1rem 1.25rem; display:flex; justify-content:space-between;
     align-items:center; gap:1rem; cursor:pointer; background:none; border:none;
-    font-size:0.9375rem; font-weight:600; color:#fff; text-align:left; transition:color 0.2s;
+    font-size:0.9375rem; font-weight:600; color:var(--text); text-align:left; transition:color 0.2s;
   }
-  .p-faq__q:hover { color:#fbbf24; }
-  .p-faq__chevron { width:16px; height:16px; color:rgba(255,255,255,0.3); flex-shrink:0; transition:transform 0.3s ease; }
+  .p-faq__q:hover { color:var(--gold); }
+  .p-faq__chevron { width:16px; height:16px; color:var(--text-muted); flex-shrink:0; transition:transform 0.3s; }
   .p-faq.open .p-faq__chevron { transform:rotate(180deg); }
   .p-faq__a { max-height:0; overflow:hidden; transition:max-height 0.35s ease; }
   .p-faq.open .p-faq__a { max-height:600px; }
-  .p-faq__a-inner { padding:0 1.25rem 1.125rem; font-size:0.875rem; color:rgba(255,255,255,0.5); line-height:1.7; }
+  .p-faq__a-inner { padding:0 1.25rem 1rem; font-size:0.875rem; color:var(--text-secondary); line-height:1.7; }
 
-  /* ── Expertise tags ─────────────────────────  */
+  /* ── Expertise ─────────────────────────── */
   .p-knows { display:flex; flex-wrap:wrap; gap:0.5rem; }
   .p-knows__item {
-    font-size:0.8125rem; padding:0.5rem 1rem; background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.06); border-radius:8px; color:rgba(255,255,255,0.5);
+    font-size:0.8125rem; padding:0.4rem 0.875rem; background:var(--card);
+    border:1px solid var(--border); border-radius:8px; color:var(--text-muted);
   }
 
-  /* ── CTA ─────────────────────────────────────  */
+  /* ── CTA ────────────────────────────────── */
   .p-cta {
     background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(251,191,36,0.05));
-    border:1px solid rgba(251,191,36,0.15); border-radius:16px; padding:2.5rem;
+    border:1px solid rgba(251,191,36,0.15); border-radius:12px; padding:2rem;
     text-align:center; margin-top:1rem;
   }
-  .p-cta__title {
-    font-family:'Syncopate',sans-serif; font-size:0.625rem; font-weight:700;
-    letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);
-    margin-bottom:0.75rem;
+  .p-cta__label {
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;
   }
-  .p-cta__text { font-size:0.9375rem; color:rgba(255,255,255,0.55); margin-bottom:1.5rem; line-height:1.6; }
+  .p-cta__text { font-size:0.9375rem; color:var(--text-secondary); margin-bottom:1.25rem; line-height:1.6; }
   .p-cta__btn {
-    display:inline-flex; align-items:center; gap:0.5rem; padding:0.875rem 2rem;
-    background:#fbbf24; color:#050914; font-family:'Syncopate',sans-serif;
-    font-weight:700; font-size:0.625rem; letter-spacing:0.15em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.75rem;
+    background:var(--gold); color:var(--bg); font-family:var(--font-display);
+    font-weight:700; font-size:0.5625rem; letter-spacing:0.15em; text-transform:uppercase;
     border-radius:8px; text-decoration:none; transition:background 0.2s;
   }
   .p-cta__btn:hover { background:#f59e0b; }
 
-  /* ── Not Found ──────────────────────────────  */
+  /* ── Not Found ─────────────────────────── */
   .p-notfound {
     min-height:60vh; display:flex; align-items:center; justify-content:center;
     flex-direction:column; gap:1rem; text-align:center; padding:2rem;
   }
   .p-notfound__title {
-    font-family:'Syncopate',sans-serif; font-size:1.5rem; font-weight:700;
-    text-transform:uppercase; color:#fff;
+    font-family:var(--font-display); font-size:1.5rem; font-weight:700;
+    text-transform:uppercase; color:var(--text);
   }
-  .p-notfound__text { color:rgba(255,255,255,0.5); }
+  .p-notfound__text { color:var(--text-muted); }
 
-  /* ── Responsive ─────────────────────────────  */
-  @media (max-width:900px) {
-    .p-grid { grid-template-columns:1fr; }
+  /* ── Responsive ────────────────────────── */
+  @media (max-width:768px) {
     .p-hero__content { padding:0 24px 48px; }
-    .p-identity { flex-direction:column; text-align:center; }
-    .p-identity__cta { margin-left:0; align-items:center; }
-    .p-identity__tags { justify-content:center; }
+    .p-statbar { gap:1rem; }
+    .p-statbar__links { margin-left:0; width:100%; justify-content:flex-start; }
+    .p-insights { grid-template-columns:1fr; }
+    .p-insight:first-child { grid-column:span 1; }
     .p-signal { flex-direction:column; text-align:center; }
-    .p-hero__actions { justify-content:center; }
-  }
-  @media (max-width:600px) {
-    .p-hero { min-height:70vh; }
     .p-appearance { flex-direction:column; text-align:center; }
   }
   </style>
@@ -386,14 +364,10 @@
     </button>
   </header>
   <div class="ge-header__mobile-overlay" id="geMobileMenu">
-    <a href="/directory/">Directory</a>
-    <a href="/marketplace/">Marketplace</a>
-    <a href="/shows/">Shows</a>
-    <a href="/#pricing">Pricing</a>
-    <a href="/#network">Network</a>
-    <a href="/signal/">Signal</a>
-    <a href="/why/">Why</a>
-    <a href="/join/">Join</a>
+    <a href="/directory/">Directory</a><a href="/marketplace/">Marketplace</a>
+    <a href="/shows/">Shows</a><a href="/#pricing">Pricing</a>
+    <a href="/#network">Network</a><a href="/signal/">Signal</a>
+    <a href="/why/">Why</a><a href="/join/">Join</a>
     <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
     <a href="/join/" class="ge-header__signup">Sign Up</a>
   </div>
@@ -416,25 +390,18 @@
   <!-- PROFILE -->
   <div id="profile-content" style="display:none">
 
-    <!-- HERO — cinematic episode art -->
+    <!-- HERO -->
     <section class="p-hero" id="p-hero">
       <div class="p-hero__bg" id="p-hero-bg"></div>
       <div class="p-hero__overlay"></div>
       <div class="p-hero__content">
-        <div class="p-hero__show" id="p-hero-show">
-          <span>Mornings in the Lab</span> · <span id="p-hero-segment">Center Stage</span>
-        </div>
+        <div class="p-hero__segment" id="p-hero-segment">Mornings in the Lab · Center Stage</div>
         <h1 class="p-hero__name" id="p-hero-name"></h1>
         <p class="p-hero__headline" id="p-hero-headline"></p>
-        <div class="p-hero__actions">
-          <a id="p-hero-play-btn" class="p-hero__play-btn" style="display:none" target="_blank">
-            <span class="p-hero__play-circle"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span>
-            Watch Center Stage Interview
-          </a>
-          <button class="p-hero__sophia-btn" id="p-hero-sophia" onclick="if(window.__sophiaWidget)window.__sophiaWidget.open()">
-            <i class="fa-solid fa-comments"></i> Talk to Sophia
-          </button>
-        </div>
+        <a id="p-hero-play-btn" class="p-hero__play-btn" style="display:none" target="_blank">
+          <span class="p-hero__play-circle"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></span>
+          Watch Center Stage Interview
+        </a>
       </div>
     </section>
 
@@ -444,74 +411,54 @@
 
         <a href="/directory/" class="p-back"><i class="fa-solid fa-arrow-left"></i> Back to Directory</a>
 
-        <!-- Identity Card — compact -->
-        <div class="p-identity" id="p-identity">
-          <div id="p-id-photo"></div>
-          <div class="p-identity__info">
-            <div class="p-identity__top">
-              <span class="p-identity__name" id="p-id-name"></span>
-              <span id="p-id-tier"></span>
-            </div>
-            <div class="p-identity__title" id="p-id-title"></div>
-            <div class="p-identity__tags" id="p-id-tags"></div>
+        <!-- Stat Bar — photo, name, tier, score, social icons -->
+        <div class="p-statbar" id="p-statbar">
+          <div id="p-sb-photo"></div>
+          <div class="p-statbar__meta">
+            <div class="p-statbar__name" id="p-sb-name"></div>
+            <div class="p-statbar__title" id="p-sb-title"></div>
           </div>
-          <div class="p-identity__cta">
-            <a class="p-identity__sophia" id="p-id-sophia" onclick="if(window.__sophiaWidget)window.__sophiaWidget.open()">
-              <i class="fa-solid fa-comments"></i> Talk to Sophia
-            </a>
+          <span id="p-sb-tier"></span>
+          <div id="p-sb-score" style="display:none" class="p-statbar__score">
+            <span class="p-statbar__score-num" id="p-sb-score-num"></span>
+            <span class="p-statbar__score-label">Signal<br>Score</span>
           </div>
+          <div class="p-statbar__links" id="p-sb-links"></div>
         </div>
 
         <!-- Signal Brief -->
         <div class="p-signal" id="p-signal" style="display:none">
-          <div class="p-signal__score-ring">
-            <span class="p-signal__score-value" id="p-signal-score"></span>
+          <div class="p-signal__ring">
+            <span class="p-signal__num" id="p-signal-score"></span>
           </div>
           <div class="p-signal__info">
-            <div class="p-signal__label">Signal Brief</div>
-            <div class="p-signal__desc">Authority intelligence report — topics, audience overlap, and narrative potential.</div>
-            <div class="p-signal__date" id="p-signal-date"></div>
+            <div class="p-signal__title">Signal Brief</div>
+            <div class="p-signal__desc" id="p-signal-desc">Authority intelligence report — topics, audience overlap, and narrative potential.</div>
           </div>
-          <a class="p-signal__download" id="p-signal-download" href="#" onclick="alert('Sign in to download the full Signal Brief PDF.');return false;">
+          <a class="p-signal__btn" id="p-signal-btn" href="#" onclick="alert('Sign in to download the full Signal Brief PDF.');return false;">
             <i class="fa-solid fa-file-arrow-down"></i> Download PDF
           </a>
         </div>
 
-        <!-- Two-column: Bio + Sidebar -->
-        <div class="p-grid" id="p-grid">
-          <div class="p-bio">
-            <div class="p-section__title">ABOUT</div>
-            <div class="p-bio__text" id="p-bio"></div>
-          </div>
-          <div class="p-sidebar" id="p-sidebar">
-            <!-- Watch on YouTube card -->
-            <div class="p-sidebar__card" id="p-sidebar-video" style="display:none">
-              <div class="p-sidebar__title">Watch on YouTube</div>
-              <div class="p-sidebar__yt" id="p-sidebar-yt"></div>
-            </div>
-            <!-- Social Links card -->
-            <div class="p-sidebar__card" id="p-sidebar-links" style="display:none">
-              <div class="p-sidebar__title">Connect</div>
-              <div id="p-sidebar-links-list"></div>
-            </div>
-            <!-- Press Assets card -->
-            <div class="p-sidebar__card" id="p-sidebar-press" style="display:none">
-              <div class="p-sidebar__title">Press Assets</div>
-              <div id="p-sidebar-press-list"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Center Stage Full Video -->
-        <div class="p-video" id="p-video-section" style="display:none">
-          <div class="p-section__title">CENTER STAGE INTERVIEW</div>
-          <div class="p-video__wrap" id="p-video-wrap"></div>
+        <!-- Bio — condensed -->
+        <div class="p-bio p-section" id="p-bio-section">
+          <div class="p-section__title">ABOUT</div>
+          <div class="p-bio__text" id="p-bio"></div>
+          <button class="p-bio__toggle" id="p-bio-toggle" onclick="toggleBio()">
+            Read more <i class="fa-solid fa-chevron-down" style="font-size:10px"></i>
+          </button>
         </div>
 
         <!-- Key Insights -->
         <div class="p-section" id="p-insights-section" style="display:none">
           <div class="p-section__title">KEY INSIGHTS</div>
           <div class="p-insights" id="p-insights"></div>
+        </div>
+
+        <!-- Center Stage Video -->
+        <div class="p-video p-section" id="p-video-section" style="display:none">
+          <div class="p-section__title">CENTER STAGE INTERVIEW</div>
+          <div class="p-video__wrap" id="p-video-wrap"></div>
         </div>
 
         <!-- Appearances -->
@@ -534,7 +481,7 @@
 
         <!-- CTA -->
         <div class="p-cta">
-          <p class="p-cta__title">GUEST ENGINE</p>
+          <p class="p-cta__label">GUEST ENGINE</p>
           <p class="p-cta__text">Every Guest Engine guest gets a permanent, SEO-indexed profile page — complete with clips, transcript highlights, backlinks, and a highlight reel.</p>
           <a href="/join/" class="p-cta__btn">Get Featured &rarr;</a>
         </div>
@@ -582,78 +529,72 @@
   <script src="/header.js"></script>
 
   <script>
+  function toggleBio() {
+    var bio = document.getElementById('p-bio');
+    var btn = document.getElementById('p-bio-toggle');
+    bio.classList.toggle('expanded');
+    btn.innerHTML = bio.classList.contains('expanded')
+      ? 'Read less <i class="fa-solid fa-chevron-up" style="font-size:10px"></i>'
+      : 'Read more <i class="fa-solid fa-chevron-down" style="font-size:10px"></i>';
+  }
+  function toggleFaq(i) {
+    var el = document.getElementById('faq-' + i);
+    if (el) el.classList.toggle('open');
+  }
+
   (function() {
     var API = 'https://app.conversationos.live/api/guest-marketplace';
     var slug = getSlug();
-
     if (!slug) return showNotFound();
 
     Promise.all([
       fetch(API + '/directory/' + slug).then(ok),
       fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
       fetch(API + '/authority-visuals/' + slug).then(ok).catch(function() { return null; }),
-    ]).then(function(results) {
-      var profile = results[0];
-      var authority = results[1];
-      var visuals = results[2];
-      if (!profile) return showNotFound();
-      render(profile, authority, visuals);
-    }).catch(function() { showNotFound(); });
+    ]).then(function(r) {
+      if (!r[0]) return showNotFound();
+      render(r[0], r[1], r[2]);
+    }).catch(showNotFound);
 
     function ok(r) { return r.ok ? r.json() : null; }
-
     function getSlug() {
-      var p = window.location.pathname.replace(/\/+$/, '').split('/');
-      var idx = p.indexOf('profile');
-      return idx >= 0 && p[idx + 1] ? p[idx + 1] : null;
+      var p = location.pathname.replace(/\/+$/, '').split('/');
+      var i = p.indexOf('profile');
+      return i >= 0 && p[i+1] ? p[i+1] : null;
     }
-
     function showNotFound() {
       document.getElementById('profile-loading').style.display = 'none';
       document.getElementById('profile-notfound').style.display = 'block';
     }
-
-    function parseJSON(val) {
-      if (!val) return null;
-      if (typeof val === 'object') return val;
-      try { return JSON.parse(val); } catch(e) { return null; }
+    function parseJSON(v) {
+      if (!v) return null;
+      if (typeof v === 'object') return v;
+      try { return JSON.parse(v); } catch(e) { return null; }
     }
-
     function formatDate(d) {
       if (!d) return '';
-      var date = new Date(d + 'T00:00:00');
-      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+      var dt = new Date(d + 'T00:00:00');
+      var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      return m[dt.getMonth()] + ' ' + dt.getDate() + ', ' + dt.getFullYear();
     }
-
-    function findImage(images, type) {
-      for (var i = 0; i < images.length; i++) {
-        if (images[i].type === type) return images[i].url;
-      }
+    function findImage(imgs, type) {
+      for (var i = 0; i < imgs.length; i++) if (imgs[i].type === type) return imgs[i].url;
       return null;
     }
-
     function extractYTId(url) {
       if (!url) return null;
       var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/);
       return m ? m[1] : null;
     }
-
     function esc(s) {
       if (!s) return '';
-      var d = document.createElement('div');
-      d.textContent = s;
-      return d.innerHTML;
+      var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
     }
-
-    function setMeta(name, content) {
-      var el = document.querySelector('meta[name="' + name + '"]');
-      if (el) el.setAttribute('content', content);
-    }
-    function setOG(prop, content) {
-      var el = document.querySelector('meta[property="' + prop + '"]');
-      if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
-      el.setAttribute('content', content);
+    function setMeta(n, c) { var el = document.querySelector('meta[name="'+n+'"]'); if (el) el.setAttribute('content', c); }
+    function setOG(p, c) {
+      var el = document.querySelector('meta[property="'+p+'"]');
+      if (!el) { el = document.createElement('meta'); el.setAttribute('property', p); document.head.appendChild(el); }
+      el.setAttribute('content', c);
     }
 
     function render(profile, authority, visuals) {
@@ -661,7 +602,6 @@
       var headline = (authority && authority.job_title) || profile.headline || '';
       var bio = (authority && authority.authority_bio) || profile.bio || '';
       var topics = parseJSON(profile.topics) || [];
-      var expertise = parseJSON(profile.expertise) || [];
       var socials = parseJSON(profile.socialLinks) || {};
       var appearances = parseJSON(profile.pastAppearances) || [];
       var insights = (authority && authority.key_insights) || [];
@@ -669,266 +609,166 @@
       var knowsAbout = (authority && authority.knows_about) || [];
       var csVideo = profile.centerStageVideoId;
       var images = (visuals && visuals.images) || [];
-      var guestScore = profile.guestScore;
+      var score = profile.guestScore;
 
-      // Page title + meta
+      // Meta
       document.title = name + ' — ' + headline + ' | Guest Engine';
-      setMeta('description', bio.substring(0, 200) + '...');
+      setMeta('description', bio.substring(0, 200));
       setOG('og:title', name + ' — ' + headline + ' | Guest Engine');
-      setOG('og:description', bio.substring(0, 200) + '...');
-      setOG('og:image', findImage(images, 'episode_art') || profile.headshotUrl || '');
+      setOG('og:description', bio.substring(0, 200));
+      setOG('og:image', csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : (findImage(images,'episode_art') || profile.headshotUrl || ''));
       setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
       setOG('og:type', 'profile');
 
-      // ── HERO — use YouTube maxresdefault (cinematic episode title art) as primary
-      var heroImg;
-      if (csVideo) {
-        heroImg = 'https://img.youtube.com/vi/' + csVideo + '/maxresdefault.jpg';
-      }
-      if (!heroImg) heroImg = findImage(images, 'episode_art') || findImage(images, 'authority_portrait') || profile.headshotUrl;
-      if (heroImg) {
-        document.getElementById('p-hero-bg').style.backgroundImage = 'url(' + heroImg + ')';
-      }
-      var segment = '';
-      if (topics.length && topics[0] !== 'Community Corner') segment = topics[0];
-      if (segment) document.getElementById('p-hero-segment').textContent = segment;
+      // ── HERO
+      var heroImg = csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : (findImage(images,'episode_art') || findImage(images,'authority_portrait') || profile.headshotUrl);
+      if (heroImg) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+heroImg+')';
+      var seg = (topics.length && topics[0] !== 'Community Corner') ? topics[0] : '';
+      document.getElementById('p-hero-segment').textContent = seg ? 'Mornings in the Lab · ' + seg : 'Mornings in the Lab · Center Stage';
       document.getElementById('p-hero-name').textContent = name;
       document.getElementById('p-hero-headline').textContent = headline;
-
       if (csVideo) {
         var btn = document.getElementById('p-hero-play-btn');
         btn.href = 'https://www.youtube.com/watch?v=' + csVideo;
         btn.style.display = 'inline-flex';
       }
 
-      // ── Identity Card
+      // ── Stat Bar
       if (profile.headshotUrl) {
-        document.getElementById('p-id-photo').innerHTML = '<div class="p-identity__photo"><img src="' + esc(profile.headshotUrl) + '" alt="' + esc(name) + '"></div>';
+        document.getElementById('p-sb-photo').innerHTML = '<div class="p-statbar__photo"><img src="'+esc(profile.headshotUrl)+'" alt="'+esc(name)+'"></div>';
       } else {
-        var initials = name.split(' ').map(function(w) { return w[0]; }).join('').substring(0, 2);
-        document.getElementById('p-id-photo').innerHTML = '<div class="p-identity__initials">' + esc(initials) + '</div>';
+        var init = name.split(' ').map(function(w){return w[0]}).join('').substring(0,2);
+        document.getElementById('p-sb-photo').innerHTML = '<div class="p-statbar__initials">'+esc(init)+'</div>';
+      }
+      document.getElementById('p-sb-name').textContent = name;
+      document.getElementById('p-sb-title').textContent = headline;
+
+      var tc = profile.tier === 'vip' ? 'vip' : profile.tier === 'member' ? 'member' : profile.tier === 'featured' ? 'featured' : 'free';
+      var tl = profile.tier === 'vip' ? '★ VIP' : profile.tier === 'member' ? '◆ MEMBER' : profile.tier === 'featured' ? '⚡ THE APPEARANCE' : 'DIRECTORY';
+      document.getElementById('p-sb-tier').innerHTML = '<span class="p-statbar__tier p-statbar__tier--'+tc+'">'+tl+'</span>';
+
+      if (score && score > 0) {
+        document.getElementById('p-sb-score').style.display = 'flex';
+        document.getElementById('p-sb-score-num').textContent = score;
       }
 
-      var tierClass = profile.tier === 'vip' ? 'vip' : profile.tier === 'member' ? 'member' : profile.tier === 'featured' ? 'featured' : 'free';
-      var tierLabel = profile.tier === 'vip' ? '★ VIP' : profile.tier === 'member' ? '◆ MEMBER' : profile.tier === 'featured' ? '⚡ THE APPEARANCE' : 'DIRECTORY';
-      document.getElementById('p-id-tier').innerHTML = '<span class="p-identity__tier p-identity__tier--' + tierClass + '">' + tierLabel + '</span>';
-
-      document.getElementById('p-id-name').textContent = name;
-      document.getElementById('p-id-title').textContent = headline;
-
-      var tagsHtml = '';
-      var allTopics = knowsAbout.length ? knowsAbout.slice(0, 4) : (expertise.length ? expertise.slice(0, 4) : topics.slice(0, 4));
-      allTopics.forEach(function(t) {
-        tagsHtml += '<span class="p-identity__tag">' + esc(t) + '</span>';
+      // Social icons in stat bar
+      var linkMap = {
+        linkedin:{icon:'fa-brands fa-linkedin',label:'LinkedIn'},twitter:{icon:'fa-brands fa-x-twitter',label:'X'},
+        website:{icon:'fa-solid fa-globe',label:'Website'},youtube:{icon:'fa-brands fa-youtube',label:'YouTube'},
+        instagram:{icon:'fa-brands fa-instagram',label:'Instagram'},facebook:{icon:'fa-brands fa-facebook',label:'Facebook'},
+        tiktok:{icon:'fa-brands fa-tiktok',label:'TikTok'},substack:{icon:'fa-solid fa-newspaper',label:'Substack'},
+      };
+      var linksHtml = '';
+      Object.keys(socials).forEach(function(k) {
+        var url = socials[k]; if (!url) return;
+        var m = linkMap[k] || {icon:'fa-solid fa-link',label:k};
+        linksHtml += '<a href="'+esc(url)+'" class="p-statbar__link" target="_blank" rel="noopener" title="'+m.label+'"><i class="'+m.icon+'"></i></a>';
       });
-      document.getElementById('p-id-tags').innerHTML = tagsHtml;
+      document.getElementById('p-sb-links').innerHTML = linksHtml;
 
       // ── Signal Brief
-      if (guestScore && guestScore > 0) {
+      if (score && score > 0) {
         document.getElementById('p-signal').style.display = 'flex';
-        document.getElementById('p-signal-score').textContent = guestScore;
-        document.getElementById('p-signal-date').textContent = 'Generated ' + formatDate(profile.updatedAt ? profile.updatedAt.split('T')[0] : null);
+        document.getElementById('p-signal-score').textContent = score;
       }
 
-      // ── Bio (two-column with sidebar)
-      var bioHtml = bio.split('\n\n').map(function(p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; }).join('');
+      // ── Bio (condensed)
+      var bioHtml = bio.split('\n\n').map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>'}).join('');
       document.getElementById('p-bio').innerHTML = bioHtml;
-
-      // ── Sidebar: YouTube
-      if (csVideo) {
-        document.getElementById('p-sidebar-video').style.display = 'block';
-        document.getElementById('p-sidebar-yt').innerHTML = '<iframe src="https://www.youtube.com/embed/' + csVideo + '?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
-      }
-
-      // ── Sidebar: Social Links
-      var linkMap = {
-        linkedin: { icon: 'fa-brands fa-linkedin', label: 'LinkedIn' },
-        twitter: { icon: 'fa-brands fa-x-twitter', label: 'X' },
-        website: { icon: 'fa-solid fa-globe', label: 'Website' },
-        youtube: { icon: 'fa-brands fa-youtube', label: 'YouTube' },
-        instagram: { icon: 'fa-brands fa-instagram', label: 'Instagram' },
-        facebook: { icon: 'fa-brands fa-facebook', label: 'Facebook' },
-        tiktok: { icon: 'fa-brands fa-tiktok', label: 'TikTok' },
-        substack: { icon: 'fa-solid fa-newspaper', label: 'Substack' },
-        roam: { icon: 'fa-solid fa-video', label: 'Ro.am' },
-      };
-      var hasLinks = false;
-      var linksHtml = '';
-      Object.keys(socials).forEach(function(key) {
-        var url = socials[key];
-        if (!url) return;
-        var m = linkMap[key] || { icon: 'fa-solid fa-link', label: key };
-        linksHtml += '<a href="' + esc(url) + '" class="p-sidebar__link" target="_blank" rel="noopener"><i class="' + m.icon + '"></i> ' + m.label + '</a>';
-        hasLinks = true;
-      });
-      if (hasLinks) {
-        document.getElementById('p-sidebar-links').style.display = 'block';
-        document.getElementById('p-sidebar-links-list').innerHTML = linksHtml;
-      }
-
-      // ── Sidebar: Press Assets (authority visuals)
-      var portrait = findImage(images, 'authority_portrait');
-      var quoteCard = findImage(images, 'quote_card_bg');
-      var landscape = findImage(images, 'topic_landscape');
-      if (portrait || quoteCard || landscape) {
-        document.getElementById('p-sidebar-press').style.display = 'block';
-        var pressHtml = '';
-        if (portrait) pressHtml += '<a href="' + portrait + '" target="_blank"><img src="' + portrait + '" alt="Authority portrait" class="p-sidebar__press-img" loading="lazy"></a>';
-        if (quoteCard) pressHtml += '<a href="' + quoteCard + '" target="_blank"><img src="' + quoteCard + '" alt="Quote card" class="p-sidebar__press-img" loading="lazy"></a>';
-        if (landscape) pressHtml += '<a href="' + landscape + '" target="_blank"><img src="' + landscape + '" alt="Topic landscape" class="p-sidebar__press-img" loading="lazy"></a>';
-        document.getElementById('p-sidebar-press-list').innerHTML = pressHtml;
-      }
 
       // ── Key Insights
       if (insights.length) {
         document.getElementById('p-insights-section').style.display = 'block';
         var insHtml = '';
-        insights.slice(0, 5).forEach(function(ins) {
+        insights.slice(0,5).forEach(function(ins) {
           insHtml += '<div class="p-insight">';
-          insHtml += '<div class="p-insight__quote">"' + esc(ins.quote || '') + '"</div>';
-          if (ins.context) insHtml += '<div class="p-insight__context">' + esc(ins.context) + '</div>';
-          if (ins.topic) insHtml += '<span class="p-insight__topic">' + esc(ins.topic) + '</span>';
+          insHtml += '<div class="p-insight__quote">"'+esc(ins.quote||'')+'"</div>';
+          if (ins.context) insHtml += '<div class="p-insight__context">'+esc(ins.context)+'</div>';
+          if (ins.topic) insHtml += '<span class="p-insight__topic">'+esc(ins.topic)+'</span>';
           insHtml += '</div>';
         });
         document.getElementById('p-insights').innerHTML = insHtml;
       }
 
+      // ── Video embed
+      if (csVideo) {
+        document.getElementById('p-video-section').style.display = 'block';
+        document.getElementById('p-video-wrap').innerHTML = '<iframe src="https://www.youtube.com/embed/'+csVideo+'?rel=0" allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+      }
+
       // ── Appearances
       if (appearances.length) {
         document.getElementById('p-appearances-section').style.display = 'block';
-        var appHtml = '';
+        var appH = '';
         appearances.forEach(function(a) {
-          var isLink = !!a.link;
-          var tag = isLink ? 'a' : 'div';
-          var href = isLink ? ' href="' + esc(a.link) + '" target="_blank"' : '';
-          var videoId = a.link ? extractYTId(a.link) : null;
-          var thumbUrl = videoId ? 'https://img.youtube.com/vi/' + videoId + '/mqdefault.jpg' : '';
-
-          appHtml += '<' + tag + ' class="p-appearance"' + href + '>';
-          appHtml += '<div class="p-appearance__thumb">';
-          if (thumbUrl) {
-            appHtml += '<img src="' + thumbUrl + '" alt="" loading="lazy">';
-            appHtml += '<div class="p-appearance__thumb-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>';
-          } else {
-            appHtml += '<i class="fa-solid fa-play" style="color:#fbbf24;font-size:1.25rem"></i>';
-          }
-          appHtml += '</div><div>';
-          appHtml += '<div class="p-appearance__show">' + esc(a.showName || 'MiTL Live Network') + '</div>';
-          appHtml += '<div class="p-appearance__segment">' + esc(a.segment || 'Guest Appearance') + '</div>';
-          appHtml += '<div class="p-appearance__date">' + formatDate(a.date) + '</div>';
-          appHtml += '</div></' + tag + '>';
+          var isL = !!a.link, tag = isL?'a':'div', href = isL?' href="'+esc(a.link)+'" target="_blank"':'';
+          var vid = a.link ? extractYTId(a.link) : null;
+          var th = vid ? 'https://img.youtube.com/vi/'+vid+'/mqdefault.jpg' : '';
+          appH += '<'+tag+' class="p-appearance"'+href+'>';
+          appH += '<div class="p-appearance__thumb">';
+          if (th) { appH += '<img src="'+th+'" alt="" loading="lazy"><div class="p-appearance__thumb-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>'; }
+          else { appH += '<i class="fa-solid fa-play" style="color:var(--gold);font-size:1rem"></i>'; }
+          appH += '</div><div>';
+          appH += '<div class="p-appearance__show">'+esc(a.showName||'MiTL Live Network')+'</div>';
+          appH += '<div class="p-appearance__segment">'+esc(a.segment||'Guest Appearance')+'</div>';
+          appH += '<div class="p-appearance__date">'+formatDate(a.date)+'</div>';
+          appH += '</div></'+tag+'>';
         });
-        document.getElementById('p-appearances').innerHTML = appHtml;
+        document.getElementById('p-appearances').innerHTML = appH;
       }
 
       // ── FAQ
       if (faqs.length) {
         document.getElementById('p-faq-section').style.display = 'block';
-        var faqHtml = '';
-        faqs.forEach(function(f, i) {
-          faqHtml += '<div class="p-faq" id="faq-' + i + '">';
-          faqHtml += '<button class="p-faq__q" onclick="toggleFaq(' + i + ')">';
-          faqHtml += '<span>' + esc(f.question) + '</span>';
-          faqHtml += '<svg class="p-faq__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
-          faqHtml += '</button>';
-          faqHtml += '<div class="p-faq__a"><div class="p-faq__a-inner">' + esc(f.answer) + '</div></div>';
-          faqHtml += '</div>';
+        var fH = '';
+        faqs.forEach(function(f,i) {
+          fH += '<div class="p-faq" id="faq-'+i+'"><button class="p-faq__q" onclick="toggleFaq('+i+')">';
+          fH += '<span>'+esc(f.question)+'</span>';
+          fH += '<svg class="p-faq__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+          fH += '</button><div class="p-faq__a"><div class="p-faq__a-inner">'+esc(f.answer)+'</div></div></div>';
         });
-        document.getElementById('p-faqs').innerHTML = faqHtml;
+        document.getElementById('p-faqs').innerHTML = fH;
       }
 
       // ── Expertise
       if (knowsAbout.length) {
         document.getElementById('p-knows-section').style.display = 'block';
-        var knowsHtml = '';
-        knowsAbout.forEach(function(k) {
-          knowsHtml += '<div class="p-knows__item">' + esc(k) + '</div>';
-        });
-        document.getElementById('p-knows').innerHTML = knowsHtml;
+        var kH = '';
+        knowsAbout.forEach(function(k) { kH += '<div class="p-knows__item">'+esc(k)+'</div>'; });
+        document.getElementById('p-knows').innerHTML = kH;
       }
 
       // Structured data
-      injectStructuredData(profile, authority, visuals);
+      injectSchema(profile, authority, visuals);
 
-      // Show content
+      // Show
       document.getElementById('profile-loading').style.display = 'none';
       document.getElementById('profile-content').style.display = 'block';
     }
 
-    function injectStructuredData(profile, authority, visuals) {
-      var name = profile.guestName || '';
-      var headline = (authority && authority.job_title) || profile.headline || '';
-      var bio = (authority && authority.authority_bio) || profile.bio || '';
-      var knowsAbout = (authority && authority.knows_about) || [];
-      var sameAs = (authority && authority.same_as) || [];
-      var faqs = (authority && authority.faqs) || [];
-
-      var schema = {
-        '@context': 'https://schema.org',
-        '@graph': [
-          {
-            '@type': 'Person',
-            '@id': 'https://guestengine.live/profile/' + profile.slug + '#person',
-            name: name,
-            url: 'https://guestengine.live/profile/' + profile.slug,
-            jobTitle: headline,
-            description: bio.substring(0, 500),
-            image: profile.headshotUrl || undefined,
-            knowsAbout: knowsAbout,
-            sameAs: sameAs,
-          },
-          {
-            '@type': 'ProfilePage',
-            '@id': 'https://guestengine.live/profile/' + profile.slug,
-            name: name + ' — ' + headline + ' | Guest Engine',
-            url: 'https://guestengine.live/profile/' + profile.slug,
-            about: { '@id': 'https://guestengine.live/profile/' + profile.slug + '#person' },
-            isPartOf: { '@type': 'WebSite', name: 'Guest Engine', url: 'https://guestengine.live' },
-          }
-        ]
-      };
-
-      if (faqs.length) {
-        schema['@graph'].push({
-          '@type': 'FAQPage',
-          '@id': 'https://guestengine.live/profile/' + profile.slug + '#faq',
-          mainEntity: faqs.map(function(f) {
-            return { '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } };
-          })
-        });
-      }
-
-      if (profile.centerStageVideoId) {
-        schema['@graph'].push({
-          '@type': 'VideoObject',
-          name: name + ' — Center Stage Interview | Mornings in the Lab',
-          thumbnailUrl: 'https://img.youtube.com/vi/' + profile.centerStageVideoId + '/maxresdefault.jpg',
-          contentUrl: 'https://www.youtube.com/watch?v=' + profile.centerStageVideoId,
-          embedUrl: 'https://www.youtube.com/embed/' + profile.centerStageVideoId,
-          publisher: { '@type': 'Organization', name: 'Mornings in the Lab', url: 'https://mornings.live' }
-        });
-      }
-
-      var el = document.createElement('script');
-      el.type = 'application/ld+json';
-      el.textContent = JSON.stringify(schema);
-      document.head.appendChild(el);
+    function injectSchema(profile, authority) {
+      var name = profile.guestName||'', headline = (authority&&authority.job_title)||profile.headline||'';
+      var bio = (authority&&authority.authority_bio)||profile.bio||'';
+      var knowsAbout = (authority&&authority.knows_about)||[];
+      var sameAs = (authority&&authority.same_as)||[];
+      var faqs = (authority&&authority.faqs)||[];
+      var s = {'@context':'https://schema.org','@graph':[
+        {'@type':'Person','@id':'https://guestengine.live/profile/'+profile.slug+'#person',name:name,url:'https://guestengine.live/profile/'+profile.slug,jobTitle:headline,description:bio.substring(0,500),image:profile.headshotUrl||undefined,knowsAbout:knowsAbout,sameAs:sameAs},
+        {'@type':'ProfilePage','@id':'https://guestengine.live/profile/'+profile.slug,name:name+' — '+headline+' | Guest Engine',url:'https://guestengine.live/profile/'+profile.slug,about:{'@id':'https://guestengine.live/profile/'+profile.slug+'#person'},isPartOf:{'@type':'WebSite',name:'Guest Engine',url:'https://guestengine.live'}}
+      ]};
+      if (faqs.length) s['@graph'].push({'@type':'FAQPage','@id':'https://guestengine.live/profile/'+profile.slug+'#faq',mainEntity:faqs.map(function(f){return{'@type':'Question',name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer}}})});
+      if (profile.centerStageVideoId) s['@graph'].push({'@type':'VideoObject',name:name+' — Center Stage Interview | Mornings in the Lab',thumbnailUrl:'https://img.youtube.com/vi/'+profile.centerStageVideoId+'/maxresdefault.jpg',contentUrl:'https://www.youtube.com/watch?v='+profile.centerStageVideoId,embedUrl:'https://www.youtube.com/embed/'+profile.centerStageVideoId,publisher:{'@type':'Organization',name:'Mornings in the Lab',url:'https://mornings.live'}});
+      var el = document.createElement('script'); el.type = 'application/ld+json'; el.textContent = JSON.stringify(s); document.head.appendChild(el);
     }
   })();
-
-  function toggleFaq(i) {
-    var el = document.getElementById('faq-' + i);
-    if (el) el.classList.toggle('open');
-  }
   </script>
 
-  <!-- SOPHIA AI CHAT WIDGET -->
   <script
     src="https://app.conversationos.live/sophia-embed.js"
     data-product="guest-engine"
     data-theme="dark"
     data-accent-color="#7c3aed"
   ></script>
-
 </body>
 </html>
