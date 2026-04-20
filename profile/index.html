@@ -185,6 +185,134 @@
   .p-signal__btn:hover { background:rgba(251,191,36,0.12); border-color:var(--gold); }
   .p-signal__btn i { font-size:11px; }
 
+  /* ── Signal Breakdown — dimensional bars ─── */
+  .p-signal-breakdown {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(251,191,36,0.1);
+    border-radius: 16px;
+    padding: 2rem 2rem 1.5rem;
+    margin-top: 1rem;
+  }
+  .p-sb-header { margin-bottom: 1.5rem; }
+  .p-sb-title {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 0.35rem;
+  }
+  .p-sb-subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .p-sb-bars { display: flex; flex-direction: column; gap: 1rem; }
+  .p-sb-bar-row {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .p-sb-bar-label {
+    width: 120px; min-width: 120px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: right;
+  }
+  .p-sb-bar-track {
+    flex: 1; height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .p-sb-bar-fill {
+    height: 100%; border-radius: 4px;
+    transition: width 1.2s cubic-bezier(.22,1,.36,1);
+    width: 0;
+  }
+  .p-sb-bar-fill.high { background: var(--gold); }
+  .p-sb-bar-fill.mid { background: #d97706; }
+  .p-sb-bar-fill.low { background: rgba(251,191,36,0.25); }
+  .p-sb-bar-fill.zero { background: rgba(255,255,255,0.08); width: 100% !important; }
+  .p-sb-bar-value {
+    width: 36px; min-width: 36px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-align: right;
+  }
+  .p-sb-bar-value.high { color: var(--gold); }
+  .p-sb-bar-value.mid { color: #d97706; }
+  .p-sb-bar-value.low { color: rgba(251,191,36,0.5); }
+  .p-sb-bar-value.zero { color: rgba(255,255,255,0.25); }
+  .p-sb-bar-status {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 80px; min-width: 80px;
+  }
+  .p-sb-bar-status.high { color: var(--gold); }
+  .p-sb-bar-status.mid { color: #d97706; }
+  .p-sb-bar-status.low { color: rgba(251,191,36,0.5); }
+  .p-sb-bar-status.zero { color: rgba(255,255,255,0.25); }
+
+  /* Improvement actions */
+  .p-sb-actions {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(251,191,36,0.1);
+    padding-top: 1.25rem;
+  }
+  .p-sb-actions-header {
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  .p-sb-actions-header i { margin-right: 6px; }
+  .p-sb-actions-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .p-sb-action {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(251,191,36,0.04);
+    border: 1px solid rgba(251,191,36,0.08);
+    border-radius: 10px;
+    transition: border-color .2s;
+  }
+  .p-sb-action:hover { border-color: rgba(251,191,36,0.25); }
+  .p-sb-action-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    background: rgba(251,191,36,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 12px;
+    margin-top: 2px;
+  }
+  .p-sb-action-text { flex: 1; }
+  .p-sb-action-title {
+    font-size: 0.8125rem; font-weight: 600;
+    color: #fff; margin-bottom: 2px;
+  }
+  .p-sb-action-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .p-sb-action-impact {
+    font-size: 0.6875rem;
+    color: var(--gold);
+    font-weight: 600;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  @media (max-width:600px) {
+    .p-sb-bar-row { flex-wrap: wrap; gap: 0.4rem; }
+    .p-sb-bar-label { width: 100%; text-align: left; min-width: unset; }
+    .p-sb-bar-status { display: none; }
+    .p-signal-breakdown { padding: 1.25rem; }
+  }
+
   /* ── Story Chapter — image + quote side by side ── */
   .p-chapter {
     display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:0;
@@ -478,6 +606,21 @@
           </a>
         </div>
 
+        <!-- Signal Breakdown — dimensional bars + improvement actions -->
+        <div class="p-signal-breakdown p-reveal" id="p-signal-breakdown" style="display:none">
+          <div class="p-sb-header">
+            <h3 class="p-sb-title">Signal Breakdown</h3>
+            <p class="p-sb-subtitle">What's driving the score — and what's holding it back.</p>
+          </div>
+          <div class="p-sb-bars" id="p-sb-bars"></div>
+          <div class="p-sb-actions" id="p-sb-actions" style="display:none">
+            <div class="p-sb-actions-header">
+              <i class="fa-solid fa-bolt"></i> Fastest Ways to Improve
+            </div>
+            <div class="p-sb-actions-list" id="p-sb-actions-list"></div>
+          </div>
+        </div>
+
       </div>
 
       <!-- STORY CHAPTERS — full-bleed visual narrative -->
@@ -732,6 +875,131 @@
         setTimeout(function(){
           document.getElementById('p-signal-ring').style.strokeDashoffset = offset;
         }, 300);
+      }
+
+      // ── SIGNAL BREAKDOWN — dimensional bars + improvement actions
+      if (score && score > 0) {
+        var appearances = profile.pastAppearances;
+        if (typeof appearances === 'string') try { appearances = JSON.parse(appearances); } catch(e) { appearances = []; }
+        appearances = appearances || [];
+        var socialObj = socials || {};
+        var socialCount = Object.keys(socialObj).filter(function(k){ return !!socialObj[k]; }).length;
+        var expertiseCount = (authorityData && authorityData.knows_about) ? authorityData.knows_about.length : (profile.expertise ? profile.expertise.length : 0);
+        var hasTwin = profile.twinStatus && profile.twinStatus !== 'none';
+        var hasCharacter = !!profile.characterId;
+        var tierLevel = profile.tier === 'vip' ? 3 : profile.tier === 'member' ? 2 : profile.tier === 'featured' ? 1 : 0;
+
+        // Estimate dimension scores (0-25 each) based on observable data
+        // These approximate the backend rubric: socialFootprint, contentReach, publicDiscourse, professionalAuthority
+        var dims = [];
+
+        // Social Footprint: based on connected platforms (proxy for followers we can't see)
+        var sfScore = Math.min(25, Math.round(socialCount * 3.5));
+        dims.push({
+          label: 'Social Footprint', score: sfScore, max: 25,
+          desc: socialCount + ' of 7 platforms connected',
+          action: sfScore < 20 ? {
+            icon: 'fa-solid fa-share-nodes',
+            title: 'Connect Your Social Profiles',
+            desc: 'Link LinkedIn, X, Instagram, YouTube, TikTok, Facebook, and your website to strengthen your digital footprint.',
+            impact: '+' + (Math.min(25, 25) - sfScore) + ' pts possible'
+          } : null
+        });
+
+        // Content Reach: based on appearances + tier
+        var crScore = Math.min(25, appearances.length * 8 + tierLevel * 3);
+        dims.push({
+          label: 'Content Reach', score: crScore, max: 25,
+          desc: appearances.length + ' appearance' + (appearances.length !== 1 ? 's' : '') + ' on Mornings in the Lab',
+          action: crScore < 20 ? {
+            icon: 'fa-solid fa-microphone-lines',
+            title: 'Book Another Appearance',
+            desc: 'Each appearance generates new content, clips, and backlinks that amplify your reach across every platform.',
+            impact: '+8 pts per appearance'
+          } : null
+        });
+
+        // Public Discourse: based on authority data richness (FAQs, insights, topics)
+        var faqCount = (authorityData && authorityData.faqs) ? authorityData.faqs.length : 0;
+        var insightCount = insights.length;
+        var topicCount = (authorityData && authorityData.conversation_topics) ? authorityData.conversation_topics.length : 0;
+        var pdScore = Math.min(25, Math.round((faqCount * 2) + (insightCount * 1.5) + (topicCount * 1)));
+        dims.push({
+          label: 'Public Discourse', score: pdScore, max: 25,
+          desc: faqCount + ' FAQs, ' + insightCount + ' key insights indexed',
+          action: pdScore < 20 ? {
+            icon: 'fa-solid fa-comments',
+            title: 'Create Content Through Dialog',
+            desc: 'Recurring appearances and community interaction build discourse around your expertise — the engine that drives discovery.',
+            impact: '+' + (20 - pdScore) + ' pts achievable'
+          } : null
+        });
+
+        // Professional Authority: based on tier, twin, expertise depth
+        var paScore = Math.min(25, (tierLevel * 5) + (hasTwin ? 5 : 0) + (hasCharacter ? 3 : 0) + Math.min(7, expertiseCount));
+        dims.push({
+          label: 'Authority', score: paScore, max: 25,
+          desc: (hasTwin ? 'Digital Twin active' : 'No Digital Twin') + ' · ' + (tierLevel >= 2 ? 'VIP tier' : tierLevel >= 1 ? 'Featured tier' : 'Basic tier'),
+          action: paScore < 20 ? {
+            icon: 'fa-solid fa-crown',
+            title: hasTwin ? 'Upgrade to VIP' : 'Activate Your Digital Twin',
+            desc: hasTwin
+              ? 'VIP members get weekly signal updates, priority matching, and top placement — the full authority engine.'
+              : 'Your Digital Twin creates a persistent AI representation trained on your real content and expertise.',
+            impact: '+' + (hasTwin ? '5' : '8') + ' pts'
+          } : null
+        });
+
+        // Render the breakdown
+        var breakdownEl = document.getElementById('p-signal-breakdown');
+        var barsEl = document.getElementById('p-sb-bars');
+        var actionsEl = document.getElementById('p-sb-actions');
+        var actionsListEl = document.getElementById('p-sb-actions-list');
+        breakdownEl.style.display = 'block';
+
+        var barsHtml = '';
+        var actionsHtml = '';
+        var actionCount = 0;
+
+        dims.forEach(function(d) {
+          var pct = Math.round((d.score / d.max) * 100);
+          var tier = pct >= 80 ? 'high' : pct >= 50 ? 'mid' : pct > 0 ? 'low' : 'zero';
+          var statusText = pct >= 80 ? 'Strong' : pct >= 50 ? 'Growing' : pct > 0 ? 'Needs Work' : 'Missing';
+          barsHtml += '<div class="p-sb-bar-row">' +
+            '<div class="p-sb-bar-label">' + d.label + '</div>' +
+            '<div class="p-sb-bar-track"><div class="p-sb-bar-fill ' + tier + '" data-width="' + pct + '"></div></div>' +
+            '<div class="p-sb-bar-value ' + tier + '">' + d.score + '/' + d.max + '</div>' +
+            '<div class="p-sb-bar-status ' + tier + '">' + statusText + '</div>' +
+            '</div>';
+
+          if (d.action && actionCount < 3) {
+            actionsHtml += '<div class="p-sb-action">' +
+              '<div class="p-sb-action-icon"><i class="' + d.action.icon + '"></i></div>' +
+              '<div class="p-sb-action-text">' +
+                '<div class="p-sb-action-title">' + d.action.title + '</div>' +
+                '<div class="p-sb-action-desc">' + d.action.desc + '</div>' +
+              '</div>' +
+              '<div class="p-sb-action-impact">' + d.action.impact + '</div>' +
+              '</div>';
+            actionCount++;
+          }
+        });
+
+        barsEl.innerHTML = barsHtml;
+
+        if (actionCount > 0) {
+          actionsListEl.innerHTML = actionsHtml;
+          actionsEl.style.display = 'block';
+        }
+
+        // Animate bar fills after a delay
+        setTimeout(function() {
+          var fills = barsEl.querySelectorAll('.p-sb-bar-fill');
+          fills.forEach(function(f) {
+            var w = f.getAttribute('data-width');
+            if (!f.classList.contains('zero')) f.style.width = w + '%';
+          });
+        }, 500);
       }
 
       // ── STORY CHAPTERS — visual narrative
