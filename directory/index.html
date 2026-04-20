@@ -111,9 +111,8 @@ img { max-width: 100%; display: block; }
    ============================================================ */
 .hero {
   position: relative;
-  height: 88vh;
-  min-height: 560px;
-  max-height: 820px;
+  height: 100vh;
+  min-height: 600px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -160,8 +159,8 @@ img { max-width: 100%; display: block; }
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 80px 100px;
-  max-width: 960px;
+  padding: 0 80px 80px;
+  max-width: 1200px;
   text-align: left;
 }
 
@@ -188,13 +187,12 @@ img { max-width: 100%; display: block; }
 .hero-content h1 {
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: clamp(36px, 4.8vw, 72px);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: 72px;
+  line-height: 1.0;
+  letter-spacing: -1px;
   text-transform: uppercase;
   color: #ffffff;
   margin: 0;
-  text-shadow: 0 4px 40px rgba(0,0,0,0.4);
 }
 .hero-content h1 .gold { color: #fbbf24; }
 
@@ -1367,8 +1365,8 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 900px) {
-  .hero-content { padding: 0 32px 70px; }
-  .hero-content h1 { font-size: 60px; }
+  .hero-content { padding: 0 32px 60px; }
+  .hero-content h1 { font-size: 48px; }
   .hero-row { grid-template-columns: 1fr; gap: 24px; align-items: flex-start; }
   .stats { justify-content: flex-start; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
