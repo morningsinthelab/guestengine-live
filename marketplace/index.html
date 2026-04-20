@@ -530,7 +530,7 @@
   .hero-content h1 {
     font-family: 'Cabinet Grotesk', sans-serif;
     font-weight: 900;
-    font-size: 72px;
+    font-size: clamp(48px, 5vw, 72px);
     line-height: 1.0;
     letter-spacing: -1px;
     text-transform: uppercase;
@@ -653,7 +653,7 @@
     </button>
     <div class="hero-content">
       <h1>
-        THE CHARACTERS BEHIND<br>
+        <span style="white-space:nowrap">THE CHARACTERS BEHIND</span><br>
         <span class="gold">THE NETWORK.</span>
       </h1>
       <p class="hero-sub">
