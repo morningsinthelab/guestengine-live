@@ -126,11 +126,28 @@ img { max-width: 100%; display: block; }
   inset: 0;
   z-index: -1;
 }
-.hero__img {
+.hero__video, .hero__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
+}
+.hero__unmute {
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
 }
 .hero__overlay {
   position: absolute;
@@ -2203,6 +2220,23 @@ img { max-width: 100%; display: block; }
       mo.observe(container, { childList: true, subtree: true });
     }
     observeAll();
+  })();
+  </script>
+
+  <!-- Hero video unmute toggle -->
+  <script>
+  (function() {
+    var video = document.getElementById('hero-video');
+    var btn = document.getElementById('heroUnmute');
+    if (!video || !btn) return;
+    var mutedIcon = btn.querySelector('.hero__unmute-icon--muted');
+    var unmutedIcon = btn.querySelector('.hero__unmute-icon--unmuted');
+    btn.addEventListener('click', function() {
+      video.muted = !video.muted;
+      mutedIcon.style.display = video.muted ? '' : 'none';
+      unmutedIcon.style.display = video.muted ? 'none' : '';
+      btn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+    });
   })();
   </script>
 
