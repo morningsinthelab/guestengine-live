@@ -2015,13 +2015,16 @@ img { max-width: 100%; display: block; }
     var allFetched = [];
     var page = 1;
     var totalPages = 1;
+    var maxPages = 15; // safety limit
 
     try {
-      while (page <= totalPages) {
+      while (page <= totalPages && page <= maxPages) {
         var url = API_BASE + '/directory?limit=50&page=' + page + '&sort=featured';
+        console.log('[GuestDirectory] Fetching page ' + page + '/' + totalPages + ':', url);
         var response = await fetch(url);
         if (!response.ok) throw new Error('API returned ' + response.status);
         var data = await response.json();
+        console.log('[GuestDirectory] Page ' + page + ': ' + (data.guests ? data.guests.length : 0) + ' guests, total=' + data.total + ', totalPages=' + data.totalPages);
 
         if (data.guests && Array.isArray(data.guests)) {
           allFetched = allFetched.concat(data.guests);
@@ -2031,27 +2034,36 @@ img { max-width: 100%; display: block; }
       }
     } catch (err) {
       console.error('[GuestDirectory] API fetch failed:', err);
+      // If we already fetched some pages, use what we have rather than showing nothing
+      if (allFetched.length > 0) {
+        console.warn('[GuestDirectory] Partial fetch: using ' + allFetched.length + ' guests from completed pages');
+        return allFetched.map(normalizeGuest);
+      }
       var container = document.getElementById('grid-container');
       if (container) container.innerHTML = '<div class="tier-section"><div class="grid"><div class="loading">Unable to load guest directory. Please try again later.</div></div></div>';
       return [];
     }
 
+    console.log('[GuestDirectory] Total fetched: ' + allFetched.length + ' guests');
     return allFetched.map(normalizeGuest);
   }
 
   // Initialize directory from API
   (async function initDirectory() {
     var fetched = await fetchAllGuests();
+    console.log('[GuestDirectory] Fetched total:', fetched.length);
 
+    var excludedCount = 0, noAppsCount = 0, ccCount = 0;
     var guests = fetched.filter(function(g) {
-      if (EXCLUDED_SLUGS.indexOf(g.slug) !== -1) return false;
+      if (EXCLUDED_SLUGS.indexOf(g.slug) !== -1) { excludedCount++; return false; }
       // Exclude guests who never appeared on the show
       var apps = getAppearances(g);
-      if (!apps.length) return false;
+      if (!apps.length) { noAppsCount++; return false; }
       // Exclude Community Corner guests
-      if (getSegCode(g.topics) === 'cc') return false;
+      if (getSegCode(g.topics) === 'cc') { ccCount++; return false; }
       return true;
     });
+    console.log('[GuestDirectory] Filter: excluded=' + excludedCount + ', noAppearances=' + noAppsCount + ', communityCorner=' + ccCount + ', remaining=' + guests.length);
 
     allGuests = guests;
 
