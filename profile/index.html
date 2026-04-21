@@ -830,9 +830,17 @@
       var tl = profile.tier === 'vip' ? '★ VIP' : profile.tier === 'member' ? '◆ MEMBER' : profile.tier === 'featured' ? '⚡ THE APPEARANCE' : 'DIRECTORY';
       document.getElementById('p-sb-tier').innerHTML = '<span class="p-statbar__tier p-statbar__tier--'+tc+'">'+tl+'</span>';
 
-      if (score && score > 0) {
+      // Signal score headline: use sum of backend breakdown when available,
+      // otherwise fall back to guestScore (profile completeness)
+      var hasBackendSignalScores = (profile.signalSocial || 0) + (profile.signalReach || 0) +
+        (profile.signalDiscourse || 0) + (profile.signalAuthorityScore || 0) > 0;
+      var displayScore = hasBackendSignalScores
+        ? (profile.signalSocial || 0) + (profile.signalReach || 0) +
+          (profile.signalDiscourse || 0) + (profile.signalAuthorityScore || 0)
+        : score;
+      if (displayScore && displayScore > 0) {
         document.getElementById('p-sb-score').style.display = 'flex';
-        document.getElementById('p-sb-score-num').textContent = score;
+        document.getElementById('p-sb-score-num').textContent = displayScore;
       }
 
       // Social icons
@@ -850,12 +858,12 @@
       });
       document.getElementById('p-sb-links').innerHTML = linksHtml;
 
-      // ── Signal Brief — animated ring
-      if (score && score > 0) {
+      // ── Signal Brief — animated ring (uses same displayScore as headline)
+      if (displayScore && displayScore > 0) {
         document.getElementById('p-signal').style.display = 'flex';
-        document.getElementById('p-signal-score').textContent = score;
+        document.getElementById('p-signal-score').textContent = displayScore;
         var circumference = 2 * Math.PI * 30; // r=30
-        var offset = circumference - (score / 100) * circumference;
+        var offset = circumference - (displayScore / 100) * circumference;
         setTimeout(function(){
           document.getElementById('p-signal-ring').style.strokeDashoffset = offset;
         }, 300);
@@ -871,66 +879,117 @@
         var hasCharacter = !!profile.characterId;
         var tierLevel = profile.tier === 'vip' ? 3 : profile.tier === 'member' ? 2 : profile.tier === 'featured' ? 1 : 0;
 
-        // Estimate dimension scores (0-25 each) based on observable data
-        // These approximate the backend rubric: socialFootprint, contentReach, publicDiscourse, professionalAuthority
+        // Use backend signal scores when available (from Hub DB), fall back to client-side estimates
+        var hasBackendSignal = (profile.signalSocial || 0) + (profile.signalReach || 0) +
+          (profile.signalDiscourse || 0) + (profile.signalAuthorityScore || 0) > 0;
+
         var dims = [];
 
-        // Social Footprint: based on connected platforms (proxy for followers we can't see)
-        var sfScore = Math.min(25, Math.round(socialCount * 3.5));
-        dims.push({
-          label: 'Social Footprint', score: sfScore, max: 25,
-          desc: socialCount + ' of 7 platforms connected',
-          action: sfScore < 20 ? {
-            icon: 'fa-solid fa-share-nodes',
-            title: 'Connect Your Social Profiles',
-            desc: 'Link LinkedIn, X, Instagram, YouTube, TikTok, Facebook, and your website to strengthen your digital footprint.',
-            impact: '+' + (Math.min(25, 25) - sfScore) + ' pts possible'
-          } : null
-        });
+        if (hasBackendSignal) {
+          // Backend-calculated signal scores (authoritative)
+          var sfScore = profile.signalSocial || 0;
+          var crScore = profile.signalReach || 0;
+          var pdScore = profile.signalDiscourse || 0;
+          var paScore = profile.signalAuthorityScore || 0;
 
-        // Content Reach: based on appearances + tier
-        var crScore = Math.min(25, appearances.length * 8 + tierLevel * 3);
-        dims.push({
-          label: 'Content Reach', score: crScore, max: 25,
-          desc: appearances.length + ' appearance' + (appearances.length !== 1 ? 's' : '') + ' on Mornings in the Lab',
-          action: crScore < 20 ? {
-            icon: 'fa-solid fa-microphone-lines',
-            title: 'Book Another Appearance',
-            desc: 'Each appearance generates new content, clips, and backlinks that amplify your reach across every platform.',
-            impact: '+8 pts per appearance'
-          } : null
-        });
+          dims.push({
+            label: 'Social Footprint', score: sfScore, max: 25,
+            desc: socialCount + ' of 7 platforms connected',
+            action: sfScore < 20 ? {
+              icon: 'fa-solid fa-share-nodes',
+              title: 'Connect Your Social Profiles',
+              desc: 'Link LinkedIn, X, Instagram, YouTube, TikTok, Facebook, and your website to strengthen your digital footprint.',
+              impact: '+' + (25 - sfScore) + ' pts possible'
+            } : null
+          });
+          dims.push({
+            label: 'Content Reach', score: crScore, max: 25,
+            desc: appearances.length + ' appearance' + (appearances.length !== 1 ? 's' : '') + ' on Mornings in the Lab',
+            action: crScore < 20 ? {
+              icon: 'fa-solid fa-microphone-lines',
+              title: 'Book Another Appearance',
+              desc: 'Each appearance generates new content, clips, and backlinks that amplify your reach across every platform.',
+              impact: '+8 pts per appearance'
+            } : null
+          });
+          dims.push({
+            label: 'Public Discourse', score: pdScore, max: 25,
+            desc: faqs.length + ' FAQs, ' + insights.length + ' key insights indexed',
+            action: pdScore < 20 ? {
+              icon: 'fa-solid fa-comments',
+              title: 'Create Content Through Dialog',
+              desc: 'Recurring appearances and community interaction build discourse around your expertise — the engine that drives discovery.',
+              impact: '+' + (20 - pdScore) + ' pts achievable'
+            } : null
+          });
+          dims.push({
+            label: 'Authority', score: paScore, max: 25,
+            desc: (hasTwin ? 'Digital Twin active' : 'No Digital Twin') + ' · ' + (tierLevel >= 2 ? 'VIP tier' : tierLevel >= 1 ? 'Featured tier' : 'Basic tier'),
+            action: paScore < 20 ? {
+              icon: 'fa-solid fa-crown',
+              title: hasTwin ? 'Upgrade to VIP' : 'Activate Your Digital Twin',
+              desc: hasTwin
+                ? 'VIP members get weekly signal updates, priority matching, and top placement — the full authority engine.'
+                : 'Your Digital Twin creates a persistent AI representation trained on your real content and expertise.',
+              impact: '+' + (hasTwin ? '5' : '8') + ' pts'
+            } : null
+          });
+        } else {
+          // Estimate dimension scores (0-25 each) based on observable data
+          // These approximate the backend rubric: socialFootprint, contentReach, publicDiscourse, professionalAuthority
+          var sfScore = Math.min(25, Math.round(socialCount * 3.5));
+          dims.push({
+            label: 'Social Footprint', score: sfScore, max: 25,
+            desc: socialCount + ' of 7 platforms connected',
+            action: sfScore < 20 ? {
+              icon: 'fa-solid fa-share-nodes',
+              title: 'Connect Your Social Profiles',
+              desc: 'Link LinkedIn, X, Instagram, YouTube, TikTok, Facebook, and your website to strengthen your digital footprint.',
+              impact: '+' + (Math.min(25, 25) - sfScore) + ' pts possible'
+            } : null
+          });
 
-        // Public Discourse: based on authority data richness (FAQs, insights, topics)
-        var faqCount = faqs.length;
-        var insightCount = insights.length;
-        var topicCount = (authority && authority.conversation_topics) ? authority.conversation_topics.length : 0;
-        var pdScore = Math.min(25, Math.round((faqCount * 2) + (insightCount * 1.5) + (topicCount * 1)));
-        dims.push({
-          label: 'Public Discourse', score: pdScore, max: 25,
-          desc: faqCount + ' FAQs, ' + insightCount + ' key insights indexed',
-          action: pdScore < 20 ? {
-            icon: 'fa-solid fa-comments',
-            title: 'Create Content Through Dialog',
-            desc: 'Recurring appearances and community interaction build discourse around your expertise — the engine that drives discovery.',
-            impact: '+' + (20 - pdScore) + ' pts achievable'
-          } : null
-        });
+          var crScore = Math.min(25, appearances.length * 8 + tierLevel * 3);
+          dims.push({
+            label: 'Content Reach', score: crScore, max: 25,
+            desc: appearances.length + ' appearance' + (appearances.length !== 1 ? 's' : '') + ' on Mornings in the Lab',
+            action: crScore < 20 ? {
+              icon: 'fa-solid fa-microphone-lines',
+              title: 'Book Another Appearance',
+              desc: 'Each appearance generates new content, clips, and backlinks that amplify your reach across every platform.',
+              impact: '+8 pts per appearance'
+            } : null
+          });
 
-        // Professional Authority: based on tier, twin, expertise depth
-        var paScore = Math.min(25, (tierLevel * 5) + (hasTwin ? 5 : 0) + (hasCharacter ? 3 : 0) + Math.min(7, expertiseCount));
-        dims.push({
-          label: 'Authority', score: paScore, max: 25,
-          desc: (hasTwin ? 'Digital Twin active' : 'No Digital Twin') + ' · ' + (tierLevel >= 2 ? 'VIP tier' : tierLevel >= 1 ? 'Featured tier' : 'Basic tier'),
-          action: paScore < 20 ? {
-            icon: 'fa-solid fa-crown',
-            title: hasTwin ? 'Upgrade to VIP' : 'Activate Your Digital Twin',
-            desc: hasTwin
-              ? 'VIP members get weekly signal updates, priority matching, and top placement — the full authority engine.'
-              : 'Your Digital Twin creates a persistent AI representation trained on your real content and expertise.',
-            impact: '+' + (hasTwin ? '5' : '8') + ' pts'
-          } : null
-        });
+          var faqCount = faqs.length;
+          var insightCount = insights.length;
+          var topicCount = (authority && authority.conversation_topics) ? authority.conversation_topics.length : 0;
+          var pdScore = Math.min(25, Math.round((faqCount * 2) + (insightCount * 1.5) + (topicCount * 1)));
+          dims.push({
+            label: 'Public Discourse', score: pdScore, max: 25,
+            desc: faqCount + ' FAQs, ' + insightCount + ' key insights indexed',
+            action: pdScore < 20 ? {
+              icon: 'fa-solid fa-comments',
+              title: 'Create Content Through Dialog',
+              desc: 'Recurring appearances and community interaction build discourse around your expertise — the engine that drives discovery.',
+              impact: '+' + (20 - pdScore) + ' pts achievable'
+            } : null
+          });
+
+          var paScore = Math.min(25, (tierLevel * 5) + (hasTwin ? 5 : 0) + (hasCharacter ? 3 : 0) + Math.min(7, expertiseCount));
+          dims.push({
+            label: 'Authority', score: paScore, max: 25,
+            desc: (hasTwin ? 'Digital Twin active' : 'No Digital Twin') + ' · ' + (tierLevel >= 2 ? 'VIP tier' : tierLevel >= 1 ? 'Featured tier' : 'Basic tier'),
+            action: paScore < 20 ? {
+              icon: 'fa-solid fa-crown',
+              title: hasTwin ? 'Upgrade to VIP' : 'Activate Your Digital Twin',
+              desc: hasTwin
+                ? 'VIP members get weekly signal updates, priority matching, and top placement — the full authority engine.'
+                : 'Your Digital Twin creates a persistent AI representation trained on your real content and expertise.',
+              impact: '+' + (hasTwin ? '5' : '8') + ' pts'
+            } : null
+          });
+        }
 
         // Render the breakdown
         var breakdownEl = document.getElementById('p-signal-breakdown');
