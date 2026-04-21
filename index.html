@@ -1007,6 +1007,159 @@
   }
 
   /* ============================================
+     TRUST LAYER (E-E-A-T pillars)
+     ============================================ */
+  .v2 .trust-layer {
+    padding: 100px 80px 110px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(251,191,36,0.03) 0%, transparent 70%),
+      var(--bg);
+  }
+  .v2 .tl-label {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .v2 .tl-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 auto;
+    max-width: 880px;
+  }
+  .v2 .tl-title .gold { color: var(--gold); }
+  .v2 .tl-desc {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 20px auto 0;
+    line-height: 1.7;
+  }
+  .v2 .tl-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 64px auto 48px;
+    text-align: left;
+  }
+  .v2 .tl-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px 24px 26px;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    position: relative;
+  }
+  .v2 .tl-card:hover {
+    border-color: rgba(251,191,36,0.35);
+    background: rgba(251,191,36,0.02);
+    transform: translateY(-2px);
+  }
+  .v2 .tl-card-letter {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -1px;
+    opacity: 0.95;
+  }
+  .v2 .tl-card-name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 14px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+  .v2 .tl-card-def {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    line-height: 1.55;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .v2 .tl-card-divider {
+    height: 1px;
+    background: rgba(251,191,36,0.15);
+    margin: 18px 0 14px;
+  }
+  .v2 .tl-card-claim-label {
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+  .v2 .tl-card-claim {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .v2 .tl-honesty {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 22px 32px;
+    border-left: 2px solid var(--gold);
+    background: rgba(251,191,36,0.03);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+  }
+  .v2 .tl-honesty-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .v2 .tl-honesty-body {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .v2 .tl-honesty-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  @media (max-width: 1024px) {
+    .v2 .tl-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+  }
+  @media (max-width: 768px) {
+    .v2 .trust-layer { padding: 64px 24px 72px; }
+    .v2 .tl-title { font-size: 30px; }
+    .v2 .tl-desc { font-size: 15px; }
+    .v2 .tl-grid { gap: 14px; margin: 44px auto 36px; }
+    .v2 .tl-card { padding: 22px 20px 20px; }
+    .v2 .tl-card-letter { font-size: 36px; }
+    .v2 .tl-card-name { font-size: 13px; margin-top: 12px; }
+    .v2 .tl-card-def { font-size: 12px; }
+    .v2 .tl-card-claim { font-size: 12.5px; }
+    .v2 .tl-honesty { padding: 18px 22px; }
+    .v2 .tl-honesty-body { font-size: 14px; }
+  }
+  @media (max-width: 480px) {
+    .v2 .tl-grid { grid-template-columns: 1fr; }
+    .v2 .tl-title { font-size: 24px; }
+  }
+
+  /* ============================================
      TIER SHOWCASE
      ============================================ */
   .v2 .showcase-section {
@@ -2601,6 +2754,64 @@
     <p class="ae-quote">
       &ldquo;In a world of AI-generated content, the one signal that can&rsquo;t be faked is <strong>a live conversation where you prove what you know</strong>.&rdquo;
     </p>
+  </section>
+
+  <!-- ============================
+       TRUST LAYER (E-E-A-T pillars)
+       ============================ -->
+  <section class="trust-layer" id="trust-layer">
+    <div class="tl-label">What We Actually Own</div>
+    <h2 class="tl-title">
+      E-E-A-T, <span class="gold">earned live.</span>
+    </h2>
+    <p class="tl-desc">
+      Google&rsquo;s quality guidelines reward four signals. A live conversation is one of the few formats that produces all four at once &mdash; unscripted, on the record, indexed.
+    </p>
+
+    <div class="tl-grid">
+      <div class="tl-card">
+        <div class="tl-card-letter">E</div>
+        <div class="tl-card-name">Experience</div>
+        <div class="tl-card-def">&ldquo;First-hand, real-world experience with the topic.&rdquo;</div>
+        <div class="tl-card-divider"></div>
+        <div class="tl-card-claim-label">What a live conversation produces</div>
+        <div class="tl-card-claim">You were there. The conversation proves it &mdash; with timestamps, video, and a permanent URL.</div>
+      </div>
+
+      <div class="tl-card">
+        <div class="tl-card-letter">E</div>
+        <div class="tl-card-name">Expertise</div>
+        <div class="tl-card-def">&ldquo;Demonstrated knowledge and skill on the subject.&rdquo;</div>
+        <div class="tl-card-divider"></div>
+        <div class="tl-card-claim-label">What a live conversation produces</div>
+        <div class="tl-card-claim">You answer unscripted questions in real time. That&rsquo;s harder to fake than a bio or a blog post.</div>
+      </div>
+
+      <div class="tl-card">
+        <div class="tl-card-letter">A</div>
+        <div class="tl-card-name">Authoritativeness</div>
+        <div class="tl-card-def">&ldquo;Recognized source on the topic by others.&rdquo;</div>
+        <div class="tl-card-divider"></div>
+        <div class="tl-card-claim-label">What a live conversation produces</div>
+        <div class="tl-card-claim">Hosted on a named show, indexed with structured schema, backed by real inbound links.</div>
+      </div>
+
+      <div class="tl-card">
+        <div class="tl-card-letter">T</div>
+        <div class="tl-card-name">Trustworthiness</div>
+        <div class="tl-card-def">&ldquo;Accurate, honest, safe, reliable content.&rdquo;</div>
+        <div class="tl-card-divider"></div>
+        <div class="tl-card-claim-label">What a live conversation produces</div>
+        <div class="tl-card-claim">On-the-record video. Permanent URL. Full transcript. Nothing behind a paywall or a stock photo.</div>
+      </div>
+    </div>
+
+    <div class="tl-honesty">
+      <div class="tl-honesty-label">The honest version</div>
+      <div class="tl-honesty-body">
+        We own the <strong>live signal</strong>. We don&rsquo;t own the LLM&rsquo;s decision. We can&rsquo;t promise you&rsquo;ll show up in ChatGPT, Gemini, or Perplexity &mdash; nobody honestly can. What we can do is produce the strongest E-E-A-T signals on the open web, give you a permanent authority page, and let the indexers do what they do.
+      </div>
+    </div>
   </section>
 
   <!-- ============================
