@@ -724,57 +724,147 @@
   <div class="ct"><strong id="countNum">6</strong> characters</div>
 </div>
 
-<div class="grid" id="grid"></div>
+<div class="grid" id="grid">
+  <!-- Loading skeleton while API loads -->
+  <div class="card" style="opacity:0.4;pointer-events:none">
+    <div class="card-photo" style="background:#1a1f2e;height:200px"></div>
+    <div class="card-body"><div style="height:14px;width:60%;background:#1a1f2e;border-radius:4px;margin-bottom:8px"></div><div style="height:10px;width:80%;background:#1a1f2e;border-radius:4px"></div></div>
+  </div>
+  <div class="card" style="opacity:0.3;pointer-events:none">
+    <div class="card-photo" style="background:#1a1f2e;height:200px"></div>
+    <div class="card-body"><div style="height:14px;width:50%;background:#1a1f2e;border-radius:4px;margin-bottom:8px"></div><div style="height:10px;width:70%;background:#1a1f2e;border-radius:4px"></div></div>
+  </div>
+  <div class="card" style="opacity:0.2;pointer-events:none">
+    <div class="card-photo" style="background:#1a1f2e;height:200px"></div>
+    <div class="card-body"><div style="height:14px;width:55%;background:#1a1f2e;border-radius:4px;margin-bottom:8px"></div><div style="height:10px;width:65%;background:#1a1f2e;border-radius:4px"></div></div>
+  </div>
+</div>
 
 <script>
 (function() {
-  var CHARACTERS = [
-    {
-      name: 'Sophia', type: 'studio', role: 'Lead AI Producer — Guest Engine & MiTL Network',
-      desc: 'I handle your prep — topic angles, talking points, green room briefing — so you arrive ready and the host has everything they need.',
-      traits: ['Guest Prep', 'Show Production', 'Research', 'Scheduling'],
-      show: 'MiTL', freq: 'Core', featured: 'hero', comingSoon: true,
-      img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=faces'
-    },
-    {
-      name: 'Sterling', type: 'studio', role: 'News Anchor — MiTL Morning Wire',
-      desc: 'Gravitas meets algorithm. I deliver the morning wire with precision, authority, and just enough edge to keep you honest.',
-      traits: ['News Anchor', 'Morning Wire', 'Authoritative'],
-      show: 'MiTL', freq: 'Recurring', featured: 'vert', comingSoon: true,
-      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=faces'
-    },
-    {
-      name: 'Frankie', type: 'studio', role: 'Recurring Character — Entertainment',
-      desc: "Overconfident delivery meets under-disciplined research. I say things other characters won't — and I'm usually half right.",
-      traits: ['Entertainment', 'Comedy', 'Hot Takes'],
-      show: 'MiTL', freq: 'Recurring', comingSoon: true,
-      img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'Preston', type: 'studio', role: 'Market Analyst & Finance Correspondent',
-      desc: "I break down market moves before the opening bell. No hype, no FUD — just the numbers and what they actually mean for your day.",
-      traits: ['Markets', 'Finance', 'Pre-Market'],
-      show: 'MiTL', freq: 'Daily', comingSoon: true,
-      img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'Tommy', type: 'studio', role: 'Sports Desk Producer — The Skeptic',
-      desc: "I don't trust narratives until the numbers back them up. Every take gets pressure-tested. Every stat gets verified.",
-      traits: ['Sports', 'NFL', 'Analytics'],
-      show: 'MiTL', freq: 'Sports Desk', comingSoon: true,
-      img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'Maya', type: 'studio', role: 'Community Correspondent — Culture & Lifestyle',
-      desc: "I find the stories that don't make headlines but should. The people, the neighborhoods, the culture that defines how we actually live.",
-      traits: ['Culture', 'Lifestyle', 'Community'],
-      show: 'MiTL', freq: 'Community', comingSoon: true,
-      img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=400&fit=crop&crop=faces'
-    }
+  // ── Character Engine API ──────────────────────────────────────────────────
+  var CE_API = 'https://app.conversationos.live/api/character-engine/search';
+
+  // Featured character IDs — only these appear on the marketplace
+  var FEATURED_IDS = [
+    'char-sophia-grant',
+    'char-sterling-james',
+    'char-frankie',
+    'char-preston-vale',
+    'char-tommy',
+    'char-maya-reyes'
   ];
 
-  var allChars = CHARACTERS;
+  // Local enrichment data (descriptions, layout hints, trait labels, shows)
+  // — the Character Engine DB stores identity; this layer adds marketing copy.
+  var ENRICHMENT = {
+    'char-sophia-grant': {
+      desc: 'I handle your prep \u2014 topic angles, talking points, green room briefing \u2014 so you arrive ready and the host has everything they need.',
+      traits: ['Guest Prep', 'Show Production', 'Research', 'Scheduling'],
+      show: 'MiTL', freq: 'Core', featured: 'hero',
+      fallbackImg: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=faces'
+    },
+    'char-sterling-james': {
+      desc: 'Gravitas meets algorithm. I deliver the morning wire with precision, authority, and just enough edge to keep you honest.',
+      traits: ['News Anchor', 'Morning Wire', 'Authoritative'],
+      show: 'MiTL', freq: 'Recurring', featured: 'vert',
+      fallbackImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=faces'
+    },
+    'char-frankie': {
+      desc: "Overconfident delivery meets under-disciplined research. I say things other characters won't \u2014 and I'm usually half right.",
+      traits: ['Entertainment', 'Comedy', 'Hot Takes'],
+      show: 'MiTL', freq: 'Recurring',
+      fallbackImg: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=400&fit=crop&crop=faces'
+    },
+    'char-preston-vale': {
+      desc: "I break down market moves before the opening bell. No hype, no FUD \u2014 just the numbers and what they actually mean for your day.",
+      traits: ['Markets', 'Finance', 'Pre-Market'],
+      show: 'MiTL', freq: 'Daily',
+      fallbackImg: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=400&fit=crop&crop=faces'
+    },
+    'char-tommy': {
+      desc: "I don't trust narratives until the numbers back them up. Every take gets pressure-tested. Every stat gets verified.",
+      traits: ['Sports', 'NFL', 'Analytics'],
+      show: 'MiTL', freq: 'Sports Desk',
+      fallbackImg: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=400&fit=crop&crop=faces'
+    },
+    'char-maya-reyes': {
+      desc: "I find the stories that don't make headlines but should. The people, the neighborhoods, the culture that defines how we actually live.",
+      traits: ['Culture', 'Lifestyle', 'Community'],
+      show: 'MiTL', freq: 'Community',
+      fallbackImg: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=400&fit=crop&crop=faces'
+    }
+  };
+
+  // Static fallback (used if API is unreachable)
+  var FALLBACK_CHARACTERS = FEATURED_IDS.map(function(id) {
+    var e = ENRICHMENT[id];
+    var name = id.replace('char-', '').replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+    return {
+      id: id, name: name, type: 'studio', status: 'active', role: '',
+      desc: e.desc, traits: e.traits, show: e.show, freq: e.freq,
+      featured: e.featured, comingSoon: true, img: e.fallbackImg
+    };
+  });
+
+  var allChars = [];
   var activeFilter = 'all';
+
+  // ── Fetch from Character Engine API ─────────────────────────────────────
+  function loadFromAPI() {
+    var url = CE_API + '?expand=marketplace&status=active&type=studio&limit=100';
+    return fetch(url)
+      .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(data) {
+        var apiChars = (data.characters || []).filter(function(c) {
+          return FEATURED_IDS.indexOf(c.id) !== -1;
+        });
+
+        // Merge API data with local enrichment
+        return FEATURED_IDS.map(function(id) {
+          var api = apiChars.find(function(c) { return c.id === id; });
+          var enrich = ENRICHMENT[id] || {};
+          if (!api) {
+            // Character not in API — use fallback
+            return FALLBACK_CHARACTERS.find(function(c) { return c.id === id; });
+          }
+          // Parse keyTraits from API (comma-separated or array)
+          var apiTraits = [];
+          if (api.keyTraits) {
+            apiTraits = typeof api.keyTraits === 'string'
+              ? api.keyTraits.split(',').map(function(t) { return t.trim(); }).filter(Boolean)
+              : api.keyTraits;
+          }
+          return {
+            id: api.id,
+            name: api.name,
+            type: api.type || 'studio',
+            status: api.status,
+            role: api.role || enrich.role || '',
+            desc: api.backstory || enrich.desc || '',
+            traits: apiTraits.length ? apiTraits : (enrich.traits || []),
+            show: (api.showIds && api.showIds[0]) || enrich.show || 'MiTL',
+            freq: enrich.freq || '',
+            featured: enrich.featured || null,
+            comingSoon: true,
+            img: api.image || enrich.fallbackImg || ''
+          };
+        }).filter(Boolean);
+      });
+  }
+
+  // ── Initialize ─────────────────────────────────────────────────────────
+  function init(chars) {
+    allChars = chars;
+    renderGrid(allChars);
+  }
+
+  loadFromAPI()
+    .then(init)
+    .catch(function(err) {
+      console.warn('[Marketplace] API unavailable, using fallback:', err);
+      init(FALLBACK_CHARACTERS);
+    });
 
   function getInitials(name) {
     var parts = name.trim().split(/\s+/);
@@ -967,7 +1057,7 @@
     filterChars();
   });
 
-  renderGrid(allChars);
+  // Initial render handled by loadFromAPI().then(init) above
 })();
 </script>
 
