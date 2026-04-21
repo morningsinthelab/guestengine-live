@@ -282,7 +282,7 @@ function generatePage(v) {
         <a href="/#network" class="nav__link">Network</a>
       </div>
       <div class="nav__actions">
-        <a href="https://app.conversationos.live" class="nav__link nav__link--login">Log In</a>
+        <a href="https://app.conversationos.live/portal/login" class="nav__link nav__link--login">Log In</a>
         <a href="/join/" class="btn btn--primary btn--sm">Get Started</a>
       </div>
       <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">

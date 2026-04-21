@@ -613,7 +613,7 @@
       <a href="/join/">Join</a>
     </nav>
     <div class="ge-header__actions">
-      <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
+      <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
       <a href="/join/" class="ge-header__signup">Sign Up</a>
     </div>
     <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
@@ -629,7 +629,7 @@
     <a href="/signal/">Signal</a>
     <a href="/why/">Why</a>
     <a href="/join/">Join</a>
-    <a href="https://app.conversationos.live" class="ge-header__login">Log In</a>
+    <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
     <a href="/join/" class="ge-header__signup">Sign Up</a>
   </div>
 
@@ -1182,7 +1182,7 @@
       if (state.topic) params.topic = state.topic;
 
       var qs = new URLSearchParams(params).toString();
-      window.location.href = 'https://app.conversationos.live/signup?' + qs;
+      window.location.href = 'https://app.conversationos.live/portal/signup?' + qs;
     });
 
     // ══════════════════════════════════════
