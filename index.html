@@ -2346,7 +2346,8 @@
       }
       fetch('https://app.conversationos.live/api/guest-marketplace/showcase-guests')
         .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
-        .then(function(guests) {
+        .then(function(data) {
+          var guests = data.guests || data;
           if (!guests || !guests.length) return;
           grid.innerHTML = guests.map(buildCol).join('\n');
           if (window._initShowcaseLightbox) window._initShowcaseLightbox();
