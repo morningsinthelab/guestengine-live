@@ -778,7 +778,8 @@
       var knowsAbout = (authority && authority.knows_about) || [];
       var csVideo = profile.centerStageVideoId;
       var images = (visuals && visuals.images) || [];
-      var score = profile.guestScore;
+      // guestScore removed — no longer returned by API (internal only).
+      // Breakdown section gated on hasBackendSignal (sum of 4 signal fields > 0).
       var storyImgs = null;
       if (profile.storyImagesJson) {
         try {
@@ -875,7 +876,6 @@
         var socialCount = Object.keys(socialObj).filter(function(k){ return !!socialObj[k]; }).length;
         var expertiseCount = knowsAbout.length || (profile.expertise ? profile.expertise.length : 0);
         var hasTwin = profile.twinStatus && profile.twinStatus !== 'none';
-        var hasCharacter = !!profile.characterId;
         var tierLevel = profile.tier === 'vip' ? 3 : profile.tier === 'member' ? 2 : profile.tier === 'featured' ? 1 : 0;
 
         var dims = [];
