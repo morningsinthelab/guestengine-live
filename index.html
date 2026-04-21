@@ -870,12 +870,40 @@
     color: var(--text);
     line-height: 1;
     text-shadow: 0 0 60px rgba(251,191,36,0.2);
+    transition: opacity 0.5s ease;
   }
-  .v2 .fc-score-sub {
-    font-size: 12px;
+  .v2 .fc-guest {
+    margin-top: 10px;
+    min-height: 32px;
+    transition: opacity 0.5s ease;
+  }
+  .v2 .fc-guest.fading { opacity: 0; }
+  .v2 .fc-score-number.fading { opacity: 0.35; }
+  .v2 .fc-guest-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+  .v2 .fc-guest-appearances {
+    font-size: 10.5px;
     color: var(--text-tertiary);
-    margin-top: 4px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
+    margin-top: 2px;
+    text-transform: lowercase;
+  }
+  .v2 .ae-proof {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.85;
+    margin: 0 auto 44px;
+    text-align: center;
   }
   .v2 .fw-node {
     position: absolute;
@@ -955,6 +983,9 @@
     .v2 .fw-node-sub { font-size: 9px; }
     .v2 .fc-score-number { font-size: 52px; }
     .v2 .fc-score-label { font-size: 9px; }
+    .v2 .fc-guest-name { font-size: 11px; }
+    .v2 .fc-guest-appearances { font-size: 9.5px; }
+    .v2 .ae-proof { font-size: 10.5px; letter-spacing: 1.6px; margin-bottom: 32px; }
     .v2 .ae-quote { font-size: 15px; }
   }
   @media (max-width: 480px) {
@@ -971,6 +1002,8 @@
     .v2 .fw-node-title { font-size: 10px; }
     .v2 .fw-node-sub { font-size: 8.5px; }
     .v2 .fc-score-number { font-size: 44px; }
+    .v2 .fc-guest-name { font-size: 10px; }
+    .v2 .fc-guest-appearances { font-size: 9px; }
   }
 
   /* ============================================
@@ -2528,7 +2561,10 @@
       <div class="flywheel-center">
         <div class="fc-score-label">Signal Score</div>
         <div class="fc-score-number" id="aeSignalScore">0</div>
-        <div class="fc-score-sub">authority surface area</div>
+        <div class="fc-guest" id="aeGuestBlock">
+          <div class="fc-guest-name" id="aeGuestName">&nbsp;</div>
+          <div class="fc-guest-appearances" id="aeGuestAppearances">&nbsp;</div>
+        </div>
       </div>
 
       <div class="fw-node" id="fwn0">
@@ -2557,6 +2593,10 @@
         <div class="fw-node-sub">Next conversation<br>starts higher</div>
       </div>
     </div>
+
+    <p class="ae-proof">
+      Real guests. Real scores. More conversations &rarr; higher authority.
+    </p>
 
     <p class="ae-quote">
       &ldquo;In a world of AI-generated content, the one signal that can&rsquo;t be faked is <strong>a live conversation where you prove what you know</strong>.&rdquo;
@@ -3247,7 +3287,7 @@
 })();
 </script>
 
-<!-- Authority Engine flywheel: position nodes + animate score -->
+<!-- Authority Engine flywheel: position nodes + cycle real guests -->
 <script>
 (function() {
   var wrap = document.getElementById('flywheelWrap');
@@ -3269,24 +3309,112 @@
   positionNodes();
   window.addEventListener('resize', positionNodes);
 
-  var target = 74;
-  var el = document.getElementById('aeSignalScore');
-  var duration = 2200;
-  var startTime = null;
-  var started = false;
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-  function animate(ts) {
-    if (!startTime) startTime = ts;
-    var p = Math.min((ts - startTime) / duration, 1);
-    el.textContent = Math.round(easeOut(p) * target);
-    if (p < 1) requestAnimationFrame(animate);
+  var scoreEl     = document.getElementById('aeSignalScore');
+  var nameEl      = document.getElementById('aeGuestName');
+  var apprEl      = document.getElementById('aeGuestAppearances');
+  var guestBlock  = document.getElementById('aeGuestBlock');
+
+  // Fallback values if API fails — based on last verified snapshot.
+  var guests = [
+    { name: 'Tommy Rhee', score: 26, appearances: 1 },
+    { name: 'EJ Snyder',  score: 74, appearances: 2 }
+  ];
+
+  // Fetch live data so the flywheel always reflects production reality.
+  function loadGuests() {
+    return fetch('https://app.conversationos.live/api/guest-marketplace/directory')
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        if (!data) return;
+        var list = data.guests || data;
+        var slugs = ['tommy-rhee', 'ej-snyder'];
+        var found = slugs.map(function(s) {
+          return list.find(function(g) { return g.slug === s; });
+        }).filter(Boolean);
+        if (found.length < 2) return;
+        var mapped = found.map(function(g) {
+          var appearances = 0;
+          try {
+            var pa = typeof g.pastAppearances === 'string' ? JSON.parse(g.pastAppearances) : g.pastAppearances;
+            if (Array.isArray(pa)) appearances = pa.length;
+          } catch (e) { /* keep 0 */ }
+          return {
+            name: g.guestName || g.name || g.fullName || '',
+            score: typeof g.signalScore === 'number' ? g.signalScore : 0,
+            appearances: appearances
+          };
+        });
+        // Sort ascending by score so lower score shows first (compounding story).
+        mapped.sort(function(a, b) { return a.score - b.score; });
+        guests = mapped;
+      })
+      .catch(function() { /* keep fallback */ });
   }
+
+  function formatApp(n) {
+    return n + ' appearance' + (n === 1 ? '' : 's');
+  }
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function animateScore(to, duration, done) {
+    var startTime = null;
+    var from = parseInt(scoreEl.textContent, 10) || 0;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      var val = Math.round(from + (to - from) * easeOut(p));
+      scoreEl.textContent = val;
+      if (p < 1) requestAnimationFrame(step);
+      else if (done) done();
+    }
+    requestAnimationFrame(step);
+  }
+
+  function showGuest(i, isFirst) {
+    var g = guests[i];
+    if (isFirst) {
+      nameEl.textContent = g.name;
+      apprEl.textContent = formatApp(g.appearances);
+      guestBlock.classList.remove('fading');
+      animateScore(g.score, 2000);
+    } else {
+      // crossfade
+      scoreEl.classList.add('fading');
+      guestBlock.classList.add('fading');
+      setTimeout(function() {
+        nameEl.textContent = g.name;
+        apprEl.textContent = formatApp(g.appearances);
+        scoreEl.classList.remove('fading');
+        guestBlock.classList.remove('fading');
+        animateScore(g.score, 900);
+      }, 500);
+    }
+  }
+
+  var started = false;
+  var cycleTimer = null;
+
+  function startCycle() {
+    if (started) return;
+    started = true;
+    showGuest(0, true);
+    var idx = 0;
+    cycleTimer = setInterval(function() {
+      idx = (idx + 1) % guests.length;
+      showGuest(idx, false);
+    }, 4200);
+  }
+
   var obs = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting && !started) {
-      started = true;
-      requestAnimationFrame(animate);
+      startCycle();
     }
   }, { threshold: 0.3 });
+
+  // Kick off the fetch immediately, but only start the animation when the
+  // section enters view. If fetch is still pending, fallback values are used.
+  loadGuests();
   obs.observe(document.getElementById('authority-engine'));
 })();
 </script>
