@@ -1717,11 +1717,6 @@ img { max-width: 100%; display: block; }
       .replace(/"/g, '&quot;');
   }
 
-  /* Living portrait video URLs — keyed by guest slug */
-  var LIVING_PORTRAITS = {
-    'tommy-rhee': 'https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/directory-portraits/tommy-rhee-living-portrait.mp4',
-    'ej-snyder': 'https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/directory-portraits/ej-snyder-living-portrait.mp4'
-  };
 
   /* ==========================================
      VIP HERO (wide, 2-col span, horizontal)
@@ -1733,7 +1728,7 @@ img { max-width: 100%; display: block; }
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
     var profileUrl = '/profile/' + guest.slug;
 
-    var portraitVideo = LIVING_PORTRAITS[guest.slug] || '';
+    var portraitVideo = guest.livingPortraitVideoUrl || '';
     var photoHTML;
     if (portraitVideo) {
       photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
@@ -1790,7 +1785,7 @@ img { max-width: 100%; display: block; }
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
     var profileUrl = '/profile/' + guest.slug;
 
-    var portraitVideo = LIVING_PORTRAITS[guest.slug] || '';
+    var portraitVideo = guest.livingPortraitVideoUrl || '';
     var photoHTML;
     if (portraitVideo) {
       photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
@@ -1853,7 +1848,7 @@ img { max-width: 100%; display: block; }
     else if (isFeatured) tierClass = ' tier-member';
     else if (isFree) tierClass = ' tier-free';
 
-    var portraitVideo = LIVING_PORTRAITS[guest.slug] || '';
+    var portraitVideo = guest.livingPortraitVideoUrl || '';
     var photoHTML;
     if (portraitVideo) {
       photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
