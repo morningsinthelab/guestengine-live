@@ -716,35 +716,6 @@
     var slug = getSlug();
     if (!slug) return showNotFound();
 
-    // Guest-specific story images (generated per guest)
-    var STORY_IMAGES = {
-      'ej-snyder': {
-        images: [
-          '/assets/guests/ej-snyder/military.jpg',
-          '/assets/guests/ej-snyder/survival.jpg',
-          '/assets/guests/ej-snyder/entrepreneur.jpg',
-          '/assets/guests/ej-snyder/freedom-pickles.jpg',
-          '/assets/guests/ej-snyder/speaker.jpg',
-          '/assets/guests/ej-snyder/reflection.jpg',
-        ],
-        labels: ['The Soldier', 'The Survivor', 'The Entrepreneur', 'The Mission', 'The Voice', 'The Horizon'],
-        video: '/assets/guests/ej-snyder/wilderness-walk.mp4',
-        videoAfter: 1,
-      },
-      'tommy-rhee': {
-        images: [
-          '/assets/guests/tommy-rhee/chiropractor.jpg',
-          '/assets/guests/tommy-rhee/veteran.jpg',
-          '/assets/guests/tommy-rhee/scientist.jpg',
-          '/assets/guests/tommy-rhee/sideline.jpg',
-          '/assets/guests/tommy-rhee/founder.jpg',
-        ],
-        labels: ['The Healer', 'The Veteran', 'The Scientist', 'The Sideline', 'The Founder'],
-        video: '/assets/guests/tommy-rhee/clinic-walk.mp4',
-        videoAfter: 1,
-      }
-    };
-
     Promise.all([
       fetch(API + '/directory/' + slug).then(ok),
       fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
@@ -808,7 +779,20 @@
       var csVideo = profile.centerStageVideoId;
       var images = (visuals && visuals.images) || [];
       var score = profile.guestScore;
-      var storyImgs = STORY_IMAGES[slug] || null;
+      var storyImgs = null;
+      if (profile.storyImagesJson) {
+        try {
+          var parsed = typeof profile.storyImagesJson === 'string' ? JSON.parse(profile.storyImagesJson) : profile.storyImagesJson;
+          if (parsed && parsed.images) {
+            storyImgs = {
+              images: parsed.images.map(function(i) { return i.url; }),
+              labels: parsed.images.map(function(i) { return i.label; }),
+              video: parsed.video || null,
+              videoAfter: parsed.videoAfter != null ? parsed.videoAfter : null
+            };
+          }
+        } catch(e) {}
+      }
 
       // Meta
       document.title = name + ' — ' + headline + ' | Guest Engine';

@@ -2299,94 +2299,61 @@
       </p>
     </div>
 
-    <div class="showcase-grid">
-
-      <!-- COL 1: Tommy Rhee — The Appearance ($497) -->
-      <div class="showcase-col">
-        <div class="showcase-browser">
-          <div class="showcase-toolbar">
-            <span class="dot r"></span>
-            <span class="dot y"></span>
-            <span class="dot g"></span>
-            <span class="url">guestengine.live/profile/tommy-rhee</span>
-          </div>
-          <div class="showcase-screen">
-            <img src="assets/tommy_preview.jpg?v=2" alt="Tommy Rhee's authority page" loading="lazy">
-          </div>
-        </div>
-        <div class="showcase-meta">
-          <div class="showcase-tier-badge appearance">&#9889; The Appearance</div>
-          <div class="showcase-name">Tommy Rhee</div>
-          <div class="showcase-role">President & CEO, RheeGen</div>
-          <div class="showcase-price"><span class="amount">$497</span> <span class="freq">one-time</span></div>
-          <div class="showcase-includes">
-            <span>Authority Page</span>
-            <span>4 AI Visuals</span>
-            <span>Media Kit</span>
-            <span>Signal Brief</span>
-            <span>Episode Art</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- COL 2: EJ Snyder — VIP ($297/mo) — CENTER -->
-      <div class="showcase-col vip">
-        <div class="showcase-browser">
-          <div class="showcase-toolbar">
-            <span class="dot r"></span>
-            <span class="dot y"></span>
-            <span class="dot g"></span>
-            <span class="url">guestengine.live/profile/ej-snyder</span>
-          </div>
-          <div class="showcase-screen">
-            <img src="assets/ej_preview.jpg?v=2" alt="EJ Snyder's VIP authority page" loading="lazy">
-          </div>
-        </div>
-        <div class="showcase-meta">
-          <div class="showcase-tier-badge vip-badge">&#9733; VIP</div>
-          <div class="showcase-name">EJ Snyder</div>
-          <div class="showcase-role">EVP, Freedom Pickles USA | 6x Naked & Afraid Legend</div>
-          <div class="showcase-price gold"><span class="amount">$297</span><span class="freq">/mo</span></div>
-          <div class="showcase-includes">
-            <span class="gold-tag">Weekly Signals</span>
-            <span class="gold-tag">1 Appearance / Qtr</span>
-            <span>Top Placement</span>
-            <span>Digital Twin</span>
-            <span>Priority Matching</span>
-            <span>Live Intelligence</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- COL 3: Nino Fincher — Member ($97/mo) -->
-      <div class="showcase-col">
-        <div class="showcase-browser">
-          <div class="showcase-toolbar">
-            <span class="dot r"></span>
-            <span class="dot y"></span>
-            <span class="dot g"></span>
-            <span class="url">guestengine.live/profile/nino-fincher</span>
-          </div>
-          <div class="showcase-screen">
-            <img src="assets/nino_preview.jpg?v=2" alt="Nino Fincher's member authority page" loading="lazy">
-          </div>
-        </div>
-        <div class="showcase-meta">
-          <div class="showcase-tier-badge member">&#9679; Member</div>
-          <div class="showcase-name">Nino Fincher</div>
-          <div class="showcase-role">RTT Specialist & Keynote Speaker</div>
-          <div class="showcase-price"><span class="amount">$97</span><span class="freq">/mo</span></div>
-          <div class="showcase-includes">
-            <span>Monthly Intel</span>
-            <span>Updated Profile</span>
-            <span>Network Discovery</span>
-            <span>Media Kit</span>
-            <span>Digital Twin</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="showcase-grid" id="showcase-grid"></div>
+    <script>
+    (function() {
+      var grid = document.getElementById('showcase-grid');
+      function esc(s) { if (!s) return ''; var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+      function tierConfig(guest) {
+        var tier = (guest.tier || '').toLowerCase();
+        var tierLabel = guest.tierLabel || '';
+        if (tier === 'vip') return { colClass: 'showcase-col vip', badgeClass: 'vip-badge', priceClass: ' gold', icon: '&#9733;', goldTags: 2 };
+        if (tier === 'featured' || tierLabel === 'The Appearance') return { colClass: 'showcase-col', badgeClass: 'appearance', priceClass: '', icon: '&#9889;', goldTags: 0 };
+        return { colClass: 'showcase-col', badgeClass: 'member', priceClass: '', icon: '&#9679;', goldTags: 0 };
+      }
+      function buildCol(guest) {
+        var cfg = tierConfig(guest);
+        var includes = [];
+        try { includes = typeof guest.showcaseIncludes === 'string' ? JSON.parse(guest.showcaseIncludes) : (guest.showcaseIncludes || []); } catch(e) {}
+        var includesHtml = includes.map(function(tag, i) {
+          var cls = (i < cfg.goldTags) ? ' class="gold-tag"' : '';
+          return '<span' + cls + '>' + esc(tag) + '</span>';
+        }).join('\n            ');
+        var previewUrl = guest.showcasePreviewUrl || '';
+        var altText = esc(guest.guestName || '') + (cfg.badgeClass === 'vip-badge' ? "'s VIP authority page" : cfg.badgeClass === 'member' ? "'s member authority page" : "'s authority page");
+        return '<div class="' + cfg.colClass + '">' +
+          '<div class="showcase-browser">' +
+            '<div class="showcase-toolbar">' +
+              '<span class="dot r"></span>' +
+              '<span class="dot y"></span>' +
+              '<span class="dot g"></span>' +
+              '<span class="url">guestengine.live/profile/' + esc(guest.slug) + '</span>' +
+            '</div>' +
+            '<div class="showcase-screen">' +
+              '<img src="' + esc(previewUrl) + (previewUrl.indexOf('?') === -1 ? '?v=2' : '') + '" alt="' + altText + '" loading="lazy">' +
+            '</div>' +
+          '</div>' +
+          '<div class="showcase-meta">' +
+            '<div class="showcase-tier-badge ' + cfg.badgeClass + '">' + cfg.icon + ' ' + esc(guest.tierLabel) + '</div>' +
+            '<div class="showcase-name">' + esc(guest.guestName) + '</div>' +
+            '<div class="showcase-role">' + esc(guest.showcaseRole) + '</div>' +
+            '<div class="showcase-price' + cfg.priceClass + '"><span class="amount">' + esc(guest.pricingAmount) + '</span>' + (guest.pricingFrequency === 'one-time' ? ' ' : '') + '<span class="freq">' + esc(guest.pricingFrequency) + '</span></div>' +
+            '<div class="showcase-includes">' +
+              includesHtml +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }
+      fetch('https://app.conversationos.live/api/guest-marketplace/showcase-guests')
+        .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function(guests) {
+          if (!guests || !guests.length) return;
+          grid.innerHTML = guests.map(buildCol).join('\n');
+          if (window._initShowcaseLightbox) window._initShowcaseLightbox();
+        })
+        .catch(function() {});
+    })();
+    </script>
   </section>
 
   <!-- ============================
@@ -2961,21 +2928,31 @@
   var overlay = document.getElementById('lb-overlay');
   var lbImg = document.getElementById('lb-img');
   var lbLabel = document.getElementById('lb-label');
-  document.querySelectorAll('.showcase-screen').forEach(function(screen){
-    screen.addEventListener('click', function(){
-      var img = screen.querySelector('img');
-      if (!img) return;
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
-      // Get guest name from the meta below
-      var col = screen.closest('.showcase-col');
-      var name = col ? col.querySelector('.showcase-name') : null;
-      var tier = col ? col.querySelector('.showcase-tier-badge') : null;
-      lbLabel.textContent = (name ? name.textContent : '') + (tier ? ' — ' + tier.textContent.trim() : '');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  var grid = document.getElementById('showcase-grid');
+
+  function bindScreens() {
+    if (!grid) return;
+    grid.querySelectorAll('.showcase-screen').forEach(function(screen){
+      if (screen._lbBound) return;
+      screen._lbBound = true;
+      screen.addEventListener('click', function(){
+        var img = screen.querySelector('img');
+        if (!img) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        var col = screen.closest('.showcase-col');
+        var name = col ? col.querySelector('.showcase-name') : null;
+        var tier = col ? col.querySelector('.showcase-tier-badge') : null;
+        lbLabel.textContent = (name ? name.textContent : '') + (tier ? ' — ' + tier.textContent.trim() : '');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
     });
-  });
+  }
+
+  bindScreens();
+  window._initShowcaseLightbox = bindScreens;
+
   function closeLB(){
     overlay.classList.remove('active');
     document.body.style.overflow = '';
