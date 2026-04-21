@@ -765,6 +765,215 @@
   }
 
   /* ============================================
+     AUTHORITY ENGINE (flywheel)
+     ============================================ */
+  .v2 .authority-engine {
+    padding: 100px 80px;
+    text-align: center;
+  }
+  .v2 .ae-label {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .v2 .ae-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0 auto;
+    max-width: 900px;
+  }
+  .v2 .ae-title .gold { color: var(--gold); }
+  .v2 .ae-desc {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 20px auto 0;
+    line-height: 1.7;
+  }
+  .v2 .flywheel-wrap {
+    --fw-size: 560px;
+    --fw-radius: 250px;
+    position: relative;
+    width: var(--fw-size);
+    height: var(--fw-size);
+    margin: 64px auto 52px;
+  }
+  .v2 .flywheel-orbit {
+    position: absolute;
+    inset: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(251,191,36,0.12);
+  }
+  .v2 .flywheel-orbit::before {
+    content: '';
+    position: absolute;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 16px 4px rgba(251,191,36,0.5), 0 0 40px 8px rgba(251,191,36,0.2);
+    top: 50%; left: 50%;
+    animation: aeOrbitSpin 14s linear infinite;
+  }
+  .v2 .flywheel-orbit::after {
+    content: '';
+    position: absolute;
+    width: 5px; height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 12px 3px rgba(251,191,36,0.35);
+    top: 50%; left: 50%;
+    opacity: 0.45;
+    animation: aeOrbitSpin 14s linear infinite;
+    animation-delay: -7s;
+  }
+  @keyframes aeOrbitSpin {
+    0%   { transform: rotate(0deg)   translateX(var(--fw-orbit-r)) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(var(--fw-orbit-r)) rotate(-360deg); }
+  }
+  .v2 .flywheel-inner-ring {
+    position: absolute;
+    inset: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(251,191,36,0.05);
+    background: radial-gradient(circle, rgba(251,191,36,0.03) 0%, transparent 70%);
+  }
+  .v2 .flywheel-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+  }
+  .v2 .fc-score-label {
+    font-family: var(--font-display);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-bottom: 4px;
+  }
+  .v2 .fc-score-number {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 72px;
+    letter-spacing: -2px;
+    color: var(--text);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(251,191,36,0.2);
+  }
+  .v2 .fc-score-sub {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .v2 .fw-node {
+    position: absolute;
+    width: 130px;
+    text-align: center;
+    z-index: 4;
+    cursor: default;
+    transform: translate(-50%, -50%);
+    transition: filter 0.3s;
+  }
+  .v2 .fw-node:hover { filter: brightness(1.15); }
+  .v2 .fw-node-icon {
+    width: 50px; height: 50px;
+    border-radius: 13px;
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .v2 .fw-node:hover .fw-node-icon {
+    background: rgba(251,191,36,0.15);
+    border-color: rgba(251,191,36,0.4);
+    box-shadow: 0 0 24px rgba(251,191,36,0.15);
+  }
+  .v2 .fw-node-icon svg {
+    width: 22px; height: 22px;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .v2 .fw-node-title {
+    font-family: var(--font-display);
+    font-size: 12px; font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.3px;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .v2 .fw-node-sub {
+    font-size: 10.5px;
+    color: var(--text-tertiary);
+    line-height: 1.35;
+  }
+  .v2 .ae-quote {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .v2 .ae-quote strong {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+  }
+  @media (max-width: 768px) {
+    .v2 .authority-engine { padding: 64px 24px; }
+    .v2 .ae-title { font-size: 32px; }
+    .v2 .ae-desc { font-size: 15px; }
+    .v2 .flywheel-wrap {
+      --fw-size: 380px;
+      --fw-radius: 165px;
+      margin: 44px auto 40px;
+    }
+    .v2 .flywheel-orbit { inset: 24px; }
+    .v2 .flywheel-inner-ring { inset: 70px; }
+    .v2 .fw-node { width: 105px; }
+    .v2 .fw-node-icon { width: 40px; height: 40px; border-radius: 10px; }
+    .v2 .fw-node-icon svg { width: 18px; height: 18px; }
+    .v2 .fw-node-title { font-size: 10.5px; }
+    .v2 .fw-node-sub { font-size: 9px; }
+    .v2 .fc-score-number { font-size: 52px; }
+    .v2 .fc-score-label { font-size: 9px; }
+    .v2 .ae-quote { font-size: 15px; }
+  }
+  @media (max-width: 480px) {
+    .v2 .ae-title { font-size: 26px; }
+    .v2 .flywheel-wrap {
+      --fw-size: 320px;
+      --fw-radius: 138px;
+    }
+    .v2 .flywheel-orbit { inset: 20px; }
+    .v2 .flywheel-inner-ring { inset: 56px; }
+    .v2 .fw-node { width: 95px; }
+    .v2 .fw-node-icon { width: 36px; height: 36px; }
+    .v2 .fw-node-icon svg { width: 16px; height: 16px; }
+    .v2 .fw-node-title { font-size: 10px; }
+    .v2 .fw-node-sub { font-size: 8.5px; }
+    .v2 .fc-score-number { font-size: 44px; }
+  }
+
+  /* ============================================
      TIER SHOWCASE
      ============================================ */
   .v2 .showcase-section {
@@ -2287,6 +2496,74 @@
   </section>
 
   <!-- ============================
+       AUTHORITY ENGINE (flywheel)
+       ============================ -->
+  <section class="authority-engine" id="authority-engine">
+    <div class="ae-label">The Authority Engine</div>
+    <h2 class="ae-title">
+      ONE CONVERSATION.<br>
+      <span class="gold">A PERMANENT LAYER OF TRUST.</span>
+    </h2>
+    <p class="ae-desc">
+      Every appearance produces indexed content, structured data, and real backlinks. Each layer makes the next conversation more powerful. The floor never drops. Your authority only compounds.
+    </p>
+
+    <div class="flywheel-wrap" id="flywheelWrap">
+      <div class="flywheel-orbit"></div>
+      <div class="flywheel-inner-ring"></div>
+
+      <svg viewBox="0 0 560 560" fill="none" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;">
+        <defs>
+          <marker id="aeAh" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+            <path d="M0,0 L7,2.5 L0,5" fill="rgba(251,191,36,0.30)"/>
+          </marker>
+        </defs>
+        <path d="M 320,38 A 248,248 0 0,1 510,148" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" fill="none" marker-end="url(#aeAh)"/>
+        <path d="M 528,200 A 248,248 0 0,1 456,460" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" fill="none" marker-end="url(#aeAh)"/>
+        <path d="M 420,490 A 248,248 0 0,1 140,490" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" fill="none" marker-end="url(#aeAh)"/>
+        <path d="M 104,460 A 248,248 0 0,1 32,200" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" fill="none" marker-end="url(#aeAh)"/>
+        <path d="M 50,148 A 248,248 0 0,1 240,38" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" fill="none" marker-end="url(#aeAh)"/>
+      </svg>
+
+      <div class="flywheel-center">
+        <div class="fc-score-label">Signal Score</div>
+        <div class="fc-score-number" id="aeSignalScore">0</div>
+        <div class="fc-score-sub">authority surface area</div>
+      </div>
+
+      <div class="fw-node" id="fwn0">
+        <div class="fw-node-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="fw-node-title">Live Conversation</div>
+        <div class="fw-node-sub">Unscripted. On the record.</div>
+      </div>
+      <div class="fw-node" id="fwn1">
+        <div class="fw-node-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><polygon points="10 8 10 13 14.5 10.5"/></svg></div>
+        <div class="fw-node-title">Content Produced</div>
+        <div class="fw-node-sub">Clips &middot; Posts &middot; Transcript</div>
+      </div>
+      <div class="fw-node" id="fwn2">
+        <div class="fw-node-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div class="fw-node-title">Indexed Everywhere</div>
+        <div class="fw-node-sub">Google &middot; YouTube &middot; Schema</div>
+      </div>
+      <div class="fw-node" id="fwn3">
+        <div class="fw-node-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="fw-node-title">E-E-A-T Signals</div>
+        <div class="fw-node-sub">Experience &middot; Expertise<br>Authority &middot; Trust</div>
+      </div>
+      <div class="fw-node" id="fwn4">
+        <div class="fw-node-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="fw-node-title">Authority Compounds</div>
+        <div class="fw-node-sub">Next conversation<br>starts higher</div>
+      </div>
+    </div>
+
+    <p class="ae-quote">
+      &ldquo;In a world of AI-generated content, the one signal that can&rsquo;t be faked is <strong>a live conversation where you prove what you know</strong>.&rdquo;
+    </p>
+  </section>
+
+  <!-- ============================
        TIER SHOWCASE
        ============================ -->
   <section class="section showcase-section" id="pricing">
@@ -2967,6 +3244,50 @@
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') closeLB();
   });
+})();
+</script>
+
+<!-- Authority Engine flywheel: position nodes + animate score -->
+<script>
+(function() {
+  var wrap = document.getElementById('flywheelWrap');
+  if (!wrap) return;
+  var nodes = wrap.querySelectorAll('.fw-node');
+
+  function positionNodes() {
+    var cx = wrap.offsetWidth / 2;
+    var cy = wrap.offsetHeight / 2;
+    var r  = parseFloat(getComputedStyle(wrap).getPropertyValue('--fw-radius'));
+    for (var i = 0; i < nodes.length; i++) {
+      var angle = (-90 + i * 72) * (Math.PI / 180);
+      nodes[i].style.left = (cx + r * Math.cos(angle)) + 'px';
+      nodes[i].style.top  = (cy + r * Math.sin(angle)) + 'px';
+    }
+    var orbitR = (wrap.offsetWidth / 2) - 30;
+    wrap.querySelector('.flywheel-orbit').style.setProperty('--fw-orbit-r', orbitR + 'px');
+  }
+  positionNodes();
+  window.addEventListener('resize', positionNodes);
+
+  var target = 74;
+  var el = document.getElementById('aeSignalScore');
+  var duration = 2200;
+  var startTime = null;
+  var started = false;
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function animate(ts) {
+    if (!startTime) startTime = ts;
+    var p = Math.min((ts - startTime) / duration, 1);
+    el.textContent = Math.round(easeOut(p) * target);
+    if (p < 1) requestAnimationFrame(animate);
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !started) {
+      started = true;
+      requestAnimationFrame(animate);
+    }
+  }, { threshold: 0.3 });
+  obs.observe(document.getElementById('authority-engine'));
 })();
 </script>
 </body>
