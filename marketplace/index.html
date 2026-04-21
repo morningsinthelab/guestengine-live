@@ -388,6 +388,30 @@
   .bg-license { background:var(--licensable-faint); border:1px solid rgba(56,184,110,0.09); color:var(--licensable); }
   .bg-license::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--licensable); flex-shrink:0; }
 
+  /* Coming Soon badge */
+  .bg-coming-soon {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.18);
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 9px;
+    padding: 3px 10px;
+  }
+  .bg-coming-soon::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    animation: cs-pulse 2s ease-in-out infinite;
+  }
+  @keyframes cs-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
   /* Description */
   .card-desc {
     font-size:12.5px; font-style:italic; color:var(--p);
@@ -697,7 +721,7 @@
     <div class="ch" data-type="twin" data-filter="twin">Digital Twins</div>
     <div class="ch" data-type="license" data-filter="license">Available for Licensing</div>
   </div>
-  <div class="ct"><strong id="countNum">14</strong> characters</div>
+  <div class="ct"><strong id="countNum">6</strong> characters</div>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -709,95 +733,43 @@
       name: 'Sophia', type: 'studio', role: 'Lead AI Producer — Guest Engine & MiTL Network',
       desc: 'I handle your prep — topic angles, talking points, green room briefing — so you arrive ready and the host has everything they need.',
       traits: ['Guest Prep', 'Show Production', 'Research', 'Scheduling'],
-      show: 'MiTL', freq: 'Core', licensable: true, price: '$75/ep', featured: 'hero',
+      show: 'MiTL', freq: 'Core', featured: 'hero', comingSoon: true,
       img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=faces'
     },
     {
       name: 'Sterling', type: 'studio', role: 'News Anchor — MiTL Morning Wire',
       desc: 'Gravitas meets algorithm. I deliver the morning wire with precision, authority, and just enough edge to keep you honest.',
       traits: ['News Anchor', 'Morning Wire', 'Authoritative'],
-      show: 'MiTL', freq: 'Recurring', licensable: true, price: '$75/ep', featured: 'vert',
+      show: 'MiTL', freq: 'Recurring', featured: 'vert', comingSoon: true,
       img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=faces'
     },
     {
       name: 'Frankie', type: 'studio', role: 'Recurring Character — Entertainment',
       desc: "Overconfident delivery meets under-disciplined research. I say things other characters won't — and I'm usually half right.",
       traits: ['Entertainment', 'Comedy', 'Hot Takes'],
-      show: 'MiTL', freq: 'Recurring', licensable: true, price: '$75/ep',
+      show: 'MiTL', freq: 'Recurring', comingSoon: true,
       img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=400&fit=crop&crop=faces'
     },
     {
       name: 'Preston', type: 'studio', role: 'Market Analyst & Finance Correspondent',
       desc: "I break down market moves before the opening bell. No hype, no FUD — just the numbers and what they actually mean for your day.",
       traits: ['Markets', 'Finance', 'Pre-Market'],
-      show: 'MiTL', freq: 'Daily',
+      show: 'MiTL', freq: 'Daily', comingSoon: true,
       img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=400&fit=crop&crop=faces'
     },
     {
       name: 'Tommy', type: 'studio', role: 'Sports Desk Producer — The Skeptic',
       desc: "I don't trust narratives until the numbers back them up. Every take gets pressure-tested. Every stat gets verified.",
       traits: ['Sports', 'NFL', 'Analytics'],
-      show: 'MiTL', freq: 'Sports Desk',
+      show: 'MiTL', freq: 'Sports Desk', comingSoon: true,
       img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'Dr. Peter Parkher', type: 'studio', role: 'Investigative Journalist',
-      desc: "I dig where others won't. Every story has a paper trail — and I follow it until someone gets uncomfortable.",
-      traits: ['Investigative', 'Journalism', 'Deep Dives'],
-      show: 'MiTL', freq: 'Investigations',
-      img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'GlAIdys Mornings', type: 'studio', role: 'Morning Show Personality',
-      desc: "Good morning. I bring the warmth, the wit, and the wake-up call. Every morning needs an anchor — I'm yours.",
-      traits: ['Morning Show', 'Personality', 'Lifestyle'],
-      show: 'MiTL', freq: 'Morning',
-      img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'Christopher "CMarty Fit" Martin', type: 'studio', role: 'Fitness & Wellness Correspondent',
-      desc: "Fitness isn't a trend — it's a discipline. I cut through the noise and bring you what actually works.",
-      traits: ['Fitness', 'Wellness', 'Nutrition'],
-      show: 'MiTL', freq: 'Wellness',
-      img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=400&fit=crop&crop=faces'
     },
     {
       name: 'Maya', type: 'studio', role: 'Community Correspondent — Culture & Lifestyle',
       desc: "I find the stories that don't make headlines but should. The people, the neighborhoods, the culture that defines how we actually live.",
       traits: ['Culture', 'Lifestyle', 'Community'],
-      show: 'MiTL', freq: 'Community',
+      show: 'MiTL', freq: 'Community', comingSoon: true,
       img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=400&fit=crop&crop=faces'
-    },
-    {
-      name: 'Colleen Marchetti-Burns', type: 'correspondent', role: 'MiTL Sports Desk — New York City · NFL Correspondent',
-      desc: "The NFL doesn't stop at the whistle. I cover the moves, the money, and the stories New York is talking about before anyone else.",
-      traits: ['NFL', 'New York City', 'Sports Business'],
-      show: 'MiTL Sports Desk', freq: 'NFL · NYC', featured: 'corr-hero',
-      img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop&crop=faces'
-    },
-    {
-      name: 'Amara Diallo-Nguyen', type: 'correspondent', role: 'MiTL Sports Desk — Minneapolis · NFL Correspondent',
-      desc: "Minneapolis doesn't just watch football — we live it. I cover the Vikings and the culture around the North.",
-      traits: ['NFL', 'Minneapolis', 'Vikings'],
-      show: 'Sports Desk', freq: 'NFL'
-    },
-    {
-      name: 'Agnes Szymanski', type: 'correspondent', role: 'Victoria Morning Wire Correspondent',
-      desc: "Victoria's stories move quietly — but they matter. I bring the island's voice to the morning wire before the mainland wakes up.",
-      traits: ['Morning Wire', 'Victoria', 'Regional News'],
-      show: 'Morning Wire', freq: 'Victoria'
-    },
-    {
-      name: 'Erick Flores-Bautista', type: 'correspondent', role: 'MiTL Sports Desk — Los Angeles · NFL Correspondent',
-      desc: 'LA has two teams and ten million opinions. I cover the Rams, the Chargers, and the culture that ties them together.',
-      traits: ['NFL', 'Los Angeles', 'Rams'],
-      show: 'Sports Desk', freq: 'NFL · LA'
-    },
-    {
-      name: 'Cassidy Reeves', type: 'correspondent', role: 'Calgary Morning Wire Correspondent',
-      desc: 'Calgary wakes up early and moves fast. I make sure the morning wire keeps pace with the energy of this city.',
-      traits: ['Morning Wire', 'Calgary', 'Regional'],
-      show: 'Morning Wire', freq: 'Calgary'
     }
   ];
 
@@ -830,6 +802,7 @@
     var traitHTML = ch.traits.map(function(t) { return '<span class="trait">' + t + '</span>'; }).join('');
     if (ch.traits.length > 4) traitHTML += '<span class="trait-more" style="color:var(--gold);">+' + (ch.traits.length - 4) + '</span>';
 
+    var comingSoonBadge = ch.comingSoon ? '<span class="bg bg-coming-soon">Coming Soon</span>' : '';
     var licenseBadge = ch.licensable ? '<span class="bg bg-license">Available for Licensing</span>' : '';
 
     return '<div class="card-hero" data-type="' + ch.type + '" data-name="' + ch.name.toLowerCase() + '" data-licensable="' + (ch.licensable || false) + '">' +
@@ -841,6 +814,7 @@
         '</div>' +
         '<div class="hero-badges">' +
           '<span class="bg bg-type" data-t="' + ch.type + '">' + typeLabel(ch.type) + '</span>' +
+          comingSoonBadge +
           licenseBadge +
         '</div>' +
         '<div class="hero-qt">' + ch.desc + '</div>' +
@@ -897,6 +871,7 @@
         '<div class="card-role">' + ch.role + '</div>' +
         '<div class="card-badges">' +
           '<span class="bg bg-type" data-t="' + ch.type + '">' + typeLabel(ch.type) + '</span>' +
+          (ch.comingSoon ? '<span class="bg bg-coming-soon">Coming Soon</span>' : '') +
           (ch.licensable ? '<span class="bg bg-license">Licensable</span>' : '') +
         '</div>' +
         '<div class="card-desc">' + ch.desc + '</div>' +
@@ -930,6 +905,7 @@
         '<div class="card-role">' + ch.role + '</div>' +
         '<div class="card-badges">' +
           '<span class="bg bg-type" data-t="' + ch.type + '">' + (ch.type === 'studio' ? 'Studio' : 'Correspondent') + '</span>' +
+          (ch.comingSoon ? '<span class="bg bg-coming-soon">Coming Soon</span>' : '') +
           (ch.licensable ? '<span class="bg bg-license">Licensable</span>' : '') +
         '</div>' +
         '<div class="card-desc">' + ch.desc + '</div>' +
