@@ -520,59 +520,248 @@
   }
 
   /* ============================================
-     FOR GUESTS — WHAT YOU GET
+     FOR GUESTS — WHAT YOU GET (cinematic layout)
      ============================================ */
-  .v2 .deliverables-grid {
+
+  /* Top row: 2 big cinematic showcase cards */
+  .v2 .wyg-showcase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 56px;
+  }
+  .v2 .wyg-showcase-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    aspect-ratio: 16/10;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.4s cubic-bezier(0.2,0.7,0.2,1);
+  }
+  .v2 .wyg-showcase-card:hover {
+    border-color: rgba(251,191,36,0.25);
+    transform: translateY(-4px);
+  }
+  .v2 .wyg-showcase-card video,
+  .v2 .wyg-showcase-card img.wyg-card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .v2 .wyg-showcase-card video { filter: brightness(0.85) contrast(1.08); }
+  .v2 .wyg-showcase-card img.wyg-card-bg { filter: brightness(0.55) contrast(1.1); }
+  .v2 .wyg-showcase-card .wyg-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.4) 40%, rgba(2,6,23,0.15) 70%, rgba(2,6,23,0.3) 100%),
+      linear-gradient(to right, rgba(2,6,23,0.5) 0%, transparent 50%);
+    z-index: 1;
+  }
+  .v2 .wyg-showcase-card .wyg-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    z-index: 2;
+  }
+  .v2 .wyg-card-eyebrow {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .v2 .wyg-card-eyebrow .wyg-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: wygPulse 2s ease-in-out infinite;
+  }
+  @keyframes wygPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(251,191,36,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(251,191,36,0); }
+  }
+  .v2 .wyg-card-heading {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .v2 .wyg-card-sub {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.65);
+    max-width: 380px;
+  }
+  .v2 .wyg-play-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(251,191,36,0.15);
+    border: 2px solid rgba(251,191,36,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s;
+    opacity: 0;
+  }
+  .v2 .wyg-showcase-card:hover .wyg-play-ring { opacity: 1; }
+  .v2 .wyg-play-ring svg {
+    width: 22px; height: 22px;
+    fill: var(--gold);
+    margin-left: 3px;
+  }
+
+  /* Middle row: 4 visual strip cards */
+  .v2 .wyg-strip-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-top: 48px;
+    margin-top: 20px;
+  }
+  .v2 .wyg-strip-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    aspect-ratio: 4/5;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .v2 .wyg-strip-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+  }
+  .v2 .wyg-strip-card img.wyg-strip-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6) contrast(1.1) saturate(0.85);
+  }
+  .v2 .wyg-strip-card .wyg-strip-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(2,6,23,0.92) 0%, rgba(2,6,23,0.3) 50%, rgba(2,6,23,0.15) 100%);
+    z-index: 1;
+  }
+  .v2 .wyg-strip-card .wyg-strip-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    z-index: 2;
+  }
+  .v2 .wyg-strip-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(251,191,36,0.12);
+    border: 1px solid rgba(251,191,36,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--gold);
+  }
+  .v2 .wyg-strip-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .v2 .wyg-strip-sub {
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.5);
+  }
+  .v2 .wyg-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(251,191,36,0.10);
+    border: 1px solid rgba(251,191,36,0.25);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
   }
 
-  .v2 .deliverable-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 24px;
-    transition: all 0.25s;
+  /* Bottom row: 3 supporting text cards */
+  .v2 .wyg-bottom-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
   }
-  .v2 .deliverable-card:hover {
-    border-color: var(--border-strong);
-    background: var(--surface-hover);
+  .v2 .wyg-bottom-card {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    padding: 28px 24px;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .v2 .wyg-bottom-card:hover {
+    border-color: rgba(255,255,255,0.12);
     transform: translateY(-2px);
   }
-
-  .v2 .deliverable-icon {
-    width: 44px;
-    height: 44px;
+  .v2 .wyg-bottom-icon {
+    width: 40px; height: 40px;
     border-radius: 10px;
     background: var(--gold-dim);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
     margin-bottom: 16px;
+    font-size: 18px;
+    color: var(--gold);
   }
-
-  .v2 .deliverable-card h3 {
+  .v2 .wyg-bottom-card h3 {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 8px;
     color: var(--text);
+    margin-bottom: 6px;
   }
-
-  .v2 .deliverable-card p {
-    font-size: 14px;
-    color: var(--text-secondary);
+  .v2 .wyg-bottom-card p {
+    font-size: 13.5px;
     line-height: 1.5;
+    color: var(--text-secondary);
   }
 
-  .v2 .deliverable-card.featured {
-    grid-column: span 2;
-    background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(0,0,0,0.5) 100%);
-    border-color: rgba(251,191,36,0.20);
+  /* WYG responsive */
+  @media (max-width: 900px) {
+    .v2 .wyg-showcase-row { grid-template-columns: 1fr; }
+    .v2 .wyg-strip-row { grid-template-columns: repeat(2, 1fr); }
+    .v2 .wyg-bottom-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 540px) {
+    .v2 .wyg-strip-row { grid-template-columns: 1fr 1fr; }
   }
 
   /* ============================================
@@ -2005,46 +2194,93 @@
       Stop creating from scratch. One live appearance on our network gives you everything you need to show up across every platform for weeks.
     </p>
 
-    <div class="deliverables-grid">
-      <div class="deliverable-card featured">
-        <div class="deliverable-icon"><i class="fa-solid fa-microphone-lines"></i></div>
-        <h3>Live Appearance</h3>
-        <p>Full guest segment broadcast to a daily audience. Live, unscripted, real conversation. Remote or in-studio.</p>
+    <!-- Top row: 2 cinematic showcase cards -->
+    <div class="wyg-showcase-row">
+      <!-- Live Appearance — real show footage -->
+      <div class="wyg-showcase-card">
+        <video autoplay muted loop playsinline src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/1776723765296-shows-hero.mp4"></video>
+        <div class="wyg-overlay"></div>
+        <div class="wyg-play-ring">
+          <svg viewBox="0 0 24 24"><polygon points="8 5 20 12 8 19"/></svg>
+        </div>
+        <div class="wyg-card-content">
+          <div class="wyg-card-eyebrow"><span class="wyg-dot"></span> Live &middot; Broadcast Daily</div>
+          <div class="wyg-card-heading">Live Appearance</div>
+          <div class="wyg-card-sub">Full guest segment broadcast to a daily audience. Live, unscripted, real conversation. Remote or in-studio.</div>
+        </div>
       </div>
-      <div class="deliverable-card featured">
-        <div class="deliverable-icon"><i class="fa-solid fa-globe"></i></div>
-        <h3>Authority Page</h3>
-        <p>A permanent, indexed page that ranks for your name and expertise. SEO + GEO optimized. Your professional identity online.</p>
+      <!-- Authority Page — generated authority profile on monitor -->
+      <div class="wyg-showcase-card">
+        <img class="wyg-card-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_authority_page.png" alt="Authority Page">
+        <div class="wyg-overlay"></div>
+        <div class="wyg-card-content">
+          <div class="wyg-card-eyebrow">SEO + GEO Optimized &middot; Indexed Everywhere</div>
+          <div class="wyg-card-heading">Authority Page</div>
+          <div class="wyg-card-sub">A permanent, indexed page that ranks for your name and expertise. Your professional identity online.</div>
+        </div>
       </div>
-      <div class="deliverable-card">
-        <div class="deliverable-icon"><i class="fa-solid fa-scissors"></i></div>
-        <h3>5 Video Clips</h3>
-        <p>Short-form clips optimized for LinkedIn, X, Instagram, TikTok, and YouTube Shorts.</p>
+    </div>
+
+    <!-- Middle row: 4 visual strip cards -->
+    <div class="wyg-strip-row">
+      <!-- Video Clips -->
+      <div class="wyg-strip-card">
+        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_video_clips.png" alt="Video Clips">
+        <div class="wyg-strip-overlay"></div>
+        <div class="wyg-strip-content">
+          <span class="wyg-count-badge">5 Clips</span>
+          <div class="wyg-strip-title">Video Clips</div>
+          <div class="wyg-strip-sub">Short-form clips for LinkedIn, X, Instagram, TikTok, YouTube Shorts.</div>
+        </div>
       </div>
-      <div class="deliverable-card">
-        <div class="deliverable-icon"><i class="fa-solid fa-pen-fancy"></i></div>
-        <h3>10 Social Posts</h3>
-        <p>Pre-written posts for every platform. Your voice, your message, ready to publish.</p>
+      <!-- Social Posts -->
+      <div class="wyg-strip-card">
+        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_social_posts.png" alt="Social Posts">
+        <div class="wyg-strip-overlay"></div>
+        <div class="wyg-strip-content">
+          <span class="wyg-count-badge">10 Posts</span>
+          <div class="wyg-strip-title">Social Posts</div>
+          <div class="wyg-strip-sub">Pre-written posts for every platform. Your voice, your message.</div>
+        </div>
       </div>
-      <div class="deliverable-card">
-        <div class="deliverable-icon"><i class="fa-solid fa-file-lines"></i></div>
-        <h3>Full Transcript</h3>
-        <p>Searchable, shareable, repurposable. Turn your conversation into articles and threads.</p>
+      <!-- Full Transcript -->
+      <div class="wyg-strip-card">
+        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_transcript.png" alt="Full Transcript">
+        <div class="wyg-strip-overlay"></div>
+        <div class="wyg-strip-content">
+          <div class="wyg-strip-icon">&#9998;</div>
+          <div class="wyg-strip-title">Full Transcript</div>
+          <div class="wyg-strip-sub">Searchable, shareable, repurposable. Turn your conversation into articles.</div>
+        </div>
       </div>
-      <div class="deliverable-card">
-        <div class="deliverable-icon"><i class="fa-solid fa-link"></i></div>
+      <!-- Highlight Reel -->
+      <div class="wyg-strip-card">
+        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_highlight_reel.png" alt="Highlight Reel">
+        <div class="wyg-strip-overlay"></div>
+        <div class="wyg-strip-content">
+          <div class="wyg-strip-icon">&#9654;</div>
+          <div class="wyg-strip-title">Highlight Reel</div>
+          <div class="wyg-strip-sub">A polished sizzle reel for your website, media kit, or speaking page.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom row: 3 supporting cards -->
+    <div class="wyg-bottom-row">
+      <div class="wyg-bottom-card">
+        <div class="wyg-bottom-icon"><i class="fa-solid fa-link"></i></div>
         <h3>Backlinks</h3>
         <p>High-authority links back to your website. Boost your domain ranking with every appearance.</p>
       </div>
-      <div class="deliverable-card">
-        <div class="deliverable-icon"><i class="fa-solid fa-film"></i></div>
-        <h3>Highlight Reel</h3>
-        <p>A polished sizzle reel for your website, media kit, or speaking page.</p>
-      </div>
-      <div class="deliverable-card">
-        <div class="deliverable-icon"><i class="fa-solid fa-robot"></i></div>
+      <div class="wyg-bottom-card">
+        <div class="wyg-bottom-icon"><i class="fa-solid fa-robot"></i></div>
         <h3>AI Producer Prep</h3>
         <p>Sophia handles your prep &mdash; topic angles, talking points, and a briefing so you arrive ready.</p>
+      </div>
+      <div class="wyg-bottom-card">
+        <div class="wyg-bottom-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Signal Brief</h3>
+        <p>Your public authority score across 4 dimensions. See where you stand and where to grow.</p>
       </div>
     </div>
   </section>
