@@ -529,19 +529,18 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 
-/* Grid layouts */
+/* Grid layouts — OPTION C: uniform 4-col for both VIP and Member.
+   Tier distinction comes from TREATMENT (gold lockup, serif quote,
+   living portrait) not from size. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
 .grid-vip {
-  /* OPTION C: VIPs share the same grid dimensions as Members.
-     Status is signaled by TREATMENT (gold border, glow, lockup,
-     serif pull-quote, living portrait), not by size. */
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .loading {
@@ -1466,7 +1465,7 @@ img { max-width: 100%; display: block; }
   .hero-row { grid-template-columns: 1fr; gap: 24px; align-items: flex-start; }
   .stats { justify-content: flex-start; }
   .grid,
-  .grid-vip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-vip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .ctrl {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1483,7 +1482,7 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 700px) {
   .grid,
-  .grid-vip { grid-template-columns: 1fr; }
+  .grid-vip { grid-template-columns: 1fr; gap: 14px; }
   .card-hero { grid-template-columns: 1fr; }
   .hero-photo { min-height: 260px; height: 260px; }
   .hero-photo img { height: 100%; }
