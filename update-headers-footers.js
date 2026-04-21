@@ -37,7 +37,7 @@ function getHomepageNav() {
         <a href="#network" class="nav__link">NETWORK</a>
       </div>
       <div class="nav__actions">
-        <a href="https://app.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
+        <a href="https://app.conversationos.live/portal/login" class="nav__link nav__link--login">LOG IN</a>
         <a href="/join/" class="btn btn--primary btn--sm">GET STARTED</a>
       </div>
       <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
@@ -65,7 +65,7 @@ function getVerticalNav() {
         <a href="/#network" class="nav__link">NETWORK</a>
       </div>
       <div class="nav__actions">
-        <a href="https://app.conversationos.live" class="nav__link nav__link--login">LOG IN</a>
+        <a href="https://app.conversationos.live/portal/login" class="nav__link nav__link--login">LOG IN</a>
         <a href="/join/" class="btn btn--primary btn--sm">GET STARTED</a>
       </div>
       <button class="nav__hamburger" id="navToggle" aria-label="Toggle menu">
