@@ -709,6 +709,15 @@ img { max-width: 100%; display: block; }
   z-index: 1;
 }
 
+/* Living portrait video on cards */
+.card-photo video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Photo overlay — holds tier badge + verified dot */
 .photo-overlay {
   position: absolute;
@@ -826,6 +835,19 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-family: var(--f-body);
+}
+/* VIP badge — gold tone */
+.bg-v {
+  background: rgba(251,191,36,0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251,191,36,0.40);
+}
+.bg-v::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: #fbbf24;
+  box-shadow: 0 0 6px rgba(251,191,36,0.5);
 }
 /* Member badge — silver/platinum tone */
 .bg-m {
@@ -1144,6 +1166,13 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
   object-position: center 20%;
   transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
+  filter: brightness(1.12) contrast(1.10);
+}
+.hero-photo video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
   filter: brightness(1.12) contrast(1.10);
 }
 .card-hero:hover .hero-photo img { transform: scale(1.04); }
@@ -1688,6 +1717,12 @@ img { max-width: 100%; display: block; }
       .replace(/"/g, '&quot;');
   }
 
+  /* Living portrait video URLs — keyed by guest slug */
+  var LIVING_PORTRAITS = {
+    'tommy-rhee': 'https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/directory-portraits/tommy-rhee-living-portrait.mp4',
+    'ej-snyder': 'https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/directory-portraits/ej-snyder-living-portrait.mp4'
+  };
+
   /* ==========================================
      VIP HERO (wide, 2-col span, horizontal)
      ========================================== */
@@ -1698,8 +1733,11 @@ img { max-width: 100%; display: block; }
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
     var profileUrl = '/profile/' + guest.slug;
 
+    var portraitVideo = LIVING_PORTRAITS[guest.slug] || '';
     var photoHTML;
-    if (guest.headshotUrl) {
+    if (portraitVideo) {
+      photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
+    } else if (guest.headshotUrl) {
       photoHTML = '<img src="' + guest.headshotUrl + '" alt="' + escapeHtml(guest.guestName) + '" onerror="this.outerHTML=\'<div class=initials-lg>' + getInitials(guest.guestName) + '</div>\'">';
     } else {
       photoHTML = '<div class="initials-lg">' + getInitials(guest.guestName) + '</div>';
@@ -1752,8 +1790,11 @@ img { max-width: 100%; display: block; }
     var lastDate = apps.length ? apps[apps.length - 1].date : '';
     var profileUrl = '/profile/' + guest.slug;
 
+    var portraitVideo = LIVING_PORTRAITS[guest.slug] || '';
     var photoHTML;
-    if (guest.headshotUrl) {
+    if (portraitVideo) {
+      photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
+    } else if (guest.headshotUrl) {
       photoHTML = '<img src="' + guest.headshotUrl + '" alt="' + escapeHtml(guest.guestName) + '" onerror="this.outerHTML=\'<div class=initials>' + getInitials(guest.guestName) + '</div>\'">';
     } else {
       photoHTML = '<div class="initials">' + getInitials(guest.guestName) + '</div>';
@@ -1767,7 +1808,7 @@ img { max-width: 100%; display: block; }
 
     return '<a href="' + profileUrl + '" class="card-hero-vert" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
       '<div class="card-photo">' + photoHTML +
-        '<div class="photo-overlay"><span class="tr vt">VIP</span><span class="photo-vd"></span></div>' +
+        '<div class="photo-overlay"><span class="photo-vd"></span></div>' +
       '</div>' +
       '<div class="card-body">' +
         '<div class="card-nm">' + escapeHtml(guest.guestName) + '</div>' +
@@ -1812,16 +1853,15 @@ img { max-width: 100%; display: block; }
     else if (isFeatured) tierClass = ' tier-member';
     else if (isFree) tierClass = ' tier-free';
 
+    var portraitVideo = LIVING_PORTRAITS[guest.slug] || '';
     var photoHTML;
-    if (guest.headshotUrl) {
+    if (portraitVideo) {
+      photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
+    } else if (guest.headshotUrl) {
       photoHTML = '<img src="' + guest.headshotUrl + '" alt="' + escapeHtml(guest.guestName) + '" onerror="this.outerHTML=\'<div class=initials>' + getInitials(guest.guestName) + '</div>\'">';
     } else {
       photoHTML = '<div class="initials">' + getInitials(guest.guestName) + '</div>';
     }
-
-    var tierBadge = '';
-    if (isVIP) tierBadge = '<span class="tr vt">VIP</span>';
-    else if (isFeatured) tierBadge = '<span class="tr mt">Member</span>';
 
     var verifiedDot = !isFree ? '<span class="photo-vd"></span>' : '<span class="photo-vd-ghost"></span>';
 
@@ -1832,12 +1872,13 @@ img { max-width: 100%; display: block; }
     if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
 
     var badges = '';
-    if (isFeatured) badges += '<span class="bg bg-m">Member</span>';
+    if (isVIP) badges += '<span class="bg bg-v">VIP</span>';
+    else if (isFeatured) badges += '<span class="bg bg-m">Member</span>';
     badges += '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>';
 
     return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
       '<div class="card-photo">' + photoHTML +
-        '<div class="photo-overlay">' + tierBadge + verifiedDot + '</div>' +
+        '<div class="photo-overlay">' + verifiedDot + '</div>' +
       '</div>' +
       '<div class="card-body">' +
         '<div class="card-nm">' + escapeHtml(guest.guestName) + '</div>' +
@@ -1877,12 +1918,19 @@ img { max-width: 100%; display: block; }
     var featured = guests.filter(function(g) { return g.tier === 'member'; });
     var free = guests.filter(function(g) { return g.tier === 'free'; });
 
-    // Sort non-VIP by appearance count (desc)
-    function sortByApps(a, b) {
-      return getAppearances(b).length - getAppearances(a).length;
+    // Sort all tiers alphabetically by last name
+    function sortByLastName(a, b) {
+      var aParts = a.guestName.trim().split(/\s+/);
+      var bParts = b.guestName.trim().split(/\s+/);
+      var aLast = aParts[aParts.length - 1].toLowerCase();
+      var bLast = bParts[bParts.length - 1].toLowerCase();
+      if (aLast < bLast) return -1;
+      if (aLast > bLast) return 1;
+      return a.guestName.localeCompare(b.guestName);
     }
-    featured.sort(sortByApps);
-    free.sort(sortByApps);
+    vips.sort(sortByLastName);
+    featured.sort(sortByLastName);
+    free.sort(sortByLastName);
 
     var html = '';
 
