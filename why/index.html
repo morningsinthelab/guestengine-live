@@ -39,7 +39,7 @@
   <meta name="apple-mobile-web-app-title" content="Guest Engine">
   <meta name="application-name" content="Guest Engine">
   <!-- Hero Image Preload -->
-  <link rel="preload" as="image" href="/assets/heroes/hero-why.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/heroes/hero-why-poster.jpg" fetchpriority="high">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -663,9 +663,33 @@
        ============================ -->
   <section class="hero" id="hero">
     <div class="hero__video-wrap">
-      <img class="hero__img" src="/assets/heroes/hero-why.jpg" alt="Sophia Grant in the Guest Engine production war room">
+      <video
+        id="hero-video"
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="/assets/heroes/hero-why-poster.jpg"
+      >
+        <source media="(max-width: 768px)" src="/assets/heroes/hero-why-1280.mp4" type="video/mp4">
+        <source src="/assets/heroes/hero-why.mp4" type="video/mp4">
+      </video>
       <div class="hero__overlay"></div>
     </div>
+    <button class="hero__unmute" id="heroUnmute" aria-label="Unmute video">
+      <svg class="hero__unmute-icon hero__unmute-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <svg class="hero__unmute-icon hero__unmute-icon--unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+    </button>
     <div class="hero-content">
       <h1>
         OTHER PLATFORMS<br>
