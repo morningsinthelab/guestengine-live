@@ -2157,17 +2157,16 @@ img { max-width: 100%; display: block; }
     var fetched = await fetchAllGuests();
     console.log('[GuestDirectory] Fetched total:', fetched.length);
 
-    var excludedCount = 0, noAppsCount = 0, ccCount = 0;
+    var excludedCount = 0;
     var guests = fetched.filter(function(g) {
       if (EXCLUDED_SLUGS.indexOf(g.slug) !== -1) { excludedCount++; return false; }
-      // Exclude guests who never appeared on the show
-      var apps = getAppearances(g);
-      if (!apps.length) { noAppsCount++; return false; }
-      // Exclude Community Corner guests
-      if (getSegCode(g.topics) === 'cc') { ccCount++; return false; }
+      // Show every public guest with a product assignment.
+      // Center Stage and Community Corner are both first-class pills now;
+      // backfilled stubs without past_appearances still belong on their
+      // product page until episode rows arrive.
       return true;
     });
-    console.log('[GuestDirectory] Filter: excluded=' + excludedCount + ', noAppearances=' + noAppsCount + ', communityCorner=' + ccCount + ', remaining=' + guests.length);
+    console.log('[GuestDirectory] Filter: excluded=' + excludedCount + ', remaining=' + guests.length);
 
     allGuests = guests;
 
