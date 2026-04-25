@@ -1634,9 +1634,8 @@ img { max-width: 100%; display: block; }
   <input type="text" class="search" id="searchInput" placeholder="Search guests, topics, credentials...">
   <div class="chips" id="chips">
     <div class="ch on" data-filter="all">All</div>
-    <div class="ch" data-filter="cs">Center Stage</div>
-    <div class="ch" data-filter="vip">VIP</div>
-    <div class="ch" data-filter="featured">Members</div>
+    <div class="ch" data-filter="center-stage">Center Stage</div>
+    <div class="ch" data-filter="community-corner">Community Corner</div>
   </div>
   <div class="ct"><strong id="countNum">--</strong> guests</div>
 </div>
@@ -1655,7 +1654,7 @@ img { max-width: 100%; display: block; }
 <!-- SSR-friendly hidden content for crawlers — dynamically populated -->
 <div id="ssr-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
   <h2>Guest Engine Directory — Expert Podcast Guests</h2>
-  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Filter by segment, tier (VIP, Members, Appearances), or search by name and expertise. Powered by ConversationOS.</p>
+  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Filter by show segment (Center Stage, Community Corner) or search by name and expertise. Powered by ConversationOS.</p>
 </div>
 <script>
 (function() {
@@ -1932,12 +1931,16 @@ img { max-width: 100%; display: block; }
     var extra = expertise.length - 3;
     if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
 
+    // Card badges: VIP pill only on actual VIP profiles. Product pill
+    // (Center Stage / Community Corner) replaces the topic-segment pill.
+    var prodSlug = guest.productSlug || 'center-stage';
+    var prodSegCode = prodSlug === 'community-corner' ? 'cc' : 'cs';
+    var prodLabel = prodSlug === 'community-corner' ? 'Community Corner' : 'Center Stage';
     var badges = '';
     if (isVIP) badges += '<span class="bg bg-v">VIP</span>';
-    else if (isFeatured) badges += '<span class="bg bg-m">Member</span>';
-    badges += '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>';
+    badges += '<span class="bg bg-seg" data-seg="' + prodSegCode + '">' + prodLabel + '</span>';
 
-    return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
+    return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + prodSegCode + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + prodSegCode + '">' +
       '<div class="card-photo">' + photoHTML +
         '<div class="photo-overlay">' + verifiedDot + '</div>' +
       '</div>' +
@@ -1975,11 +1978,14 @@ img { max-width: 100%; display: block; }
       return;
     }
 
-    var vips = guests.filter(function(g) { return g.tier === 'vip'; });
-    var featured = guests.filter(function(g) { return g.tier === 'member'; });
-    var free = guests.filter(function(g) { return g.tier === 'free'; });
+    // Bucket by product (Center Stage / Community Corner). VIPs render at the
+    // top of their product section with the existing VIP card treatment —
+    // there's no separate VIP section anymore. Each product section is
+    // ordered: VIPs first (alpha by last name), then everyone else (alpha
+    // by last name).
+    var centerStage = guests.filter(function(g) { return g.productSlug === 'center-stage'; });
+    var communityCorner = guests.filter(function(g) { return g.productSlug === 'community-corner'; });
 
-    // Sort all tiers alphabetically by last name
     function sortByLastName(a, b) {
       var aParts = a.guestName.trim().split(/\s+/);
       var bParts = b.guestName.trim().split(/\s+/);
@@ -1989,61 +1995,50 @@ img { max-width: 100%; display: block; }
       if (aLast > bLast) return 1;
       return a.guestName.localeCompare(b.guestName);
     }
-    vips.sort(sortByLastName);
-    featured.sort(sortByLastName);
-    free.sort(sortByLastName);
+    function sortVipFirst(a, b) {
+      var aVip = a.tier === 'vip' ? 0 : 1;
+      var bVip = b.tier === 'vip' ? 0 : 1;
+      if (aVip !== bVip) return aVip - bVip;
+      return sortByLastName(a, b);
+    }
+    centerStage.sort(sortVipFirst);
+    communityCorner.sort(sortVipFirst);
 
     var html = '';
 
-    // --- VIP SECTION ---
-    if (vips.length > 0) {
+    // --- CENTER STAGE SECTION ---
+    if (centerStage.length > 0) {
+      var csVipCount = centerStage.filter(function(g){ return g.tier === 'vip'; }).length;
+      var csHeadClass = csVipCount > 0 ? 'section-head section-head-vip' : 'section-head';
       html += '<section class="tier-section">';
-      html += '<div class="section-head section-head-vip">';
+      html += '<div class="' + csHeadClass + '">';
       html +=   '<div class="section-head-left">';
-      html +=     '<div class="section-label">Tier 01</div>';
-      html +=     '<h2><span class="vipAccent">VIP</span> Guests<span class="count">' + vips.length + '</span></h2>';
+      html +=     '<h2>Center Stage<span class="count">' + centerStage.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">The show\'s most trusted voices. Premium placement, full media kits, and authority profiles.</p>';
+      html +=   '<p class="section-sub">Long-form, signature interviews. The show\'s headline guests — deep domain authority, full media kits, and authority profiles.</p>';
       html += '</div>';
-      html += '<div class="grid grid-vip">';
-      for (var i = 0; i < vips.length; i++) {
-        html += buildCard(vips[i]);
+      html += '<div class="grid' + (csVipCount > 0 ? ' grid-vip' : '') + '">';
+      for (var i = 0; i < centerStage.length; i++) {
+        html += buildCard(centerStage[i]);
       }
       html += '</div>';
       html += '</section>';
     }
 
-    // --- FEATURED SECTION ---
-    if (featured.length > 0) {
+    // --- COMMUNITY CORNER SECTION ---
+    if (communityCorner.length > 0) {
+      var ccVipCount = communityCorner.filter(function(g){ return g.tier === 'vip'; }).length;
+      var ccHeadClass = ccVipCount > 0 ? 'section-head section-head-vip' : 'section-head';
       html += '<section class="tier-section">';
-      html += '<div class="section-head">';
+      html += '<div class="' + ccHeadClass + '">';
       html +=   '<div class="section-head-left">';
-      html +=     '<div class="section-label">Tier 02</div>';
-      html +=     '<h2>Members<span class="count">' + featured.length + '</span></h2>';
+      html +=     '<h2>Community Corner<span class="count">' + communityCorner.length + '</span></h2>';
       html +=   '</div>';
-      html +=   '<p class="section-sub">Active members with recurring access, deep domain authority, and priority placement across the network.</p>';
+      html +=   '<p class="section-sub">Quick-hit, conversational guest spots. Voices from the ConversationOS network with single or recurring appearances.</p>';
       html += '</div>';
-      html += '<div class="grid">';
-      for (var j = 0; j < featured.length; j++) {
-        html += buildCard(featured[j]);
-      }
-      html += '</div>';
-      html += '</section>';
-    }
-
-    // --- FREE SECTION ---
-    if (free.length > 0) {
-      html += '<section class="tier-section">';
-      html += '<div class="section-head">';
-      html +=   '<div class="section-head-left">';
-      html +=     '<div class="section-label">Tier 03</div>';
-      html +=     '<h2>Appearances<span class="count">' + free.length + '</span></h2>';
-      html +=   '</div>';
-      html +=   '<p class="section-sub">Guests who have appeared on a ConversationOS show. Single-appearance access and directory listing.</p>';
-      html += '</div>';
-      html += '<div class="grid">';
-      for (var k = 0; k < free.length; k++) {
-        html += buildCard(free[k]);
+      html += '<div class="grid' + (ccVipCount > 0 ? ' grid-vip' : '') + '">';
+      for (var j = 0; j < communityCorner.length; j++) {
+        html += buildCard(communityCorner[j]);
       }
       html += '</div>';
       html += '</section>';
@@ -2056,11 +2051,9 @@ img { max-width: 100%; display: block; }
   function filterGuests() {
     var query = document.getElementById('searchInput').value.toLowerCase().trim();
     var filtered = allGuests.filter(function(g) {
-      if (activeFilter === 'vip' && g.tier !== 'vip') return false;
-      if (activeFilter === 'featured' && g.tier !== 'member') return false;
-      if (['cs','ns','dk'].indexOf(activeFilter) !== -1) {
-        if (getSegCode(g.topics) !== activeFilter) return false;
-      }
+      // Product-based pills: 'center-stage' / 'community-corner'. 'all' shows
+      // everything. Anything else falls through to "no match".
+      if (activeFilter !== 'all' && g.productSlug !== activeFilter) return false;
       if (query) {
         var searchable = (g.guestName + ' ' + (g.headline || '') + ' ' + (g.bio || '') + ' ' + (g.topics || []).join(' ')).toLowerCase();
         if (searchable.indexOf(query) === -1) return false;
