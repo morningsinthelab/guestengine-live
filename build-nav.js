@@ -30,7 +30,7 @@ const NAV_LINKS = [
 ];
 
 const LOGIN_URL = 'https://app.conversationos.live/portal/login';
-const SIGNUP_PATH = '/join/';
+const SIGNUP_URL = 'https://app.conversationos.live/portal/signup';
 const SITE_ORIGIN = 'https://guestengine.live';
 
 // -- LINK-PREFIX VARIANTS ------------------------------------
@@ -52,9 +52,10 @@ function resolveHref(link, variant) {
   return link.href;
 }
 
-function resolveSignupHref(variant) {
-  if (variant === 'directory') return SITE_ORIGIN + SIGNUP_PATH;
-  return SIGNUP_PATH;
+function resolveSignupHref(_variant) {
+  // Sign Up always goes to the portal — full account creation flow.
+  // ("Join" / "Get Featured" CTAs still point to /join/ for the booking funnel.)
+  return SIGNUP_URL;
 }
 
 // -- HTML GENERATORS -----------------------------------------
