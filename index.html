@@ -573,6 +573,103 @@
   .v2 .tour-spotlight__cta:hover { background: var(--gold-hover); transform: translateY(-1px); }
 
   /* ============================================
+     TIER STRIP (4-tier compact pricing above FAQ)
+     ============================================ */
+  .v2 .tier-strip {
+    padding: 80px clamp(20px, 4vw, 80px);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .v2 .tier-strip__head { max-width: 720px; margin: 0 auto 40px; }
+  .v2 .tier-strip__sub {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 14px 0 0;
+    line-height: 1.6;
+  }
+  .v2 .tier-strip__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .v2 .tier-strip__card {
+    position: relative;
+    padding: 24px 22px 22px;
+    background: var(--bg-elevated, rgba(255,255,255,0.02));
+    border: 1px solid var(--border, rgba(255,255,255,0.06));
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .v2 .tier-strip__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0;
+  }
+  .v2 .tier-strip__price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--gold);
+    margin: 0;
+    line-height: 1.1;
+  }
+  .v2 .tier-strip__price-period {
+    font-family: var(--font-body, Inter), sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-left: 4px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .v2 .tier-strip__desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 4px 0 0;
+  }
+  .v2 .tier-strip__new {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .v2 .tier-strip__footer { margin-top: 32px; }
+  .v2 .tier-strip__compare {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(251,191,36,0.3);
+    padding-bottom: 3px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .v2 .tier-strip__compare:hover { color: var(--gold-hover); border-bottom-color: var(--gold); }
+
+  /* ============================================
      SECTION UTILITIES
      ============================================ */
   .v2 .section {
@@ -2719,6 +2816,8 @@
     .v2 .section, .v2 .section-tight { padding: 48px 32px; }
     .v2 .tour-spotlight { padding: 40px 32px; }
     .v2 .tour-spotlight__headline { font-size: 22px; }
+    .v2 .tier-strip { padding: 56px 32px; }
+    .v2 .tier-strip__grid { grid-template-columns: repeat(2, 1fr); }
     .v2 .hero-content { padding: 0 32px 60px; }
     .v2 .hero-content h1 { font-size: 48px; }
     .v2 .section-title { font-size: 36px; }
@@ -2740,6 +2839,8 @@
 
   @media (max-width: 640px) {
     .v2 .section, .v2 .section-tight { padding: 48px 20px; }
+    .v2 .tier-strip { padding: 40px 20px; }
+    .v2 .tier-strip__grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
     .v2 .hero-content { padding: 0 20px 48px; }
     .v2 .hero-content h1 { font-size: 36px; }
     .v2 .section-title { font-size: 28px; }
@@ -3615,6 +3716,50 @@
         <p>We research 30 days of community discourse around you, your ideas, and your category &mdash; then show you exactly what your best material is. Free.</p>
       </div>
       <a href="/signal/" class="lead-cta" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--gold);color:var(--bg);font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;border-radius:6px;transition:all 0.2s;margin-top:8px;">Get Your Signal Report <span>&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ============================
+       PRICING STRIP (4-tier compact)
+       ============================ -->
+  <section class="tier-strip" id="pricing-strip" aria-labelledby="pricing-strip-heading">
+    <div class="tier-strip__head">
+      <div class="section-label">Four ways in</div>
+      <h2 class="section-title section-title--center" id="pricing-strip-heading">PICK YOUR <span class="gold">TIER.</span></h2>
+      <p class="tier-strip__sub">Get featured. Get distributed. Get booked again.</p>
+    </div>
+
+    <div class="tier-strip__grid">
+
+      <div class="tier-strip__card">
+        <div class="tier-strip__name">Single Appearance</div>
+        <div class="tier-strip__price">$497<span class="tier-strip__price-period">once</span></div>
+        <p class="tier-strip__desc">One produced appearance. Permanent Authority Page. 14-day Distribution Sprint.</p>
+      </div>
+
+      <div class="tier-strip__card">
+        <div class="tier-strip__name">Member</div>
+        <div class="tier-strip__price">$97<span class="tier-strip__price-period">/mo</span></div>
+        <p class="tier-strip__desc">Stay visible between appearances. Monthly Signal report. AI digital twin. 10 Reach pitches/mo.</p>
+      </div>
+
+      <div class="tier-strip__card">
+        <span class="tier-strip__new">New</span>
+        <div class="tier-strip__name">Reach Pro</div>
+        <div class="tier-strip__price">$197<span class="tier-strip__price-period">/mo</span></div>
+        <p class="tier-strip__desc">Pitch hard. 50 Authority Reach pitches/mo. Backed by your Authority Page.</p>
+      </div>
+
+      <div class="tier-strip__card">
+        <div class="tier-strip__name">VIP</div>
+        <div class="tier-strip__price">$297<span class="tier-strip__price-period">/mo</span></div>
+        <p class="tier-strip__desc">Quarterly produced appearances. 60-day Sprint. 25 Reach pitches/mo. Premium placement.</p>
+      </div>
+
+    </div>
+
+    <div class="tier-strip__footer">
+      <a href="/join/" class="tier-strip__compare">Compare all features <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
