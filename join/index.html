@@ -1348,27 +1348,31 @@
     };
 
     var tierData = {
-      single:  { label: 'Single Appearance', price: '$497', billing: 'one-time' },
-      member:  { label: 'Member', price: '$97/mo', billing: 'monthly' },
-      vip:     { label: 'VIP', price: '$297/mo', billing: 'monthly' }
+      single:   { label: 'Single Appearance', price: '$497',    billing: 'one-time' },
+      member:   { label: 'Member',            price: '$97/mo',  billing: 'monthly'  },
+      reachpro: { label: 'Reach Pro',         price: '$197/mo', billing: 'monthly'  },
+      vip:      { label: 'VIP',               price: '$297/mo', billing: 'monthly'  }
     };
 
     // Which tiers unlock which segment requirements
+    // (reachpro doesn't pick a segment — it has its own flow)
     var tierAccess = {
-      single: ['single'],
-      member: ['single', 'member'],
-      vip:    ['single', 'member', 'vip']
+      single:   ['single'],
+      member:   ['single', 'member'],
+      reachpro: ['single', 'member'],
+      vip:      ['single', 'member', 'vip']
     };
 
     // ══════════════════════════════════════
     // FLOW DEFINITIONS
     // ══════════════════════════════════════
-    // Single/VIP: tier → show → segment → confirm
-    // Member:     tier → details → confirm
+    // Single/VIP:           tier → show → segment → confirm
+    // Member / Reach Pro:   tier → details → confirm
     var flows = {
-      single: ['tier', 'show', 'segment', 'confirm'],
-      member: ['tier', 'details', 'confirm'],
-      vip:    ['tier', 'show', 'segment', 'confirm']
+      single:   ['tier', 'show', 'segment', 'confirm'],
+      member:   ['tier', 'details', 'confirm'],
+      reachpro: ['tier', 'details', 'confirm'],
+      vip:      ['tier', 'show', 'segment', 'confirm']
     };
 
     var currentStepId = 'tier';
@@ -1426,6 +1430,7 @@
     // ══════════════════════════════════════
     document.querySelectorAll('.tier-card').forEach(function(card) {
       card.addEventListener('click', function() {
+        if (card.classList.contains('disabled')) return;
         document.querySelectorAll('.tier-card').forEach(function(c) { c.classList.remove('selected'); });
         card.classList.add('selected');
         state.tier = card.dataset.tier;
@@ -1433,9 +1438,11 @@
         state.billing = tierData[state.tier].billing;
         document.getElementById('nextTier').disabled = false;
 
-        // Update button text based on tier
+        // Update button text based on tier — flows that go to "details"
+        // collect contact info; flows that go to "show" let the user pick.
         var btn = document.getElementById('nextTier');
-        if (state.tier === 'member') {
+        var nextStep = (flows[state.tier] || flows.single)[1];
+        if (nextStep === 'details') {
           btn.innerHTML = 'Enter Your Details <i class="fas fa-arrow-right"></i>';
         } else {
           btn.innerHTML = 'Select Show <i class="fas fa-arrow-right"></i>';
@@ -1532,8 +1539,10 @@
 
       html += '<div class="summary-row"><span class="label">Tier</span><span class="value">' + tierData[state.tier].label + '</span></div>';
 
-      if (state.tier === 'member') {
-        // Member summary — show details
+      var isDetailsTier = state.tier === 'member' || state.tier === 'reachpro';
+
+      if (isDetailsTier) {
+        // Member / Reach Pro summary — show details
         html += '<div class="summary-row"><span class="label">Name</span><span class="value">' + escHtml(state.name) + '</span></div>';
         html += '<div class="summary-row"><span class="label">Email</span><span class="value">' + escHtml(state.email) + '</span></div>';
         if (state.topic) {
@@ -1541,7 +1550,11 @@
         }
         // What happens next
         html += '<div style="padding:16px 0 0;border-top:1px solid var(--border);margin-top:8px;">';
-        html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Signal ENGINE starts researching your world. Within 48 hours you\'ll have your first intelligence report, your digital twin begins building, and your directory listing goes live.</p>';
+        if (state.tier === 'reachpro') {
+          html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Sophia starts drafting your first batch of pitches within 24 hours. MITL ops will manually review your first three before they send, and replies route directly to your Gmail. Your Authority Page must be live before pitches send &mdash; if you haven\'t booked a Single Appearance yet, we\'ll prompt you.</p>';
+        } else {
+          html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Signal ENGINE starts researching your world. Within 48 hours you\'ll have your first intelligence report, your digital twin begins building, and your directory listing goes live.</p>';
+        }
         html += '</div>';
       } else {
         // Single/VIP summary — show + segment
@@ -1576,6 +1589,15 @@
 
     // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', function() {
+      // TODO: Wire Stripe Reach Pro price ID once Keith creates it in
+      // the Stripe dashboard. Until then, Reach Pro submissions are
+      // gated by the feature flag below and show a polite error if
+      // somehow reached without REACH_PRO_ENABLED.
+      if (state.tier === 'reachpro' && window.REACH_PRO_ENABLED !== true) {
+        alert('Reach Pro is launching soon — book a Single Appearance to get started, then upgrade from your dashboard.');
+        return;
+      }
+
       var params = { ref: 'join', tier: state.tier };
       if (state.show) params.show = state.show;
       if (state.segment) params.segment = state.segment;
