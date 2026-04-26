@@ -1379,18 +1379,16 @@
     // ══════════════════════════════════════
     // FEATURE FLAGS
     // ══════════════════════════════════════
-    // REACH_PRO_ENABLED gates the Reach Pro tier behind a flag until
-    // (a) Stripe price ID is created and wired in cos/server/billing-routes.ts,
-    // (b) the Reach Pro pitch flow itself is closer to GA in the cos build.
-    // Toggle by setting window.REACH_PRO_ENABLED = true in the console
-    // or by flipping the default below to true at launch.
+    // REACH_PRO_ENABLED — defaults true now that the live Stripe price
+    // (price_1TQYZoHOIN3f8KXf8yEGLIXG / prod_UPNKz10AvCdMip) is wired in
+    // cos/server/billing-routes.ts. Override to false in the console for
+    // emergency disablement without a redeploy.
     if (typeof window.REACH_PRO_ENABLED === 'undefined') {
-      window.REACH_PRO_ENABLED = false;
+      window.REACH_PRO_ENABLED = true;
     }
 
-    // Apply visual treatment to the Reach Pro card based on the flag.
-    // When disabled: card shows but is non-clickable, with a "COMING SOON"
-    // overlay so prospects can read the offer but can't submit.
+    // Visual treatment when explicitly disabled (override path only).
+    // Normal flow: flag is true → card is fully clickable, no overlay.
     (function applyReachProFlag() {
       var card = document.getElementById('tier-reachpro');
       if (!card) return;
@@ -1414,11 +1412,15 @@
       price: null, billing: null
     };
 
+    // tierData carries the Stripe product slug forward in the checkout
+    // redirect query string. The cos backend translates productSlug →
+    // STRIPE_<TIER>_PRICE_ID env var → live price ID at session creation
+    // time, so live price IDs are never baked into static HTML.
     var tierData = {
-      single:   { label: 'Single Appearance', price: '$497',    billing: 'one-time' },
-      member:   { label: 'Member',            price: '$97/mo',  billing: 'monthly'  },
-      reachpro: { label: 'Reach Pro',         price: '$197/mo', billing: 'monthly'  },
-      vip:      { label: 'VIP',               price: '$297/mo', billing: 'monthly'  }
+      single:   { label: 'Single Appearance', price: '$497',    billing: 'one-time', productSlug: 'single'    },
+      member:   { label: 'Member',            price: '$97/mo',  billing: 'monthly',  productSlug: 'member'    },
+      reachpro: { label: 'Reach Pro',         price: '$197/mo', billing: 'monthly',  productSlug: 'reach_pro' },
+      vip:      { label: 'VIP',               price: '$297/mo', billing: 'monthly',  productSlug: 'vip'       }
     };
 
     // Which tiers unlock which segment requirements
@@ -1656,16 +1658,19 @@
 
     // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', function() {
-      // TODO: Wire Stripe Reach Pro price ID once Keith creates it in
-      // the Stripe dashboard. Until then, Reach Pro submissions are
-      // gated by the feature flag below and show a polite error if
-      // somehow reached without REACH_PRO_ENABLED.
+      // Defensive fallback only — fires if the flag is explicitly toggled
+      // off in the console (emergency disable). Normal path: flag is true,
+      // checkout proceeds with productSlug=reach_pro and cos resolves the
+      // Stripe price from STRIPE_REACH_PRO_PRICE_ID at session creation.
       if (state.tier === 'reachpro' && window.REACH_PRO_ENABLED !== true) {
-        alert('Reach Pro is launching soon — book a Single Appearance to get started, then upgrade from your dashboard.');
+        alert('Reach Pro is temporarily unavailable — book a Single Appearance to get started, then upgrade from your dashboard.');
         return;
       }
 
       var params = { ref: 'join', tier: state.tier };
+      if (tierData[state.tier] && tierData[state.tier].productSlug) {
+        params.productSlug = tierData[state.tier].productSlug;
+      }
       if (state.show) params.show = state.show;
       if (state.segment) params.segment = state.segment;
       if (state.name) params.name = state.name;
