@@ -136,6 +136,38 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Tour — public walkthrough of what $497 produces, anchored in EJ Snyder -->
+  <url>
+    <loc>https://guestengine.live/tour/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://guestengine.live/tour/authority-page/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://guestengine.live/tour/signal-report/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://guestengine.live/tour/vault/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://guestengine.live/tour/twin/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- 6 Guides -->
   <url>
     <loc>https://guestengine.live/guides/author-podcast-booking/</loc>

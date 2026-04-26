@@ -25,6 +25,7 @@ const NAV_LINKS = [
   { href: '#pricing',      label: 'Pricing',  isAnchor: true },
   { href: '#network',      label: 'Network',  isAnchor: true },
   { href: '/signal/',      label: 'Signal' },
+  { href: '/tour/',        label: 'Tour' },
   { href: '/why/',         label: 'Why' },
   { href: '/join/',        label: 'Join' },
 ];
@@ -121,6 +122,11 @@ const ALL_PAGES = [
   'shows/index.html',
   'signal/index.html',
   'therapists/index.html',
+  'tour/index.html',
+  'tour/authority-page/index.html',
+  'tour/signal-report/index.html',
+  'tour/vault/index.html',
+  'tour/twin/index.html',
   'why/index.html',
 ];
 

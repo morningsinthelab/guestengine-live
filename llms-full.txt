@@ -196,6 +196,27 @@ Guest Engine serves these professional verticals with tailored messaging, delive
 | Free Signal Report | https://guestengine.live/signal/ | AI-generated audience signal report for prospective guests |
 | Why Guest Engine | https://guestengine.live/why/ | Comparison with guest marketplaces, value proposition |
 | Sample Profile | https://guestengine.live/profile/sample/ | Example of a permanent SEO-indexed guest profile |
+| Tour Hub | https://guestengine.live/tour/ | Public walkthrough of what a $497 appearance produces |
+| Tour: Authority Page | https://guestengine.live/tour/authority-page/ | Sample Authority Page anchored in EJ Snyder's real published profile |
+| Tour: Signal Report | https://guestengine.live/tour/signal-report/ | Sample Signal Report with EJ Snyder's real four-pillar scores (74/100) |
+| Tour: Content Vault | https://guestengine.live/tour/vault/ | Sample Content Vault: 5 clips, 10 social posts, full transcript, highlight reel |
+| Tour: Digital Twin | https://guestengine.live/tour/twin/ | Sample Digital Twin bible: persona, catchphrases, conversation map, hard rules |
+
+---
+
+## The Tour — Public Walkthrough
+
+A public, hand-authored walkthrough at https://guestengine.live/tour/ shows what a $497 Guest Engine appearance produces, using EJ "Skullcrusher" Snyder's real Mornings in the Lab appearances (Center Stage, March 24, 2026; Full Show with Dr. John Petrocelli, January 9, 2026) as the example. EJ is a 25-year decorated Army combat veteran (Sergeant Major, Airborne Ranger, two Bronze Stars, Legion of Merit), most decorated contestant in Naked and Afraid history (six challenges, 206+ days, zero tap-outs), serial entrepreneur (EVP Freedom Pickles USA), and #1 ranked survivalist by The Top Tens.
+
+The tour has five pages:
+
+- **Tour Hub** — overview, four-card artifact grid, EJ as anchor, four-step "How it works"
+- **Authority Page sample** — six-section anatomy (Conversation Map, Audience DNA, Verified Credentials, Key Insights, FAQ from Transcript, AI Visuals), discoverability across Google + ChatGPT + Perplexity + Claude + Gemini + Bing
+- **Signal Report sample** — real EJ scores (Social Footprint 21/25, Content Reach 16/25, Public Discourse 12/25, Professional Authority 25/25 = 74/100), Three Weapons panel (Grenade Question, Mirror Quote, Community Question), 9 web mentions, audience reach (252K followers, 9.89M YouTube views), 3 host topics from his conversation map
+- **Content Vault sample** — 5 clips drawn from EJ's transcript with platform recommendations, 10 social posts with one-click copy (4 LinkedIn / 3 X / 3 Instagram), embedded living-portrait highlight reel, full speaker-identified transcript
+- **Digital Twin sample** — sample bible (persona "The Skullcrusher", 5 catchphrases, 5 conversation themes, hard rules), four content-rule types (Can Discuss / Cannot Discuss / Always Mention / Never Position), 70% revenue share
+
+Pricing surfaced via the tour: $497 single appearance includes Authority Page + Signal Report + Content Vault. Member ($97/mo) or VIP ($297/mo) adds Digital Twin authorization with 70% revenue share when other shows license your twin.
 
 ---
 
