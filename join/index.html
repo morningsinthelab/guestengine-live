@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join Guest Engine — Book Your Appearance</title>
-  <meta name="description" content="Join Guest Engine. Choose your tier, select your show, and get started. One live conversation produces a permanent authority profile, video clips, and social content.">
+  <title>Pricing — Get Featured, Distributed, and Booked | Guest Engine</title>
+  <meta name="description" content="Four ways to grow your authority on the MITL Live Network. Single Appearance ($497), Member ($97/mo), Reach Pro ($197/mo), VIP ($297/mo). Get featured, get distributed, get booked again.">
 
-  <meta property="og:title" content="Join Guest Engine">
-  <meta property="og:description" content="Choose your tier, select your show, and book your guest appearance.">
+  <meta property="og:title" content="Guest Engine Pricing — Four Tiers, One Compounding Asset">
+  <meta property="og:description" content="Single Appearance ($497) · Member ($97/mo) · Reach Pro ($197/mo) · VIP ($297/mo). Every tier includes a permanent, AI-indexed Authority Page.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://guestengine.live/join/">
   <meta property="og:image" content="https://guestengine.live/og-image.png">
@@ -1376,6 +1376,33 @@
 
   <script>
   (function() {
+    // ══════════════════════════════════════
+    // FEATURE FLAGS
+    // ══════════════════════════════════════
+    // REACH_PRO_ENABLED gates the Reach Pro tier behind a flag until
+    // (a) Stripe price ID is created and wired in cos/server/billing-routes.ts,
+    // (b) the Reach Pro pitch flow itself is closer to GA in the cos build.
+    // Toggle by setting window.REACH_PRO_ENABLED = true in the console
+    // or by flipping the default below to true at launch.
+    if (typeof window.REACH_PRO_ENABLED === 'undefined') {
+      window.REACH_PRO_ENABLED = false;
+    }
+
+    // Apply visual treatment to the Reach Pro card based on the flag.
+    // When disabled: card shows but is non-clickable, with a "COMING SOON"
+    // overlay so prospects can read the offer but can't submit.
+    (function applyReachProFlag() {
+      var card = document.getElementById('tier-reachpro');
+      if (!card) return;
+      if (window.REACH_PRO_ENABLED !== true) {
+        card.classList.add('disabled');
+        var overlay = document.createElement('div');
+        overlay.className = 'tier-card__coming-soon';
+        overlay.textContent = 'Coming soon';
+        card.appendChild(overlay);
+      }
+    })();
+
     // ══════════════════════════════════════
     // STATE
     // ══════════════════════════════════════
