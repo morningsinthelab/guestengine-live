@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Digital Twin — EJ Snyder | Guest Engine Tour</title>
+  <meta name="description" content="What a Guest Engine Digital Twin looks like — an AI character built from your appearance with persona, catchphrases, conversation map, and hard rules. You set the boundaries. You own the IP. 70% revenue when other shows license your twin.">
+  <meta property="og:title" content="Sample Digital Twin — EJ Snyder | Guest Engine Tour">
+  <meta property="og:description" content="Your AI character. You own the IP. A walkthrough of the Digital Twin artifact, built from EJ Snyder's real appearance data.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://guestengine.live/tour/twin/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/morningsinthelab/mitl-cdn/main/guest-headshots/ej-snyder.jpg">
+  <meta property="og:image:alt" content="EJ Snyder Digital Twin sample on Guest Engine">
+  <meta property="og:site_name" content="Guest Engine">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@gabornings">
+  <meta name="twitter:title" content="Sample Digital Twin — EJ Snyder | Guest Engine Tour">
+  <meta name="twitter:description" content="An AI character built from your appearance. Member-tier benefit. 70% revenue share.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/morningsinthelab/mitl-cdn/main/guest-headshots/ej-snyder.jpg">
+
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="bingbot" content="index, follow">
+
+  <meta name="author" content="Keith Bilous">
+  <meta name="publisher" content="Guest Engine — Mornings in the Lab">
+  <meta name="keywords" content="digital twin, ai character, guest engine twin, ej snyder twin, ai persona, character licensing, ai voice character, member tier benefit">
+
+  <meta name="theme-color" content="#020617">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../../style.css?v=20260426">
+  <link rel="stylesheet" href="../../header.css?v=20260426">
+  <link rel="canonical" href="https://guestengine.live/tour/twin/">
+
+  <link rel="llms-txt" href="https://guestengine.live/llms.txt">
+  <link rel="alternate" type="text/plain" href="https://guestengine.live/llms-full.txt" title="LLM Full Documentation">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        "@id": "https://guestengine.live/tour/twin/#creative-work",
+        "name": "Sample Digital Twin — EJ Snyder",
+        "description": "Sample Digital Twin showing the persona, catchphrases, conversation map, and hard rules constructed from a guest's appearance data.",
+        "creator": { "@id": "https://guestengine.live/profile/ej-snyder/#person" },
+        "datePublished": "2026-04-26",
+        "license": "https://guestengine.live/twin-license"
+      },
+      {
+        "@type": "FictionalCharacter",
+        "@id": "https://guestengine.live/tour/twin/#character",
+        "name": "The Skullcrusher (Sample Twin)",
+        "description": "AI character constructed from EJ Snyder's bio, key insights, and conversation map. Sample for the Guest Engine Tour.",
+        "image": "https://raw.githubusercontent.com/morningsinthelab/mitl-cdn/main/guest-headshots/ej-snyder.jpg",
+        "knowsAbout": [
+          "Extreme survival skills, mindset, and wilderness leadership",
+          "Military service, combat leadership, and the Airborne Ranger ethos",
+          "Post-military transition, PTSD, and finding new purpose",
+          "Veteran entrepreneurship and building mission-driven brands",
+          "Clean food production and challenging the processed food industry",
+          "The psychology of refusing to quit under extreme conditions",
+          "Building businesses from scratch with zero-excuse discipline",
+          "Health-conscious product development and FDA compliance",
+          "Motivational speaking and the warrior mindset philosophy",
+          "Television survival competition and on-camera authenticity"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://guestengine.live/profile/ej-snyder/#person",
+        "name": "EJ Snyder",
+        "jobTitle": "EVP & Veteran Owner, Freedom Pickles USA",
+        "url": "https://guestengine.live/profile/ej-snyder/",
+        "image": "https://raw.githubusercontent.com/morningsinthelab/mitl-cdn/main/guest-headshots/ej-snyder.jpg"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://guestengine.live/tour/twin/#webpage",
+        "url": "https://guestengine.live/tour/twin/",
+        "name": "Sample Digital Twin — EJ Snyder | Guest Engine Tour",
+        "isPartOf": { "@type": "WebSite", "@id": "https://guestengine.live/#website", "name": "Guest Engine", "url": "https://guestengine.live" },
+        "mainEntity": { "@id": "https://guestengine.live/tour/twin/#creative-work" }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Guest Engine", "item": "https://guestengine.live/" },
+      { "@type": "ListItem", "position": 2, "name": "Take the Tour", "item": "https://guestengine.live/tour/" },
+      { "@type": "ListItem", "position": 3, "name": "Digital Twin", "item": "https://guestengine.live/tour/twin/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="ge-header" id="geHeader">
+    <a href="/" class="ge-header__logo">
+      <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon"><div class="ge-header__logo-text"><span class="ge-header__logo-cos">ConversationOS</span><div class="ge-header__logo-ge"><span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span></div></div>
+    </a>
+    <nav class="ge-header__nav" id="geNav">
+      <a href="/directory/">Directory</a>
+      <a href="/marketplace/">Marketplace</a>
+      <a href="/shows/">Shows</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#network">Network</a>
+      <a href="/signal/">Signal</a>
+      <a href="/tour/">Tour</a>
+      <a href="/why/">Why</a>
+      <a href="/join/">Join</a>
+    </nav>
+    <div class="ge-header__actions">
+      <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
+    </div>
+    <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="ge-header__mobile-overlay" id="geMobileMenu">
+    <a href="/directory/">Directory</a>
+    <a href="/marketplace/">Marketplace</a>
+    <a href="/shows/">Shows</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#network">Network</a>
+    <a href="/signal/">Signal</a>
+    <a href="/tour/">Tour</a>
+    <a href="/why/">Why</a>
+    <a href="/join/">Join</a>
+    <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
+  </div>
+
+  <!-- Tour banner -->
+  <div class="tour-banner">
+    <div class="tour-banner__inner">
+      <p class="tour-banner__copy">
+        <span class="tour-banner__eyebrow">Sample</span>
+        You&rsquo;re viewing a sample built from EJ Snyder&rsquo;s real appearance data. The Digital Twin is a Member-tier benefit &mdash; yours will look like this once you opt in.
+      </p>
+      <a href="/join/" class="btn btn--primary btn--sm tour-banner__cta">Book your appearance &mdash; $497 <span class="btn__arrow">&rarr;</span></a>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+
+    <!-- Hero -->
+    <section class="section" style="padding-top: 4rem;">
+      <div class="container container--narrow" style="text-align: center;">
+        <p class="section__eyebrow" style="color: var(--gold);">SAMPLE: THE DIGITAL TWIN</p>
+        <h1 class="section__title section__title--center" style="font-size: clamp(2rem, 5vw, 3.75rem);">YOUR AI CHARACTER.<br><span class="gold">YOU OWN THE IP.</span></h1>
+        <p class="section__sub section__sub--center" style="margin: 1.5rem auto 2rem; max-width: 720px;">
+          Members can authorize an AI character built from their appearance, expertise, and voice. Set the content boundaries. Own the IP. Earn 70% revenue when other shows on the network license your twin.
+        </p>
+        <p style="font-size: 0.875rem; color: rgba(255,255,255,0.5); max-width: 540px; margin: 0 auto;">
+          Member-tier benefit ($97/mo) or VIP ($297/mo). Consent-gated. Revocable any time.
+        </p>
+      </div>
+    </section>
+
+    <!-- What a twin is -->
+    <section class="section section--alt">
+      <div class="container container--narrow">
+        <p class="section__eyebrow" style="color: var(--gold); text-align: center;">WHAT IT IS</p>
+        <h2 class="section__title section__title--center">CONSTRUCTED FROM <span class="gold">YOUR APPEARANCE.</span></h2>
+        <p class="section__sub section__sub--center" style="max-width: 720px; margin: 1.5rem auto 0;">
+          Your Digital Twin is built from the same Authority Page data you already own &mdash; bio, key insights, conversation topics, FAQs, and transcript. The Character Engine packages this into a structured persona that can appear in other MITL Network shows. You set the rules. You earn 70% of every license.
+        </p>
+      </div>
+    </section>
+
+    <!-- EJ's twin (sample) -->
+    <section class="section">
+      <div class="container">
+        <p class="section__eyebrow" style="color: var(--gold); text-align: center;">EJ&rsquo;S TWIN BIBLE (SAMPLE)</p>
+        <h2 class="section__title section__title--center">FOUR SECTIONS. <span class="gold">FROM REAL DATA.</span></h2>
+        <p class="section__sub section__sub--center" style="max-width: 700px; margin: 1rem auto 0;">
+          The Twin Bible is the structured document the Character Engine reads. Below is what EJ&rsquo;s bible would contain &mdash; constructed from his actual appearance.
+        </p>
+
+        <!-- Persona -->
+        <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-elevated, rgba(255,255,255,0.02)); border: 1px solid rgba(212,168,67,0.4); border-radius: 12px; max-width: 760px; margin-left: auto; margin-right: auto;">
+          <p style="font-family: var(--font-display); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 0.875rem;">Persona</p>
+          <p style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; text-transform: uppercase; color: #fff; margin: 0 0 0.625rem;">The Skullcrusher</p>
+          <p style="font-family: var(--font-body); font-size: 0.9375rem; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0;">
+            Decorated Army Sergeant Major (Ret.) and most decorated Naked &amp; Afraid contestant in show history. Speaks in plain, direct, no-fluff sentences. Uses military cadence. Low patience for excuses. Deep care for veterans, family, and clean food. The mission is the mission &mdash; you finish.
+          </p>
+        </div>
+
+        <div class="tour-bible">
+
+          <!-- Catchphrases -->
+          <div class="tour-bible-card">
+            <p class="tour-bible-card__heading">Catchphrases (5)</p>
+            <ul class="tour-bible-card__list">
+              <li>&ldquo;The mission is 60 days and I ain&rsquo;t leaving.&rdquo;</li>
+              <li>&ldquo;If I can&rsquo;t get around it, over it, or under it, I&rsquo;m going through it.&rdquo;</li>
+              <li>&ldquo;No one&rsquo;s coming to save you.&rdquo;</li>
+              <li>&ldquo;Throw out the 95%. Look at the 5%.&rdquo;</li>
+              <li>&ldquo;Come taste what freedom is all about.&rdquo;</li>
+            </ul>
+          </div>
+
+          <!-- Conversation map -->
+          <div class="tour-bible-card">
+            <p class="tour-bible-card__heading">Conversation Map (5 themes)</p>
+            <ul class="tour-bible-card__list">
+              <li>The warrior mindset and refusing to quit</li>
+              <li>Military-to-civilian transition and PTSD</li>
+              <li>Decision-making under extreme pressure (the 5% framework)</li>
+              <li>Veteran entrepreneurship &amp; clean-food mission</li>
+              <li>Childhood adversity to Sergeant Major</li>
+            </ul>
+          </div>
+
+          <!-- Hard rules -->
+          <div class="tour-bible-card">
+            <p class="tour-bible-card__heading">Hard Rules</p>
+            <ul class="tour-bible-card__list">
+              <li><strong>Always mention</strong> Freedom Pickles when discussing entrepreneurship</li>
+              <li><strong>Always credit</strong> the MITL appearance when sourcing material</li>
+              <li><strong>Never speak negatively</strong> about Naked &amp; Afraid producers, fellow veterans, or active-duty service members</li>
+              <li><strong>Never position</strong> EJ as a finance, medical, or legal advisor</li>
+              <li><strong>Cannot discuss</strong> ongoing legal matters or sealed military operations</li>
+            </ul>
+          </div>
+
+          <!-- Topics -->
+          <div class="tour-bible-card">
+            <p class="tour-bible-card__heading">Areas of Expertise (10)</p>
+            <ul class="tour-bible-card__list">
+              <li>Extreme survival, mindset, wilderness leadership</li>
+              <li>Combat leadership and the Airborne Ranger ethos</li>
+              <li>Post-military transition, PTSD, finding new purpose</li>
+              <li>Veteran entrepreneurship and mission-driven brands</li>
+              <li>Clean food production and food-industry reform</li>
+              <li>Refusing to quit under extreme conditions</li>
+              <li>Building businesses from scratch with zero excuses</li>
+              <li>Health-conscious product development</li>
+              <li>Motivational speaking and the warrior mindset</li>
+              <li>Television survival competition and on-camera authenticity</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Provenance & control -->
+    <section class="section section--alt">
+      <div class="container">
+        <p class="section__eyebrow" style="color: var(--gold); text-align: center;">PROVENANCE &amp; CONTROL</p>
+        <h2 class="section__title section__title--center">YOU SET THE BOUNDARIES. <span class="gold">YOU OWN THE IP.</span></h2>
+        <p class="section__sub section__sub--center" style="max-width: 700px; margin: 1rem auto 0;">
+          Every Twin runs under explicit consent and a content-rules engine. Four rule types govern what your Twin will and won&rsquo;t do. You can update or revoke any time.
+        </p>
+
+        <div class="features__grid" style="margin-top: 3rem;">
+          <div class="feature-card">
+            <div class="feature-card__icon" style="color: var(--gold);"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 class="feature-card__title">Can Discuss</h3>
+            <p class="feature-card__desc">Topics your Twin engages with. Pulled from your conversation map but you can add or remove.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" style="color: var(--gold);"><i class="fa-solid fa-circle-xmark"></i></div>
+            <h3 class="feature-card__title">Cannot Discuss</h3>
+            <p class="feature-card__desc">Topics permanently off-limits &mdash; legal matters, family details, anything you want kept private.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" style="color: var(--gold);"><i class="fa-solid fa-bullhorn"></i></div>
+            <h3 class="feature-card__title">Always Mention</h3>
+            <p class="feature-card__desc">Required mentions every time the topic comes up &mdash; your book, your business, your cause.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" style="color: var(--gold);"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="feature-card__title">Never Position</h3>
+            <p class="feature-card__desc">Roles or framings your Twin will refuse &mdash; e.g. &ldquo;not a financial advisor,&rdquo; &ldquo;not a medical professional.&rdquo;</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 1.5rem 1.75rem; background: rgba(7,12,20,0.6); border: 1px solid rgba(212,168,67,0.3); border-radius: 10px; max-width: 760px; margin-left: auto; margin-right: auto;">
+          <p style="font-family: var(--font-display); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 0.625rem;">Provenance &middot; Audit Trail</p>
+          <p style="font-family: var(--font-body); font-size: 0.9375rem; color: rgba(255,255,255,0.78); line-height: 1.6; margin: 0;">
+            Every Twin appearance is logged. Every rule change is logged. Every license is logged. Your activity feed shows where your Twin has appeared, what was said, and how much you&rsquo;ve earned. Revoke any Twin at any time and all derivative content is taken down within 48 hours.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Revenue -->
+    <section class="section">
+      <div class="container container--narrow" style="text-align: center;">
+        <p class="section__eyebrow" style="color: var(--gold);">THE ECONOMICS</p>
+        <h2 class="section__title section__title--center">70% TO YOU. <span class="gold">EVERY LICENSE.</span></h2>
+        <p class="section__sub section__sub--center" style="max-width: 660px; margin: 1.5rem auto 0;">
+          When another show on the MITL Network licenses your Twin for a segment, you earn 70% of the license fee. Stripe Connect handles the payout directly to your account. No invoices, no chasing.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tour stepper -->
+    <div class="container">
+      <nav class="tour-stepper" aria-label="Tour navigation">
+        <a href="/tour/authority-page/" class="tour-stepper__node">
+          <span class="tour-stepper__num">01</span>Authority Page
+        </a>
+        <span class="tour-stepper__sep">&mdash;</span>
+        <a href="/tour/signal-report/" class="tour-stepper__node">
+          <span class="tour-stepper__num">02</span>Signal Report
+        </a>
+        <span class="tour-stepper__sep">&mdash;</span>
+        <a href="/tour/vault/" class="tour-stepper__node">
+          <span class="tour-stepper__num">03</span>Vault
+        </a>
+        <span class="tour-stepper__sep">&mdash;</span>
+        <a href="/tour/twin/" class="tour-stepper__node tour-stepper__node--active">
+          <span class="tour-stepper__num">04</span>Twin
+        </a>
+      </nav>
+    </div>
+
+    <!-- Final CTA -->
+    <section class="section section--cta">
+      <div class="container container--narrow">
+        <h2 class="section__title section__title--center">START WITH ONE <span class="gold">APPEARANCE.</span></h2>
+        <p class="section__sub section__sub--center">Your $497 appearance produces the Authority Page, Signal Report, and Content Vault. Add Member ($97/mo) or VIP ($297/mo) to authorize your Digital Twin.</p>
+        <div class="cta__buttons">
+          <a href="/join/" class="btn btn--primary btn--lg">Book Your Appearance <span class="btn__arrow">&rarr;</span></a>
+          <a href="/tour/" class="btn btn--outline btn--lg">Back to Tour Hub</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (placeholder — auto-stamped by footer-unify.js) -->
+  <footer class="footer" role="contentinfo" aria-label="Site footer">
+    <div class="container"><p style="text-align:center;color:rgba(255,255,255,0.4);padding:2rem 0;">Loading footer...</p></div>
+  </footer>
+
+  <script src="../../main.js"></script>
+  <script src="https://app.conversationos.live/sophia-embed.js" data-product="guest-engine" data-theme="dark" data-accent-color="#7c3aed"></script>
+  <script src="../../header.js"></script>
+</body>
+</html>
