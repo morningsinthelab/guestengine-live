@@ -401,6 +401,189 @@
   .btn-next:hover { background: var(--gold-hover); transform: translateY(-1px); }
   .btn-next:disabled { opacity: 0.4; pointer-events: none; }
 
+  /* ── COMPARISON TABLE ── */
+  .compare-section {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 0 40px;
+  }
+  .compare-section__head { text-align: center; margin-bottom: 40px; }
+  .compare-section__eyebrow {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .compare-section h2 {
+    font-family: var(--font-display);
+    font-weight: 900; font-size: 36px;
+    text-transform: uppercase; line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
+  .compare-section h2 .gold { color: var(--gold); }
+  .compare-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card-bg);
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+    font-size: 14px;
+  }
+  .compare-table th,
+  .compare-table td {
+    padding: 14px 18px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-tertiary);
+    background: var(--bg-elevated);
+    border-bottom: 2px solid var(--border-strong);
+  }
+  .compare-table thead th.col-feature { color: var(--text); }
+  .compare-table thead th.col-reachpro {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .compare-table tbody th {
+    font-weight: 600;
+    color: var(--text);
+    width: 32%;
+  }
+  .compare-table tbody td {
+    color: var(--text-secondary);
+    text-align: center;
+    width: 17%;
+  }
+  .compare-table tbody td.cell-empty { color: var(--text-tertiary); }
+  .compare-table tbody td.cell-yes { color: var(--gold); font-weight: 700; }
+  .compare-table tbody td.cell-reachpro {
+    background: rgba(251,191,36,0.04);
+    color: var(--gold); font-weight: 700;
+  }
+
+  /* ── FAQ ── */
+  .pricing-faq {
+    max-width: 880px;
+    margin: 80px auto 0;
+    padding: 0 40px;
+  }
+  .pricing-faq__head { text-align: center; margin-bottom: 32px; }
+  .pricing-faq__eyebrow {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .pricing-faq h2 {
+    font-family: var(--font-display);
+    font-weight: 900; font-size: 36px;
+    text-transform: uppercase; line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
+  .pricing-faq h2 .gold { color: var(--gold); }
+  .pricing-faq__list {
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .pricing-faq details {
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 4px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    color: var(--text);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+  .pricing-faq summary::-webkit-details-marker { display: none; }
+  .pricing-faq summary::after {
+    content: '+';
+    font-size: 22px; font-weight: 400;
+    color: var(--gold);
+    transition: transform 0.2s;
+  }
+  .pricing-faq details[open] summary::after { content: '−'; }
+  .pricing-faq summary:hover { color: var(--gold); }
+  .pricing-faq__body {
+    padding: 0 4px 24px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 760px;
+  }
+
+  /* ── BOTTOM CTA STRIP ── */
+  .pricing-bottom-cta {
+    max-width: 1100px;
+    margin: 80px auto 80px;
+    padding: 40px clamp(24px, 4vw, 48px);
+    border: 1px solid rgba(251,191,36,0.45);
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(251,191,36,0.06) 0%, rgba(251,191,36,0.0) 80%),
+      var(--bg-elevated);
+    text-align: center;
+  }
+  .pricing-bottom-cta h2 {
+    font-family: var(--font-display);
+    font-weight: 900; font-size: 30px;
+    text-transform: uppercase; line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin: 0 0 12px;
+  }
+  .pricing-bottom-cta h2 .gold { color: var(--gold); }
+  .pricing-bottom-cta p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 660px;
+    margin: 0 auto 24px;
+  }
+  .pricing-bottom-cta__btn {
+    display: inline-flex;
+    align-items: center; gap: 8px;
+    padding: 14px 28px;
+    background: var(--gold); color: var(--bg);
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .pricing-bottom-cta__btn:hover { background: var(--gold-hover); transform: translateY(-1px); }
+
+  @media (max-width: 1024px) {
+    .compare-section { padding: 0 20px; margin-top: 60px; }
+    .pricing-faq { padding: 0 20px; margin-top: 60px; }
+    .pricing-bottom-cta { margin: 60px 20px; }
+    .compare-section h2,
+    .pricing-faq h2 { font-size: 28px; }
+  }
+  @media (max-width: 640px) {
+    .pricing-bottom-cta h2 { font-size: 22px; }
+  }
+
   /* ── FOOTER ── */
   .footer-v2 { padding: 64px 80px; border-top: 1px solid var(--border); background: var(--bg); }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; }
@@ -945,6 +1128,106 @@
     </div>
 
   </main>
+
+  <!-- COMPARISON TABLE -->
+  <section class="compare-section" aria-labelledby="compare-heading">
+    <div class="compare-section__head">
+      <span class="compare-section__eyebrow">What you get</span>
+      <h2 id="compare-heading">Compare every <span class="gold">feature.</span></h2>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="col-feature" scope="col">&nbsp;</th>
+            <th scope="col">Single</th>
+            <th scope="col">Member</th>
+            <th class="col-reachpro" scope="col">Reach Pro</th>
+            <th scope="col">VIP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Price</th>
+            <td>$497 once</td>
+            <td>$97/mo</td>
+            <td class="cell-reachpro">$197/mo</td>
+            <td>$297/mo</td>
+          </tr>
+          <tr>
+            <th scope="row">Live appearance</th>
+            <td>1 (now)</td>
+            <td>book separately</td>
+            <td class="cell-reachpro">book separately</td>
+            <td>quarterly produced</td>
+          </tr>
+          <tr>
+            <th scope="row">Authority Page</th>
+            <td class="cell-yes">&#10003; permanent</td>
+            <td class="cell-yes">&#10003; permanent</td>
+            <td class="cell-reachpro">&#10003; permanent</td>
+            <td class="cell-yes">&#10003; premium placement</td>
+          </tr>
+          <tr>
+            <th scope="row">Content Vault</th>
+            <td class="cell-yes">&#10003;</td>
+            <td>with each appearance</td>
+            <td class="cell-reachpro">with each appearance</td>
+            <td>with each appearance</td>
+          </tr>
+          <tr>
+            <th scope="row">Distribution Sprint</th>
+            <td>14 days</td>
+            <td>30 days</td>
+            <td class="cell-reachpro">30 days</td>
+            <td>60 days</td>
+          </tr>
+          <tr>
+            <th scope="row">Authority Reach pitches/mo</th>
+            <td class="cell-empty">&mdash;</td>
+            <td>10</td>
+            <td class="cell-reachpro"><strong>50</strong></td>
+            <td>25</td>
+          </tr>
+          <tr>
+            <th scope="row">Signal intelligence report</th>
+            <td>once</td>
+            <td>monthly</td>
+            <td class="cell-reachpro">monthly + quarterly</td>
+            <td>weekly</td>
+          </tr>
+          <tr>
+            <th scope="row">AI digital twin</th>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-yes">&#10003;</td>
+            <td class="cell-reachpro">&#10003;</td>
+            <td class="cell-yes">&#10003;</td>
+          </tr>
+          <tr>
+            <th scope="row">Member directory</th>
+            <td>featured</td>
+            <td>listed</td>
+            <td class="cell-reachpro">listed</td>
+            <td>priority placement</td>
+          </tr>
+          <tr>
+            <th scope="row">Reply tracking &amp; AI suggestions</th>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-yes">&#10003;</td>
+            <td class="cell-reachpro">&#10003;</td>
+            <td class="cell-yes">&#10003;</td>
+          </tr>
+          <tr>
+            <th scope="row">Manual pitch review (first 3)</th>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-reachpro">&#10003;</td>
+            <td class="cell-yes">&#10003;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer-v2">
