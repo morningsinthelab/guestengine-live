@@ -766,7 +766,9 @@
             "name": "Single Appearance",
             "price": "497",
             "priceCurrency": "USD",
-            "description": "One-time guest appearance on a network show plus a permanent profile in the Guest Engine directory."
+            "category": "Single Appearance",
+            "description": "One produced live appearance, permanent Authority Page, Content Vault (5 clips, 10 social posts, full transcript, highlight reel), Signal intelligence report, 14-day Distribution Sprint to LinkedIn/X/Threads, backlinks from the network show, featured directory listing.",
+            "availability": "https://schema.org/InStock"
           }
         },
         {
@@ -777,7 +779,16 @@
             "name": "Member Monthly",
             "price": "97",
             "priceCurrency": "USD",
-            "description": "Monthly subscription for Signal intelligence reports and ongoing directory visibility. No show appearance included."
+            "category": "Member",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "97",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "billingIncrement": 1
+            },
+            "description": "Monthly Signal intelligence report, AI digital twin in the ConversationOS character network, Member directory listing, community access, 10 Authority Reach pitches per month, 30-day Distribution Sprint each time you appear, member-rate appearance booking.",
+            "availability": "https://schema.org/InStock"
           }
         },
         {
@@ -785,10 +796,39 @@
           "position": 3,
           "item": {
             "@type": "Offer",
+            "name": "Reach Pro Monthly",
+            "price": "197",
+            "priceCurrency": "USD",
+            "category": "Reach Pro",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "197",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "billingIncrement": 1
+            },
+            "description": "50 Authority Reach pitches per month, 30-day Distribution Sprint, AI digital twin, monthly Signal report, Member directory, manual pitch review on first three pitches.",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Offer",
             "name": "VIP Monthly",
             "price": "297",
             "priceCurrency": "USD",
-            "description": "Premium monthly subscription with quarterly show appearances, priority Signal reports, and maximum directory visibility."
+            "category": "VIP",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "297",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "billingIncrement": 1
+            },
+            "description": "Quarterly produced appearances (Center Stage or Deep Dive), premium Authority Page placement, priority directory listing, weekly Signal reports, 25 Authority Reach pitches per month, 60-day Distribution Sprint each time you appear, direct line to MITL production.",
+            "availability": "https://schema.org/InStock"
           }
         }
       ]
