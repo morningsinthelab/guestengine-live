@@ -478,6 +478,7 @@
      ============================================ */
   .v2 .proof-bar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 0;
     padding: 0;
@@ -489,7 +490,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 28px 60px;
+    padding: 28px 48px;
     border-right: 1px solid var(--border);
   }
   .v2 .proof-stat:last-child { border-right: none; }
@@ -2738,7 +2739,17 @@
     .v2 .steps-grid { grid-template-columns: 1fr; }
     .v2 .network-grid { grid-template-columns: 1fr; }
     .v2 .proof-bar { flex-wrap: wrap; }
-    .v2 .proof-stat { padding: 20px 32px; }
+    .v2 .proof-stat {
+      padding: 18px 18px;
+      flex: 1 1 33%;
+      min-width: 110px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .v2 .proof-stat:nth-child(3n) { border-right: none; }
+    .v2 .proof-stat:nth-last-child(-n+2) { border-bottom: none; }
+    .v2 .proof-stat .num { font-size: 28px; }
+    .v2 .proof-stat .label { font-size: 10px; letter-spacing: 1.5px; }
     .v2 .lead-form { flex-direction: column; }
     .v2 .footer-grid { grid-template-columns: 1fr; }
     .v2 .hero-cta { flex-direction: column; }
@@ -2965,6 +2976,10 @@
     <div class="proof-stat">
       <span class="num">4</span>
       <span class="label">Network Shows</span>
+    </div>
+    <div class="proof-stat">
+      <span class="num">200+</span>
+      <span class="label">Authority Pages Indexed</span>
     </div>
   </div>
 
