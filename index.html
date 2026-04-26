@@ -378,6 +378,21 @@
     max-width: 1200px;
   }
 
+  .v2 .hero-kicker {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    border-radius: 4px;
+    background: rgba(251, 191, 36, 0.08);
+  }
+
   .v2 .hero-content h1 {
     font-family: var(--font-display);
     font-weight: 900;
@@ -401,7 +416,24 @@
     display: flex;
     gap: 16px;
     margin-top: 32px;
+    align-items: center;
+    flex-wrap: wrap;
   }
+
+  .v2 .hero-tour-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body, Inter), sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .v2 .hero-tour-link:hover { color: var(--gold); }
+  .v2 .hero-tour-link span { transition: transform 0.2s; }
+  .v2 .hero-tour-link:hover span { transform: translateX(3px); }
 
   .v2 .btn-primary {
     display: inline-flex;
@@ -2836,16 +2868,17 @@
       </svg>
     </button>
     <div class="hero-content">
+      <span class="hero-kicker">One live conversation</span>
       <h1>
-        START THE<br>
-        <span class="gold">CONVERSATION.</span><br>
-        WE SET IT UP.
+        GET FOUND BY AI.<br>
+        <span class="gold">PERMANENTLY.</span>
       </h1>
       <p class="hero-sub">
-        One live appearance. A full production. A permanent authority profile &mdash; indexed everywhere.
+        One produced appearance. A permanent authority page indexed by Google, Perplexity, ChatGPT, and Gemini. Yours forever.
       </p>
       <div class="hero-cta">
-        <a href="/join/" class="btn-primary">Get Featured &rarr;</a>
+        <a href="/join/" class="btn-primary">Get Featured &mdash; $497 &rarr;</a>
+        <a href="/tour/" class="hero-tour-link">Take the tour <span>&rarr;</span></a>
       </div>
     </div>
   </section>
