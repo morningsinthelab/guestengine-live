@@ -30,7 +30,6 @@ const NAV_LINKS = [
 ];
 
 const LOGIN_URL = 'https://app.conversationos.live/portal/login';
-const SIGNUP_URL = 'https://app.conversationos.live/portal/signup';
 const SITE_ORIGIN = 'https://guestengine.live';
 
 // -- LINK-PREFIX VARIANTS ------------------------------------
@@ -52,12 +51,6 @@ function resolveHref(link, variant) {
   return link.href;
 }
 
-function resolveSignupHref(_variant) {
-  // Sign Up always goes to the portal — full account creation flow.
-  // ("Join" / "Get Featured" CTAs still point to /join/ for the booking funnel.)
-  return SIGNUP_URL;
-}
-
 // -- HTML GENERATORS -----------------------------------------
 
 function buildHeader(variant) {
@@ -74,7 +67,6 @@ ${navLinks}
     </nav>
     <div class="ge-header__actions">
       <a href="${LOGIN_URL}" class="ge-header__login">Log In</a>
-      <a href="${resolveSignupHref(variant)}" class="ge-header__signup">Sign Up</a>
     </div>
     <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -90,7 +82,6 @@ function buildMobileOverlay(variant) {
   return `  <div class="ge-header__mobile-overlay" id="geMobileMenu">
 ${navLinks}
     <a href="${LOGIN_URL}" class="ge-header__login">Log In</a>
-    <a href="${resolveSignupHref(variant)}" class="ge-header__signup">Sign Up</a>
   </div>
 `;
 }
