@@ -162,22 +162,39 @@
 
   /* Tier cards */
   .tier-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    max-width: 1200px;
   }
   .tier-card {
     background: var(--card-bg); border: 2px solid var(--border);
-    border-radius: 16px; padding: 32px 24px;
+    border-radius: 16px; padding: 28px 20px;
     cursor: pointer; transition: all 0.25s;
     position: relative; text-align: center;
   }
   .tier-card:hover { border-color: var(--border-strong); background: var(--surface-hover); transform: translateY(-2px); }
   .tier-card.selected { border-color: var(--gold); background: rgba(251,191,36,0.06); }
+  .tier-card.disabled { opacity: 0.55; pointer-events: none; }
   .tier-card.recommended::before {
     content: 'MOST POPULAR';
     position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
     padding: 4px 14px; background: var(--gold); color: var(--bg);
     font-family: var(--font-display); font-size: 10px; font-weight: 700;
     letter-spacing: 1.5px; border-radius: 20px;
+  }
+  .tier-card__badge--new {
+    position: absolute; top: 12px; right: 12px;
+    padding: 3px 9px; background: var(--gold); color: var(--bg);
+    font-family: var(--font-display); font-size: 9px; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border-radius: 3px;
+  }
+  .tier-card__coming-soon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(2,6,23,0.78); border-radius: 14px;
+    font-family: var(--font-display); font-size: 12px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    pointer-events: none;
   }
   .tier-card__name {
     font-family: var(--font-display);
@@ -414,7 +431,7 @@
       padding: 24px; gap: 16px;
     }
     .wizard-page { padding: 100px 20px 60px; }
-    .tier-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .tier-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
     .show-grid { grid-template-columns: 1fr; }
     .segment-grid { grid-template-columns: 1fr; }
     .footer-v2 { padding: 48px 32px; }
@@ -423,6 +440,7 @@
   @media (max-width: 640px) {
     .step h2 { font-size: 28px; }
     .progress-step span:not(.step-num) { display: none; }
+    .tier-grid { grid-template-columns: 1fr; max-width: 400px; }
     .footer-grid { grid-template-columns: 1fr; }
     .wizard-nav { gap: 12px; }
     .show-option { flex-direction: column; }
@@ -670,16 +688,11 @@
     </button>
     <div class="hero-content">
       <h1>
-        START THE<br>
-        <span class="gold">CONVERSATION.</span><br>
-        WE SET IT UP.
+        PICK YOUR <span class="gold">TIER.</span>
       </h1>
       <p class="hero-sub">
-        One live appearance. A full production. A permanent authority profile &mdash; indexed everywhere.
+        Get featured. Get distributed. Get booked again. Three things. Four ways to pay.
       </p>
-      <div class="hero-cta">
-        <a href="/join/" class="btn-primary">Get Featured &rarr;</a>
-      </div>
     </div>
   </section>
 
@@ -695,8 +708,8 @@
          ═══════════════════════════════════════ -->
     <div class="step active" id="step-tier">
       <div class="step-label">Step 1</div>
-      <h2>Choose Your <span class="gold">Tier</span></h2>
-      <p class="step-desc">Each tier is a different product. Pick the one that fits where you are right now.</p>
+      <h2>Pick your <span class="gold">tier.</span></h2>
+      <p class="step-desc">Get featured. Get distributed. Get booked again. Three things. Four ways to pay.</p>
 
       <div class="tier-grid">
         <!-- SINGLE -->
