@@ -1151,6 +1151,39 @@
     margin: 0 auto;
     line-height: 1.7;
   }
+  .v2 .ae-tour {
+    margin-top: 32px;
+    text-align: center;
+  }
+  .v2 .ae-tour-lead {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-tertiary);
+    margin: 0 0 14px;
+    line-height: 1.6;
+  }
+  .v2 .ae-tour-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .v2 .ae-tour-cta:hover {
+    background: var(--gold);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
   .v2 .ae-quote strong {
     color: var(--gold);
     font-style: normal;
@@ -3287,6 +3320,11 @@
     <p class="ae-quote">
       &ldquo;In a world of AI-generated content, the one signal that can&rsquo;t be faked is <strong>a live conversation where you prove what you know</strong>.&rdquo;
     </p>
+
+    <div class="ae-tour">
+      <p class="ae-tour-lead">Here&rsquo;s what your trust layer actually contains &mdash;</p>
+      <a href="/tour/" class="ae-tour-cta">Walk through a real one <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </section>
 
   <!-- ============================
