@@ -51,6 +51,16 @@ Guest Engine serves 12 professional verticals with tailored positioning:
 - [Why Guest Engine](https://guestengine.live/why/) — How Guest Engine compares to guest marketplaces and why production matters
 - [Sample Guest Profile](https://guestengine.live/profile/sample/) — Example of a permanent SEO-indexed guest profile page
 
+## The Tour — What $497 Produces
+
+A guided walkthrough showing every artifact a Guest Engine appearance produces, anchored in EJ Snyder's real Mornings in the Lab appearances (Center Stage, March 24, 2026; Full Show with Dr. John Petrocelli, January 9, 2026):
+
+- [Tour Hub](https://guestengine.live/tour/) — Overview of the four artifacts every appearance produces, with EJ Snyder as the example anchor
+- [Authority Page sample](https://guestengine.live/tour/authority-page/) — A permanent, SEO + GEO indexed profile (bio, key insights, FAQs, conversation map, AI visuals, downloadable media kit)
+- [Signal Report sample](https://guestengine.live/tour/signal-report/) — 30 days of community discourse research, scored across four pillars (Social Footprint, Content Reach, Public Discourse, Professional Authority); EJ scored 74/100
+- [Content Vault sample](https://guestengine.live/tour/vault/) — 5 vertical video clips, 10 ready-to-post social messages, full transcript, and a 60-second highlight reel
+- [Digital Twin sample](https://guestengine.live/tour/twin/) — AI character built from your appearance with persona, catchphrases, conversation map, and consent-gated content rules; Member-tier benefit with 70% revenue share
+
 ## MITL Live Network Shows
 
 Guest Engine is the front door to the MITL Live Network. AI matches each guest to the show and segment where their story hits hardest.

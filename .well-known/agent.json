@@ -38,6 +38,10 @@
     "ai_producer": {
       "description": "Sophia AI producer handles pre-show prep, topic angles, talking points, green room briefing, and guest coordination.",
       "endpoint": "https://app.conversationos.live"
+    },
+    "public_tour": {
+      "description": "Public walkthrough of what a $497 Guest Engine appearance produces, using EJ Snyder's real Mornings in the Lab appearance as the example. Five pages covering Authority Page, Signal Report, Content Vault, and Digital Twin.",
+      "url": "https://guestengine.live/tour/"
     }
   },
   "pricing": {
