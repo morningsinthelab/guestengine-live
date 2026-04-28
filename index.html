@@ -311,6 +311,9 @@
     justify-content: flex-start;
     overflow: hidden;
     background: var(--bg);
+    /* Override global .hero padding from style.css so hero-content sits flush
+       at the bottom — matches Directory and Shows hero positioning. */
+    padding: 0;
   }
 
   .v2 .hero__video-wrap {
