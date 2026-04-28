@@ -496,6 +496,89 @@
     max-width:560px; margin:0 0 1.5rem;
   }
 
+  /* The Conversation — transcript stack (highlights + collapsed full + standalone link) */
+  .p-conv__lede {
+    color:var(--text-secondary); font-size:0.9375rem; line-height:1.6;
+    max-width:620px; margin:0 0 1.75rem;
+  }
+  .p-conv__highlights {
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem;
+  }
+  .p-conv__card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:1.5rem 1.5rem 1.25rem;
+    transition:all 0.3s ease;
+  }
+  .p-conv__card:hover { border-color:var(--gold-dim); transform:translateY(-2px); }
+  .p-conv__topic {
+    display:inline-block; font-family:var(--font-display);
+    font-size:0.5rem; font-weight:700; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--gold);
+    margin-bottom:0.75rem;
+  }
+  .p-conv__quote {
+    color:var(--text); font-size:1rem; line-height:1.55;
+    font-weight:500; margin:0;
+  }
+  .p-conv__quote::before { content:'“'; color:var(--gold); margin-right:2px; }
+  .p-conv__quote::after { content:'”'; color:var(--gold); margin-left:2px; }
+
+  .p-conv__expand {
+    margin-top:1.5rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;
+  }
+  .p-conv__btn {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.625rem 1.25rem; background:transparent;
+    border:1px solid rgba(251,191,36,0.35);
+    color:var(--gold); font-family:var(--font-display);
+    font-weight:700; font-size:0.5625rem; letter-spacing:0.15em;
+    text-transform:uppercase; border-radius:8px;
+    text-decoration:none; cursor:pointer; transition:all 0.2s;
+  }
+  .p-conv__btn:hover { background:rgba(251,191,36,0.08); border-color:var(--gold); }
+  .p-conv__btn .fa-solid, .p-conv__btn svg { font-size:0.75rem; transition:transform 0.3s; }
+  .p-conv__btn[aria-expanded="true"] .p-conv__btn-chev { transform:rotate(180deg); }
+  .p-conv__btn-link {
+    color:var(--text-muted); border-color:transparent;
+    background:transparent; padding:0.625rem 0.5rem;
+  }
+  .p-conv__btn-link:hover { color:var(--gold); background:transparent; }
+
+  .p-conv__full {
+    max-height:0; overflow:hidden;
+    transition:max-height 0.6s ease;
+  }
+  .p-conv__full.is-open { max-height:8000px; }
+  .p-conv__full-inner {
+    margin-top:1.5rem; padding:1.75rem 1.75rem 1.5rem;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px;
+    color:var(--text-secondary); font-size:0.9375rem; line-height:1.7;
+  }
+  .p-conv__full-inner p { margin:0 0 1rem; }
+  .p-conv__full-inner p:last-child { margin-bottom:0; }
+  .p-conv__full-foot {
+    margin-top:1.25rem; padding-top:1rem;
+    border-top:1px solid var(--border);
+    font-size:0.8125rem; color:var(--text-muted);
+  }
+
+  /* Agent-discovery: small terminal-icon button in the stat bar */
+  .p-statbar__agent {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:8px;
+    background:rgba(251,191,36,0.06);
+    border:1px solid rgba(251,191,36,0.2);
+    color:var(--gold); transition:all 0.2s;
+    text-decoration:none;
+  }
+  .p-statbar__agent:hover {
+    background:rgba(251,191,36,0.14);
+    border-color:var(--gold);
+    transform:translateY(-1px);
+  }
+  .p-statbar__agent svg { width:14px; height:14px; }
+
   /* ── FAQ ────────────────────────────────── */
   .p-faqs { display:flex; flex-direction:column; gap:0.5rem; }
   .p-faq {
@@ -568,6 +651,7 @@
     .p-reels { grid-template-columns:repeat(2, 1fr); gap:1rem; }
     .p-reels--four { grid-template-columns:repeat(2, 1fr); }
     .p-reels--one { grid-template-columns:1fr; }
+    .p-conv__highlights { grid-template-columns:1fr; }
   }
 
   /* ── Scroll animations ─────────────────── */
@@ -716,6 +800,23 @@
           <div class="p-reels" id="p-reels"></div>
         </div>
 
+        <!-- The Conversation — highlights + collapsed full transcript + standalone link -->
+        <div class="p-section p-reveal" id="p-conv-section" style="display:none">
+          <div class="p-section__title">THE CONVERSATION</div>
+          <p class="p-conv__lede" id="p-conv-lede">Highlights from the live appearance — in their own words. Read the full conversation below or open the standalone transcript.</p>
+          <div class="p-conv__highlights" id="p-conv-highlights"></div>
+          <div class="p-conv__expand">
+            <button class="p-conv__btn" id="p-conv-toggle" aria-expanded="false" aria-controls="p-conv-full">
+              <span id="p-conv-toggle-label">Read the full conversation</span>
+              <svg class="p-conv__btn-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <a class="p-conv__btn p-conv__btn-link" id="p-conv-standalone" href="#">Open standalone transcript →</a>
+          </div>
+          <div class="p-conv__full" id="p-conv-full">
+            <div class="p-conv__full-inner" id="p-conv-full-inner"></div>
+          </div>
+        </div>
+
         <!-- Appearances -->
         <div class="p-section p-reveal" id="p-appearances-section" style="display:none">
           <div class="p-section__title">APPEARANCES</div>
@@ -806,6 +907,22 @@
     //    profile.shorts, we manually wire featured guests' YouTube Shorts here.
     //    Each entry: { id, caption, sub, chip? }. Caption + sub appear over the
     //    poster; clicking lazy-loads the YouTube embed (no suggestion grid).
+    // ── Story Images registry — per-slug fallback for the cinematic narrative
+    //    chapters until profile.storyImagesJson is populated in the backend.
+    //    Each entry: { images: [{url, label}], video?, videoAfter? }
+    var STORY_BY_SLUG = {
+      'david-frangioni': {
+        images: [
+          { url: '/assets/guests/david-frangioni/the-survivor.png',  label: 'The Survivor' },
+          { url: '/assets/guests/david-frangioni/the-prodigy.png',   label: 'The Prodigy' },
+          { url: '/assets/guests/david-frangioni/the-builder.png',   label: 'The Builder' },
+          { url: '/assets/guests/david-frangioni/the-engineer.png',  label: 'The Engineer' },
+          { url: '/assets/guests/david-frangioni/the-pioneer.png',   label: 'The Pioneer' },
+          { url: '/assets/guests/david-frangioni/the-steward.png',   label: 'The Steward' }
+        ]
+      }
+    };
+
     var SHORTS_BY_SLUG = {
       'ej-snyder': [
         {
@@ -821,6 +938,22 @@
           chip: 'The Mission',
           caption: '“The mission is 60 days and I ain’t leaving.”',
           sub: 'On the relentless pursuit — and why he refuses to quit.'
+        }
+      ],
+      'david-frangioni': [
+        {
+          id: '2Q2zSyK2_vM',
+          poster: '/assets/guests/david-frangioni/reels/the-origin.png',
+          chip: 'All or Nothing · The Origin',
+          caption: '“From loner kid to music mogul.”',
+          sub: 'On the discipline that turned a child behind a kit into a 30-year career.'
+        },
+        {
+          id: 'BdoHiFV_yyk',
+          poster: '/assets/guests/david-frangioni/reels/the-mindset.png',
+          chip: 'The Mindset',
+          caption: '“My awards mean nothing.”',
+          sub: 'On why the scoreboard isn’t the destination — and what is.'
         }
       ]
     };
@@ -893,9 +1026,11 @@
       // guestScore removed — no longer returned by API (internal only).
       // Breakdown section gated on hasBackendSignal (sum of 4 signal fields > 0).
       var storyImgs = null;
-      if (profile.storyImagesJson) {
+      // Fallback chain: profile.storyImagesJson (backend) → STORY_BY_SLUG (client registry)
+      var storyRaw = profile.storyImagesJson || (STORY_BY_SLUG && STORY_BY_SLUG[slug]) || null;
+      if (storyRaw) {
         try {
-          var parsed = typeof profile.storyImagesJson === 'string' ? JSON.parse(profile.storyImagesJson) : profile.storyImagesJson;
+          var parsed = typeof storyRaw === 'string' ? JSON.parse(storyRaw) : storyRaw;
           if (parsed && parsed.images) {
             storyImgs = {
               images: parsed.images.map(function(i) { return i.url; }),
@@ -965,7 +1100,21 @@
         var m = linkMap[k] || {icon:'fa-solid fa-link',label:k};
         linksHtml += '<a href="'+esc(url)+'" class="p-statbar__link" target="_blank" rel="noopener" title="'+m.label+'"><i class="'+m.icon+'"></i></a>';
       });
+      // Agent-readable view button — terminal icon, opens .md companion in new tab
+      linksHtml += '<a href="/profile/' + slug + '.md" class="p-statbar__agent" target="_blank" rel="alternate" title="Agent-readable view (Markdown)" aria-label="Agent-readable Markdown view">'
+                + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>'
+                + '</a>';
       document.getElementById('p-sb-links').innerHTML = linksHtml;
+
+      // Agent-discovery breadcrumbs — invisible <link rel="alternate"> for crawlers
+      function injectAlt(type, href, title) {
+        if (document.querySelector('link[rel="alternate"][href="'+href+'"]')) return;
+        var l = document.createElement('link');
+        l.rel = 'alternate'; l.type = type; l.href = href; l.title = title;
+        document.head.appendChild(l);
+      }
+      injectAlt('text/markdown', '/profile/' + slug + '.md', 'Markdown version for AI agents');
+      injectAlt('application/json', '/profile/' + slug + '.json', 'JSON version for AI agents');
 
       // ── Signal Brief — animated ring (uses same displayScore as headline)
       if (displayScore && displayScore > 0) {
@@ -1205,6 +1354,69 @@
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
           });
         });
+      }
+
+      // ── The Conversation — highlights + collapsed full transcript + standalone link
+      var fullTranscript = (authority && authority.full_transcript) || '';
+      var convInsights = insights.slice(0, 8);
+      if (fullTranscript || convInsights.length) {
+        document.getElementById('p-conv-section').style.display = 'block';
+
+        // Layer 1 — Highlights (uses key_insights when available)
+        var highlightsEl = document.getElementById('p-conv-highlights');
+        if (convInsights.length && highlightsEl) {
+          var hH = '';
+          convInsights.forEach(function(ins) {
+            var topic = ins.topic || '';
+            var quote = ins.quote || '';
+            if (!quote) return;
+            hH += '<div class="p-conv__card">';
+            if (topic) hH += '<div class="p-conv__topic">' + esc(topic) + '</div>';
+            hH += '<p class="p-conv__quote">' + esc(quote) + '</p>';
+            hH += '</div>';
+          });
+          highlightsEl.innerHTML = hH;
+        } else if (highlightsEl) {
+          highlightsEl.style.display = 'none';
+        }
+
+        // Layer 2 — collapsed full transcript (broken into paragraphs)
+        var fullEl = document.getElementById('p-conv-full');
+        var fullInner = document.getElementById('p-conv-full-inner');
+        var toggleBtn = document.getElementById('p-conv-toggle');
+        var toggleLabel = document.getElementById('p-conv-toggle-label');
+        if (fullTranscript && fullInner) {
+          // Naive paragraph split: blank line, or every 4 sentences
+          var paras = [];
+          if (/\n\s*\n/.test(fullTranscript)) {
+            paras = fullTranscript.split(/\n\s*\n/);
+          } else {
+            var sents = fullTranscript.match(/[^.!?]+[.!?]+/g) || [fullTranscript];
+            for (var i = 0; i < sents.length; i += 4) {
+              paras.push(sents.slice(i, i + 4).join(' ').trim());
+            }
+          }
+          var pH = '';
+          paras.forEach(function(p) {
+            if (p && p.trim()) pH += '<p>' + esc(p.trim()) + '</p>';
+          });
+          pH += '<div class="p-conv__full-foot">Edited for readability. Recorded live on Mornings in the Lab.</div>';
+          fullInner.innerHTML = pH;
+
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+              var open = fullEl.classList.toggle('is-open');
+              toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+              if (toggleLabel) toggleLabel.textContent = open ? 'Hide the full conversation' : 'Read the full conversation';
+            });
+          }
+        } else if (toggleBtn) {
+          toggleBtn.style.display = 'none';
+        }
+
+        // Layer 3 — standalone transcript page link
+        var standalone = document.getElementById('p-conv-standalone');
+        if (standalone) standalone.href = '/profile/' + slug + '/transcript/';
       }
 
       // ── Appearances (visual cards, NOT duplicate of CS video)

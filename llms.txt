@@ -51,6 +51,15 @@ Guest Engine serves 12 professional verticals with tailored positioning:
 - [Why Guest Engine](https://guestengine.live/why/) — How Guest Engine compares to guest marketplaces and why production matters
 - [Sample Guest Profile](https://guestengine.live/profile/sample/) — Example of a permanent SEO-indexed guest profile page
 
+## Featured Guest Authority Pages (agent-readable)
+
+Every guest profile is published in three formats: a cinematic HTML page for humans, a clean Markdown file for AI agents, and a structured JSON file for programmatic ingestion. Crawlers should prefer the .md or .json variants.
+
+- **EJ Snyder** — 25-year decorated Army combat veteran, 6× Naked & Afraid legend, EVP of Freedom Pickles USA  
+  HTML: https://guestengine.live/profile/ej-snyder  ·  Markdown: https://guestengine.live/profile/ej-snyder.md  ·  JSON: https://guestengine.live/profile/ej-snyder.json  ·  Transcript: https://guestengine.live/profile/ej-snyder/transcript/
+- **David Frangioni** — CEO & Publisher, Modern Drummer Magazine; 13-year Aerosmith engineer; built the first all-Pro Tools studio (Livin' La Vida Loca)  
+  HTML: https://guestengine.live/profile/david-frangioni  ·  Markdown: https://guestengine.live/profile/david-frangioni.md  ·  JSON: https://guestengine.live/profile/david-frangioni.json  ·  Transcript: https://guestengine.live/profile/david-frangioni/transcript/
+
 ## The Tour — What $497 Produces
 
 A guided walkthrough showing every artifact a Guest Engine appearance produces, anchored in EJ Snyder's real Mornings in the Lab appearances (Center Stage, March 24, 2026; Full Show with Dr. John Petrocelli, January 9, 2026):
