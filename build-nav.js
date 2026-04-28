@@ -20,7 +20,7 @@ const path = require('path');
 
 const NAV_LINKS = [
   { href: '/directory/',   label: 'Directory' },
-  { href: '/marketplace/', label: 'Marketplace' },
+  // { href: '/marketplace/', label: 'Marketplace' }, // Hidden for now — re-enable to restore
   { href: '/shows/',       label: 'Shows' },
   { href: '#pricing',      label: 'Pricing',  isAnchor: true },
   { href: '#network',      label: 'Network',  isAnchor: true },
