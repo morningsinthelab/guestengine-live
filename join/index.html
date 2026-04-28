@@ -162,7 +162,7 @@
 
   /* Tier cards */
   .tier-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
     max-width: 1200px;
   }
   .tier-card {
@@ -170,6 +170,66 @@
     border-radius: 16px; padding: 28px 20px;
     cursor: pointer; transition: all 0.25s;
     position: relative; text-align: center;
+  }
+
+  /* Featured hero tier (Single Appearance) — full width above the 3-col grid */
+  .tier-hero {
+    display: grid;
+    grid-template-columns: minmax(260px, 320px) 1fr;
+    gap: 36px;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(251,191,36,0.02) 60%, var(--card-bg) 100%);
+    border: 2px solid rgba(251,191,36,0.45);
+    border-radius: 20px;
+    padding: 36px 40px;
+    max-width: 1200px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+  }
+  .tier-hero:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .tier-hero.selected { border-color: var(--gold); background: linear-gradient(135deg, rgba(251,191,36,0.14) 0%, rgba(251,191,36,0.05) 60%, var(--card-bg) 100%); }
+  .tier-hero__badge {
+    position: absolute; top: -12px; left: 40px;
+    padding: 4px 14px; background: var(--gold); color: var(--bg);
+    font-family: var(--font-display); font-size: 10px; font-weight: 800;
+    letter-spacing: 1.5px; border-radius: 20px; text-transform: uppercase;
+  }
+  .tier-hero__left { text-align: left; }
+  .tier-hero__name {
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 20px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .tier-hero__price {
+    font-family: var(--font-display);
+    font-weight: 900; font-size: 64px; color: var(--gold);
+    line-height: 1; margin: 0 0 6px;
+  }
+  .tier-hero__billing {
+    font-size: 13px; color: var(--text-tertiary);
+    margin-bottom: 14px; letter-spacing: 0.3px;
+  }
+  .tier-hero__subtitle {
+    font-size: 15px; color: var(--gold);
+    font-weight: 600; line-height: 1.4;
+  }
+  .tier-hero__features {
+    list-style: none; text-align: left;
+    font-size: 14px; color: var(--text-secondary);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+    margin: 0; padding: 0;
+  }
+  .tier-hero__features li {
+    padding: 4px 0;
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.45;
+  }
+  .tier-hero__features li::before {
+    content: '\2713'; color: var(--gold);
+    font-weight: 700; flex-shrink: 0;
   }
   .tier-card:hover { border-color: var(--border-strong); background: var(--surface-hover); transform: translateY(-2px); }
   .tier-card.selected { border-color: var(--gold); background: rgba(251,191,36,0.06); }
@@ -615,6 +675,8 @@
     }
     .wizard-page { padding: 100px 20px 60px; }
     .tier-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+    .tier-hero { grid-template-columns: 1fr; gap: 24px; padding: 32px; }
+    .tier-hero__features { grid-template-columns: 1fr; }
     .show-grid { grid-template-columns: 1fr; }
     .segment-grid { grid-template-columns: 1fr; }
     .footer-v2 { padding: 48px 32px; }
@@ -624,6 +686,8 @@
     .step h2 { font-size: 28px; }
     .progress-step span:not(.step-num) { display: none; }
     .tier-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .tier-hero { padding: 24px; }
+    .tier-hero__price { font-size: 52px; }
     .footer-grid { grid-template-columns: 1fr; }
     .wizard-nav { gap: 12px; }
     .show-option { flex-direction: column; }
@@ -930,26 +994,29 @@
     <div class="step active" id="step-tier">
       <div class="step-label">Step 1</div>
       <h2>Pick your <span class="gold">tier.</span></h2>
-      <p class="step-desc">Get featured. Get distributed. Get booked again. Three things. Four ways to pay.</p>
+      <p class="step-desc">Get featured. Get distributed. Get booked again. Start with a single appearance, or pick a monthly plan.</p>
+
+      <!-- HERO TIER — SINGLE APPEARANCE ($497) -->
+      <div class="tier-hero" data-tier="single">
+        <div class="tier-hero__badge">Start here</div>
+        <div class="tier-hero__left">
+          <div class="tier-hero__name">Single Appearance</div>
+          <div class="tier-hero__price">$497</div>
+          <div class="tier-hero__billing">One-time</div>
+          <div class="tier-hero__subtitle">One show. Full production. A real Authority Page.</div>
+        </div>
+        <ul class="tier-hero__features">
+          <li>One produced live appearance</li>
+          <li>Permanent Authority Page (indexed by Google, Perplexity, ChatGPT, Gemini)</li>
+          <li>Content Vault &mdash; 5 vertical clips, 10 social posts, full transcript, highlight reel</li>
+          <li>Signal intelligence report on your category</li>
+          <li>14-day Distribution Sprint &mdash; clips and posts auto-published to LinkedIn, X, Threads</li>
+          <li>Backlinks from the network show</li>
+          <li>Featured listing in the public Guest Directory</li>
+        </ul>
+      </div>
 
       <div class="tier-grid">
-        <!-- SINGLE -->
-        <div class="tier-card" data-tier="single">
-          <div class="tier-card__name">Single Appearance</div>
-          <div class="tier-card__price">$497</div>
-          <div class="tier-card__billing">One-time</div>
-          <div class="tier-card__subtitle">One show. Full production. A real Authority Page.</div>
-          <ul class="tier-card__features">
-            <li>One produced live appearance</li>
-            <li>Permanent Authority Page (indexed by Google, Perplexity, ChatGPT, Gemini)</li>
-            <li>Content Vault &mdash; 5 vertical clips, 10 social posts, full transcript, highlight reel</li>
-            <li>Signal intelligence report on your category</li>
-            <li>14-day Distribution Sprint &mdash; clips and posts auto-published to LinkedIn, X, Threads</li>
-            <li>Backlinks from the network show</li>
-            <li>Featured listing in the public Guest Directory</li>
-          </ul>
-        </div>
-
         <!-- MEMBER -->
         <div class="tier-card recommended" data-tier="member">
           <div class="tier-card__name">Member</div>
@@ -1495,10 +1562,10 @@
     // ══════════════════════════════════════
     // STEP 1: TIER SELECTION
     // ══════════════════════════════════════
-    document.querySelectorAll('.tier-card').forEach(function(card) {
+    document.querySelectorAll('.tier-card, .tier-hero').forEach(function(card) {
       card.addEventListener('click', function() {
         if (card.classList.contains('disabled')) return;
-        document.querySelectorAll('.tier-card').forEach(function(c) { c.classList.remove('selected'); });
+        document.querySelectorAll('.tier-card, .tier-hero').forEach(function(c) { c.classList.remove('selected'); });
         card.classList.add('selected');
         state.tier = card.dataset.tier;
         state.price = tierData[state.tier].price;
