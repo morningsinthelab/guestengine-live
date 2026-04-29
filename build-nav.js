@@ -102,6 +102,7 @@ const ALL_PAGES = [
   'consultants/index.html',
   'corporate-executives/index.html',
   'directory/index.html',
+  'directory/all/index.html',
   'directory/index-mockup.html',
   'financial-advisors/index.html',
   'founders/index.html',
@@ -133,6 +134,7 @@ const ALL_PAGES = [
 function getVariant(file) {
   if (file === 'index.html') return 'homepage';
   if (file === 'directory/index.html') return 'directory';
+  if (file === 'directory/all/index.html') return 'directory';
   return 'subpage';
 }
 
