@@ -608,8 +608,14 @@ img { max-width: 100%; display: block; }
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  display: block;
 }
-.feature-twoup__media img { width: 100%; height: 100%; object-fit: cover; }
+.feature-twoup__media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .feature-twoup__chip {
   position: absolute; top: 16px; left: 16px;
   font-family: var(--mono);
@@ -676,8 +682,14 @@ img { max-width: 100%; display: block; }
   border-radius: 6px;
   overflow: hidden;
   position: relative;
+  display: block;
 }
-.feature-threeup__media img { width: 100%; height: 100%; object-fit: cover; }
+.feature-threeup__media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .feature-threeup__date {
   position: absolute; top: 12px; left: 12px;
   font-family: var(--mono);
@@ -767,8 +779,19 @@ img { max-width: 100%; display: block; }
   transition: transform .2s, box-shadow .2s;
 }
 .dept-card:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.5); }
-.dept-card__media { aspect-ratio: 4 / 5; background: var(--bg-3); position: relative; overflow: hidden; }
-.dept-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.dept-card__media {
+  aspect-ratio: 4 / 5;
+  background: var(--bg-3);
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+.dept-card__media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .dept-card__tier {
   position: absolute; top: 12px; left: 12px;
   font-family: var(--mono);
@@ -1246,7 +1269,7 @@ function renderTwoUpFeature(section, paper) {
           ${guests.map((g) => `
             <a class="feature-twoup__card" href="${PROFILE(g.slug)}">
               <div class="feature-twoup__media">
-                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async" fetchpriority="high">
                 ${g.tier ? `<span class="feature-twoup__chip">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
               </div>
               <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} · ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
@@ -1274,7 +1297,7 @@ function renderThreeUpFeature(section) {
           ${guests.map((g) => `
             <a class="feature-threeup__card" href="${PROFILE(g.slug)}">
               <div class="feature-threeup__media">
-                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async" fetchpriority="high">
                 ${g.latestAppearanceDate ? `<span class="feature-threeup__date">${escapeHTML(relativeDays(g.latestAppearanceDate))}</span>` : ""}
               </div>
               <h3 class="feature-threeup__title">${escapeHTML(g.guestName)}</h3>
