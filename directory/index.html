@@ -501,6 +501,72 @@ img { max-width: 100%; display: block; }
   .feature__portrait-img { width: 100%; height: 320px; }
 }
 
+/* ┏━ Editorial plates ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+   Atmospheric images placed in the right rail next to long-form prose.
+   They break the scroll at editorial moments — act-breaks between
+   paragraphs — and pace the read like a real magazine plate.
+
+   Implementation: float right with negative margin so the plate
+   physically sits inside the right grid column (320px wide), while
+   the body text continues to flow on the left. The aside above it is
+   align-self: start (not sticky), so by the time the reader hits a
+   plate, the rail is already empty and the plate has clean real estate.
+
+   Mobile (≤1000px): the grid collapses to one column, so we drop the
+   float and let the plate become a full-width inline break.
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ */
+.feature__plate {
+  float: right;
+  clear: right;
+  width: 320px;
+  /* Push into the right rail: 320px col + 80px gap = 400px from body edge. */
+  margin-right: -400px;
+  margin-left: 32px;
+  margin-bottom: 48px;
+  margin-top: 8px;
+}
+.feature__plate-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #0a0a0a;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+}
+.feature__plate-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.02) saturate(0.92);
+}
+.feature__plate-eyebrow {
+  margin-top: 14px;
+  font-family: var(--label);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.feature__plate-caption {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--t-2);
+  letter-spacing: 0.005em;
+}
+@media (max-width: 1000px) {
+  /* Grid collapses to single column — plate becomes a full-width break. */
+  .feature__plate {
+    float: none;
+    width: 100%;
+    margin: 32px 0 32px;
+  }
+  .feature__plate-img { aspect-ratio: 3 / 2; }
+}
+
 /* End-mark — magazine-style end-of-article glyph */
 .feature__endmark {
   margin-top: 24px;
@@ -1588,9 +1654,34 @@ function renderCoverFeature(cover, feature, issue) {
   // Build body — drop-cap on first paragraph; pull quote inserted between p3 and p4
   const paragraphs = (f.spread && f.spread.length) ? f.spread : [];
   const pullQuoteIndex = Math.min(2, Math.max(0, paragraphs.length - 1)); // after p3 if available
+
+  // Editorial plates — atmospheric images placed in the right rail at
+  // editorial act-breaks. Indexed by paragraph so each plate breaks the
+  // scroll at the same beat the writer chose. Convention: 1–2 plates max.
+  const plates = Array.isArray(f.plates) ? f.plates : [];
+  const platesByParaIndex = new Map();
+  for (const p of plates) {
+    if (!p || !p.src) continue;
+    const idx = Number.isFinite(p.placeAfterParagraph) ? p.placeAfterParagraph : 0;
+    if (!platesByParaIndex.has(idx)) platesByParaIndex.set(idx, []);
+    platesByParaIndex.get(idx).push(p);
+  }
+  const renderPlate = (p) => `
+    <figure class="feature__plate">
+      <div class="feature__plate-img">
+        <img src="${escapeHTML(p.src)}" alt="${escapeHTML(p.alt || p.caption || "")}" loading="lazy" decoding="async">
+      </div>
+      ${p.eyebrow ? `<div class="feature__plate-eyebrow">${escapeHTML(p.eyebrow)}</div>` : ""}
+      ${p.caption ? `<figcaption class="feature__plate-caption">${escapeHTML(p.caption)}</figcaption>` : ""}
+    </figure>
+  `;
+
   let bodyHTML = "";
   for (let i = 0; i < paragraphs.length; i++) {
     bodyHTML += `<p>${escapeProse(paragraphs[i])}</p>`;
+    if (platesByParaIndex.has(i)) {
+      for (const plate of platesByParaIndex.get(i)) bodyHTML += renderPlate(plate);
+    }
     if (i === pullQuoteIndex && f.pullQuote && paragraphs.length > pullQuoteIndex + 1) {
       bodyHTML += `<blockquote class="feature__pull">${escapeHTML(f.pullQuote)}</blockquote>`;
     }
