@@ -640,6 +640,46 @@
     line-height: 1.55;
     margin: 4px 0 0;
   }
+  /* Per-card CTA — the actual conversion button. Sits at the bottom of each
+     card via margin-top:auto so all CTAs align on the same horizontal line
+     regardless of card content height. Deep-links to /join/?tier=<slug> so
+     the wizard auto-selects the chosen tier and advances to step 2. */
+  .v2 .tier-strip__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: auto;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    border: 1px solid var(--border, rgba(255,255,255,0.10));
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+  }
+  .v2 .tier-strip__cta:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.20);
+    transform: translateY(-1px);
+  }
+  .v2 .tier-strip__cta--primary {
+    background: var(--gold);
+    color: var(--bg, #050914);
+    border-color: var(--gold);
+  }
+  .v2 .tier-strip__cta--primary:hover {
+    background: var(--gold-hover, #f59e0b);
+    border-color: var(--gold-hover, #f59e0b);
+    color: var(--bg, #050914);
+  }
+  .v2 .tier-strip__cta-arrow { transition: transform 0.2s; }
+  .v2 .tier-strip__cta:hover .tier-strip__cta-arrow { transform: translateX(2px); }
   .v2 .tier-strip__new {
     position: absolute;
     top: 14px;
@@ -3776,12 +3816,14 @@
         <div class="tier-strip__name">Single Appearance</div>
         <div class="tier-strip__price">$497<span class="tier-strip__price-period">once</span></div>
         <p class="tier-strip__desc">One produced appearance. Permanent Authority Page. 14-day Distribution Sprint.</p>
+        <a href="/join/?tier=single" class="tier-strip__cta tier-strip__cta--primary">Book a Single Appearance <span class="tier-strip__cta-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
 
       <div class="tier-strip__card">
         <div class="tier-strip__name">Member</div>
         <div class="tier-strip__price">$97<span class="tier-strip__price-period">/mo</span></div>
         <p class="tier-strip__desc">Story Time sponsorship. AI digital twin. Monthly Signal report. 10 Reach pitches/mo.</p>
+        <a href="/join/?tier=member" class="tier-strip__cta">Become a Member <span class="tier-strip__cta-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
 
       <div class="tier-strip__card">
@@ -3789,12 +3831,14 @@
         <div class="tier-strip__name">Reach Pro</div>
         <div class="tier-strip__price">$197<span class="tier-strip__price-period">/mo</span></div>
         <p class="tier-strip__desc">Pitch hard. 25 Authority Reach pitches/mo. Full-service reply tracking. Backed by your Authority Page.</p>
+        <a href="/join/?tier=reachpro" class="tier-strip__cta">Get Reach Pro <span class="tier-strip__cta-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
 
       <div class="tier-strip__card">
         <div class="tier-strip__name">VIP</div>
         <div class="tier-strip__price">$297<span class="tier-strip__price-period">/mo</span></div>
         <p class="tier-strip__desc">Quarterly produced appearances. 30-day Sprint. 50 Reach pitches/mo. Premium placement.</p>
+        <a href="/join/?tier=vip" class="tier-strip__cta">Go VIP <span class="tier-strip__cta-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
 
     </div>
