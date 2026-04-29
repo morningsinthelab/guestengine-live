@@ -1954,7 +1954,7 @@ function renderDepartments(section) {
       <div class="departments__inner">
         <div class="departments__head">
           <div>
-            <span class="departments__sub">Departments \u00b7 For Hosts</span>
+            <span class="departments__sub">Departments \u00b7 Directory</span>
             <h2 class="departments__title">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
           </div>
           <a href="/directory/all/" class="departments__cta">Browse all 200 \u2192</a>
@@ -1965,8 +1965,10 @@ function renderDepartments(section) {
             // and Community Corner guests don't get a chip — they're the
             // baseline editorial roster, no badge needed.
             const chip = tierChipHTML(g.editorialTier);
+            // Card meta shows segment only (e.g. CENTER STAGE / VIP).
+            // "Signal N" is internal scoring noise — not host-relevant on
+            // the catalog card. It still surfaces on the Authority Page.
             const metaParts = [];
-            if (g.signalScore) metaParts.push(`Signal ${g.signalScore}`);
             if (g.editorialSegment) metaParts.push(g.editorialSegment);
             const metaHTML = metaParts.map((m, i) =>
               i === 0 ? m : `<span class="dept-card__meta-divider"></span>${m}`
@@ -2083,7 +2085,7 @@ function buildFallbackIssue(directory) {
     sections: [
       { id: "on-the-record", name: "On The Record", blurb: "The paid produced segment. Permanent Authority Page. Distribution Sprint. The lead.", treatment: "asymmetric", guests: [] },
       { id: "center-stage", name: "Center Stage", blurb: "Our free segment. Editorial choice \u2014 we pick who sits here.", treatment: "wide-scroller", guests: guests.slice(0, 4) },
-      { id: "for-hosts", name: "For Hosts", blurb: "Booking a guest? Start here.", treatment: "wide-scroller", guests: guests.slice(0, 8) },
+      { id: "for-hosts", name: "The Directory", blurb: "Every guest available to book. Tier-sorted.", treatment: "wide-scroller", guests: guests.slice(0, 8) },
     ],
   };
 }
