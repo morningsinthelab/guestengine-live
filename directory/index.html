@@ -16,8 +16,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
-<!-- Editorial display serif (Newsreader 16..72 opsz) for masthead/section heads/feature headlines, Source Serif 4 for body, Cabinet for sans display ("THE PEOPLE BEHIND…"), JetBrains Mono for kickers/folios -->
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;0,6..72,900;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700;1,6..72,800;1,6..72,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Editorial display serif (Newsreader 16..72 opsz) is the publication
+     voice on masthead/headline/section heads. Source Serif 4 is the
+     long-form feature body. Cabinet Grotesk is the brand voice that
+     ties /directory/ to the rest of the site — every kicker, eyebrow,
+     and label uses it. Inter is the nav font (shared with home). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;0,6..72,900;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700;1,6..72,800;1,6..72,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/header.css?v=1776710000">
 
@@ -49,7 +53,16 @@
    ╚══════════════════════════════════════════════════════════════════════╝ */
 
 :root {
-  --bg: #050914;
+  /* ╔═══════════════════════════════════════════════════════════════════════╗
+     DELIBERATE HYBRID
+     The handshake with guestengine.live: every variable below matches
+     the homepage EXCEPT --display. That's the only signal that says
+     "you're in the publication." Background, gold, sans, kickers, body
+     — all identical to home. Newsreader serif on masthead/headlines
+     is the publication voice. Cabinet Grotesk on every kicker, eyebrow,
+     and label is the brand voice that ties both surfaces together.
+     ╚═══════════════════════════════════════════════════════════════════════╝ */
+  --bg: #020617;          /* matches home (was #050914) */
   --bg-2: #0a0e1c;
   --bg-3: #0f1424;
   --paper: #faf6ee;
@@ -65,10 +78,13 @@
   --rule: rgba(255, 255, 255, 0.10);
   --rule-strong: rgba(255, 255, 255, 0.20);
   --paper-rule: rgba(0, 0, 0, 0.12);
-  --display: "Newsreader", "Fraunces", Georgia, serif;
-  --serif: "Source Serif 4", "Tiempos Text", Georgia, serif;
-  --sans: "Cabinet Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+  --display: "Newsreader", "Fraunces", Georgia, serif;     /* publication voice */
+  --serif: "Source Serif 4", "Tiempos Text", Georgia, serif; /* feature body only */
+  --sans: "Cabinet Grotesk", "Inter", system-ui, -apple-system, sans-serif; /* brand voice */
+  --label: "Cabinet Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+                                                            /* every kicker/eyebrow/tag */
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+                                                            /* reserved: live indicators only */
 }
 
 * { box-sizing: border-box; }
@@ -115,11 +131,11 @@ img { max-width: 100%; display: block; }
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   color: var(--gold);
   margin-bottom: 22px;
 }
@@ -150,7 +166,7 @@ img { max-width: 100%; display: block; }
 .hero-cta { display: flex; gap: 16px; margin-top: 40px; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gold); color: #050914;
+  background: var(--gold); color: #020617;
   font-family: var(--sans);
   font-weight: 700;
   font-size: 15px;
@@ -204,7 +220,7 @@ img { max-width: 100%; display: block; }
   position: absolute;
   top: 0; left: 0; right: 0;
   z-index: 5;
-  padding: 112px 64px 28px;
+  padding: 96px 64px 28px;
   display: grid;
   grid-template-columns: 1fr;
   text-align: center;
@@ -216,22 +232,37 @@ img { max-width: 100%; display: block; }
 .masthead-overlay::before {
   content: '';
   position: absolute;
-  inset: -40px -10% auto -10%;
-  height: 360px;
+  inset: -60px -8% auto -8%;
+  height: 440px;
   background: radial-gradient(
-    ellipse 70% 90% at 50% 50%,
-    rgba(2, 6, 23, 0.55) 0%,
-    rgba(2, 6, 23, 0.30) 45%,
-    transparent 75%
+    ellipse 65% 80% at 50% 50%,
+    rgba(2, 6, 23, 0.78) 0%,
+    rgba(2, 6, 23, 0.55) 35%,
+    rgba(2, 6, 23, 0.20) 70%,
+    transparent 90%
   );
   z-index: -1;
   pointer-events: none;
 }
 @media (max-width: 720px) {
   .masthead-overlay::before {
-    inset: -20px -5% auto -5%;
-    height: 280px;
+    inset: -30px -5% auto -5%;
+    height: 340px;
   }
+}
+/* Brand handshake eyebrow — explicitly says "this is the editorial arm
+   of guestengine.live." Cabinet Grotesk uppercase, identical treatment
+   to the homepage section labels. The Newsreader masthead title below
+   is then the only visual signal that you've crossed into the
+   publication. */
+.masthead-overlay__brand {
+  font-family: var(--label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 18px;
 }
 .masthead-overlay__title {
   font-family: var(--display);
@@ -251,12 +282,12 @@ img { max-width: 100%; display: block; }
 }
 .masthead-overlay__sub {
   margin-top: 12px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.24em;
+  font-family: var(--label);
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 700;
 }
 .masthead-overlay__sub a { color: var(--gold); pointer-events: auto; }
 
@@ -275,7 +306,7 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -284,10 +315,10 @@ img { max-width: 100%; display: block; }
 }
 .cover-hero__caption strong { color: var(--gold); font-weight: 500; }
 .cover-hero__kicker {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  font-weight: 600;
+  font-family: var(--label);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
   color: var(--gold);
   text-transform: uppercase;
 }
@@ -320,12 +351,12 @@ img { max-width: 100%; display: block; }
 .feature__head { margin-bottom: 56px; }
 .feature__kicker {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.24em;
+  font-family: var(--label);
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold);
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 22px;
 }
 .feature__kicker::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
@@ -375,7 +406,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.005em;
 }
 .feature__credentials {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -457,7 +488,7 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
 }
 .feature__portrait-caption {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -480,7 +511,7 @@ img { max-width: 100%; display: block; }
   background: var(--gold); transform: rotate(45deg);
 }
 .feature__endmark a {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -511,11 +542,11 @@ img { max-width: 100%; display: block; }
   padding: 22px 0 0;
 }
 .editors-note__label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
+  font-family: var(--label);
+  font-size: 11px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--gold);
   margin-bottom: 12px;
 }
@@ -530,7 +561,7 @@ img { max-width: 100%; display: block; }
   font-variation-settings: "opsz" 72;
 }
 .editors-note__signoff {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -541,7 +572,7 @@ img { max-width: 100%; display: block; }
 .feature__credits {
   border-top: 1px solid var(--rule);
   padding-top: 22px;
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -580,7 +611,7 @@ img { max-width: 100%; display: block; }
 }
 .toc__heading em { font-style: italic; font-weight: 600; }
 .toc__sub {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -609,7 +640,7 @@ img { max-width: 100%; display: block; }
 .toc__item > * { min-width: 0; }
 .toc__item:hover { background-color: rgba(0,0,0,0.04); }
 .toc__num {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 13px;
   font-weight: 600;
   color: var(--gold-soft);
@@ -617,9 +648,9 @@ img { max-width: 100%; display: block; }
 }
 .toc__entry { display: flex; flex-direction: column; gap: 4px; }
 .toc__entry-section {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 600;
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.55);
@@ -645,9 +676,9 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 .toc__status {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 600;
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 700;
   text-align: right;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -692,11 +723,12 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 720px) { .spread__inner { padding: 64px 28px; } }
 .spread__folio {
-  font-family: var(--mono);
-  font-size: 11px;
+  font-family: var(--label);
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--t-3);
+  font-weight: 700;
   margin-bottom: 18px;
 }
 .spread--paper .spread__folio { color: rgba(0,0,0,0.55); }
@@ -746,7 +778,7 @@ img { max-width: 100%; display: block; }
 }
 .feature-twoup__chip {
   position: absolute; top: 16px; left: 16px;
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -776,8 +808,9 @@ img { max-width: 100%; display: block; }
 }
 .spread--paper .feature-twoup__deck { color: rgba(0,0,0,0.7); }
 .feature-twoup__byline {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--t-3);
@@ -818,10 +851,10 @@ img { max-width: 100%; display: block; }
 }
 .feature-threeup__date {
   position: absolute; top: 12px; left: 12px;
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 5px 10px;
   background: rgba(5, 9, 20, 0.78);
@@ -875,11 +908,12 @@ img { max-width: 100%; display: block; }
 }
 .departments__title em { font-style: italic; font-weight: 600; color: var(--gold); }
 .departments__sub {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--t-3);
+  font-weight: 700;
 }
 .departments__cta {
   display: inline-flex; align-items: center; gap: 8px;
@@ -914,9 +948,9 @@ img { max-width: 100%; display: block; }
 .dept-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .dept-card__tier {
   position: absolute; top: 12px; left: 12px;
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 600;
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 5px 10px;
@@ -925,7 +959,7 @@ img { max-width: 100%; display: block; }
   border-radius: 999px;
   backdrop-filter: blur(6px);
 }
-.dept-card__tier--vip { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #050914; }
+.dept-card__tier--vip { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #020617; }
 .dept-card__body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .dept-card__name {
   font-family: var(--display);
@@ -951,7 +985,7 @@ img { max-width: 100%; display: block; }
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid var(--rule);
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 10px;
   letter-spacing: 0.08em;
   color: var(--t-3);
@@ -976,7 +1010,7 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 900px) { .colophon__inner { grid-template-columns: 1fr; gap: 36px; } }
 .colophon__col h3 {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -991,7 +1025,7 @@ img { max-width: 100%; display: block; }
 .colophon__col a { color: var(--t-1); border-bottom: 1px solid var(--rule-strong); transition: color .2s, border-color .2s; }
 .colophon__col a:hover { color: var(--gold); border-color: var(--gold); }
 .colophon__masthead {
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1003,7 +1037,7 @@ img { max-width: 100%; display: block; }
   padding-top: 28px;
   border-top: 1px solid var(--rule);
   display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1017,7 +1051,7 @@ img { max-width: 100%; display: block; }
   background: var(--bg);
   padding: 120px 32px;
   text-align: center;
-  font-family: var(--mono);
+  font-family: var(--label);
   font-size: 13px;
   letter-spacing: 0.14em;
   color: var(--t-3);
@@ -1025,7 +1059,7 @@ img { max-width: 100%; display: block; }
 }
 .issue-error h2 { font-family: var(--display); font-size: 36px; margin: 0 0 12px; color: var(--t-1); text-transform: none; letter-spacing: 0; }
 .issue-error p { color: var(--t-2); font-size: 16px; line-height: 1.5; margin: 0 0 24px; text-transform: none; letter-spacing: 0; }
-.issue-error a { display: inline-block; padding: 12px 24px; background: var(--gold); color: #050914; border-radius: 999px; font-weight: 600; text-transform: none; letter-spacing: normal; }
+.issue-error a { display: inline-block; padding: 12px 24px; background: var(--gold); color: #020617; border-radius: 999px; font-weight: 600; text-transform: none; letter-spacing: normal; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -1275,6 +1309,7 @@ function renderCoverHero(cover, feature, issue) {
       <div class="cover-hero__scrim"></div>
 
       <header class="masthead-overlay">
+        <div class="masthead-overlay__brand">The Publication of Guest Engine</div>
         <h1 class="masthead-overlay__title">On The <em>Record</em>.</h1>
         <div class="masthead-overlay__sub">
           The 9:45 ET Segment <span class="live-indicator">ON AIR NOW</span> \u00b7 <a href="https://mornings.live">Mornings.Live</a>
