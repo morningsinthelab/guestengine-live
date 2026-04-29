@@ -4,29 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Issue — Guest Engine | ConversationOS</title>
-<meta name="description" content="A weekly editorial publication of the people on our shows. Cover Story, On Air This Week, Just Aired, For Hosts. Updated every Monday at 04:00 ET.">
+<meta name="description" content="A weekly editorial of the people on our shows. Cover story, departments, and a living record of credibility — produced by ConversationOS.">
 <meta property="og:title" content="The Issue — Guest Engine">
-<meta property="og:description" content="A weekly editorial publication of the people on our shows. Updated every Monday.">
+<meta property="og:description" content="A weekly editorial of the people on our shows.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guestengine.live/directory/">
 <meta property="og:image" content="https://guestengine.live/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://guestengine.live/directory/">
+
+<!-- Editorial display serif (Fraunces 144 opsz for cover headlines), Cabinet for sans, Inter for body, JetBrains Mono for kickers/folios -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
-<!-- Editorial display serif (Fraunces) + Cabinet Grotesk for sans + JetBrains Mono for metadata -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Agent-readable links -->
 <link rel="alternate" type="application/json" href="https://app.conversationos.live/api/guest-marketplace/issue/current.json" title="Current issue (JSON)">
 <link rel="alternate" type="text/markdown" href="https://app.conversationos.live/api/guest-marketplace/issue/current.md" title="Current issue (Markdown)">
 
-<!-- JSON-LD Article schema. The runtime fetch updates the dateModified
-     and the cover-story name once issue data loads. -->
 <script type="application/ld+json" id="issue-jsonld">
 {
   "@context": "https://schema.org",
@@ -43,609 +41,857 @@
 </script>
 
 <style>
-/* ──────────────────────────────────────────────────────────────────────
-   THE ISSUE — magazine-style guest directory.
-   Built on the existing GE color tokens (deep navy + gold) but introduces
-   editorial display typography (Fraunces) and asymmetric layouts.
-   ────────────────────────────────────────────────────────────────────── */
+/* ╔══════════════════════════════════════════════════════════════════════╗
+   ║  THE ISSUE — true magazine layout                                     ║
+   ║                                                                       ║
+   ║  Two halves:                                                          ║
+   ║   1. Top hero: the original "THE PEOPLE BEHIND THE CONVERSATIONS"     ║
+   ║      brand promise (restored from the original /directory hero)       ║
+   ║   2. Magazine: a real editorial publication with cover spread,        ║
+   ║      table of contents, mini-features, and back-of-book departments   ║
+   ╚══════════════════════════════════════════════════════════════════════╝ */
 
 :root {
-  --ge-bg: #0a0e1a;
-  --ge-bg-2: #0f1424;
-  --ge-bg-3: #141a2e;
-  --ge-fg: #f4f1ea;
-  --ge-fg-dim: #b8b3a8;
-  --ge-fg-faint: #6b6b7a;
-  --ge-gold: #f4c842;
-  --ge-gold-dim: #c9a437;
-  --ge-rule: rgba(244, 241, 234, 0.08);
-  --ge-rule-strong: rgba(244, 241, 234, 0.15);
-  --ge-vip: linear-gradient(135deg, #f4c842 0%, #d4a432 100%);
-  --serif: "Fraunces", "Tiempos", Georgia, serif;
-  --sans: "Cabinet Grotesk", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --bg: #050914;
+  --bg-2: #0a0e1c;
+  --bg-3: #0f1424;
+  --paper: #faf6ee;
+  --paper-2: #f1ebde;
+  --ink: #0a0a0a;
+  --t-1: #ffffff;
+  --t-2: rgba(255, 255, 255, 0.78);
+  --t-3: rgba(255, 255, 255, 0.55);
+  --t-4: rgba(255, 255, 255, 0.40);
+  --gold: #fbbf24;
+  --gold-soft: #f59e0b;
+  --gold-glow: 0 0 30px rgba(251, 191, 36, 0.25);
+  --rule: rgba(255, 255, 255, 0.10);
+  --rule-strong: rgba(255, 255, 255, 0.20);
+  --paper-rule: rgba(0, 0, 0, 0.12);
+  --serif: "Fraunces", Georgia, serif;
+  --display: "Cabinet Grotesk", system-ui, -apple-system, sans-serif;
+  --sans: "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 * { box-sizing: border-box; }
-
-html, body {
-  background: var(--ge-bg);
-  color: var(--ge-fg);
-  font-family: var(--sans);
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--t-1); font-family: var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: rgba(251, 191, 36, 0.25); color: #fff; }
 
-/* ─── HEADER (matches existing site chrome) ─────────────────────────── */
+/* ─── HEADER ────────────────────────────────────────────────────── */
 .ge-header {
-  position: sticky; top: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 32px;
-  background: rgba(10, 14, 26, 0.92);
+  background: rgba(5, 9, 20, 0.78);
   backdrop-filter: saturate(140%) blur(18px);
   -webkit-backdrop-filter: saturate(140%) blur(18px);
-  border-bottom: 1px solid var(--ge-rule);
+  border-bottom: 1px solid var(--rule);
 }
 .ge-header__logo { display: flex; align-items: center; gap: 12px; }
 .ge-header__logo-icon { width: 32px; height: 32px; }
-.ge-header__logo-cos { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--ge-gold); }
+.ge-header__logo-cos { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--gold); }
 .ge-header__logo-ge { display: flex; gap: 6px; font-weight: 800; font-size: 16px; letter-spacing: 0.02em; }
-.ge-header__logo-engine { color: var(--ge-gold); }
+.ge-header__logo-engine { color: var(--gold); }
 .ge-header__nav { display: flex; gap: 28px; }
-.ge-header__nav a { font-size: 14px; font-weight: 500; color: var(--ge-fg); }
-.ge-header__nav a:hover { color: var(--ge-gold); }
-.ge-header__login { font-size: 14px; font-weight: 600; color: var(--ge-fg); padding: 10px 18px; }
+.ge-header__nav a { font-size: 14px; font-weight: 500; color: var(--t-1); transition: color .2s; }
+.ge-header__nav a:hover { color: var(--gold); }
+.ge-header__login { font-size: 14px; font-weight: 600; color: var(--t-1); padding: 10px 18px; }
 .ge-header__hamburger { display: none; }
 @media (max-width: 900px) {
   .ge-header__nav { display: none; }
   .ge-header__hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: 0; cursor: pointer; padding: 8px; }
-  .ge-header__hamburger span { width: 22px; height: 2px; background: var(--ge-fg); }
+  .ge-header__hamburger span { width: 22px; height: 2px; background: var(--t-1); }
 }
 
-/* ─── MASTHEAD ──────────────────────────────────────────────────────── */
-.issue-masthead {
+/* ─── TOP HERO (restored from original /directory) ─────────────── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero__video-wrap { position: absolute; inset: 0; z-index: -1; }
+.hero__video, .hero__img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+.hero__overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, rgba(5,9,20,1) 0%, rgba(5,9,20,0.65) 35%, rgba(5,9,20,0.15) 70%, rgba(5,9,20,0.35) 100%),
+    linear-gradient(to right, rgba(5,9,20,0.55) 0%, rgba(5,9,20,0.0) 50%);
+}
+.hero__unmute {
+  position: absolute; top: 80px; right: 40px; z-index: 10;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: rgba(255,255,255,0.6);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 80px 100px;
+  max-width: 1280px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  margin-bottom: 22px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 32px; height: 1px; background: var(--gold); opacity: 0.85;
+}
+.hero-content h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(42px, 6.2vw, 84px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+}
+.hero-content h1 .gold {
+  background: linear-gradient(180deg, #fde68a 0%, #fbbf24 55%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  margin-top: 28px;
+  font-size: 19px;
+  color: rgba(255,255,255,0.78);
+  max-width: 580px;
+  line-height: 1.55;
+}
+.hero-cta { display: flex; gap: 16px; margin-top: 40px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: #050914;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(251,191,36,0.5);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  box-shadow: 0 6px 24px rgba(251,191,36,0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(251,191,36,0.35);
+  filter: brightness(1.06);
+}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: #fff;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: border-color .2s, background .2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+@media (max-width: 720px) {
+  .hero-content { padding: 0 28px 80px; }
+}
+
+/* ─── MASTHEAD (issue marker between hero and magazine) ────────── */
+.masthead {
+  position: relative;
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
+  padding: 56px 32px 40px;
+}
+.masthead__inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 80px 32px 40px;
-  border-bottom: 1px solid var(--ge-rule);
-}
-.issue-masthead__topline {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 24px; flex-wrap: wrap;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ge-fg-dim);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 28px;
-}
-.issue-masthead__publisher { color: var(--ge-gold); }
-.issue-masthead__live {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--ge-fg-dim);
-}
-.issue-masthead__live-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #5d5d5d;
-}
-.issue-masthead__live--on .issue-masthead__live-dot {
-  background: #ff3b3b;
-  box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.6);
-  animation: live-pulse 2s ease-out infinite;
-}
-@keyframes live-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.5); }
-  100% { box-shadow: 0 0 0 14px rgba(255, 59, 59, 0); }
-}
-.issue-masthead__title {
-  font-family: var(--serif);
-  font-weight: 900;
-  font-size: clamp(64px, 11vw, 160px);
-  line-height: 0.86;
-  letter-spacing: -0.04em;
-  margin: 0 0 24px 0;
-  font-variation-settings: "opsz" 144;
-}
-.issue-masthead__title em {
-  font-style: italic;
-  font-weight: 600;
-  color: var(--ge-gold);
-  font-variation-settings: "opsz" 144, "SOFT" 0;
-}
-.issue-masthead__deck {
-  font-family: var(--serif);
-  font-size: clamp(20px, 2.4vw, 32px);
-  line-height: 1.35;
-  font-weight: 300;
-  color: var(--ge-fg-dim);
-  max-width: 720px;
-  margin: 0 0 32px 0;
-}
-.issue-masthead__bar {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 20px;
-  padding-top: 24px;
-  border-top: 1px solid var(--ge-rule);
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ge-fg-dim);
-  letter-spacing: 0.05em;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 32px;
   flex-wrap: wrap;
 }
-.issue-masthead__actions { display: flex; gap: 14px; }
-.issue-masthead__action {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 16px;
-  border: 1px solid var(--ge-rule-strong);
-  border-radius: 999px;
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0;
-  transition: border-color .2s, color .2s;
-  text-transform: none;
+.masthead__pub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
 }
-.issue-masthead__action:hover { border-color: var(--ge-gold); color: var(--ge-gold); }
-.issue-masthead__action--primary { background: var(--ge-gold); color: #0a0e1a; border-color: var(--ge-gold); }
-.issue-masthead__action--primary:hover { background: var(--ge-gold-dim); color: #0a0e1a; }
-
-/* ─── COVER STORY ───────────────────────────────────────────────────── */
-.cover-section {
-  position: relative;
-  margin: 64px auto 0;
-  max-width: 1440px;
-  padding: 0 32px;
+.masthead__title-wrap { flex: 1; min-width: 320px; text-align: center; }
+.masthead__title {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  margin: 8px 0 0;
+  font-variation-settings: "opsz" 144;
 }
-.cover-story {
-  position: relative;
-  display: block;
-  width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-  background: var(--ge-bg-2);
-  isolation: isolate;
-  /* Use min-height with viewport units instead of aspect-ratio because
-     aspect-ratio doesn't compute when the container's only children are
-     position:absolute (zero contributing intrinsic size). */
-  min-height: clamp(520px, 60vw, 760px);
+.masthead__title em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
 }
-.cover-story__media {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  z-index: 1;
-}
-.cover-story__media img,
-.cover-story__media video {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: saturate(1.05) contrast(1.02);
-}
-.cover-story__scrim {
-  position: absolute; inset: 0; z-index: 2;
-  background:
-    radial-gradient(ellipse at 30% 75%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 60%),
-    linear-gradient(180deg, rgba(10,14,26,0.0) 35%, rgba(10,14,26,0.85) 90%, rgba(10,14,26,1) 100%);
-}
-.cover-story__content {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  z-index: 3;
-  padding: clamp(32px, 5vw, 72px);
-  max-width: 920px;
-}
-.cover-story__chip {
-  display: inline-flex; align-items: center; gap: 10px;
+.masthead__meta {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ge-gold);
-  margin-bottom: 16px;
-}
-.cover-story__chip::before {
-  content: ""; width: 28px; height: 1px; background: var(--ge-gold);
-}
-.cover-story__title {
-  font-family: var(--serif);
-  font-weight: 800;
-  font-size: clamp(40px, 6vw, 96px);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  margin: 0 0 18px 0;
-  color: var(--ge-fg);
-}
-.cover-story__quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(20px, 1.8vw, 26px);
-  line-height: 1.4;
-  color: var(--ge-fg);
-  max-width: 720px;
-  margin: 0 0 28px 0;
-  position: relative;
-  padding-left: 18px;
-  border-left: 2px solid var(--ge-gold);
-}
-.cover-story__meta {
-  display: flex; align-items: center; gap: 24px;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--ge-fg-dim);
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.cover-story__meta strong { color: var(--ge-fg); font-weight: 500; }
-.cover-story__meta-divider { width: 1px; height: 14px; background: var(--ge-rule-strong); }
-.cover-story__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 28px;
-  background: var(--ge-gold);
-  color: #0a0e1a;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 15px;
-  /* prevent the inline-flex from collapsing into a vertical column when
-     parent layouts try to constrain its width (the 'circle CTA' bug) */
-  white-space: nowrap;
-  width: auto;
-  flex-shrink: 0;
-  transition: transform .2s, background .2s;
-}
-.cover-story__cta:hover { background: var(--ge-gold-dim); transform: translateY(-1px); }
-.cover-story__cta-arrow { transition: transform .2s; }
-.cover-story__cta:hover .cover-story__cta-arrow { transform: translateX(3px); }
-
-@media (max-width: 720px) {
-  .cover-story { min-height: clamp(560px, 110vw, 720px); }
-}
-
-/* ─── SECTION CHROME ────────────────────────────────────────────────── */
-.issue-section {
-  max-width: 1440px;
-  margin: 96px auto 0;
-  padding: 0 32px;
-}
-.issue-section__head {
-  display: flex; justify-content: space-between; align-items: baseline;
-  gap: 24px;
-  padding-bottom: 24px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--ge-rule);
-}
-.issue-section__heading {
-  display: flex; align-items: baseline; gap: 18px;
-  flex-wrap: wrap;
-}
-.issue-section__num {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ge-gold);
-  letter-spacing: 0.12em;
-}
-.issue-section__name {
-  font-family: var(--serif);
-  font-weight: 800;
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  margin: 0;
-  font-variation-settings: "opsz" 144;
-}
-.issue-section__blurb {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 1.4;
-  color: var(--ge-fg-dim);
-  max-width: 480px;
+  color: var(--t-3);
   text-align: right;
-  margin: 0;
 }
-@media (max-width: 720px) {
-  .issue-section__head { flex-direction: column; align-items: flex-start; }
-  .issue-section__blurb { text-align: left; }
-}
+.masthead__meta strong { color: var(--t-1); font-weight: 500; }
 
-/* ─── WIDE SCROLLER ─────────────────────────────────────────────────── */
-.scroller {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(380px, 28%);
-  gap: 24px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  padding: 4px 4px 24px 4px;
-  margin: 0 -4px;
-}
-.scroller::-webkit-scrollbar { height: 6px; }
-.scroller::-webkit-scrollbar-track { background: transparent; }
-.scroller::-webkit-scrollbar-thumb { background: var(--ge-rule-strong); border-radius: 3px; }
-
-/* ─── ISSUE CARDS ───────────────────────────────────────────────────── */
-.issue-card {
+/* ─── COVER SPREAD (the magazine starts here) ──────────────────── */
+.cover-spread {
   position: relative;
-  scroll-snap-align: start;
-  background: var(--ge-bg-2);
-  border-radius: 16px;
-  overflow: hidden;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  transition: transform .25s ease, box-shadow .25s ease;
+  background: var(--bg);
+  border-top: 4px double var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+  padding: 0;
 }
-.issue-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 32px 64px -32px rgba(0, 0, 0, 0.5);
-}
-.issue-card__media {
+.cover-spread__media {
   position: relative;
-  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: clamp(440px, 62vh, 720px);
   overflow: hidden;
-  background: var(--ge-bg-3);
+  background: var(--bg-2);
 }
-.issue-card__media img,
-.issue-card__media video {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform .6s ease;
+.cover-spread__media img,
+.cover-spread__media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
 }
-.issue-card:hover .issue-card__media img,
-.issue-card:hover .issue-card__media video {
-  transform: scale(1.04);
-}
-.issue-card__media-scrim {
-  position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(180deg, rgba(0,0,0,0.0) 50%, rgba(10,14,26,0.85) 100%);
+.cover-spread__media-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5,9,20,0.0) 60%, rgba(5,9,20,0.65) 100%),
+    linear-gradient(90deg, rgba(5,9,20,0.45) 0%, rgba(5,9,20,0.0) 50%);
   pointer-events: none;
 }
-.issue-card__tier {
+.cover-spread__media-kicker {
   position: absolute;
-  top: 16px; left: 16px;
-  z-index: 3;
+  top: 32px; left: 32px;
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: 11px;
   font-weight: 600;
-  padding: 6px 10px;
-  background: rgba(10, 14, 26, 0.7);
-  backdrop-filter: blur(10px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(5, 9, 20, 0.65);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.cover-spread__article {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 80px 48px 96px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  .cover-spread__article { grid-template-columns: 1fr; gap: 48px; padding: 56px 32px 72px; }
+}
+
+.cover-spread__byline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  margin: 0 0 18px;
+}
+.cover-spread__byline strong { color: var(--gold); font-weight: 500; }
+
+.cover-spread__headline {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(60px, 9vw, 140px);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  margin: 0 0 28px;
+  font-variation-settings: "opsz" 144;
+  color: var(--t-1);
+}
+.cover-spread__headline em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.cover-spread__subhead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.32;
+  color: var(--t-2);
+  margin: 0 0 48px;
+  max-width: 640px;
+}
+
+.cover-spread__lede {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.62;
+  color: var(--t-1);
+  letter-spacing: -0.005em;
+}
+.cover-spread__lede p { margin: 0 0 1.2em; }
+.cover-spread__lede p:first-child::first-letter {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 5.2em;
+  float: left;
+  line-height: 0.8;
+  margin: 0.05em 0.08em 0 -0.04em;
+  color: var(--gold);
+  font-variation-settings: "opsz" 144;
+}
+
+.cover-spread__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  padding: 14px 24px;
+  background: var(--gold);
+  color: #050914;
   border-radius: 999px;
-  text-transform: uppercase;
-  color: var(--ge-fg);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: var(--gold-glow);
 }
-.issue-card__tier--vip {
-  background: var(--ge-vip);
-  color: #0a0e1a;
-}
-.issue-card__signal {
-  position: absolute;
-  top: 16px; right: 16px;
-  z-index: 3;
-  display: flex; flex-direction: column; align-items: flex-end;
-  font-family: var(--mono);
-  background: rgba(10, 14, 26, 0.7);
-  backdrop-filter: blur(10px);
-  padding: 8px 12px;
-  border-radius: 10px;
-}
-.issue-card__signal-num {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--ge-gold);
-  line-height: 1;
-}
-.issue-card__signal-label {
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  color: var(--ge-fg-dim);
-  text-transform: uppercase;
-  margin-top: 3px;
-}
-.issue-card__body {
-  padding: 22px 24px 28px;
-  flex: 1;
+.cover-spread__more:hover { transform: translateY(-1px); }
+
+/* ── Cover sidebar (gutter content) ─────────────────────────────── */
+.cover-spread__aside {
+  position: sticky;
+  top: 96px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 36px;
 }
-.issue-card__name {
+@media (max-width: 1000px) { .cover-spread__aside { position: static; } }
+
+.pull-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 1.32;
+  color: var(--t-1);
+  border-left: 3px solid var(--gold);
+  padding: 4px 0 4px 20px;
+  margin: 0;
+}
+.pull-quote::before { content: "\201C"; }
+.pull-quote::after { content: "\201D"; }
+
+.cover-stat-card {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 20px 22px;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(10px);
+}
+.cover-stat-card__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  margin-bottom: 14px;
+}
+.cover-stat-card__row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+}
+.cover-stat-card__row:last-child { border-bottom: 0; }
+.cover-stat-card__k { color: var(--t-3); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+.cover-stat-card__v { color: var(--t-1); font-weight: 500; }
+.cover-stat-card__v strong { color: var(--gold); font-weight: 600; }
+
+/* ─── TABLE OF CONTENTS (front of book) ────────────────────────── */
+.toc {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 80px 32px 96px;
+  border-top: 1px solid var(--paper-rule);
+  border-bottom: 1px solid var(--paper-rule);
+}
+.toc__inner { max-width: 1240px; margin: 0 auto; }
+.toc__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 20px;
+  margin-bottom: 48px;
+}
+.toc__heading {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144;
+}
+.toc__heading em { font-style: italic; font-weight: 600; }
+.toc__sub {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+}
+.toc__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+  row-gap: 0;
+}
+@media (max-width: 800px) { .toc__list { grid-template-columns: 1fr; column-gap: 0; } }
+.toc__item {
+  display: grid;
+  grid-template-columns: 44px 1fr 56px;
+  gap: 16px;
+  padding: 24px 12px 22px;
+  border-bottom: 1px solid var(--paper-rule);
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color .2s;
+  margin-left: -12px; margin-right: -12px;
+  min-width: 0;
+}
+.toc__item > * { min-width: 0; }
+.toc__item:hover { background-color: rgba(0,0,0,0.04); }
+.toc__num {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-soft);
+  letter-spacing: 0.08em;
+}
+.toc__entry {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.toc__entry-section {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+}
+.toc__entry-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+.toc__entry-title em { font-style: italic; font-weight: 500; }
+.toc__entry-deck {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(0,0,0,0.65);
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.toc__page {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: right;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+}
+
+/* ─── FEATURE SPREADS ──────────────────────────────────────────── */
+.spread {
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  padding: 0;
+  background: var(--bg);
+}
+.spread--paper { background: var(--paper); color: var(--ink); }
+.spread__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 96px 48px;
+}
+@media (max-width: 720px) { .spread__inner { padding: 64px 28px; } }
+.spread__folio {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  margin-bottom: 18px;
+}
+.spread--paper .spread__folio { color: rgba(0,0,0,0.55); }
+.spread__folio strong { color: var(--gold); font-weight: 500; }
+.spread--paper .spread__folio strong { color: var(--gold-soft); }
+
+.spread__head {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+  font-variation-settings: "opsz" 144;
+}
+.spread__head em { font-style: italic; font-weight: 600; color: var(--gold); }
+.spread--paper .spread__head em { color: var(--gold-soft); }
+
+.spread__deck {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.42;
+  color: var(--t-2);
+  max-width: 720px;
+  margin: 0 0 56px;
+}
+.spread--paper .spread__deck { color: rgba(0,0,0,0.7); }
+
+/* ── Two-up feature spread (used for On Air This Week) ─────────── */
+.feature-twoup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+@media (max-width: 900px) { .feature-twoup { grid-template-columns: 1fr; gap: 40px; } }
+.feature-twoup__card { display: flex; flex-direction: column; gap: 18px; }
+.feature-twoup__media {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--bg-3);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.feature-twoup__media img { width: 100%; height: 100%; object-fit: cover; }
+.feature-twoup__chip {
+  position: absolute; top: 16px; left: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  background: rgba(5, 9, 20, 0.78);
+  color: var(--gold);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.feature-twoup__title {
   font-family: var(--serif);
   font-weight: 700;
-  font-size: 26px;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.feature-twoup__title em { font-style: italic; font-weight: 500; }
+.feature-twoup__deck {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--t-2);
+  margin: 0;
+}
+.spread--paper .feature-twoup__deck { color: rgba(0,0,0,0.7); }
+.feature-twoup__byline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+}
+.spread--paper .feature-twoup__byline { color: rgba(0,0,0,0.55); }
+.feature-twoup__readmore {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 4px;
+  align-self: flex-start;
+  transition: gap .2s;
+}
+.spread--paper .feature-twoup__readmore { color: var(--gold-soft); border-color: var(--gold-soft); }
+.feature-twoup__readmore:hover { gap: 14px; }
+
+/* ── Three-up feature row (for Just Aired) ─────────────────────── */
+.feature-threeup { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+@media (max-width: 900px) { .feature-threeup { grid-template-columns: 1fr; gap: 32px; } }
+.feature-threeup__card { display: flex; flex-direction: column; gap: 14px; }
+.feature-threeup__media {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--bg-3);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.feature-threeup__media img { width: 100%; height: 100%; object-fit: cover; }
+.feature-threeup__date {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: rgba(5, 9, 20, 0.78);
+  color: var(--t-1);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.feature-threeup__title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 24px;
   line-height: 1.1;
   letter-spacing: -0.015em;
   margin: 0;
-  color: var(--ge-fg);
 }
-.issue-card__headline {
-  font-family: var(--sans);
+.feature-threeup__deck {
+  font-family: var(--serif);
   font-size: 14px;
-  line-height: 1.45;
-  color: var(--ge-fg-dim);
+  line-height: 1.5;
+  color: var(--t-2);
+  margin: 0;
+}
+.spread--paper .feature-threeup__deck { color: rgba(0,0,0,0.65); }
+
+/* ── Departments — back-of-book card grid ──────────────────────── */
+.departments {
+  background: var(--bg);
+  padding: 96px 32px 80px;
+  border-top: 4px double var(--rule-strong);
+}
+.departments__inner { max-width: 1280px; margin: 0 auto; }
+.departments__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 20px;
+  margin-bottom: 48px;
+}
+.departments__title {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.departments__title em { font-style: italic; font-weight: 600; color: var(--gold); }
+.departments__sub {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+}
+.departments__cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--t-1);
+  transition: border-color .2s, color .2s;
+}
+.departments__cta:hover { border-color: var(--gold); color: var(--gold); }
+
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1100px) { .dept-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .dept-grid { grid-template-columns: 1fr; } }
+.dept-card {
+  background: var(--bg-2);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.dept-card:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.5); }
+.dept-card__media { aspect-ratio: 4 / 5; background: var(--bg-3); position: relative; overflow: hidden; }
+.dept-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.dept-card__tier {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: rgba(5, 9, 20, 0.78);
+  color: var(--t-1);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.dept-card__tier--vip { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #050914; }
+.dept-card__body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.dept-card__name {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.dept-card__head {
+  font-size: 13px;
+  line-height: 1.42;
+  color: var(--t-2);
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.issue-card__meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.dept-card__meta {
+  display: flex; gap: 10px; align-items: center;
   margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid var(--ge-rule);
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ge-fg-dim);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.issue-card__meta-divider {
-  width: 3px; height: 3px; border-radius: 50%; background: var(--ge-fg-faint);
-}
-
-/* ─── ROW LAYOUT (Just Aired) ───────────────────────────────────────── */
-.row-layout {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-@media (max-width: 1100px) { .row-layout { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .row-layout { grid-template-columns: 1fr; } }
-
-.row-card {
-  position: relative;
-  background: var(--ge-bg-2);
-  border-radius: 14px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .25s ease;
-}
-.row-card:hover { transform: translateY(-3px); }
-.row-card__media {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-.row-card__media img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.row-card__date {
-  position: absolute;
-  top: 12px; left: 12px;
-  z-index: 3;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-  padding: 5px 9px;
-  background: rgba(10, 14, 26, 0.78);
-  backdrop-filter: blur(8px);
-  border-radius: 999px;
+  letter-spacing: 0.08em;
+  color: var(--t-3);
   text-transform: uppercase;
-  color: var(--ge-fg);
 }
-.row-card__body {
-  padding: 18px 20px 20px;
-}
-.row-card__name {
-  font-family: var(--serif);
-  font-weight: 700;
-  font-size: 19px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin: 0 0 6px 0;
-}
-.row-card__show {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ge-fg-dim);
-}
+.dept-card__meta-divider { width: 3px; height: 3px; border-radius: 50%; background: var(--t-4); }
 
-/* ─── FOOTER (agent-readable layer) ─────────────────────────────────── */
-.issue-foot {
-  margin-top: 128px;
-  padding: 80px 32px 64px;
-  border-top: 1px solid var(--ge-rule);
-  background: var(--ge-bg-2);
+/* ─── COLOPHON FOOTER ──────────────────────────────────────────── */
+.colophon {
+  background: var(--bg-2);
+  border-top: 1px solid var(--rule);
+  padding: 80px 32px 56px;
 }
-.issue-foot__inner {
-  max-width: 1440px;
-  margin: 0 auto;
+.colophon__inner {
+  max-width: 1240px; margin: 0 auto;
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 48px;
 }
-@media (max-width: 900px) { .issue-foot__inner { grid-template-columns: 1fr; gap: 36px; } }
-.issue-foot__col h3 {
+@media (max-width: 900px) { .colophon__inner { grid-template-columns: 1fr; gap: 36px; } }
+.colophon__col h3 {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ge-gold);
-  margin: 0 0 14px 0;
   font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 14px;
 }
-.issue-foot__col p, .issue-foot__col li {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--ge-fg-dim);
-  margin: 0 0 8px 0;
+.colophon__col p, .colophon__col li {
+  font-size: 14px; line-height: 1.55; color: var(--t-2); margin: 0 0 8px;
 }
-.issue-foot__col ul { padding: 0; list-style: none; }
-.issue-foot__col a { color: var(--ge-fg); border-bottom: 1px solid var(--ge-rule-strong); transition: color .2s, border-color .2s; }
-.issue-foot__col a:hover { color: var(--ge-gold); border-color: var(--ge-gold); }
-.issue-foot__agentbadge {
+.colophon__col ul { padding: 0; list-style: none; }
+.colophon__col a { color: var(--t-1); border-bottom: 1px solid var(--rule-strong); transition: color .2s, border-color .2s; }
+.colophon__col a:hover { color: var(--gold); border-color: var(--gold); }
+.colophon__badge {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 6px 12px;
-  background: rgba(244, 200, 66, 0.1);
-  border: 1px solid rgba(244, 200, 66, 0.25);
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
   border-radius: 999px;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--ge-gold);
+  letter-spacing: 0.14em;
+  color: var(--gold);
   text-transform: uppercase;
   margin-bottom: 14px;
 }
-.issue-foot__agentbadge::before {
-  content: ""; width: 6px; height: 6px; background: var(--ge-gold); border-radius: 50%;
+.colophon__badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+.colophon__credits {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--t-4);
+  max-width: 1240px;
+  margin-left: auto; margin-right: auto;
 }
 
-/* ─── LOADING STATE ─────────────────────────────────────────────────── */
-.issue-loading {
-  max-width: 1280px;
-  margin: 100px auto;
-  padding: 40px 32px;
+/* ─── LOADING / ERROR ──────────────────────────────────────────── */
+.issue-loading, .issue-error {
+  background: var(--bg);
+  padding: 120px 32px;
   text-align: center;
   font-family: var(--mono);
   font-size: 13px;
   letter-spacing: 0.14em;
-  color: var(--ge-fg-dim);
+  color: var(--t-3);
   text-transform: uppercase;
 }
-.issue-loading-dots::after {
-  content: "·"; animation: dots 1.4s steps(4, end) infinite;
-  display: inline-block; min-width: 1.4ch; text-align: left;
-}
-@keyframes dots {
-  0%, 25% { content: "·"; }
-  50% { content: "··"; }
-  75% { content: "···"; }
-  100% { content: ""; }
-}
-
-/* ─── ERROR / FALLBACK ──────────────────────────────────────────────── */
-.issue-error {
-  max-width: 720px;
-  margin: 100px auto;
-  padding: 48px 32px;
-  text-align: center;
-}
-.issue-error h2 { font-family: var(--serif); font-size: 36px; margin: 0 0 12px 0; }
-.issue-error p { color: var(--ge-fg-dim); font-size: 16px; line-height: 1.5; margin: 0 0 24px 0; }
+.issue-error h2 { font-family: var(--serif); font-size: 36px; margin: 0 0 12px; color: var(--t-1); text-transform: none; letter-spacing: 0; }
+.issue-error p { color: var(--t-2); font-size: 16px; line-height: 1.5; margin: 0 0 24px; text-transform: none; letter-spacing: 0; }
 .issue-error a {
-  display: inline-block;
-  padding: 12px 24px;
-  background: var(--ge-gold);
-  color: #0a0e1a;
-  border-radius: 999px;
-  font-weight: 600;
+  display: inline-block; padding: 12px 24px;
+  background: var(--gold); color: #050914;
+  border-radius: 999px; font-weight: 600;
+  text-transform: none; letter-spacing: normal;
 }
 
-/* ─── REDUCED MOTION ────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -653,386 +899,540 @@ a { color: inherit; text-decoration: none; }
 </head>
 <body>
 
-  <header class="ge-header" id="geHeader">
-    <a href="/" class="ge-header__logo">
-      <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon"><div class="ge-header__logo-text"><span class="ge-header__logo-cos">ConversationOS</span><div class="ge-header__logo-ge"><span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span></div></div>
-    </a>
-    <nav class="ge-header__nav" id="geNav">
-      <a href="/directory/">Directory</a>
-      <a href="https://guestengine.live/shows/">Shows</a>
-      <a href="https://guestengine.live/#pricing">Pricing</a>
-      <a href="https://guestengine.live/#network">Network</a>
-      <a href="https://guestengine.live/signal/">Signal</a>
-      <a href="https://guestengine.live/tour/">Tour</a>
-      <a href="https://guestengine.live/why/">Why</a>
-      <a href="https://guestengine.live/join/">Join</a>
-    </nav>
-    <div class="ge-header__actions">
-      <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
-    </div>
-    <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <!-- ─── MASTHEAD ────────────────────────────────────────────────── -->
-  <section class="issue-masthead">
-    <div class="issue-masthead__topline">
-      <span class="issue-masthead__publisher">CONVERSATIONOS · GUEST ENGINE</span>
-      <span class="issue-masthead__live" id="liveIndicator">
-        <span class="issue-masthead__live-dot"></span>
-        <span id="liveLabel">CHECKING SHOW STATUS</span>
-      </span>
-    </div>
-    <h1 class="issue-masthead__title">The <em>Issue</em></h1>
-    <p class="issue-masthead__deck">
-      A weekly editorial of the people on our shows. The cover story, who's on air, who just shipped, and who hosts should be booking next.
-    </p>
-    <div class="issue-masthead__bar">
-      <div id="issueMeta">
-        <span id="issueNumber">ISSUE —</span>
-        <span style="color: var(--ge-fg-faint); margin: 0 10px;">·</span>
-        <span id="issueGuests">— GUESTS</span>
-        <span style="color: var(--ge-fg-faint); margin: 0 10px;">·</span>
-        <span id="issueRefresh">UPDATED MONDAYS · 04:00 ET</span>
-      </div>
-      <div class="issue-masthead__actions">
-        <a href="/directory/all/" class="issue-masthead__action">Search all guests</a>
+<header class="ge-header" id="geHeader">
+  <a href="/" class="ge-header__logo">
+    <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon">
+    <div class="ge-header__logo-text">
+      <span class="ge-header__logo-cos">ConversationOS</span>
+      <div class="ge-header__logo-ge">
+        <span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span>
       </div>
     </div>
-  </section>
+  </a>
+  <nav class="ge-header__nav" id="geNav">
+    <a href="/directory/">Directory</a>
+    <a href="https://guestengine.live/shows/">Shows</a>
+    <a href="https://guestengine.live/#pricing">Pricing</a>
+    <a href="https://guestengine.live/#network">Network</a>
+    <a href="https://guestengine.live/signal/">Signal</a>
+    <a href="https://guestengine.live/tour/">Tour</a>
+    <a href="https://guestengine.live/why/">Why</a>
+    <a href="https://guestengine.live/join/">Join</a>
+  </nav>
+  <div class="ge-header__actions">
+    <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
+  </div>
+  <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
-  <!-- ─── BODY (issue-main is replaced by JS once data loads) ─────── -->
-  <main id="issueMain">
-    <div class="issue-loading">
-      <span>Building this week's issue<span class="issue-loading-dots"></span></span>
+<!-- ════════════════════════════════════════════════════════════════
+     TOP HERO — restored from original /directory
+     Brand promise lives here. Magazine begins below the fold.
+     ════════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__video-wrap">
+    <video id="hero-video" class="hero__video" autoplay muted loop playsinline preload="auto" src="/assets/heroes/directory-hero.mp4"></video>
+    <div class="hero__overlay"></div>
+  </div>
+  <button class="hero__unmute" id="heroUnmute" aria-label="Unmute video">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  </button>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Authority Index — 2026 Season</div>
+    <h1>THE PEOPLE BEHIND<br><span class="gold">THE CONVERSATIONS.</span></h1>
+    <p class="hero-sub">Real guests. Real authority. Permanently indexed — complete with episode, signal brief, and social proof.</p>
+    <div class="hero-cta">
+      <a href="#issue" class="btn-primary">Read this week's issue →</a>
+      <a href="/directory/all/" class="btn-secondary">Search all guests</a>
     </div>
-  </main>
+  </div>
+</section>
 
-  <!-- ─── FOOTER ─────────────────────────────────────────────────── -->
-  <footer class="issue-foot">
-    <div class="issue-foot__inner">
-      <div class="issue-foot__col">
-        <span class="issue-foot__agentbadge">Built for agents</span>
-        <p>Every page on guestengine.live is paired with a structured, machine-readable view. Hosts, agents, and AI assistants can ingest the issue without scraping.</p>
-      </div>
-      <div class="issue-foot__col">
-        <h3>Agent endpoints</h3>
-        <ul>
-          <li><a href="https://app.conversationos.live/api/guest-marketplace/issue/current.json">/issue/current.json</a></li>
-          <li><a href="https://app.conversationos.live/api/guest-marketplace/issue/current.md">/issue/current.md</a></li>
-          <li><a href="https://app.conversationos.live/api/guest-marketplace/directory">/directory (all 200)</a></li>
-        </ul>
-      </div>
-      <div class="issue-foot__col">
-        <h3>For hosts</h3>
-        <ul>
-          <li><a href="/directory/all/">Search all guests</a></li>
-          <li><a href="https://guestengine.live/shows/">All shows on the network</a></li>
-          <li><a href="https://guestengine.live/join/">Pitch your show</a></li>
-        </ul>
-      </div>
+<!-- ════════════════════════════════════════════════════════════════
+     MASTHEAD
+     Issue marker — fold between the brand promise and the magazine.
+     ════════════════════════════════════════════════════════════════ -->
+<section class="masthead" id="issue">
+  <div class="masthead__inner">
+    <div class="masthead__pub">CONVERSATIONOS · GUEST ENGINE</div>
+    <div class="masthead__title-wrap">
+      <div class="masthead__title">The <em>Issue</em></div>
     </div>
-  </footer>
+    <div class="masthead__meta" id="mastheadMeta">
+      <strong id="issueNumLine">ISSUE —</strong><br>
+      <span id="issueDateLine">Loading…</span>
+    </div>
+  </div>
+</section>
 
-  <script>
-  // ─────────────────────────────────────────────────────────────────────
-  // THE ISSUE — runtime
-  //
-  // Fetches https://app.conversationos.live/api/guest-marketplace/issue/current
-  // and renders the magazine layout. Uses sectional treatment hints from the
-  // server response, so adding a new section is a server-side change only.
-  //
-  // Falls back to the legacy directory endpoint if the issue endpoint isn't
-  // live yet (so we don't ship a broken page during the API rollout).
-  // ─────────────────────────────────────────────────────────────────────
+<!-- The magazine renders here once the API responds -->
+<main id="issueMain">
+  <div class="issue-loading">Building this week's issue…</div>
+</main>
 
-  const ISSUE_URL = "https://app.conversationos.live/api/guest-marketplace/issue/current";
-  const FALLBACK_URL = "https://app.conversationos.live/api/guest-marketplace/directory?limit=50&page=1";
-  const GUEST_PROFILE = (slug) => `https://guestengine.live/profile/${slug}`;
+<!-- ════════════════════════════════════════════════════════════════
+     COLOPHON — credits + agent endpoints
+     ════════════════════════════════════════════════════════════════ -->
+<footer class="colophon">
+  <div class="colophon__inner">
+    <div class="colophon__col">
+      <span class="colophon__badge">Built for agents</span>
+      <p>Every spread of The Issue is paired with a structured, machine-readable view. Hosts, agents, and AI assistants can ingest the magazine without scraping.</p>
+    </div>
+    <div class="colophon__col">
+      <h3>Agent endpoints</h3>
+      <ul>
+        <li><a href="https://app.conversationos.live/api/guest-marketplace/issue/current.json">/issue/current.json</a></li>
+        <li><a href="https://app.conversationos.live/api/guest-marketplace/issue/current.md">/issue/current.md</a></li>
+        <li><a href="https://app.conversationos.live/api/guest-marketplace/directory">/directory (all 200)</a></li>
+      </ul>
+    </div>
+    <div class="colophon__col">
+      <h3>For hosts</h3>
+      <ul>
+        <li><a href="/directory/all/">Search all guests</a></li>
+        <li><a href="https://guestengine.live/shows/">All shows on the network</a></li>
+        <li><a href="https://guestengine.live/join/">Pitch your show</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon__credits">
+    <span>Edited by Sophia Grant · ConversationOS Editorial</span>
+    <span>Updated Mondays · 04:00 ET</span>
+  </div>
+</footer>
 
-  // ─── Helpers ─────────────────────────────────────────────────────────
+<script>
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  THE ISSUE — runtime renderer                                     ║
+// ║  Pulls the issue from app.conversationos.live and renders a       ║
+// ║  proper magazine layout: cover spread + TOC + feature spreads     ║
+// ║  + back-of-book departments. Story-driven, not card-driven.       ║
+// ╚══════════════════════════════════════════════════════════════════╝
 
-  function escapeHTML(s) {
-    if (s == null) return "";
-    return String(s).replace(/[&<>"]/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;",
-    }[c]));
+const ISSUE_URL = "https://app.conversationos.live/api/guest-marketplace/issue/current";
+const FALLBACK_URL = "https://app.conversationos.live/api/guest-marketplace/directory?limit=50&page=1";
+const PROFILE = (slug) => `https://guestengine.live/profile/${slug}`;
+
+// ── Issue cover video overrides ─────────────────────────────────────
+// Veo-generated cinematic establishing shots, served as static assets
+// from this repo (Railway). Keyed by issue number + guest slug. When a
+// match exists, the cover spread uses this video instead of the guest's
+// generic living-portrait clip. Phase 2 moves this to the API.
+const COVER_VIDEO_OVERRIDES = {
+  "04.27|ej-snyder": "/assets/issue/ej-snyder-cover-2604.mp4",
+};
+
+// ─── Helpers ─────────────────────────────────────────────────────────
+function escapeHTML(s) {
+  if (s == null) return "";
+  return String(s).replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+}
+function fmtDate(iso) {
+  if (!iso) return "";
+  try { return new Date(iso).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}).toUpperCase(); }
+  catch { return ""; }
+}
+function fmtMonth(iso) {
+  if (!iso) return "";
+  try { return new Date(iso).toLocaleDateString("en-US",{month:"short",year:"numeric"}).toUpperCase(); }
+  catch { return ""; }
+}
+function relativeDays(iso) {
+  if (!iso) return "";
+  const days = Math.round((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (days === 0) return "TODAY";
+  if (days === 1) return "1 DAY AGO";
+  if (days < 7) return `${days} DAYS AGO`;
+  if (days < 30) return `${Math.round(days/7)} WEEK${Math.round(days/7)===1?"":"S"} AGO`;
+  return fmtMonth(iso);
+}
+function firstSentence(text) {
+  if (!text) return "";
+  const s = String(text).split(/(?<=[.!?])\s+/)[0];
+  return s && s.length > 25 ? s : "";
+}
+
+// ─── Sophia auto-draft (client-side; matches the editorial voice) ───
+//
+// In Phase 2 this will move server-side to /api/issue/feature/{slug} and
+// produce a proper drafted feature with headlines + leading paragraph.
+// For now: rule-based composition from the bio + key insights surfaces a
+// proper editorial feature without bloating the API surface.
+//
+function draftFeature(g) {
+  const name = g.guestName || "";
+  const last = name.split(" ").pop() || name;
+
+  // Headline rule:
+  //   - If headline contains a clear ALL-CAPS hook (e.g. "Skullcrusher"),
+  //     use that as the magazine cover headline
+  //   - Else use the guest's own short-form authority noun if available
+  //   - Else fall back to last name in italics
+  let headline = last;
+  let italicWord = last;
+  const bio = g.bio || "";
+  const hl = (g.headline || "").trim();
+  // Match nicknames in quotes ("Skullcrusher") — search both bio and headline.
+  // The bio is checked first because nicknames usually live in the opening
+  // sentence ("EJ \"Skullcrusher\" Snyder is a 25-year decorated…").
+  const nickRe = /"([A-Z][A-Za-z][^"]{2,38})"/;
+  const nickMatch = bio.match(nickRe) || hl.match(nickRe);
+  if (nickMatch) { headline = nickMatch[1]; italicWord = nickMatch[1]; }
+  else if (last.length >= 3 && last.length <= 16) { headline = last; italicWord = last; }
+
+  // Subhead: take the most cinematic sentence available
+  const candidates = [
+    /(\d+\s+days?\s+naked[^.]+\.)/i,
+    /(\d+\s+stitches[^.]+\.)/i,
+    /(most decorated[^.]+\.)/i,
+    /(over\s+\d+[^.]+\.)/i,
+    /(serial entrepreneur[^.]+\.)/i,
+    /(was forged through[^.]+\.)/i,
+  ];
+  let subhead = "";
+  for (const re of candidates) {
+    const m = bio.match(re);
+    if (m) { subhead = m[1]; break; }
+  }
+  if (!subhead) subhead = firstSentence(bio);
+  if (subhead.length > 220) subhead = subhead.slice(0, 217) + "…";
+
+  // Lede: first 2-3 sentences of bio, or headline + first paragraph
+  let lede = "";
+  if (bio) {
+    const paragraphs = bio.split(/\n\s*\n+/);
+    lede = paragraphs[0] || bio.slice(0, 600);
+    // Trim to ~600 chars at sentence boundary
+    if (lede.length > 700) {
+      const cutoff = lede.slice(0, 700).lastIndexOf(". ");
+      if (cutoff > 200) lede = lede.slice(0, cutoff + 1);
+    }
   }
 
-  function formatDate(iso) {
-    if (!iso) return "";
+  // Pull quote: prefer pullQuote, fall back to a key insight if any present
+  const pq = g.pullQuote || "";
+
+  return { headline, italicWord, subhead, lede, pullQuote: pq };
+}
+
+// ─── Renderers ───────────────────────────────────────────────────────
+
+function renderCoverSpread(cover, issue) {
+  if (!cover) return "";
+  const f = draftFeature(cover);
+  const photo = cover.headshotUrl || "";
+  const overrideKey = `${issue.issueNumber}|${cover.slug}`;
+  const overrideVideo = COVER_VIDEO_OVERRIDES[overrideKey];
+  const video = overrideVideo || cover.livingPortraitVideoUrl || "";
+  const media = video
+    ? `<video autoplay muted loop playsinline poster="${escapeHTML(photo)}"><source src="${escapeHTML(video)}" type="video/mp4"></video>`
+    : `<img src="${escapeHTML(photo)}" alt="${escapeHTML(cover.guestName)}" loading="eager">`;
+
+  // Headline rendering: italicize the matched word
+  let headlineHTML = `<em>${escapeHTML(f.headline)}.</em>`;
+  if (f.headline === cover.guestName.split(" ").pop()) {
+    headlineHTML = `<em>${escapeHTML(f.headline)}.</em>`;
+  }
+
+  const ledeP = f.lede ? `<p>${escapeHTML(f.lede)}</p>` : `<p>${escapeHTML(cover.headline || "")}</p>`;
+  const pull = f.pullQuote ? `<blockquote class="pull-quote">${escapeHTML(f.pullQuote)}</blockquote>` : "";
+
+  const stats = `
+    <div class="cover-stat-card">
+      <div class="cover-stat-card__label">At a glance</div>
+      ${cover.tier ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Tier</span><span class="cover-stat-card__v"><strong>${escapeHTML(cover.tier.toUpperCase())}</strong></span></div>` : ""}
+      ${cover.signalScore != null ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Signal</span><span class="cover-stat-card__v"><strong>${cover.signalScore}</strong></span></div>` : ""}
+      ${cover.appearanceCount ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Appearances</span><span class="cover-stat-card__v">${cover.appearanceCount}</span></div>` : ""}
+      ${cover.latestAppearanceDate ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Latest</span><span class="cover-stat-card__v">${fmtMonth(cover.latestAppearanceDate)}</span></div>` : ""}
+    </div>
+  `;
+
+  return `
+    <article class="cover-spread">
+      <div class="cover-spread__media">
+        ${media}
+        <div class="cover-spread__media-scrim"></div>
+        <div class="cover-spread__media-kicker">Issue ${escapeHTML(issue.issueNumber || "")} · Cover Story</div>
+      </div>
+      <div class="cover-spread__article">
+        <div>
+          <p class="cover-spread__byline">By <strong>Sophia Grant</strong> · ConversationOS Editorial · ${fmtDate(issue.issueDate)}</p>
+          <h1 class="cover-spread__headline">${headlineHTML}</h1>
+          <p class="cover-spread__subhead">${escapeHTML(f.subhead)}</p>
+          <div class="cover-spread__lede">${ledeP}</div>
+          <a href="${PROFILE(cover.slug)}" class="cover-spread__more">Read the full feature →</a>
+        </div>
+        <aside class="cover-spread__aside">
+          ${pull}
+          ${stats}
+        </aside>
+      </div>
+    </article>
+  `;
+}
+
+function renderTOC(issue) {
+  if (!issue.cover && (!issue.sections || !issue.sections.length)) return "";
+
+  const items = [];
+  let pageNum = 12;
+  if (issue.cover) {
+    items.push({
+      kicker: "COVER STORY",
+      title: issue.cover.guestName,
+      deck: issue.cover.headline || "",
+      page: String(pageNum),
+      href: PROFILE(issue.cover.slug),
+    });
+    pageNum += 6;
+  }
+  for (const section of issue.sections || []) {
+    const featured = section.guests && section.guests[0];
+    if (!featured) continue;
+    items.push({
+      kicker: section.name.toUpperCase(),
+      title: featured.guestName,
+      deck: section.blurb,
+      page: String(pageNum),
+      href: PROFILE(featured.slug),
+    });
+    pageNum += 4;
+  }
+
+  if (!items.length) return "";
+
+  return `
+    <section class="toc">
+      <div class="toc__inner">
+        <div class="toc__head">
+          <h2 class="toc__heading">In this <em>Issue</em></h2>
+          <span class="toc__sub">Table of Contents · ${items.length} stories</span>
+        </div>
+        <div class="toc__list">
+          ${items.map((it, i) => `
+            <a class="toc__item" href="${escapeHTML(it.href)}">
+              <span class="toc__num">${String(i + 1).padStart(2, "0")}</span>
+              <div class="toc__entry">
+                <span class="toc__entry-section">${escapeHTML(it.kicker)}</span>
+                <span class="toc__entry-title">${escapeHTML(it.title)}</span>
+                ${it.deck ? `<span class="toc__entry-deck">${escapeHTML(it.deck)}</span>` : ""}
+              </div>
+              <span class="toc__page">P. ${escapeHTML(it.page)}</span>
+            </a>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderTwoUpFeature(section, paper) {
+  const guests = (section.guests || []).slice(0, 2);
+  if (guests.length < 1) return "";
+  return `
+    <section class="spread${paper ? " spread--paper" : ""}">
+      <div class="spread__inner">
+        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> · this week</div>
+        <h2 class="spread__head">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
+        <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
+        <div class="feature-twoup">
+          ${guests.map((g) => `
+            <a class="feature-twoup__card" href="${PROFILE(g.slug)}">
+              <div class="feature-twoup__media">
+                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+                ${g.tier ? `<span class="feature-twoup__chip">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
+              </div>
+              <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} · ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
+              <h3 class="feature-twoup__title">${escapeHTML(g.guestName)}</h3>
+              <p class="feature-twoup__deck">${escapeHTML(g.headline || "")}</p>
+              <span class="feature-twoup__readmore">Read the feature →</span>
+            </a>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderThreeUpFeature(section) {
+  const guests = (section.guests || []).slice(0, 3);
+  if (guests.length < 1) return "";
+  return `
+    <section class="spread spread--paper">
+      <div class="spread__inner">
+        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> · last week</div>
+        <h2 class="spread__head">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
+        <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
+        <div class="feature-threeup">
+          ${guests.map((g) => `
+            <a class="feature-threeup__card" href="${PROFILE(g.slug)}">
+              <div class="feature-threeup__media">
+                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+                ${g.latestAppearanceDate ? `<span class="feature-threeup__date">${escapeHTML(relativeDays(g.latestAppearanceDate))}</span>` : ""}
+              </div>
+              <h3 class="feature-threeup__title">${escapeHTML(g.guestName)}</h3>
+              <p class="feature-threeup__deck">${escapeHTML(firstSentence(g.headline) || g.headline || "")}</p>
+            </a>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderDepartments(section) {
+  const guests = (section.guests || []).slice(0, 8);
+  if (guests.length < 1) return "";
+  return `
+    <section class="departments">
+      <div class="departments__inner">
+        <div class="departments__head">
+          <div>
+            <span class="departments__sub">Departments · For Hosts</span>
+            <h2 class="departments__title">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
+          </div>
+          <a href="/directory/all/" class="departments__cta">Browse all 200 →</a>
+        </div>
+        <div class="dept-grid">
+          ${guests.map((g) => {
+            const tierClass = (g.tier || "").toLowerCase() === "vip" ? " dept-card__tier--vip" : "";
+            const meta = [
+              g.signalScore ? `Signal ${g.signalScore}` : null,
+              g.productSlug === "center-stage" ? "Center Stage" : g.productSlug === "community-corner" ? "Community Corner" : null,
+            ].filter(Boolean);
+            const metaHTML = meta.map((m, i) => i === 0 ? m : `<span class="dept-card__meta-divider"></span>${m}`).join("");
+            return `
+              <a class="dept-card" href="${PROFILE(g.slug)}">
+                <div class="dept-card__media">
+                  <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+                  ${g.tier ? `<span class="dept-card__tier${tierClass}">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
+                </div>
+                <div class="dept-card__body">
+                  <h3 class="dept-card__name">${escapeHTML(g.guestName)}</h3>
+                  <p class="dept-card__head">${escapeHTML(g.headline || "")}</p>
+                  ${metaHTML ? `<div class="dept-card__meta">${metaHTML}</div>` : ""}
+                </div>
+              </a>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// ─── Boot ────────────────────────────────────────────────────────────
+
+function renderIssue(issue) {
+  // Update masthead metadata
+  document.getElementById("issueNumLine").textContent = `ISSUE ${issue.issueNumber || "—"}`;
+  document.getElementById("issueDateLine").textContent = `${issue.totalGuests || 0} GUESTS · WEEK OF ${fmtDate(issue.issueDate)}`;
+
+  // JSON-LD
+  if (issue.cover) {
     try {
-      const d = new Date(iso);
-      return d.toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase();
-    } catch { return ""; }
-  }
-
-  function relativeDays(iso) {
-    if (!iso) return "";
-    const now = Date.now();
-    const then = new Date(iso).getTime();
-    const days = Math.round((now - then) / 86_400_000);
-    if (days === 0) return "TODAY";
-    if (days === 1) return "1 DAY AGO";
-    if (days < 7) return `${days} DAYS AGO`;
-    if (days < 30) return `${Math.round(days / 7)} WEEK${Math.round(days/7)===1?"":"S"} AGO`;
-    if (days < 365) return formatDate(iso);
-    return formatDate(iso);
-  }
-
-  function pickPullQuote(g) {
-    if (g.pullQuote) return g.pullQuote;
-    if (g.bio) {
-      // First sentence of bio if it's not generic
-      const first = String(g.bio).split(/(?<=[.!?])\s+/)[0];
-      if (first && first.length > 30 && !/appeared on Center Stage/i.test(first)) {
-        return first;
-      }
-    }
-    return g.headline || "";
-  }
-
-  // ─── Live status (from MITL show schedule) ───────────────────────────
-
-  function refreshLiveIndicator() {
-    // Show is M-F 09:00-10:30 ET. Quick eyeball check.
-    const now = new Date();
-    const et = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
-    const day = et.getDay(); // 0 Sun .. 6 Sat
-    const minutes = et.getHours() * 60 + et.getMinutes();
-    const onAir = day >= 1 && day <= 5 && minutes >= 540 && minutes <= 630;
-    const el = document.getElementById("liveIndicator");
-    const lbl = document.getElementById("liveLabel");
-    if (onAir) {
-      el.classList.add("issue-masthead__live--on");
-      lbl.textContent = "ON AIR NOW";
-    } else {
-      el.classList.remove("issue-masthead__live--on");
-      lbl.textContent = "OFF AIR";
-    }
-  }
-
-  // ─── Renderers ───────────────────────────────────────────────────────
-
-  function renderCover(cover) {
-    if (!cover) return "";
-    const photo = cover.headshotUrl || "";
-    const video = cover.livingPortraitVideoUrl || "";
-    const media = video
-      ? `<video autoplay muted loop playsinline poster="${escapeHTML(photo)}"><source src="${escapeHTML(video)}" type="video/mp4"></video>`
-      : `<img src="${escapeHTML(photo)}" alt="${escapeHTML(cover.guestName)}" loading="eager">`;
-    const meta = [
-      cover.tier ? `<strong>${escapeHTML(cover.tier.toUpperCase())}</strong>` : null,
-      cover.signalScore != null ? `Signal <strong>${cover.signalScore}</strong>` : null,
-      cover.appearanceCount ? `${cover.appearanceCount} appearance${cover.appearanceCount === 1 ? "" : "s"}` : null,
-      cover.latestAppearanceDate ? formatDate(cover.latestAppearanceDate) : null,
-    ].filter(Boolean).join('<span class="cover-story__meta-divider"></span>');
-
-    return `
-      <section class="cover-section">
-        <a href="${GUEST_PROFILE(cover.slug)}" class="cover-story" aria-label="Cover Story: ${escapeHTML(cover.guestName)}">
-          <div class="cover-story__media">${media}</div>
-          <div class="cover-story__scrim"></div>
-          <div class="cover-story__content">
-            <div class="cover-story__chip">Cover Story</div>
-            <h2 class="cover-story__title">${escapeHTML(cover.guestName)}</h2>
-            <p class="cover-story__quote">${escapeHTML(pickPullQuote(cover))}</p>
-            <div class="cover-story__meta">${meta}</div>
-            <span class="cover-story__cta">
-              Read the cover story
-              <span class="cover-story__cta-arrow">→</span>
-            </span>
-          </div>
-        </a>
-      </section>
-    `;
-  }
-
-  function renderIssueCard(g) {
-    const photo = g.headshotUrl || "";
-    const tierClass = (g.tier || "").toLowerCase() === "vip" ? " issue-card__tier--vip" : "";
-    const tierBadge = g.tier
-      ? `<div class="issue-card__tier${tierClass}">${escapeHTML(g.tier.toUpperCase())}</div>`
-      : "";
-    const signalBadge = (g.signalScore != null && g.signalScore > 0)
-      ? `<div class="issue-card__signal">
-           <span class="issue-card__signal-num">${g.signalScore}</span>
-           <span class="issue-card__signal-label">Signal</span>
-         </div>`
-      : "";
-    const meta = [
-      g.productSlug === "center-stage" ? "Center Stage" : g.productSlug === "community-corner" ? "Community Corner" : null,
-      g.appearanceCount ? `${g.appearanceCount} appearance${g.appearanceCount === 1 ? "" : "s"}` : null,
-      g.latestAppearanceDate ? formatDate(g.latestAppearanceDate) : null,
-    ].filter(Boolean);
-    const metaHtml = meta.length
-      ? meta.map((m, i) => i === 0 ? m : `<span class="issue-card__meta-divider"></span>${m}`).join("")
-      : "";
-
-    return `
-      <a href="${GUEST_PROFILE(g.slug)}" class="issue-card">
-        <div class="issue-card__media">
-          <img src="${escapeHTML(photo)}" alt="${escapeHTML(g.guestName)}" loading="lazy">
-          <div class="issue-card__media-scrim"></div>
-          ${tierBadge}
-          ${signalBadge}
-        </div>
-        <div class="issue-card__body">
-          <h3 class="issue-card__name">${escapeHTML(g.guestName)}</h3>
-          <p class="issue-card__headline">${escapeHTML(g.headline || "")}</p>
-          ${metaHtml ? `<div class="issue-card__meta">${metaHtml}</div>` : ""}
-        </div>
-      </a>
-    `;
-  }
-
-  function renderRowCard(g) {
-    const photo = g.headshotUrl || "";
-    const dateChip = g.latestAppearanceDate
-      ? `<div class="row-card__date">${relativeDays(g.latestAppearanceDate)}</div>`
-      : "";
-    return `
-      <a href="${GUEST_PROFILE(g.slug)}" class="row-card">
-        <div class="row-card__media">
-          <img src="${escapeHTML(photo)}" alt="${escapeHTML(g.guestName)}" loading="lazy">
-          ${dateChip}
-        </div>
-        <div class="row-card__body">
-          <h3 class="row-card__name">${escapeHTML(g.guestName)}</h3>
-          <div class="row-card__show">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")}</div>
-        </div>
-      </a>
-    `;
-  }
-
-  function renderSection(section, idx) {
-    const num = String(idx + 1).padStart(2, "0");
-    let body = "";
-    switch (section.treatment) {
-      case "row":
-        body = `<div class="row-layout">${section.guests.map(renderRowCard).join("")}</div>`;
-        break;
-      case "wide-scroller":
-      default:
-        body = `<div class="scroller">${section.guests.map(renderIssueCard).join("")}</div>`;
-        break;
-    }
-    return `
-      <section class="issue-section" data-section="${escapeHTML(section.id)}">
-        <div class="issue-section__head">
-          <div class="issue-section__heading">
-            <span class="issue-section__num">№ ${num}</span>
-            <h2 class="issue-section__name">${escapeHTML(section.name)}</h2>
-          </div>
-          <p class="issue-section__blurb">${escapeHTML(section.blurb)}</p>
-        </div>
-        ${body}
-      </section>
-    `;
-  }
-
-  function renderIssue(issue) {
-    document.getElementById("issueNumber").textContent = `ISSUE ${issue.issueNumber}`;
-    document.getElementById("issueGuests").textContent = `${issue.totalGuests} GUESTS`;
-
-    // Update JSON-LD with cover story
-    if (issue.cover) {
       const ld = document.getElementById("issue-jsonld");
-      try {
-        const payload = JSON.parse(ld.textContent);
-        payload.headline = `${issue.cover.guestName} — Issue ${issue.issueNumber}`;
-        payload.dateModified = issue.generatedAt;
-        payload.image = issue.cover.headshotUrl;
-        ld.textContent = JSON.stringify(payload, null, 2);
-      } catch {}
+      const payload = JSON.parse(ld.textContent);
+      payload.headline = `${issue.cover.guestName} — Issue ${issue.issueNumber}`;
+      payload.dateModified = issue.generatedAt;
+      payload.image = issue.cover.headshotUrl;
+      ld.textContent = JSON.stringify(payload, null, 2);
+    } catch {}
+  }
+
+  // Build the magazine
+  let html = renderCoverSpread(issue.cover, issue);
+  html += renderTOC(issue);
+  // Section ordering: On Air This Week → Just Aired → For Hosts (departments)
+  const sections = issue.sections || [];
+  const onAir = sections.find((s) => s.id === "on-air");
+  const justAired = sections.find((s) => s.id === "just-aired");
+  const forHosts = sections.find((s) => s.id === "for-hosts");
+  if (onAir) html += renderTwoUpFeature(onAir, false);
+  if (justAired) html += renderThreeUpFeature(justAired);
+  if (forHosts) html += renderDepartments(forHosts);
+  // Render any other sections as twoup features (future-proof)
+  for (const s of sections) {
+    if (s.id === "on-air" || s.id === "just-aired" || s.id === "for-hosts") continue;
+    html += renderTwoUpFeature(s, false);
+  }
+
+  document.getElementById("issueMain").innerHTML = html;
+}
+
+function buildFallbackIssue(directory) {
+  const guests = (directory.guests || []).map((g) => ({
+    ...g,
+    appearanceCount: (() => {
+      try { const a = typeof g.pastAppearances === "string" ? JSON.parse(g.pastAppearances) : g.pastAppearances; return Array.isArray(a) ? a.length : 0; } catch { return 0; }
+    })(),
+    latestAppearanceDate: (() => {
+      try { const a = typeof g.pastAppearances === "string" ? JSON.parse(g.pastAppearances) : g.pastAppearances;
+        if (!Array.isArray(a) || !a.length) return null;
+        return a.sort((x,y) => (y.date||"").localeCompare(x.date||""))[0]?.date || null; } catch { return null; }
+    })(),
+  }));
+  const cover = guests.find((g) => g.tier === "vip" && g.headshotUrl) || guests[0];
+  return {
+    issueNumber: "current",
+    issueDate: new Date().toISOString().slice(0, 10),
+    generatedAt: new Date().toISOString(),
+    totalGuests: directory.total || guests.length,
+    cover,
+    sections: [
+      { id: "on-air", name: "On Air This Week", blurb: "Just shipped, just aired, or going live in the next seven days.", treatment: "wide-scroller", guests: guests.filter(g => g.tier === "vip").slice(0, 2) },
+      { id: "just-aired", name: "Just Aired", blurb: "The latest conversations on Mornings in the Lab.", treatment: "row", guests: guests.slice(0, 3) },
+      { id: "for-hosts", name: "For Hosts", blurb: "Booking a guest? Start here.", treatment: "wide-scroller", guests: guests.filter(g => g.tier === "vip" || g.tier === "featured").slice(0, 8) },
+    ],
+  };
+}
+
+async function loadIssue() {
+  try {
+    const r = await fetch(ISSUE_URL, { headers: { Accept: "application/json" } });
+    if (r.ok) {
+      const issue = await r.json();
+      renderIssue(issue);
+      return;
     }
+  } catch {}
+  try {
+    const r = await fetch(FALLBACK_URL);
+    if (r.ok) {
+      const data = await r.json();
+      renderIssue(buildFallbackIssue(data));
+      return;
+    }
+  } catch {}
+  document.getElementById("issueMain").innerHTML = `
+    <div class="issue-error">
+      <h2>The issue is at the printers.</h2>
+      <p>We couldn't load this week's issue. Browse the full directory while we sort it out.</p>
+      <a href="/directory/all/">Search all guests →</a>
+    </div>
+  `;
+}
 
-    const main = document.getElementById("issueMain");
-    main.innerHTML = renderCover(issue.cover) + issue.sections.map(renderSection).join("");
-  }
+// Hero unmute toggle (mirrors original directory)
+document.getElementById("heroUnmute")?.addEventListener("click", function() {
+  const v = document.getElementById("hero-video");
+  if (!v) return;
+  v.muted = !v.muted;
+  if (!v.muted) v.play().catch(() => {});
+});
 
-  // ─── Fallback: build a minimal issue from the legacy directory ───────
+document.getElementById("geHamburger")?.addEventListener("click", () => {
+  document.getElementById("geMobileMenu")?.classList.toggle("open");
+});
 
-  function buildFallbackIssue(directory) {
-    const guests = (directory.guests || []).map((g) => ({
-      ...g,
-      appearanceCount: (() => {
-        try {
-          const a = typeof g.pastAppearances === "string" ? JSON.parse(g.pastAppearances) : g.pastAppearances;
-          return Array.isArray(a) ? a.length : 0;
-        } catch { return 0; }
-      })(),
-      latestAppearanceDate: (() => {
-        try {
-          const a = typeof g.pastAppearances === "string" ? JSON.parse(g.pastAppearances) : g.pastAppearances;
-          if (!Array.isArray(a) || !a.length) return null;
-          return a.sort((x, y) => (y.date || "").localeCompare(x.date || ""))[0]?.date || null;
-        } catch { return null; }
-      })(),
-      latestAppearanceShow: "Mornings in the Lab",
-    }));
-
-    const cover = guests.find((g) => g.tier === "vip" && g.headshotUrl) || guests[0];
-    const onAir = guests.filter((g) => g.tier === "vip").slice(0, 6);
-    const justAired = guests.slice(0, 4);
-    const forHosts = guests.filter((g) => g.tier === "vip" || g.tier === "featured").slice(0, 8);
-
-    return {
-      issueNumber: "current",
-      issueDate: new Date().toISOString().slice(0, 10),
-      generatedAt: new Date().toISOString(),
-      totalGuests: directory.total || guests.length,
-      cover,
-      sections: [
-        onAir.length && { id: "on-air", name: "On Air This Week", blurb: "Just shipped, just aired, or going live in the next seven days.", treatment: "wide-scroller", guests: onAir },
-        justAired.length && { id: "just-aired", name: "Just Aired", blurb: "The latest conversations on Mornings in the Lab.", treatment: "row", guests: justAired },
-        forHosts.length && { id: "for-hosts", name: "For Hosts", blurb: "Booking a guest? Start here.", treatment: "wide-scroller", guests: forHosts },
-      ].filter(Boolean),
-    };
-  }
-
-  // ─── Boot ────────────────────────────────────────────────────────────
-
-  async function loadIssue() {
-    refreshLiveIndicator();
-    setInterval(refreshLiveIndicator, 60_000);
-
-    try {
-      const r = await fetch(ISSUE_URL, { headers: { Accept: "application/json" } });
-      if (r.ok) {
-        const issue = await r.json();
-        renderIssue(issue);
-        return;
-      }
-    } catch (e) { /* fall through */ }
-
-    // Fallback path
-    try {
-      const r = await fetch(FALLBACK_URL);
-      if (r.ok) {
-        const data = await r.json();
-        renderIssue(buildFallbackIssue(data));
-        return;
-      }
-    } catch (e) { /* fall through */ }
-
-    // Hard error
-    document.getElementById("issueMain").innerHTML = `
-      <div class="issue-error">
-        <h2>The issue is at the printers.</h2>
-        <p>We couldn't load this week's issue. Browse the full directory while we sort it out.</p>
-        <a href="/directory/all/">Search all guests →</a>
-      </div>
-    `;
-  }
-
-  // Mobile menu hook (matches existing site)
-  document.getElementById("geHamburger")?.addEventListener("click", () => {
-    document.getElementById("geMobileMenu")?.classList.toggle("open");
-  });
-
-  loadIssue();
-  </script>
+loadIssue();
+</script>
 </body>
 </html>
