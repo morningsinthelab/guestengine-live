@@ -377,6 +377,76 @@
     color:var(--text-muted); font-size:0.9375rem;
   }
 
+  /* Close The Gap — ranked, computed plays under the citation audit.
+     Answers the obvious question every owner asks after seeing 3/12:
+     "Okay, so what do I actually do about it?" Each play tied to point
+     lift, target LLMs, and a deadline. Computed from real pillar gaps. */
+  .p-gap__intro {
+    margin-bottom:1rem; padding:0.875rem 1rem;
+    background:rgba(255,255,255,0.02); border-radius:8px;
+    border-left:2px solid rgba(251,191,36,0.4);
+    font-size:0.875rem; color:rgba(255,255,255,0.78); line-height:1.5;
+  }
+  .p-gap__plays {
+    display:flex; flex-direction:column; gap:0.75rem;
+  }
+  .p-gap__play {
+    display:grid; grid-template-columns:auto 1fr auto; gap:0.875rem;
+    padding:1rem 1.125rem;
+    background:rgba(255,255,255,0.025);
+    border:1px solid rgba(255,255,255,0.06);
+    border-left:3px solid var(--gold);
+    border-radius:8px;
+    align-items:start;
+  }
+  .p-gap__play--high { border-left-color:#fbbf24; }
+  .p-gap__play--med  { border-left-color:#a3a3a3; }
+  .p-gap__play--low  { border-left-color:#6b7280; }
+  .p-gap__rank {
+    display:flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:50%;
+    background:rgba(251,191,36,0.12); color:var(--gold);
+    font-family:var(--font-display); font-weight:700; font-size:0.875rem;
+    flex-shrink:0;
+  }
+  .p-gap__body { min-width:0; }
+  .p-gap__title {
+    font-family:var(--font-display); font-size:0.9375rem; font-weight:700;
+    color:#fff; margin-bottom:0.25rem; letter-spacing:0.01em;
+  }
+  .p-gap__why {
+    font-size:0.8125rem; line-height:1.5;
+    color:rgba(255,255,255,0.7); margin-bottom:0.5rem;
+  }
+  .p-gap__meta {
+    display:flex; flex-wrap:wrap; gap:0.5rem 0.875rem;
+    font-size:0.6875rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:rgba(255,255,255,0.55); font-weight:600;
+  }
+  .p-gap__meta span {
+    display:inline-flex; align-items:center; gap:0.35rem;
+  }
+  .p-gap__meta i { color:rgba(251,191,36,0.6); font-size:0.75rem; }
+  .p-gap__meta strong { color:rgba(255,255,255,0.78); font-weight:700; }
+  .p-gap__lift {
+    display:flex; flex-direction:column; align-items:flex-end;
+    flex-shrink:0; min-width:64px; text-align:right;
+  }
+  .p-gap__lift-num {
+    font-family:var(--font-display); font-size:1.375rem; font-weight:700;
+    color:var(--gold); line-height:1;
+  }
+  .p-gap__lift-label {
+    font-size:0.625rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:rgba(255,255,255,0.5); margin-top:0.25rem; font-weight:700;
+  }
+  @media (max-width: 640px) {
+    .p-gap__play { grid-template-columns:auto 1fr; }
+    .p-gap__lift { grid-column:2; align-items:flex-start; flex-direction:row;
+                   gap:0.5rem; align-items:baseline; margin-top:0.25rem; }
+    .p-gap__lift-label { margin-top:0; }
+  }
+
   /* Starting Line banner — contextualizes the citation audit baseline.
      Visually distinct from the global Honest Version disclaimer: warmer
      teal accent, forward-arrow icon, reads as actionable framing for the
@@ -1895,6 +1965,7 @@
       html += renderHero(d);
       html += renderEEAT(d);
       html += renderCitationAudit(d);
+      html += renderCloseTheGap(d);
       html += renderCompounding(d);
       html += renderDeliverables(d);
       html += renderDataSources(d);
@@ -2133,10 +2204,166 @@
       return html;
     }
 
+    // ── Close The Gap ───────────────────────────────────────────────────────────────────
+    // Computes 3-5 ranked plays from the four pillar gaps + per-provider
+    // citation absence. Public viewers see the locked state; owners get
+    // the full prescriptive plan with point lifts, target LLMs, deadlines.
+    function renderCloseTheGap(d) {
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">03</span>Close The Gap</div>' +
+        '<div class="p-drawer__section-sub">Ranked plays computed from your actual pillar gaps and per-LLM absence. Highest lift first.</div>';
+
+      if (d.audienceState === 'public') {
+        html += '<div class="p-locked">' +
+          '<i class="fa-solid fa-lock"></i>' +
+          'Sign in as the page owner to see the prescriptive plan — ranked plays with point lifts, target LLMs, and realistic deadlines based on this guest\'s actual gaps.' +
+          '<a class="p-locked__cta" href="https://app.conversationos.live/login">Sign in</a>' +
+        '</div></div>';
+        return html;
+      }
+
+      var e = d.eeat || {};
+      var experience      = (e.experience      && e.experience.score)      || 0;
+      var expertise       = (e.expertise       && e.expertise.score)       || 0;
+      var authoritative   = (e.authoritativeness && e.authoritativeness.score) || 0;
+      var trust           = (e.trustworthiness && e.trustworthiness.score) || 0;
+
+      // Per-provider absence — which specific LLMs are missing this guest?
+      var ca = d.citationAudit || {};
+      var absentProviders = {};
+      (ca.queries || []).forEach(function(q) {
+        (q.results || []).forEach(function(r) {
+          if (r.status === 'absent') absentProviders[r.provider] = true;
+        });
+      });
+      var absentList = Object.keys(absentProviders);
+      var absentLabel = absentList.length
+        ? absentList.map(function(p) { return p.charAt(0).toUpperCase() + p.slice(1); }).join(', ')
+        : 'None — you\'re cited everywhere';
+
+      // Compute deadline strings (dates, not vague "this week")
+      function fmt(daysOut) {
+        var d2 = new Date();
+        d2.setDate(d2.getDate() + daysOut);
+        return d2.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+
+      // Build the candidate play set. Each entry: { lift, title, why, llms, deadline, icon, id }.
+      // lift = the actual point gain achievable; only render plays where lift > 0.
+      var candidates = [];
+
+      // PLAY: Trust pillar — connect verified social platforms
+      if (trust < 25) {
+        candidates.push({
+          id: 'trust',
+          lift: Math.min(25 - trust, 25),
+          title: 'Connect verified social platforms',
+          why: 'You score ' + trust + '/25 on Trustworthiness. Verified platforms (LinkedIn, X, IG, YouTube, Substack, GitHub, personal domain) are what every LLM uses as identity-resolution — it\'s the highest-signal, fastest-to-move pillar.',
+          llms: 'Moves all 4 — ChatGPT and Claude weight verified identity heaviest',
+          deadline: 'By ' + fmt(7),
+          icon: 'fa-solid fa-share-nodes'
+        });
+      }
+
+      // PLAY: Experience pillar — book another appearance
+      if (experience < 25) {
+        candidates.push({
+          id: 'experience',
+          lift: Math.min(8, 25 - experience),
+          title: 'Book your next live appearance',
+          why: 'You score ' + experience + '/25 on Experience. Each MiTL appearance adds 2,000–5,000 words of transcribed primary-source material that gets indexed and cited. Compounds linearly.',
+          llms: 'Perplexity indexes new transcripts within 48h — ChatGPT/Claude lag 60–90 days',
+          deadline: 'Book by ' + fmt(14),
+          icon: 'fa-solid fa-microphone-lines'
+        });
+      }
+
+      // PLAY: Authoritativeness — cross-network mentions
+      if (authoritative < 25) {
+        candidates.push({
+          id: 'authority',
+          lift: Math.min(10, 25 - authoritative),
+          title: 'Get 5 cross-network mentions',
+          why: 'You score ' + authoritative + '/25 on Authoritativeness. Inbound references from podcasts, Substacks, news outlets, and industry blogs are what tells LLMs other authorities recognize you. We track these via OctoLens.',
+          llms: 'Highest-impact for ChatGPT and Gemini — they weight third-party endorsement heavily',
+          deadline: 'Target ' + fmt(30),
+          icon: 'fa-solid fa-comments'
+        });
+      }
+
+      // PLAY: Expertise depth — only when there\'s real room (rare; David is 25/25)
+      if (expertise < 20) {
+        candidates.push({
+          id: 'expertise',
+          lift: Math.min(8, 25 - expertise),
+          title: 'Add 3 verified identity URLs + key insights',
+          why: 'You score ' + expertise + '/25 on Expertise. Apollo-verified credentials, Wikipedia, your own domain, and topical key insights are what models retrieve when verifying you are who you say you are.',
+          llms: 'Required floor for ChatGPT and Claude to surface you at all',
+          deadline: 'By ' + fmt(10),
+          icon: 'fa-solid fa-crown'
+        });
+      }
+
+      // PLAY: Per-LLM-specific — if specific models are absent, recommend a YouTube transcript appearance
+      // (the one tactic that moves ChatGPT/Claude/Gemini most reliably since they all index public YouTube transcripts).
+      var hardMissing = ['openai','anthropic','gemini'].filter(function(p) { return absentProviders[p]; });
+      if (hardMissing.length >= 2) {
+        candidates.push({
+          id: 'hard-missing',
+          lift: 4,
+          title: 'Get one public YouTube appearance with full transcript',
+          why: hardMissing.length + ' of the big 3 LLMs (' + hardMissing.map(function(p) { return p.charAt(0).toUpperCase() + p.slice(1); }).join(', ') + ') don\'t name you yet. Public YouTube transcripts are the one source all three crawl into their training and retrieval indexes.',
+          llms: 'Specifically targets ' + hardMissing.map(function(p) { return p.charAt(0).toUpperCase() + p.slice(1); }).join(' + '),
+          deadline: 'Schedule by ' + fmt(21),
+          icon: 'fa-brands fa-youtube'
+        });
+      }
+
+      // Sort by lift (descending), cap at 5
+      candidates.sort(function(a, b) { return b.lift - a.lift; });
+      candidates = candidates.slice(0, 5);
+
+      if (!candidates.length) {
+        html += '<div class="p-locked" style="border-color:rgba(20,184,166,0.3);">' +
+          '<i class="fa-solid fa-circle-check" style="color:#5eead4;"></i>' +
+          'You\'re at 25/25 across every pillar. Maintenance mode — keep the recompute cadence going so authority doesn\'t decay.' +
+        '</div></div>';
+        return html;
+      }
+
+      html += '<div class="p-gap__intro">' +
+        '<strong>So what do I actually do?</strong> These ' + candidates.length + ' plays are computed from your real pillar gaps and per-LLM absence (' + esc(absentLabel) + '). Each lift is the maximum point gain achievable. Run the rerun audit after each one to measure the move.' +
+      '</div>';
+
+      html += '<div class="p-gap__plays">';
+      candidates.forEach(function(p, idx) {
+        var liftClass = p.lift >= 10 ? 'p-gap__play--high'
+                      : p.lift >= 5  ? 'p-gap__play--med'
+                                     : 'p-gap__play--low';
+        html += '<div class="p-gap__play ' + liftClass + '">' +
+          '<div class="p-gap__rank">' + (idx + 1) + '</div>' +
+          '<div class="p-gap__body">' +
+            '<div class="p-gap__title"><i class="' + p.icon + '" style="margin-right:0.5rem;color:var(--gold);"></i>' + esc(p.title) + '</div>' +
+            '<div class="p-gap__why">' + esc(p.why) + '</div>' +
+            '<div class="p-gap__meta">' +
+              '<span><i class="fa-solid fa-bullseye"></i><strong>' + esc(p.llms) + '</strong></span>' +
+              '<span><i class="fa-regular fa-calendar"></i>' + esc(p.deadline) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="p-gap__lift">' +
+            '<div class="p-gap__lift-num">+' + p.lift + '</div>' +
+            '<div class="p-gap__lift-label">pts</div>' +
+          '</div>' +
+        '</div>';
+      });
+      html += '</div></div>';
+      return html;
+    }
+
     function renderCompounding(d) {
       var hist = (d.history || []).slice().reverse();   // ascending by date
       var html = '<div class="p-drawer__section">' +
-        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">03</span>Authority Compounding</div>' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">04</span>Authority Compounding</div>' +
         '<div class="p-drawer__section-sub">The floor never drops. Every appearance, every artifact, every recompute makes you more citable.</div>' +
         '<div class="p-compound">';
 
@@ -2197,7 +2424,7 @@
 
     function renderDeliverables(d) {
       var html = '<div class="p-drawer__section">' +
-        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">04</span>Deliverables · Was the work done?</div>' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">05</span>Deliverables · Was the work done?</div>' +
         '<div class="p-drawer__section-sub">Every artifact your tier produced — with proof-of-work URLs and performance data.</div>';
 
       if (d.audienceState === 'public') {
@@ -2249,7 +2476,7 @@
     function renderDataSources(d) {
       var sources = d.dataSources || [];
       var html = '<div class="p-drawer__section">' +
-        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">05</span>Data Sources</div>' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">06</span>Data Sources</div>' +
         '<div class="p-drawer__section-sub">Every score is computed from named third-party providers. No black box.</div>' +
         '<div class="p-source-list">';
       var totalCost = 0;
