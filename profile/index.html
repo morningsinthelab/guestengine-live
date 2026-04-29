@@ -1832,7 +1832,9 @@
       // No credentials — audit endpoint is public-readable; cookies would
       // trip CORS preflight and the response handler shapes audienceState
       // by JWT in the Authorization header (also omitted here for public).
-      fetch(url)
+      // Pass owner Bearer if present so audienceState comes back as 'owner'
+      // and the locked sections (citation audit, deliverables) populate.
+      fetch(url, { headers: ownerAuthHeaders() })
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(data) {
           if (!data) {
@@ -1886,15 +1888,18 @@
         rerunBtn.addEventListener('click', function() {
           rerunBtn.disabled = true;
           rerunBtn.textContent = 'Running…';
+          var headers = ownerAuthHeaders();
           fetch(AUDIT_API + encodeURIComponent(drawerCacheSlug) + '/rerun', {
             method: 'POST',
+            headers: headers,
           }).then(function(r) {
             if (r.status === 202) {
-              rerunBtn.textContent = 'Audit queued. Refresh in a few minutes.';
+              rerunBtn.textContent = 'Running… polling for results';
+              pollRerunUntilComplete(drawerCacheSlug, rerunBtn);
             } else if (r.status === 429) {
               rerunBtn.textContent = 'Already ran in last 24h';
-            } else if (r.status === 403) {
-              rerunBtn.textContent = 'Owner only';
+            } else if (r.status === 401 || r.status === 403) {
+              rerunBtn.textContent = 'Owner only — sign in to rerun';
             } else {
               rerunBtn.textContent = 'Failed — try again';
               rerunBtn.disabled = false;
@@ -1905,6 +1910,67 @@
           });
         });
       }
+    }
+
+    // ── Owner auth helpers ────────────────────────────────────────────────
+    function ownerAuthHeaders() {
+      try {
+        var t = sessionStorage.getItem('cos_auth_token') || localStorage.getItem('cos_auth_token');
+        if (t) return { 'Authorization': 'Bearer ' + t };
+      } catch (e) {}
+      return {};
+    }
+
+    // Poll /rerun-status every 5s up to 90s. When state flips to 'complete',
+    // re-fetch the audit and re-render so the drawer shows fresh results
+    // including "Last refresh just now" instead of "never".
+    function pollRerunUntilComplete(slug, rerunBtn) {
+      var attempts = 0;
+      var maxAttempts = 18; // 18 × 5s = 90s
+      var statusUrl = AUDIT_API + encodeURIComponent(slug) + '/rerun-status';
+      var headers = ownerAuthHeaders();
+      var tick = function() {
+        attempts++;
+        fetch(statusUrl, { headers: headers })
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(s) {
+            if (s && (s.state === 'complete' || s.state === 'completed' || s.state === 'done')) {
+              if (rerunBtn) rerunBtn.textContent = 'Refreshing audit…';
+              // Re-fetch full audit and re-render
+              var url = AUDIT_API + encodeURIComponent(slug);
+              fetch(url, { headers: headers })
+                .then(function(r) { return r.ok ? r.json() : null; })
+                .then(function(data) {
+                  if (data) {
+                    drawerCache = data;
+                    renderDrawer(data);
+                  } else if (rerunBtn) {
+                    rerunBtn.textContent = 'Refresh failed — reload page';
+                  }
+                });
+              return;
+            }
+            if (s && (s.state === 'error' || s.state === 'failed')) {
+              if (rerunBtn) {
+                rerunBtn.textContent = 'Audit failed — try again';
+                rerunBtn.disabled = false;
+              }
+              return;
+            }
+            if (attempts >= maxAttempts) {
+              if (rerunBtn) {
+                rerunBtn.textContent = 'Still running — reload in a moment';
+                rerunBtn.disabled = false;
+              }
+              return;
+            }
+            setTimeout(tick, 5000);
+          })
+          .catch(function() {
+            if (attempts < maxAttempts) setTimeout(tick, 5000);
+          });
+      };
+      setTimeout(tick, 4000); // first poll after 4s
     }
 
     function renderDisclaimer(d) {
