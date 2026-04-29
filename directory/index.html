@@ -1050,6 +1050,7 @@ const PROFILE = (slug) => `https://guestengine.live/profile/${slug}`;
 // generic living-portrait clip. Phase 2 moves this to the API.
 const COVER_VIDEO_OVERRIDES = {
   "04.27|ej-snyder": "/assets/issue/ej-snyder-cover-2604.mp4",
+  "04.27|david-frangioni": "/assets/issue/david-frangioni-cover-2604.mp4",
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────
@@ -1110,14 +1111,20 @@ function draftFeature(g) {
   if (nickMatch) { headline = nickMatch[1]; italicWord = nickMatch[1]; }
   else if (last.length >= 3 && last.length <= 16) { headline = last; italicWord = last; }
 
-  // Subhead: take the most cinematic sentence available
+  // Subhead: take the most cinematic sentence available. Order matters —
+  // earlier patterns win. Patterns are tuned to surface bio sentences
+  // that read like editorial pull quotes.
   const candidates = [
+    /(Music chose him[^.]+\.)/i,
     /(\d+\s+days?\s+naked[^.]+\.)/i,
     /(\d+\s+stitches[^.]+\.)/i,
     /(most decorated[^.]+\.)/i,
-    /(over\s+\d+[^.]+\.)/i,
+    /(over\s+\d+\s+million[^.]+\.)/i,
     /(serial entrepreneur[^.]+\.)/i,
     /(was forged through[^.]+\.)/i,
+    /(survived\s+\w+[^.]+\.)/i,
+    /(played professional gigs[^.]+\.)/i,
+    /(did not choose[^.]+\.[^.]+chose[^.]+\.)/i,
   ];
   let subhead = "";
   for (const re of candidates) {
@@ -1334,7 +1341,7 @@ function renderDepartments(section) {
             return `
               <a class="dept-card" href="${PROFILE(g.slug)}">
                 <div class="dept-card__media">
-                  <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+                  <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">
                   ${g.tier ? `<span class="dept-card__tier${tierClass}">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
                 </div>
                 <div class="dept-card__body">
