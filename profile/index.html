@@ -1483,21 +1483,33 @@
       setOG('og:type', 'profile');
 
       // ── HERO (UNTOUCHED visual layout) + Digital Twin portrait integration
-      // The hero falls back through: csVideo → episode_art → twin portrait
-      // → authority_portrait (legacy slot) → original headshot. When the guest
-      // has an active Digital Twin with a primary portrait (resolved by the
-      // /directory/:slug API into profile.twinPortraitUrl), it takes priority
-      // over the older 'authority_portrait' slot. The viewer can flip back to
-      // the original via the segmented control under the stat bar.
+      //
+      // Hero precedence:
+      //
+      //   When the guest HAS a twin portrait (twinPortraitUrl set):
+      //     Twin view     → twin portrait wins. The publication asserts its
+      //                     identity for this guest; the YouTube video is
+      //                     still accessible via the play button overlay.
+      //     Original view → original headshot wins. Same reasoning — the
+      //                     toggle is THE viewer's choice about which face
+      //                     of the guest they're looking at, not what kind
+      //                     of media the page surfaces.
+      //
+      //   When the guest does NOT have a twin portrait (legacy / no twin):
+      //     Falls back to the previous cascade: csVideo (YouTube thumbnail)
+      //     → episode_art → authority_portrait → headshotUrl. csVideo only
+      //     wins as a HERO image when no twin portrait exists.
+      //
       // See docs/digital-twin-spec.md § "Gap 2 — Portrait wiring".
       var twinPortraitUrl = profile.twinPortraitUrl || null;
       var hasTwinPortrait = !!twinPortraitUrl;
-      var twinHeroImg = csVideo
-        ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg'
-        : (findImage(images,'episode_art') || twinPortraitUrl || findImage(images,'authority_portrait') || profile.headshotUrl);
-      var originalHeroImg = csVideo
-        ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg'
-        : (findImage(images,'episode_art') || profile.headshotUrl);
+      var ytPoster = csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : null;
+      var twinHeroImg = hasTwinPortrait
+        ? twinPortraitUrl
+        : (ytPoster || findImage(images,'episode_art') || findImage(images,'authority_portrait') || profile.headshotUrl);
+      var originalHeroImg = hasTwinPortrait
+        ? (profile.headshotUrl || ytPoster)
+        : (ytPoster || findImage(images,'episode_art') || profile.headshotUrl);
       var heroImg = twinHeroImg;
       if (heroImg) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+heroImg+')';
       var seg = (topics.length && topics[0] !== 'Community Corner') ? topics[0] : '';
