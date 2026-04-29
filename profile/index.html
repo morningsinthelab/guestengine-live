@@ -1829,7 +1829,10 @@
     function loadAudit(slug) {
       drawerCacheSlug = slug;
       var url = AUDIT_API + encodeURIComponent(slug);
-      fetch(url, { credentials: 'include' })
+      // No credentials — audit endpoint is public-readable; cookies would
+      // trip CORS preflight and the response handler shapes audienceState
+      // by JWT in the Authorization header (also omitted here for public).
+      fetch(url)
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(data) {
           if (!data) {
@@ -1885,7 +1888,6 @@
           rerunBtn.textContent = 'Running…';
           fetch(AUDIT_API + encodeURIComponent(drawerCacheSlug) + '/rerun', {
             method: 'POST',
-            credentials: 'include',
           }).then(function(r) {
             if (r.status === 202) {
               rerunBtn.textContent = 'Audit queued. Refresh in a few minutes.';
