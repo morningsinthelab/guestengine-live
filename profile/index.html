@@ -1556,7 +1556,19 @@
         var barsEl = document.getElementById('p-sb-bars');
         var actionsEl = document.getElementById('p-sb-actions');
         var actionsListEl = document.getElementById('p-sb-actions-list');
-        if (dims.length > 0) {
+
+        // OWNER-ONLY: the Signal Breakdown reveals which pillars are weak
+        // and what to do about them — strategic intelligence the guest's
+        // competitors, prospects, and sponsors should not see on the
+        // public page. Public viewers see only the Authority Engine Brief
+        // CTA above; owners (logged in via sessionStorage.cos_auth_token)
+        // see the full breakdown inline. The same data lives in the
+        // Authority Drawer for any audience state.
+        var hasOwnerToken = false;
+        try {
+          hasOwnerToken = !!(sessionStorage.getItem('cos_auth_token') || localStorage.getItem('cos_auth_token'));
+        } catch (e) {}
+        if (dims.length > 0 && hasOwnerToken) {
           breakdownEl.style.display = 'block';
         }
 
