@@ -377,6 +377,49 @@
     color:var(--text-muted); font-size:0.9375rem;
   }
 
+  /* Refresh My Authority — the customer's magic button. Sits at the top
+     of the drawer for owners only. Same engine the producer's "Refresh
+     Authority Stack" calls. One click = signal recompute + citation
+     audit + history snapshot. Rate-limited to 1/24h for owners. */
+  .p-refresh-stack {
+    display:flex; align-items:center; gap:0.875rem;
+    padding:0.875rem 1rem; margin-bottom:1.25rem;
+    background:linear-gradient(135deg, rgba(251,191,36,0.10) 0%, rgba(20,184,166,0.06) 100%);
+    border:1px solid rgba(251,191,36,0.28);
+    border-left:3px solid var(--gold);
+    border-radius:8px;
+  }
+  .p-refresh-stack__icon {
+    flex-shrink:0; width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(251,191,36,0.16); border-radius:50%; color:var(--gold);
+    font-size:0.9375rem;
+  }
+  .p-refresh-stack__body { flex:1; min-width:0; }
+  .p-refresh-stack__title {
+    font-family:var(--font-display); font-size:0.9375rem; font-weight:700;
+    color:#fff; margin-bottom:0.125rem;
+  }
+  .p-refresh-stack__sub {
+    font-size:0.75rem; line-height:1.45; color:rgba(255,255,255,0.65);
+  }
+  .p-refresh-stack__btn {
+    flex-shrink:0; padding:0.6rem 1.125rem;
+    background:var(--gold); color:#020617; border:none; border-radius:6px;
+    font-family:var(--font-display); font-weight:700; font-size:0.6875rem;
+    letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;
+    transition:all 0.2s; white-space:nowrap;
+  }
+  .p-refresh-stack__btn:hover:not(:disabled) { background:#fde68a; }
+  .p-refresh-stack__btn:disabled {
+    background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.4);
+    cursor:not-allowed;
+  }
+  @media (max-width: 640px) {
+    .p-refresh-stack { flex-wrap:wrap; }
+    .p-refresh-stack__btn { width:100%; padding:0.75rem; }
+  }
+
   /* Close The Gap — ranked, computed plays under the citation audit.
      Answers the obvious question every owner asks after seeing 3/12:
      "Okay, so what do I actually do about it?" Each play tied to point
@@ -1973,6 +2016,7 @@
       sub.textContent = name + ' · Last refresh ' + fmtRelative(lastRefresh);
 
       var html = '';
+      html += renderRefreshStack(d);
       html += renderDisclaimer(d);
       html += renderHero(d);
       html += renderEEAT(d);
@@ -1991,6 +2035,37 @@
           b.style.width = pct + '%';
         });
       });
+
+      // Wire the Refresh Authority Stack button (owner only). Polls the
+      // refresh-stack-status endpoint every 4s up to 90s; on complete,
+      // re-fetches the audit so all 6 sections re-render with fresh data.
+      var refreshBtn = document.getElementById('p-refresh-stack-btn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+          refreshBtn.disabled = true;
+          refreshBtn.textContent = 'Refreshing…';
+          var headers = ownerAuthHeaders();
+          fetch(AUDIT_API + encodeURIComponent(drawerCacheSlug) + '/refresh-stack', {
+            method: 'POST',
+            headers: headers,
+          }).then(function(r) {
+            if (r.status === 202) {
+              refreshBtn.textContent = 'Running 3 steps…';
+              pollRefreshStackUntilComplete(drawerCacheSlug, refreshBtn);
+            } else if (r.status === 429) {
+              refreshBtn.textContent = 'Already refreshed in last 24h';
+            } else if (r.status === 401 || r.status === 403) {
+              refreshBtn.textContent = 'Owner only';
+            } else {
+              refreshBtn.textContent = 'Failed — try again';
+              refreshBtn.disabled = false;
+            }
+          }).catch(function() {
+            refreshBtn.textContent = 'Failed — try again';
+            refreshBtn.disabled = false;
+          });
+        });
+      }
 
       // Wire the rerun button if present (owner only)
       var rerunBtn = document.getElementById('p-cite-rerun');
@@ -2029,6 +2104,69 @@
         if (t) return { 'Authorization': 'Bearer ' + t };
       } catch (e) {}
       return {};
+    }
+
+    // Poll /refresh-stack-status every 4s up to 120s. When state flips to
+    // 'complete', re-fetch the full audit and re-render so the customer sees
+    // the just-refreshed E-E-A-T pillars + new citation results + new
+    // compounding data point all at once. Honest about partial failures.
+    function pollRefreshStackUntilComplete(slug, btn) {
+      var attempts = 0;
+      var maxAttempts = 30; // 30 × 4s = 120s
+      var statusUrl = AUDIT_API + encodeURIComponent(slug) + '/refresh-stack-status';
+      var headers = ownerAuthHeaders();
+      var tick = function() {
+        attempts++;
+        fetch(statusUrl, { headers: headers })
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(s) {
+            if (s && s.state === 'complete') {
+              if (btn) btn.textContent = 'Re-rendering…';
+              var url = AUDIT_API + encodeURIComponent(slug);
+              fetch(url, { headers: headers })
+                .then(function(r) { return r.ok ? r.json() : null; })
+                .then(function(data) {
+                  if (data) {
+                    drawerCache = data;
+                    renderDrawer(data);
+                    // After re-render, the new button instance reflects fresh state.
+                    var newBtn = document.getElementById('p-refresh-stack-btn');
+                    if (newBtn) {
+                      var resultObj = s.result || {};
+                      var steps = resultObj.steps || {};
+                      var allOk = steps.signalScore && steps.signalScore.ok &&
+                                  steps.citationAudit && steps.citationAudit.ok &&
+                                  steps.historySnapshot && steps.historySnapshot.ok;
+                      newBtn.disabled = true;
+                      newBtn.textContent = allOk ? 'Refreshed ✓' : 'Refreshed (partial) ⚠';
+                    }
+                  } else if (btn) {
+                    btn.textContent = 'Re-render failed — reload page';
+                  }
+                });
+              return;
+            }
+            if (s && s.state === 'failed') {
+              if (btn) {
+                btn.textContent = 'Refresh failed — try again';
+                btn.disabled = false;
+              }
+              return;
+            }
+            if (attempts >= maxAttempts) {
+              if (btn) {
+                btn.textContent = 'Still running — reload to check';
+                btn.disabled = false;
+              }
+              return;
+            }
+            setTimeout(tick, 4000);
+          })
+          .catch(function() {
+            if (attempts < maxAttempts) setTimeout(tick, 4000);
+          });
+      };
+      setTimeout(tick, 3000);
     }
 
     // Poll /rerun-status every 5s up to 90s. When state flips to 'complete',
@@ -2081,6 +2219,23 @@
           });
       };
       setTimeout(tick, 4000); // first poll after 4s
+    }
+
+    // ── Refresh My Authority ───────────────────────────────────────────────────────────────────
+    // The customer-facing magic button. Owner only. Calls the same canonical
+    // 3-step orchestrator (signal recompute + citation audit + history
+    // snapshot) the producer hits from app.conversationos.live. One engine,
+    // two surfaces. Rate-limited 1/24h server-side.
+    function renderRefreshStack(d) {
+      if (d.audienceState !== 'owner') return '';
+      return '<div class="p-refresh-stack">' +
+        '<div class="p-refresh-stack__icon"><i class="fa-solid fa-bolt"></i></div>' +
+        '<div class="p-refresh-stack__body">' +
+          '<div class="p-refresh-stack__title">Refresh My Authority</div>' +
+          '<div class="p-refresh-stack__sub">Re-pull every data source, re-ask all 4 LLMs, snapshot today\'s score. ~30 seconds.</div>' +
+        '</div>' +
+        '<button class="p-refresh-stack__btn" id="p-refresh-stack-btn">Refresh Now</button>' +
+      '</div>';
     }
 
     function renderDisclaimer(d) {
