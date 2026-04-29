@@ -130,6 +130,30 @@
     border-radius:60px; font-family:var(--font-display); font-size:0.4rem;
     font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
   }
+  /* ┏━ Digital Twin portrait toggle ━━━━━━━━━━━━━━━━━━━━━┓
+     Segmented control under the stat bar that lets the viewer flip the
+     hero background and the stat-bar photo between the publication-
+     treated Digital Twin portrait and the guest's original headshot.
+     Only renders when the guest has an active twin with a primary
+     portrait. Default state shows the Twin (gold pill on "Twin").
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ */
+  .p-portrait-toggle {
+    display:inline-flex; align-items:center; gap:0; padding:3px;
+    border-radius:60px; border:1px solid rgba(251,191,36,0.18);
+    background:rgba(255,255,255,0.02); margin-top:8px;
+  }
+  .p-portrait-toggle__btn {
+    appearance:none; border:0; background:transparent; cursor:pointer;
+    padding:5px 14px; border-radius:60px;
+    font-family:var(--font-display); font-size:0.65rem; font-weight:700;
+    letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--text-muted); transition:color 0.2s, background 0.2s;
+  }
+  .p-portrait-toggle__btn:hover { color:var(--text-secondary); }
+  .p-portrait-toggle__btn[aria-pressed="true"] {
+    background:rgba(251,191,36,0.15); color:var(--gold);
+  }
+
   .p-statbar__tier--vip { background:rgba(251,191,36,0.15); color:var(--gold); border:1px solid var(--gold-dim); }
   .p-statbar__tier--member { background:rgba(99,102,241,0.12); color:#818cf8; border:1px solid rgba(99,102,241,0.25); }
   .p-statbar__tier--featured { background:var(--gold-faint); color:var(--gold); border:1px solid rgba(251,191,36,0.15); }
@@ -1116,6 +1140,16 @@
           <div class="p-statbar__meta">
             <div class="p-statbar__name" id="p-sb-name"></div>
             <div class="p-statbar__title" id="p-sb-title"></div>
+            <div
+              id="p-portrait-toggle"
+              class="p-portrait-toggle"
+              role="group"
+              aria-label="Portrait view"
+              style="display:none"
+            >
+              <button type="button" class="p-portrait-toggle__btn" data-view="original" aria-pressed="false">Original</button>
+              <button type="button" class="p-portrait-toggle__btn" data-view="twin" aria-pressed="true">Twin</button>
+            </div>
           </div>
           <span id="p-sb-tier"></span>
           <div id="p-sb-score" style="display:none" class="p-statbar__score">
@@ -1448,8 +1482,23 @@
       setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
       setOG('og:type', 'profile');
 
-      // ── HERO (UNTOUCHED)
-      var heroImg = csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : (findImage(images,'episode_art') || findImage(images,'authority_portrait') || profile.headshotUrl);
+      // ── HERO (UNTOUCHED visual layout) + Digital Twin portrait integration
+      // The hero falls back through: csVideo → episode_art → twin portrait
+      // → authority_portrait (legacy slot) → original headshot. When the guest
+      // has an active Digital Twin with a primary portrait (resolved by the
+      // /directory/:slug API into profile.twinPortraitUrl), it takes priority
+      // over the older 'authority_portrait' slot. The viewer can flip back to
+      // the original via the segmented control under the stat bar.
+      // See docs/digital-twin-spec.md § "Gap 2 — Portrait wiring".
+      var twinPortraitUrl = profile.twinPortraitUrl || null;
+      var hasTwinPortrait = !!twinPortraitUrl;
+      var twinHeroImg = csVideo
+        ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg'
+        : (findImage(images,'episode_art') || twinPortraitUrl || findImage(images,'authority_portrait') || profile.headshotUrl);
+      var originalHeroImg = csVideo
+        ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg'
+        : (findImage(images,'episode_art') || profile.headshotUrl);
+      var heroImg = twinHeroImg;
       if (heroImg) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+heroImg+')';
       var seg = (topics.length && topics[0] !== 'Community Corner') ? topics[0] : '';
       document.getElementById('p-hero-segment').textContent = seg ? 'Mornings in the Lab · ' + seg : 'Mornings in the Lab · Center Stage';
@@ -1461,12 +1510,41 @@
         btn.style.display = 'inline-flex';
       }
 
-      // ── Stat Bar
-      if (profile.headshotUrl) {
-        document.getElementById('p-sb-photo').innerHTML = '<div class="p-statbar__photo"><img src="'+esc(profile.headshotUrl)+'" alt="'+esc(name)+'"></div>';
-      } else {
-        var init = name.split(' ').map(function(w){return w[0]}).join('').substring(0,2);
-        document.getElementById('p-sb-photo').innerHTML = '<div class="p-statbar__initials">'+esc(init)+'</div>';
+      // ── Stat Bar (with Digital Twin portrait priority)
+      // Stat-bar photo defaults to the twin portrait when present, falls back
+      // to the original headshot, falls back to initials. Toggle below the
+      // stat-bar name/title flips both the stat-bar photo AND the hero bg
+      // between Twin and Original.
+      var sbTwinPhoto = twinPortraitUrl || profile.headshotUrl;
+      var sbOriginalPhoto = profile.headshotUrl;
+      var renderStatBarPhoto = function (src) {
+        var el = document.getElementById('p-sb-photo');
+        if (src) {
+          el.innerHTML = '<div class="p-statbar__photo"><img src="'+esc(src)+'" alt="'+esc(name)+'"></div>';
+        } else {
+          var init = name.split(' ').map(function(w){return w[0]}).join('').substring(0,2);
+          el.innerHTML = '<div class="p-statbar__initials">'+esc(init)+'</div>';
+        }
+      };
+      renderStatBarPhoto(sbTwinPhoto);
+
+      // Toggle wiring — only enable when both a twin portrait AND an original
+      // exist. If either is missing there's nothing to flip between, so the
+      // control stays hidden (defaults to display:none in the markup).
+      if (hasTwinPortrait && profile.headshotUrl) {
+        var toggleEl = document.getElementById('p-portrait-toggle');
+        toggleEl.style.display = 'inline-flex';
+        var btns = toggleEl.querySelectorAll('.p-portrait-toggle__btn');
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var view = btn.getAttribute('data-view');
+            btns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+            var nextHero = view === 'original' ? originalHeroImg : twinHeroImg;
+            var nextSb   = view === 'original' ? sbOriginalPhoto : sbTwinPhoto;
+            if (nextHero) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+nextHero+')';
+            renderStatBarPhoto(nextSb);
+          });
+        });
       }
       document.getElementById('p-sb-name').textContent = name;
       document.getElementById('p-sb-title').textContent = headline;
