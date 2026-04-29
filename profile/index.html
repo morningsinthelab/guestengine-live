@@ -1419,7 +1419,7 @@
           });
           dims.push({
             label: 'Expertise', sublabel: 'Verified credentials + key insights + identity URLs', score: paScore, max: 25,
-            desc: 'Apollo verified · ' + insights.length + ' key insights · ' + (sameAsCount || 0) + ' identity URLs',
+            desc: 'Apollo verified · ' + insights.length + ' key insights · ' + (((authority && authority.same_as) || []).length) + ' identity URLs',
             googleRef: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
             action: paScore < 20 ? {
               icon: 'fa-solid fa-crown',
