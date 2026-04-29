@@ -1274,6 +1274,50 @@ img { max-width: 100%; display: block; }
 }
 .tier-feature__readmore:hover { gap: 14px; }
 
+/* Actions row — wraps CTAs that share a tier-feature card. Used by Reach
+   Pro to put the primary booking CTA next to the secondary authority-page
+   link. Other tiers (VIP, OTR) still render only the readmore link, so
+   this container collapses cleanly when there's just one child. */
+.tier-feature__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+@media (max-width: 800px) {
+  .tier-feature__actions { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+
+/* Reach Pro booking CTA. Teal solid to match the Reach Pro chip color
+   (#5eead4 / teal-300). The primary on-page action for any guest in the
+   Reach Pro tier — their product IS bookability, so the page makes that
+   bookability one click away. Same Cabinet 700 / 0.16em treatment as the
+   homepage tier-strip CTAs (canonical kicker style). */
+.tier-feature__book-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 6px;
+  background: #5eead4;       /* teal-300, matches .tier-chip--reach-pro */
+  color: #042f2e;            /* teal-950 for max contrast on the button */
+  font-family: var(--label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+  border: 1px solid #5eead4;
+}
+.tier-feature__book-cta:hover {
+  background: #2dd4bf;       /* teal-400 hover */
+  border-color: #2dd4bf;
+  transform: translateY(-1px);
+}
+.tier-feature__book-cta-arrow { transition: transform .2s; }
+.tier-feature__book-cta:hover .tier-feature__book-cta-arrow { transform: translateX(2px); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -1804,6 +1848,12 @@ function renderOnTheRecord(section, coverSlug, coverIsOTR) {
 // opts.reverse — when true, photo renders on the right, copy on the left.
 //                Used to zigzag consecutive tier sections so the eye doesn't
 //                see two identical layouts stamped on top of each other.
+// opts.bookCta — when true, render a primary "Book <FirstName>" CTA next
+//                to the authority-page link. Reach Pro tier only — their
+//                product IS bookability so the page exposes that one click
+//                away. Today the CTA is a mailto to bookings@bapl.ai with a
+//                pre-filled subject and body; swap to /book?guest=<slug>
+//                when the inbound-booking form ships.
 //
 // Note on motion: tier-feature MEDIA stays a still image regardless of
 // whether the guest has a livingPortraitVideoUrl. Living portraits are
@@ -1817,6 +1867,33 @@ function renderTierFeature(section, opts) {
   const g = guests[0];
   const sectionLabel = (opts && opts.label) || section.name;
   const reverseClass = (opts && opts.reverse) ? " tier-feature--reverse" : "";
+
+  // ─── Booking CTA (Reach Pro tier only) ───────────────────────────────
+  // mailto: pre-fills subject + body so a host hitting send produces a
+  // usable lead in the bookings inbox without any form-building work.
+  // When the proper inbound-booking form ships at /book?guest=<slug>,
+  // this href becomes a one-line swap.
+  let bookCtaHTML = "";
+  if (opts && opts.bookCta) {
+    const firstName = (g.guestName || "").split(" ")[0] || "this guest";
+    const subject = `Booking ${g.guestName} via Guest Engine`;
+    const body = [
+      `Hi MITL ops,`,
+      ``,
+      `I'd like to book ${g.guestName} for a show, found via guestengine.live.`,
+      ``,
+      `Show name:`,
+      `Topic:`,
+      `Target date:`,
+      `My name:`,
+      `My contact:`,
+      ``,
+      `Thanks.`,
+    ].join("\n");
+    const mailto = `mailto:bookings@bapl.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    bookCtaHTML = `<a class="tier-feature__book-cta" href="${mailto}">Book ${escapeHTML(firstName)} <span class="tier-feature__book-cta-arrow" aria-hidden="true">\u2192</span></a>`;
+  }
+
   return `
     <section class="spread">
       <div class="spread__inner">
@@ -1832,7 +1909,10 @@ function renderTierFeature(section, opts) {
             <h3 class="tier-feature__name">${escapeHTML(g.guestName)}</h3>
             ${g.headline ? `<p class="tier-feature__head">${escapeHTML(g.headline)}</p>` : ""}
             ${g.editorialSegment ? `<p class="tier-feature__credentials">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(g.editorialSegment)} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>` : ""}
-            <a class="tier-feature__readmore" href="${PROFILE(g.slug)}">Continued in their authority page \u2192</a>
+            <div class="tier-feature__actions">
+              ${bookCtaHTML}
+              <a class="tier-feature__readmore" href="${PROFILE(g.slug)}">Continued in their authority page \u2192</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1964,9 +2044,12 @@ function renderIssue(issue) {
   // Reach Pro section uses the reverse layout (photo-right) so that when
   // it sits directly below the VIP section (photo-left), the eye zigzags
   // down the page instead of seeing two identical layouts back-to-back.
+  // Also exclusive to Reach Pro: a primary "Book <FirstName>" CTA. Reach
+  // Pro's product literally IS bookability — the page makes booking one
+  // click away, not buried behind the authority-page detour.
   if (reachPro) html += (reachPro.guests && reachPro.guests.length > 1)
     ? renderTwoUpFeature(reachPro, false)
-    : renderTierFeature(reachPro, { label: "Reach Pro \u00b7 $197/mo", reverse: true });
+    : renderTierFeature(reachPro, { label: "Reach Pro \u00b7 $197/mo", reverse: true, bookCta: true });
   if (forHosts) html += renderDepartments(forHosts);
 
   document.getElementById("issueMain").innerHTML = html;
