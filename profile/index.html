@@ -376,6 +376,33 @@
     border-radius:10px; border:1px dashed rgba(251,191,36,0.2);
     color:var(--text-muted); font-size:0.9375rem;
   }
+
+  /* Starting Line banner — contextualizes the citation audit baseline.
+     Visually distinct from the global Honest Version disclaimer: warmer
+     teal accent, forward-arrow icon, reads as actionable framing for the
+     specific guest's current state, not a product-wide disclaimer. */
+  .p-starting-line {
+    display:flex; gap:0.875rem; align-items:flex-start;
+    padding:1.125rem 1.25rem; margin-bottom:1.25rem;
+    background:linear-gradient(135deg, rgba(20,184,166,0.08) 0%, rgba(251,191,36,0.04) 100%);
+    border:1px solid rgba(20,184,166,0.22);
+    border-left:3px solid #14b8a6;
+    border-radius:8px;
+  }
+  .p-starting-line__icon {
+    flex-shrink:0; width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+    background:rgba(20,184,166,0.18); border-radius:50%; color:#5eead4; font-size:0.875rem;
+  }
+  .p-starting-line__body { flex:1; min-width:0; }
+  .p-starting-line__title {
+    font-family:var(--font-display); font-size:0.75rem; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase; color:#5eead4;
+    margin-bottom:0.25rem;
+  }
+  .p-starting-line__text {
+    font-size:0.875rem; line-height:1.55; color:rgba(255,255,255,0.82);
+  }
+  .p-starting-line__text strong { color:#fff; font-weight:600; }
   .p-locked i { color:var(--gold); font-size:1.5rem; margin-bottom:0.5rem; display:block; }
   .p-locked__cta {
     display:inline-block; margin-top:1rem; padding:0.6rem 1.25rem;
@@ -2048,6 +2075,34 @@
           (d.audienceState === 'owner' ? '<button class="p-cite__rerun" id="p-cite-rerun" style="margin-top:1rem;display:inline-block;">Run citation audit now</button>' : '') +
         '</div></div>';
         return html;
+      }
+
+      // Starting Line banner — contextualizes the day-one read so a 3/12 baseline
+      // doesn't get misread as "the product is broken." Computed from the same
+      // overallCitations the summary uses below; only renders for owners (public
+      // viewers hit the locked state and never see this).
+      var ocPre = ca.overallCitations || { cited: 0, mentioned: 0, absent: 0 };
+      var totalPre = (ocPre.cited || 0) + (ocPre.mentioned || 0) + (ocPre.absent || 0);
+      if (totalPre > 0) {
+        var pct = (ocPre.cited || 0) / totalPre;
+        var slTitle, slText;
+        if (pct >= 0.75) {
+          slTitle = 'You\'re a citation magnet';
+          slText = '<strong>The work is paying off.</strong> Most LLMs already name you. Keep stacking appearances and verified URLs to defend the position — authority decays without recompute.';
+        } else if (pct >= 0.4) {
+          slTitle = 'You\'re in motion';
+          slText = '<strong>The compounding has started.</strong> Some models cite you, others don\'t — yet. Every appearance, transcript, and cross-network mention closes the gap on the absent ones.';
+        } else {
+          slTitle = 'Your starting line';
+          slText = '<strong>This is your day-one baseline. You have work to do, and that\'s the point.</strong> Most guests start here — one model already names you, the others don\'t. Every appearance, transcript, and verified identity URL is a measurable input the LLMs use to decide who to cite. The gap is exactly what we\'re here to close.';
+        }
+        html += '<div class="p-starting-line">' +
+          '<div class="p-starting-line__icon"><i class="fa-solid fa-arrow-trend-up"></i></div>' +
+          '<div class="p-starting-line__body">' +
+            '<div class="p-starting-line__title">' + slTitle + '</div>' +
+            '<div class="p-starting-line__text">' + slText + '</div>' +
+          '</div>' +
+        '</div>';
       }
 
       ca.queries.forEach(function(q) {
