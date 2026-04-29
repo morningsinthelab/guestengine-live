@@ -1566,7 +1566,7 @@ function renderCoverHero(cover, feature, issue) {
       <div class="cover-hero__scrim"></div>
 
       <header class="masthead-overlay">
-        <div class="masthead-overlay__brand">The Publication of Guest Engine</div>
+        <div class="masthead-overlay__brand">A ConversationOS Publication</div>
         <h1 class="masthead-overlay__title">On The <em>Record</em>.</h1>
         <div class="masthead-overlay__sub">
           The 9:45 ET Segment <span class="live-indicator">ON AIR NOW</span> \u00b7 <a href="https://mornings.live">Mornings.Live</a>
@@ -1676,10 +1676,16 @@ function renderTOC(issue) {
   for (const section of issue.sections || []) {
     const featured = section.guests && section.guests[0];
     if (!featured) continue;
+    // TOC decks describe the GUEST, not the section/product. Section
+    // identity already lives in the kicker above (COVER STORY / CENTER
+    // STAGE / VIP / REACH PRO / THE DIRECTORY). The deck slot belongs
+    // to the guest's editorial headline — the same `headline` field used
+    // on cards downstream — so a reader scanning the TOC gets a one-line
+    // teaser per person, not a product description.
     items.push({
       kicker: section.name.toUpperCase(),
       title: featured.guestName,
-      deck: section.blurb,
+      deck: featured.headline || "",
       status: "This Week",
       statusClass: "",
       href: PROFILE(featured.slug),
