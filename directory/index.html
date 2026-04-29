@@ -152,8 +152,9 @@ a { color: inherit; text-decoration: none; }
 }
 .issue-masthead__title em {
   font-style: italic;
-  font-weight: 300;
+  font-weight: 600;
   color: var(--ge-gold);
+  font-variation-settings: "opsz" 144, "SOFT" 0;
 }
 .issue-masthead__deck {
   font-family: var(--serif);
@@ -201,11 +202,16 @@ a { color: inherit; text-decoration: none; }
 }
 .cover-story {
   position: relative;
+  display: block;
+  width: 100%;
   border-radius: 24px;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
   background: var(--ge-bg-2);
   isolation: isolate;
+  /* Use min-height with viewport units instead of aspect-ratio because
+     aspect-ratio doesn't compute when the container's only children are
+     position:absolute (zero contributing intrinsic size). */
+  min-height: clamp(520px, 60vw, 760px);
 }
 .cover-story__media {
   position: absolute; inset: 0;
@@ -275,13 +281,20 @@ a { color: inherit; text-decoration: none; }
 .cover-story__meta strong { color: var(--ge-fg); font-weight: 500; }
 .cover-story__meta-divider { width: 1px; height: 14px; background: var(--ge-rule-strong); }
 .cover-story__cta {
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 14px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
   background: var(--ge-gold);
   color: #0a0e1a;
   border-radius: 999px;
   font-weight: 600;
   font-size: 15px;
+  /* prevent the inline-flex from collapsing into a vertical column when
+     parent layouts try to constrain its width (the 'circle CTA' bug) */
+  white-space: nowrap;
+  width: auto;
+  flex-shrink: 0;
   transition: transform .2s, background .2s;
 }
 .cover-story__cta:hover { background: var(--ge-gold-dim); transform: translateY(-1px); }
@@ -289,7 +302,7 @@ a { color: inherit; text-decoration: none; }
 .cover-story__cta:hover .cover-story__cta-arrow { transform: translateX(3px); }
 
 @media (max-width: 720px) {
-  .cover-story { aspect-ratio: 4 / 5; }
+  .cover-story { min-height: clamp(560px, 110vw, 720px); }
 }
 
 /* ─── SECTION CHROME ────────────────────────────────────────────────── */
