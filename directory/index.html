@@ -1190,8 +1190,29 @@ img { max-width: 100%; display: block; }
   max-width: 900px;
   margin: 0 auto;
 }
+/* Reverse variant — photo on the right, copy on the left.
+   Used to alternate visual rhythm between consecutive single-card tier
+   sections (e.g. VIP photo-left, then Reach Pro photo-right). The eye
+   zigzags down the page instead of stamping the same layout twice. */
+.tier-feature--reverse {
+  grid-template-columns: 1fr 360px;
+}
+.tier-feature--reverse .tier-feature__copy {
+  order: 1;
+  text-align: left;
+}
+.tier-feature--reverse .tier-feature__media {
+  order: 2;
+}
 @media (max-width: 800px) {
-  .tier-feature { grid-template-columns: 1fr; gap: 32px; max-width: 480px; }
+  .tier-feature,
+  .tier-feature--reverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 480px;
+  }
+  .tier-feature--reverse .tier-feature__media { order: 1; }
+  .tier-feature--reverse .tier-feature__copy { order: 2; }
 }
 .tier-feature__media {
   aspect-ratio: 4 / 5;
@@ -1200,7 +1221,8 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   border-radius: 6px;
 }
-.tier-feature__media img {
+.tier-feature__media img,
+.tier-feature__media video {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover;
 }
@@ -1731,6 +1753,19 @@ function renderOnTheRecord(section, coverSlug, coverIsOTR) {
     `;
   }
 
+  // ╔═══════════════════════════════════════════════════════════════╗
+  // MOTION: living-portrait Veo videos are the OTR tier's signature.       ║
+  // ╠═══════════════════════════════════════════════════════════════╣
+  // Each OTR guest's card upgrades from a still image to an autoplay loop  ║
+  // video when livingPortraitVideoUrl is present. This is the tangible     ║
+  // production deliverable that comes with buying On The Record — the      ║
+  // moving portrait IS the product feature, not a decoration.              ║
+  //                                                                         ║
+  // DO NOT extend this pattern to Center Stage, VIP, Reach Pro, or         ║
+  // For Hosts. Motion is exclusive to On The Record. Adding it elsewhere   ║
+  // dilutes the tier signal and commits us to recurring production costs   ║
+  // we haven't priced into those products.                                 ║
+  // ╚═══════════════════════════════════════════════════════════════╝
   return `
     <section class="spread spread--otr">
       <div class="spread__inner">
@@ -1738,17 +1773,22 @@ function renderOnTheRecord(section, coverSlug, coverIsOTR) {
         <h2 class="spread__head">On The <em>Record</em></h2>
         <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
         <div class="feature-twoup">
-          ${guests.slice(0, 2).map((g) => `
-            <a class="feature-twoup__card" href="${PROFILE(g.slug)}">
-              <div class="feature-twoup__media">
-                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">
-              </div>
-              <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
-              <h3 class="feature-twoup__title">${escapeHTML(g.guestName)}</h3>
-              <p class="feature-twoup__deck">${escapeHTML(g.headline || "")}</p>
-              <span class="feature-twoup__readmore">More from the conversation \u2192</span>
-            </a>
-          `).join("")}
+          ${guests.slice(0, 2).map((g) => {
+            const portraitMedia = g.livingPortraitVideoUrl
+              ? `<video autoplay muted loop playsinline poster="${escapeHTML(g.headshotUrl || "")}"><source src="${escapeHTML(g.livingPortraitVideoUrl)}" type="video/mp4"></video>`
+              : `<img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">`;
+            return `
+              <a class="feature-twoup__card" href="${PROFILE(g.slug)}">
+                <div class="feature-twoup__media">
+                  ${portraitMedia}
+                </div>
+                <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
+                <h3 class="feature-twoup__title">${escapeHTML(g.guestName)}</h3>
+                <p class="feature-twoup__deck">${escapeHTML(g.headline || "")}</p>
+                <span class="feature-twoup__readmore">More from the conversation \u2192</span>
+              </a>
+            `;
+          }).join("")}
         </div>
       </div>
     </section>
@@ -1759,23 +1799,36 @@ function renderOnTheRecord(section, coverSlug, coverIsOTR) {
 // Used by VIP and Reach Pro right now (one placeholder each). When a tier
 // hits 2+ guests, the dispatcher upgrades to a multi-up grid via
 // renderTwoUpFeature.
+//
+// opts.label   — string shown in the spread__folio (e.g. "VIP · $297/mo")
+// opts.reverse — when true, photo renders on the right, copy on the left.
+//                Used to zigzag consecutive tier sections so the eye doesn't
+//                see two identical layouts stamped on top of each other.
+//
+// Note on motion: tier-feature MEDIA stays a still image regardless of
+// whether the guest has a livingPortraitVideoUrl. Living portraits are
+// reserved for the On The Record tier (cover + OTR strip) — see
+// renderOnTheRecord. VIP and Reach Pro deliverables don't include a Veo;
+// adding one here would commit to a recurring production cost we haven't
+// priced into those subscriptions.
 function renderTierFeature(section, opts) {
   const guests = (section.guests || []);
   if (guests.length === 0) return "";
   const g = guests[0];
   const sectionLabel = (opts && opts.label) || section.name;
+  const reverseClass = (opts && opts.reverse) ? " tier-feature--reverse" : "";
   return `
     <section class="spread">
       <div class="spread__inner">
         <div class="spread__folio"><strong>${escapeHTML(sectionLabel)}</strong></div>
         <h2 class="spread__head">${escapeHTML(section.name.split(" ").slice(0, -1).join(" ") || section.name)} ${section.name.split(" ").length > 1 ? `<em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em>` : ""}</h2>
         <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
-        <div class="tier-feature">
+        <div class="tier-feature${reverseClass}">
           <a class="tier-feature__media" href="${PROFILE(g.slug)}" aria-label="${escapeHTML(g.guestName)}">
             <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">
             <div class="tier-feature__chip">${tierChipHTML(g.editorialTier)}</div>
           </a>
-          <div>
+          <div class="tier-feature__copy">
             <h3 class="tier-feature__name">${escapeHTML(g.guestName)}</h3>
             ${g.headline ? `<p class="tier-feature__head">${escapeHTML(g.headline)}</p>` : ""}
             ${g.editorialSegment ? `<p class="tier-feature__credentials">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(g.editorialSegment)} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>` : ""}
@@ -1908,9 +1961,12 @@ function renderIssue(issue) {
   if (vip) html += (vip.guests && vip.guests.length > 1)
     ? renderTwoUpFeature(vip, false)
     : renderTierFeature(vip, { label: "VIP \u00b7 $297/mo" });
+  // Reach Pro section uses the reverse layout (photo-right) so that when
+  // it sits directly below the VIP section (photo-left), the eye zigzags
+  // down the page instead of seeing two identical layouts back-to-back.
   if (reachPro) html += (reachPro.guests && reachPro.guests.length > 1)
     ? renderTwoUpFeature(reachPro, false)
-    : renderTierFeature(reachPro, { label: "Reach Pro \u00b7 $197/mo" });
+    : renderTierFeature(reachPro, { label: "Reach Pro \u00b7 $197/mo", reverse: true });
   if (forHosts) html += renderDepartments(forHosts);
 
   document.getElementById("issueMain").innerHTML = html;
