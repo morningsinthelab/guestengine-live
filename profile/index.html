@@ -160,6 +160,239 @@
     display:flex; align-items:center; gap:1.5rem; margin-bottom:3rem;
     background:linear-gradient(135deg,rgba(251,191,36,0.04),rgba(255,255,255,0.01));
     border:1px solid rgba(251,191,36,0.12); border-radius:16px; padding:1.25rem 1.5rem;
+    cursor:pointer; transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .p-signal:hover { border-color:rgba(251,191,36,0.3); transform:translateY(-1px); }
+  .p-signal__open-hint {
+    margin-left:auto; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--text-muted); display:flex; align-items:center; gap:0.4rem;
+  }
+  .p-signal__open-hint i { font-size:0.875rem; color:var(--gold); }
+
+  /* ── Authority Drawer — the audit panel ─── */
+  .p-drawer-backdrop {
+    position:fixed; inset:0; background:rgba(2,6,12,0.85); backdrop-filter:blur(8px);
+    opacity:0; pointer-events:none; transition:opacity 0.35s ease; z-index:100;
+  }
+  .p-drawer-backdrop.is-open { opacity:1; pointer-events:auto; }
+  .p-drawer {
+    position:fixed; inset:5vh 0 0 0; max-width:920px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(8,12,24,0.98), rgba(5,9,20,0.99));
+    border:1px solid rgba(251,191,36,0.15); border-radius:24px 24px 0 0;
+    transform:translateY(100%); transition:transform 0.45s cubic-bezier(0.32,0.72,0,1);
+    overflow-y:auto; box-shadow:0 -20px 60px rgba(0,0,0,0.6); z-index:101;
+  }
+  .p-drawer.is-open { transform:translateY(0); }
+  .p-drawer__header {
+    position:sticky; top:0; display:flex; align-items:center; justify-content:space-between;
+    padding:1.5rem 2rem; background:linear-gradient(180deg, rgba(8,12,24,0.98), rgba(8,12,24,0.85));
+    border-bottom:1px solid rgba(251,191,36,0.1); z-index:2;
+  }
+  .p-drawer__title {
+    font-family:'Bebas Neue', sans-serif; font-size:1.35rem; letter-spacing:0.08em;
+    color:var(--gold); text-transform:uppercase; line-height:1;
+  }
+  .p-drawer__sub { font-size:0.8125rem; color:var(--text-muted); margin-top:0.25rem; }
+  .p-drawer__close {
+    background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text);
+    width:36px; height:36px; border-radius:50%; cursor:pointer; transition:all 0.2s;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .p-drawer__close:hover { border-color:var(--gold); color:var(--gold); }
+  .p-drawer__body { padding:1.5rem 2rem 4rem; }
+
+  /* Disclaimer */
+  .p-drawer__disclaimer {
+    background:linear-gradient(135deg, rgba(251,191,36,0.06), rgba(251,191,36,0.02));
+    border-left:3px solid var(--gold); border-radius:8px;
+    padding:1.25rem 1.5rem; margin-bottom:2rem; font-size:0.9375rem; line-height:1.6;
+    color:rgba(255,255,255,0.75);
+  }
+  .p-drawer__disclaimer strong { color:var(--gold); display:block; margin-bottom:0.5rem;
+    font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; }
+
+  /* Hero score row */
+  .p-drawer__hero {
+    display:flex; align-items:center; gap:1.5rem; margin-bottom:2.5rem;
+    padding:1.5rem; background:rgba(255,255,255,0.02); border-radius:12px;
+    border:1px solid rgba(251,191,36,0.08);
+  }
+  .p-drawer__score {
+    font-family:'Bebas Neue', sans-serif; font-size:4rem; line-height:1; color:var(--gold);
+  }
+  .p-drawer__score-meta { flex:1; }
+  .p-drawer__score-label {
+    font-size:0.6875rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--text-muted); margin-bottom:0.25rem;
+  }
+  .p-drawer__score-name { font-size:1.125rem; font-weight:600; color:var(--text); }
+  .p-drawer__score-tier {
+    display:inline-block; margin-left:0.5rem; padding:0.15rem 0.6rem; font-size:0.6875rem;
+    letter-spacing:0.1em; text-transform:uppercase; border-radius:999px;
+    background:rgba(251,191,36,0.12); color:var(--gold); border:1px solid rgba(251,191,36,0.25);
+  }
+
+  /* Section pattern */
+  .p-drawer__section { margin-bottom:2.5rem; }
+  .p-drawer__section-num {
+    font-family:'Bebas Neue', sans-serif; color:var(--gold); font-size:1.5rem;
+    letter-spacing:0.1em; margin-right:0.5rem; opacity:0.6;
+  }
+  .p-drawer__section-title {
+    font-family:'Bebas Neue', sans-serif; font-size:1.5rem; letter-spacing:0.08em;
+    color:var(--text); text-transform:uppercase; line-height:1; margin-bottom:0.25rem;
+    display:flex; align-items:center;
+  }
+  .p-drawer__section-sub {
+    font-size:0.8125rem; color:var(--text-muted); margin-bottom:1.25rem;
+  }
+  .p-drawer__section-sub a { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+
+  /* E-E-A-T grid */
+  .p-eeat-grid { display:grid; gap:1rem; }
+  .p-eeat-row {
+    display:grid; grid-template-columns:120px 1fr 80px; gap:1rem; align-items:start;
+    padding:1rem; background:rgba(255,255,255,0.02); border-radius:10px;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .p-eeat-row__label {
+    font-family:'Bebas Neue', sans-serif; font-size:1rem; letter-spacing:0.06em;
+    color:var(--gold); text-transform:uppercase; line-height:1.2;
+  }
+  .p-eeat-row__source { font-size:0.8125rem; color:var(--text-secondary); margin-bottom:0.5rem; }
+  .p-eeat-row__bar {
+    height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;
+    margin-bottom:0.5rem;
+  }
+  .p-eeat-row__bar-fill { height:100%; background:linear-gradient(90deg, var(--gold), #fde68a); border-radius:3px; transition:width 1s ease; }
+  .p-eeat-row__hint { font-size:0.75rem; color:var(--text-muted); }
+  .p-eeat-row__score { text-align:right; font-family:'Bebas Neue', sans-serif; font-size:1.5rem; color:var(--text); }
+  .p-eeat-row__score small { font-size:0.875rem; color:var(--text-muted); display:block; }
+
+  /* Citation audit */
+  .p-cite {
+    background:rgba(255,255,255,0.02); border-radius:10px; padding:1.25rem;
+    border:1px solid rgba(255,255,255,0.04); margin-bottom:1rem;
+  }
+  .p-cite__query {
+    font-size:0.95rem; color:var(--text); margin-bottom:0.875rem; font-style:italic;
+    padding-left:0.75rem; border-left:2px solid var(--gold);
+  }
+  .p-cite__results { display:grid; grid-template-columns:repeat(2, 1fr); gap:0.5rem; }
+  .p-cite__row {
+    display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
+    padding:0.6rem 0.875rem; background:rgba(0,0,0,0.25); border-radius:6px;
+    font-size:0.8125rem;
+  }
+  .p-cite__provider { color:var(--text-secondary); font-weight:500; }
+  .p-cite__status { font-size:0.75rem; letter-spacing:0.05em; text-transform:uppercase; }
+  .p-cite__status--cited { color:#4ade80; }
+  .p-cite__status--mentioned { color:var(--gold); }
+  .p-cite__status--absent { color:#f87171; }
+  .p-cite__status--locked { color:var(--text-muted); }
+  .p-cite__rank {
+    display:inline-block; width:18px; height:18px; line-height:18px; text-align:center;
+    border-radius:50%; background:rgba(74,222,128,0.15); color:#4ade80;
+    font-size:0.6875rem; font-weight:700; margin-left:0.4rem;
+  }
+  .p-cite__overall {
+    margin-top:1.5rem; padding:1rem 1.25rem; background:rgba(251,191,36,0.05);
+    border-radius:8px; font-size:0.875rem; color:var(--text-secondary); display:flex;
+    justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+  }
+  .p-cite__overall strong { color:var(--gold); font-size:1rem; }
+  .p-cite__rerun {
+    background:transparent; border:1px solid rgba(251,191,36,0.3); color:var(--gold);
+    padding:0.5rem 1rem; border-radius:6px; font-size:0.75rem; letter-spacing:0.08em;
+    text-transform:uppercase; cursor:pointer; transition:all 0.2s;
+  }
+  .p-cite__rerun:hover:not(:disabled) { background:rgba(251,191,36,0.1); }
+  .p-cite__rerun:disabled { opacity:0.4; cursor:not-allowed; }
+
+  /* Compounding chart */
+  .p-compound {
+    background:rgba(255,255,255,0.02); border-radius:10px; padding:1.5rem;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .p-compound__chart { width:100%; height:140px; margin-bottom:1rem; }
+  .p-compound__line { fill:none; stroke:var(--gold); stroke-width:2; }
+  .p-compound__area { fill:url(#p-compound-grad); }
+  .p-compound__dot { fill:var(--gold); }
+  .p-compound__events { font-size:0.8125rem; }
+  .p-compound__event {
+    display:grid; grid-template-columns:90px 36px 1fr; gap:0.75rem; padding:0.5rem 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .p-compound__event:last-child { border-bottom:none; }
+  .p-compound__event-date { color:var(--text-muted); }
+  .p-compound__event-score { color:var(--gold); font-weight:600; text-align:center; }
+  .p-compound__event-label { color:var(--text-secondary); }
+
+  /* Deliverables */
+  .p-deliv { display:flex; flex-direction:column; gap:0.5rem; }
+  .p-deliv__row {
+    display:grid; grid-template-columns:24px 1fr auto; gap:0.875rem; align-items:center;
+    padding:0.75rem 1rem; background:rgba(255,255,255,0.02); border-radius:8px;
+    border:1px solid rgba(255,255,255,0.04); font-size:0.875rem;
+  }
+  .p-deliv__icon { width:24px; height:24px; display:flex; align-items:center; justify-content:center; }
+  .p-deliv__icon i { font-size:1rem; }
+  .p-deliv__icon--shipped i { color:#4ade80; }
+  .p-deliv__icon--pending i { color:var(--gold); }
+  .p-deliv__icon--inprog i { color:var(--gold); }
+  .p-deliv__icon--locked i { color:var(--text-muted); }
+  .p-deliv__label { color:var(--text); font-weight:500; }
+  .p-deliv__perf { display:block; color:var(--text-muted); font-size:0.75rem; margin-top:0.2rem; }
+  .p-deliv__url {
+    color:var(--gold); font-size:0.75rem; text-decoration:none;
+    border:1px solid rgba(251,191,36,0.25); padding:0.25rem 0.6rem; border-radius:6px;
+  }
+  .p-deliv__url:hover { background:rgba(251,191,36,0.08); }
+  .p-deliv__summary {
+    margin-top:1rem; padding:0.875rem 1rem; background:rgba(251,191,36,0.05);
+    border-radius:8px; font-size:0.8125rem; color:var(--text-secondary);
+  }
+
+  /* Data sources */
+  .p-source-list { display:grid; gap:0.5rem; }
+  .p-source {
+    display:grid; grid-template-columns:160px 1fr auto; gap:1rem; align-items:center;
+    padding:0.6rem 1rem; background:rgba(255,255,255,0.02); border-radius:6px;
+    font-size:0.8125rem;
+  }
+  .p-source__name { color:var(--text); font-weight:500; }
+  .p-source__purpose { color:var(--text-muted); }
+  .p-source__cost { color:var(--gold); font-family:monospace; font-size:0.75rem; }
+  .p-source__total {
+    margin-top:0.875rem; padding:0.875rem 1rem; background:rgba(251,191,36,0.05);
+    border-radius:6px; font-size:0.8125rem; color:var(--text-secondary);
+    display:flex; justify-content:space-between;
+  }
+  .p-source__total strong { color:var(--gold); }
+
+  /* Locked state for non-owners */
+  .p-locked {
+    padding:2rem; text-align:center; background:rgba(255,255,255,0.02);
+    border-radius:10px; border:1px dashed rgba(251,191,36,0.2);
+    color:var(--text-muted); font-size:0.9375rem;
+  }
+  .p-locked i { color:var(--gold); font-size:1.5rem; margin-bottom:0.5rem; display:block; }
+  .p-locked__cta {
+    display:inline-block; margin-top:1rem; padding:0.6rem 1.25rem;
+    background:var(--gold); color:#020617; font-weight:700; font-size:0.8125rem;
+    letter-spacing:0.08em; text-transform:uppercase; border-radius:6px;
+    text-decoration:none;
+  }
+  .p-locked__cta:hover { background:#fde68a; }
+
+  @media (max-width: 768px) {
+    .p-drawer { inset:2vh 0 0 0; border-radius:16px 16px 0 0; }
+    .p-drawer__header { padding:1rem 1.25rem; }
+    .p-drawer__body { padding:1rem 1.25rem 4rem; }
+    .p-eeat-row { grid-template-columns:90px 1fr 60px; gap:0.75rem; }
+    .p-cite__results { grid-template-columns:1fr; }
+    .p-source { grid-template-columns:1fr auto; }
+    .p-source__purpose { grid-column:1 / -1; }
   }
   .p-signal__ring-wrap { position:relative; width:72px; height:72px; min-width:72px; }
   .p-signal__ring-svg { width:72px; height:72px; transform:rotate(-90deg); }
@@ -752,8 +985,10 @@
           <div class="p-statbar__links" id="p-sb-links"></div>
         </div>
 
-        <!-- Signal Brief — SVG ring infographic -->
-        <div class="p-signal p-reveal" id="p-signal" style="display:none">
+        <!-- Signal Brief / Authority Drawer trigger — click anywhere on this card opens the drawer -->
+        <div class="p-signal p-reveal" id="p-signal" style="display:none" role="button" tabindex="0"
+             onclick="openAuthorityDrawer()"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAuthorityDrawer();}">
           <div class="p-signal__ring-wrap">
             <svg class="p-signal__ring-svg" viewBox="0 0 72 72">
               <circle class="p-signal__ring-bg" cx="36" cy="36" r="30"/>
@@ -763,12 +998,10 @@
             <span class="p-signal__ring-num" id="p-signal-score">0</span>
           </div>
           <div class="p-signal__info">
-            <div class="p-signal__title">Signal Brief</div>
-            <div class="p-signal__desc">Authority intelligence report — topics, audience overlap, and narrative potential.</div>
+            <div class="p-signal__title">Authority Engine Brief</div>
+            <div class="p-signal__desc">E-E-A-T audit, live LLM citation tests, deliverables — every input behind the score.</div>
           </div>
-          <a class="p-signal__btn" id="p-signal-btn" href="#" onclick="alert('Sign in to download the full Signal Brief PDF.');return false;">
-            <i class="fa-solid fa-file-arrow-down"></i> Download PDF
-          </a>
+          <div class="p-signal__open-hint">Open audit <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
         </div>
 
         <!-- Signal Breakdown — dimensional bars + improvement actions -->
@@ -880,6 +1113,30 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===================================================================
+       AUTHORITY DRAWER — the locked guest-only audit panel
+       Opens when user clicks the Signal Brief card. Three audience states:
+       public / network member / owner. Backed by GET /api/signal/audit/:slug.
+       =================================================================== -->
+  <div class="p-drawer-backdrop" id="p-drawer-backdrop" onclick="closeAuthorityDrawer()"></div>
+  <aside class="p-drawer" id="p-drawer" role="dialog" aria-modal="true" aria-labelledby="p-drawer-title">
+    <div class="p-drawer__header">
+      <div>
+        <div class="p-drawer__title" id="p-drawer-title">Authority Engine Brief</div>
+        <div class="p-drawer__sub" id="p-drawer-sub">Loading audit…</div>
+      </div>
+      <button class="p-drawer__close" onclick="closeAuthorityDrawer()" aria-label="Close audit drawer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="p-drawer__body" id="p-drawer-body">
+      <div style="text-align:center;padding:3rem;color:var(--text-muted);">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size:1.5rem;color:var(--gold);"></i>
+        <p style="margin-top:0.75rem;">Loading the audit…</p>
+      </div>
+    </div>
+  </aside>
 
   <script src="/main.js"></script>
   <script src="/header.js"></script>
@@ -1147,39 +1404,23 @@
           var pdScore = profile.signalDiscourse || 0;
           var paScore = profile.signalAuthorityScore || 0;
 
+          // E-E-A-T mapping (Google Search Quality Rater Guidelines § 5.1)
+          // Math is identical to the four signal-engine pillars; labels match Google's framework.
           dims.push({
-            label: 'Social Footprint', score: sfScore, max: 25,
-            desc: socialCount + ' of 7 platforms connected',
-            action: sfScore < 20 ? {
-              icon: 'fa-solid fa-share-nodes',
-              title: 'Connect Your Social Profiles',
-              desc: 'Link LinkedIn, X, Instagram, YouTube, TikTok, Facebook, and your website to strengthen your digital footprint.',
-              impact: '+' + (25 - sfScore) + ' pts possible'
-            } : null
-          });
-          dims.push({
-            label: 'Content Reach', score: crScore, max: 25,
+            label: 'Experience', sublabel: 'Live appearances + transcript depth', score: crScore, max: 25,
             desc: appearances.length + ' appearance' + (appearances.length !== 1 ? 's' : '') + ' on Mornings in the Lab',
+            googleRef: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
             action: crScore < 20 ? {
               icon: 'fa-solid fa-microphone-lines',
               title: 'Book Another Appearance',
-              desc: 'Each appearance generates new content, clips, and backlinks that amplify your reach across every platform.',
+              desc: 'Each appearance adds 2,000–5,000 words of transcribed primary-source material that LLMs can cite.',
               impact: '+8 pts per appearance'
             } : null
           });
           dims.push({
-            label: 'Public Discourse', score: pdScore, max: 25,
-            desc: faqs.length + ' FAQs, ' + insights.length + ' key insights indexed',
-            action: pdScore < 20 ? {
-              icon: 'fa-solid fa-comments',
-              title: 'Create Content Through Dialog',
-              desc: 'Recurring appearances and community interaction build discourse around your expertise — the engine that drives discovery.',
-              impact: '+' + (20 - pdScore) + ' pts achievable'
-            } : null
-          });
-          dims.push({
-            label: 'Authority', score: paScore, max: 25,
-            desc: (hasTwin ? 'Digital Twin active' : 'No Digital Twin') + ' · ' + (tierLevel >= 2 ? 'VIP tier' : tierLevel >= 1 ? 'Featured tier' : 'Basic tier'),
+            label: 'Expertise', sublabel: 'Verified credentials + key insights + identity URLs', score: paScore, max: 25,
+            desc: 'Apollo verified · ' + insights.length + ' key insights · ' + (sameAsCount || 0) + ' identity URLs',
+            googleRef: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
             action: paScore < 20 ? {
               icon: 'fa-solid fa-crown',
               title: hasTwin ? 'Upgrade to VIP' : 'Activate Your Digital Twin',
@@ -1187,6 +1428,28 @@
                 ? 'VIP members get weekly signal updates, priority matching, and top placement — the full authority engine.'
                 : 'Your Digital Twin creates a persistent AI representation trained on your real content and expertise.',
               impact: '+' + (hasTwin ? '5' : '8') + ' pts'
+            } : null
+          });
+          dims.push({
+            label: 'Authoritativeness', sublabel: 'Inbound mentions + cross-network references', score: pdScore, max: 25,
+            desc: faqs.length + ' FAQs · ' + insights.length + ' insights indexed',
+            googleRef: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+            action: pdScore < 20 ? {
+              icon: 'fa-solid fa-comments',
+              title: 'Build Discourse Around Your Expertise',
+              desc: 'Recurring appearances and community interaction generate the inbound mentions and cross-references that LLMs treat as authoritative signal.',
+              impact: '+' + (20 - pdScore) + ' pts achievable'
+            } : null
+          });
+          dims.push({
+            label: 'Trustworthiness', sublabel: 'Verified social platforms (SociaVault)', score: sfScore, max: 25,
+            desc: socialCount + ' of 7 platforms verified',
+            googleRef: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+            action: sfScore < 20 ? {
+              icon: 'fa-solid fa-share-nodes',
+              title: 'Connect Your Social Profiles',
+              desc: 'Verifiable social presence is what models use to confirm you are who you say you are. Each connected platform: predictable +1 to +5.',
+              impact: '+' + (25 - sfScore) + ' pts possible'
             } : null
           });
 
@@ -1486,6 +1749,402 @@
       if (profile.centerStageVideoId) s['@graph'].push({'@type':'VideoObject',name:name+' — Center Stage Interview | Mornings in the Lab',thumbnailUrl:'https://img.youtube.com/vi/'+profile.centerStageVideoId+'/maxresdefault.jpg',contentUrl:'https://www.youtube.com/watch?v='+profile.centerStageVideoId,embedUrl:'https://www.youtube.com/embed/'+profile.centerStageVideoId,publisher:{'@type':'Organization',name:'Mornings in the Lab',url:'https://mornings.live'}});
       var el = document.createElement('script'); el.type = 'application/ld+json'; el.textContent = JSON.stringify(s); document.head.appendChild(el);
     }
+  })();
+  </script>
+
+  <!-- ===================================================================
+       AUTHORITY DRAWER — fetch + render the audit payload
+       =================================================================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    var AUDIT_API = 'https://app.conversationos.live/api/signal/audit/';
+    var drawerCache = null;
+    var drawerCacheSlug = null;
+
+    function getProfileSlug() {
+      var p = location.pathname.replace(/\/+$/, '').split('/');
+      var i = p.indexOf('profile');
+      return i >= 0 && p[i+1] ? p[i+1] : null;
+    }
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      try {
+        var d = new Date(iso);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      } catch (e) { return iso; }
+    }
+
+    function fmtRelative(iso) {
+      if (!iso) return 'never';
+      var d = new Date(iso); var now = new Date();
+      var hours = Math.floor((now - d) / 3600000);
+      if (hours < 1) return 'just now';
+      if (hours < 24) return hours + ' hour' + (hours === 1 ? '' : 's') + ' ago';
+      var days = Math.floor(hours / 24);
+      if (days < 7) return days + ' day' + (days === 1 ? '' : 's') + ' ago';
+      return fmtDate(iso);
+    }
+
+    // ── Public open/close (exposed to inline onclick handlers) ─────────────
+    window.openAuthorityDrawer = function() {
+      var backdrop = document.getElementById('p-drawer-backdrop');
+      var drawer = document.getElementById('p-drawer');
+      if (!backdrop || !drawer) return;
+      backdrop.classList.add('is-open');
+      drawer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var slug = getProfileSlug();
+      if (slug && slug !== drawerCacheSlug) {
+        loadAudit(slug);
+      }
+    };
+
+    window.closeAuthorityDrawer = function() {
+      var backdrop = document.getElementById('p-drawer-backdrop');
+      var drawer = document.getElementById('p-drawer');
+      if (!backdrop || !drawer) return;
+      backdrop.classList.remove('is-open');
+      drawer.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+
+    // ESC closes drawer
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var drawer = document.getElementById('p-drawer');
+        if (drawer && drawer.classList.contains('is-open')) closeAuthorityDrawer();
+      }
+    });
+
+    // ── Fetch ──────────────────────────────────────────────────────────────
+    function loadAudit(slug) {
+      drawerCacheSlug = slug;
+      var url = AUDIT_API + encodeURIComponent(slug);
+      fetch(url, { credentials: 'include' })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(data) {
+          if (!data) {
+            renderError('Audit data unavailable. Please try again later.');
+            return;
+          }
+          drawerCache = data;
+          renderDrawer(data);
+        })
+        .catch(function(err) {
+          console.error('[AuthorityDrawer] fetch failed', err);
+          renderError('Could not load the audit. Please try again later.');
+        });
+    }
+
+    function renderError(msg) {
+      var body = document.getElementById('p-drawer-body');
+      body.innerHTML = '<div class="p-locked"><i class="fa-solid fa-circle-exclamation"></i>' + esc(msg) + '</div>';
+    }
+
+    // ── Renderers ──────────────────────────────────────────────────────────
+    function renderDrawer(d) {
+      var body = document.getElementById('p-drawer-body');
+      var sub = document.getElementById('p-drawer-sub');
+      var name = d.guest && d.guest.fullName || 'Guest';
+      var lastRefresh = d.citationAudit && d.citationAudit.lastRunAt;
+      sub.textContent = name + ' · Last refresh ' + fmtRelative(lastRefresh);
+
+      var html = '';
+      html += renderDisclaimer(d);
+      html += renderHero(d);
+      html += renderEEAT(d);
+      html += renderCitationAudit(d);
+      html += renderCompounding(d);
+      html += renderDeliverables(d);
+      html += renderDataSources(d);
+      body.innerHTML = html;
+
+      // Animate score bars after paint
+      requestAnimationFrame(function() {
+        var bars = document.querySelectorAll('.p-eeat-row__bar-fill');
+        bars.forEach(function(b) {
+          var pct = b.getAttribute('data-pct');
+          b.style.width = pct + '%';
+        });
+      });
+
+      // Wire the rerun button if present (owner only)
+      var rerunBtn = document.getElementById('p-cite-rerun');
+      if (rerunBtn) {
+        rerunBtn.addEventListener('click', function() {
+          rerunBtn.disabled = true;
+          rerunBtn.textContent = 'Running…';
+          fetch(AUDIT_API + encodeURIComponent(drawerCacheSlug) + '/rerun', {
+            method: 'POST',
+            credentials: 'include',
+          }).then(function(r) {
+            if (r.status === 202) {
+              rerunBtn.textContent = 'Audit queued. Refresh in a few minutes.';
+            } else if (r.status === 429) {
+              rerunBtn.textContent = 'Already ran in last 24h';
+            } else if (r.status === 403) {
+              rerunBtn.textContent = 'Owner only';
+            } else {
+              rerunBtn.textContent = 'Failed — try again';
+              rerunBtn.disabled = false;
+            }
+          }).catch(function() {
+            rerunBtn.textContent = 'Failed — try again';
+            rerunBtn.disabled = false;
+          });
+        });
+      }
+    }
+
+    function renderDisclaimer(d) {
+      var text = d.honestDisclaimer || "We don't own the LLM's decision. We can't promise you'll show up in ChatGPT, Gemini, or Perplexity — nobody honestly can. What we can do is produce the strongest E-E-A-T signals on the open web. Here's the audit.";
+      return '<div class="p-drawer__disclaimer">' +
+        '<strong><i class="fa-solid fa-circle-info"></i> The Honest Version</strong>' +
+        esc(text) +
+        '</div>';
+    }
+
+    function renderHero(d) {
+      var score = d.signalScore || 0;
+      var name = (d.guest && d.guest.fullName) || 'Guest';
+      var tier = (d.guest && d.guest.tier) || '';
+      var tierLabel = tier === 'vip' ? 'VIP' : tier === 'member' ? 'Member' : tier === 'featured' ? 'Featured' : '';
+      var tierBadge = tierLabel ? '<span class="p-drawer__score-tier">★ ' + tierLabel + '</span>' : '';
+      return '<div class="p-drawer__hero">' +
+        '<div class="p-drawer__score">' + score + '</div>' +
+        '<div class="p-drawer__score-meta">' +
+          '<div class="p-drawer__score-label">Signal Score · 0–100</div>' +
+          '<div class="p-drawer__score-name">' + esc(name) + tierBadge + '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function renderEEAT(d) {
+      var e = d.eeat || {};
+      var rows = [
+        { key: 'experience',        label: 'Experience' },
+        { key: 'expertise',         label: 'Expertise' },
+        { key: 'authoritativeness', label: 'Authoritativeness' },
+        { key: 'trustworthiness',   label: 'Trustworthiness' },
+      ];
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">01</span>E-E-A-T Audit</div>' +
+        '<div class="p-drawer__section-sub">Mapped to <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">Google’s Search Quality Guidelines § 5.1</a> — the four signals models use to decide who to cite.</div>' +
+        '<div class="p-eeat-grid">';
+      rows.forEach(function(r) {
+        var p = e[r.key] || { score: 0, source: '' };
+        var pct = Math.round((p.score / 25) * 100);
+        html += '<div class="p-eeat-row">' +
+          '<div class="p-eeat-row__label">' + r.label + '</div>' +
+          '<div>' +
+            '<div class="p-eeat-row__source">' + esc(p.source || '') + '</div>' +
+            '<div class="p-eeat-row__bar"><div class="p-eeat-row__bar-fill" data-pct="' + pct + '" style="width:0%"></div></div>' +
+            '<div class="p-eeat-row__hint">' + esc(p.evidence || (p.score + '/25')) + '</div>' +
+          '</div>' +
+          '<div class="p-eeat-row__score">' + p.score + '<small>/ 25</small></div>' +
+        '</div>';
+      });
+      html += '</div></div>';
+      return html;
+    }
+
+    function renderCitationAudit(d) {
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">02</span>Live LLM Citation Audit</div>' +
+        '<div class="p-drawer__section-sub">We literally ask Perplexity, ChatGPT, Gemini, and Claude about your topic and show what they returned.</div>';
+
+      if (d.audienceState === 'public') {
+        html += '<div class="p-locked">' +
+          '<i class="fa-solid fa-lock"></i>' +
+          'Sign in as the page owner to see the live LLM citation audit — the actual answers we got back from ChatGPT, Perplexity, Claude, and Gemini when we asked who the authority is on your topics.' +
+          '<a class="p-locked__cta" href="https://app.conversationos.live/login">Sign in</a>' +
+        '</div></div>';
+        return html;
+      }
+
+      var ca = d.citationAudit;
+      if (!ca || !ca.queries || !ca.queries.length) {
+        html += '<div class="p-locked">' +
+          '<i class="fa-solid fa-clock"></i>' +
+          'No citation audit has run yet. ' +
+          (d.audienceState === 'owner' ? 'Click <em>Run citation audit now</em> to launch the first one.' : 'The next scheduled audit will populate this section.') +
+          (d.audienceState === 'owner' ? '<button class="p-cite__rerun" id="p-cite-rerun" style="margin-top:1rem;display:inline-block;">Run citation audit now</button>' : '') +
+        '</div></div>';
+        return html;
+      }
+
+      ca.queries.forEach(function(q) {
+        html += '<div class="p-cite">' +
+          '<div class="p-cite__query">“' + esc(q.query) + '”</div>' +
+          '<div class="p-cite__results">';
+        q.results.forEach(function(res) {
+          var statusClass = 'p-cite__status--' + (res.status || 'absent');
+          var icon = res.status === 'cited' ? '✓' : res.status === 'mentioned' ? '⚠' : '✗';
+          var rankBadge = (res.status === 'cited' && res.rank) ? '<span class="p-cite__rank">#' + res.rank + '</span>' : '';
+          var providerLabel = (res.provider || '').charAt(0).toUpperCase() + (res.provider || '').slice(1);
+          html += '<div class="p-cite__row">' +
+            '<span class="p-cite__provider">' + esc(providerLabel) + '</span>' +
+            '<span class="p-cite__status ' + statusClass + '">' + icon + ' ' + esc(res.status || 'absent') + rankBadge + '</span>' +
+          '</div>';
+        });
+        html += '</div></div>';
+      });
+
+      var oc = ca.overallCitations || { cited: 0, mentioned: 0, absent: 0 };
+      var total = (oc.cited || 0) + (oc.mentioned || 0) + (oc.absent || 0);
+      html += '<div class="p-cite__overall">' +
+        '<div><strong>' + (oc.cited || 0) + ' / ' + total + '</strong> citations across ' + ca.queries.length + ' queries · ' + (oc.mentioned || 0) + ' mentions · ' + (oc.absent || 0) + ' absent</div>';
+      if (d.audienceState === 'owner') {
+        html += '<button class="p-cite__rerun" id="p-cite-rerun">Re-run audit (max 1/24h)</button>';
+      }
+      html += '</div></div>';
+      return html;
+    }
+
+    function renderCompounding(d) {
+      var hist = (d.history || []).slice().reverse();   // ascending by date
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">03</span>Authority Compounding</div>' +
+        '<div class="p-drawer__section-sub">The floor never drops. Every appearance, every artifact, every recompute makes you more citable.</div>' +
+        '<div class="p-compound">';
+
+      if (hist.length < 2) {
+        html += '<p style="color:var(--text-muted);font-size:0.875rem;text-align:center;padding:1rem;">' +
+          'Compounding chart appears after the second daily snapshot. First snapshot recorded ' +
+          fmtRelative(hist[0] && hist[0].snapshotAt) + '.' +
+        '</p>';
+      } else {
+        // Build SVG line chart
+        var w = 800, h = 140, pad = 20;
+        var xs = hist.map(function(_, i) { return pad + (i / (hist.length - 1)) * (w - pad * 2); });
+        // Y axis scales to 100 (max score) so bars trend visually toward the top.
+        var ys = hist.map(function(snap) {
+          var s = snap.signalTotal || 0;
+          return (h - pad) - (s / 100) * (h - pad * 2);
+        });
+        var pathD = 'M ' + xs[0] + ' ' + ys[0];
+        for (var i = 1; i < xs.length; i++) pathD += ' L ' + xs[i] + ' ' + ys[i];
+        var areaD = pathD + ' L ' + xs[xs.length - 1] + ' ' + (h - pad) + ' L ' + xs[0] + ' ' + (h - pad) + ' Z';
+        html += '<svg class="p-compound__chart" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none">' +
+          '<defs><linearGradient id="p-compound-grad" x1="0" y1="0" x2="0" y2="1">' +
+            '<stop offset="0%" stop-color="#fbbf24" stop-opacity="0.4"/>' +
+            '<stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>' +
+          '</linearGradient></defs>' +
+          '<path class="p-compound__area" d="' + areaD + '"/>' +
+          '<path class="p-compound__line" d="' + pathD + '"/>';
+        for (var j = 0; j < xs.length; j++) {
+          html += '<circle class="p-compound__dot" cx="' + xs[j] + '" cy="' + ys[j] + '" r="3"/>';
+        }
+        html += '</svg>';
+
+        html += '<div class="p-compound__events">';
+        var firstScore = hist[0].signalTotal || 0;
+        var lastScore = hist[hist.length - 1].signalTotal || 0;
+        var delta = lastScore - firstScore;
+        var arrow = delta > 0 ? '↗' : delta < 0 ? '↘' : '→';
+        html += '<div style="text-align:center;padding:0.5rem 0;color:var(--gold);font-size:0.875rem;">' +
+          fmtDate(hist[0].snapshotAt) + ' → ' + fmtDate(hist[hist.length - 1].snapshotAt) +
+          ' · ' + arrow + ' ' + (delta >= 0 ? '+' : '') + delta + ' points' +
+        '</div>';
+        // Show first, last, and any milestone snapshots
+        var milestones = [hist[0]];
+        if (hist.length > 2) milestones.push(hist[Math.floor(hist.length / 2)]);
+        milestones.push(hist[hist.length - 1]);
+        milestones.forEach(function(m) {
+          html += '<div class="p-compound__event">' +
+            '<span class="p-compound__event-date">' + fmtDate(m.snapshotAt) + '</span>' +
+            '<span class="p-compound__event-score">' + (m.signalTotal || 0) + '</span>' +
+            '<span class="p-compound__event-label">' + esc(m.label || 'Daily snapshot') + '</span>' +
+          '</div>';
+        });
+        html += '</div>';
+      }
+      html += '</div></div>';
+      return html;
+    }
+
+    function renderDeliverables(d) {
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">04</span>Deliverables · Was the work done?</div>' +
+        '<div class="p-drawer__section-sub">Every artifact your tier produced — with proof-of-work URLs and performance data.</div>';
+
+      if (d.audienceState === 'public') {
+        html += '<div class="p-locked">' +
+          '<i class="fa-solid fa-lock"></i>' +
+          'Sign in as the page owner to see the deliverables audit — every clip, post, transcript, and asset, plus the views, indexing status, and proof-of-work URL for each one.' +
+          '<a class="p-locked__cta" href="https://app.conversationos.live/login">Sign in</a>' +
+        '</div></div>';
+        return html;
+      }
+
+      var deliv = d.deliverables || [];
+      if (!deliv.length) {
+        html += '<div class="p-locked">' +
+          '<i class="fa-solid fa-hourglass-half"></i>' +
+          'No deliverables tracked yet. Ask the production team to populate this section after your appearance ships.' +
+        '</div></div>';
+        return html;
+      }
+
+      var shipped = 0, total = deliv.length;
+      var rowsHtml = '<div class="p-deliv">';
+      deliv.forEach(function(item) {
+        var iconClass = 'p-deliv__icon--' + (item.status === 'shipped' ? 'shipped' : item.status === 'in_progress' ? 'inprog' : 'pending');
+        var iconChar = item.status === 'shipped' ? 'fa-check-circle' : item.status === 'in_progress' ? 'fa-circle-notch fa-spin' : 'fa-clock';
+        if (item.status === 'shipped') shipped++;
+        var perf = '';
+        if (item.performance) {
+          var bits = [];
+          if (item.performance.plays) bits.push(item.performance.plays + ' plays');
+          if (item.performance.views) bits.push(item.performance.views + ' views');
+          if (item.performance.indexed_at) bits.push('indexed ' + fmtDate(item.performance.indexed_at));
+          if (bits.length) perf = '<span class="p-deliv__perf">' + esc(bits.join(' · ')) + '</span>';
+        }
+        var urlBtn = item.url ? '<a class="p-deliv__url" href="' + esc(item.url) + '" target="_blank" rel="noopener">View</a>' : '<span style="font-size:0.75rem;color:var(--text-muted);">' + esc(item.status) + '</span>';
+        rowsHtml += '<div class="p-deliv__row">' +
+          '<div class="p-deliv__icon ' + iconClass + '"><i class="fa-solid ' + iconChar + '"></i></div>' +
+          '<div><div class="p-deliv__label">' + esc(item.label) + '</div>' + perf + '</div>' +
+          urlBtn +
+        '</div>';
+      });
+      rowsHtml += '</div>';
+      var pct = total ? Math.round((shipped / total) * 100) : 0;
+      rowsHtml += '<div class="p-deliv__summary">Production status: <strong style="color:var(--gold);">' + shipped + ' of ' + total + ' shipped (' + pct + '%)</strong></div>';
+      html += rowsHtml + '</div>';
+      return html;
+    }
+
+    function renderDataSources(d) {
+      var sources = d.dataSources || [];
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">05</span>Data Sources</div>' +
+        '<div class="p-drawer__section-sub">Every score is computed from named third-party providers. No black box.</div>' +
+        '<div class="p-source-list">';
+      var totalCost = 0;
+      sources.forEach(function(s) {
+        var cost = parseFloat(s.costPerRefresh || 0);
+        totalCost += cost;
+        html += '<div class="p-source">' +
+          '<div class="p-source__name">' + esc(s.name) + '</div>' +
+          '<div class="p-source__purpose">' + esc(s.purpose || '') + '</div>' +
+          '<div class="p-source__cost">$' + cost.toFixed(3) + '/refresh</div>' +
+        '</div>';
+      });
+      html += '</div>';
+      html += '<div class="p-source__total"><span>Total per recompute</span><strong>$' + totalCost.toFixed(2) + '</strong></div>';
+      html += '</div>';
+      return html;
+    }
+
   })();
   </script>
 
