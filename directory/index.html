@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guest Directory — Guest Engine | ConversationOS</title>
-<meta name="description" content="Discover expert guests for your show or podcast. Browse guests across Center Stage and more segments on the ConversationOS network.">
-<meta property="og:title" content="Guest Directory — GuestENGINE">
-<meta property="og:description" content="Discover expert guests for your show or podcast. Browse guests across Center Stage and more segments on the ConversationOS network.">
+<title>The Issue — Guest Engine | ConversationOS</title>
+<meta name="description" content="A weekly editorial publication of the people on our shows. Cover Story, On Air This Week, Just Aired, For Hosts. Updated every Monday at 04:00 ET.">
+<meta property="og:title" content="The Issue — Guest Engine">
+<meta property="og:description" content="A weekly editorial publication of the people on our shows. Updated every Monday.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guestengine.live/directory/">
 <meta property="og:image" content="https://guestengine.live/og-image.png">
@@ -14,1522 +14,629 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://guestengine.live/directory/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
+<!-- Editorial display serif (Fraunces) + Cabinet Grotesk for sans + JetBrains Mono for metadata -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Agent-readable links -->
+<link rel="alternate" type="application/json" href="https://app.conversationos.live/api/guest-marketplace/issue/current.json" title="Current issue (JSON)">
+<link rel="alternate" type="text/markdown" href="https://app.conversationos.live/api/guest-marketplace/issue/current.md" title="Current issue (Markdown)">
+
+<!-- JSON-LD Article schema. The runtime fetch updates the dateModified
+     and the cover-story name once issue data loads. -->
+<script type="application/ld+json" id="issue-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Issue — Guest Engine",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ConversationOS",
+    "logo": { "@type": "ImageObject", "url": "https://guestengine.live/assets/c-icon.png" }
+  },
+  "author": { "@type": "Organization", "name": "ConversationOS Editorial" },
+  "url": "https://guestengine.live/directory/"
+}
+</script>
+
 <style>
-/* ============================================================
-   GUEST DIRECTORY v7 — "Spotlight on the Guest"
-   Dark stage, lit cards. Premium contrast, not brightness.
-   ============================================================ */
+/* ──────────────────────────────────────────────────────────────────────
+   THE ISSUE — magazine-style guest directory.
+   Built on the existing GE color tokens (deep navy + gold) but introduces
+   editorial display typography (Fraunces) and asymmetric layouts.
+   ────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* PAGE */
-  --bg: #060a14;
-  --bg-grad: radial-gradient(ellipse at top, #0c1328 0%, #060a14 60%);
-
-  /* TIER SURFACES — the #1 fix: cards must be visibly distinct */
-  --vip-bg: #1c1a14;
-  --vip-bg-hover: #242016;
-  --vip-border: rgba(251,191,36,0.35);
-  --vip-border-hover: rgba(251,191,36,0.60);
-  --vip-glow: 0 0 0 1px rgba(251,191,36,0.15), 0 12px 40px rgba(251,191,36,0.08), 0 2px 8px rgba(0,0,0,0.4);
-  --vip-glow-hover: 0 0 0 1px rgba(251,191,36,0.35), 0 20px 60px rgba(251,191,36,0.18), 0 6px 20px rgba(0,0,0,0.5);
-
-  --member-bg: #171c2e;
-  --member-bg-hover: #1e2440;
-  --member-border: rgba(192,192,220,0.18);
-  --member-border-hover: rgba(192,192,220,0.40);
-  --member-shadow: 0 2px 10px rgba(0,0,0,0.3), 0 0 0 1px rgba(192,192,220,0.08);
-  --member-shadow-hover: 0 14px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(192,192,220,0.25);
-  --member-accent: #c0c0dc;
-
-  --free-bg: #111826;
-  --free-bg-hover: #172033;
-  --free-border: rgba(148,163,184,0.10);
-  --free-border-hover: rgba(148,163,184,0.28);
-  --free-shadow: 0 1px 6px rgba(0,0,0,0.25);
-  --free-shadow-hover: 0 10px 28px rgba(0,0,0,0.4);
-
-  /* ACCENTS */
-  --gold: #fbbf24;
-  --gold-soft: #f59e0b;
-  --silver: #cbd5e1;
-
-  /* TEXT */
-  --t-1: #ffffff;
-  --t-2: rgba(255,255,255,0.75);
-  --t-3: rgba(255,255,255,0.55);
-  --t-4: rgba(255,255,255,0.45);
-  --t-5: rgba(255,255,255,0.35);
-
-  /* SEGMENTS */
-  --seg-cs: #60a5fa;
-  --seg-dd: #a78bfa;
-  --seg-cc: #34d399;
-  --seg-ns: #f87171;
-  --seg-dk: #fbbf24;
-
-  --signal: #10b981;
-
-  /* FONT FAMILIES */
-  --f-display: 'Cabinet Grotesk', system-ui, -apple-system, sans-serif;
-  --f-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --ge-bg: #0a0e1a;
+  --ge-bg-2: #0f1424;
+  --ge-bg-3: #141a2e;
+  --ge-fg: #f4f1ea;
+  --ge-fg-dim: #b8b3a8;
+  --ge-fg-faint: #6b6b7a;
+  --ge-gold: #f4c842;
+  --ge-gold-dim: #c9a437;
+  --ge-rule: rgba(244, 241, 234, 0.08);
+  --ge-rule-strong: rgba(244, 241, 234, 0.15);
+  --ge-vip: linear-gradient(135deg, #f4c842 0%, #d4a432 100%);
+  --serif: "Fraunces", "Tiempos", Georgia, serif;
+  --sans: "Cabinet Grotesk", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-/* ============================================================
-   RESET + BASE
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
 html, body {
+  background: var(--ge-bg);
+  color: var(--ge-fg);
+  font-family: var(--sans);
   margin: 0;
   padding: 0;
-  background: var(--bg);
-  color: var(--t-1);
-  font-family: var(--f-body);
-  font-size: 15px;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  background: var(--bg-grad);
-  background-attachment: fixed;
-  min-height: 100vh;
 }
 
 a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
 
-::selection { background: rgba(251,191,36,0.25); color: #fff; }
-
-/* ============================================================
-   HERO (top-of-page)
-   ============================================================ */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 600px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  overflow: hidden;
-  isolation: isolate;
+/* ─── HEADER (matches existing site chrome) ─────────────────────────── */
+.ge-header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 32px;
+  background: rgba(10, 14, 26, 0.92);
+  backdrop-filter: saturate(140%) blur(18px);
+  -webkit-backdrop-filter: saturate(140%) blur(18px);
+  border-bottom: 1px solid var(--ge-rule);
 }
-
-.hero__video-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-}
-.hero__video, .hero__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-.hero__unmute {
-  position: absolute;
-  top: 80px;
-  right: 40px;
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: rgba(255,255,255,0.6);
-  font-size: 18px;
-}
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to top, rgba(6,10,20,1) 0%, rgba(6,10,20,0.65) 35%, rgba(6,10,20,0.15) 70%, rgba(6,10,20,0.35) 100%),
-    linear-gradient(to right, rgba(6,10,20,0.55) 0%, rgba(6,10,20,0.0) 50%);
+.ge-header__logo { display: flex; align-items: center; gap: 12px; }
+.ge-header__logo-icon { width: 32px; height: 32px; }
+.ge-header__logo-cos { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--ge-gold); }
+.ge-header__logo-ge { display: flex; gap: 6px; font-weight: 800; font-size: 16px; letter-spacing: 0.02em; }
+.ge-header__logo-engine { color: var(--ge-gold); }
+.ge-header__nav { display: flex; gap: 28px; }
+.ge-header__nav a { font-size: 14px; font-weight: 500; color: var(--ge-fg); }
+.ge-header__nav a:hover { color: var(--ge-gold); }
+.ge-header__login { font-size: 14px; font-weight: 600; color: var(--ge-fg); padding: 10px 18px; }
+.ge-header__hamburger { display: none; }
+@media (max-width: 900px) {
+  .ge-header__nav { display: none; }
+  .ge-header__hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .ge-header__hamburger span { width: 22px; height: 2px; background: var(--ge-fg); }
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 0 80px 80px;
-  max-width: 1200px;
-  text-align: left;
+/* ─── MASTHEAD ──────────────────────────────────────────────────────── */
+.issue-masthead {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 32px 40px;
+  border-bottom: 1px solid var(--ge-rule);
 }
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--f-display);
+.issue-masthead__topline {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  font-family: var(--mono);
   font-size: 12px;
-  font-weight: 700;
+  color: var(--ge-fg-dim);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--gold);
-  margin-bottom: 22px;
-}
-.hero-eyebrow::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--gold);
-  opacity: 0.8;
-}
-
-.hero-content h1 {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 72px;
-  line-height: 1.0;
-  letter-spacing: -1px;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-}
-.hero-content h1 .gold { color: #fbbf24; }
-
-.hero-sub {
-  margin-top: 28px;
-  font-size: 19px;
-  color: rgba(255,255,255,0.78);
-  max-width: 560px;
-  line-height: 1.55;
-  letter-spacing: -0.005em;
-}
-
-.hero-cta { display: flex; gap: 16px; margin-top: 40px; }
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fbbf24;
-  color: #050914;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  padding: 14px 26px;
-  border-radius: 999px;
-  border: 1px solid rgba(251,191,36,0.5);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 6px 24px rgba(251,191,36,0.25);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(251,191,36,0.35);
-  filter: brightness(1.06);
-}
-
-/* ============================================================
-   DIRECTORY HEADER
-   ============================================================ */
-.dir-header {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 80px 32px 28px;
-}
-.dir-header-inner { }
-.dir-eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 16px;
-  opacity: 0.85;
-}
-.hero-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: flex-end;
-}
-.hero-row h1 {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: clamp(34px, 4.4vw, 56px);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  margin: 0 0 14px;
-  color: #fff;
-}
-.hero-row h1 em {
-  font-style: normal;
-  background: linear-gradient(180deg, #fde68a 0%, #fbbf24 55%, #d97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-row .sub {
-  max-width: 680px;
-  font-size: 15.5px;
-  line-height: 1.6;
-  color: var(--t-2);
-  margin: 0;
-}
-
-/* Stats */
-.stats {
-  display: flex;
-  gap: 10px;
-  align-items: stretch;
-}
-.st {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-  padding: 14px 20px;
-  text-align: center;
-  min-width: 92px;
-  backdrop-filter: blur(6px);
-}
-.st-v {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 28px;
-  line-height: 1;
-  color: #fff;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
-}
-.st-l {
-  font-size: 10.5px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--t-4);
-}
-
-/* ============================================================
-   SEGMENT LEGEND
-   ============================================================ */
-.seg-legend {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 32px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-items: center;
-  font-size: 12px;
-  color: var(--t-3);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 500;
-}
-.seg-legend > span:first-child {
-  color: var(--t-4);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-}
-.seg-legend .leg {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--t-2);
-  letter-spacing: 0.06em;
-  text-transform: none;
-  font-size: 12.5px;
-  font-weight: 500;
-}
-.seg-legend .dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.04);
-}
-
-/* ============================================================
-   CONTROLS (search + chips + count)
-   ============================================================ */
-.ctrl {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 32px 28px;
-  display: grid;
-  grid-template-columns: minmax(260px, 360px) 1fr auto;
-  gap: 16px;
-  align-items: center;
-}
-
-.search {
-  width: 100%;
-  background:
-    rgba(255,255,255,0.06) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') no-repeat 16px center;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #fff;
-  font-family: var(--f-body);
-  font-size: 14.5px;
-  padding: 14px 16px 14px 46px;
-  border-radius: 12px;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-}
-.search::placeholder { color: var(--t-4); }
-.search:focus {
-  border-color: rgba(251,191,36,0.55);
-  background-color: rgba(255,255,255,0.09);
-  box-shadow: 0 0 0 3px rgba(251,191,36,0.12);
-}
-
-.chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.ch {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: var(--t-2);
-  padding: 9px 14px;
-  border-radius: 999px;
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  user-select: none;
-  letter-spacing: 0.02em;
-}
-.ch:hover {
-  color: #fff;
-  border-color: rgba(255,255,255,0.28);
-  background: rgba(255,255,255,0.07);
-}
-.ch.on {
-  background: linear-gradient(180deg, rgba(251,191,36,0.22) 0%, rgba(251,191,36,0.14) 100%);
-  border-color: rgba(251,191,36,0.55);
-  color: #fde68a;
-  font-weight: 600;
-  box-shadow: 0 0 0 1px rgba(251,191,36,0.20), 0 4px 14px rgba(251,191,36,0.10);
-}
-
-.ct {
-  color: var(--t-3);
-  font-size: 13px;
-  white-space: nowrap;
-  font-weight: 500;
-}
-.ct strong {
-  color: #fff;
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-  margin-right: 3px;
-}
-
-/* ============================================================
-   GRID CONTAINER + TIER SECTIONS
-   ============================================================ */
-#grid-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 32px 80px;
-}
-
-.tier-section {
-  margin-bottom: 72px;
-}
-.tier-section:last-child { margin-bottom: 0; }
-
-/* Section heading */
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 32px;
-  padding: 0 0 18px;
   margin-bottom: 28px;
-  border-bottom: 1px solid rgba(148,163,184,0.15);
 }
-.section-head-vip {
-  border-bottom: 1px solid rgba(251,191,36,0.30);
+.issue-masthead__publisher { color: var(--ge-gold); }
+.issue-masthead__live {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ge-fg-dim);
 }
-.tier-section:last-child .section-head {
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+.issue-masthead__live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #5d5d5d;
 }
-/* Override: second section (Featured) keeps silver rule */
-.tier-section .section-head:not(.section-head-vip) {
-  /* silver default */
+.issue-masthead__live--on .issue-masthead__live-dot {
+  background: #ff3b3b;
+  box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.6);
+  animation: live-pulse 2s ease-out infinite;
 }
-
-.section-head-left {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.5); }
+  100% { box-shadow: 0 0 0 14px rgba(255, 59, 59, 0); }
 }
-.section-label {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: var(--silver);
-  opacity: 0.75;
-}
-.section-head-vip .section-label {
-  color: var(--gold);
-  opacity: 0.95;
-}
-.tier-section:last-child .section-label {
-  color: var(--t-4);
-}
-
-.section-head h2 {
-  font-family: var(--f-display);
+.issue-masthead__title {
+  font-family: var(--serif);
   font-weight: 900;
-  font-size: clamp(26px, 3vw, 36px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  margin: 0;
-  color: #fff;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 14px;
+  font-size: clamp(64px, 11vw, 160px);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px 0;
+  font-variation-settings: "opsz" 144;
 }
-.section-head h2 .vipAccent {
-  background: linear-gradient(180deg, #fde68a 0%, #fbbf24 55%, #d97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.issue-masthead__title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ge-gold);
 }
-.section-head h2 .count {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--t-4);
-  letter-spacing: 0;
-  padding: 4px 10px;
-  border: 1px solid rgba(255,255,255,0.14);
+.issue-masthead__deck {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.35;
+  font-weight: 300;
+  color: var(--ge-fg-dim);
+  max-width: 720px;
+  margin: 0 0 32px 0;
+}
+.issue-masthead__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ge-rule);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ge-fg-dim);
+  letter-spacing: 0.05em;
+  flex-wrap: wrap;
+}
+.issue-masthead__actions { display: flex; gap: 14px; }
+.issue-masthead__action {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--ge-rule-strong);
   border-radius: 999px;
-  background: rgba(255,255,255,0.04);
-}
-.section-head-vip h2 .count {
-  color: var(--gold);
-  border-color: rgba(251,191,36,0.35);
-  background: rgba(251,191,36,0.08);
-}
-
-.section-sub {
+  font-family: var(--sans);
   font-size: 13px;
-  color: var(--t-3);
-  line-height: 1.4;
-  max-width: none;
-  margin: 0;
-  text-align: right;
-  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: border-color .2s, color .2s;
+  text-transform: none;
 }
+.issue-masthead__action:hover { border-color: var(--ge-gold); color: var(--ge-gold); }
+.issue-masthead__action--primary { background: var(--ge-gold); color: #0a0e1a; border-color: var(--ge-gold); }
+.issue-masthead__action--primary:hover { background: var(--ge-gold-dim); color: #0a0e1a; }
 
-/* Grid layouts — OPTION C: uniform 4-col for both VIP and Member.
-   Tier distinction comes from TREATMENT (gold lockup, serif quote,
-   living portrait) not from size. */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-.grid-vip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.loading {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--t-3);
-  font-size: 14px;
-}
-.loading-spinner {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  border: 2px solid rgba(255,255,255,0.12);
-  border-top-color: var(--gold);
-  border-radius: 999px;
-  animation: spin 0.8s linear infinite;
-  margin-bottom: 12px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ============================================================
-   CARD — BASE (Featured + Free share this)
-   ============================================================ */
-.card {
+/* ─── COVER STORY ───────────────────────────────────────────────────── */
+.cover-section {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  background: var(--free-bg);
-  border: 1px solid var(--free-border);
-  border-radius: 16px;
+  margin: 64px auto 0;
+  max-width: 1440px;
+  padding: 0 32px;
+}
+.cover-story {
+  position: relative;
+  border-radius: 24px;
   overflow: hidden;
-  color: inherit;
-  text-decoration: none;
-  transition: transform 0.28s cubic-bezier(.2,.7,.2,1),
-              border-color 0.28s ease,
-              background 0.28s ease,
-              box-shadow 0.28s ease;
-  box-shadow: var(--free-shadow);
+  aspect-ratio: 16 / 9;
+  background: var(--ge-bg-2);
   isolation: isolate;
 }
-
-/* VIP card styling — gold border, glow, premium feel */
-.card.tier-vip {
-  background:
-    linear-gradient(180deg, rgba(251,191,36,0.06) 0%, rgba(28,26,20,0) 40%),
-    var(--vip-bg);
-  border: 1.5px solid var(--vip-border);
-  box-shadow: var(--vip-glow);
-}
-.card.tier-vip:hover {
-  border-color: var(--vip-border-hover);
-  background:
-    linear-gradient(180deg, rgba(251,191,36,0.10) 0%, rgba(36,32,22,0) 40%),
-    var(--vip-bg-hover);
-  box-shadow: var(--vip-glow-hover);
-}
-.card.tier-vip::before {
-  background: linear-gradient(90deg, #fde68a 0%, #fbbf24 50%, #d97706 100%);
-  height: 3px;
-}
-/* Option C — VIP treatment (same size as Member, different language) */
-.card.tier-vip .card-photo img,
-.card.tier-vip .card-photo video {
-  filter: brightness(1.14) contrast(1.12) saturate(1.05);
-}
-.card.tier-vip .card-nm {
-  font-size: 21px;
-  letter-spacing: -0.3px;
-}
-.card.tier-vip .card-tl {
-  font-size: 12.5px;
-  color: rgba(255,255,255,0.72);
-  font-weight: 500;
-  -webkit-line-clamp: 1;
-}
-.card.tier-vip .card-body { padding: 16px 18px 12px; gap: 9px; }
-.card.tier-vip .card-qt {
-  font-family: var(--f-display);
-  font-style: italic;
-  font-weight: 500;
-  border-left-color: var(--gold);
-  border-left-width: 2.5px;
-  color: #ffffff;
-  font-size: 14px;
-  line-height: 1.4;
-  -webkit-line-clamp: 2;
-}
-.card.tier-vip .bg.vip,
-.card.tier-vip .bg[data-bg="vip"] {
-  background: linear-gradient(180deg, rgba(251,191,36,0.22), rgba(251,191,36,0.10));
-  color: var(--gold);
-  border-color: rgba(251,191,36,0.35);
-}
-.card.tier-vip .card-topics { gap: 4px; }
-.card.tier-vip .tp {
-  font-size: 10px;
-  padding: 3px 7px;
-  max-width: none;
-  border-color: rgba(251,191,36,0.22);
-  background: rgba(251,191,36,0.05);
-  color: rgba(255,255,255,0.72);
-}
-.card.tier-vip .card-footer {
-  border-top-color: rgba(251,191,36,0.18);
-  padding: 10px 18px 14px;
-}
-.card.tier-vip .card-footer .ft-l { font-size: 11.5px; }
-.card.tier-vip .vp { font-size: 12.5px; color: var(--gold); }
-
-/* Gold "VIP · LIVE" lockup pill — injected purely via CSS, no DOM change */
-.card.tier-vip::after {
-  content: "VIP · Live";
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 3;
-  padding: 5px 11px 5px 20px;
-  background: rgba(6,10,20,0.72);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(251,191,36,0.45);
-  border-radius: 999px;
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  background-image: radial-gradient(circle at 10px center, var(--gold) 0 3px, transparent 3.5px);
-  background-repeat: no-repeat;
-  box-shadow: 0 0 12px rgba(251,191,36,0.20);
-}
-
-/* Option C — Member treatment (quieter, silver voice) */
-.card.tier-member .card-photo img {
-  filter: brightness(1.02) contrast(1.05) saturate(0.92);
-}
-.card.tier-member .card-nm {
-  color: var(--silver);
-}
-.card.tier-member .card-qt {
-  display: none;
-}
-.card.tier-member .bg {
-  color: var(--t-3);
-  background: rgba(192,192,220,0.06);
-  border-color: rgba(192,192,220,0.15);
-}
-.card.tier-member .vp {
-  color: var(--silver);
-}
-.card.tier-vip .photo-vd {
-  box-shadow: 0 0 0 2px rgba(16,185,129,0.28), 0 0 14px rgba(16,185,129,0.55);
-}
-
-/* Top accent bar (segment-colored) — default Featured at full opacity */
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--seg-cs);
-  opacity: 1;
-  z-index: 2;
-  transition: opacity 0.25s ease;
-}
-.card[data-card-seg="cs"]::before { background: var(--seg-cs); }
-.card[data-card-seg="dd"]::before { background: var(--seg-dd); }
-.card[data-card-seg="cc"]::before { background: var(--seg-cc); }
-.card[data-card-seg="ns"]::before { background: var(--seg-ns); }
-.card[data-card-seg="dk"]::before { background: var(--seg-dk); }
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: var(--free-border-hover);
-  background: var(--free-bg-hover);
-  box-shadow: var(--free-shadow-hover);
-}
-
-/* ============================================================
-   CARD PHOTO — the #2 fix: brighten, reduce dark overlay
-   ============================================================ */
-.card-photo {
-  position: relative;
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  background: #0a0f1c;
-  flex-shrink: 0;
-}
-
-.card-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  transition: transform 0.45s cubic-bezier(.2,.7,.2,1), filter 0.3s ease;
-  filter: brightness(1.10) contrast(1.08);
-}
-.card:hover .card-photo img { transform: scale(1.04); }
-
-/* Initials fallback — segment-tinted gradient, not ghosted gray */
-.card-photo .initials {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 72px;
-  color: #fff;
-  letter-spacing: -0.04em;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-}
-.card[data-card-seg="cs"] .card-photo .initials { background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%); }
-.card[data-card-seg="dd"] .card-photo .initials { background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%); }
-.card[data-card-seg="cc"] .card-photo .initials { background: linear-gradient(135deg, #059669 0%, #064e3b 100%); }
-.card[data-card-seg="ns"] .card-photo .initials { background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%); }
-.card[data-card-seg="dk"] .card-photo .initials { background: linear-gradient(135deg, #d97706 0%, #78350f 100%); }
-
-/* MINIMAL bottom gradient — just for badge legibility (was 52px/0.55) */
-.card-photo::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 30px;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%);
-  pointer-events: none;
+.cover-story__media {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
   z-index: 1;
 }
+.cover-story__media img,
+.cover-story__media video {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(1.05) contrast(1.02);
+}
+.cover-story__scrim {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    radial-gradient(ellipse at 30% 75%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 60%),
+    linear-gradient(180deg, rgba(10,14,26,0.0) 35%, rgba(10,14,26,0.85) 90%, rgba(10,14,26,1) 100%);
+}
+.cover-story__content {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  padding: clamp(32px, 5vw, 72px);
+  max-width: 920px;
+}
+.cover-story__chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ge-gold);
+  margin-bottom: 16px;
+}
+.cover-story__chip::before {
+  content: ""; width: 28px; height: 1px; background: var(--ge-gold);
+}
+.cover-story__title {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px 0;
+  color: var(--ge-fg);
+}
+.cover-story__quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.4;
+  color: var(--ge-fg);
+  max-width: 720px;
+  margin: 0 0 28px 0;
+  position: relative;
+  padding-left: 18px;
+  border-left: 2px solid var(--ge-gold);
+}
+.cover-story__meta {
+  display: flex; align-items: center; gap: 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ge-fg-dim);
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.cover-story__meta strong { color: var(--ge-fg); font-weight: 500; }
+.cover-story__meta-divider { width: 1px; height: 14px; background: var(--ge-rule-strong); }
+.cover-story__cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 24px;
+  background: var(--ge-gold);
+  color: #0a0e1a;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform .2s, background .2s;
+}
+.cover-story__cta:hover { background: var(--ge-gold-dim); transform: translateY(-1px); }
+.cover-story__cta-arrow { transition: transform .2s; }
+.cover-story__cta:hover .cover-story__cta-arrow { transform: translateX(3px); }
 
-/* Living portrait video on cards */
-.card-photo video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+@media (max-width: 720px) {
+  .cover-story { aspect-ratio: 4 / 5; }
 }
 
-/* Photo overlay — holds tier badge + verified dot */
-.photo-overlay {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  right: 12px;
+/* ─── SECTION CHROME ────────────────────────────────────────────────── */
+.issue-section {
+  max-width: 1440px;
+  margin: 96px auto 0;
+  padding: 0 32px;
+}
+.issue-section__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 24px;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--ge-rule);
+}
+.issue-section__heading {
+  display: flex; align-items: baseline; gap: 18px;
+  flex-wrap: wrap;
+}
+.issue-section__num {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ge-gold);
+  letter-spacing: 0.12em;
+}
+.issue-section__name {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-variation-settings: "opsz" 144;
+}
+.issue-section__blurb {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--ge-fg-dim);
+  max-width: 480px;
+  text-align: right;
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .issue-section__head { flex-direction: column; align-items: flex-start; }
+  .issue-section__blurb { text-align: left; }
+}
+
+/* ─── WIDE SCROLLER ─────────────────────────────────────────────────── */
+.scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(380px, 28%);
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  padding: 4px 4px 24px 4px;
+  margin: 0 -4px;
+}
+.scroller::-webkit-scrollbar { height: 6px; }
+.scroller::-webkit-scrollbar-track { background: transparent; }
+.scroller::-webkit-scrollbar-thumb { background: var(--ge-rule-strong); border-radius: 3px; }
+
+/* ─── ISSUE CARDS ───────────────────────────────────────────────────── */
+.issue-card {
+  position: relative;
+  scroll-snap-align: start;
+  background: var(--ge-bg-2);
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 2;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.issue-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 64px -32px rgba(0, 0, 0, 0.5);
+}
+.issue-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ge-bg-3);
+}
+.issue-card__media img,
+.issue-card__media video {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .6s ease;
+}
+.issue-card:hover .issue-card__media img,
+.issue-card:hover .issue-card__media video {
+  transform: scale(1.04);
+}
+.issue-card__media-scrim {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 50%, rgba(10,14,26,0.85) 100%);
   pointer-events: none;
 }
-
-.tr {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-family: var(--f-display);
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  backdrop-filter: blur(8px);
-}
-.tr.vt {
-  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
-  color: #1a1410;
-  box-shadow: 0 4px 14px rgba(251,191,36,0.35), 0 0 0 1px rgba(251,191,36,0.5);
-}
-.tr.mt {
-  background: linear-gradient(180deg, rgba(192,192,220,0.30) 0%, rgba(140,140,170,0.25) 100%);
-  color: #d4d4e8;
-  border: 1px solid rgba(192,192,220,0.45);
-  box-shadow: 0 2px 8px rgba(192,192,220,0.15);
-}
-
-/* Verified dot on photo */
-.photo-vd {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--signal);
-  box-shadow: 0 0 0 2px rgba(16,185,129,0.22), 0 0 12px rgba(16,185,129,0.5);
-  position: relative;
-}
-.photo-vd::after {
-  content: "";
+.issue-card__tier {
   position: absolute;
-  inset: -4px;
+  top: 16px; left: 16px;
+  z-index: 3;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  padding: 6px 10px;
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 999px;
-  border: 1px solid rgba(16,185,129,0.35);
-  animation: pulseRing 2s ease-out infinite;
+  text-transform: uppercase;
+  color: var(--ge-fg);
 }
-.photo-vd-ghost {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
+.issue-card__tier--vip {
+  background: var(--ge-vip);
+  color: #0a0e1a;
 }
-@keyframes pulseRing {
-  0% { transform: scale(0.9); opacity: 0.9; }
-  100% { transform: scale(1.6); opacity: 0; }
+.issue-card__signal {
+  position: absolute;
+  top: 16px; right: 16px;
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-end;
+  font-family: var(--mono);
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 10px;
 }
-
-/* ============================================================
-   CARD BODY — text hierarchy (the #3 fix)
-   ============================================================ */
-.card-body {
-  padding: 20px 20px 14px;
+.issue-card__signal-num {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ge-gold);
+  line-height: 1;
+}
+.issue-card__signal-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--ge-fg-dim);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.issue-card__body {
+  padding: 22px 24px 28px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
-
-.card-nm {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 21px;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #ffffff;
+.issue-card__name {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   margin: 0;
+  color: var(--ge-fg);
 }
-
-.card-tl {
-  font-family: var(--f-body);
-  font-size: 13.5px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: rgba(255,255,255,0.78);
-  letter-spacing: 0.01em;
-  margin: 2px 0 0;
+.issue-card__headline {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ge-fg-dim);
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-.card-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 2px 0;
-}
-.bg {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-family: var(--f-body);
-}
-/* VIP badge — gold tone */
-.bg-v {
-  background: rgba(251,191,36,0.12);
-  color: #fbbf24;
-  border: 1px solid rgba(251,191,36,0.40);
-}
-.bg-v::before {
-  content: "";
-  width: 6px; height: 6px;
-  border-radius: 999px;
-  background: #fbbf24;
-  box-shadow: 0 0 6px rgba(251,191,36,0.5);
-}
-/* Member badge — silver/platinum tone */
-.bg-m {
-  background: rgba(192,192,220,0.10);
-  color: #c0c0dc;
-  border: 1px solid rgba(192,192,220,0.30);
-}
-.bg-m::before {
-  content: "";
-  width: 6px; height: 6px;
-  border-radius: 999px;
-  background: #c0c0dc;
-  box-shadow: 0 0 6px rgba(192,192,220,0.5);
-}
-.bg-seg {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: var(--t-2);
-}
-.bg-seg[data-seg="cs"] { color: #bfdbfe; border-color: rgba(96,165,250,0.35); background: rgba(96,165,250,0.10); }
-.bg-seg[data-seg="dd"] { color: #ddd6fe; border-color: rgba(167,139,250,0.35); background: rgba(167,139,250,0.10); }
-.bg-seg[data-seg="cc"] { color: #a7f3d0; border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.10); }
-.bg-seg[data-seg="ns"] { color: #fecaca; border-color: rgba(248,113,113,0.35); background: rgba(248,113,113,0.10); }
-.bg-seg[data-seg="dk"] { color: #fde68a; border-color: rgba(251,191,36,0.35); background: rgba(251,191,36,0.10); }
-
-/* Quote — the hook. Segment-colored left border. */
-.card-qt {
-  font-family: var(--f-body);
-  font-style: normal;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.92);
-  border-left: 3px solid var(--seg-cs);
-  padding: 2px 0 2px 12px;
-  margin: 4px 0 2px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.card[data-card-seg="cs"] .card-qt { border-left-color: var(--seg-cs); }
-.card[data-card-seg="dd"] .card-qt { border-left-color: var(--seg-dd); }
-.card[data-card-seg="cc"] .card-qt { border-left-color: var(--seg-cc); }
-.card[data-card-seg="ns"] .card-qt { border-left-color: var(--seg-ns); }
-.card[data-card-seg="dk"] .card-qt { border-left-color: var(--seg-dk); }
-
-/* Topics */
-.card-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: auto;
-  padding-top: 6px;
-}
-.tp {
-  display: inline-block;
-  padding: 2px 7px;
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--t-3);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px;
-  letter-spacing: 0.01em;
-  max-width: 180px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tp-more {
-  display: inline-block;
-  padding: 2px 7px;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--t-4);
-  background: rgba(255,255,255,0.03);
-  border: 1px dashed rgba(255,255,255,0.10);
-  border-radius: 4px;
-}
-.tp-more.deep { color: var(--gold); border-color: rgba(251,191,36,0.35); background: rgba(251,191,36,0.08); }
-.tp-more.very-deep { color: #fde68a; border-color: rgba(251,191,36,0.55); background: rgba(251,191,36,0.14); }
-
-/* ============================================================
-   CARD FOOTER
-   ============================================================ */
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px 16px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  gap: 10px;
-  margin-top: 10px;
-}
-.ft-l {
+.issue-card__meta {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  font-size: 11px;
-  color: rgba(255,255,255,0.45);
-  font-weight: 500;
-}
-.app-meter {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-.meter-bar {
-  display: inline-block;
-  width: 46px;
-  height: 3px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.meter-fill {
-  display: block;
-  height: 100%;
-  border-radius: 999px;
-  transition: width 0.4s ease;
-}
-.meter-fill.low { background: rgba(255,255,255,0.35); }
-.meter-fill.mid { background: var(--seg-cs); }
-.meter-fill.high { background: var(--gold); }
-
-.dt { color: var(--t-4); white-space: nowrap; }
-.dt.recent { color: #6ee7b7; }
-
-/* Social icons */
-.sc {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.sc span {
-  width: 22px; height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  cursor: pointer;
-  color: var(--t-3);
-  transition: color 0.2s, background 0.2s;
-  pointer-events: auto;
-}
-.sc span:hover {
-  color: var(--gold);
-  background: rgba(251,191,36,0.08);
-}
-.sc svg { width: 13px; height: 13px; fill: currentColor; }
-
-/* View Profile */
-.vp {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--f-body);
-  font-weight: 600;
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
-  color: var(--t-2);
-  transition: color 0.2s, gap 0.2s;
-  white-space: nowrap;
-}
-.vp .pc {
-  width: 20px; height: 20px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, border-color 0.2s;
-}
-.vp .pc svg { width: 8px; height: 8px; fill: var(--t-2); }
-.vp .ar { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.4; }
-.card:hover .vp,
-.card-hero:hover .vp,
-.card-hero-vert:hover .vp {
-  color: var(--gold);
-  gap: 10px;
-}
-.card:hover .vp .pc,
-.card-hero:hover .vp .pc,
-.card-hero-vert:hover .vp .pc {
-  background: rgba(251,191,36,0.14);
-  border-color: rgba(251,191,36,0.45);
-}
-.card:hover .vp .pc svg,
-.card-hero:hover .vp .pc svg,
-.card-hero-vert:hover .vp .pc svg {
-  fill: var(--gold);
-}
-
-/* Verified sparkle in hero name */
-.vd {
-  display: inline-block;
-  width: 18px; height: 18px;
-  background: var(--signal);
-  border-radius: 999px;
-  position: relative;
-  vertical-align: middle;
-  margin-left: 6px;
-  box-shadow: 0 0 0 3px rgba(16,185,129,0.18), 0 0 16px rgba(16,185,129,0.5);
-}
-.vd::after {
-  content: "";
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -60%) rotate(0deg);
-  width: 6px; height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: translate(-50%, -60%) rotate(45deg);
-}
-
-/* ============================================================
-   TIER: MEMBER (.card.tier-member) — silver/platinum accent, left border
-   ============================================================ */
-.card.tier-member {
-  background: var(--member-bg);
-  border-color: var(--member-border);
-  box-shadow: var(--member-shadow);
-  border-left: 3px solid var(--member-accent);
-}
-.card.tier-member:hover {
-  background: var(--member-bg-hover);
-  border-color: var(--member-border-hover);
-  box-shadow: var(--member-shadow-hover);
-  border-left: 3px solid var(--member-accent);
-}
-.card.tier-member::before {
-  background: linear-gradient(90deg, rgba(192,192,220,0.5) 0%, rgba(192,192,220,0.0) 100%);
-}
-.card.tier-member .card-footer {
-  border-top-color: rgba(192,192,220,0.12);
-}
-.card.tier-member .vp {
-  color: var(--member-accent);
-}
-.card.tier-member .vp .pc {
-  background: var(--member-accent);
-}
-
-/* ============================================================
-   TIER: FREE (.card.tier-free) — dimmer, smaller name, thinner border
-   ============================================================ */
-.card.tier-free {
-  background: var(--free-bg);
-  border-color: var(--free-border);
-  box-shadow: var(--free-shadow);
-}
-.card.tier-free:hover {
-  background: var(--free-bg-hover);
-  border-color: var(--free-border-hover);
-  box-shadow: var(--free-shadow-hover);
-}
-.card.tier-free::before { opacity: 0.5; }
-.card.tier-free .card-photo { height: 230px; }
-.card.tier-free .card-photo img { filter: brightness(1.05) contrast(1.04); }
-.card.tier-free .card-nm { font-size: 18px; }
-.card.tier-free .card-qt { display: none; }
-
-/* ============================================================
-   VIP HERO CARD (.card-hero) — horizontal
-   ============================================================ */
-.card-hero {
-  position: relative;
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  background:
-    linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(28,26,20,0) 55%),
-    var(--vip-bg);
-  border: 2px solid var(--vip-border);
-  border-radius: 18px;
-  overflow: hidden;
-  color: inherit;
-  text-decoration: none;
-  box-shadow: var(--vip-glow);
-  transition: transform 0.3s cubic-bezier(.2,.7,.2,1),
-              border-color 0.3s ease,
-              background 0.3s ease,
-              box-shadow 0.3s ease;
-  isolation: isolate;
-  min-height: 340px;
-}
-.card-hero::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #fde68a 0%, #fbbf24 50%, #d97706 100%);
-  z-index: 3;
-}
-.card-hero:hover {
-  transform: translateY(-5px);
-  border-color: var(--vip-border-hover);
-  background:
-    linear-gradient(135deg, rgba(251,191,36,0.10) 0%, rgba(36,32,22,0) 55%),
-    var(--vip-bg-hover);
-  box-shadow: var(--vip-glow-hover);
-}
-
-.hero-photo {
-  position: relative;
-  min-height: 100%;
-  overflow: hidden;
-  background: #0a0f1c;
-}
-.hero-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
-  filter: brightness(1.12) contrast(1.10);
-}
-.hero-photo video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  filter: brightness(1.12) contrast(1.10);
-}
-.card-hero:hover .hero-photo img { transform: scale(1.04); }
-
-.hero-photo .initials-lg {
-  width: 100%; height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 100px;
-  letter-spacing: -0.04em;
-  color: rgba(251,191,36,0.85);
-  text-shadow: 0 4px 30px rgba(251,191,36,0.3);
-  background:
-    radial-gradient(circle at 30% 30%, rgba(251,191,36,0.25) 0%, transparent 55%),
-    linear-gradient(135deg, #2a2010 0%, #14182a 60%, #0a0f1e 100%);
-}
-
-/* Gold star tier badge on hero photo */
-.hero-photo__tier {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #1a1410;
-  background: linear-gradient(180deg, #fde68a 0%, #fbbf24 50%, #d97706 100%);
-  box-shadow: 0 6px 18px rgba(251,191,36,0.45), 0 0 0 1px rgba(251,191,36,0.7);
-  z-index: 3;
-}
-
-/* Hero content body */
-.hero-content-body {
-  padding: 30px 32px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
-.hero-top { display: flex; flex-direction: column; gap: 6px; }
-
-.hero-nm {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: 32px;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-  color: #ffffff;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.hero-tl {
-  font-family: var(--f-body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.60);
-  margin: 0;
-}
-
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 2px 0;
-}
-
-.hero-qt {
-  font-family: var(--f-body);
-  font-weight: 500;
-  font-style: normal;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #ffffff;
-  border-left: 3px solid var(--gold);
-  padding: 4px 0 4px 14px;
-  margin: 4px 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.hero-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 4px 0 2px;
-}
-.hero-topics .tp {
-  background: rgba(251,191,36,0.08);
-  border-color: rgba(251,191,36,0.22);
-  color: #fde68a;
-}
-
-.hero-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0 0;
-  border-top: 1px solid rgba(251,191,36,0.18);
-  margin-top: auto;
   gap: 12px;
-  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--ge-rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ge-fg-dim);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.issue-card__meta-divider {
+  width: 3px; height: 3px; border-radius: 50%; background: var(--ge-fg-faint);
 }
 
-/* ============================================================
-   VIP VERTICAL (.card-hero-vert)
-   ============================================================ */
-.card-hero-vert {
+/* ─── ROW LAYOUT (Just Aired) ───────────────────────────────────────── */
+.row-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1100px) { .row-layout { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .row-layout { grid-template-columns: 1fr; } }
+
+.row-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  background:
-    linear-gradient(180deg, rgba(251,191,36,0.05) 0%, rgba(28,26,20,0) 40%),
-    var(--vip-bg);
-  border: 1px solid var(--vip-border);
-  border-radius: 16px;
+  background: var(--ge-bg-2);
+  border-radius: 14px;
   overflow: hidden;
-  color: inherit;
-  text-decoration: none;
-  box-shadow: var(--vip-glow);
-  transition: transform 0.3s cubic-bezier(.2,.7,.2,1),
-              border-color 0.3s ease,
-              background 0.3s ease,
-              box-shadow 0.3s ease;
-  isolation: isolate;
+  cursor: pointer;
+  transition: transform .25s ease;
 }
-.card-hero-vert::before {
-  content: "";
+.row-card:hover { transform: translateY(-3px); }
+.row-card__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.row-card__media img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.row-card__date {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #fde68a 0%, #fbbf24 50%, #d97706 100%);
+  top: 12px; left: 12px;
   z-index: 3;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  padding: 5px 9px;
+  background: rgba(10, 14, 26, 0.78);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+  text-transform: uppercase;
+  color: var(--ge-fg);
 }
-.card-hero-vert:hover {
-  transform: translateY(-5px);
-  border-color: var(--vip-border-hover);
-  background:
-    linear-gradient(180deg, rgba(251,191,36,0.09) 0%, rgba(36,32,22,0) 40%),
-    var(--vip-bg-hover);
-  box-shadow: var(--vip-glow-hover);
+.row-card__body {
+  padding: 18px 20px 20px;
 }
-.card-hero-vert .card-photo {
-  height: 270px;
+.row-card__name {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px 0;
 }
-.card-hero-vert .card-photo img {
-  filter: brightness(1.12) contrast(1.10);
-}
-.card-hero-vert .card-photo::after {
-  height: 30px;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 100%);
-}
-.card-hero-vert:hover .card-photo img { transform: scale(1.04); }
-.card-hero-vert .card-body { padding: 22px 22px 14px; }
-.card-hero-vert .card-nm {
-  font-size: 24px;
-  font-weight: 900;
-}
-.card-hero-vert .card-qt {
-  border-left-color: var(--gold);
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-}
-.card-hero-vert .card-footer {
-  border-top: 1px solid rgba(251,191,36,0.18);
-  padding: 12px 22px 16px;
+.row-card__show {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ge-fg-dim);
 }
 
-/* VIP verified photo-dot glow stronger */
-.card-hero-vert .photo-vd {
-  box-shadow: 0 0 0 2px rgba(16,185,129,0.28), 0 0 14px rgba(16,185,129,0.55);
+/* ─── FOOTER (agent-readable layer) ─────────────────────────────────── */
+.issue-foot {
+  margin-top: 128px;
+  padding: 80px 32px 64px;
+  border-top: 1px solid var(--ge-rule);
+  background: var(--ge-bg-2);
+}
+.issue-foot__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+}
+@media (max-width: 900px) { .issue-foot__inner { grid-template-columns: 1fr; gap: 36px; } }
+.issue-foot__col h3 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ge-gold);
+  margin: 0 0 14px 0;
+  font-weight: 600;
+}
+.issue-foot__col p, .issue-foot__col li {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ge-fg-dim);
+  margin: 0 0 8px 0;
+}
+.issue-foot__col ul { padding: 0; list-style: none; }
+.issue-foot__col a { color: var(--ge-fg); border-bottom: 1px solid var(--ge-rule-strong); transition: color .2s, border-color .2s; }
+.issue-foot__col a:hover { color: var(--ge-gold); border-color: var(--ge-gold); }
+.issue-foot__agentbadge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px;
+  background: rgba(244, 200, 66, 0.1);
+  border: 1px solid rgba(244, 200, 66, 0.25);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ge-gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.issue-foot__agentbadge::before {
+  content: ""; width: 6px; height: 6px; background: var(--ge-gold); border-radius: 50%;
 }
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
-.card, .card-hero, .card-hero-vert {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease,
-              transform 0.5s ease,
-              border-color 0.3s ease,
-              background 0.3s ease,
-              box-shadow 0.3s ease;
+/* ─── LOADING STATE ─────────────────────────────────────────────────── */
+.issue-loading {
+  max-width: 1280px;
+  margin: 100px auto;
+  padding: 40px 32px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--ge-fg-dim);
+  text-transform: uppercase;
 }
-.card.revealed, .card-hero.revealed, .card-hero-vert.revealed {
-  opacity: 1;
-  transform: translateY(0);
+.issue-loading-dots::after {
+  content: "·"; animation: dots 1.4s steps(4, end) infinite;
+  display: inline-block; min-width: 1.4ch; text-align: left;
 }
-.card.revealed:hover { transform: translateY(-5px); }
-.card-hero.revealed:hover, .card-hero-vert.revealed:hover { transform: translateY(-5px); }
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 1100px) {
-  .grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
-  .dir-header { padding: 64px 24px 24px; }
-  #grid-container { padding: 0 24px 64px; }
-  .seg-legend, .ctrl { padding-left: 24px; padding-right: 24px; }
+@keyframes dots {
+  0%, 25% { content: "·"; }
+  50% { content: "··"; }
+  75% { content: "···"; }
+  100% { content: ""; }
 }
 
-@media (max-width: 900px) {
-  .hero-content { padding: 0 32px 60px; }
-  .hero-content h1 { font-size: 48px; }
-  .hero-row { grid-template-columns: 1fr; gap: 24px; align-items: flex-start; }
-  .stats { justify-content: flex-start; }
-  .grid,
-  .grid-vip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .ctrl {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .ct { justify-self: start; }
-  .section-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .section-sub { text-align: left; }
-  .card-hero { grid-template-columns: 260px 1fr; }
+/* ─── ERROR / FALLBACK ──────────────────────────────────────────────── */
+.issue-error {
+  max-width: 720px;
+  margin: 100px auto;
+  padding: 48px 32px;
+  text-align: center;
+}
+.issue-error h2 { font-family: var(--serif); font-size: 36px; margin: 0 0 12px 0; }
+.issue-error p { color: var(--ge-fg-dim); font-size: 16px; line-height: 1.5; margin: 0 0 24px 0; }
+.issue-error a {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--ge-gold);
+  color: #0a0e1a;
+  border-radius: 999px;
+  font-weight: 600;
 }
 
-@media (max-width: 700px) {
-  .grid,
-  .grid-vip { grid-template-columns: 1fr; gap: 14px; }
-  .card-hero { grid-template-columns: 1fr; }
-  .hero-photo { min-height: 260px; height: 260px; }
-  .hero-photo img { height: 100%; }
-  .hero-content-body { padding: 22px 20px 18px; }
-  .hero-nm { font-size: 26px; }
-  .hero-qt { font-size: 16px; }
-  .card-photo { height: 220px; }
-  .card.tier-free .card-photo { height: 210px; }
-  .card-hero-vert .card-photo { height: 280px; }
-  .dir-header { padding: 48px 20px 20px; }
-  #grid-container { padding: 0 20px 48px; }
-  .seg-legend, .ctrl { padding-left: 20px; padding-right: 20px; }
-  .hero-content { padding: 0 20px 56px; }
-  .hero-content h1 { font-size: 40px; }
-  .hero-sub { font-size: 16px; }
-}
-
-@media (max-width: 500px) {
-  .hero-content h1 { font-size: 34px; }
-  .card-nm { font-size: 19px; }
-  .card.tier-free .card-nm { font-size: 17px; }
-  .card-qt { font-size: 14px; }
-  .hero-row h1 { font-size: 36px; }
-  .section-head h2 { font-size: 26px; }
-  .stats { flex-wrap: wrap; }
-  .st { min-width: 0; flex: 1; padding: 12px 14px; }
-  .st-v { font-size: 24px; }
-  .chips { gap: 6px; }
-  .ch { padding: 8px 12px; font-size: 12px; }
-}
-
-/* ============================================================
-   FOCUS STATES — a11y
-   ============================================================ */
-.card:focus-visible,
-.card-hero:focus-visible,
-.card-hero-vert:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
-.ch:focus-visible,
-.search:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
+/* ─── REDUCED MOTION ────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
-<link rel="stylesheet" href="../header.css?v=1776710000">
 </head>
 <body>
 
@@ -1554,806 +661,365 @@ img { max-width: 100%; display: block; }
       <span></span><span></span><span></span>
     </button>
   </header>
-  <div class="ge-header__mobile-overlay" id="geMobileMenu">
-    <a href="/directory/">Directory</a>
-    <a href="https://guestengine.live/shows/">Shows</a>
-    <a href="https://guestengine.live/#pricing">Pricing</a>
-    <a href="https://guestengine.live/#network">Network</a>
-    <a href="https://guestengine.live/signal/">Signal</a>
-    <a href="https://guestengine.live/tour/">Tour</a>
-    <a href="https://guestengine.live/why/">Why</a>
-    <a href="https://guestengine.live/join/">Join</a>
-    <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
-  </div>
 
-  <!-- ============================
-       HERO (top of page)
-       ============================ -->
-  <section class="hero" id="hero">
-    <div class="hero__video-wrap">
-      <video
-        id="hero-video"
-        class="hero__video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        src="/assets/heroes/directory-hero.mp4"
-      ></video>
-      <div class="hero__overlay"></div>
+  <!-- ─── MASTHEAD ────────────────────────────────────────────────── -->
+  <section class="issue-masthead">
+    <div class="issue-masthead__topline">
+      <span class="issue-masthead__publisher">CONVERSATIONOS · GUEST ENGINE</span>
+      <span class="issue-masthead__live" id="liveIndicator">
+        <span class="issue-masthead__live-dot"></span>
+        <span id="liveLabel">CHECKING SHOW STATUS</span>
+      </span>
     </div>
-    <button class="hero__unmute" id="heroUnmute" aria-label="Unmute video">
-      <svg class="hero__unmute-icon hero__unmute-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-        <line x1="23" y1="9" x2="17" y2="15"/>
-        <line x1="17" y1="9" x2="23" y2="15"/>
-      </svg>
-      <svg class="hero__unmute-icon hero__unmute-icon--unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-      </svg>
-    </button>
-    <div class="hero-content">
-
-      <h1>
-        THE PEOPLE BEHIND<br>
-        <span class="gold">THE CONVERSATIONS.</span>
-      </h1>
-      <p class="hero-sub">
-        Real guests. Real authority. Permanently indexed &mdash; complete with episode, signal brief, and social proof.
-      </p>
-      <div class="hero-cta">
-        <a href="#directory" class="btn-primary">Browse the Directory &rarr;</a>
+    <h1 class="issue-masthead__title">The <em>Issue</em></h1>
+    <p class="issue-masthead__deck">
+      A weekly editorial of the people on our shows. The cover story, who's on air, who just shipped, and who hosts should be booking next.
+    </p>
+    <div class="issue-masthead__bar">
+      <div id="issueMeta">
+        <span id="issueNumber">ISSUE —</span>
+        <span style="color: var(--ge-fg-faint); margin: 0 10px;">·</span>
+        <span id="issueGuests">— GUESTS</span>
+        <span style="color: var(--ge-fg-faint); margin: 0 10px;">·</span>
+        <span id="issueRefresh">UPDATED MONDAYS · 04:00 ET</span>
+      </div>
+      <div class="issue-masthead__actions">
+        <a href="/directory/all/" class="issue-masthead__action">Search all guests</a>
       </div>
     </div>
   </section>
 
-<div class="dir-header" id="directory">
-  <div class="dir-header-inner">
-    <div class="dir-eyebrow">Authority Index — 2026 Season</div>
-    <div class="hero-row">
-      <div>
-        <h1>The <em>Guest Directory</em></h1>
-        <p class="sub">Every guest featured on a ConversationOS show earns a permanent, indexed authority profile &mdash; complete with their episode, signal brief, media kit, and social proof. This isn't a listing. It's a living record of credibility, produced and maintained by the network.</p>
+  <!-- ─── BODY (issue-main is replaced by JS once data loads) ─────── -->
+  <main id="issueMain">
+    <div class="issue-loading">
+      <span>Building this week's issue<span class="issue-loading-dots"></span></span>
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+  <footer class="issue-foot">
+    <div class="issue-foot__inner">
+      <div class="issue-foot__col">
+        <span class="issue-foot__agentbadge">Built for agents</span>
+        <p>Every page on guestengine.live is paired with a structured, machine-readable view. Hosts, agents, and AI assistants can ingest the issue without scraping.</p>
       </div>
-      <div class="stats" id="stats">
-        <div class="st"><div class="st-v" id="stat-guests">--</div><div class="st-l">Guests</div></div>
-        <div class="st"><div class="st-v" id="stat-shows">--</div><div class="st-l">Shows</div></div>
+      <div class="issue-foot__col">
+        <h3>Agent endpoints</h3>
+        <ul>
+          <li><a href="https://app.conversationos.live/api/guest-marketplace/issue/current.json">/issue/current.json</a></li>
+          <li><a href="https://app.conversationos.live/api/guest-marketplace/issue/current.md">/issue/current.md</a></li>
+          <li><a href="https://app.conversationos.live/api/guest-marketplace/directory">/directory (all 200)</a></li>
+        </ul>
+      </div>
+      <div class="issue-foot__col">
+        <h3>For hosts</h3>
+        <ul>
+          <li><a href="/directory/all/">Search all guests</a></li>
+          <li><a href="https://guestengine.live/shows/">All shows on the network</a></li>
+          <li><a href="https://guestengine.live/join/">Pitch your show</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-</div>
+  </footer>
 
-<!-- segment legend removed -->
+  <script>
+  // ─────────────────────────────────────────────────────────────────────
+  // THE ISSUE — runtime
+  //
+  // Fetches https://app.conversationos.live/api/guest-marketplace/issue/current
+  // and renders the magazine layout. Uses sectional treatment hints from the
+  // server response, so adding a new section is a server-side change only.
+  //
+  // Falls back to the legacy directory endpoint if the issue endpoint isn't
+  // live yet (so we don't ship a broken page during the API rollout).
+  // ─────────────────────────────────────────────────────────────────────
 
-<div class="ctrl">
-  <input type="text" class="search" id="searchInput" placeholder="Search guests, topics, credentials...">
-  <div class="chips" id="chips">
-    <div class="ch on" data-filter="all">All</div>
-    <div class="ch" data-filter="center-stage">Center Stage</div>
-    <div class="ch" data-filter="community-corner">Community Corner</div>
-  </div>
-  <div class="ct"><strong id="countNum">--</strong> guests</div>
-</div>
+  const ISSUE_URL = "https://app.conversationos.live/api/guest-marketplace/issue/current";
+  const FALLBACK_URL = "https://app.conversationos.live/api/guest-marketplace/directory?limit=50&page=1";
+  const GUEST_PROFILE = (slug) => `https://guestengine.live/profile/${slug}`;
 
-<div id="grid-container">
-  <div class="tier-section">
-    <div class="grid">
-      <div class="loading">
-        <div class="loading-spinner"></div>
-        Loading guest directory...
-      </div>
-    </div>
-  </div>
-</div>
+  // ─── Helpers ─────────────────────────────────────────────────────────
 
-<!-- SSR-friendly hidden content for crawlers — dynamically populated -->
-<div id="ssr-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-  <h2>Guest Engine Directory — Expert Podcast Guests</h2>
-  <p>Browse expert guests available for podcast and show appearances on the ConversationOS network. Filter by show segment (Center Stage, Community Corner) or search by name and expertise. Powered by ConversationOS.</p>
-</div>
-<script>
-(function() {
-  var EXCLUDED_SLUGS = ['jason-hewlett','jeremy-barker','rich-ingram','oscar-smith'];
-
-  var SEG_MAP = {
-    'Center Stage': 'cs',
-    'Deep Dive': 'dd',
-    'Community Corner': 'cc',
-    'No Safe Words': 'ns',
-    'Did You Know': 'dk'
-  };
-
-  var SEG_LABELS = { cs:'Center Stage', dd:'Deep Dive', cc:'Community Corner', ns:'No Safe Words', dk:'Did You Know' };
-
-  var allGuests = [];
-  var activeFilter = 'all';
-
-  function getInitials(name) {
-    if (!name) return '??';
-    var parts = name.trim().split(/\s+/);
-    if (parts.length === 1) return parts[0][0].toUpperCase();
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  function escapeHTML(s) {
+    if (s == null) return "";
+    return String(s).replace(/[&<>"]/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;",
+    }[c]));
   }
 
-  function getSegCode(topics) {
-    var t = Array.isArray(topics) ? topics : parseJSON(topics);
-    if (!t || !t.length) return 'cs';
-    for (var i = 0; i < t.length; i++) {
-      var code = SEG_MAP[t[i]];
-      if (code) return code;
-    }
-    return 'cs';
+  function formatDate(iso) {
+    if (!iso) return "";
+    try {
+      const d = new Date(iso);
+      return d.toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase();
+    } catch { return ""; }
   }
 
-  function parseJSON(str) {
-    if (!str) return null;
-    if (typeof str === 'object') return str;
-    try { return JSON.parse(str); } catch(e) { return null; }
+  function relativeDays(iso) {
+    if (!iso) return "";
+    const now = Date.now();
+    const then = new Date(iso).getTime();
+    const days = Math.round((now - then) / 86_400_000);
+    if (days === 0) return "TODAY";
+    if (days === 1) return "1 DAY AGO";
+    if (days < 7) return `${days} DAYS AGO`;
+    if (days < 30) return `${Math.round(days / 7)} WEEK${Math.round(days/7)===1?"":"S"} AGO`;
+    if (days < 365) return formatDate(iso);
+    return formatDate(iso);
   }
 
-  function getExpertise(guest) {
-    var exp = parseJSON(guest.expertise);
-    if (exp && Array.isArray(exp) && exp.length) return filterSegments(exp);
-    var t = parseJSON(guest.topics);
-    if (t && Array.isArray(t)) return filterSegments(t);
-    if (Array.isArray(guest.topics)) return filterSegments(guest.topics);
-    return [];
-  }
-
-  function filterSegments(arr) {
-    return arr.filter(function(t) { return !SEG_MAP[t]; });
-  }
-
-  function getAppearances(guest) {
-    if (Array.isArray(guest.pastAppearances)) return guest.pastAppearances;
-    var pa = parseJSON(guest.pastAppearances);
-    return Array.isArray(pa) ? pa : [];
-  }
-
-  function formatDate(dateStr) {
-    if (!dateStr) return '';
-    var d = new Date(dateStr);
-    if (isNaN(d)) return dateStr;
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return months[d.getMonth()] + ' ' + d.getFullYear();
-  }
-
-  function isRecent(dateStr) {
-    if (!dateStr) return false;
-    var d = new Date(dateStr);
-    var now = new Date();
-    var diff = now - d;
-    return diff < 90 * 24 * 60 * 60 * 1000;
-  }
-
-  function isFillerBio(text) {
-    if (!text) return true;
-    var t = text.toLowerCase();
-    if (t.match(/appeared on .+ with .+ on mornings in the lab/)) return true;
-    if (t.match(/joined .+ on mornings in the lab/)) return true;
-    if (t.length < 30) return true;
-    return false;
-  }
-
-  function buildSocialIcons(socialLinks) {
-    if (!socialLinks || typeof socialLinks !== 'object') return '';
-    var icons = '';
-    if (socialLinks.linkedin) {
-      icons += '<span data-href="' + socialLinks.linkedin + '" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.href,\'_blank\')"><svg viewBox="0 0 24 24"><path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 110-3.12 1.56 1.56 0 010 3.12zM18.91 18.74h-3v-4.26c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39v4.34h-3v-9h2.89v1.36h.04a3.16 3.16 0 012.85-1.56c3.04 0 3.6 2 3.6 4.61v4.59z"/></svg></span>';
-    }
-    if (socialLinks.twitter || socialLinks.x) {
-      var url = socialLinks.twitter || socialLinks.x;
-      icons += '<span data-href="' + url + '" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.href,\'_blank\')"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"/></svg></span>';
-    }
-    if (socialLinks.youtube) {
-      icons += '<span data-href="' + socialLinks.youtube + '" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.href,\'_blank\')"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#050914"/></svg></span>';
-    }
-    if (!icons) return '';
-    return '<div class="sc">' + icons + '</div>';
-  }
-
-  function meterClass(count) {
-    if (count >= 5) return 'high';
-    if (count >= 2) return 'mid';
-    return 'low';
-  }
-
-  function meterWidth(count) {
-    return Math.min(100, count * 8.3) + '%';
-  }
-
-  function moreClass(count) {
-    if (count >= 6) return 'very-deep';
-    if (count >= 3) return 'deep';
-    return '';
-  }
-
-  function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-
-  /* ==========================================
-     VIP HERO (wide, 2-col span, horizontal)
-     ========================================== */
-  function buildHeroCard(guest) {
-    var seg = getSegCode(guest.topics);
-    var apps = getAppearances(guest);
-    var expertise = getExpertise(guest);
-    var lastDate = apps.length ? apps[apps.length - 1].date : '';
-    var profileUrl = '/profile/' + guest.slug;
-
-    var portraitVideo = guest.livingPortraitVideoUrl || '';
-    var photoHTML;
-    if (portraitVideo) {
-      photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
-    } else if (guest.headshotUrl) {
-      photoHTML = '<img src="' + guest.headshotUrl + '" alt="' + escapeHtml(guest.guestName) + '" onerror="this.outerHTML=\'<div class=initials-lg>' + getInitials(guest.guestName) + '</div>\'">';
-    } else {
-      photoHTML = '<div class="initials-lg">' + getInitials(guest.guestName) + '</div>';
-    }
-
-    var topicTags = expertise.slice(0, 4).map(function(t) {
-      return '<span class="tp">' + escapeHtml(t) + '</span>';
-    }).join('');
-    var extra = expertise.length - 4;
-    if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
-
-    return '<a href="' + profileUrl + '" class="card-hero" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
-      '<div class="hero-photo">' + photoHTML +
-        '<span class="hero-photo__tier">&#9733; VIP</span>' +
-      '</div>' +
-      '<div class="hero-content-body">' +
-        '<div class="hero-top">' +
-          '<div class="hero-nm">' + escapeHtml(guest.guestName) + ' <span class="vd"></span></div>' +
-          '<div class="hero-tl">' + escapeHtml(guest.headline || '') + '</div>' +
-        '</div>' +
-        '<div class="hero-badges">' +
-          '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>' +
-        '</div>' +
-        (guest.bio ? '<div class="hero-qt">&ldquo;' + escapeHtml(guest.bio) + '&rdquo;</div>' : '') +
-        '<div class="hero-topics">' + topicTags + '</div>' +
-        '<div class="hero-footer">' +
-          '<div class="ft-l">' +
-            '<div class="app-meter">' + apps.length + ' appearance' + (apps.length !== 1 ? 's' : '') +
-              ' <div class="meter-bar"><div class="meter-fill ' + meterClass(apps.length) + '" style="width:' + meterWidth(apps.length) + '"></div></div>' +
-            '</div>' +
-            (lastDate ? '<span class="dt ' + (isRecent(lastDate) ? 'recent' : '') + '">&middot; ' + formatDate(lastDate) + '</span>' : '') +
-            buildSocialIcons(guest.socialLinks) +
-          '</div>' +
-          '<div class="vp">' +
-            '<div class="pc"><svg viewBox="0 0 24 24"><polygon points="9 6 19 12 9 18"/></svg></div>' +
-            'View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</a>';
-  }
-
-  /* ==========================================
-     VIP VERTICAL (single-column VIP)
-     ========================================== */
-  function buildVIPVertCard(guest) {
-    var seg = getSegCode(guest.topics);
-    var apps = getAppearances(guest);
-    var expertise = getExpertise(guest);
-    var lastDate = apps.length ? apps[apps.length - 1].date : '';
-    var profileUrl = '/profile/' + guest.slug;
-
-    var portraitVideo = guest.livingPortraitVideoUrl || '';
-    var photoHTML;
-    if (portraitVideo) {
-      photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
-    } else if (guest.headshotUrl) {
-      photoHTML = '<img src="' + guest.headshotUrl + '" alt="' + escapeHtml(guest.guestName) + '" onerror="this.outerHTML=\'<div class=initials>' + getInitials(guest.guestName) + '</div>\'">';
-    } else {
-      photoHTML = '<div class="initials">' + getInitials(guest.guestName) + '</div>';
-    }
-
-    var topicTags = expertise.slice(0, 3).map(function(t) {
-      return '<span class="tp">' + escapeHtml(t) + '</span>';
-    }).join('');
-    var extra = expertise.length - 3;
-    if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
-
-    return '<a href="' + profileUrl + '" class="card-hero-vert" data-card-seg="' + seg + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + seg + '">' +
-      '<div class="card-photo">' + photoHTML +
-        '<div class="photo-overlay"><span class="photo-vd"></span></div>' +
-      '</div>' +
-      '<div class="card-body">' +
-        '<div class="card-nm">' + escapeHtml(guest.guestName) + '</div>' +
-        '<div class="card-tl">' + escapeHtml(guest.headline || '') + '</div>' +
-        '<div class="card-badges">' +
-          '<span class="bg bg-seg" data-seg="' + seg + '">' + (SEG_LABELS[seg] || 'Center Stage') + '</span>' +
-        '</div>' +
-        (guest.bio ? '<div class="card-qt">&ldquo;' + escapeHtml(guest.bio) + '&rdquo;</div>' : '') +
-        '<div class="card-topics">' + topicTags + '</div>' +
-      '</div>' +
-      '<div class="card-footer">' +
-        '<div class="ft-l">' +
-          '<div class="app-meter">' + apps.length + ' appearance' + (apps.length !== 1 ? 's' : '') +
-            ' <div class="meter-bar"><div class="meter-fill ' + meterClass(apps.length) + '" style="width:' + meterWidth(apps.length) + '"></div></div>' +
-          '</div>' +
-          (lastDate ? '<span class="dt ' + (isRecent(lastDate) ? 'recent' : '') + '">&middot; ' + formatDate(lastDate) + '</span>' : '') +
-            buildSocialIcons(guest.socialLinks) +
-        '</div>' +
-        '<div class="vp">' +
-          '<div class="pc"><svg viewBox="0 0 24 24"><polygon points="9 6 19 12 9 18"/></svg></div>' +
-          'View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>' +
-        '</div>' +
-      '</div>' +
-    '</a>';
-  }
-
-  /* ==========================================
-     STANDARD CARD (Featured + Free)
-     ========================================== */
-  function buildCard(guest) {
-    var seg = getSegCode(guest.topics);
-    var apps = getAppearances(guest);
-    var expertise = getExpertise(guest);
-    var lastDate = apps.length ? apps[apps.length - 1].date : '';
-    var isVIP = guest.tier === 'vip';
-    var isFeatured = guest.tier === 'member';
-    var isFree = guest.tier === 'free';
-    var profileUrl = '/profile/' + guest.slug;
-
-    var tierClass = '';
-    if (isVIP) tierClass = ' tier-vip';
-    else if (isFeatured) tierClass = ' tier-member';
-    else if (isFree) tierClass = ' tier-free';
-
-    var portraitVideo = guest.livingPortraitVideoUrl || '';
-    var photoHTML;
-    if (portraitVideo) {
-      photoHTML = '<video autoplay muted loop playsinline src="' + portraitVideo + '" poster="' + (guest.headshotUrl || '') + '"></video>';
-    } else if (guest.headshotUrl) {
-      photoHTML = '<img src="' + guest.headshotUrl + '" alt="' + escapeHtml(guest.guestName) + '" onerror="this.outerHTML=\'<div class=initials>' + getInitials(guest.guestName) + '</div>\'">';
-    } else {
-      photoHTML = '<div class="initials">' + getInitials(guest.guestName) + '</div>';
-    }
-
-    var verifiedDot = !isFree ? '<span class="photo-vd"></span>' : '<span class="photo-vd-ghost"></span>';
-
-    var topicTags = expertise.slice(0, 3).map(function(t) {
-      return '<span class="tp">' + escapeHtml(t) + '</span>';
-    }).join('');
-    var extra = expertise.length - 3;
-    if (extra > 0) topicTags += '<span class="tp-more ' + moreClass(extra) + '">+' + extra + '</span>';
-
-    // Card badges: VIP pill only on actual VIP profiles. Product pill
-    // (Center Stage / Community Corner) replaces the topic-segment pill.
-    var prodSlug = guest.productSlug || 'center-stage';
-    var prodSegCode = prodSlug === 'community-corner' ? 'cc' : 'cs';
-    var prodLabel = prodSlug === 'community-corner' ? 'Community Corner' : 'Center Stage';
-    var badges = '';
-    if (isVIP) badges += '<span class="bg bg-v">VIP</span>';
-    badges += '<span class="bg bg-seg" data-seg="' + prodSegCode + '">' + prodLabel + '</span>';
-
-    return '<a href="' + profileUrl + '" class="card' + tierClass + '" data-card-seg="' + prodSegCode + '" data-name="' + guest.guestName.toLowerCase() + '" data-tier="' + guest.tier + '" data-seg="' + prodSegCode + '">' +
-      '<div class="card-photo">' + photoHTML +
-        '<div class="photo-overlay">' + verifiedDot + '</div>' +
-      '</div>' +
-      '<div class="card-body">' +
-        '<div class="card-nm">' + escapeHtml(guest.guestName) + '</div>' +
-        '<div class="card-tl">' + escapeHtml(guest.headline || '') + '</div>' +
-        '<div class="card-badges">' + badges + '</div>' +
-        (guest.bio ? '<div class="card-qt">&ldquo;' + escapeHtml(guest.bio) + '&rdquo;</div>' : '') +
-        '<div class="card-topics">' + topicTags + '</div>' +
-      '</div>' +
-      '<div class="card-footer">' +
-        '<div class="ft-l">' +
-          '<div class="app-meter">' + apps.length + ' appearance' + (apps.length !== 1 ? 's' : '') +
-            ' <div class="meter-bar"><div class="meter-fill ' + meterClass(apps.length) + '" style="width:' + meterWidth(apps.length) + '"></div></div>' +
-          '</div>' +
-          (lastDate ? '<span class="dt ' + (isRecent(lastDate) ? 'recent' : '') + '">&middot; ' + formatDate(lastDate) + '</span>' : '') +
-        '</div>' +
-        '<div class="vp">' +
-          '<div class="pc"><svg viewBox="0 0 24 24"><polygon points="9 6 19 12 9 18"/></svg></div>' +
-          'View Profile <svg class="ar" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>' +
-        '</div>' +
-      '</div>' +
-    '</a>';
-  }
-
-  /* ==========================================
-     RENDER — sectioned by tier
-     ========================================== */
-  function renderGrid(guests) {
-    var container = document.getElementById('grid-container');
-
-    if (!guests.length) {
-      container.innerHTML = '<div class="tier-section"><div class="grid"><div class="loading">No guests match your search.</div></div></div>';
-      document.getElementById('countNum').textContent = '0';
-      return;
-    }
-
-    // Bucket by product (Center Stage / Community Corner). VIPs render at the
-    // top of their product section with the existing VIP card treatment —
-    // there's no separate VIP section anymore. Each product section is
-    // ordered: VIPs first (alpha by last name), then everyone else (alpha
-    // by last name).
-    var centerStage = guests.filter(function(g) { return g.productSlug === 'center-stage'; });
-    var communityCorner = guests.filter(function(g) { return g.productSlug === 'community-corner'; });
-
-    function sortByLastName(a, b) {
-      var aParts = a.guestName.trim().split(/\s+/);
-      var bParts = b.guestName.trim().split(/\s+/);
-      var aLast = aParts[aParts.length - 1].toLowerCase();
-      var bLast = bParts[bParts.length - 1].toLowerCase();
-      if (aLast < bLast) return -1;
-      if (aLast > bLast) return 1;
-      return a.guestName.localeCompare(b.guestName);
-    }
-    function sortVipFirst(a, b) {
-      var aVip = a.tier === 'vip' ? 0 : 1;
-      var bVip = b.tier === 'vip' ? 0 : 1;
-      if (aVip !== bVip) return aVip - bVip;
-      return sortByLastName(a, b);
-    }
-    centerStage.sort(sortVipFirst);
-    communityCorner.sort(sortVipFirst);
-
-    var html = '';
-
-    // --- CENTER STAGE SECTION ---
-    if (centerStage.length > 0) {
-      var csVipCount = centerStage.filter(function(g){ return g.tier === 'vip'; }).length;
-      var csHeadClass = csVipCount > 0 ? 'section-head section-head-vip' : 'section-head';
-      html += '<section class="tier-section">';
-      html += '<div class="' + csHeadClass + '">';
-      html +=   '<div class="section-head-left">';
-      html +=     '<h2>Center Stage<span class="count">' + centerStage.length + '</span></h2>';
-      html +=   '</div>';
-      html +=   '<p class="section-sub">Long-form, signature interviews. The show\'s headline guests — deep domain authority, full media kits, and authority profiles.</p>';
-      html += '</div>';
-      html += '<div class="grid' + (csVipCount > 0 ? ' grid-vip' : '') + '">';
-      for (var i = 0; i < centerStage.length; i++) {
-        html += buildCard(centerStage[i]);
+  function pickPullQuote(g) {
+    if (g.pullQuote) return g.pullQuote;
+    if (g.bio) {
+      // First sentence of bio if it's not generic
+      const first = String(g.bio).split(/(?<=[.!?])\s+/)[0];
+      if (first && first.length > 30 && !/appeared on Center Stage/i.test(first)) {
+        return first;
       }
-      html += '</div>';
-      html += '</section>';
     }
-
-    // --- COMMUNITY CORNER SECTION ---
-    if (communityCorner.length > 0) {
-      var ccVipCount = communityCorner.filter(function(g){ return g.tier === 'vip'; }).length;
-      var ccHeadClass = ccVipCount > 0 ? 'section-head section-head-vip' : 'section-head';
-      html += '<section class="tier-section">';
-      html += '<div class="' + ccHeadClass + '">';
-      html +=   '<div class="section-head-left">';
-      html +=     '<h2>Community Corner<span class="count">' + communityCorner.length + '</span></h2>';
-      html +=   '</div>';
-      html +=   '<p class="section-sub">Quick-hit, conversational guest spots. Voices from the ConversationOS network with single or recurring appearances.</p>';
-      html += '</div>';
-      html += '<div class="grid' + (ccVipCount > 0 ? ' grid-vip' : '') + '">';
-      for (var j = 0; j < communityCorner.length; j++) {
-        html += buildCard(communityCorner[j]);
-      }
-      html += '</div>';
-      html += '</section>';
-    }
-
-    container.innerHTML = html;
-    document.getElementById('countNum').textContent = guests.length;
+    return g.headline || "";
   }
 
-  function filterGuests() {
-    var query = document.getElementById('searchInput').value.toLowerCase().trim();
-    var filtered = allGuests.filter(function(g) {
-      // Product-based pills: 'center-stage' / 'community-corner'. 'all' shows
-      // everything. Anything else falls through to "no match".
-      if (activeFilter !== 'all' && g.productSlug !== activeFilter) return false;
-      if (query) {
-        var searchable = (g.guestName + ' ' + (g.headline || '') + ' ' + (g.bio || '') + ' ' + (g.topics || []).join(' ')).toLowerCase();
-        if (searchable.indexOf(query) === -1) return false;
-      }
-      return true;
-    });
-    renderGrid(filtered);
+  // ─── Live status (from MITL show schedule) ───────────────────────────
+
+  function refreshLiveIndicator() {
+    // Show is M-F 09:00-10:30 ET. Quick eyeball check.
+    const now = new Date();
+    const et = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+    const day = et.getDay(); // 0 Sun .. 6 Sat
+    const minutes = et.getHours() * 60 + et.getMinutes();
+    const onAir = day >= 1 && day <= 5 && minutes >= 540 && minutes <= 630;
+    const el = document.getElementById("liveIndicator");
+    const lbl = document.getElementById("liveLabel");
+    if (onAir) {
+      el.classList.add("issue-masthead__live--on");
+      lbl.textContent = "ON AIR NOW";
+    } else {
+      el.classList.remove("issue-masthead__live--on");
+      lbl.textContent = "OFF AIR";
+    }
   }
 
-  // Chip filtering
-  document.getElementById('chips').addEventListener('click', function(e) {
-    var chip = e.target.closest('.ch');
-    if (!chip) return;
-    document.querySelectorAll('.ch').forEach(function(c) { c.classList.remove('on'); });
-    chip.classList.add('on');
-    activeFilter = chip.getAttribute('data-filter');
-    filterGuests();
-  });
+  // ─── Renderers ───────────────────────────────────────────────────────
 
-  // Search
-  document.getElementById('searchInput').addEventListener('input', function() {
-    filterGuests();
-  });
+  function renderCover(cover) {
+    if (!cover) return "";
+    const photo = cover.headshotUrl || "";
+    const video = cover.livingPortraitVideoUrl || "";
+    const media = video
+      ? `<video autoplay muted loop playsinline poster="${escapeHTML(photo)}"><source src="${escapeHTML(video)}" type="video/mp4"></video>`
+      : `<img src="${escapeHTML(photo)}" alt="${escapeHTML(cover.guestName)}" loading="eager">`;
+    const meta = [
+      cover.tier ? `<strong>${escapeHTML(cover.tier.toUpperCase())}</strong>` : null,
+      cover.signalScore != null ? `Signal <strong>${cover.signalScore}</strong>` : null,
+      cover.appearanceCount ? `${cover.appearanceCount} appearance${cover.appearanceCount === 1 ? "" : "s"}` : null,
+      cover.latestAppearanceDate ? formatDate(cover.latestAppearanceDate) : null,
+    ].filter(Boolean).join('<span class="cover-story__meta-divider"></span>');
 
-  // ── Fetch guest data from ConversationOS API ──
-  var API_BASE = 'https://app.conversationos.live/api/guest-marketplace';
+    return `
+      <section class="cover-section">
+        <a href="${GUEST_PROFILE(cover.slug)}" class="cover-story" aria-label="Cover Story: ${escapeHTML(cover.guestName)}">
+          <div class="cover-story__media">${media}</div>
+          <div class="cover-story__scrim"></div>
+          <div class="cover-story__content">
+            <div class="cover-story__chip">Cover Story</div>
+            <h2 class="cover-story__title">${escapeHTML(cover.guestName)}</h2>
+            <p class="cover-story__quote">${escapeHTML(pickPullQuote(cover))}</p>
+            <div class="cover-story__meta">${meta}</div>
+            <span class="cover-story__cta">
+              Read the cover story
+              <span class="cover-story__cta-arrow">→</span>
+            </span>
+          </div>
+        </a>
+      </section>
+    `;
+  }
 
-  // Normalize API response to match the rendering format
-  function normalizeGuest(g) {
-    var displayQuote = g.pullQuote || '';
-    if (!displayQuote && g.bio && !isFillerBio(g.bio)) {
-      displayQuote = g.bio;
+  function renderIssueCard(g) {
+    const photo = g.headshotUrl || "";
+    const tierClass = (g.tier || "").toLowerCase() === "vip" ? " issue-card__tier--vip" : "";
+    const tierBadge = g.tier
+      ? `<div class="issue-card__tier${tierClass}">${escapeHTML(g.tier.toUpperCase())}</div>`
+      : "";
+    const signalBadge = (g.signalScore != null && g.signalScore > 0)
+      ? `<div class="issue-card__signal">
+           <span class="issue-card__signal-num">${g.signalScore}</span>
+           <span class="issue-card__signal-label">Signal</span>
+         </div>`
+      : "";
+    const meta = [
+      g.productSlug === "center-stage" ? "Center Stage" : g.productSlug === "community-corner" ? "Community Corner" : null,
+      g.appearanceCount ? `${g.appearanceCount} appearance${g.appearanceCount === 1 ? "" : "s"}` : null,
+      g.latestAppearanceDate ? formatDate(g.latestAppearanceDate) : null,
+    ].filter(Boolean);
+    const metaHtml = meta.length
+      ? meta.map((m, i) => i === 0 ? m : `<span class="issue-card__meta-divider"></span>${m}`).join("")
+      : "";
+
+    return `
+      <a href="${GUEST_PROFILE(g.slug)}" class="issue-card">
+        <div class="issue-card__media">
+          <img src="${escapeHTML(photo)}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+          <div class="issue-card__media-scrim"></div>
+          ${tierBadge}
+          ${signalBadge}
+        </div>
+        <div class="issue-card__body">
+          <h3 class="issue-card__name">${escapeHTML(g.guestName)}</h3>
+          <p class="issue-card__headline">${escapeHTML(g.headline || "")}</p>
+          ${metaHtml ? `<div class="issue-card__meta">${metaHtml}</div>` : ""}
+        </div>
+      </a>
+    `;
+  }
+
+  function renderRowCard(g) {
+    const photo = g.headshotUrl || "";
+    const dateChip = g.latestAppearanceDate
+      ? `<div class="row-card__date">${relativeDays(g.latestAppearanceDate)}</div>`
+      : "";
+    return `
+      <a href="${GUEST_PROFILE(g.slug)}" class="row-card">
+        <div class="row-card__media">
+          <img src="${escapeHTML(photo)}" alt="${escapeHTML(g.guestName)}" loading="lazy">
+          ${dateChip}
+        </div>
+        <div class="row-card__body">
+          <h3 class="row-card__name">${escapeHTML(g.guestName)}</h3>
+          <div class="row-card__show">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")}</div>
+        </div>
+      </a>
+    `;
+  }
+
+  function renderSection(section, idx) {
+    const num = String(idx + 1).padStart(2, "0");
+    let body = "";
+    switch (section.treatment) {
+      case "row":
+        body = `<div class="row-layout">${section.guests.map(renderRowCard).join("")}</div>`;
+        break;
+      case "wide-scroller":
+      default:
+        body = `<div class="scroller">${section.guests.map(renderIssueCard).join("")}</div>`;
+        break;
     }
-    var socials = g.socialLinks;
-    if (typeof socials === 'string') {
-      try { socials = JSON.parse(socials); } catch(e) { socials = {}; }
+    return `
+      <section class="issue-section" data-section="${escapeHTML(section.id)}">
+        <div class="issue-section__head">
+          <div class="issue-section__heading">
+            <span class="issue-section__num">№ ${num}</span>
+            <h2 class="issue-section__name">${escapeHTML(section.name)}</h2>
+          </div>
+          <p class="issue-section__blurb">${escapeHTML(section.blurb)}</p>
+        </div>
+        ${body}
+      </section>
+    `;
+  }
+
+  function renderIssue(issue) {
+    document.getElementById("issueNumber").textContent = `ISSUE ${issue.issueNumber}`;
+    document.getElementById("issueGuests").textContent = `${issue.totalGuests} GUESTS`;
+
+    // Update JSON-LD with cover story
+    if (issue.cover) {
+      const ld = document.getElementById("issue-jsonld");
+      try {
+        const payload = JSON.parse(ld.textContent);
+        payload.headline = `${issue.cover.guestName} — Issue ${issue.issueNumber}`;
+        payload.dateModified = issue.generatedAt;
+        payload.image = issue.cover.headshotUrl;
+        ld.textContent = JSON.stringify(payload, null, 2);
+      } catch {}
     }
+
+    const main = document.getElementById("issueMain");
+    main.innerHTML = renderCover(issue.cover) + issue.sections.map(renderSection).join("");
+  }
+
+  // ─── Fallback: build a minimal issue from the legacy directory ───────
+
+  function buildFallbackIssue(directory) {
+    const guests = (directory.guests || []).map((g) => ({
+      ...g,
+      appearanceCount: (() => {
+        try {
+          const a = typeof g.pastAppearances === "string" ? JSON.parse(g.pastAppearances) : g.pastAppearances;
+          return Array.isArray(a) ? a.length : 0;
+        } catch { return 0; }
+      })(),
+      latestAppearanceDate: (() => {
+        try {
+          const a = typeof g.pastAppearances === "string" ? JSON.parse(g.pastAppearances) : g.pastAppearances;
+          if (!Array.isArray(a) || !a.length) return null;
+          return a.sort((x, y) => (y.date || "").localeCompare(x.date || ""))[0]?.date || null;
+        } catch { return null; }
+      })(),
+      latestAppearanceShow: "Mornings in the Lab",
+    }));
+
+    const cover = guests.find((g) => g.tier === "vip" && g.headshotUrl) || guests[0];
+    const onAir = guests.filter((g) => g.tier === "vip").slice(0, 6);
+    const justAired = guests.slice(0, 4);
+    const forHosts = guests.filter((g) => g.tier === "vip" || g.tier === "featured").slice(0, 8);
+
     return {
-      guestName: g.guestName || '',
-      slug: g.slug || '',
-      headline: g.headline || '',
-      bio: displayQuote,
-      headshotUrl: (function(u) {
-        if (!u) return '';
-        return u.replace('shrink_200_200', 'shrink_400_400')
-                .replace('scale_200_200', 'scale_400_400');
-      })(g.authorityThumbnail || g.headshotUrl || ''),
-      tier: g.tier || 'free',
-      topics: g.topics,
-      expertise: g.topicsExpertise || g.expertise,
-      pastAppearances: g.pastAppearances,
-      socialLinks: socials || {},
-      // Option C: pass through living portrait so VIP cards can autoplay video
-      livingPortraitVideoUrl: g.livingPortraitVideoUrl || '',
-      totalFollowers: g.totalFollowers || 0,
-      hasSignal: g.hasSignal || false,
-      signalScore: g.signalScore || 0,
-      // Product association — required by renderGrid() to bucket cards into Center Stage / Community Corner
-      productSlug: g.productSlug || null,
-      productId: g.productId || null
+      issueNumber: "current",
+      issueDate: new Date().toISOString().slice(0, 10),
+      generatedAt: new Date().toISOString(),
+      totalGuests: directory.total || guests.length,
+      cover,
+      sections: [
+        onAir.length && { id: "on-air", name: "On Air This Week", blurb: "Just shipped, just aired, or going live in the next seven days.", treatment: "wide-scroller", guests: onAir },
+        justAired.length && { id: "just-aired", name: "Just Aired", blurb: "The latest conversations on Mornings in the Lab.", treatment: "row", guests: justAired },
+        forHosts.length && { id: "for-hosts", name: "For Hosts", blurb: "Booking a guest? Start here.", treatment: "wide-scroller", guests: forHosts },
+      ].filter(Boolean),
     };
   }
 
-  // Fetch all guests from ConversationOS API (paginated)
-  async function fetchAllGuests() {
-    var allFetched = [];
-    var page = 1;
-    var totalPages = 1;
-    var maxPages = 15; // safety limit
+  // ─── Boot ────────────────────────────────────────────────────────────
+
+  async function loadIssue() {
+    refreshLiveIndicator();
+    setInterval(refreshLiveIndicator, 60_000);
 
     try {
-      while (page <= totalPages && page <= maxPages) {
-        var url = API_BASE + '/directory?limit=50&page=' + page + '&sort=featured';
-        console.log('[GuestDirectory] Fetching page ' + page + '/' + totalPages + ':', url);
-        var response = await fetch(url);
-        if (!response.ok) throw new Error('API returned ' + response.status);
-        var data = await response.json();
-        console.log('[GuestDirectory] Page ' + page + ': ' + (data.guests ? data.guests.length : 0) + ' guests, total=' + data.total + ', totalPages=' + data.totalPages);
-
-        if (data.guests && Array.isArray(data.guests)) {
-          allFetched = allFetched.concat(data.guests);
-        }
-        totalPages = data.totalPages || 1;
-        page++;
+      const r = await fetch(ISSUE_URL, { headers: { Accept: "application/json" } });
+      if (r.ok) {
+        const issue = await r.json();
+        renderIssue(issue);
+        return;
       }
-    } catch (err) {
-      console.error('[GuestDirectory] API fetch failed:', err);
-      // If we already fetched some pages, use what we have rather than showing nothing
-      if (allFetched.length > 0) {
-        console.warn('[GuestDirectory] Partial fetch: using ' + allFetched.length + ' guests from completed pages');
-        return allFetched.map(normalizeGuest);
-      }
-      var container = document.getElementById('grid-container');
-      if (container) container.innerHTML = '<div class="tier-section"><div class="grid"><div class="loading">Unable to load guest directory. Please try again later.</div></div></div>';
-      return [];
-    }
+    } catch (e) { /* fall through */ }
 
-    console.log('[GuestDirectory] Total fetched: ' + allFetched.length + ' guests');
-    return allFetched.map(normalizeGuest);
+    // Fallback path
+    try {
+      const r = await fetch(FALLBACK_URL);
+      if (r.ok) {
+        const data = await r.json();
+        renderIssue(buildFallbackIssue(data));
+        return;
+      }
+    } catch (e) { /* fall through */ }
+
+    // Hard error
+    document.getElementById("issueMain").innerHTML = `
+      <div class="issue-error">
+        <h2>The issue is at the printers.</h2>
+        <p>We couldn't load this week's issue. Browse the full directory while we sort it out.</p>
+        <a href="/directory/all/">Search all guests →</a>
+      </div>
+    `;
   }
 
-  // Initialize directory from API
-  (async function initDirectory() {
-    var fetched = await fetchAllGuests();
-    console.log('[GuestDirectory] Fetched total:', fetched.length);
+  // Mobile menu hook (matches existing site)
+  document.getElementById("geHamburger")?.addEventListener("click", () => {
+    document.getElementById("geMobileMenu")?.classList.toggle("open");
+  });
 
-    var excludedCount = 0;
-    var guests = fetched.filter(function(g) {
-      if (EXCLUDED_SLUGS.indexOf(g.slug) !== -1) { excludedCount++; return false; }
-      // Show every public guest with a product assignment.
-      // Center Stage and Community Corner are both first-class pills now;
-      // backfilled stubs without past_appearances still belong on their
-      // product page until episode rows arrive.
-      return true;
-    });
-    console.log('[GuestDirectory] Filter: excluded=' + excludedCount + ', remaining=' + guests.length);
-
-    allGuests = guests;
-
-    document.getElementById('stat-guests').textContent = guests.length;
-    var shows = new Set();
-    guests.forEach(function(g) {
-      var apps = getAppearances(g);
-      apps.forEach(function(a) { if (a.showName) shows.add(a.showName); });
-    });
-    document.getElementById('stat-shows').textContent = Math.max(shows.size, 1);
-
-    renderGrid(guests);
-  })();
-})();
-</script>
-  <!-- Face-aware focal point adjustment -->
-  <script>
-  (function() {
-    var HAS_FACE_DETECTOR = typeof window.FaceDetector === 'function';
-    var detector = null;
-    try { if (HAS_FACE_DETECTOR) detector = new FaceDetector({ fastMode: true, maxDetectedFaces: 1 }); } catch(e) {}
-
-    // Canvas-based skin-tone detection fallback
-    function findFaceRegionCanvas(img) {
-      try {
-        var c = document.createElement('canvas');
-        var w = Math.min(img.naturalWidth, 100);
-        var h = Math.round(w * img.naturalHeight / img.naturalWidth);
-        c.width = w; c.height = h;
-        var ctx = c.getContext('2d', { willReadFrequently: true });
-        ctx.drawImage(img, 0, 0, w, h);
-        var data;
-        try { data = ctx.getImageData(0, 0, w, h).data; }
-        catch(e) { return null; }
-
-        var bands = 10;
-        var bandH = Math.floor(h / bands);
-        var scores = new Array(bands).fill(0);
-
-        for (var y = 0; y < h; y++) {
-          for (var x = 0; x < w; x++) {
-            var i = (y * w + x) * 4;
-            var r = data[i], g = data[i+1], b = data[i+2];
-            if (r > 60 && g > 40 && b > 20 &&
-                r > g && r > b &&
-                (r - g) > 5 && (r - b) > 10 &&
-                Math.abs(r - g) < 130 &&
-                r < 250 && g < 230 && b < 210) {
-              var band = Math.min(Math.floor(y / bandH), bands - 1);
-              scores[band]++;
-            }
-          }
-        }
-
-        var maxScore = 0, maxBand = 2;
-        for (var b = 0; b < bands; b++) {
-          if (scores[b] > maxScore) { maxScore = scores[b]; maxBand = b; }
-        }
-
-        if (maxScore < (w * bandH * 0.03)) return null;
-
-        return ((maxBand + 0.5) / bands) * 100;
-      } catch(e) { return null; }
-    }
-
-    function adjustFocalPoint(img) {
-      if (!img.naturalWidth || !img.naturalHeight) return;
-      if (img.dataset.focalSet) return;
-      var container = img.parentElement;
-      if (!container) return;
-      var containerW = container.offsetWidth;
-      var containerH = container.offsetHeight;
-      if (!containerW || !containerH) return;
-      var imgW = img.naturalWidth;
-      var imgH = img.naturalHeight;
-
-      var scaleX = containerW / imgW;
-      var scaleY = containerH / imgH;
-      var scale = Math.max(scaleX, scaleY);
-      var scaledH = imgH * scale;
-
-      if (scaledH <= containerH + 2) { img.dataset.focalSet = '1'; return; }
-
-      function applyPosition(posY) {
-        posY = Math.max(0, Math.min(100, posY - 8));
-        img.style.objectPosition = 'center ' + posY + '%';
-        img.dataset.focalSet = '1';
-      }
-
-      if (detector) {
-        detector.detect(img).then(function(faces) {
-          if (faces.length > 0) {
-            var face = faces[0].boundingBox;
-            var faceCenterY = (face.y + face.height / 2) / imgH * 100;
-            applyPosition(faceCenterY);
-          } else {
-            var canvasY = findFaceRegionCanvas(img);
-            if (canvasY !== null) applyPosition(canvasY);
-            else img.dataset.focalSet = '1';
-          }
-        }).catch(function() {
-          var canvasY = findFaceRegionCanvas(img);
-          if (canvasY !== null) applyPosition(canvasY);
-          else img.dataset.focalSet = '1';
-        });
-      } else {
-        var canvasY = findFaceRegionCanvas(img);
-        if (canvasY !== null) applyPosition(canvasY);
-        else img.dataset.focalSet = '1';
-      }
-    }
-
-    function processImages(root) {
-      var imgs = (root || document).querySelectorAll('.card-photo img, .hero-photo img');
-      imgs.forEach(function(img) {
-        if (img.dataset.focalSet) return;
-        if (img.complete && img.naturalWidth) {
-          adjustFocalPoint(img);
-        } else {
-          img.addEventListener('load', function() { adjustFocalPoint(img); }, { once: true });
-        }
-      });
-    }
-
-    var observer = new MutationObserver(function(mutations) {
-      var hasNew = false;
-      mutations.forEach(function(m) {
-        if (m.addedNodes.length) hasNew = true;
-      });
-      if (hasNew) setTimeout(function() { processImages(); }, 200);
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    setTimeout(function() { processImages(); }, 500);
-  })();
+  loadIssue();
   </script>
-
-  <!-- Scroll reveal (fade-in as cards enter viewport) -->
-  <script>
-  (function() {
-    if (!('IntersectionObserver' in window) || !('MutationObserver' in window)) {
-      // Fallback: reveal everything immediately
-      document.querySelectorAll('.card, .card-hero, .card-hero-vert').forEach(function(el) { el.classList.add('revealed'); });
-      return;
-    }
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('revealed');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
-
-    function observeAll() {
-      document.querySelectorAll('.card:not(.revealed), .card-hero:not(.revealed), .card-hero-vert:not(.revealed)').forEach(function(el) {
-        obs.observe(el);
-      });
-    }
-
-    var container = document.getElementById('grid-container');
-    if (container) {
-      var mo = new MutationObserver(function() { observeAll(); });
-      mo.observe(container, { childList: true, subtree: true });
-    }
-    observeAll();
-  })();
-  </script>
-
-  <!-- Hero video unmute toggle -->
-  <script>
-  (function() {
-    var video = document.getElementById('hero-video');
-    var btn = document.getElementById('heroUnmute');
-    if (!video || !btn) return;
-    var mutedIcon = btn.querySelector('.hero__unmute-icon--muted');
-    var unmutedIcon = btn.querySelector('.hero__unmute-icon--unmuted');
-    btn.addEventListener('click', function() {
-      video.muted = !video.muted;
-      mutedIcon.style.display = video.muted ? '' : 'none';
-      unmutedIcon.style.display = video.muted ? 'none' : '';
-      btn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
-    });
-  })();
-  </script>
-
-  <script src="../header.js"></script>
 </body>
 </html>
