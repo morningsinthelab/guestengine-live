@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
 <!-- Editorial display serif (Newsreader 16..72 opsz) for masthead/section heads/feature headlines, Source Serif 4 for body, Cabinet for sans display ("THE PEOPLE BEHIND…"), JetBrains Mono for kickers/folios -->
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,800;0,6..72,900;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,800;1,6..72,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;0,6..72,900;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700;1,6..72,800;1,6..72,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/header.css?v=1776710000">
 
@@ -210,9 +210,32 @@ img { max-width: 100%; display: block; }
   text-align: center;
   pointer-events: none;
 }
+/* Focused radial scrim behind the masthead block only — anchors the title
+   without dimming the rest of the Veo. The pseudo-element sits behind the
+   text but inside the masthead box, so the scrim travels with it. */
+.masthead-overlay::before {
+  content: '';
+  position: absolute;
+  inset: -40px -10% auto -10%;
+  height: 360px;
+  background: radial-gradient(
+    ellipse 70% 90% at 50% 50%,
+    rgba(2, 6, 23, 0.55) 0%,
+    rgba(2, 6, 23, 0.30) 45%,
+    transparent 75%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+@media (max-width: 720px) {
+  .masthead-overlay::before {
+    inset: -20px -5% auto -5%;
+    height: 280px;
+  }
+}
 .masthead-overlay__title {
   font-family: var(--display);
-  font-weight: 900;
+  font-weight: 800;
   font-size: clamp(56px, 9vw, 132px);
   line-height: 0.86;
   letter-spacing: -0.04em;
@@ -322,7 +345,7 @@ img { max-width: 100%; display: block; }
 
 .feature__headline {
   font-family: var(--display);
-  font-weight: 900;
+  font-weight: 800;
   font-size: clamp(72px, 11vw, 180px);
   line-height: 0.85;
   letter-spacing: -0.05em;
@@ -343,6 +366,7 @@ img { max-width: 100%; display: block; }
   font-weight: 400;
   color: var(--t-2);
   margin: 14px 0 0;
+  font-variation-settings: "opsz" 72;
 }
 .feature__byline strong {
   font-style: normal;
@@ -381,7 +405,7 @@ img { max-width: 100%; display: block; }
 }
 .feature__body p:first-of-type::first-letter {
   font-family: var(--display);
-  font-weight: 900;
+  font-weight: 800;
   font-size: 5.4em;
   float: left;
   line-height: 0.78;
@@ -546,7 +570,7 @@ img { max-width: 100%; display: block; }
 }
 .toc__heading {
   font-family: var(--display);
-  font-weight: 900;
+  font-weight: 800;
   font-size: clamp(48px, 6vw, 80px);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -602,10 +626,11 @@ img { max-width: 100%; display: block; }
 }
 .toc__entry-title {
   font-family: var(--display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 22px;
-  line-height: 1.18;
+  line-height: 1.22;
   letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72;
 }
 .toc__entry-title em { font-style: italic; font-weight: 500; }
 .toc__entry-deck {
@@ -679,9 +704,9 @@ img { max-width: 100%; display: block; }
 .spread--paper .spread__folio strong { color: var(--gold-soft); }
 .spread__head {
   font-family: var(--display);
-  font-weight: 900;
-  font-size: clamp(40px, 6vw, 80px);
-  line-height: 0.96;
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1;
   letter-spacing: -0.03em;
   margin: 0 0 16px;
   font-variation-settings: "opsz" 72;
@@ -765,6 +790,7 @@ img { max-width: 100%; display: block; }
   font-weight: 400;
   font-size: 16px;
   color: var(--gold);
+  font-variation-settings: "opsz" 72;
   margin-top: 4px;
   align-self: flex-start;
   transition: gap .2s;
@@ -807,9 +833,10 @@ img { max-width: 100%; display: block; }
   font-family: var(--display);
   font-weight: 700;
   font-size: 24px;
-  line-height: 1.1;
+  line-height: 1.18;
   letter-spacing: -0.015em;
   margin: 0;
+  font-variation-settings: "opsz" 72;
 }
 .feature-threeup__deck {
   font-family: var(--serif);
@@ -840,10 +867,11 @@ img { max-width: 100%; display: block; }
 .departments__title {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(36px, 4.6vw, 56px);
+  font-size: clamp(48px, 6vw, 80px);
   line-height: 1;
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 72;
 }
 .departments__title em { font-style: italic; font-weight: 600; color: var(--gold); }
 .departments__sub {

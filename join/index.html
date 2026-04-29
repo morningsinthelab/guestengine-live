@@ -1778,6 +1778,38 @@
     // ══════════════════════════════════════
     renderProgress();
 
+    // Deep-link from homepage pricing strip: /join/?tier=member etc.
+    // ──────────────────────────────────────────────────────────────
+    // The homepage tier-strip cards link here with ?tier=<slug>. We
+    // auto-select the matching tier card and advance straight to the
+    // next step in that tier's flow:
+    //   single  → step-show     (pick which show)
+    //   member  → step-details  (collect name/email/topic)
+    //   reachpro→ step-details  (collect name/email/topic)
+    //   vip     → step-show     (pick which show)
+    //
+    // We DO NOT auto-fire checkout — the user still confirms on the
+    // final step. This is a pre-selection, not a bypass.
+    (function autoSelectFromQuery() {
+      var params = new URLSearchParams(window.location.search);
+      var requested = (params.get('tier') || '').toLowerCase();
+      var validTiers = ['single', 'member', 'reachpro', 'vip'];
+      if (validTiers.indexOf(requested) === -1) return;
+
+      // Find the matching tier card and trigger the same click logic so
+      // state.tier, state.price, state.billing, and the next-button label
+      // all stay consistent with the manual click path.
+      var sel = '[data-tier="' + requested + '"]';
+      var card = document.querySelector(sel);
+      if (!card || card.classList.contains('disabled')) return;
+      card.click();
+
+      // Advance to step 2 of the tier's flow. We use the same goToStep
+      // path the manual Next button uses, so progress bar updates too.
+      var flow = flows[requested] || flows.single;
+      goToStep(flow[1]);
+    })();
+
     // Mobile nav
     var toggle = document.getElementById('navToggle');
     var navLinks = document.getElementById('navLinks');
