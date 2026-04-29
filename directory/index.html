@@ -16,9 +16,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
-<!-- Editorial display serif (Fraunces 144 opsz) for headlines, Source Serif 4 for body, Cabinet for sans, JetBrains Mono for kickers/folios -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Editorial display serif (Newsreader 16..72 opsz) for masthead/section heads/feature headlines, Source Serif 4 for body, Cabinet for sans display ("THE PEOPLE BEHIND…"), JetBrains Mono for kickers/folios -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,800;0,6..72,900;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,800;1,6..72,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/header.css?v=1776710000">
 
 <!-- Agent-readable links -->
 <link rel="alternate" type="application/json" href="https://app.conversationos.live/api/guest-marketplace/issue/current.json" title="Current issue (JSON)">
@@ -64,7 +65,7 @@
   --rule: rgba(255, 255, 255, 0.10);
   --rule-strong: rgba(255, 255, 255, 0.20);
   --paper-rule: rgba(0, 0, 0, 0.12);
-  --display: "Fraunces", Georgia, serif;
+  --display: "Newsreader", "Fraunces", Georgia, serif;
   --serif: "Source Serif 4", "Tiempos Text", Georgia, serif;
   --sans: "Cabinet Grotesk", "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -77,30 +78,8 @@ img { max-width: 100%; display: block; }
 ::selection { background: rgba(251, 191, 36, 0.25); color: #fff; }
 
 /* ─── HEADER ────────────────────────────────────────────────────── */
-.ge-header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 32px;
-  background: rgba(5, 9, 20, 0.78);
-  backdrop-filter: saturate(140%) blur(18px);
-  -webkit-backdrop-filter: saturate(140%) blur(18px);
-  border-bottom: 1px solid var(--rule);
-}
-.ge-header__logo { display: flex; align-items: center; gap: 12px; }
-.ge-header__logo-icon { width: 32px; height: 32px; }
-.ge-header__logo-cos { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--gold); }
-.ge-header__logo-ge { display: flex; gap: 6px; font-weight: 800; font-size: 16px; letter-spacing: 0.02em; }
-.ge-header__logo-engine { color: var(--gold); }
-.ge-header__nav { display: flex; gap: 28px; }
-.ge-header__nav a { font-size: 14px; font-weight: 500; color: var(--t-1); transition: color .2s; }
-.ge-header__nav a:hover { color: var(--gold); }
-.ge-header__login { font-size: 14px; font-weight: 600; color: var(--t-1); padding: 10px 18px; }
-.ge-header__hamburger { display: none; }
-@media (max-width: 900px) {
-  .ge-header__nav { display: none; }
-  .ge-header__hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: 0; cursor: pointer; padding: 8px; }
-  .ge-header__hamburger span { width: 22px; height: 2px; background: var(--t-1); }
-}
+/* Header styles live in /header.css (single source of truth — soft alpha
+   gradient + .scrolled blur). Do not redefine .ge-header here. */
 
 /* ─── TOP HERO (brand promise) ──────────────────────────────────── */
 .hero {
@@ -225,30 +204,21 @@ img { max-width: 100%; display: block; }
   position: absolute;
   top: 0; left: 0; right: 0;
   z-index: 5;
-  padding: 96px 64px 28px;
+  padding: 112px 64px 28px;
   display: grid;
   grid-template-columns: 1fr;
   text-align: center;
   pointer-events: none;
-}
-.masthead-overlay__pub {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.60);
-  font-weight: 500;
-  margin-bottom: 14px;
 }
 .masthead-overlay__title {
   font-family: var(--display);
   font-weight: 900;
   font-size: clamp(56px, 9vw, 132px);
   line-height: 0.86;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
   margin: 0;
   color: #ffffff;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
 }
 .masthead-overlay__title em {
@@ -257,7 +227,7 @@ img { max-width: 100%; display: block; }
   color: var(--gold);
 }
 .masthead-overlay__sub {
-  margin-top: 22px;
+  margin-top: 12px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.24em;
@@ -347,7 +317,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.01em;
   margin: 0 0 28px;
   max-width: 760px;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 
 .feature__headline {
@@ -357,7 +327,7 @@ img { max-width: 100%; display: block; }
   line-height: 0.85;
   letter-spacing: -0.05em;
   margin: 0 0 32px;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
   color: #ffffff;
 }
 .feature__headline em {
@@ -372,7 +342,7 @@ img { max-width: 100%; display: block; }
   font-size: 18px;
   font-weight: 400;
   color: var(--t-2);
-  margin: 0 0 4px;
+  margin: 14px 0 0;
 }
 .feature__byline strong {
   font-style: normal;
@@ -383,12 +353,15 @@ img { max-width: 100%; display: block; }
 .feature__credentials {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--t-3);
-  margin: 14px 0 0;
+  margin: 0 0 18px;
   line-height: 1.6;
   max-width: 720px;
+  padding-top: 4px;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
 }
 
 /* Body */
@@ -414,7 +387,7 @@ img { max-width: 100%; display: block; }
   line-height: 0.78;
   margin: 0.04em 0.08em 0 -0.04em;
   color: var(--gold);
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 
 /* Inline pull quote — breaks the body for column-break rhythm */
@@ -429,7 +402,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.28;
   color: var(--t-1);
   letter-spacing: -0.012em;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
   max-width: 800px;
 }
 .feature__pull::before { content: "\201C"; }
@@ -494,15 +467,20 @@ img { max-width: 100%; display: block; }
 }
 .feature__endmark a:hover { color: var(--gold); border-color: var(--gold); }
 
-/* Sidebar — From the Editor + credits */
+/* Sidebar — From the Editor + credits.
+   Pinned to the TOP of the lede (next to the kicker/deck/headline) by sitting
+   in the second grid column with align-self:start. No `position: sticky` —
+   sticky on a short sidebar in a tall column makes it float in the void after
+   the body scrolls past. */
 .feature__aside {
-  position: sticky;
-  top: 96px;
+  align-self: start;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  position: relative;
+  top: 0;
 }
-@media (max-width: 1000px) { .feature__aside { position: static; } }
+@media (max-width: 1000px) { .feature__aside { align-self: stretch; } }
 
 .editors-note {
   border-top: 2px solid var(--gold);
@@ -525,7 +503,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.45;
   color: var(--t-1);
   letter-spacing: -0.005em;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 .editors-note__signoff {
   font-family: var(--mono);
@@ -574,7 +552,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.03em;
   margin: 0;
   color: var(--ink);
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 .toc__heading em { font-style: italic; font-weight: 600; }
 .toc__sub {
@@ -641,13 +619,34 @@ img { max-width: 100%; display: block; }
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.toc__page {
+.toc__status {
   font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 600;
   text-align: right;
-  color: var(--ink);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+  white-space: nowrap;
+  align-self: center;
+}
+.toc__status--live {
+  color: var(--gold-soft);
+}
+.toc__status--live::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  margin-right: 6px;
+  vertical-align: middle;
+  animation: tocPulse 1.6s ease-in-out infinite;
+}
+@keyframes tocPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
 }
 
 /* ╔══════════════════════════════════════════════════════════════════╗
@@ -685,7 +684,7 @@ img { max-width: 100%; display: block; }
   line-height: 0.96;
   letter-spacing: -0.03em;
   margin: 0 0 16px;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 .spread__head em { font-style: italic; font-weight: 600; color: var(--gold); }
 .spread--paper .spread__head em { color: var(--gold-soft); }
@@ -698,7 +697,7 @@ img { max-width: 100%; display: block; }
   color: var(--t-2);
   max-width: 720px;
   margin: 0 0 56px;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 .spread--paper .spread__deck { color: rgba(0,0,0,0.7); }
 
@@ -740,7 +739,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 .feature-twoup__title em { font-style: italic; font-weight: 500; }
 .feature-twoup__deck {
@@ -907,7 +906,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.12;
   letter-spacing: -0.01em;
   margin: 0;
-  font-variation-settings: "opsz" 144;
+  font-variation-settings: "opsz" 72;
 }
 .dept-card__head {
   font-size: 13px;
@@ -1007,18 +1006,29 @@ img { max-width: 100%; display: block; }
 </head>
 <body>
 
-<header class="ge-header" id="geHeader">
-  <a href="/" class="ge-header__logo">
-    <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon">
-    <div class="ge-header__logo-text">
-      <span class="ge-header__logo-cos">ConversationOS</span>
-      <div class="ge-header__logo-ge">
-        <span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span>
-      </div>
+  <header class="ge-header" id="geHeader">
+    <a href="/" class="ge-header__logo">
+      <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon"><div class="ge-header__logo-text"><span class="ge-header__logo-cos">ConversationOS</span><div class="ge-header__logo-ge"><span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span></div></div>
+    </a>
+    <nav class="ge-header__nav" id="geNav">
+      <a href="/directory/">On The Record</a>
+      <a href="https://guestengine.live/shows/">Shows</a>
+      <a href="https://guestengine.live/#pricing">Pricing</a>
+      <a href="https://guestengine.live/#network">Network</a>
+      <a href="https://guestengine.live/signal/">Signal</a>
+      <a href="https://guestengine.live/tour/">Tour</a>
+      <a href="https://guestengine.live/why/">Why</a>
+      <a href="https://guestengine.live/join/">Join</a>
+    </nav>
+    <div class="ge-header__actions">
+      <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
     </div>
-  </a>
-  <nav class="ge-header__nav" id="geNav">
-    <a href="/directory/">Directory</a>
+    <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="ge-header__mobile-overlay" id="geMobileMenu">
+    <a href="/directory/">On The Record</a>
     <a href="https://guestengine.live/shows/">Shows</a>
     <a href="https://guestengine.live/#pricing">Pricing</a>
     <a href="https://guestengine.live/#network">Network</a>
@@ -1026,14 +1036,10 @@ img { max-width: 100%; display: block; }
     <a href="https://guestengine.live/tour/">Tour</a>
     <a href="https://guestengine.live/why/">Why</a>
     <a href="https://guestengine.live/join/">Join</a>
-  </nav>
-  <div class="ge-header__actions">
     <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
   </div>
-  <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
+
+<script src="/header.js?v=1776710000" defer></script>
 
 <!-- ════════════════════════════════════════════════════════════════
      TOP HERO — brand promise
@@ -1241,7 +1247,6 @@ function renderCoverHero(cover, feature, issue) {
       <div class="cover-hero__scrim"></div>
 
       <header class="masthead-overlay">
-        <div class="masthead-overlay__pub">CONVERSATIONOS \u00b7 GUEST ENGINE EDITION</div>
         <h1 class="masthead-overlay__title">On The <em>Record</em>.</h1>
         <div class="masthead-overlay__sub">
           The 9:45 ET Segment <span class="live-indicator">ON AIR NOW</span> \u00b7 <a href="https://mornings.live">Mornings.Live</a>
@@ -1317,9 +1322,9 @@ function renderCoverFeature(cover, feature, issue) {
           <header class="feature__head">
             <div class="feature__kicker">${escapeHTML(f.kicker || "Cover Story")}</div>
             <p class="feature__deck">${escapeHTML(f.deck || "")}</p>
+            ${f.credentials ? `<p class="feature__credentials">${escapeHTML(f.credentials)}</p>` : ""}
             <h2 class="feature__headline">${headlineHTML}.</h2>
             <p class="feature__byline">By <strong>${escapeHTML(f.byline || "Sophia Grant")}</strong></p>
-            ${f.credentials ? `<p class="feature__credentials">${escapeHTML(f.credentials)}</p>` : ""}
           </header>
           <div class="feature__body">${bodyHTML}</div>
           <div class="feature__endmark">
@@ -1338,16 +1343,15 @@ function renderCoverFeature(cover, feature, issue) {
 function renderTOC(issue) {
   if (!issue.cover && (!issue.sections || !issue.sections.length)) return "";
   const items = [];
-  let pageNum = 12;
   if (issue.cover) {
     items.push({
       kicker: "COVER STORY",
       title: issue.cover.guestName,
       deck: issue.cover.headline || "",
-      page: String(pageNum),
+      status: "Live",
+      statusClass: "toc__status--live",
       href: PROFILE(issue.cover.slug),
     });
-    pageNum += 6;
   }
   for (const section of issue.sections || []) {
     const featured = section.guests && section.guests[0];
@@ -1356,10 +1360,10 @@ function renderTOC(issue) {
       kicker: section.name.toUpperCase(),
       title: featured.guestName,
       deck: section.blurb,
-      page: String(pageNum),
+      status: "This Week",
+      statusClass: "",
       href: PROFILE(featured.slug),
     });
-    pageNum += 4;
   }
   if (!items.length) return "";
   return `
@@ -1378,7 +1382,7 @@ function renderTOC(issue) {
                 <span class="toc__entry-title">${escapeHTML(it.title)}</span>
                 ${it.deck ? `<span class="toc__entry-deck">${escapeHTML(it.deck)}</span>` : ""}
               </div>
-              <span class="toc__page">P. ${escapeHTML(it.page)}</span>
+              <span class="toc__status ${it.statusClass}">${escapeHTML(it.status)}</span>
             </a>
           `).join("")}
         </div>
@@ -1570,9 +1574,7 @@ document.getElementById("heroUnmute")?.addEventListener("click", function() {
   v.muted = !v.muted;
   if (!v.muted) v.play().catch(() => {});
 });
-document.getElementById("geHamburger")?.addEventListener("click", () => {
-  document.getElementById("geMobileMenu")?.classList.toggle("open");
-});
+// Hamburger + scroll behavior handled by /header.js
 
 loadIssue();
 </script>

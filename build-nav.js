@@ -19,7 +19,7 @@ const path = require('path');
 // -- NAV LINK DEFINITIONS (single source of truth) -----------
 
 const NAV_LINKS = [
-  { href: '/directory/',   label: 'Directory' },
+  { href: '/directory/',   label: 'On The Record' },
   // { href: '/marketplace/', label: 'Marketplace' }, // Hidden for now — re-enable to restore
   { href: '/shows/',       label: 'Shows' },
   { href: '#pricing',      label: 'Pricing',  isAnchor: true },
