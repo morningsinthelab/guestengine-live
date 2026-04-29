@@ -3,22 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Issue — Guest Engine | ConversationOS</title>
-<meta name="description" content="A weekly editorial of the people on our shows. Cover story, departments, and a living record of credibility — produced by ConversationOS.">
-<meta property="og:title" content="The Issue — Guest Engine">
-<meta property="og:description" content="A weekly editorial of the people on our shows.">
+<title>On The Record — Guest Engine | ConversationOS</title>
+<meta name="description" content="A weekly publication of conversations from On The Record — the 9:45 ET segment on Mornings.Live. Every cover story is a guest who went on the record.">
+<meta property="og:title" content="On The Record — Guest Engine">
+<meta property="og:description" content="A weekly publication of conversations from On The Record — the 9:45 ET segment on Mornings.Live.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guestengine.live/directory/">
 <meta property="og:image" content="https://guestengine.live/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://guestengine.live/directory/">
-
-<!-- Editorial display serif (Fraunces 144 opsz for cover headlines), Cabinet for sans, Inter for body, JetBrains Mono for kickers/folios -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Editorial display serif (Fraunces 144 opsz) for headlines, Source Serif 4 for body, Cabinet for sans, JetBrains Mono for kickers/folios -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 
 <!-- Agent-readable links -->
@@ -29,7 +28,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The Issue — Guest Engine",
+  "headline": "On The Record — Guest Engine",
   "publisher": {
     "@type": "Organization",
     "name": "ConversationOS",
@@ -42,13 +41,10 @@
 
 <style>
 /* ╔══════════════════════════════════════════════════════════════════════╗
-   ║  THE ISSUE — true magazine layout                                     ║
-   ║                                                                       ║
-   ║  Two halves:                                                          ║
-   ║   1. Top hero: the original "THE PEOPLE BEHIND THE CONVERSATIONS"     ║
-   ║      brand promise (restored from the original /directory hero)       ║
-   ║   2. Magazine: a real editorial publication with cover spread,        ║
-   ║      table of contents, mini-features, and back-of-book departments   ║
+   ║  ON THE RECORD                                                        ║
+   ║  Weekly publication of guests from the 9:45 ET segment on             ║
+   ║  Mornings.Live. Designed to feel like a magazine that people aspire   ║
+   ║  to be featured in — not a directory.                                 ║
    ╚══════════════════════════════════════════════════════════════════════╝ */
 
 :root {
@@ -58,19 +54,19 @@
   --paper: #faf6ee;
   --paper-2: #f1ebde;
   --ink: #0a0a0a;
+  --ink-2: rgba(0, 0, 0, 0.72);
   --t-1: #ffffff;
   --t-2: rgba(255, 255, 255, 0.78);
   --t-3: rgba(255, 255, 255, 0.55);
   --t-4: rgba(255, 255, 255, 0.40);
   --gold: #fbbf24;
   --gold-soft: #f59e0b;
-  --gold-glow: 0 0 30px rgba(251, 191, 36, 0.25);
   --rule: rgba(255, 255, 255, 0.10);
   --rule-strong: rgba(255, 255, 255, 0.20);
   --paper-rule: rgba(0, 0, 0, 0.12);
-  --serif: "Fraunces", Georgia, serif;
-  --display: "Cabinet Grotesk", system-ui, -apple-system, sans-serif;
-  --sans: "Inter", system-ui, -apple-system, sans-serif;
+  --display: "Fraunces", Georgia, serif;
+  --serif: "Source Serif 4", "Tiempos Text", Georgia, serif;
+  --sans: "Cabinet Grotesk", "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
@@ -106,7 +102,7 @@ img { max-width: 100%; display: block; }
   .ge-header__hamburger span { width: 22px; height: 2px; background: var(--t-1); }
 }
 
-/* ─── TOP HERO (restored from original /directory) ─────────────── */
+/* ─── TOP HERO (brand promise) ──────────────────────────────────── */
 .hero {
   position: relative;
   height: 100vh;
@@ -148,11 +144,9 @@ img { max-width: 100%; display: block; }
   color: var(--gold);
   margin-bottom: 22px;
 }
-.hero-eyebrow::before {
-  content: ''; width: 32px; height: 1px; background: var(--gold); opacity: 0.85;
-}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); opacity: 0.85; }
 .hero-content h1 {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 900;
   font-size: clamp(42px, 6.2vw, 84px);
   line-height: 0.96;
@@ -178,7 +172,7 @@ img { max-width: 100%; display: block; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--gold); color: #050914;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.02em;
@@ -188,15 +182,11 @@ img { max-width: 100%; display: block; }
   transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
   box-shadow: 0 6px 24px rgba(251,191,36,0.25);
 }
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(251,191,36,0.35);
-  filter: brightness(1.06);
-}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(251,191,36,0.35); filter: brightness(1.06); }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 8px;
   background: transparent; color: #fff;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 15px;
   padding: 13px 26px;
@@ -205,243 +195,362 @@ img { max-width: 100%; display: block; }
   transition: border-color .2s, background .2s;
 }
 .btn-secondary:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
-@media (max-width: 720px) {
-  .hero-content { padding: 0 28px 80px; }
+@media (max-width: 720px) { .hero-content { padding: 0 28px 80px; } }
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  COVER — masthead overlay on Veo                                  ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+.cover-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(640px, 92vh, 920px);
+  overflow: hidden;
+  isolation: isolate;
+  border-top: 4px double var(--rule-strong);
+  background: var(--bg-2);
+}
+.cover-hero__media { position: absolute; inset: 0; z-index: 1; }
+.cover-hero__media img,
+.cover-hero__media video { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.cover-hero__scrim {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(180deg, rgba(5,9,20,0.45) 0%, rgba(5,9,20,0.0) 18%, rgba(5,9,20,0.0) 60%, rgba(5,9,20,0.85) 100%),
+    linear-gradient(90deg, rgba(5,9,20,0.55) 0%, rgba(5,9,20,0.0) 55%);
 }
 
-/* ─── MASTHEAD (issue marker between hero and magazine) ────────── */
-.masthead {
-  position: relative;
-  background: var(--bg);
-  border-top: 1px solid var(--rule);
-  padding: 56px 32px 40px;
+/* Masthead overlay — top strip, no background, sits on the Veo */
+.masthead-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 5;
+  padding: 96px 64px 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+  pointer-events: none;
 }
-.masthead__inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.masthead__pub {
+.masthead-overlay__pub {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.60);
+  font-weight: 500;
+  margin-bottom: 14px;
 }
-.masthead__title-wrap { flex: 1; min-width: 320px; text-align: center; }
-.masthead__title {
-  font-family: var(--serif);
+.masthead-overlay__title {
+  font-family: var(--display);
   font-weight: 900;
-  font-size: clamp(48px, 8vw, 120px);
+  font-size: clamp(56px, 9vw, 132px);
   line-height: 0.86;
-  letter-spacing: -0.04em;
-  margin: 8px 0 0;
+  letter-spacing: -0.045em;
+  margin: 0;
+  color: #ffffff;
   font-variation-settings: "opsz" 144;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
 }
-.masthead__title em {
+.masthead-overlay__title em {
   font-style: italic;
   font-weight: 600;
   color: var(--gold);
 }
-.masthead__meta {
+.masthead-overlay__sub {
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+}
+.masthead-overlay__sub a { color: var(--gold); pointer-events: auto; }
+
+@media (max-width: 720px) {
+  .masthead-overlay { padding: 80px 24px 24px; }
+}
+
+/* Bottom-of-cover credit strip */
+.cover-hero__caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 6;
+  padding: 32px 64px 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--t-3);
-  text-align: right;
-}
-.masthead__meta strong { color: var(--t-1); font-weight: 500; }
-
-/* ─── COVER SPREAD (the magazine starts here) ──────────────────── */
-.cover-spread {
-  position: relative;
-  background: var(--bg);
-  border-top: 4px double var(--rule-strong);
-  border-bottom: 1px solid var(--rule);
-  padding: 0;
-}
-.cover-spread__media {
-  position: relative;
-  width: 100%;
-  height: clamp(440px, 62vh, 720px);
-  overflow: hidden;
-  background: var(--bg-2);
-}
-.cover-spread__media img,
-.cover-spread__media video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-}
-.cover-spread__media-scrim {
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(180deg, rgba(5,9,20,0.0) 60%, rgba(5,9,20,0.65) 100%),
-    linear-gradient(90deg, rgba(5,9,20,0.45) 0%, rgba(5,9,20,0.0) 50%);
+  color: rgba(255, 255, 255, 0.65);
   pointer-events: none;
 }
-.cover-spread__media-kicker {
-  position: absolute;
-  top: 32px; left: 32px;
+.cover-hero__caption strong { color: var(--gold); font-weight: 500; }
+.cover-hero__kicker {
   font-family: var(--mono);
   font-size: 11px;
+  letter-spacing: 0.28em;
   font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
   color: var(--gold);
-  background: rgba(5, 9, 20, 0.65);
-  backdrop-filter: blur(8px);
-  padding: 8px 14px;
-  border-radius: 4px;
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  text-transform: uppercase;
 }
 
-.cover-spread__article {
-  max-width: 1240px;
+@media (max-width: 720px) { .cover-hero__caption { padding: 24px 24px 28px; flex-direction: column; align-items: flex-start; } }
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  COVER FEATURE — long-form editorial spread                       ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+.feature {
+  background: var(--bg);
+  padding: 96px 32px 80px;
+  border-bottom: 1px solid var(--rule);
+}
+.feature__inner {
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 80px 48px 96px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) 320px;
   gap: 80px;
   align-items: start;
 }
 @media (max-width: 1000px) {
-  .cover-spread__article { grid-template-columns: 1fr; gap: 48px; padding: 56px 32px 72px; }
+  .feature__inner { grid-template-columns: 1fr; gap: 56px; }
+  .feature { padding: 64px 24px 48px; }
 }
 
-.cover-spread__byline {
+/* Editorial header */
+.feature__head { margin-bottom: 56px; }
+.feature__kicker {
+  display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--t-3);
-  margin: 0 0 18px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 22px;
 }
-.cover-spread__byline strong { color: var(--gold); font-weight: 500; }
+.feature__kicker::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
 
-.cover-spread__headline {
-  font-family: var(--serif);
-  font-weight: 900;
-  font-size: clamp(60px, 9vw, 140px);
-  line-height: 0.88;
-  letter-spacing: -0.045em;
+.feature__deck {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.32;
+  color: var(--t-2);
+  letter-spacing: -0.01em;
   margin: 0 0 28px;
+  max-width: 760px;
   font-variation-settings: "opsz" 144;
-  color: var(--t-1);
 }
-.cover-spread__headline em {
+
+.feature__headline {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(72px, 11vw, 180px);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  margin: 0 0 32px;
+  font-variation-settings: "opsz" 144;
+  color: #ffffff;
+}
+.feature__headline em {
   font-style: italic;
   font-weight: 600;
   color: var(--gold);
 }
 
-.cover-spread__subhead {
-  font-family: var(--serif);
+.feature__byline {
+  font-family: var(--display);
   font-style: italic;
-  font-weight: 300;
-  font-size: clamp(20px, 2.4vw, 30px);
-  line-height: 1.32;
+  font-size: 18px;
+  font-weight: 400;
   color: var(--t-2);
-  margin: 0 0 48px;
-  max-width: 640px;
+  margin: 0 0 4px;
+}
+.feature__byline strong {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--t-1);
+  letter-spacing: 0.005em;
+}
+.feature__credentials {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  margin: 14px 0 0;
+  line-height: 1.6;
+  max-width: 720px;
 }
 
-.cover-spread__lede {
+/* Body */
+.feature__body {
   font-family: var(--serif);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.62;
+  font-size: 19px;
+  line-height: 1.72;
   color: var(--t-1);
+  font-weight: 400;
   letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 24;
 }
-.cover-spread__lede p { margin: 0 0 1.2em; }
-.cover-spread__lede p:first-child::first-letter {
-  font-family: var(--serif);
+.feature__body p {
+  margin: 0 0 1.4em;
+  text-align: left;
+  hyphens: auto;
+}
+.feature__body p:first-of-type::first-letter {
+  font-family: var(--display);
   font-weight: 900;
-  font-size: 5.2em;
+  font-size: 5.4em;
   float: left;
-  line-height: 0.8;
-  margin: 0.05em 0.08em 0 -0.04em;
+  line-height: 0.78;
+  margin: 0.04em 0.08em 0 -0.04em;
   color: var(--gold);
   font-variation-settings: "opsz" 144;
 }
 
-.cover-spread__more {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 32px;
-  padding: 14px 24px;
-  background: var(--gold);
-  color: #050914;
-  border-radius: 999px;
+/* Inline pull quote — breaks the body for column-break rhythm */
+.feature__pull {
+  margin: 56px 0 56px;
+  padding: 28px 0 28px 28px;
+  border-left: 3px solid var(--gold);
   font-family: var(--display);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  transition: transform .2s, box-shadow .2s;
-  box-shadow: var(--gold-glow);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(26px, 2.8vw, 36px);
+  line-height: 1.28;
+  color: var(--t-1);
+  letter-spacing: -0.012em;
+  font-variation-settings: "opsz" 144;
+  max-width: 800px;
 }
-.cover-spread__more:hover { transform: translateY(-1px); }
+.feature__pull::before { content: "\201C"; }
+.feature__pull::after { content: "\201D"; }
 
-/* ── Cover sidebar (gutter content) ─────────────────────────────── */
-.cover-spread__aside {
+/* Portrait inset — small image between paragraphs */
+.feature__portrait {
+  margin: 36px 0;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  align-items: start;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.feature__portrait-img {
+  width: 220px;
+  height: 280px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-2);
+  position: relative;
+}
+.feature__portrait-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.feature__portrait-caption {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  line-height: 1.7;
+}
+.feature__portrait-caption strong { color: var(--t-1); font-weight: 500; }
+@media (max-width: 700px) {
+  .feature__portrait { grid-template-columns: 1fr; }
+  .feature__portrait-img { width: 100%; height: 320px; }
+}
+
+/* End-mark — magazine-style end-of-article glyph */
+.feature__endmark {
+  margin-top: 24px;
+  display: flex; align-items: center; gap: 18px;
+}
+.feature__endmark::before {
+  content: ''; display: inline-block; width: 12px; height: 12px;
+  background: var(--gold); transform: rotate(45deg);
+}
+.feature__endmark a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.feature__endmark a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* Sidebar — From the Editor + credits */
+.feature__aside {
   position: sticky;
   top: 96px;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 32px;
 }
-@media (max-width: 1000px) { .cover-spread__aside { position: static; } }
+@media (max-width: 1000px) { .feature__aside { position: static; } }
 
-.pull-quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 26px;
-  line-height: 1.32;
-  color: var(--t-1);
-  border-left: 3px solid var(--gold);
-  padding: 4px 0 4px 20px;
-  margin: 0;
+.editors-note {
+  border-top: 2px solid var(--gold);
+  padding: 22px 0 0;
 }
-.pull-quote::before { content: "\201C"; }
-.pull-quote::after { content: "\201D"; }
-
-.cover-stat-card {
-  border: 1px solid var(--rule);
-  border-radius: 12px;
-  padding: 20px 22px;
-  background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(10px);
-}
-.cover-stat-card__label {
+.editors-note__label {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.editors-note__body {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--t-1);
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 144;
+}
+.editors-note__signoff {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--t-3);
-  margin-bottom: 14px;
+  margin-top: 14px;
 }
-.cover-stat-card__row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
-  font-size: 14px;
-}
-.cover-stat-card__row:last-child { border-bottom: 0; }
-.cover-stat-card__k { color: var(--t-3); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
-.cover-stat-card__v { color: var(--t-1); font-weight: 500; }
-.cover-stat-card__v strong { color: var(--gold); font-weight: 600; }
 
-/* ─── TABLE OF CONTENTS (front of book) ────────────────────────── */
+.feature__credits {
+  border-top: 1px solid var(--rule);
+  padding-top: 22px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  line-height: 1.7;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  TABLE OF CONTENTS                                                ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
 .toc {
   background: var(--paper);
   color: var(--ink);
@@ -449,7 +558,7 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid var(--paper-rule);
   border-bottom: 1px solid var(--paper-rule);
 }
-.toc__inner { max-width: 1240px; margin: 0 auto; }
+.toc__inner { max-width: 1180px; margin: 0 auto; }
 .toc__head {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 24px; flex-wrap: wrap;
@@ -458,7 +567,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 48px;
 }
 .toc__heading {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 900;
   font-size: clamp(48px, 6vw, 80px);
   line-height: 1;
@@ -504,9 +613,7 @@ img { max-width: 100%; display: block; }
   color: var(--gold-soft);
   letter-spacing: 0.08em;
 }
-.toc__entry {
-  display: flex; flex-direction: column; gap: 4px;
-}
+.toc__entry { display: flex; flex-direction: column; gap: 4px; }
 .toc__entry-section {
   font-family: var(--mono);
   font-size: 10px;
@@ -516,7 +623,7 @@ img { max-width: 100%; display: block; }
   color: rgba(0,0,0,0.55);
 }
 .toc__entry-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 600;
   font-size: 22px;
   line-height: 1.18;
@@ -543,7 +650,10 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.08em;
 }
 
-/* ─── FEATURE SPREADS ──────────────────────────────────────────── */
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  FEATURE SPREADS                                                  ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
 .spread {
   position: relative;
   border-bottom: 1px solid var(--rule);
@@ -552,7 +662,7 @@ img { max-width: 100%; display: block; }
 }
 .spread--paper { background: var(--paper); color: var(--ink); }
 .spread__inner {
-  max-width: 1240px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 96px 48px;
 }
@@ -568,9 +678,8 @@ img { max-width: 100%; display: block; }
 .spread--paper .spread__folio { color: rgba(0,0,0,0.55); }
 .spread__folio strong { color: var(--gold); font-weight: 500; }
 .spread--paper .spread__folio strong { color: var(--gold-soft); }
-
 .spread__head {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 900;
   font-size: clamp(40px, 6vw, 80px);
   line-height: 0.96;
@@ -580,25 +689,21 @@ img { max-width: 100%; display: block; }
 }
 .spread__head em { font-style: italic; font-weight: 600; color: var(--gold); }
 .spread--paper .spread__head em { color: var(--gold-soft); }
-
 .spread__deck {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.42;
   color: var(--t-2);
   max-width: 720px;
   margin: 0 0 56px;
+  font-variation-settings: "opsz" 144;
 }
 .spread--paper .spread__deck { color: rgba(0,0,0,0.7); }
 
-/* ── Two-up feature spread (used for On Air This Week) ─────────── */
-.feature-twoup {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-}
+/* Two-up */
+.feature-twoup { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
 @media (max-width: 900px) { .feature-twoup { grid-template-columns: 1fr; gap: 40px; } }
 .feature-twoup__card { display: flex; flex-direction: column; gap: 18px; }
 .feature-twoup__media {
@@ -614,7 +719,6 @@ img { max-width: 100%; display: block; }
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  display: block;
 }
 .feature-twoup__chip {
   position: absolute; top: 16px; left: 16px;
@@ -630,12 +734,13 @@ img { max-width: 100%; display: block; }
   backdrop-filter: blur(6px);
 }
 .feature-twoup__title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: clamp(28px, 3.4vw, 44px);
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0;
+  font-variation-settings: "opsz" 144;
 }
 .feature-twoup__title em { font-style: italic; font-weight: 500; }
 .feature-twoup__deck {
@@ -657,21 +762,18 @@ img { max-width: 100%; display: block; }
 .feature-twoup__readmore {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--display);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
   color: var(--gold);
-  text-transform: uppercase;
-  margin-top: 8px;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 4px;
+  margin-top: 4px;
   align-self: flex-start;
   transition: gap .2s;
 }
-.spread--paper .feature-twoup__readmore { color: var(--gold-soft); border-color: var(--gold-soft); }
+.spread--paper .feature-twoup__readmore { color: var(--gold-soft); }
 .feature-twoup__readmore:hover { gap: 14px; }
 
-/* ── Three-up feature row (for Just Aired) ─────────────────────── */
+/* Three-up */
 .feature-threeup { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 @media (max-width: 900px) { .feature-threeup { grid-template-columns: 1fr; gap: 32px; } }
 .feature-threeup__card { display: flex; flex-direction: column; gap: 14px; }
@@ -688,7 +790,6 @@ img { max-width: 100%; display: block; }
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  display: block;
 }
 .feature-threeup__date {
   position: absolute; top: 12px; left: 12px;
@@ -704,7 +805,7 @@ img { max-width: 100%; display: block; }
   backdrop-filter: blur(6px);
 }
 .feature-threeup__title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 24px;
   line-height: 1.1;
@@ -720,7 +821,10 @@ img { max-width: 100%; display: block; }
 }
 .spread--paper .feature-threeup__deck { color: rgba(0,0,0,0.65); }
 
-/* ── Departments — back-of-book card grid ──────────────────────── */
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  DEPARTMENTS — back of book                                       ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
 .departments {
   background: var(--bg);
   padding: 96px 32px 80px;
@@ -735,7 +839,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 48px;
 }
 .departments__title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 800;
   font-size: clamp(36px, 4.6vw, 56px);
   line-height: 1;
@@ -755,7 +859,7 @@ img { max-width: 100%; display: block; }
   padding: 10px 18px;
   border: 1px solid var(--rule-strong);
   border-radius: 999px;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.04em;
@@ -779,19 +883,8 @@ img { max-width: 100%; display: block; }
   transition: transform .2s, box-shadow .2s;
 }
 .dept-card:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -24px rgba(0,0,0,0.5); }
-.dept-card__media {
-  aspect-ratio: 4 / 5;
-  background: var(--bg-3);
-  position: relative;
-  overflow: hidden;
-  display: block;
-}
-.dept-card__media img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
+.dept-card__media { aspect-ratio: 4 / 5; background: var(--bg-3); position: relative; overflow: hidden; display: block; }
+.dept-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .dept-card__tier {
   position: absolute; top: 12px; left: 12px;
   font-family: var(--mono);
@@ -808,12 +901,13 @@ img { max-width: 100%; display: block; }
 .dept-card__tier--vip { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #050914; }
 .dept-card__body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .dept-card__name {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 21px;
   line-height: 1.12;
   letter-spacing: -0.01em;
   margin: 0;
+  font-variation-settings: "opsz" 144;
 }
 .dept-card__head {
   font-size: 13px;
@@ -838,7 +932,10 @@ img { max-width: 100%; display: block; }
 }
 .dept-card__meta-divider { width: 3px; height: 3px; border-radius: 50%; background: var(--t-4); }
 
-/* ─── COLOPHON FOOTER ──────────────────────────────────────────── */
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  COLOPHON                                                         ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
 .colophon {
   background: var(--bg-2);
   border-top: 1px solid var(--rule);
@@ -866,21 +963,14 @@ img { max-width: 100%; display: block; }
 .colophon__col ul { padding: 0; list-style: none; }
 .colophon__col a { color: var(--t-1); border-bottom: 1px solid var(--rule-strong); transition: color .2s, border-color .2s; }
 .colophon__col a:hover { color: var(--gold); border-color: var(--gold); }
-.colophon__badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 12px;
-  background: rgba(251, 191, 36, 0.08);
-  border: 1px solid rgba(251, 191, 36, 0.25);
-  border-radius: 999px;
+.colophon__masthead {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--t-3);
   margin-bottom: 14px;
 }
-.colophon__badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-
 .colophon__credits {
   margin-top: 56px;
   padding-top: 28px;
@@ -895,7 +985,7 @@ img { max-width: 100%; display: block; }
   margin-left: auto; margin-right: auto;
 }
 
-/* ─── LOADING / ERROR ──────────────────────────────────────────── */
+/* ─── Loading / error ──────────────────────────────────────────── */
 .issue-loading, .issue-error {
   background: var(--bg);
   padding: 120px 32px;
@@ -906,14 +996,9 @@ img { max-width: 100%; display: block; }
   color: var(--t-3);
   text-transform: uppercase;
 }
-.issue-error h2 { font-family: var(--serif); font-size: 36px; margin: 0 0 12px; color: var(--t-1); text-transform: none; letter-spacing: 0; }
+.issue-error h2 { font-family: var(--display); font-size: 36px; margin: 0 0 12px; color: var(--t-1); text-transform: none; letter-spacing: 0; }
 .issue-error p { color: var(--t-2); font-size: 16px; line-height: 1.5; margin: 0 0 24px; text-transform: none; letter-spacing: 0; }
-.issue-error a {
-  display: inline-block; padding: 12px 24px;
-  background: var(--gold); color: #050914;
-  border-radius: 999px; font-weight: 600;
-  text-transform: none; letter-spacing: normal;
-}
+.issue-error a { display: inline-block; padding: 12px 24px; background: var(--gold); color: #050914; border-radius: 999px; font-weight: 600; text-transform: none; letter-spacing: normal; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -951,8 +1036,7 @@ img { max-width: 100%; display: block; }
 </header>
 
 <!-- ════════════════════════════════════════════════════════════════
-     TOP HERO — restored from original /directory
-     Brand promise lives here. Magazine begins below the fold.
+     TOP HERO — brand promise
      ════════════════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
   <div class="hero__video-wrap">
@@ -978,35 +1062,20 @@ img { max-width: 100%; display: block; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════════
-     MASTHEAD
-     Issue marker — fold between the brand promise and the magazine.
+     THE MAGAZINE — renders here once data loads
      ════════════════════════════════════════════════════════════════ -->
-<section class="masthead" id="issue">
-  <div class="masthead__inner">
-    <div class="masthead__pub">CONVERSATIONOS · GUEST ENGINE</div>
-    <div class="masthead__title-wrap">
-      <div class="masthead__title">The <em>Issue</em></div>
-    </div>
-    <div class="masthead__meta" id="mastheadMeta">
-      <strong id="issueNumLine">ISSUE —</strong><br>
-      <span id="issueDateLine">Loading…</span>
-    </div>
-  </div>
-</section>
-
-<!-- The magazine renders here once the API responds -->
 <main id="issueMain">
-  <div class="issue-loading">Building this week's issue…</div>
+  <div class="issue-loading">Loading this week's issue…</div>
 </main>
 
 <!-- ════════════════════════════════════════════════════════════════
-     COLOPHON — credits + agent endpoints
+     COLOPHON
      ════════════════════════════════════════════════════════════════ -->
 <footer class="colophon">
   <div class="colophon__inner">
     <div class="colophon__col">
-      <span class="colophon__badge">Built for agents</span>
-      <p>Every spread of The Issue is paired with a structured, machine-readable view. Hosts, agents, and AI assistants can ingest the magazine without scraping.</p>
+      <div class="colophon__masthead">ON THE RECORD · GUEST ENGINE EDITION</div>
+      <p>Every week, conversations from the 9:45 ET segment on <a href="https://mornings.live">Mornings.Live</a> become the cover story. Built so hosts, agents, and AI assistants can ingest the publication without scraping.</p>
     </div>
     <div class="colophon__col">
       <h3>Agent endpoints</h3>
@@ -1027,27 +1096,20 @@ img { max-width: 100%; display: block; }
   </div>
   <div class="colophon__credits">
     <span>Edited by Sophia Grant · ConversationOS Editorial</span>
-    <span>Updated Mondays · 04:00 ET</span>
+    <span>On The Record airs 9:45 ET · Center Stage airs 8:30 ET · Mornings.Live</span>
   </div>
 </footer>
 
 <script>
 // ╔══════════════════════════════════════════════════════════════════╗
-// ║  THE ISSUE — runtime renderer                                     ║
-// ║  Pulls the issue from app.conversationos.live and renders a       ║
-// ║  proper magazine layout: cover spread + TOC + feature spreads     ║
-// ║  + back-of-book departments. Story-driven, not card-driven.       ║
+// ║  ON THE RECORD — runtime renderer                                 ║
 // ╚══════════════════════════════════════════════════════════════════╝
 
 const ISSUE_URL = "https://app.conversationos.live/api/guest-marketplace/issue/current";
 const FALLBACK_URL = "https://app.conversationos.live/api/guest-marketplace/directory?limit=50&page=1";
 const PROFILE = (slug) => `https://guestengine.live/profile/${slug}`;
 
-// ── Issue cover video overrides ─────────────────────────────────────
-// Veo-generated cinematic establishing shots, served as static assets
-// from this repo (Railway). Keyed by issue number + guest slug. When a
-// match exists, the cover spread uses this video instead of the guest's
-// generic living-portrait clip. Phase 2 moves this to the API.
+// Cover Veo overrides — Phase 1 hardcoded; Phase 2 moves into API.
 const COVER_VIDEO_OVERRIDES = {
   "04.27|ej-snyder": "/assets/issue/ej-snyder-cover-2604.mp4",
   "04.27|david-frangioni": "/assets/issue/david-frangioni-cover-2604.mp4",
@@ -1058,6 +1120,13 @@ function escapeHTML(s) {
   if (s == null) return "";
   return String(s).replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 }
+// Body-prose escape that renders *italic* markup as <em>. Used only in
+// long-form feature paragraphs where editorial italics matter (titles,
+// emphasis). Keeps every other escape strict.
+function escapeProse(s) {
+  if (s == null) return "";
+  return escapeHTML(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+}
 function fmtDate(iso) {
   if (!iso) return "";
   try { return new Date(iso).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}).toUpperCase(); }
@@ -1067,6 +1136,16 @@ function fmtMonth(iso) {
   if (!iso) return "";
   try { return new Date(iso).toLocaleDateString("en-US",{month:"short",year:"numeric"}).toUpperCase(); }
   catch { return ""; }
+}
+function fmtIssueRange(iso) {
+  if (!iso) return "";
+  try {
+    const start = new Date(iso);
+    const end = new Date(iso);
+    end.setDate(end.getDate() + 6);
+    const fmt = (d) => d.toLocaleDateString("en-US",{month:"short",day:"numeric"}).toUpperCase();
+    return `${fmt(start)} \u2014 ${fmt(end)}`;
+  } catch { return ""; }
 }
 function relativeDays(iso) {
   if (!iso) return "";
@@ -1083,125 +1162,173 @@ function firstSentence(text) {
   return s && s.length > 25 ? s : "";
 }
 
-// ─── Sophia auto-draft (client-side; matches the editorial voice) ───
-//
-// In Phase 2 this will move server-side to /api/issue/feature/{slug} and
-// produce a proper drafted feature with headlines + leading paragraph.
-// For now: rule-based composition from the bio + key insights surfaces a
-// proper editorial feature without bloating the API surface.
-//
-function draftFeature(g) {
-  const name = g.guestName || "";
-  const last = name.split(" ").pop() || name;
-
-  // Headline rule:
-  //   - If headline contains a clear ALL-CAPS hook (e.g. "Skullcrusher"),
-  //     use that as the magazine cover headline
-  //   - Else use the guest's own short-form authority noun if available
-  //   - Else fall back to last name in italics
-  let headline = last;
-  let italicWord = last;
+// ─── Sophia auto-draft fallback (when no curated feature exists) ────
+function draftFallbackFeature(g, issue) {
+  const last = (g.guestName || "").split(" ").pop() || g.guestName;
   const bio = g.bio || "";
   const hl = (g.headline || "").trim();
-  // Match nicknames in quotes ("Skullcrusher") — search both bio and headline.
-  // The bio is checked first because nicknames usually live in the opening
-  // sentence ("EJ \"Skullcrusher\" Snyder is a 25-year decorated…").
   const nickRe = /"([A-Z][A-Za-z][^"]{2,38})"/;
   const nickMatch = bio.match(nickRe) || hl.match(nickRe);
-  if (nickMatch) { headline = nickMatch[1]; italicWord = nickMatch[1]; }
-  else if (last.length >= 3 && last.length <= 16) { headline = last; italicWord = last; }
+  const headline = nickMatch ? nickMatch[1] : last;
 
-  // Subhead: take the most cinematic sentence available. Order matters —
-  // earlier patterns win. Patterns are tuned to surface bio sentences
-  // that read like editorial pull quotes.
   const candidates = [
     /(Music chose him[^.]+\.)/i,
     /(\d+\s+days?\s+naked[^.]+\.)/i,
     /(\d+\s+stitches[^.]+\.)/i,
     /(most decorated[^.]+\.)/i,
     /(over\s+\d+\s+million[^.]+\.)/i,
-    /(serial entrepreneur[^.]+\.)/i,
-    /(was forged through[^.]+\.)/i,
     /(survived\s+\w+[^.]+\.)/i,
     /(played professional gigs[^.]+\.)/i,
-    /(did not choose[^.]+\.[^.]+chose[^.]+\.)/i,
   ];
-  let subhead = "";
-  for (const re of candidates) {
-    const m = bio.match(re);
-    if (m) { subhead = m[1]; break; }
-  }
-  if (!subhead) subhead = firstSentence(bio);
-  if (subhead.length > 220) subhead = subhead.slice(0, 217) + "…";
+  let deck = "";
+  for (const re of candidates) { const m = bio.match(re); if (m) { deck = m[1]; break; } }
+  if (!deck) deck = firstSentence(bio);
 
-  // Lede: first 2-3 sentences of bio, or headline + first paragraph
   let lede = "";
   if (bio) {
     const paragraphs = bio.split(/\n\s*\n+/);
-    lede = paragraphs[0] || bio.slice(0, 600);
-    // Trim to ~600 chars at sentence boundary
-    if (lede.length > 700) {
-      const cutoff = lede.slice(0, 700).lastIndexOf(". ");
+    lede = paragraphs[0] || bio.slice(0, 700);
+    if (lede.length > 800) {
+      const cutoff = lede.slice(0, 800).lastIndexOf(". ");
       if (cutoff > 200) lede = lede.slice(0, cutoff + 1);
     }
   }
 
-  // Pull quote: prefer pullQuote, fall back to a key insight if any present
-  const pq = g.pullQuote || "";
+  return {
+    guestSlug: g.slug,
+    issueNumber: issue.issueNumber,
+    kicker: "Cover Story",
+    deck,
+    headline,
+    italicWord: headline,
+    byline: "Sophia Grant",
+    byline_extended: "Story by Sophia Grant",
+    credits: `Live conversation ${fmtDate(g.latestAppearanceDate)} \u00b7 Mornings.Live`,
+    credentials: g.headline || "",
+    pullQuote: g.pullQuote || "",
+    spread: lede ? [lede] : [],
+  };
+}
 
-  return { headline, italicWord, subhead, lede, pullQuote: pq };
+// ─── Live status ─────────────────────────────────────────────────────
+function refreshLiveIndicator() {
+  const now = new Date();
+  const et = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const day = et.getDay();
+  const minutes = et.getHours() * 60 + et.getMinutes();
+  const onAir = day >= 1 && day <= 5 && minutes >= 540 && minutes <= 630;
+  const els = document.querySelectorAll(".live-indicator");
+  els.forEach((el) => el.textContent = onAir ? "ON AIR NOW" : "OFF AIR");
 }
 
 // ─── Renderers ───────────────────────────────────────────────────────
 
-function renderCoverSpread(cover, issue) {
+function renderCoverHero(cover, feature, issue) {
   if (!cover) return "";
-  const f = draftFeature(cover);
   const photo = cover.headshotUrl || "";
   const overrideKey = `${issue.issueNumber}|${cover.slug}`;
   const overrideVideo = COVER_VIDEO_OVERRIDES[overrideKey];
   const video = overrideVideo || cover.livingPortraitVideoUrl || "";
   const media = video
     ? `<video autoplay muted loop playsinline poster="${escapeHTML(photo)}"><source src="${escapeHTML(video)}" type="video/mp4"></video>`
-    : `<img src="${escapeHTML(photo)}" alt="${escapeHTML(cover.guestName)}" loading="eager">`;
+    : `<img src="${escapeHTML(photo)}" alt="${escapeHTML(cover.guestName)}" loading="eager" fetchpriority="high">`;
 
-  // Headline rendering: italicize the matched word
-  let headlineHTML = `<em>${escapeHTML(f.headline)}.</em>`;
-  if (f.headline === cover.guestName.split(" ").pop()) {
-    headlineHTML = `<em>${escapeHTML(f.headline)}.</em>`;
-  }
-
-  const ledeP = f.lede ? `<p>${escapeHTML(f.lede)}</p>` : `<p>${escapeHTML(cover.headline || "")}</p>`;
-  const pull = f.pullQuote ? `<blockquote class="pull-quote">${escapeHTML(f.pullQuote)}</blockquote>` : "";
-
-  const stats = `
-    <div class="cover-stat-card">
-      <div class="cover-stat-card__label">At a glance</div>
-      ${cover.tier ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Tier</span><span class="cover-stat-card__v"><strong>${escapeHTML(cover.tier.toUpperCase())}</strong></span></div>` : ""}
-      ${cover.signalScore != null ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Signal</span><span class="cover-stat-card__v"><strong>${cover.signalScore}</strong></span></div>` : ""}
-      ${cover.appearanceCount ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Appearances</span><span class="cover-stat-card__v">${cover.appearanceCount}</span></div>` : ""}
-      ${cover.latestAppearanceDate ? `<div class="cover-stat-card__row"><span class="cover-stat-card__k">Latest</span><span class="cover-stat-card__v">${fmtMonth(cover.latestAppearanceDate)}</span></div>` : ""}
-    </div>
-  `;
+  const f = feature || draftFallbackFeature(cover, issue);
 
   return `
-    <article class="cover-spread">
-      <div class="cover-spread__media">
-        ${media}
-        <div class="cover-spread__media-scrim"></div>
-        <div class="cover-spread__media-kicker">Issue ${escapeHTML(issue.issueNumber || "")} · Cover Story</div>
-      </div>
-      <div class="cover-spread__article">
-        <div>
-          <p class="cover-spread__byline">By <strong>Sophia Grant</strong> · ConversationOS Editorial · ${fmtDate(issue.issueDate)}</p>
-          <h1 class="cover-spread__headline">${headlineHTML}</h1>
-          <p class="cover-spread__subhead">${escapeHTML(f.subhead)}</p>
-          <div class="cover-spread__lede">${ledeP}</div>
-          <a href="${PROFILE(cover.slug)}" class="cover-spread__more">Read the full feature →</a>
+    <section class="cover-hero">
+      <div class="cover-hero__media">${media}</div>
+      <div class="cover-hero__scrim"></div>
+
+      <header class="masthead-overlay">
+        <div class="masthead-overlay__pub">CONVERSATIONOS \u00b7 GUEST ENGINE EDITION</div>
+        <h1 class="masthead-overlay__title">On The <em>Record</em>.</h1>
+        <div class="masthead-overlay__sub">
+          The 9:45 ET Segment <span class="live-indicator">ON AIR NOW</span> \u00b7 <a href="https://mornings.live">Mornings.Live</a>
         </div>
-        <aside class="cover-spread__aside">
-          ${pull}
-          ${stats}
+      </header>
+
+      <div class="cover-hero__caption">
+        <div class="cover-hero__kicker">Issue ${escapeHTML(issue.issueNumber || "")} \u00b7 Cover Story</div>
+        <div>${escapeHTML(fmtIssueRange(issue.issueDate))} \u00b7 <strong>${escapeHTML(cover.guestName)}</strong></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderCoverFeature(cover, feature, issue) {
+  if (!cover) return "";
+  const f = feature || draftFallbackFeature(cover, issue);
+
+  // Build body — drop-cap on first paragraph; pull quote inserted between p3 and p4
+  const paragraphs = (f.spread && f.spread.length) ? f.spread : [];
+  const pullQuoteIndex = Math.min(2, Math.max(0, paragraphs.length - 1)); // after p3 if available
+  let bodyHTML = "";
+  for (let i = 0; i < paragraphs.length; i++) {
+    bodyHTML += `<p>${escapeProse(paragraphs[i])}</p>`;
+    if (i === pullQuoteIndex && f.pullQuote && paragraphs.length > pullQuoteIndex + 1) {
+      bodyHTML += `<blockquote class="feature__pull">${escapeHTML(f.pullQuote)}</blockquote>`;
+    }
+  }
+  // If we never hit the pull-quote insertion point but have a pull quote, append it before the end
+  if (f.pullQuote && !bodyHTML.includes("feature__pull")) {
+    bodyHTML += `<blockquote class="feature__pull">${escapeHTML(f.pullQuote)}</blockquote>`;
+  }
+
+  // Headline italics
+  const headline = f.headline || "";
+  const italicTarget = f.italicWord || headline;
+  const headlineHTML = headline.includes(italicTarget)
+    ? headline.replace(italicTarget, `<em>${escapeHTML(italicTarget)}</em>`)
+    : `<em>${escapeHTML(headline)}</em>`;
+
+  // Portrait inset — uses headshot, sits between paragraphs (rendered separately below)
+  const portraitHTML = cover.headshotUrl ? `
+    <figure class="feature__portrait">
+      <div class="feature__portrait-img">
+        <img src="${escapeHTML(cover.headshotUrl)}" alt="${escapeHTML(cover.guestName)}" loading="eager">
+      </div>
+      <figcaption class="feature__portrait-caption">
+        <strong>${escapeHTML(cover.guestName)}</strong><br>
+        ${escapeHTML(f.credentials || cover.headline || "")}
+      </figcaption>
+    </figure>
+  ` : "";
+
+  // Inject portrait after first paragraph for editorial rhythm
+  if (portraitHTML && bodyHTML.includes("</p>")) {
+    const firstClose = bodyHTML.indexOf("</p>") + 4;
+    bodyHTML = bodyHTML.slice(0, firstClose) + portraitHTML + bodyHTML.slice(firstClose);
+  }
+
+  // Editor's note
+  const editorNote = f.editorsNote ? `
+    <aside class="editors-note">
+      <div class="editors-note__label">From the Editor</div>
+      <div class="editors-note__body">${escapeHTML(f.editorsNote)}</div>
+      <div class="editors-note__signoff">— Sophia Grant</div>
+    </aside>
+  ` : "";
+
+  return `
+    <article class="feature">
+      <div class="feature__inner">
+        <div>
+          <header class="feature__head">
+            <div class="feature__kicker">${escapeHTML(f.kicker || "Cover Story")}</div>
+            <p class="feature__deck">${escapeHTML(f.deck || "")}</p>
+            <h2 class="feature__headline">${headlineHTML}.</h2>
+            <p class="feature__byline">By <strong>${escapeHTML(f.byline || "Sophia Grant")}</strong></p>
+            ${f.credentials ? `<p class="feature__credentials">${escapeHTML(f.credentials)}</p>` : ""}
+          </header>
+          <div class="feature__body">${bodyHTML}</div>
+          <div class="feature__endmark">
+            <a href="${PROFILE(cover.slug)}">Continued in ${escapeHTML(cover.guestName)}'s authority page</a>
+          </div>
+        </div>
+        <aside class="feature__aside">
+          ${editorNote}
+          ${f.credits ? `<div class="feature__credits">${escapeHTML(f.credits)}</div>` : ""}
         </aside>
       </div>
     </article>
@@ -1210,7 +1337,6 @@ function renderCoverSpread(cover, issue) {
 
 function renderTOC(issue) {
   if (!issue.cover && (!issue.sections || !issue.sections.length)) return "";
-
   const items = [];
   let pageNum = 12;
   if (issue.cover) {
@@ -1235,11 +1361,9 @@ function renderTOC(issue) {
     });
     pageNum += 4;
   }
-
   if (!items.length) return "";
-
   return `
-    <section class="toc">
+    <section class="toc" id="issue">
       <div class="toc__inner">
         <div class="toc__head">
           <h2 class="toc__heading">In this <em>Issue</em></h2>
@@ -1269,7 +1393,7 @@ function renderTwoUpFeature(section, paper) {
   return `
     <section class="spread${paper ? " spread--paper" : ""}">
       <div class="spread__inner">
-        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> · this week</div>
+        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> \u00b7 this week</div>
         <h2 class="spread__head">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
         <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
         <div class="feature-twoup">
@@ -1279,10 +1403,10 @@ function renderTwoUpFeature(section, paper) {
                 <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async" fetchpriority="high">
                 ${g.tier ? `<span class="feature-twoup__chip">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
               </div>
-              <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} · ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
+              <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
               <h3 class="feature-twoup__title">${escapeHTML(g.guestName)}</h3>
               <p class="feature-twoup__deck">${escapeHTML(g.headline || "")}</p>
-              <span class="feature-twoup__readmore">Read the feature →</span>
+              <span class="feature-twoup__readmore">More from the conversation \u2192</span>
             </a>
           `).join("")}
         </div>
@@ -1297,7 +1421,7 @@ function renderThreeUpFeature(section) {
   return `
     <section class="spread spread--paper">
       <div class="spread__inner">
-        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> · last week</div>
+        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> \u00b7 last week</div>
         <h2 class="spread__head">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
         <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
         <div class="feature-threeup">
@@ -1325,10 +1449,10 @@ function renderDepartments(section) {
       <div class="departments__inner">
         <div class="departments__head">
           <div>
-            <span class="departments__sub">Departments · For Hosts</span>
+            <span class="departments__sub">Departments \u00b7 For Hosts</span>
             <h2 class="departments__title">${escapeHTML(section.name.split(" ").slice(0, -1).join(" "))} <em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em></h2>
           </div>
-          <a href="/directory/all/" class="departments__cta">Browse all 200 →</a>
+          <a href="/directory/all/" class="departments__cta">Browse all 200 \u2192</a>
         </div>
         <div class="dept-grid">
           ${guests.map((g) => {
@@ -1361,26 +1485,26 @@ function renderDepartments(section) {
 // ─── Boot ────────────────────────────────────────────────────────────
 
 function renderIssue(issue) {
-  // Update masthead metadata
-  document.getElementById("issueNumLine").textContent = `ISSUE ${issue.issueNumber || "—"}`;
-  document.getElementById("issueDateLine").textContent = `${issue.totalGuests || 0} GUESTS · WEEK OF ${fmtDate(issue.issueDate)}`;
-
   // JSON-LD
   if (issue.cover) {
     try {
       const ld = document.getElementById("issue-jsonld");
       const payload = JSON.parse(ld.textContent);
-      payload.headline = `${issue.cover.guestName} — Issue ${issue.issueNumber}`;
+      payload.headline = `${issue.cover.guestName} — On The Record, Issue ${issue.issueNumber}`;
       payload.dateModified = issue.generatedAt;
       payload.image = issue.cover.headshotUrl;
       ld.textContent = JSON.stringify(payload, null, 2);
     } catch {}
   }
 
-  // Build the magazine
-  let html = renderCoverSpread(issue.cover, issue);
+  const cover = issue.cover;
+  const feature = issue.coverFeature;
+
+  let html = "";
+  html += renderCoverHero(cover, feature, issue);
+  html += renderCoverFeature(cover, feature, issue);
   html += renderTOC(issue);
-  // Section ordering: On Air This Week → Just Aired → For Hosts (departments)
+
   const sections = issue.sections || [];
   const onAir = sections.find((s) => s.id === "on-air");
   const justAired = sections.find((s) => s.id === "just-aired");
@@ -1388,13 +1512,10 @@ function renderIssue(issue) {
   if (onAir) html += renderTwoUpFeature(onAir, false);
   if (justAired) html += renderThreeUpFeature(justAired);
   if (forHosts) html += renderDepartments(forHosts);
-  // Render any other sections as twoup features (future-proof)
-  for (const s of sections) {
-    if (s.id === "on-air" || s.id === "just-aired" || s.id === "for-hosts") continue;
-    html += renderTwoUpFeature(s, false);
-  }
 
   document.getElementById("issueMain").innerHTML = html;
+  refreshLiveIndicator();
+  setInterval(refreshLiveIndicator, 60000);
 }
 
 function buildFallbackIssue(directory) {
@@ -1416,6 +1537,7 @@ function buildFallbackIssue(directory) {
     generatedAt: new Date().toISOString(),
     totalGuests: directory.total || guests.length,
     cover,
+    coverFeature: null,
     sections: [
       { id: "on-air", name: "On Air This Week", blurb: "Just shipped, just aired, or going live in the next seven days.", treatment: "wide-scroller", guests: guests.filter(g => g.tier === "vip").slice(0, 2) },
       { id: "just-aired", name: "Just Aired", blurb: "The latest conversations on Mornings in the Lab.", treatment: "row", guests: guests.slice(0, 3) },
@@ -1427,19 +1549,11 @@ function buildFallbackIssue(directory) {
 async function loadIssue() {
   try {
     const r = await fetch(ISSUE_URL, { headers: { Accept: "application/json" } });
-    if (r.ok) {
-      const issue = await r.json();
-      renderIssue(issue);
-      return;
-    }
+    if (r.ok) { const issue = await r.json(); renderIssue(issue); return; }
   } catch {}
   try {
     const r = await fetch(FALLBACK_URL);
-    if (r.ok) {
-      const data = await r.json();
-      renderIssue(buildFallbackIssue(data));
-      return;
-    }
+    if (r.ok) { const data = await r.json(); renderIssue(buildFallbackIssue(data)); return; }
   } catch {}
   document.getElementById("issueMain").innerHTML = `
     <div class="issue-error">
@@ -1450,14 +1564,12 @@ async function loadIssue() {
   `;
 }
 
-// Hero unmute toggle (mirrors original directory)
 document.getElementById("heroUnmute")?.addEventListener("click", function() {
   const v = document.getElementById("hero-video");
   if (!v) return;
   v.muted = !v.muted;
   if (!v.muted) v.play().catch(() => {});
 });
-
 document.getElementById("geHamburger")?.addEventListener("click", () => {
   document.getElementById("geMobileMenu")?.classList.toggle("open");
 });
