@@ -1061,6 +1061,197 @@ img { max-width: 100%; display: block; }
 .issue-error p { color: var(--t-2); font-size: 16px; line-height: 1.5; margin: 0 0 24px; text-transform: none; letter-spacing: 0; }
 .issue-error a { display: inline-block; padding: 12px 24px; background: var(--gold); color: #020617; border-radius: 999px; font-weight: 600; text-transform: none; letter-spacing: normal; }
 
+/* ╔══════════════════════════════════════════════════════════════════╗
+   TIER CHIPS — consistent visual language across all sections
+   ╠══════════════════════════════════════════════════════════════════╣
+   Tier chips appear on every guest card. The chip color encodes what
+   the guest paid — the reader learns the hierarchy after one visit.
+     OTR        — gold solid (the lead)
+     VIP        — gold outline
+     REACH PRO  — teal outline
+     MEMBER     — white subtle outline
+     CENTER STAGE / COMMUNITY CORNER — no chip on dept cards (implied);
+                 use the section context instead.
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.tier-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.tier-chip--otr {
+  background: var(--gold);
+  color: #020617;
+  border-color: var(--gold);
+}
+.tier-chip--vip {
+  background: transparent;
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.tier-chip--reach-pro {
+  background: transparent;
+  color: #5eead4;          /* teal-300 */
+  border-color: #5eead4;
+}
+.tier-chip--member {
+  background: transparent;
+  color: rgba(255,255,255,0.78);
+  border-color: rgba(255,255,255,0.20);
+}
+/* Position helpers — chips that sit on top of an image */
+.dept-card__chip-pos { position: absolute; top: 12px; left: 12px; z-index: 2; }
+.feature-twoup__chip-pos { position: absolute; top: 16px; left: 16px; z-index: 2; }
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ON THE RECORD — flagship strip
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.spread--otr {
+  background: linear-gradient(
+    180deg,
+    rgba(251, 191, 36, 0.04) 0%,
+    transparent 100%
+  );
+  border-top: 1px solid rgba(251, 191, 36, 0.20);
+  border-bottom: 1px solid var(--rule);
+}
+.spread--otr .spread__folio strong {
+  color: var(--gold);
+}
+.otr-empty {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 56px 48px;
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.20);
+  border-radius: 6px;
+}
+@media (max-width: 900px) {
+  .otr-empty { grid-template-columns: 1fr; gap: 32px; padding: 40px 28px; }
+}
+.otr-empty__deck {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.32;
+  color: var(--t-1);
+  margin: 0;
+  font-variation-settings: "opsz" 72;
+}
+.otr-empty__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  background: var(--gold);
+  color: #020617;
+  border-radius: 6px;
+  font-family: var(--label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+  align-self: start;
+}
+.otr-empty__cta:hover { background: var(--gold-soft); transform: translateY(-1px); }
+.otr-empty__supporting {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  margin-top: 14px;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   SINGLE-CARD TIER FEATURES (VIP, REACH PRO)
+   When a tier has only 1–2 guests, render them as a centered hero
+   card instead of a 2–3 column grid (which looks empty).
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.tier-feature {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 48px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (max-width: 800px) {
+  .tier-feature { grid-template-columns: 1fr; gap: 32px; max-width: 480px; }
+}
+.tier-feature__media {
+  aspect-ratio: 4 / 5;
+  background: var(--bg-3);
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.tier-feature__media img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+}
+.tier-feature__chip {
+  position: absolute; top: 14px; left: 14px;
+}
+.tier-feature__name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(36px, 4.2vw, 56px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  font-variation-settings: "opsz" 72;
+  color: var(--t-1);
+}
+.tier-feature__head {
+  font-family: var(--display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.3;
+  color: var(--t-2);
+  margin: 0 0 18px;
+  font-variation-settings: "opsz" 72;
+  max-width: 480px;
+}
+.tier-feature__credentials {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-3);
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 480px;
+}
+.tier-feature__readmore {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gold);
+  font-variation-settings: "opsz" 72;
+  text-decoration: none;
+  transition: gap .2s;
+}
+.tier-feature__readmore:hover { gap: 14px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -1454,6 +1645,20 @@ function renderTOC(issue) {
   `;
 }
 
+// Tier chip helper — single source for the editorial tier label and class.
+// Returns empty string for guests with no tier or for tiers we deliberately
+// don't badge (Center Stage / Community Corner are implied by section context).
+function tierChipHTML(tier) {
+  if (!tier) return "";
+  switch (tier) {
+    case "on-the-record": return `<span class="tier-chip tier-chip--otr">On The Record</span>`;
+    case "vip":           return `<span class="tier-chip tier-chip--vip">VIP</span>`;
+    case "reach-pro":     return `<span class="tier-chip tier-chip--reach-pro">Reach Pro</span>`;
+    case "member":        return `<span class="tier-chip tier-chip--member">Member</span>`;
+    default:              return "";
+  }
+}
+
 function renderTwoUpFeature(section, paper) {
   const guests = (section.guests || []).slice(0, 2);
   if (guests.length < 1) return "";
@@ -1468,7 +1673,7 @@ function renderTwoUpFeature(section, paper) {
             <a class="feature-twoup__card" href="${PROFILE(g.slug)}">
               <div class="feature-twoup__media">
                 <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async" fetchpriority="high">
-                ${g.tier ? `<span class="feature-twoup__chip">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
+                ${tierChipHTML(g.editorialTier).replace('class="tier-chip', 'class="feature-twoup__chip-pos tier-chip')}
               </div>
               <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
               <h3 class="feature-twoup__title">${escapeHTML(g.guestName)}</h3>
@@ -1476,6 +1681,106 @@ function renderTwoUpFeature(section, paper) {
               <span class="feature-twoup__readmore">More from the conversation \u2192</span>
             </a>
           `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// ╔══════════════════════════════════════════════════════════════════╗
+// renderOnTheRecord — the publication's lead segment.
+// ╠══════════════════════════════════════════════════════════════════╣
+// Always renders. When empty (no paying On The Record customers yet), shows
+// an empty-state "book your seat" CTA — the lead segment earns its real
+// estate by selling itself when no one's bought yet.
+// When populated: a wider, prouder treatment than Center Stage — OTR is
+// the premium thing.
+// ╚══════════════════════════════════════════════════════════════════╝
+function renderOnTheRecord(section, coverSlug, coverIsOTR) {
+  // The cover guest is rendered above as the magazine cover. Don't repeat
+  // them in the section body.
+  const guests = (section.guests || []).filter((g) => g.slug !== coverSlug);
+
+  // Three empty-state cases to think through:
+  //   1. Cover IS the OTR guest AND there are no other OTRs → skip the
+  //      section entirely. The cover IS the OTR — a redundant section
+  //      below would just say "nothing else here."
+  //   2. Cover is NOT OTR AND there are no OTR guests at all → render
+  //      the empty-state CTA. The publication needs to sell its lead
+  //      segment when the issue happens to lack one.
+  //   3. There ARE other OTR guests → render them.
+  if (guests.length === 0) {
+    if (coverIsOTR) return "";
+    return `
+      <section class="spread spread--otr">
+        <div class="spread__inner">
+          <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> \u00b7 the paid produced segment</div>
+          <h2 class="spread__head">On The <em>Record</em></h2>
+          <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
+          <div class="otr-empty">
+            <div>
+              <p class="otr-empty__deck">The next On The Record sits down soon. The first paid produced segment of every issue is the lead.</p>
+              <p class="otr-empty__supporting">$497 \u00b7 One produced live appearance \u00b7 Permanent Authority Page \u00b7 14-day Distribution Sprint</p>
+            </div>
+            <div>
+              <a href="https://guestengine.live/join/?tier=single" class="otr-empty__cta">Book your seat \u2192</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  return `
+    <section class="spread spread--otr">
+      <div class="spread__inner">
+        <div class="spread__folio"><strong>${escapeHTML(section.name)}</strong> \u00b7 the paid produced segment</div>
+        <h2 class="spread__head">On The <em>Record</em></h2>
+        <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
+        <div class="feature-twoup">
+          ${guests.slice(0, 2).map((g) => `
+            <a class="feature-twoup__card" href="${PROFILE(g.slug)}">
+              <div class="feature-twoup__media">
+                <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">
+              </div>
+              <p class="feature-twoup__byline">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>
+              <h3 class="feature-twoup__title">${escapeHTML(g.guestName)}</h3>
+              <p class="feature-twoup__deck">${escapeHTML(g.headline || "")}</p>
+              <span class="feature-twoup__readmore">More from the conversation \u2192</span>
+            </a>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// renderTierFeature — single-card hero for a tier section with only 1 guest.
+// Used by VIP and Reach Pro right now (one placeholder each). When a tier
+// hits 2+ guests, the dispatcher upgrades to a multi-up grid via
+// renderTwoUpFeature.
+function renderTierFeature(section, opts) {
+  const guests = (section.guests || []);
+  if (guests.length === 0) return "";
+  const g = guests[0];
+  const sectionLabel = (opts && opts.label) || section.name;
+  return `
+    <section class="spread">
+      <div class="spread__inner">
+        <div class="spread__folio"><strong>${escapeHTML(sectionLabel)}</strong></div>
+        <h2 class="spread__head">${escapeHTML(section.name.split(" ").slice(0, -1).join(" ") || section.name)} ${section.name.split(" ").length > 1 ? `<em>${escapeHTML(section.name.split(" ").slice(-1)[0])}</em>` : ""}</h2>
+        <p class="spread__deck">${escapeHTML(section.blurb || "")}</p>
+        <div class="tier-feature">
+          <a class="tier-feature__media" href="${PROFILE(g.slug)}" aria-label="${escapeHTML(g.guestName)}">
+            <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">
+            <div class="tier-feature__chip">${tierChipHTML(g.editorialTier)}</div>
+          </a>
+          <div>
+            <h3 class="tier-feature__name">${escapeHTML(g.guestName)}</h3>
+            ${g.headline ? `<p class="tier-feature__head">${escapeHTML(g.headline)}</p>` : ""}
+            ${g.editorialSegment ? `<p class="tier-feature__credentials">${escapeHTML(g.latestAppearanceShow || "Mornings in the Lab")} \u00b7 ${escapeHTML(g.editorialSegment)} \u00b7 ${escapeHTML(fmtMonth(g.latestAppearanceDate))}</p>` : ""}
+            <a class="tier-feature__readmore" href="${PROFILE(g.slug)}">Continued in their authority page \u2192</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1509,7 +1814,7 @@ function renderThreeUpFeature(section) {
 }
 
 function renderDepartments(section) {
-  const guests = (section.guests || []).slice(0, 8);
+  const guests = (section.guests || []).slice(0, 12);
   if (guests.length < 1) return "";
   return `
     <section class="departments">
@@ -1523,17 +1828,21 @@ function renderDepartments(section) {
         </div>
         <div class="dept-grid">
           ${guests.map((g) => {
-            const tierClass = (g.tier || "").toLowerCase() === "vip" ? " dept-card__tier--vip" : "";
-            const meta = [
-              g.signalScore ? `Signal ${g.signalScore}` : null,
-              g.productSlug === "center-stage" ? "Center Stage" : g.productSlug === "community-corner" ? "Community Corner" : null,
-            ].filter(Boolean);
-            const metaHTML = meta.map((m, i) => i === 0 ? m : `<span class="dept-card__meta-divider"></span>${m}`).join("");
+            // Show a tier chip on cards for paying tiers only. Center Stage
+            // and Community Corner guests don't get a chip — they're the
+            // baseline editorial roster, no badge needed.
+            const chip = tierChipHTML(g.editorialTier);
+            const metaParts = [];
+            if (g.signalScore) metaParts.push(`Signal ${g.signalScore}`);
+            if (g.editorialSegment) metaParts.push(g.editorialSegment);
+            const metaHTML = metaParts.map((m, i) =>
+              i === 0 ? m : `<span class="dept-card__meta-divider"></span>${m}`
+            ).join("");
             return `
               <a class="dept-card" href="${PROFILE(g.slug)}">
                 <div class="dept-card__media">
                   <img src="${escapeHTML(g.headshotUrl || "")}" alt="${escapeHTML(g.guestName)}" loading="eager" decoding="async">
-                  ${g.tier ? `<span class="dept-card__tier${tierClass}">${escapeHTML(g.tier.toUpperCase())}</span>` : ""}
+                  ${chip ? `<div class="dept-card__chip-pos">${chip}</div>` : ""}
                 </div>
                 <div class="dept-card__body">
                   <h3 class="dept-card__name">${escapeHTML(g.guestName)}</h3>
@@ -1572,12 +1881,36 @@ function renderIssue(issue) {
   html += renderCoverFeature(cover, feature, issue);
   html += renderTOC(issue);
 
+  // ╔═══════════════════════════════════════════════════════════════╗
+  // SECTION DISPATCH — each tier has its own renderer.                 ║
+  // ╠═══════════════════════════════════════════════════════════════╣
+  // The Issue Engine API returns sections in priority order; we render ║
+  // them in that same order. Each renderer handles its own empty state ║
+  // (most return empty string when 0 guests; OTR is the exception that ║
+  // shows a "book your seat" CTA when empty).                          ║
+  // ╚═══════════════════════════════════════════════════════════════╝
   const sections = issue.sections || [];
-  const onAir = sections.find((s) => s.id === "on-air");
-  const justAired = sections.find((s) => s.id === "just-aired");
-  const forHosts = sections.find((s) => s.id === "for-hosts");
-  if (onAir) html += renderTwoUpFeature(onAir, false);
-  if (justAired) html += renderThreeUpFeature(justAired);
+  const byId = (id) => sections.find((s) => s.id === id);
+  const coverSlug = (issue.cover && issue.cover.slug) || null;
+
+  const onTheRecord = byId("on-the-record");
+  const centerStage = byId("center-stage");
+  const vip = byId("vip");
+  const reachPro = byId("reach-pro");
+  const forHosts = byId("for-hosts");
+
+  // OTR section: render only when there are OTR guests OTHER than the cover,
+  // or when the cover isn't OTR (in which case we show an empty-state CTA
+  // selling the segment).
+  const coverIsOTR = (issue.cover && issue.cover.editorialTier === "on-the-record");
+  if (onTheRecord) html += renderOnTheRecord(onTheRecord, coverSlug, coverIsOTR);
+  if (centerStage) html += renderTwoUpFeature(centerStage, false);
+  if (vip) html += (vip.guests && vip.guests.length > 1)
+    ? renderTwoUpFeature(vip, false)
+    : renderTierFeature(vip, { label: "VIP \u00b7 $297/mo" });
+  if (reachPro) html += (reachPro.guests && reachPro.guests.length > 1)
+    ? renderTwoUpFeature(reachPro, false)
+    : renderTierFeature(reachPro, { label: "Reach Pro \u00b7 $197/mo" });
   if (forHosts) html += renderDepartments(forHosts);
 
   document.getElementById("issueMain").innerHTML = html;
@@ -1605,10 +1938,13 @@ function buildFallbackIssue(directory) {
     totalGuests: directory.total || guests.length,
     cover,
     coverFeature: null,
+    // Fallback sections (only used when /issue/current 5xxs and we have to
+    // synthesize from a flat directory dump). Mirrors the API's section IDs
+    // so the dispatcher above doesn't need a fallback codepath.
     sections: [
-      { id: "on-air", name: "On Air This Week", blurb: "Just shipped, just aired, or going live in the next seven days.", treatment: "wide-scroller", guests: guests.filter(g => g.tier === "vip").slice(0, 2) },
-      { id: "just-aired", name: "Just Aired", blurb: "The latest conversations on Mornings in the Lab.", treatment: "row", guests: guests.slice(0, 3) },
-      { id: "for-hosts", name: "For Hosts", blurb: "Booking a guest? Start here.", treatment: "wide-scroller", guests: guests.filter(g => g.tier === "vip" || g.tier === "featured").slice(0, 8) },
+      { id: "on-the-record", name: "On The Record", blurb: "The paid produced segment. Permanent Authority Page. Distribution Sprint. The lead.", treatment: "asymmetric", guests: [] },
+      { id: "center-stage", name: "Center Stage", blurb: "Our free segment. Editorial choice \u2014 we pick who sits here.", treatment: "wide-scroller", guests: guests.slice(0, 4) },
+      { id: "for-hosts", name: "For Hosts", blurb: "Booking a guest? Start here.", treatment: "wide-scroller", guests: guests.slice(0, 8) },
     ],
   };
 }
