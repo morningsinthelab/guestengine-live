@@ -3160,12 +3160,56 @@
     function renderTierDeliverables(d) {
       if (d.audienceState !== 'owner') return '';
       var tier = (d.guest && d.guest.tier) || '';
+      // Tier line items — verbatim from docs/scoring.md § "What people pay"
+      // (LOCKED 2026-04-29). When this map drifts from the canonical doc,
+      // the doc wins. Bullets are written from the customer's POV ("You
+      // get...") and pulled from the same blurb the pricing page shows.
       var meta = ({
-        vip:        { label: 'VIP — $297/mo', items: ['25 Authority Reach pitches/mo', 'Quarterly produced appearance', '30-day Distribution Sprint each appearance', 'Weekly Signal report'] },
-        reach_pro:  { label: 'Reach Pro — $197/mo', items: ['50 Authority Reach pitches/mo', 'Priority pitch generation by Sophia', 'Reply tracking with AI-suggested responses', 'Quarterly category report'] },
-        member:     { label: 'Member — $97/mo', items: ['10 Authority Reach pitches/mo', 'Storytime sponsorship — your twin in the universe', 'Monthly Signal Score refresh', 'Member directory listing'] },
-        single:     { label: 'Single Appearance — $497', items: ['14-day Distribution Sprint', 'Authority Page indexed', 'Signal Score baseline', 'Twin character with consent'] },
-        featured:   { label: 'Featured', items: ['Authority Page indexed', 'Signal Score baseline'] },
+        vip: {
+          label: 'VIP — $297/mo',
+          items: [
+            'Quarterly produced appearance on Mornings in the Lab',
+            'Weekly Signal Intelligence Report by email',
+            '25 Authority Reach pitches/mo (sent from MITL warmed inboxes)',
+            '30-day Distribution Sprint each appearance',
+            'Premium Authority Page placement · priority directory listing',
+            'Unlimited Signal viewing in your portal',
+          ],
+        },
+        reach_pro: {
+          label: 'Reach Pro — $197/mo',
+          items: [
+            '50 Authority Reach pitches/mo (sent from MITL warmed inboxes)',
+            'Priority pitch generation + manual MITL ops review of first 3',
+            'Reply tracking with AI-suggested responses',
+            'External appearances auto-added to your Authority Page',
+            'Quarterly category report tuned to pitch targets',
+            'Monthly Signal Intelligence Report by email',
+          ],
+        },
+        member: {
+          label: 'Member — $97/mo',
+          items: [
+            'Storytime sponsorship — your Digital Twin becomes a character in the universe',
+            '10 Authority Reach pitches/mo',
+            'Monthly Signal Intelligence Report by email',
+            'Member directory listing + Roam community access',
+          ],
+        },
+        single: {
+          label: 'Single Appearance — $497',
+          items: [
+            'One produced live appearance + permanent indexed Authority Page',
+            '5 vertical clips + 10 social posts + transcript + highlight reel',
+            'Signal intelligence report on issue',
+            '14-day Distribution Sprint',
+            'Twin character with consent',
+          ],
+        },
+        featured: {
+          label: 'Featured',
+          items: ['Authority Page indexed', 'Signal Score baseline'],
+        },
       })[tier];
       if (!meta) return '';
       var itemsHtml = meta.items.map(function(item) {
