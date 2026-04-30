@@ -2154,6 +2154,30 @@
       }
     });
 
+    // Deep-link: opening the page with `#audit` (or `#audit-something`)
+    // auto-opens the Authority Engine Brief drawer once the page is
+    // hydrated. This is what the /twin/:slug credential card links into
+    // so the drawer stays the single source of truth across both pages.
+    function maybeAutoOpenAuditFromHash() {
+      var h = (window.location.hash || '').toLowerCase();
+      if (h === '#audit' || h.indexOf('#audit') === 0) {
+        // Wait until p-signal is hydrated; the trigger card only renders
+        // after profile data lands. Poll briefly, give up after ~3 s.
+        var tries = 0;
+        (function tryOpen() {
+          tries++;
+          var el = document.getElementById('p-signal');
+          if (el && el.style.display !== 'none') {
+            try { window.openAuthorityDrawer(); } catch (e) {}
+            return;
+          }
+          if (tries < 30) setTimeout(tryOpen, 100);
+        })();
+      }
+    }
+    maybeAutoOpenAuditFromHash();
+    window.addEventListener('hashchange', maybeAutoOpenAuditFromHash);
+
     // ── Fetch ──────────────────────────────────────────────────────────────
     function loadAudit(slug) {
       drawerCacheSlug = slug;
