@@ -3192,8 +3192,9 @@
         var hs = d.historySummary || {};
         var summaryLine = '';
         if (hs.daysCompounding && hs.daysCompounding > 0) {
-          var dl = hs.daysCompounding === 1 ? 'day' : 'days';
-          summaryLine = ' This guest is on day ' + hs.daysCompounding + ' of ' + dl + ' compounding.';
+          summaryLine = hs.daysCompounding === 1
+            ? ' This guest is on day 1 of compounding.'
+            : ' This guest is ' + hs.daysCompounding + ' days into compounding.';
         }
         html += renderLockedTwoCta(
           'fa-lock',
@@ -3329,20 +3330,22 @@
 
       // PUBLIC: server returns dataSources=[], summary only. Show the
       // locked two-CTA panel — no provider names or per-refresh costs
-      // reach the wire.
+      // reach the wire. Provider count goes into the panel body so it
+      // doesn't dangle under the CTAs as an orphan line.
       if (d.audienceState === 'public') {
         var ds = d.dataSourcesSummary || {};
-        var summary = '';
+        var countLine = '';
         if (ds.liveCount && ds.liveCount > 0) {
-          summary = ' Currently driving the score: ' + ds.liveCount + ' named providers';
+          countLine = ' Right now ' + ds.liveCount +
+            ' named providers are driving today\u2019s score';
           if (ds.pendingCount > 0) {
-            summary += ', plus ' + ds.pendingCount + ' more in flight';
+            countLine += ', with ' + ds.pendingCount + ' more in flight';
           }
-          summary += '.';
+          countLine += '.';
         }
         html += renderLockedTwoCta(
           'fa-lock',
-          'Sign in as the page owner to see every named third-party provider feeding the Signal Score, plus per-refresh cost on each one.' + summary
+          'Sign in as the page owner to see every named third-party provider feeding the Signal Score, plus per-refresh cost on each one.' + countLine
         ) + '</div>';
         return html;
       }
