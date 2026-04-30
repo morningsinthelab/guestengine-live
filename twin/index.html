@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Twin | Guest Engine</title>
+  <meta name="description" content="The Digital Twin — On The Record portrait, Authority signal, and signature pull-quotes for guests of the MiTL Live Network.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/style.css?v=20260419">
+  <link rel="stylesheet" href="/header.css?v=1776710000">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@gabornings">
+  <style>
+  :root {
+    --gold: #d4a843;
+    --gold-bright: #fbbf24;
+    --gold-dim: rgba(212,168,67,0.30);
+    --gold-faint: rgba(212,168,67,0.06);
+    --bg: #050914;
+    --card: rgba(255,255,255,0.02);
+    --border: rgba(255,255,255,0.08);
+    --text: #fff;
+    --text-secondary: rgba(255,255,255,0.62);
+    --text-muted: rgba(255,255,255,0.40);
+    --font-display: 'Syncopate', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+
+  /* ── Loading / 404 ────────────────────────────── */
+  .twin-loading, .twin-notfound {
+    min-height: 80vh; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem; padding: 2rem;
+  }
+  .twin-loading__spinner {
+    width: 36px; height: 36px; border: 3px solid var(--gold-faint);
+    border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .twin-loading__text {
+    font-family: var(--font-display); font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .twin-notfound h1 { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.05em; margin: 0 0 0.5rem; }
+  .twin-notfound p { color: var(--text-muted); margin: 0; }
+
+  /* ── Wordmark ─────────────────────────────────── */
+  .twin-wordmark {
+    position: relative; z-index: 5; padding: 36px 80px 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .twin-wordmark__brand {
+    font-family: var(--font-display); font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .twin-wordmark__brand strong { color: var(--gold); font-weight: 700; }
+  .twin-wordmark__back {
+    font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+    color: var(--text-muted); text-decoration: none; transition: color 200ms ease;
+  }
+  .twin-wordmark__back:hover { color: var(--text); }
+
+  /* ── Hero ─────────────────────────────────────── */
+  .twin-hero {
+    position: relative; min-height: 86vh; padding: 64px 80px 80px;
+    display: grid; grid-template-columns: minmax(320px, 1fr) minmax(420px, 560px);
+    gap: 80px; align-items: center;
+  }
+  @media (max-width: 960px) {
+    .twin-wordmark { padding: 28px 24px 0; }
+    .twin-hero { grid-template-columns: 1fr; padding: 32px 24px 56px; gap: 32px; }
+  }
+  .twin-hero__copy { max-width: 580px; }
+  .twin-hero__eyebrow {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 16px;
+  }
+  .twin-hero__name {
+    font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 700; letter-spacing: 0.02em; line-height: 1.05;
+    margin: 0 0 12px;
+  }
+  .twin-hero__role {
+    font-family: var(--font-body); font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 400;
+    color: var(--text-secondary); line-height: 1.45; margin: 0 0 28px;
+  }
+  .twin-hero__bio {
+    font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;
+    margin: 0 0 32px; max-width: 520px;
+  }
+  .twin-hero__cta-row {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+  .twin-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+    padding: 11px 20px; border-radius: 999px; text-decoration: none;
+    transition: all 180ms ease; letter-spacing: 0.01em;
+  }
+  .twin-cta--primary {
+    background: var(--gold); color: #000; border: 1px solid var(--gold);
+  }
+  .twin-cta--primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+  .twin-cta--ghost {
+    background: transparent; color: var(--text); border: 1px solid var(--border);
+  }
+  .twin-cta--ghost:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+  /* ── Portrait card ───────────────────────────── */
+  .twin-portrait {
+    position: relative; aspect-ratio: 4 / 5;
+    border-radius: 20px; overflow: hidden;
+    background: var(--card); border: 1px solid var(--border);
+    box-shadow: 0 50px 120px -40px rgba(212, 168, 67, 0.25),
+                0 0 0 1px rgba(212, 168, 67, 0.08);
+  }
+  .twin-portrait img, .twin-portrait video {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .twin-portrait__chip {
+    position: absolute; top: 18px; left: 18px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    padding: 7px 12px; border-radius: 999px;
+    background: rgba(5, 9, 20, 0.78); color: var(--gold);
+    backdrop-filter: blur(8px); border: 1px solid var(--gold-dim);
+  }
+
+  /* ── Sections ────────────────────────────────── */
+  section.twin-section {
+    padding: 64px 80px; border-top: 1px solid var(--border);
+  }
+  @media (max-width: 960px) { section.twin-section { padding: 48px 24px; } }
+  .twin-section__head {
+    display: flex; align-items: baseline; gap: 14px; margin: 0 0 32px;
+  }
+  .twin-section__rule {
+    flex: 1; height: 1px; background: var(--border);
+  }
+  .twin-section__eyebrow {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .twin-section__count {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.32em; color: var(--gold);
+  }
+
+  /* ── Authority summary ───────────────────────── */
+  .twin-authority {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-bottom: 40px;
+  }
+  .twin-stat {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px;
+  }
+  .twin-stat__label {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted);
+    margin: 0 0 10px;
+  }
+  .twin-stat__value {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
+    color: var(--text); line-height: 1; letter-spacing: 0.02em;
+  }
+  .twin-stat__value small {
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+    color: var(--text-muted); margin-left: 4px;
+  }
+  .twin-stat__bar {
+    margin-top: 14px; height: 4px; background: rgba(255,255,255,0.05);
+    border-radius: 999px; overflow: hidden;
+  }
+  .twin-stat__bar > span {
+    display: block; height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  }
+  .twin-summary {
+    font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7;
+    max-width: 880px;
+  }
+
+  /* ── Pull-quotes ─────────────────────────────── */
+  .twin-quotes {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .twin-quote {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+    position: relative; overflow: hidden;
+  }
+  .twin-quote::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--gold);
+  }
+  .twin-quote__mark {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+    color: var(--gold); line-height: 1; margin-bottom: 12px;
+  }
+  .twin-quote__body {
+    font-size: 0.98rem; line-height: 1.55; color: var(--text);
+    margin: 0 0 16px; font-style: italic;
+  }
+  .twin-quote__theme {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  /* ── Topics chips ────────────────────────────── */
+  .twin-topics { display: flex; flex-wrap: wrap; gap: 8px; }
+  .twin-topic {
+    font-size: 0.78rem; font-weight: 500;
+    padding: 7px 14px; border-radius: 999px;
+    color: var(--text-secondary);
+    background: var(--card); border: 1px solid var(--border);
+  }
+
+  /* ── Footer ──────────────────────────────────── */
+  .twin-footer {
+    padding: 48px 80px 64px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--text-muted); font-size: 0.78rem;
+    line-height: 1.7;
+  }
+  @media (max-width: 960px) { .twin-footer { padding: 36px 24px 48px; } }
+  .twin-footer a { color: var(--gold); text-decoration: none; }
+  .twin-footer a:hover { color: var(--gold-bright); }
+  </style>
+</head>
+<body>
+
+<div class="twin-wordmark">
+  <span class="twin-wordmark__brand"><strong>Guest</strong> Engine — Digital Twin</span>
+  <a class="twin-wordmark__back" href="/" id="twin-back">← guestengine.live</a>
+</div>
+
+<div class="twin-loading" id="twin-loading">
+  <div class="twin-loading__spinner"></div>
+  <div class="twin-loading__text">Loading Digital Twin</div>
+</div>
+
+<div class="twin-notfound" id="twin-notfound" style="display:none">
+  <h1>Twin not found</h1>
+  <p>This guest doesn't have a Digital Twin yet — or the slug is invalid.</p>
+</div>
+
+<main id="twin-content" style="display:none">
+  <!-- ── HERO ────────────────────────────────────────────────────────── -->
+  <section class="twin-hero">
+    <div class="twin-hero__copy">
+      <p class="twin-hero__eyebrow">On The Record</p>
+      <h1 class="twin-hero__name" id="t-name">—</h1>
+      <p class="twin-hero__role" id="t-role"></p>
+      <p class="twin-hero__bio" id="t-bio"></p>
+      <div class="twin-hero__cta-row">
+        <a class="twin-cta twin-cta--primary" id="t-cta-profile" href="#">View Authority Page →</a>
+        <a class="twin-cta twin-cta--ghost" id="t-cta-share" href="#">Share Twin</a>
+      </div>
+    </div>
+    <div class="twin-portrait" id="t-portrait-card">
+      <span class="twin-portrait__chip"><i class="fas fa-sparkles" aria-hidden="true"></i> On The Record</span>
+      <video id="t-portrait-video" autoplay muted loop playsinline preload="auto" style="display:none"></video>
+      <img id="t-portrait-img" alt="Digital Twin portrait">
+    </div>
+  </section>
+
+  <!-- ── AUTHORITY SUMMARY ──────────────────────────────────────────── -->
+  <section class="twin-section">
+    <div class="twin-section__head">
+      <span class="twin-section__eyebrow">Authority</span>
+      <span class="twin-section__rule"></span>
+      <span class="twin-section__count" id="t-signal-total"></span>
+    </div>
+    <div class="twin-authority" id="t-authority"></div>
+    <p class="twin-summary" id="t-summary"></p>
+  </section>
+
+  <!-- ── PULL QUOTES (storytime / narrative sections) ────────────────── -->
+  <section class="twin-section" id="t-quotes-section" style="display:none">
+    <div class="twin-section__head">
+      <span class="twin-section__eyebrow">Signature Moments</span>
+      <span class="twin-section__rule"></span>
+      <span class="twin-section__count" id="t-quotes-count"></span>
+    </div>
+    <div class="twin-quotes" id="t-quotes"></div>
+  </section>
+
+  <!-- ── TOPICS ─────────────────────────────────────────────────────── -->
+  <section class="twin-section" id="t-topics-section" style="display:none">
+    <div class="twin-section__head">
+      <span class="twin-section__eyebrow">Topics</span>
+      <span class="twin-section__rule"></span>
+    </div>
+    <div class="twin-topics" id="t-topics"></div>
+  </section>
+</main>
+
+<footer class="twin-footer" id="twin-footer" style="display:none">
+  Part of the <a href="/">MiTL Live Network</a>. The Digital Twin is the publication's editorial face — generated under licensed likeness, on the record.
+</footer>
+
+<script>
+(function() {
+  var API = 'https://app.conversationos.live/api/guest-marketplace';
+
+  function getSlug() {
+    var p = location.pathname.replace(/\/+$/, '').split('/');
+    var i = p.indexOf('twin');
+    return i >= 0 && p[i + 1] ? p[i + 1] : null;
+  }
+  function ok(r) { return r.ok ? r.json() : null; }
+  function show(id) { var el = document.getElementById(id); if (el) el.style.display = ''; }
+  function hide(id) { var el = document.getElementById(id); if (el) el.style.display = 'none'; }
+  function notFound() {
+    hide('twin-loading');
+    show('twin-notfound');
+  }
+  function setOG(p, c) {
+    var el = document.querySelector('meta[property="' + p + '"]');
+    if (!el) { el = document.createElement('meta'); el.setAttribute('property', p); document.head.appendChild(el); }
+    el.setAttribute('content', c);
+  }
+  function setMeta(n, c) {
+    var el = document.querySelector('meta[name="' + n + '"]');
+    if (!el) { el = document.createElement('meta'); el.setAttribute('name', n); document.head.appendChild(el); }
+    el.setAttribute('content', c);
+  }
+  function pct(v) { return Math.max(0, Math.min(100, Math.round((v / 25) * 100))); }
+  function esc(s) {
+    if (s == null) return '';
+    var d = document.createElement('div'); d.textContent = String(s); return d.innerHTML;
+  }
+  function parseJSON(v) {
+    if (!v) return null;
+    if (typeof v === 'object') return v;
+    try { return JSON.parse(v); } catch (e) { return null; }
+  }
+
+  var slug = getSlug();
+  if (!slug) return notFound();
+
+  Promise.all([
+    fetch(API + '/directory/' + slug).then(ok),
+    fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
+  ]).then(function(r) {
+    if (!r[0]) return notFound();
+    var profile = r[0];
+    var authority = r[1];
+
+    // Twin gate — this page only exists for guests with a twin portrait.
+    // Without one, send the visitor to the regular Authority Page.
+    if (!profile.twinPortraitUrl) {
+      window.location.replace('/profile/' + slug);
+      return;
+    }
+
+    render(profile, authority);
+  }).catch(notFound);
+
+  function render(profile, authority) {
+    var name = profile.guestName || 'Guest';
+    var role = (authority && authority.job_title) || profile.headline || '';
+    var bio = (authority && authority.authority_bio) || profile.bio || '';
+    var topics = parseJSON(profile.topics) || [];
+    var twinUrl = profile.twinPortraitUrl;
+    var livingUrl = profile.livingPortraitVideoUrl;
+
+    // ── Meta + OG ──
+    document.title = name + ' — Digital Twin | Guest Engine';
+    setMeta('description', (bio || (name + '\u2019s On The Record portrait, Authority signal, and signature moments.')).substring(0, 200));
+    setOG('og:title', name + ' — Digital Twin | Guest Engine');
+    setOG('og:description', (bio || '').substring(0, 200));
+    setOG('og:image', twinUrl);
+    setOG('og:url', 'https://guestengine.live/twin/' + slug);
+    setOG('og:type', 'profile');
+    setMeta('twitter:image', twinUrl);
+
+    // ── Hero ──
+    document.getElementById('t-name').textContent = name;
+    var roleEl = document.getElementById('t-role');
+    if (role) roleEl.textContent = role; else roleEl.style.display = 'none';
+    var bioEl = document.getElementById('t-bio');
+    if (bio) bioEl.textContent = bio; else bioEl.style.display = 'none';
+
+    var img = document.getElementById('t-portrait-img');
+    var video = document.getElementById('t-portrait-video');
+    if (livingUrl) {
+      video.src = livingUrl;
+      video.poster = twinUrl;
+      video.style.display = 'block';
+      img.style.display = 'none';
+    } else {
+      img.src = twinUrl;
+      img.alt = name + ' \u2014 Digital Twin portrait';
+    }
+
+    document.getElementById('t-cta-profile').href = '/profile/' + slug;
+    var shareCta = document.getElementById('t-cta-share');
+    shareCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      var shareUrl = 'https://guestengine.live/twin/' + slug;
+      if (navigator.share) {
+        navigator.share({ title: name + ' — Digital Twin', url: shareUrl }).catch(function() {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareUrl).then(function() {
+          shareCta.textContent = 'Link copied';
+          setTimeout(function() { shareCta.textContent = 'Share Twin'; }, 1800);
+        });
+      }
+    });
+
+    // ── Authority signal ──
+    var rch = profile.signalReach || 0;
+    var auth = profile.signalAuthorityScore || 0;
+    var disc = profile.signalDiscourse || 0;
+    var soc = profile.signalSocial || 0;
+    var total = rch + auth + disc + soc;
+
+    var totalEl = document.getElementById('t-signal-total');
+    if (total > 0) {
+      totalEl.textContent = total + ' / 100';
+    } else {
+      totalEl.textContent = '';
+    }
+
+    var stats = [
+      { label: 'Experience', val: rch },
+      { label: 'Expertise', val: auth },
+      { label: 'Authority', val: disc },
+      { label: 'Trust', val: soc },
+    ];
+    var hasSignal = stats.some(function(s) { return s.val > 0; });
+    var aHost = document.getElementById('t-authority');
+    if (hasSignal) {
+      aHost.innerHTML = stats.map(function(s) {
+        return '<div class="twin-stat">' +
+          '<p class="twin-stat__label">' + esc(s.label) + '</p>' +
+          '<div class="twin-stat__value">' + s.val + '<small>/25</small></div>' +
+          '<div class="twin-stat__bar"><span style="width:' + pct(s.val) + '%"></span></div>' +
+          '</div>';
+      }).join('');
+    } else {
+      aHost.parentElement.style.display = 'none';
+    }
+
+    var summary = (authority && (authority.authority_bio || authority.summary)) || '';
+    var sumEl = document.getElementById('t-summary');
+    if (summary && summary !== bio) sumEl.textContent = summary; else sumEl.style.display = 'none';
+
+    // ── Pull quotes (narrative_sections.quote) ──
+    var sections = (authority && authority.narrative_sections) || [];
+    var quotes = sections.filter(function(s) { return s && s.quote; }).slice(0, 6);
+    if (quotes.length) {
+      document.getElementById('t-quotes-section').style.display = '';
+      document.getElementById('t-quotes-count').textContent = quotes.length + ' / ' + sections.length;
+      document.getElementById('t-quotes').innerHTML = quotes.map(function(q) {
+        var theme = q.theme || q.topic || q.eyebrow || '';
+        return '<figure class="twin-quote">' +
+          '<div class="twin-quote__mark">"</div>' +
+          '<blockquote class="twin-quote__body">' + esc(q.quote) + '</blockquote>' +
+          (theme ? '<figcaption class="twin-quote__theme">' + esc(theme) + '</figcaption>' : '') +
+          '</figure>';
+      }).join('');
+    }
+
+    // ── Topics ──
+    if (Array.isArray(topics) && topics.length) {
+      document.getElementById('t-topics-section').style.display = '';
+      document.getElementById('t-topics').innerHTML = topics.slice(0, 12).map(function(t) {
+        return '<span class="twin-topic">' + esc(t) + '</span>';
+      }).join('');
+    }
+
+    // Reveal
+    hide('twin-loading');
+    show('twin-content');
+    show('twin-footer');
+  }
+})();
+</script>
+
+</body>
+</html>
