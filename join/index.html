@@ -100,6 +100,61 @@
     margin: 0 auto;
   }
 
+  /* Referral banner — 'Sent here from <slug>'s page' */
+  .ref-banner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(251,191,36,0.02));
+    border: 1px solid rgba(251,191,36,0.30);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 720px) {
+    .ref-banner {
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      padding: 16px;
+    }
+    .ref-banner__view { grid-column: 1 / -1; }
+  }
+  .ref-banner__portrait {
+    width: 56px; height: 70px; flex-shrink: 0;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(251,191,36,0.30);
+    background: rgba(251,191,36,0.06);
+    display: block;
+  }
+  .ref-banner__portrait img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .ref-banner__body { min-width: 0; }
+  .ref-banner__eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .ref-banner__copy {
+    font-size: 0.9rem; line-height: 1.5;
+    color: var(--text); margin: 0;
+    max-width: 60ch;
+  }
+  .ref-banner__view {
+    font-family: var(--font-body);
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--text); text-decoration: none;
+    padding: 8px 14px; border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    display: inline-flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+  .ref-banner__view:hover { border-color: var(--gold); color: var(--gold); }
+
   /* Progress bar */
   .progress {
     display: flex; align-items: center; gap: 0;
@@ -983,6 +1038,22 @@
 
   <main class="wizard-page">
 
+    <!-- REFERRAL BANNER — hidden by default; shown when ?ref=<slug> arrives.
+         Auto-fetches the referrer's directory entry and slots their twin
+         portrait + name + headline at the top of the wizard. The copy
+         frames the rest of the page as 'yours can look like this.' — the
+         page-as-credential argument made visceral. -->
+    <div class="ref-banner" id="refBanner" style="display:none" role="region" aria-label="Referral context">
+      <a class="ref-banner__portrait" id="refBannerPortrait" href="#" target="_blank" rel="noopener">
+        <img id="refBannerImg" alt="">
+      </a>
+      <div class="ref-banner__body">
+        <div class="ref-banner__eyebrow">Sent here from <span id="refBannerName"></span>'s Authority Page</div>
+        <p class="ref-banner__copy" id="refBannerCopy">Same engine, same network, same On The Record portrait treatment. Yours can look like this.</p>
+      </div>
+      <a class="ref-banner__view" id="refBannerView" href="#" target="_blank" rel="noopener">View their page <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+    </div>
+
     <!-- PROGRESS BAR (dynamic — labels change based on tier) -->
     <div class="progress" id="progressBar">
       <!-- Populated by JS based on tier -->
@@ -1501,7 +1572,12 @@
       show: null, showName: null,
       segment: null, segmentName: null,
       name: '', email: '', linkedin: '', topic: '',
-      price: null, billing: null
+      price: null, billing: null,
+      // ?ref=<slug> referrer attribution. Set by hydrateReferralBanner()
+      // on page load if a valid slug is present in the URL. Passed through
+      // to Stripe checkout so attribution lands in order metadata.
+      refSlug: null,
+      refName: null
     };
 
     // tierData carries the Stripe product slug forward in the checkout
@@ -1759,7 +1835,12 @@
         return;
       }
 
+      // 'ref=join' identifies the funnel source (the /join page).
+      // 'refGuest=<slug>' attributes the conversion to the guest whose
+      // Authority Page sent this visitor here — set by the locked-panel
+      // CTAs on /profile/:slug. Both land in Stripe order metadata.
       var params = { ref: 'join', tier: state.tier };
+      if (state.refSlug) params.refGuest = state.refSlug;
       if (tierData[state.tier] && tierData[state.tier].productSlug) {
         params.productSlug = tierData[state.tier].productSlug;
       }
@@ -1772,6 +1853,66 @@
       var qs = new URLSearchParams(params).toString();
       window.location.href = 'https://app.conversationos.live/portal/signup?' + qs;
     });
+
+    // ══════════════════════════════════════
+    // REFERRAL BANNER
+    // ══════════════════════════════════════
+    /**
+     * If the URL has a valid `?ref=<slug>` param, fetch the referrer's
+     * directory entry and render the banner above the wizard. Stores the
+     * slug + name in `state` so checkout passes them through to Stripe.
+     *
+     * Slug validation: must match /^[a-z0-9-]+$/ to avoid HTML injection.
+     * Network failures are silent — the banner just stays hidden.
+     */
+    function hydrateReferralBanner() {
+      try {
+        var raw = new URLSearchParams(window.location.search).get('ref');
+        if (!raw) return;
+        var slug = String(raw).toLowerCase().trim();
+        if (!/^[a-z0-9-]{2,80}$/.test(slug)) return; // bail on garbage
+
+        var url = 'https://app.conversationos.live/api/guest-marketplace/directory/' + encodeURIComponent(slug);
+        fetch(url).then(function(r) {
+          if (!r.ok) return null;
+          return r.json();
+        }).then(function(profile) {
+          if (!profile || !profile.guestName) return;
+
+          // Persist on state so Stripe payload picks it up at checkout.
+          state.refSlug = slug;
+          state.refName = profile.guestName;
+
+          // Render the banner.
+          var banner = document.getElementById('refBanner');
+          var img = document.getElementById('refBannerImg');
+          var nameEl = document.getElementById('refBannerName');
+          var view = document.getElementById('refBannerView');
+          var portrait = document.getElementById('refBannerPortrait');
+
+          // Prefer the twin portrait when present (canonical face for the
+          // network) and fall back to the headshot. Skip rendering the
+          // banner entirely if neither asset exists — a portrait-less card
+          // would look broken.
+          var imgUrl = profile.twinPortraitUrl || profile.headshotUrl;
+          if (!imgUrl) return;
+          img.src = imgUrl;
+          img.alt = profile.guestName + ' — Authority Page';
+
+          // First name reads better than full name ("David's page" vs.
+          // "David Frangioni's page").
+          var firstName = profile.guestName.split(' ')[0];
+          nameEl.textContent = firstName;
+
+          var profileHref = '/profile/' + encodeURIComponent(slug);
+          view.href = profileHref;
+          portrait.href = profileHref;
+
+          banner.style.display = 'grid';
+        }).catch(function() { /* silent */ });
+      } catch (e) { /* silent */ }
+    }
+    hydrateReferralBanner();
 
     // ══════════════════════════════════════
     // INIT
