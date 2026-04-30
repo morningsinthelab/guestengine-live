@@ -1510,7 +1510,26 @@
       setMeta('description', bio.substring(0, 200));
       setOG('og:title', name + ' — ' + headline + ' | Guest Engine');
       setOG('og:description', bio.substring(0, 200));
-      setOG('og:image', csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : (findImage(images,'episode_art') || profile.headshotUrl || ''));
+      // Gap 2c — OG share image precedence:
+      //   1. profile.twinPortraitUrl  ← publication's editorial face
+      //   2. csVideo YouTube thumbnail
+      //   3. episode_art
+      //   4. profile.headshotUrl (legacy fallback)
+      //
+      // Why twin first: the OG image is what LinkedIn / X / Slack /
+      // iMessage rasterize when someone shares the guest's Authority
+      // Page. We want the On The Record portrait to be the face the
+      // internet sees — that's the whole premise of the Digital Twin.
+      // See docs/digital-twin-spec.md § "Gap 2 — Portrait wiring".
+      var ogTwinUrl = profile.twinPortraitUrl || null;
+      var ogYouTube = csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : null;
+      var ogImage = ogTwinUrl || ogYouTube || findImage(images,'episode_art') || profile.headshotUrl || '';
+      setOG('og:image', ogImage);
+      // Twitter Card image — same precedence, separate meta property.
+      setOG('twitter:image', ogImage);
+      if (!document.querySelector('meta[name="twitter:card"]')) {
+        var tc = document.createElement('meta'); tc.setAttribute('name', 'twitter:card'); tc.setAttribute('content', 'summary_large_image'); document.head.appendChild(tc);
+      }
       setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
       setOG('og:type', 'profile');
 
