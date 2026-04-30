@@ -53,6 +53,19 @@
     position:absolute; inset:0; background-size:cover; background-position:center center;
     transition:opacity 0.6s ease;
   }
+  /* ┏━ Hero Living Portrait video (Gap 2d) ━━━━━━━━━━━━━━━━━━━━┓
+     When the guest has both a Twin still portrait AND a livingPortraitVideoUrl,
+     the Authority Page hero plays the video instead of the static portrait
+     image. Video plays muted, autoplay, loop, playsinline. Falls back to the
+     still hero bg when toggle is flipped to Original or no video is present.
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ */
+  .p-hero__video {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center center;
+    display:none; transition:opacity 0.6s ease;
+  }
+  .p-hero__video.is-active { display:block; }
+  .p-hero__bg.is-hidden { opacity:0; }
   .p-hero__overlay {
     position:absolute; inset:0;
     background:
@@ -1131,9 +1144,10 @@
   <!-- PROFILE -->
   <div id="profile-content" style="display:none">
 
-    <!-- HERO (UNTOUCHED) -->
+    <!-- HERO (UNTOUCHED visual layout) -->
     <section class="p-hero" id="p-hero">
       <div class="p-hero__bg" id="p-hero-bg"></div>
+      <video class="p-hero__video" id="p-hero-video" muted loop playsinline preload="metadata"></video>
       <div class="p-hero__overlay"></div>
       <div class="p-hero__content">
         <div class="p-hero__segment" id="p-hero-segment">Mornings in the Lab · Center Stage</div>
@@ -1530,6 +1544,40 @@
         : (ytPoster || findImage(images,'episode_art') || profile.headshotUrl);
       var heroImg = twinHeroImg;
       if (heroImg) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+heroImg+')';
+
+      // Living Portrait (Gap 2d) — if the guest has a livingPortraitVideoUrl
+      // AND a twin portrait, the hero plays the video by default. Toggling
+      // to Original hides the video and shows the original headshot bg.
+      var livingPortraitUrl = profile.livingPortraitVideoUrl || null;
+      var hasLivingPortrait = hasTwinPortrait && !!livingPortraitUrl;
+      var heroVideoEl = document.getElementById('p-hero-video');
+      var heroBgEl = document.getElementById('p-hero-bg');
+      var setLivingPortraitActive = function (active) {
+        if (!hasLivingPortrait) return;
+        if (active) {
+          heroVideoEl.classList.add('is-active');
+          heroBgEl.classList.add('is-hidden');
+          // Try to play; browsers may need user gesture for autoplay even
+          // with muted, so we fail silently and let the still bg take over.
+          var playPromise = heroVideoEl.play();
+          if (playPromise && playPromise.catch) {
+            playPromise.catch(function () {
+              heroVideoEl.classList.remove('is-active');
+              heroBgEl.classList.remove('is-hidden');
+            });
+          }
+        } else {
+          heroVideoEl.classList.remove('is-active');
+          heroBgEl.classList.remove('is-hidden');
+          try { heroVideoEl.pause(); } catch (_e) { /* noop */ }
+        }
+      };
+      if (hasLivingPortrait) {
+        heroVideoEl.poster = twinPortraitUrl;
+        heroVideoEl.src = livingPortraitUrl;
+        // Default state is Twin view, so activate the living portrait.
+        setLivingPortraitActive(true);
+      }
       var seg = (topics.length && topics[0] !== 'Community Corner') ? topics[0] : '';
       document.getElementById('p-hero-segment').textContent = seg ? 'Mornings in the Lab · ' + seg : 'Mornings in the Lab · Center Stage';
       document.getElementById('p-hero-name').textContent = name;
@@ -1573,6 +1621,8 @@
             var nextSb   = view === 'original' ? sbOriginalPhoto : sbTwinPhoto;
             if (nextHero) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+nextHero+')';
             renderStatBarPhoto(nextSb);
+            // Living Portrait follows the toggle: Twin → video on, Original → still
+            setLivingPortraitActive(view === 'twin');
           });
         });
       }
