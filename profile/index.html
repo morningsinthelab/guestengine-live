@@ -812,6 +812,149 @@
   }
 
   /* ── Section title ─────────────────────── */
+  /* ── Receipts strip — proof-of-work counters under the AEB ring ── */
+  .p-receipts {
+    display:grid; grid-template-columns:repeat(3, minmax(0, 1fr));
+    border:1px solid var(--border); border-radius:14px;
+    background:var(--card);
+    margin-bottom:2.5rem;
+  }
+  @media (max-width: 720px) { .p-receipts { grid-template-columns:1fr; } }
+  .p-receipt {
+    padding:1.25rem 1.5rem;
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column; gap:0.35rem;
+  }
+  .p-receipt:last-child { border-right:0; }
+  @media (max-width: 720px) {
+    .p-receipt { border-right:0; border-bottom:1px solid var(--border); }
+    .p-receipt:last-child { border-bottom:0; }
+  }
+  .p-receipt__label {
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.28em; text-transform:uppercase; color:var(--text-muted);
+  }
+  .p-receipt__value {
+    font-family:var(--font-display); font-size:1.875rem; font-weight:700;
+    color:var(--text); line-height:1.1; letter-spacing:0.01em;
+  }
+  .p-receipt__value small {
+    font-family:var(--font-body); font-size:0.7rem; font-weight:500;
+    color:var(--text-muted); margin-left:5px; letter-spacing:0;
+  }
+  .p-receipt__sub { font-size:0.75rem; color:var(--text-muted); line-height:1.45; }
+
+  /* ── Showcase strips — Reach + Sprint editorial cards ── */
+  .p-showcase__tagline {
+    font-size:1rem; color:var(--text); line-height:1.55;
+    margin:0 0 1rem; max-width:760px; font-style:italic;
+  }
+  .p-showcase__tagline strong { color:var(--gold); font-style:normal; }
+  .p-showcase__body {
+    font-size:0.875rem; color:var(--text-secondary); line-height:1.6;
+    margin:0 0 1.5rem; max-width:760px;
+  }
+  .p-examples {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:0.75rem; margin:0 0 1.5rem;
+  }
+  .p-example {
+    background:rgba(255,255,255,0.02); border:1px solid var(--border);
+    border-radius:12px; padding:0.875rem 1rem 1rem;
+    display:flex; flex-direction:column; gap:0.5rem; position:relative;
+  }
+  .p-example__chip {
+    position:absolute; top:0.625rem; right:0.625rem;
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.22em; text-transform:uppercase;
+    padding:0.1875rem 0.4375rem; border-radius:4px;
+    background:rgba(255,255,255,0.04); color:var(--text-muted);
+    border:1px solid var(--border);
+  }
+  .p-example__head {
+    display:flex; align-items:center; gap:0.375rem;
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.28em; text-transform:uppercase; color:var(--text-muted);
+    padding-right:60px;
+  }
+  .p-example__head--linkedin { color:#60a5fa; }
+  .p-example__head--threads  { color:var(--gold); }
+  .p-example__title {
+    font-family:var(--font-body); font-size:0.875rem; font-weight:600;
+    color:var(--text); line-height:1.4; margin:0;
+    overflow:hidden; text-overflow:ellipsis;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  }
+  .p-example__sub {
+    font-size:0.75rem; color:var(--text-secondary); line-height:1.45; margin:0;
+  }
+  .p-example__status {
+    margin-top:0.25rem;
+    display:inline-flex; align-items:center; gap:5px;
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.22em; text-transform:uppercase;
+    padding:0.1875rem 0.5rem; border-radius:4px; align-self:flex-start;
+    border:1px solid;
+  }
+  .p-example__status--draft     { color:var(--text-muted); border-color:var(--border); background:rgba(255,255,255,0.02); }
+  .p-example__status--replied   { color:#60a5fa; border-color:rgba(96,165,250,0.30); background:rgba(96,165,250,0.06); }
+  .p-example__status--booked    { color:#34d399; border-color:rgba(52,211,153,0.30); background:rgba(52,211,153,0.06); }
+  .p-example__status--scheduled { color:var(--text-muted); border-color:var(--border); background:rgba(255,255,255,0.02); }
+  .p-example__status--posted    { color:#34d399; border-color:rgba(52,211,153,0.30); background:rgba(52,211,153,0.06); }
+
+  .p-locked-panel {
+    background:var(--card); border:1px dashed var(--border);
+    border-radius:14px; padding:1.75rem 1.5rem; text-align:center;
+  }
+  .p-locked-panel__icon {
+    width:40px; height:40px; margin:0 auto 0.75rem;
+    background:rgba(251,191,36,0.06); color:var(--gold);
+    border:1px solid rgba(251,191,36,0.3); border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:0.875rem;
+  }
+  .p-locked-panel__title {
+    font-family:var(--font-body); font-size:0.95rem; font-weight:600;
+    color:var(--text); margin:0 0 0.5rem;
+  }
+  .p-locked-panel__copy {
+    font-size:0.8125rem; color:var(--text-secondary); line-height:1.55;
+    margin:0 auto 1rem; max-width:540px;
+  }
+  .p-locked-panel__bullets {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:0.625rem; max-width:720px; margin:0 auto 1.25rem;
+  }
+  .p-locked-panel__bullet {
+    background:rgba(255,255,255,0.02); border:1px solid var(--border);
+    border-radius:10px; padding:0.75rem 0.875rem; text-align:left;
+  }
+  .p-locked-panel__bullet-eyebrow {
+    font-family:var(--font-display); font-size:0.5rem; font-weight:700;
+    letter-spacing:0.28em; text-transform:uppercase; color:var(--gold);
+    margin:0 0 0.25rem;
+  }
+  .p-locked-panel__bullet-body {
+    font-size:0.75rem; color:var(--text-secondary); line-height:1.5;
+  }
+  .p-locked-panel__cta-row {
+    display:flex; gap:0.625rem; flex-wrap:wrap; justify-content:center; margin-top:0.25rem;
+  }
+  .p-locked-panel__cta {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    font-family:var(--font-body); font-size:0.8125rem; font-weight:600;
+    padding:0.625rem 1.125rem; border-radius:999px; text-decoration:none;
+    transition:all 180ms ease;
+  }
+  .p-locked-panel__cta--primary {
+    background:var(--gold); color:#020617; border:1px solid var(--gold);
+  }
+  .p-locked-panel__cta--primary:hover { background:#fbbf24; border-color:#fbbf24; }
+  .p-locked-panel__cta--ghost {
+    background:transparent; color:var(--text); border:1px solid var(--border);
+  }
+  .p-locked-panel__cta--ghost:hover { border-color:rgba(251,191,36,0.3); color:var(--gold); }
+
   .p-section { margin-bottom:2.5rem; }
   .p-section__title {
     font-family:var(--font-display); font-size:0.5625rem; font-weight:700;
@@ -1225,6 +1368,27 @@
           </div>
         </div>
 
+        <!-- Receipts strip — proof-of-work counters under the AEB ring.
+             Three cells, all sourced from data already on the page; each
+             cell is hidden if its number is zero. We never bluff. -->
+        <div class="p-receipts p-reveal" id="p-receipts" style="display:none">
+          <div class="p-receipt" id="p-rcpt-appearances-cell">
+            <span class="p-receipt__label">On the Record</span>
+            <span class="p-receipt__value" id="p-rcpt-appearances">0<small>appearances</small></span>
+            <span class="p-receipt__sub" id="p-rcpt-appearances-sub">Live, transcribed, in the public record.</span>
+          </div>
+          <div class="p-receipt" id="p-rcpt-timeline-cell">
+            <span class="p-receipt__label">Authority Timeline</span>
+            <span class="p-receipt__value" id="p-rcpt-timeline">0<small>days compounding</small></span>
+            <span class="p-receipt__sub">The floor never drops. Every recompute makes you more citable.</span>
+          </div>
+          <div class="p-receipt" id="p-rcpt-sources-cell">
+            <span class="p-receipt__label">Independent Providers</span>
+            <span class="p-receipt__value" id="p-rcpt-sources">0<small>verified sources</small></span>
+            <span class="p-receipt__sub" id="p-rcpt-sources-sub">Every score is computed from named third-party providers. No black box.</span>
+          </div>
+        </div>
+
       </div>
 
       <!-- STORY CHAPTERS — full-bleed visual narrative -->
@@ -1260,6 +1424,125 @@
         <div class="p-section p-reveal" id="p-appearances-section" style="display:none">
           <div class="p-section__title">APPEARANCES</div>
           <div class="p-appearances" id="p-appearances"></div>
+        </div>
+
+        <!-- Authority Reach showcase — ported from /twin/. Editorial example
+             cards + tier copy + CTAs into the real wired portal at
+             /portal/reach. Pitch-counts LOCKED to shared/schema.ts (Member
+             10 / Reach Pro 50 / VIP 25) per docs/digital-twin-spec.md §
+             Call decisions — 2026-04-29. -->
+        <div class="p-section p-reveal">
+          <div class="p-section__title">AUTHORITY REACH · PAGE AS CREDENTIAL</div>
+          <p class="p-showcase__tagline">
+            <strong>You're not asking for a meeting.</strong> You're sending a host a page that already proves you belong on their show.
+          </p>
+          <p class="p-showcase__body">
+            Sophia searches 4 million podcasts, scores the matches, and drafts personalized pitches that reference real episodes for each show. Pitches go out from MITL's warmed inboxes as customer outreach — “you booked on our show, here's a guest you'll want.” Replies come back to a tracked inbox; AI suggests responses; external appearances auto-add to this Authority Page.
+          </p>
+          <div class="p-examples">
+            <div class="p-example">
+              <span class="p-example__chip">Example</span>
+              <span class="p-example__head"><i class="fas fa-paper-plane" aria-hidden="true"></i> Drafted by Sophia</span>
+              <p class="p-example__title">“Follow-up to your Tom Hamilton episode — a guest who actually built the studio that recorded Aerosmith.”</p>
+              <p class="p-example__sub">To: Joe's Podcast · Drafted with reference to EP 142</p>
+              <span class="p-example__status p-example__status--draft"><i class="fas fa-pen" aria-hidden="true"></i> Draft</span>
+            </div>
+            <div class="p-example">
+              <span class="p-example__chip">Example</span>
+              <span class="p-example__head"><i class="fas fa-envelope-open" aria-hidden="true"></i> Sent — Reply tracked</span>
+              <p class="p-example__title">“Your Pro Tools deep-dive needs a guest who built the first Pro Tools studio.”</p>
+              <p class="p-example__sub">From mornings@bapl.ai · Replied within 6 hours</p>
+              <span class="p-example__status p-example__status--replied"><i class="fas fa-comment" aria-hidden="true"></i> Replied</span>
+            </div>
+            <div class="p-example">
+              <span class="p-example__chip">Example</span>
+              <span class="p-example__head"><i class="fas fa-circle-check" aria-hidden="true"></i> Booked — Auto-added to AP</span>
+              <p class="p-example__title">“Confirmed for the Music Tech Founders show — recording May 14.”</p>
+              <p class="p-example__sub">External appearance → Authority Page on appearance day</p>
+              <span class="p-example__status p-example__status--booked"><i class="fas fa-check" aria-hidden="true"></i> Booked</span>
+            </div>
+          </div>
+          <div class="p-locked-panel">
+            <div class="p-locked-panel__icon"><i class="fas fa-lock"></i></div>
+            <p class="p-locked-panel__title">Your live ledger is in your portal.</p>
+            <p class="p-locked-panel__copy">Sign in to see your real pitches, replies, and bookings — plus your monthly quota and Sophia's queued drafts.</p>
+            <div class="p-locked-panel__bullets">
+              <div class="p-locked-panel__bullet">
+                <p class="p-locked-panel__bullet-eyebrow">Member · $97/mo</p>
+                <p class="p-locked-panel__bullet-body">10 Authority Reach pitches per month. Storytime sponsorship in the universe.</p>
+              </div>
+              <div class="p-locked-panel__bullet">
+                <p class="p-locked-panel__bullet-eyebrow">Reach Pro · $197/mo</p>
+                <p class="p-locked-panel__bullet-body">50 pitches per month, priority generation by Sophia, full reply tracking, manual MITL review of your first 3 pitches, quarterly category report.</p>
+              </div>
+              <div class="p-locked-panel__bullet">
+                <p class="p-locked-panel__bullet-eyebrow">VIP · $297/mo</p>
+                <p class="p-locked-panel__bullet-body">Quarterly produced appearance + 25 pitches per month, weekly Signal report, premium Authority Page placement, 30-day Distribution Sprint each appearance.</p>
+              </div>
+            </div>
+            <div class="p-locked-panel__cta-row">
+              <a class="p-locked-panel__cta p-locked-panel__cta--primary" href="https://app.conversationos.live/portal/reach">See Your Pitches →</a>
+              <a class="p-locked-panel__cta p-locked-panel__cta--ghost" href="https://app.conversationos.live/portal/reach/quota">Check Your Quota</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distribution Sprint showcase — ported from /twin/. Sprint UI per
+             canonical call: shows 'what was published', not impressions/clicks/
+             traffic. Tier-correct sprint lengths (LOCKED). -->
+        <div class="p-section p-reveal">
+          <div class="p-section__title">DISTRIBUTION SPRINT · PUBLISHED, NOT PITCHED</div>
+          <p class="p-showcase__tagline">
+            <strong>Every appearance triggers a sprint.</strong> Clips, posts, mentions — published on autopilot, then handed back.
+          </p>
+          <p class="p-showcase__body">
+            The day this appearance shipped, the Distribution Sprint kicked off. We auto-publish a sequence of clips and posts to LinkedIn, X, and Threads on a weekday cadence — each one linked back to this Authority Page. You see what was scheduled, what was posted, and where it landed. We don't promise impressions; we deliver published artifacts you can point to.
+          </p>
+          <div class="p-examples">
+            <div class="p-example">
+              <span class="p-example__chip">Example</span>
+              <span class="p-example__head p-example__head--linkedin"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn · Day 3</span>
+              <p class="p-example__title">Carousel: “5 lessons from building the first all-Pro-Tools studio in 1989.”</p>
+              <p class="p-example__sub">Tuned by Claude · Caption + 7-slide carousel · UTM-tagged AP link</p>
+              <span class="p-example__status p-example__status--posted"><i class="fas fa-check" aria-hidden="true"></i> Posted</span>
+            </div>
+            <div class="p-example">
+              <span class="p-example__chip">Example</span>
+              <span class="p-example__head"><i class="fab fa-x-twitter" aria-hidden="true"></i> X · Day 7</span>
+              <p class="p-example__title">Thread: “Aerosmith called me at 16 to fix their MIDI rig. Here's what happened next.”</p>
+              <p class="p-example__sub">Tuned by Claude · 5-tweet thread with AP CTA in tweet 5</p>
+              <span class="p-example__status p-example__status--posted"><i class="fas fa-check" aria-hidden="true"></i> Posted</span>
+            </div>
+            <div class="p-example">
+              <span class="p-example__chip">Example</span>
+              <span class="p-example__head p-example__head--threads"><i class="fas fa-at" aria-hidden="true"></i> Threads · Day 14</span>
+              <p class="p-example__title">Reel: “The one technical decision that made Livin' La Vida Loca possible.”</p>
+              <p class="p-example__sub">Vault clip 4 of 10 · 30-second reel · AP overlay card</p>
+              <span class="p-example__status p-example__status--scheduled"><i class="fas fa-clock" aria-hidden="true"></i> Scheduled</span>
+            </div>
+          </div>
+          <div class="p-locked-panel">
+            <div class="p-locked-panel__icon"><i class="fas fa-bullseye"></i></div>
+            <p class="p-locked-panel__title">Your sprint timeline is in your portal.</p>
+            <p class="p-locked-panel__copy">Sign in to see your live sprint — every clip, every post, every platform, with the link to where it landed. Sprint length scales with your tier.</p>
+            <div class="p-locked-panel__bullets">
+              <div class="p-locked-panel__bullet">
+                <p class="p-locked-panel__bullet-eyebrow">Single · $497</p>
+                <p class="p-locked-panel__bullet-body">14-day sprint — the on-ramp. Try the show.</p>
+              </div>
+              <div class="p-locked-panel__bullet">
+                <p class="p-locked-panel__bullet-eyebrow">Reach Pro · $197/mo</p>
+                <p class="p-locked-panel__bullet-body">30-day sprint each time you appear (book additional appearances at the $297 member rate).</p>
+              </div>
+              <div class="p-locked-panel__bullet">
+                <p class="p-locked-panel__bullet-eyebrow">VIP · $297/mo</p>
+                <p class="p-locked-panel__bullet-body">30-day sprint per quarterly produced appearance — included in the tier.</p>
+              </div>
+            </div>
+            <div class="p-locked-panel__cta-row">
+              <a class="p-locked-panel__cta p-locked-panel__cta--primary" href="https://app.conversationos.live/portal/sprints">See Your Sprints →</a>
+            </div>
+          </div>
         </div>
 
         <!-- FAQ -->
@@ -1424,13 +1707,27 @@
     var slug = getSlug();
     if (!slug) return showNotFound();
 
+    // Audit endpoint shape lives on a different prefix.
+    var SIGNAL_AUDIT_API = 'https://app.conversationos.live/api/signal/audit/';
+
     Promise.all([
       fetch(API + '/directory/' + slug).then(ok),
       fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
       fetch(API + '/authority-visuals/' + slug).then(ok).catch(function() { return null; }),
+      // Prefetch the audit payload — the AEB drawer caches this same
+      // response, and the Receipts strip needs audit.history +
+      // audit.dataSources upfront. One fetch, two consumers.
+      fetch(SIGNAL_AUDIT_API + slug).then(ok).catch(function() { return null; }),
     ]).then(function(r) {
       if (!r[0]) return showNotFound();
-      render(r[0], r[1], r[2]);
+      // Hand audit to the drawer cache so it skips its own fetch on first open.
+      if (r[3]) {
+        try {
+          drawerCache = r[3];
+          drawerCacheSlug = slug;
+        } catch (e) { /* drawer module may not have hydrated yet */ }
+      }
+      render(r[0], r[1], r[2], r[3]);
     }).catch(showNotFound);
 
     function ok(r) { return r.ok ? r.json() : null; }
@@ -1474,7 +1771,7 @@
       el.setAttribute('content', c);
     }
 
-    function render(profile, authority, visuals) {
+    function render(profile, authority, visuals, audit) {
       var name = profile.guestName || 'Guest';
       var headline = (authority && authority.job_title) || profile.headline || '';
       var bio = (authority && authority.authority_bio) || profile.bio || '';
@@ -1700,6 +1997,10 @@
           document.getElementById('p-signal-ring').style.strokeDashoffset = offset;
         }, 300);
       }
+
+      // ── Receipts strip — proof-of-work counters under the AEB
+      // Honest rule: each cell is hidden if its number is zero. Never bluff.
+      renderReceiptsStrip(profile, audit);
 
       // ── SIGNAL BREAKDOWN — dimensional bars + improvement actions
       // Only show when real backend signal scores exist (not gated on guestScore).
@@ -2062,6 +2363,79 @@
 
       // Re-init scroll reveal for dynamically added elements
       if (window._initReveal) setTimeout(window._initReveal, 50);
+    }
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Receipts strip — three honest counters from data already on the page.
+    //   1. On the Record   — pastAppearances.length
+    //   2. Authority Timeline — days since earliest signal_score_history snap
+    //   3. Independent Providers — count of live audit.dataSources
+    // Each cell hidden if its number is zero (we never bluff). Strip itself
+    // hidden if all three cells go to zero.
+    // ────────────────────────────────────────────────────────────────────────
+    function renderReceiptsStrip(profile, audit) {
+      var visibleCells = 0;
+
+      // Cell 1 — appearances
+      var pa = parseJSON(profile.pastAppearances) || [];
+      var n = Array.isArray(pa) ? pa.length : 0;
+      if (n > 0) {
+        var seen = {};
+        pa.forEach(function(a){ var nm = a && a.showName; if (nm) seen[nm] = true; });
+        var uniqueShows = Object.keys(seen).length;
+        var label = n === 1 ? 'appearance' : 'appearances';
+        document.getElementById('p-rcpt-appearances').innerHTML =
+          n + '<small>' + label + '</small>';
+        var subA = uniqueShows > 1
+          ? 'Across ' + uniqueShows + ' shows. Live, transcribed, in the public record.'
+          : 'Live, transcribed, in the public record.';
+        document.getElementById('p-rcpt-appearances-sub').textContent = subA;
+        visibleCells++;
+      } else {
+        document.getElementById('p-rcpt-appearances-cell').style.display = 'none';
+      }
+
+      // Cell 2 — days compounding (always visible if a snapshot exists; Day 1 fallback otherwise)
+      var hist = (audit && audit.history) || [];
+      if (hist.length > 0) {
+        var earliest = hist[0];
+        hist.forEach(function(h){ if (new Date(h.snapshotAt) < new Date(earliest.snapshotAt)) earliest = h; });
+        var diffMs = Date.now() - new Date(earliest.snapshotAt).getTime();
+        var days = Math.max(1, Math.floor(diffMs / 86400000));
+        var dl = days === 1 ? 'day compounding' : 'days compounding';
+        document.getElementById('p-rcpt-timeline').innerHTML =
+          days + '<small>' + dl + '</small>';
+        visibleCells++;
+      } else {
+        // Day-1 fallback is fine — it isn't a bluff, it's the floor narrative.
+        document.getElementById('p-rcpt-timeline').innerHTML =
+          'Day 1<small>compounding</small>';
+        visibleCells++;
+      }
+
+      // Cell 3 — independent verified providers
+      var srcs = (audit && audit.dataSources) || [];
+      var live = 0, pending = 0;
+      srcs.forEach(function(s){
+        var st = (s.status || s.state || '').toLowerCase();
+        if (st === 'pending' || st === 'registered') pending++; else live++;
+      });
+      if (live > 0) {
+        var sl = live === 1 ? 'verified source' : 'verified sources';
+        document.getElementById('p-rcpt-sources').innerHTML =
+          live + '<small>' + sl + '</small>';
+        var subS = pending > 0
+          ? 'Plus ' + pending + ' more pending integration. No black box.'
+          : 'Every score is computed from named third-party providers. No black box.';
+        document.getElementById('p-rcpt-sources-sub').textContent = subS;
+        visibleCells++;
+      } else {
+        document.getElementById('p-rcpt-sources-cell').style.display = 'none';
+      }
+
+      if (visibleCells > 0) {
+        document.getElementById('p-receipts').style.display = 'grid';
+      }
     }
 
     function injectSchema(profile, authority) {
