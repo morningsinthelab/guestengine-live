@@ -346,6 +346,137 @@
     max-width: 880px;
   }
 
+  /* ── Storytime card ─────────────────────────── */
+  .twin-storytime {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 880px) {
+    .twin-storytime { grid-template-columns: 1fr; gap: 20px; }
+  }
+  .twin-storytime__main {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .twin-storytime__player {
+    position: relative; aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .twin-storytime__player iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+  }
+  .twin-storytime__poster {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; cursor: pointer;
+  }
+  .twin-storytime__play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .twin-storytime__play-btn {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(212, 168, 67, 0.95);
+    color: #000; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 12px 40px rgba(212, 168, 67, 0.5);
+  }
+  .twin-storytime__caption {
+    padding: 18px 22px;
+    border-top: 1px solid var(--border);
+  }
+  .twin-storytime__caption-eyebrow {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 6px;
+  }
+  .twin-storytime__caption-title {
+    font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+    color: var(--text); line-height: 1.45; margin: 0;
+  }
+
+  .twin-storytime__side {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .twin-storytime__short {
+    display: flex; gap: 12px; align-items: stretch;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px;
+    text-decoration: none; color: var(--text);
+    transition: border-color 180ms ease, transform 180ms ease;
+    cursor: pointer;
+  }
+  .twin-storytime__short:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-1px);
+  }
+  .twin-storytime__short-thumb {
+    flex: 0 0 56px; height: 72px;
+    border-radius: 6px; overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .twin-storytime__short-thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .twin-storytime__short-thumb::after {
+    content: "\f04b"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    color: var(--gold); font-size: 0.72rem;
+    background: rgba(0, 0, 0, 0.55); width: 24px; height: 24px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .twin-storytime__short-body {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    gap: 4px; min-width: 0;
+  }
+  .twin-storytime__short-eyebrow {
+    font-family: var(--font-display); font-size: 0.5rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .twin-storytime__short-title {
+    font-size: 0.82rem; font-weight: 600; color: var(--text); line-height: 1.4;
+    overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+
+  /* ── Pitch Ledger (locked panel pattern) ────── */
+  .twin-ledger__locked {
+    background: var(--card); border: 1px dashed var(--border);
+    border-radius: 16px; padding: 36px 28px; text-align: center;
+  }
+  .twin-ledger__icon {
+    width: 44px; height: 44px; margin: 0 auto 14px;
+    background: var(--gold-faint); color: var(--gold);
+    border: 1px solid var(--gold-dim); border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .twin-ledger__title {
+    font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+    color: var(--text); margin: 0 0 8px;
+  }
+  .twin-ledger__copy {
+    font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;
+    margin: 0 auto 18px; max-width: 540px;
+  }
+  .twin-ledger__bullets {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px; max-width: 720px; margin: 0 auto 18px;
+  }
+  .twin-ledger__bullet {
+    background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px; text-align: left;
+  }
+  .twin-ledger__bullet-eyebrow {
+    font-family: var(--font-display); font-size: 0.5rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 4px;
+  }
+  .twin-ledger__bullet-body {
+    font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;
+  }
+
   /* ── Pull-quotes ─────────────────────────────── */
   .twin-quotes {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -492,6 +623,67 @@
 
     <p class="twin-aeb__sub">04 · Data Sources <small>Every score is computed from named third-party providers. No black box.</small></p>
     <div class="twin-sources" id="t-aeb-sources"></div>
+  </section>
+
+  <!-- ── STORYTIME (Center Stage embed + shorts strip) ────────────────── -->
+  <!-- 'Become a character in the universe' — the canonical Member-tier framing.
+       Renders only when the guest has a centerStageVideoId. The Storytime
+       sponsor chip appears for Member-tier guests; produced-appearance
+       guests (VIP) get a 'Center Stage' eyebrow instead. -->
+  <section class="twin-section" id="t-storytime-section" style="display:none">
+    <div class="twin-section__head">
+      <span class="twin-section__eyebrow" id="t-storytime-eyebrow">Storytime</span>
+      <span class="twin-section__rule"></span>
+      <span class="twin-section__count" id="t-storytime-tag"></span>
+    </div>
+    <div class="twin-storytime">
+      <div class="twin-storytime__main">
+        <div class="twin-storytime__player" id="t-storytime-player">
+          <img class="twin-storytime__poster" id="t-storytime-poster" alt="Center Stage poster">
+          <div class="twin-storytime__play"><div class="twin-storytime__play-btn"><i class="fas fa-play" aria-hidden="true"></i></div></div>
+        </div>
+        <div class="twin-storytime__caption">
+          <p class="twin-storytime__caption-eyebrow" id="t-storytime-caption-eyebrow">Mornings in the Lab · Center Stage</p>
+          <p class="twin-storytime__caption-title" id="t-storytime-title"></p>
+        </div>
+      </div>
+      <div class="twin-storytime__side" id="t-storytime-shorts"></div>
+    </div>
+  </section>
+
+  <!-- ── PITCH LEDGER (locked, owner sign-in unlocks) ───────────────────── -->
+  <!-- Always rendered — the locked panel is the value pitch for non-owners,
+       and signed-in owners see the same panel because the public page is
+       not the owner cockpit. The owner cockpit lives in app.conversationos.live.
+       Tier copy is LOCKED to docs/digital-twin-spec.md § Call decisions —
+       Reach Pro 50 / VIP 25 (NOT inverted), pitches sent from MITL warmed
+       inboxes, page-as-credential line. -->
+  <section class="twin-section" id="t-ledger-section">
+    <div class="twin-section__head">
+      <span class="twin-section__eyebrow">Authority Reach</span>
+      <span class="twin-section__rule"></span>
+      <span class="twin-section__count">Page as Credential</span>
+    </div>
+    <div class="twin-ledger__locked">
+      <div class="twin-ledger__icon"><i class="fas fa-paper-plane"></i></div>
+      <p class="twin-ledger__title">You're not asking for a meeting. You're sending a host a page that already proves you belong on their show.</p>
+      <p class="twin-ledger__copy">Sophia searches 4 million podcasts, scores the matches, and drafts personalized pitches that reference real episodes for each show. Pitches go out from MITL's warmed inboxes as customer outreach — “you booked on our show, here's a guest you'll want.” Replies come back to a tracked inbox; AI suggests responses; external appearances auto-add to your Authority Page.</p>
+      <div class="twin-ledger__bullets">
+        <div class="twin-ledger__bullet">
+          <p class="twin-ledger__bullet-eyebrow">Member · $97/mo</p>
+          <p class="twin-ledger__bullet-body">10 Authority Reach pitches per month. Storytime sponsorship in the universe.</p>
+        </div>
+        <div class="twin-ledger__bullet">
+          <p class="twin-ledger__bullet-eyebrow">Reach Pro · $197/mo</p>
+          <p class="twin-ledger__bullet-body">50 pitches per month, priority generation by Sophia, full reply tracking, manual MITL review of your first 3 pitches, quarterly category report.</p>
+        </div>
+        <div class="twin-ledger__bullet">
+          <p class="twin-ledger__bullet-eyebrow">VIP · $297/mo</p>
+          <p class="twin-ledger__bullet-body">Quarterly produced appearance + 25 pitches per month, weekly Signal report, premium Authority Page placement, 30-day Distribution Sprint each appearance.</p>
+        </div>
+      </div>
+      <a class="twin-cta twin-cta--primary" href="https://app.conversationos.live/login">Sign In to See Your Ledger</a>
+    </div>
   </section>
 
   <!-- ── PULL QUOTES (storytime / narrative sections) ────────────────── -->
@@ -676,6 +868,13 @@
       // the profile signal columns so we don't lose the section entirely.
       renderAuthorityBriefFallback(profile);
     }
+
+    // ── Storytime (Center Stage embed + shorts) ──
+    // The 'become a character' loop made tangible. Center Stage YouTube
+    // embed loads on click (privacy-respecting nocookie, no iframe until
+    // intent), with up to 4 short clips on the side rail. Each short
+    // opens YouTube directly so the page stays light.
+    renderStorytime(profile, authority);
 
     // ── Pull quotes (narrative_sections.quote) ──
     var sections = (authority && authority.narrative_sections) || [];
@@ -936,6 +1135,71 @@
     // Reveal the strip whenever at least one cell survived.
     var visibleCells = document.querySelectorAll('#t-receipts .twin-receipt:not([style*="display: none"])');
     if (visibleCells.length > 0) show('t-receipts');
+  }
+
+  function renderStorytime(profile, authority) {
+    var csVid = profile.centerStageVideoId;
+    if (!csVid) return; // No Center Stage = no Storytime card.
+
+    show('t-storytime-section');
+
+    // Eyebrow framing depends on tier:
+    //   Member tier  — they're a *Storytime sponsor* (the canonical $97 framing)
+    //   Other tiers  — it's their Center Stage produced appearance
+    var tier = (profile.tier || '').toLowerCase();
+    if (tier === 'member') {
+      document.getElementById('t-storytime-eyebrow').textContent = 'Storytime Sponsor';
+      document.getElementById('t-storytime-caption-eyebrow').textContent = 'Mornings in the Lab · Storytime sponsorship';
+    }
+
+    // Tag in section header — episode number/title when available.
+    var tag = '';
+    if (profile.authorityEpisodeNumber) tag = 'EP ' + profile.authorityEpisodeNumber;
+    var tagEl = document.getElementById('t-storytime-tag');
+    if (tag) tagEl.textContent = tag;
+
+    // Caption title — prefer authority episode title, fall back to bio nudge.
+    var title = profile.authorityEpisodeTitle ||
+      (authority && authority.episode_title) ||
+      'Live Center Stage interview on the MiTL Live Network.';
+    document.getElementById('t-storytime-title').textContent = title;
+
+    // Poster: YouTube max-res thumbnail (deterministic, no extra fetch).
+    var poster = 'https://img.youtube.com/vi/' + csVid + '/maxresdefault.jpg';
+    document.getElementById('t-storytime-poster').src = poster;
+
+    // Click anywhere in the player frame to swap to the embed.
+    var player = document.getElementById('t-storytime-player');
+    player.addEventListener('click', function() {
+      var embed = 'https://www.youtube-nocookie.com/embed/' + csVid + '?autoplay=1&rel=0&modestbranding=1';
+      player.innerHTML = '<iframe src="' + embed + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    });
+
+    // Side rail: shorts (up to 4). Each is a clickable card opening YouTube.
+    var shorts = parseJSON(profile.shortsJson) || [];
+    if (Array.isArray(shorts) && shorts.length) {
+      document.getElementById('t-storytime-shorts').innerHTML = shorts.slice(0, 4).map(function(s, i) {
+        var sid = s.videoId || s.id || '';
+        var stitle = s.title || ('Short ' + (i + 1));
+        var sthumb = s.thumbnail || (sid ? 'https://img.youtube.com/vi/' + sid + '/hqdefault.jpg' : '');
+        var href = sid ? 'https://www.youtube.com/watch?v=' + sid : '#';
+        return '<a class="twin-storytime__short" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+          '<span class="twin-storytime__short-thumb">' +
+            (sthumb ? '<img src="' + esc(sthumb) + '" alt="">' : '') +
+          '</span>' +
+          '<span class="twin-storytime__short-body">' +
+            '<span class="twin-storytime__short-eyebrow">Short · ' + (i + 1) + '</span>' +
+            '<span class="twin-storytime__short-title">' + esc(stitle) + '</span>' +
+          '</span>' +
+        '</a>';
+      }).join('');
+    } else {
+      // No shorts — collapse the side column gracefully.
+      var sideCol = document.getElementById('t-storytime-shorts');
+      if (sideCol) sideCol.style.display = 'none';
+      var grid = sideCol && sideCol.parentElement;
+      if (grid) grid.style.gridTemplateColumns = 'minmax(0, 1fr)';
+    }
   }
 
   function formatDate(iso) {
