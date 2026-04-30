@@ -154,36 +154,155 @@
     letter-spacing: 0.32em; color: var(--gold);
   }
 
-  /* ── Authority summary ───────────────────────── */
-  .twin-authority {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px; margin-bottom: 40px;
+  /* ── Tier chip (hero) ────────────────────────── */
+  .twin-tier {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px;
+    margin: 0 0 24px;
+    background: var(--gold-faint); color: var(--gold);
+    border: 1px solid var(--gold-dim);
   }
-  .twin-stat {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 22px;
+  .twin-tier--vip { background: rgba(212,168,67,0.14); color: var(--gold-bright); border-color: rgba(212,168,67,0.45); }
+  .twin-tier--member { background: rgba(255,255,255,0.04); color: var(--text-secondary); border-color: var(--border); }
+
+  /* ── Authority Engine Brief (inline) ─────────── */
+  .twin-aeb__honest {
+    background: var(--gold-faint); border: 1px solid var(--gold-dim);
+    border-radius: 12px; padding: 18px 22px;
+    margin: 0 0 28px; max-width: 880px;
   }
-  .twin-stat__label {
+  .twin-aeb__honest-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 8px;
+  }
+  .twin-aeb__honest-body {
+    font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; margin: 0;
+  }
+  .twin-aeb__score {
+    display: flex; align-items: baseline; gap: 18px;
+    margin: 0 0 36px; padding: 24px 26px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  }
+  .twin-aeb__score-num {
+    font-family: var(--font-display); font-size: 3.2rem; font-weight: 700;
+    color: var(--gold); line-height: 1; letter-spacing: 0.02em;
+  }
+  .twin-aeb__score-meta {
+    flex: 1; display: flex; flex-direction: column; gap: 4px;
+  }
+  .twin-aeb__score-label {
     font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
     letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted);
-    margin: 0 0 10px;
   }
-  .twin-stat__value {
-    font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
-    color: var(--text); line-height: 1; letter-spacing: 0.02em;
+  .twin-aeb__score-name {
+    font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+    color: var(--text);
   }
-  .twin-stat__value small {
-    font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
-    color: var(--text-muted); margin-left: 4px;
+
+  .twin-aeb__sub {
+    font-family: var(--font-display); font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 18px;
   }
-  .twin-stat__bar {
-    margin-top: 14px; height: 4px; background: rgba(255,255,255,0.05);
-    border-radius: 999px; overflow: hidden;
+  .twin-aeb__sub small {
+    font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+    letter-spacing: 0.02em; text-transform: none; color: var(--text-muted);
+    margin-left: 8px;
   }
-  .twin-stat__bar > span {
+
+  .twin-eeat { display: flex; flex-direction: column; gap: 14px; margin: 0 0 40px; }
+  .twin-eeat__row {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 22px;
+    display: grid; grid-template-columns: 180px 1fr 64px;
+    gap: 18px; align-items: center;
+  }
+  @media (max-width: 720px) {
+    .twin-eeat__row { grid-template-columns: 1fr; gap: 8px; }
+  }
+  .twin-eeat__label {
+    font-family: var(--font-display); font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
+  }
+  .twin-eeat__source { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5; }
+  .twin-eeat__bar {
+    height: 4px; background: rgba(255,255,255,0.05); border-radius: 999px;
+    overflow: hidden; margin-top: 8px;
+  }
+  .twin-eeat__bar > span {
     display: block; height: 100%;
     background: linear-gradient(90deg, var(--gold), var(--gold-bright));
   }
+  .twin-eeat__val {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
+    color: var(--text); text-align: right; line-height: 1;
+  }
+  .twin-eeat__val small {
+    font-family: var(--font-body); font-size: 0.7rem; font-weight: 500;
+    color: var(--text-muted); margin-left: 2px;
+  }
+  .twin-eeat__evidence {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.18em; color: var(--text-muted);
+    margin-top: 6px; text-align: right;
+  }
+  @media (max-width: 720px) { .twin-eeat__evidence { text-align: left; } }
+
+  /* Locked sections (citation audit / deliverables) */
+  .twin-locked {
+    background: var(--card); border: 1px dashed var(--border);
+    border-radius: 14px; padding: 32px 24px;
+    text-align: center; margin: 0 0 28px;
+  }
+  .twin-locked__icon {
+    width: 36px; height: 36px; margin: 0 auto 12px;
+    background: var(--gold-faint); color: var(--gold);
+    border: 1px solid var(--gold-dim); border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .twin-locked__copy {
+    font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;
+    margin: 0 auto 14px; max-width: 520px;
+  }
+
+  /* Compounding chart */
+  .twin-history {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px; margin: 0 0 28px;
+  }
+  .twin-history__chart {
+    width: 100%; height: 120px; display: block;
+  }
+  .twin-history__rows {
+    margin-top: 16px; display: grid; gap: 6px;
+    font-size: 0.78rem; color: var(--text-secondary);
+  }
+  .twin-history__row { display: grid; grid-template-columns: 110px 50px 1fr; gap: 12px; align-items: center; }
+  .twin-history__row b { color: var(--gold); font-weight: 700; }
+
+  /* Data sources strip */
+  .twin-sources {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; margin: 0;
+  }
+  .twin-source {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .twin-source__name { font-size: 0.82rem; color: var(--text); }
+  .twin-source__pending {
+    font-family: var(--font-display); font-size: 0.5rem; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+    background: rgba(212,168,67,0.10); color: var(--gold); border: 1px solid var(--gold-dim);
+  }
+
   .twin-summary {
     font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7;
     max-width: 880px;
@@ -260,6 +379,7 @@
       <p class="twin-hero__eyebrow">On The Record</p>
       <h1 class="twin-hero__name" id="t-name">—</h1>
       <p class="twin-hero__role" id="t-role"></p>
+      <span class="twin-tier" id="t-tier" style="display:none"></span>
       <p class="twin-hero__bio" id="t-bio"></p>
       <div class="twin-hero__cta-row">
         <a class="twin-cta twin-cta--primary" id="t-cta-profile" href="#">View Authority Page →</a>
@@ -267,21 +387,54 @@
       </div>
     </div>
     <div class="twin-portrait" id="t-portrait-card">
-      <span class="twin-portrait__chip"><i class="fas fa-sparkles" aria-hidden="true"></i> On The Record</span>
+      <span class="twin-portrait__chip"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> On The Record</span>
       <video id="t-portrait-video" autoplay muted loop playsinline preload="auto" style="display:none"></video>
       <img id="t-portrait-img" alt="Digital Twin portrait">
     </div>
   </section>
 
-  <!-- ── AUTHORITY SUMMARY ──────────────────────────────────────────── -->
-  <section class="twin-section">
+  <!-- ── AUTHORITY ENGINE BRIEF (inline, was modal-only) ───────────────────── -->
+  <section class="twin-section" id="t-aeb-section" style="display:none">
     <div class="twin-section__head">
-      <span class="twin-section__eyebrow">Authority</span>
+      <span class="twin-section__eyebrow">Authority Engine Brief</span>
       <span class="twin-section__rule"></span>
-      <span class="twin-section__count" id="t-signal-total"></span>
+      <span class="twin-section__count" id="t-aeb-refresh"></span>
     </div>
-    <div class="twin-authority" id="t-authority"></div>
-    <p class="twin-summary" id="t-summary"></p>
+
+    <div class="twin-aeb__honest" id="t-aeb-honest">
+      <p class="twin-aeb__honest-label">⚠ The Honest Version</p>
+      <p class="twin-aeb__honest-body" id="t-aeb-disclaimer"></p>
+    </div>
+
+    <div class="twin-aeb__score">
+      <div class="twin-aeb__score-num" id="t-aeb-score">0</div>
+      <div class="twin-aeb__score-meta">
+        <span class="twin-aeb__score-label">Signal Score · 0–100</span>
+        <span class="twin-aeb__score-name" id="t-aeb-score-name"></span>
+      </div>
+    </div>
+
+    <p class="twin-aeb__sub">01 · E-E-A-T Audit <small>Mapped to <a href="https://developers.google.com/search/blog/2022/12/google-raters-guidelines-update" rel="noopener" target="_blank" style="color:var(--gold)">Google’s Search Quality Guidelines § 5.1</a> — the four signals models use to decide who to cite.</small></p>
+    <div class="twin-eeat" id="t-aeb-eeat"></div>
+
+    <p class="twin-aeb__sub">02 · Live LLM Citation Audit</p>
+    <div class="twin-locked" id="t-aeb-citations">
+      <div class="twin-locked__icon"><i class="fas fa-lock"></i></div>
+      <p class="twin-locked__copy">Sign in as the page owner to see the live LLM citation audit — the actual answers we got back from ChatGPT, Perplexity, Claude, and Gemini when we asked who the authority is on your topics.</p>
+      <a class="twin-cta twin-cta--primary" href="https://app.conversationos.live/login">Sign In</a>
+    </div>
+
+    <p class="twin-aeb__sub">03 · Authority Compounding</p>
+    <div class="twin-history" id="t-aeb-history" style="display:none">
+      <svg class="twin-history__chart" id="t-aeb-history-svg" viewBox="0 0 800 120" preserveAspectRatio="none"></svg>
+      <div class="twin-history__rows" id="t-aeb-history-rows"></div>
+    </div>
+    <div class="twin-locked" id="t-aeb-history-empty">
+      <p class="twin-locked__copy">No snapshots yet — the floor never drops. Every appearance, every artifact, every recompute makes you more citable.</p>
+    </div>
+
+    <p class="twin-aeb__sub">04 · Data Sources <small>Every score is computed from named third-party providers. No black box.</small></p>
+    <div class="twin-sources" id="t-aeb-sources"></div>
   </section>
 
   <!-- ── PULL QUOTES (storytime / narrative sections) ────────────────── -->
@@ -348,13 +501,18 @@
   var slug = getSlug();
   if (!slug) return notFound();
 
+  // Audit API lives on a different path — same host, different prefix.
+  var AUDIT_API = 'https://app.conversationos.live/api/signal/audit/';
+
   Promise.all([
     fetch(API + '/directory/' + slug).then(ok),
     fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
+    fetch(AUDIT_API + slug).then(ok).catch(function() { return null; }),
   ]).then(function(r) {
     if (!r[0]) return notFound();
     var profile = r[0];
     var authority = r[1];
+    var audit = r[2];
 
     // Twin gate — this page only exists for guests with a twin portrait.
     // Without one, send the visitor to the regular Authority Page.
@@ -363,16 +521,18 @@
       return;
     }
 
-    render(profile, authority);
+    render(profile, authority, audit);
   }).catch(notFound);
 
-  function render(profile, authority) {
+  function render(profile, authority, audit) {
     var name = profile.guestName || 'Guest';
     var role = (authority && authority.job_title) || profile.headline || '';
     var bio = (authority && authority.authority_bio) || profile.bio || '';
     var topics = parseJSON(profile.topics) || [];
     var twinUrl = profile.twinPortraitUrl;
     var livingUrl = profile.livingPortraitVideoUrl;
+    var tier = (profile.tier || '').toLowerCase();
+    var tierLabel = profile.tierLabel || '';
 
     // ── Meta + OG ──
     document.title = name + ' — Digital Twin | Guest Engine';
@@ -403,6 +563,26 @@
       img.alt = name + ' \u2014 Digital Twin portrait';
     }
 
+    // ── Tier chip ──
+    // Renders the producer-facing tier as a public-facing premium chip.
+    // VIP gets the brightest treatment, Reach Pro and Member step down
+    // gracefully. Hidden when no tier is set.
+    var tierEl = document.getElementById('t-tier');
+    var tierMap = {
+      'vip':       { label: '★ VIP',     cls: 'twin-tier twin-tier--vip' },
+      'reach_pro': { label: 'Reach Pro',  cls: 'twin-tier' },
+      'reach-pro': { label: 'Reach Pro',  cls: 'twin-tier' },
+      'reachpro':  { label: 'Reach Pro',  cls: 'twin-tier' },
+      'member':    { label: 'Member',     cls: 'twin-tier twin-tier--member' },
+      'featured':  { label: '★ Featured', cls: 'twin-tier twin-tier--vip' },
+    };
+    var tierCfg = tierMap[tier];
+    if (tierCfg) {
+      tierEl.textContent = tierLabel || tierCfg.label;
+      tierEl.className = tierCfg.cls;
+      tierEl.style.display = '';
+    }
+
     document.getElementById('t-cta-profile').href = '/profile/' + slug;
     var shareCta = document.getElementById('t-cta-share');
     shareCta.addEventListener('click', function(e) {
@@ -418,43 +598,18 @@
       }
     });
 
-    // ── Authority signal ──
-    var rch = profile.signalReach || 0;
-    var auth = profile.signalAuthorityScore || 0;
-    var disc = profile.signalDiscourse || 0;
-    var soc = profile.signalSocial || 0;
-    var total = rch + auth + disc + soc;
-
-    var totalEl = document.getElementById('t-signal-total');
-    if (total > 0) {
-      totalEl.textContent = total + ' / 100';
+    // ── Authority Engine Brief (inline) ──
+    // Promoted from a hidden modal to a permanent on-page section. Mirrors
+    // the canonical drawer payload at /api/signal/audit/:slug. The locked
+    // sections (citation audit, deliverables) prompt sign-in for the page
+    // owner — same gating pattern as the modal in profile/index.html.
+    if (audit) {
+      renderAuthorityBrief(audit);
     } else {
-      totalEl.textContent = '';
+      // Fallback — if audit endpoint failed, render minimal E-E-A-T from
+      // the profile signal columns so we don't lose the section entirely.
+      renderAuthorityBriefFallback(profile);
     }
-
-    var stats = [
-      { label: 'Experience', val: rch },
-      { label: 'Expertise', val: auth },
-      { label: 'Authority', val: disc },
-      { label: 'Trust', val: soc },
-    ];
-    var hasSignal = stats.some(function(s) { return s.val > 0; });
-    var aHost = document.getElementById('t-authority');
-    if (hasSignal) {
-      aHost.innerHTML = stats.map(function(s) {
-        return '<div class="twin-stat">' +
-          '<p class="twin-stat__label">' + esc(s.label) + '</p>' +
-          '<div class="twin-stat__value">' + s.val + '<small>/25</small></div>' +
-          '<div class="twin-stat__bar"><span style="width:' + pct(s.val) + '%"></span></div>' +
-          '</div>';
-      }).join('');
-    } else {
-      aHost.parentElement.style.display = 'none';
-    }
-
-    var summary = (authority && (authority.authority_bio || authority.summary)) || '';
-    var sumEl = document.getElementById('t-summary');
-    if (summary && summary !== bio) sumEl.textContent = summary; else sumEl.style.display = 'none';
 
     // ── Pull quotes (narrative_sections.quote) ──
     var sections = (authority && authority.narrative_sections) || [];
@@ -484,6 +639,168 @@
     hide('twin-loading');
     show('twin-content');
     show('twin-footer');
+  }
+
+  // ───────────────────────────────────────────────────────────────
+  // Authority Engine Brief — from /api/signal/audit/:slug payload
+  // ───────────────────────────────────────────────────────────────
+  function renderAuthorityBrief(audit) {
+    show('t-aeb-section');
+
+    document.getElementById('t-aeb-disclaimer').textContent =
+      audit.honestDisclaimer ||
+      'We don\u2019t own the LLM\u2019s decision. We can\u2019t promise you\u2019ll show up in ChatGPT, Gemini, or Perplexity \u2014 nobody honestly can. What we can do is produce the strongest E-E-A-T signals on the open web. Here\u2019s the audit.';
+
+    var score = audit.signalScore || 0;
+    document.getElementById('t-aeb-score').textContent = score;
+    var scoreName = audit.guest && audit.guest.fullName ? audit.guest.fullName : '';
+    document.getElementById('t-aeb-score-name').textContent = scoreName;
+
+    // E-E-A-T rows
+    var eeat = audit.eeat || {};
+    var rows = [
+      { key: 'experience',        label: 'Experience',        ev: eeat.experience },
+      { key: 'expertise',         label: 'Expertise',         ev: eeat.expertise },
+      { key: 'authoritativeness', label: 'Authoritativeness', ev: eeat.authoritativeness },
+      { key: 'trustworthiness',   label: 'Trustworthiness',   ev: eeat.trustworthiness },
+    ];
+    document.getElementById('t-aeb-eeat').innerHTML = rows.map(function(r) {
+      var s = (r.ev && r.ev.score) || 0;
+      var src = (r.ev && r.ev.source) || '';
+      var ev  = (r.ev && r.ev.evidence) || (s + '/25');
+      return '<div class="twin-eeat__row">' +
+        '<div>' +
+          '<div class="twin-eeat__label">' + esc(r.label) + '</div>' +
+          '<div class="twin-eeat__source">' + esc(src) + '</div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="twin-eeat__bar"><span style="width:' + pct(s) + '%"></span></div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="twin-eeat__val">' + s + '<small>/25</small></div>' +
+          '<div class="twin-eeat__evidence">' + esc(ev) + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // History (compounding chart)
+    var history = (audit.history || []).slice().sort(function(a, b) {
+      return new Date(a.snapshotAt) - new Date(b.snapshotAt);
+    });
+    if (history.length >= 2) {
+      hide('t-aeb-history-empty');
+      show('t-aeb-history');
+      drawHistoryChart(history);
+    } else if (history.length === 1) {
+      hide('t-aeb-history-empty');
+      show('t-aeb-history');
+      drawHistoryChart(history);
+    }
+
+    // Data sources
+    var sources = audit.dataSources || [];
+    document.getElementById('t-aeb-sources').innerHTML = sources.map(function(s) {
+      var name = s.name || s.label || s.id || '';
+      var status = (s.status || s.state || '').toLowerCase();
+      var pending = (status === 'pending' || status === 'registered');
+      return '<div class="twin-source">' +
+        '<span class="twin-source__name">' + esc(name) + '</span>' +
+        (pending ? '<span class="twin-source__pending">Pending</span>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  function renderAuthorityBriefFallback(profile) {
+    // Used when /api/signal/audit/:slug is unreachable. Renders the same
+    // E-E-A-T grid from profile.signal* columns so the section never
+    // disappears entirely.
+    show('t-aeb-section');
+    var rch = profile.signalReach || 0;
+    var aut = profile.signalAuthorityScore || 0;
+    var dis = profile.signalDiscourse || 0;
+    var soc = profile.signalSocial || 0;
+    var score = rch + aut + dis + soc;
+
+    document.getElementById('t-aeb-disclaimer').textContent =
+      'We don\u2019t own the LLM\u2019s decision. We can\u2019t promise you\u2019ll show up in ChatGPT, Gemini, or Perplexity \u2014 nobody honestly can. What we can do is produce the strongest E-E-A-T signals on the open web.';
+    document.getElementById('t-aeb-score').textContent = score;
+    document.getElementById('t-aeb-score-name').textContent = profile.guestName || '';
+
+    var rows = [
+      { label: 'Experience',        s: rch, src: 'Live appearances + transcribed words' },
+      { label: 'Expertise',         s: aut, src: 'B2B verification + transcript depth + verified identity URLs' },
+      { label: 'Authoritativeness', s: dis, src: 'Mentions in trailing 90 days + cross-network references' },
+      { label: 'Trustworthiness',   s: soc, src: 'Vault-verified social platforms' },
+    ];
+    document.getElementById('t-aeb-eeat').innerHTML = rows.map(function(r) {
+      return '<div class="twin-eeat__row">' +
+        '<div>' +
+          '<div class="twin-eeat__label">' + esc(r.label) + '</div>' +
+          '<div class="twin-eeat__source">' + esc(r.src) + '</div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="twin-eeat__bar"><span style="width:' + pct(r.s) + '%"></span></div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="twin-eeat__val">' + r.s + '<small>/25</small></div>' +
+          '<div class="twin-eeat__evidence">' + r.s + '/25</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function drawHistoryChart(history) {
+    // Build an SVG polyline + dots + horizontal axis. The viewBox is
+    // 0 0 800 120 and we scale points into a 760×80 plot area with 20px
+    // padding. We pin yMin to 0 and yMax to max(snapshot, 25) so the chart
+    // never collapses on small scores.
+    var W = 800, H = 120, padX = 20, padY = 16;
+    var n = history.length;
+    var maxScore = 25;
+    history.forEach(function(h) { if (h.signalTotal > maxScore) maxScore = h.signalTotal; });
+    var roundedMax = Math.ceil(maxScore / 25) * 25;
+
+    var stepX = n > 1 ? (W - 2 * padX) / (n - 1) : 0;
+    var pts = history.map(function(h, i) {
+      var x = padX + i * stepX;
+      var y = H - padY - ((h.signalTotal || 0) / roundedMax) * (H - 2 * padY);
+      return { x: x, y: y, snap: h };
+    });
+
+    var poly = pts.map(function(p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
+    var area = 'M ' + pts[0].x + ' ' + (H - padY) +
+               ' L ' + poly.split(' ').join(' L ') +
+               ' L ' + pts[pts.length - 1].x + ' ' + (H - padY) + ' Z';
+
+    var svg = document.getElementById('t-aeb-history-svg');
+    svg.innerHTML =
+      '<defs><linearGradient id="twin-area" x1="0" x2="0" y1="0" y2="1">' +
+        '<stop offset="0" stop-color="#d4a843" stop-opacity=".35"/>' +
+        '<stop offset="1" stop-color="#d4a843" stop-opacity="0"/>' +
+      '</linearGradient></defs>' +
+      '<path d="' + area + '" fill="url(#twin-area)"/>' +
+      '<polyline points="' + poly + '" fill="none" stroke="#d4a843" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+      pts.map(function(p) {
+        return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3.5" fill="#d4a843"/>';
+      }).join('');
+
+    // Date · score table — most recent 3 rows
+    var recent = history.slice().reverse().slice(0, 3);
+    document.getElementById('t-aeb-history-rows').innerHTML = recent.map(function(h) {
+      return '<div class="twin-history__row">' +
+        '<span>' + formatDate(h.snapshotAt) + '</span>' +
+        '<b>' + (h.signalTotal || 0) + '</b>' +
+        '<span style="color:var(--text-muted)">Daily snapshot</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  function formatDate(iso) {
+    try {
+      var d = new Date(iso);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    } catch (e) { return iso || ''; }
   }
 })();
 </script>
