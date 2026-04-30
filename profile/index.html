@@ -384,9 +384,27 @@
     padding:0.6rem 1rem; background:rgba(255,255,255,0.02); border-radius:6px;
     font-size:0.8125rem;
   }
-  .p-source__name { color:var(--text); font-weight:500; }
+  .p-source__name { color:var(--text); font-weight:500; display:flex; align-items:center; gap:0.5rem; }
   .p-source__purpose { color:var(--text-muted); }
   .p-source__cost { color:var(--gold); font-family:monospace; font-size:0.75rem; }
+  .p-source__pending {
+    color:var(--gold); font-family:monospace; font-size:0.75rem;
+    opacity:0.65; font-style:italic;
+  }
+  .p-source--pending { opacity:0.72; }
+  .p-source__badge {
+    display:inline-flex; align-items:center; padding:1px 7px;
+    border-radius:8px; border:1px solid rgba(251,191,36,0.25);
+    background:rgba(251,191,36,0.06); color:var(--gold);
+    font-family:monospace; font-size:0.55rem;
+    letter-spacing:0.12em; text-transform:uppercase; font-weight:700;
+  }
+  .p-source-group-label {
+    margin:0.875rem 0 0.375rem; padding:0 0.25rem;
+    font-family:monospace; font-size:0.625rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--text-muted); font-weight:600;
+  }
+  .p-source-group-label:first-child { margin-top:0; }
   .p-source__total {
     margin-top:0.875rem; padding:0.875rem 1rem; background:rgba(251,191,36,0.05);
     border-radius:6px; font-size:0.8125rem; color:var(--text-secondary);
@@ -2730,24 +2748,54 @@
       return html;
     }
 
+    // Render the Data Sources panel (Section 06). Sources are returned
+    // by the API with a `status` field of either "live" (driving live
+    // scoring; cost contributes to the total) or "pending" (registered
+    // and disclosed for transparency, integration in flight). We group
+    // them under sub-headers, badge the pending ones, and only sum live
+    // costs into the total. See conversationos PR #858 for the registry.
     function renderDataSources(d) {
       var sources = d.dataSources || [];
+      var live    = sources.filter(function(s) { return s.status !== 'pending'; });
+      var pending = sources.filter(function(s) { return s.status === 'pending'; });
       var html = '<div class="p-drawer__section">' +
         '<div class="p-drawer__section-title"><span class="p-drawer__section-num">06</span>Data Sources</div>' +
         '<div class="p-drawer__section-sub">Every score is computed from named third-party providers. No black box.</div>' +
         '<div class="p-source-list">';
+
       var totalCost = 0;
-      sources.forEach(function(s) {
-        var cost = parseFloat(s.costPerRefresh || 0);
-        totalCost += cost;
-        html += '<div class="p-source">' +
-          '<div class="p-source__name">' + esc(s.name) + '</div>' +
-          '<div class="p-source__purpose">' + esc(s.purpose || '') + '</div>' +
-          '<div class="p-source__cost">$' + cost.toFixed(3) + '/refresh</div>' +
-        '</div>';
-      });
+
+      if (live.length) {
+        html += '<div class="p-source-group-label">Live · driving today\'s score</div>';
+        live.forEach(function(s) {
+          var cost = parseFloat(s.costPerRefresh || 0);
+          totalCost += cost;
+          html += '<div class="p-source">' +
+            '<div class="p-source__name">' + esc(s.name) + '</div>' +
+            '<div class="p-source__purpose">' + esc(s.purpose || '') + '</div>' +
+            '<div class="p-source__cost">$' + cost.toFixed(3) + '/refresh</div>' +
+          '</div>';
+        });
+      }
+
+      if (pending.length) {
+        html += '<div class="p-source-group-label">Registered · integration in flight</div>';
+        pending.forEach(function(s) {
+          var cost = parseFloat(s.costPerRefresh || 0);
+          var costLabel = cost > 0
+            ? '$' + cost.toFixed(3) + '/refresh · projected'
+            : 'free · when live';
+          html += '<div class="p-source p-source--pending">' +
+            '<div class="p-source__name">' + esc(s.name) +
+              ' <span class="p-source__badge">PENDING</span></div>' +
+            '<div class="p-source__purpose">' + esc(s.purpose || '') + '</div>' +
+            '<div class="p-source__pending">' + costLabel + '</div>' +
+          '</div>';
+        });
+      }
+
       html += '</div>';
-      html += '<div class="p-source__total"><span>Total per recompute</span><strong>$' + totalCost.toFixed(2) + '</strong></div>';
+      html += '<div class="p-source__total"><span>Total per recompute (live)</span><strong>$' + totalCost.toFixed(2) + '</strong></div>';
       html += '</div>';
       return html;
     }
