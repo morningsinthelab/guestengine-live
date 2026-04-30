@@ -475,6 +475,77 @@
     .p-refresh-stack__btn { width:100%; padding:0.75rem; }
   }
 
+  /* Tier-deliverables strip directly under Refresh Stack. Owner-only.
+     Reads the canonical pricing line items from docs/digital-twin-spec.md.
+     This anchors the AEB as a paid deliverable: "this is what you bought." */
+  .p-drawer__tier-promise {
+    margin-bottom:1.5rem; padding:1rem 1.125rem;
+    background:rgba(15,23,42,0.55);
+    border:1px solid rgba(251,191,36,0.16);
+    border-radius:8px;
+  }
+  .p-drawer__tier-promise-title {
+    font-family:var(--font-display); font-size:0.6875rem; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase;
+    color:rgba(251,191,36,0.78); margin-bottom:0.25rem;
+  }
+  .p-drawer__tier-promise-label {
+    font-family:var(--font-display); font-size:1.0625rem; font-weight:700;
+    color:#fff; margin-bottom:0.625rem;
+  }
+  .p-drawer__tier-promise-list {
+    list-style:none; margin:0; padding:0;
+    display:grid; grid-template-columns:1fr 1fr; gap:0.375rem 1rem;
+  }
+  .p-drawer__tier-promise-list li {
+    display:flex; align-items:flex-start; gap:0.5rem;
+    font-size:0.8125rem; line-height:1.45;
+    color:rgba(255,255,255,0.84);
+  }
+  .p-drawer__tier-promise-list i {
+    color:var(--gold); font-size:0.75rem;
+    margin-top:0.25rem; flex-shrink:0;
+  }
+  @media (max-width: 640px) {
+    .p-drawer__tier-promise-list { grid-template-columns:1fr; }
+  }
+
+  /* "What this means for you" insights callout. Owner-only. Sits
+     under the score hero and translates raw pillar numbers into a
+     plain-English next step. Mirrors the cool-toned, premium aesthetic
+     of the other AEB sections without competing with the gold accent. */
+  .p-drawer__insights {
+    margin-bottom:1.75rem; padding:1.125rem 1.25rem;
+    background:linear-gradient(135deg, rgba(20,184,166,0.10) 0%, rgba(15,23,42,0.5) 100%);
+    border:1px solid rgba(20,184,166,0.32);
+    border-left:3px solid #14b8a6;
+    border-radius:8px;
+  }
+  .p-drawer__insights-title {
+    font-family:var(--font-display); font-size:0.6875rem; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase;
+    color:#5eead4; margin-bottom:0.5rem;
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .p-drawer__insights-title i { font-size:0.875rem; }
+  .p-drawer__insights-body {
+    font-size:0.9375rem; line-height:1.55;
+    color:rgba(255,255,255,0.92);
+  }
+  .p-drawer__insights-body strong { color:#fff; }
+
+  /* Next-snapshot hint at the foot of the compounding chart. Tiny,
+     unobtrusive, but signals "this is live" to the page owner. */
+  .p-compound__next-hint {
+    margin-top:0.75rem; padding:0.5rem 0.75rem;
+    background:rgba(20,184,166,0.08);
+    border:1px solid rgba(20,184,166,0.22);
+    border-radius:6px;
+    font-size:0.75rem; color:#5eead4;
+    text-align:center;
+  }
+  .p-compound__next-hint i { margin-right:0.4rem; opacity:0.8; }
+
   /* Close The Gap — ranked, computed plays under the citation audit.
      Answers the obvious question every owner asks after seeing 3/12:
      "Okay, so what do I actually do about it?" Each play tied to point
@@ -2245,16 +2316,26 @@
         document.getElementById('p-rcpt-appearances-cell').style.display = 'none';
       }
 
-      // Cell 2 — days compounding (always visible if a snapshot exists; Day 1 fallback otherwise)
+      // Cell 2 — days compounding (always visible if a snapshot exists; Day 1 fallback otherwise).
+      // Reads historySummary.daysCompounding from the audit response, which
+      // is populated for every audience (counts only — the per-snapshot
+      // history array is owner-only). Falls back to inspecting the array
+      // for older response shapes.
+      var hs = (audit && audit.historySummary) || null;
       var hist = (audit && audit.history) || [];
-      if (hist.length > 0) {
+      var snapDays = 0;
+      if (hs && typeof hs.daysCompounding === 'number') {
+        snapDays = hs.daysCompounding;
+      } else if (hist.length > 0) {
         var earliest = hist[0];
         hist.forEach(function(h){ if (new Date(h.snapshotAt) < new Date(earliest.snapshotAt)) earliest = h; });
         var diffMs = Date.now() - new Date(earliest.snapshotAt).getTime();
-        var days = Math.max(1, Math.floor(diffMs / 86400000));
-        var dl = days === 1 ? 'day compounding' : 'days compounding';
+        snapDays = Math.max(1, Math.floor(diffMs / 86400000));
+      }
+      if (snapDays > 0) {
+        var dl = snapDays === 1 ? 'day compounding' : 'days compounding';
         document.getElementById('p-rcpt-timeline').innerHTML =
-          days + '<small>' + dl + '</small>';
+          snapDays + '<small>' + dl + '</small>';
         visibleCells++;
       } else {
         // Day-1 fallback is fine — it isn't a bluff, it's the floor narrative.
@@ -2263,13 +2344,21 @@
         visibleCells++;
       }
 
-      // Cell 3 — independent verified providers
+      // Cell 3 — independent verified providers. Reads dataSourcesSummary
+      // (counts only — names and costs are owner-only). Falls back to the
+      // array for older response shapes.
+      var dss = (audit && audit.dataSourcesSummary) || null;
       var srcs = (audit && audit.dataSources) || [];
       var live = 0, pending = 0;
-      srcs.forEach(function(s){
-        var st = (s.status || s.state || '').toLowerCase();
-        if (st === 'pending' || st === 'registered') pending++; else live++;
-      });
+      if (dss && typeof dss.liveCount === 'number') {
+        live = dss.liveCount;
+        pending = dss.pendingCount || 0;
+      } else {
+        srcs.forEach(function(s){
+          var st = (s.status || s.state || '').toLowerCase();
+          if (st === 'pending' || st === 'registered') pending++; else live++;
+        });
+      }
       if (live > 0) {
         var sl = live === 1 ? 'verified source' : 'verified sources';
         document.getElementById('p-rcpt-sources').innerHTML =
@@ -2480,8 +2569,10 @@
 
       var html = '';
       html += renderRefreshStack(d);
+      html += renderTierDeliverables(d);
       html += renderDisclaimer(d);
       html += renderHero(d);
+      html += renderOwnerInsights(d);
       html += renderEEAT(d);
       html += renderCitationAudit(d);
       html += renderCloseTheGap(d);
@@ -2701,6 +2792,97 @@
       '</div>';
     }
 
+    /**
+     * "What this means" — plain-English read of today's score for the
+     * page owner. Owner-only, computed entirely from the per-pillar
+     * scores we already pull. No new model calls, no new data shapes.
+     *
+     * The intent is to make the AEB feel like a paid, premium
+     * deliverable: the owner shouldn't have to mentally translate
+     * "Trustworthiness 0/25" into "this is the gap to fix first."
+     * We do that for them.
+     */
+    function renderOwnerInsights(d) {
+      if (d.audienceState !== 'owner') return '';
+      var e = d.eeat || {};
+      if (!e || e.locked || !e.experience) return '';
+      var pillars = [
+        { key: 'experience',        label: 'Experience',        score: (e.experience      && e.experience.score)      || 0 },
+        { key: 'expertise',         label: 'Expertise',         score: (e.expertise       && e.expertise.score)       || 0 },
+        { key: 'authoritativeness', label: 'Authoritativeness', score: (e.authoritativeness && e.authoritativeness.score) || 0 },
+        { key: 'trustworthiness',   label: 'Trustworthiness',   score: (e.trustworthiness && e.trustworthiness.score) || 0 },
+      ];
+      // Sort ascending so the weakest pillar comes first.
+      pillars.sort(function(a, b) { return a.score - b.score; });
+      var weakest = pillars[0];
+      var strongest = pillars[pillars.length - 1];
+      var total = d.signalScore || 0;
+      var bandText;
+      if (total >= 75) {
+        bandText = "You're in the top tier of citable authorities. Most LLMs already know who you are.";
+      } else if (total >= 50) {
+        bandText = "You're a strong citable authority. The work now is closing specific pillar gaps so every LLM cites you, not just some.";
+      } else if (total >= 25) {
+        bandText = "You have real authority signal. The fastest path to compounding is fixing your weakest pillar first — the LLMs read all four.";
+      } else {
+        bandText = "Your authority floor is forming. Fix your weakest pillar first; the others compound from there.";
+      }
+      // Lift hint — specific, actionable, owner-only.
+      var liftHint = '';
+      if (weakest.score < 10) {
+        liftHint = ' Strongest right now is <strong>' + esc(strongest.label) + '</strong> at ' + strongest.score + '/25. ' +
+          'Weakest is <strong>' + esc(weakest.label) + '</strong> at ' + weakest.score + '/25 — fix this one first.';
+      }
+      return '<div class="p-drawer__insights">' +
+        '<div class="p-drawer__insights-title"><i class="fa-solid fa-lightbulb"></i> What this means for you</div>' +
+        '<div class="p-drawer__insights-body">' +
+          'You\u2019re at <strong>' + total + '/100</strong>. ' + esc(bandText) + liftHint +
+        '</div>' +
+      '</div>';
+    }
+
+    /**
+     * Tier deliverables target line under the Refresh Stack. Owner-only.
+     * Reads canonical tier copy from the per-tier map, derived verbatim
+     * from docs/digital-twin-spec.md (LOCKED 2026-04-29). No new copy
+     * invented — these are the same line items the user sees on /pricing.
+     */
+    function renderTierDeliverables(d) {
+      if (d.audienceState !== 'owner') return '';
+      var tier = (d.guest && d.guest.tier) || '';
+      var meta = ({
+        vip:        { label: 'VIP — $297/mo', items: ['25 Authority Reach pitches/mo', 'Quarterly produced appearance', '30-day Distribution Sprint each appearance', 'Weekly Signal report'] },
+        reach_pro:  { label: 'Reach Pro — $197/mo', items: ['50 Authority Reach pitches/mo', 'Priority pitch generation by Sophia', 'Reply tracking with AI-suggested responses', 'Quarterly category report'] },
+        member:     { label: 'Member — $97/mo', items: ['10 Authority Reach pitches/mo', 'Storytime sponsorship — your twin in the universe', 'Monthly Signal Score refresh', 'Member directory listing'] },
+        single:     { label: 'Single Appearance — $497', items: ['14-day Distribution Sprint', 'Authority Page indexed', 'Signal Score baseline', 'Twin character with consent'] },
+        featured:   { label: 'Featured', items: ['Authority Page indexed', 'Signal Score baseline'] },
+      })[tier];
+      if (!meta) return '';
+      var itemsHtml = meta.items.map(function(item) {
+        return '<li><i class="fa-solid fa-circle-check"></i>' + esc(item) + '</li>';
+      }).join('');
+      return '<div class="p-drawer__tier-promise">' +
+        '<div class="p-drawer__tier-promise-title">Your tier delivers</div>' +
+        '<div class="p-drawer__tier-promise-label">' + esc(meta.label) + '</div>' +
+        '<ul class="p-drawer__tier-promise-list">' + itemsHtml + '</ul>' +
+      '</div>';
+    }
+
+    /**
+     * Next-snapshot countdown for the owner. The daily snapshot cron
+     * runs at 00:00 UTC each day; we compute and surface "next snapshot
+     * in ~Nh" so the chart feels live, not static.
+     */
+    function nextSnapshotHint() {
+      var now = new Date();
+      var nextUtc = new Date(Date.UTC(
+        now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0
+      ));
+      var diffMs = nextUtc.getTime() - now.getTime();
+      var hours = Math.max(1, Math.round(diffMs / 3600000));
+      return hours === 1 ? 'Next daily snapshot in ~1h.' : 'Next daily snapshot in ~' + hours + 'h.';
+    }
+
     function renderDisclaimer(d) {
       var text = d.honestDisclaimer || "We don't own the LLM's decision. We can't promise you'll show up in ChatGPT, Gemini, or Perplexity — nobody honestly can. What we can do is produce the strongest E-E-A-T signals on the open web. Here's the audit.";
       return '<div class="p-drawer__disclaimer">' +
@@ -2725,6 +2907,20 @@
     }
 
     function renderEEAT(d) {
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">01</span>E-E-A-T Audit</div>' +
+        '<div class="p-drawer__section-sub">Mapped to <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">Google’s Search Quality Guidelines § 5.1</a> — the four signals models use to decide who to cite.</div>';
+
+      // PUBLIC: server returns { eeat: { locked: true } } — no per-pillar
+      // scores reach the wire. Show the two-CTA locked panel.
+      if (d.audienceState === 'public') {
+        html += renderLockedTwoCta(
+          'fa-lock',
+          'Sign in as the page owner to see the full E-E-A-T audit — four pillar scores backed by named third-party providers, with evidence strings for each one.'
+        ) + '</div>';
+        return html;
+      }
+
       var e = d.eeat || {};
       var rows = [
         { key: 'experience',        label: 'Experience' },
@@ -2732,10 +2928,7 @@
         { key: 'authoritativeness', label: 'Authoritativeness' },
         { key: 'trustworthiness',   label: 'Trustworthiness' },
       ];
-      var html = '<div class="p-drawer__section">' +
-        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">01</span>E-E-A-T Audit</div>' +
-        '<div class="p-drawer__section-sub">Mapped to <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener">Google’s Search Quality Guidelines § 5.1</a> — the four signals models use to decide who to cite.</div>' +
-        '<div class="p-eeat-grid">';
+      html += '<div class="p-eeat-grid">';
       rows.forEach(function(r) {
         var p = e[r.key] || { score: 0, source: '' };
         var pct = Math.round((p.score / 25) * 100);
@@ -2989,11 +3182,28 @@
     }
 
     function renderCompounding(d) {
-      var hist = (d.history || []).slice().reverse();   // ascending by date
       var html = '<div class="p-drawer__section">' +
         '<div class="p-drawer__section-title"><span class="p-drawer__section-num">04</span>Authority Compounding</div>' +
-        '<div class="p-drawer__section-sub">The floor never drops. Every appearance, every artifact, every recompute makes you more citable.</div>' +
-        '<div class="p-compound">';
+        '<div class="p-drawer__section-sub">The floor never drops. Every appearance, every artifact, every recompute makes you more citable.</div>';
+
+      // PUBLIC: server returns history=[], summary only. Show the locked
+      // two-CTA panel — no per-snapshot scores reach the wire.
+      if (d.audienceState === 'public') {
+        var hs = d.historySummary || {};
+        var summaryLine = '';
+        if (hs.daysCompounding && hs.daysCompounding > 0) {
+          var dl = hs.daysCompounding === 1 ? 'day' : 'days';
+          summaryLine = ' This guest is on day ' + hs.daysCompounding + ' of ' + dl + ' compounding.';
+        }
+        html += renderLockedTwoCta(
+          'fa-lock',
+          'Sign in as the page owner to see the daily Authority Compounding chart — every snapshot since day 1, plotted with milestones and floor-never-drops trend lines.' + summaryLine
+        ) + '</div>';
+        return html;
+      }
+
+      var hist = (d.history || []).slice().reverse();   // ascending by date
+      html += '<div class="p-compound">';
 
       if (hist.length < 2) {
         html += '<p style="color:var(--text-muted);font-size:0.875rem;text-align:center;padding:1rem;">' +
@@ -3045,6 +3255,12 @@
           '</div>';
         });
         html += '</div>';
+        // Owner-only countdown to the next daily snapshot.
+        if (d.audienceState === 'owner') {
+          html += '<div class="p-compound__next-hint">' +
+            '<i class="fa-solid fa-clock"></i> ' + nextSnapshotHint() +
+          '</div>';
+        }
       }
       html += '</div></div>';
       return html;
@@ -3107,13 +3323,34 @@
     // them under sub-headers, badge the pending ones, and only sum live
     // costs into the total. See conversationos PR #858 for the registry.
     function renderDataSources(d) {
+      var html = '<div class="p-drawer__section">' +
+        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">06</span>Data Sources</div>' +
+        '<div class="p-drawer__section-sub">Every score is computed from named third-party providers. No black box.</div>';
+
+      // PUBLIC: server returns dataSources=[], summary only. Show the
+      // locked two-CTA panel — no provider names or per-refresh costs
+      // reach the wire.
+      if (d.audienceState === 'public') {
+        var ds = d.dataSourcesSummary || {};
+        var summary = '';
+        if (ds.liveCount && ds.liveCount > 0) {
+          summary = ' Currently driving the score: ' + ds.liveCount + ' named providers';
+          if (ds.pendingCount > 0) {
+            summary += ', plus ' + ds.pendingCount + ' more in flight';
+          }
+          summary += '.';
+        }
+        html += renderLockedTwoCta(
+          'fa-lock',
+          'Sign in as the page owner to see every named third-party provider feeding the Signal Score, plus per-refresh cost on each one.' + summary
+        ) + '</div>';
+        return html;
+      }
+
       var sources = d.dataSources || [];
       var live    = sources.filter(function(s) { return s.status !== 'pending'; });
       var pending = sources.filter(function(s) { return s.status === 'pending'; });
-      var html = '<div class="p-drawer__section">' +
-        '<div class="p-drawer__section-title"><span class="p-drawer__section-num">06</span>Data Sources</div>' +
-        '<div class="p-drawer__section-sub">Every score is computed from named third-party providers. No black box.</div>' +
-        '<div class="p-source-list">';
+      html += '<div class="p-source-list">';
 
       var totalCost = 0;
 
