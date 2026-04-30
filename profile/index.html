@@ -580,6 +580,28 @@
   }
   .p-locked__cta:hover { background:#fde68a; }
 
+  /* Two-CTA pattern — 'Sign in' (owner) + 'Get my own' (visitor).
+     Used inside .p-locked panels so visitors don't dead-end when they
+     hit a sign-in gate on someone else's page. */
+  .p-locked__cta-row {
+    display:flex; gap:0.625rem; flex-wrap:wrap; justify-content:center;
+    margin-top:1rem;
+  }
+  .p-locked__cta--ghost {
+    display:inline-block; padding:0.6rem 1.25rem;
+    background:transparent; color:rgba(255,255,255,0.92);
+    border:1px solid rgba(255,255,255,0.18);
+    font-weight:700; font-size:0.8125rem; letter-spacing:0.08em;
+    text-transform:uppercase; border-radius:6px; text-decoration:none;
+    transition:border-color 180ms ease, color 180ms ease;
+  }
+  .p-locked__cta--ghost:hover { border-color:var(--gold); color:var(--gold); }
+  .p-locked__nudge {
+    display:block; margin-top:0.875rem;
+    font-size:0.75rem; color:rgba(255,255,255,0.55); line-height:1.5;
+  }
+  .p-locked__nudge strong { color:rgba(255,255,255,0.78); font-weight:600; }
+
   @media (max-width: 768px) {
     .p-drawer { inset:2vh 0 0 0; border-radius:16px 16px 0 0; }
     .p-drawer__header { padding:1rem 1.25rem; }
@@ -1542,6 +1564,9 @@
     }
 
     function render(profile, authority, visuals, audit) {
+      // Expose for the locked-panel helper (renderLockedTwoCta needs the
+      // guest's first name for the 'This is X’s page' nudge).
+      window.__P_PROFILE = profile;
       var name = profile.guestName || 'Guest';
       var headline = (authority && authority.job_title) || profile.headline || '';
       var bio = (authority && authority.authority_bio) || profile.bio || '';
@@ -2353,6 +2378,42 @@
     }
 
     // ── Renderers ──────────────────────────────────────────────────────────
+    /**
+     * Build a locked panel with the Sign In / Get My Own two-CTA pattern.
+     * Owner clicks Sign In → portal login with ?redirect= back here.
+     * Non-owner visitor clicks Get My Own → /join/?ref=<slug> for attribution.
+     *
+     * @param {string} icon  FontAwesome class (e.g. 'fa-lock', 'fa-clock')
+     * @param {string} body  Body copy explaining what's locked
+     * @param {object} opts  { ownerOnlyExtra: optional HTML appended for owner state }
+     * Reads drawerCacheSlug from closure scope for ?redirect= and ?ref=.
+     */
+    function renderLockedTwoCta(icon, body, opts) {
+      opts = opts || {};
+      var slug = drawerCacheSlug || '';
+      // Portal is hash-routed; the ?redirect= param goes after the hash route.
+      // For now point all sign-ins at /portal/dashboard (the ?redirect= plumbing
+      // exists; deeper deep-link to /portal/audit/<slug> can land later).
+      var loginHref = 'https://app.conversationos.live/portal/login' +
+        (slug
+          ? '#/portal/login?redirect=' + encodeURIComponent('/portal/dashboard')
+          : '');
+      var joinHref = '/join/' + (slug ? '?ref=' + encodeURIComponent(slug) : '');
+      var ownerName = (window.__P_PROFILE && window.__P_PROFILE.guestName) || 'this guest';
+      // First name only for the nudge ("David's page" reads better than "David Frangioni's page")
+      var firstName = ownerName.split(' ')[0];
+      return '<div class="p-locked">' +
+        '<i class="fa-solid ' + icon + '"></i>' +
+        body +
+        '<div class="p-locked__cta-row">' +
+          '<a class="p-locked__cta" href="' + loginHref + '">Sign In</a>' +
+          '<a class="p-locked__cta--ghost" href="' + joinHref + '">Get My Own →</a>' +
+        '</div>' +
+        '<span class="p-locked__nudge">This is <strong>' + firstName +
+          '\u2019s</strong> page. Want one too?</span>' +
+      '</div>';
+    }
+
     function renderDrawer(d) {
       var body = document.getElementById('p-drawer-body');
       var sub = document.getElementById('p-drawer-sub');
@@ -2429,7 +2490,7 @@
             } else if (r.status === 429) {
               rerunBtn.textContent = 'Already ran in last 24h';
             } else if (r.status === 401 || r.status === 403) {
-              rerunBtn.textContent = 'Owner only — sign in to rerun';
+              rerunBtn.textContent = 'Sign in as page owner to rerun';
             } else {
               rerunBtn.textContent = 'Failed — try again';
               rerunBtn.disabled = false;
@@ -2641,11 +2702,10 @@
         '<div class="p-drawer__section-sub">We literally ask Perplexity, ChatGPT, Gemini, and Claude about your topic and show what they returned.</div>';
 
       if (d.audienceState === 'public') {
-        html += '<div class="p-locked">' +
-          '<i class="fa-solid fa-lock"></i>' +
-          'Sign in as the page owner to see the live LLM citation audit — the actual answers we got back from ChatGPT, Perplexity, Claude, and Gemini when we asked who the authority is on your topics.' +
-          '<a class="p-locked__cta" href="https://app.conversationos.live/login">Sign in</a>' +
-        '</div></div>';
+        html += renderLockedTwoCta(
+          'fa-lock',
+          'Sign in as the page owner to see the live LLM citation audit — the actual answers we got back from ChatGPT, Perplexity, Claude, and Gemini when we asked who the authority is on your topics.'
+        ) + '</div>';
         return html;
       }
 
@@ -2726,11 +2786,10 @@
         '<div class="p-drawer__section-sub">Ranked plays computed from your actual pillar gaps and per-LLM absence. Highest lift first.</div>';
 
       if (d.audienceState === 'public') {
-        html += '<div class="p-locked">' +
-          '<i class="fa-solid fa-lock"></i>' +
-          'Sign in as the page owner to see the prescriptive plan — ranked plays with point lifts, target LLMs, and realistic deadlines based on this guest\'s actual gaps.' +
-          '<a class="p-locked__cta" href="https://app.conversationos.live/login">Sign in</a>' +
-        '</div></div>';
+        html += renderLockedTwoCta(
+          'fa-lock',
+          'Sign in as the page owner to see the prescriptive plan — ranked plays with point lifts, target LLMs, and realistic deadlines based on this guest\'s actual gaps.'
+        ) + '</div>';
         return html;
       }
 
@@ -2940,11 +2999,10 @@
         '<div class="p-drawer__section-sub">Every artifact your tier produced — with proof-of-work URLs and performance data.</div>';
 
       if (d.audienceState === 'public') {
-        html += '<div class="p-locked">' +
-          '<i class="fa-solid fa-lock"></i>' +
-          'Sign in as the page owner to see the deliverables audit — every clip, post, transcript, and asset, plus the views, indexing status, and proof-of-work URL for each one.' +
-          '<a class="p-locked__cta" href="https://app.conversationos.live/login">Sign in</a>' +
-        '</div></div>';
+        html += renderLockedTwoCta(
+          'fa-lock',
+          'Sign in as the page owner to see the deliverables audit — every clip, post, transcript, and asset, plus the views, indexing status, and proof-of-work URL for each one.'
+        ) + '</div>';
         return html;
       }
 
