@@ -1502,6 +1502,54 @@
     // Audit endpoint shape lives on a different prefix.
     var SIGNAL_AUDIT_API = 'https://app.conversationos.live/api/signal/audit/';
 
+    // ===== JWT handoff from /portal/audit/<slug> =====
+    // The portal redirect lands here with 'audit\u0026t=<jwt>' on the hash.
+    // We read the token, persist it for the session, and clear it from the
+    // URL bar so it doesn't get bookmarked / shared. The token is then
+    // attached as Bearer auth on the audit fetch so the server resolves
+    // audienceState='owner' and unlocks the four owner-only sections.
+    var hashAuthToken = null;
+    (function initAuthFromHash() {
+      try {
+        var h = (window.location.hash || '').replace(/^#/, '');
+        if (!h) return;
+        // Hash format: 'audit\u0026t=<urlencoded jwt>' or just 'audit'
+        var parts = h.split('\u0026');
+        for (var i = 0; i < parts.length; i++) {
+          var pair = parts[i].split('=');
+          if (pair[0] === 't' && pair[1]) {
+            // Defensive: only persist tokens that *look* like a JWT (three
+            // dot-separated base64url segments). Anything else is junk.
+            var raw = decodeURIComponent(pair[1]);
+            if (/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(raw)) {
+              hashAuthToken = raw;
+              // Store under the canonical key so the drawer's existing
+              // ownerAuthHeaders() reader (and any future Bearer caller)
+              // picks it up automatically. sessionStorage — not local —
+              // so closing the tab clears the handoff.
+              try { sessionStorage.setItem('cos_auth_token', raw); } catch (e) {}
+            }
+          }
+        }
+        // Whether we found a token or not, clean the URL: keep the page
+        // path and the 'audit' marker (drawer needs it to auto-open) but
+        // strip any t= portion. history.replaceState is safe — doesn't
+        // navigate, just rewrites the URL bar.
+        if (hashAuthToken) {
+          history.replaceState(null, '', window.location.pathname + '#audit');
+        }
+      } catch (e) {}
+      // Fall back to a previously-stored token if we just bounced back
+      // from a refresh and the hash got cleared. Reads from the same
+      // canonical key the drawer's ownerAuthHeaders() uses.
+      if (!hashAuthToken) {
+        try {
+          hashAuthToken = sessionStorage.getItem('cos_auth_token') ||
+                          localStorage.getItem('cos_auth_token');
+        } catch (e) {}
+      }
+    })();
+
     Promise.all([
       fetch(API + '/directory/' + slug).then(ok),
       fetch(API + '/authority-data/' + slug).then(ok).catch(function() { return null; }),
@@ -1509,7 +1557,14 @@
       // Prefetch the audit payload — the AEB drawer caches this same
       // response, and the Receipts strip needs audit.history +
       // audit.dataSources upfront. One fetch, two consumers.
-      fetch(SIGNAL_AUDIT_API + slug).then(ok).catch(function() { return null; }),
+      // Audit fetch — if we have a hash-handoff JWT, send it as Bearer.
+      // The server's tryGetUser() reads the Authorization header and sets
+      // audienceState='owner' for the page owner (or 'member'/'public'
+      // otherwise). Cross-origin CORS is already configured on this
+      // endpoint to accept Authorization. No cookies, no preflight headache.
+      fetch(SIGNAL_AUDIT_API + slug, hashAuthToken
+        ? { headers: { 'Authorization': 'Bearer ' + hashAuthToken } }
+        : {}).then(ok).catch(function() { return null; }),
     ]).then(function(r) {
       if (!r[0]) return showNotFound();
       // Hand audit to the drawer cache so it skips its own fetch on first open.
@@ -2391,13 +2446,15 @@
     function renderLockedTwoCta(icon, body, opts) {
       opts = opts || {};
       var slug = drawerCacheSlug || '';
-      // Portal is hash-routed; the ?redirect= param goes after the hash route.
-      // For now point all sign-ins at /portal/dashboard (the ?redirect= plumbing
-      // exists; deeper deep-link to /portal/audit/<slug> can land later).
+      // Owner sign-in deep-link: portal/login → /portal/audit/<slug> →
+      // back here with a JWT handoff on the hash. The portal-side handoff
+      // page (conversationos #880) reads localStorage and redirects with
+      // 'audit\u0026t=<jwt>' on the hash. The drawer's hashAuthToken
+      // reader (in initAuthFromHash() below) picks it up and resolves
+      // audienceState='owner' on the audit fetch.
+      var auditPath = slug ? '/portal/audit/' + slug : '/portal/dashboard';
       var loginHref = 'https://app.conversationos.live/portal/login' +
-        (slug
-          ? '#/portal/login?redirect=' + encodeURIComponent('/portal/dashboard')
-          : '');
+        '#/portal/login?redirect=' + encodeURIComponent(auditPath);
       var joinHref = '/join/' + (slug ? '?ref=' + encodeURIComponent(slug) : '');
       var ownerName = (window.__P_PROFILE && window.__P_PROFILE.guestName) || 'this guest';
       // First name only for the nudge ("David's page" reads better than "David Frangioni's page")
