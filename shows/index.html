@@ -1049,5 +1049,10 @@
   </script>
 
   <script src="../header.js"></script>
+  <!-- Hydrate the network grid from the canonical ConversationOS
+       endpoint so producer edits on the Edit tab show up here within
+       the API cache TTL (60s). The static cards above act as the
+       fallback when the fetch fails. See shows/render.js. -->
+  <script src="render.js" defer></script>
 </body>
 </html>
