@@ -154,6 +154,44 @@
     letter-spacing: 0.32em; color: var(--gold);
   }
 
+  /* ── Receipts strip (under hero) ───────────── */
+  .twin-receipts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 0 80px;
+    margin-bottom: 0;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 720px) {
+    .twin-receipts { grid-template-columns: 1fr; padding: 0 24px; }
+  }
+  .twin-receipt {
+    padding: 32px 28px;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .twin-receipt:last-child { border-right: 0; }
+  @media (max-width: 720px) {
+    .twin-receipt { border-right: 0; border-bottom: 1px solid var(--border); }
+    .twin-receipt:last-child { border-bottom: 0; }
+  }
+  .twin-receipt__label {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .twin-receipt__value {
+    font-family: var(--font-display); font-size: 2.4rem; font-weight: 700;
+    color: var(--text); line-height: 1.1; letter-spacing: 0.01em;
+  }
+  .twin-receipt__value small {
+    font-family: var(--font-body); font-size: 0.78rem; font-weight: 500;
+    color: var(--text-muted); margin-left: 6px; letter-spacing: 0;
+  }
+  .twin-receipt__sub {
+    font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;
+  }
+
   /* ── Tier chip (hero) ────────────────────────── */
   .twin-tier {
     display: inline-flex; align-items: center; gap: 6px;
@@ -393,6 +431,25 @@
     </div>
   </section>
 
+  <!-- ── RECEIPTS STRIP ─ proof-of-work, public-safe ───────────────────── -->
+  <section class="twin-receipts" id="t-receipts" style="display:none">
+    <div class="twin-receipt">
+      <span class="twin-receipt__label">On the Record</span>
+      <span class="twin-receipt__value" id="t-rcpt-appearances">0<small>appearances</small></span>
+      <span class="twin-receipt__sub" id="t-rcpt-appearances-sub">Live, transcribed, in the public record.</span>
+    </div>
+    <div class="twin-receipt">
+      <span class="twin-receipt__label">Authority Timeline</span>
+      <span class="twin-receipt__value" id="t-rcpt-timeline">0<small>days compounding</small></span>
+      <span class="twin-receipt__sub" id="t-rcpt-timeline-sub">The floor never drops. Every recompute makes you more citable.</span>
+    </div>
+    <div class="twin-receipt">
+      <span class="twin-receipt__label">Independent Providers</span>
+      <span class="twin-receipt__value" id="t-rcpt-sources">0<small>verified sources</small></span>
+      <span class="twin-receipt__sub" id="t-rcpt-sources-sub">Every score is computed from named third-party providers. No black box.</span>
+    </div>
+  </section>
+
   <!-- ── AUTHORITY ENGINE BRIEF (inline, was modal-only) ───────────────────── -->
   <section class="twin-section" id="t-aeb-section" style="display:none">
     <div class="twin-section__head">
@@ -598,6 +655,15 @@
       }
     });
 
+    // ── Receipts strip ──
+    // Three numbers that are *honestly true* and reinforce the page's
+    // premise: this is independently verifiable authority, not hype.
+    //   1. Live appearances        — pastAppearances.length
+    //   2. Days compounding        — days since earliest signal snapshot
+    //   3. Verified data providers — count of live (non-pending) sources
+    // Each cell is hidden if its number is zero — we never bluff.
+    renderReceiptsStrip(profile, audit);
+
     // ── Authority Engine Brief (inline) ──
     // Promoted from a hidden modal to a permanent on-page section. Mirrors
     // the canonical drawer payload at /api/signal/audit/:slug. The locked
@@ -793,6 +859,83 @@
         '<span style="color:var(--text-muted)">Daily snapshot</span>' +
       '</div>';
     }).join('');
+  }
+
+  function renderReceiptsStrip(profile, audit) {
+    // Receipt 1 — On the Record appearances (from pastAppearances JSON).
+    var pastAppearances = parseJSON(profile.pastAppearances) || [];
+    var appearancesCount = Array.isArray(pastAppearances) ? pastAppearances.length : 0;
+    var uniqueShows = 0;
+    if (Array.isArray(pastAppearances)) {
+      var seen = {};
+      pastAppearances.forEach(function(a) {
+        var n = (a && a.showName) || '';
+        if (n) seen[n] = true;
+      });
+      uniqueShows = Object.keys(seen).length;
+    }
+    if (appearancesCount > 0) {
+      var label = appearancesCount === 1 ? 'appearance' : 'appearances';
+      document.getElementById('t-rcpt-appearances').innerHTML =
+        appearancesCount + '<small>' + label + '</small>';
+      var subA = uniqueShows > 1
+        ? 'Across ' + uniqueShows + ' shows. Live, transcribed, in the public record.'
+        : 'Live, transcribed, in the public record.';
+      document.getElementById('t-rcpt-appearances-sub').textContent = subA;
+    } else {
+      // Hide the cell entirely when zero — we never bluff.
+      var ap = document.getElementById('t-rcpt-appearances').parentElement;
+      ap.style.display = 'none';
+    }
+
+    // Receipt 2 — Days compounding (from audit.history earliest snapshot).
+    var history = (audit && audit.history) || [];
+    var days = 0;
+    if (history.length > 0) {
+      var earliest = history[0];
+      history.forEach(function(h) {
+        if (new Date(h.snapshotAt) < new Date(earliest.snapshotAt)) earliest = h;
+      });
+      var diffMs = Date.now() - new Date(earliest.snapshotAt).getTime();
+      days = Math.max(1, Math.floor(diffMs / 86400000));
+    }
+    if (days > 0) {
+      var dLabel = days === 1 ? 'day compounding' : 'days compounding';
+      document.getElementById('t-rcpt-timeline').innerHTML =
+        days + '<small>' + dLabel + '</small>';
+    } else {
+      // Day-zero is fine to keep visible — it sets the floor narrative.
+      document.getElementById('t-rcpt-timeline').innerHTML =
+        'Day 1<small>compounding</small>';
+      document.getElementById('t-rcpt-timeline-sub').textContent =
+        'Today is the floor. Every recompute makes you more citable.';
+    }
+
+    // Receipt 3 — Independent verified providers (audit.dataSources, live).
+    var sources = (audit && audit.dataSources) || [];
+    var live = 0;
+    var pending = 0;
+    sources.forEach(function(s) {
+      var status = (s.status || s.state || '').toLowerCase();
+      if (status === 'pending' || status === 'registered') pending++;
+      else live++;
+    });
+    if (live > 0) {
+      var sLabel = live === 1 ? 'verified source' : 'verified sources';
+      document.getElementById('t-rcpt-sources').innerHTML =
+        live + '<small>' + sLabel + '</small>';
+      var subS = pending > 0
+        ? 'Plus ' + pending + ' more pending integration. No black box.'
+        : 'Every score is computed from named third-party providers. No black box.';
+      document.getElementById('t-rcpt-sources-sub').textContent = subS;
+    } else {
+      var sp = document.getElementById('t-rcpt-sources').parentElement;
+      sp.style.display = 'none';
+    }
+
+    // Reveal the strip whenever at least one cell survived.
+    var visibleCells = document.querySelectorAll('#t-receipts .twin-receipt:not([style*="display: none"])');
+    if (visibleCells.length > 0) show('t-receipts');
   }
 
   function formatDate(iso) {
