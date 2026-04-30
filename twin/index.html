@@ -192,6 +192,59 @@
     font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;
   }
 
+  /* ── AEB teaser card ─ mirrors .p-signal pattern from /profile/ ─── */
+  .twin-aeb-teaser {
+    display: flex; align-items: center; gap: 18px;
+    padding: 20px 24px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; text-decoration: none; color: var(--text);
+    transition: border-color 200ms ease, transform 200ms ease;
+    cursor: pointer;
+  }
+  .twin-aeb-teaser:hover {
+    border-color: var(--gold-dim); transform: translateY(-1px);
+  }
+  .twin-aeb-teaser__ring-wrap {
+    position: relative; width: 64px; height: 64px; flex-shrink: 0;
+  }
+  .twin-aeb-teaser__ring-svg {
+    width: 100%; height: 100%; transform: rotate(-90deg);
+  }
+  .twin-aeb-teaser__ring-bg {
+    fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 4;
+  }
+  .twin-aeb-teaser__ring-fill {
+    fill: none; stroke: var(--gold); stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 800ms ease-out;
+  }
+  .twin-aeb-teaser__ring-num {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.02em;
+  }
+  .twin-aeb-teaser__info { flex: 1; min-width: 0; }
+  .twin-aeb-teaser__title {
+    font-family: var(--font-display); font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 6px;
+  }
+  .twin-aeb-teaser__desc {
+    font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;
+  }
+  .twin-aeb-teaser__hint {
+    font-family: var(--font-display); font-size: 0.55rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted);
+    display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .twin-aeb-teaser:hover .twin-aeb-teaser__hint { color: var(--gold); }
+  @media (max-width: 720px) {
+    .twin-aeb-teaser { flex-direction: column; text-align: center; }
+    .twin-aeb-teaser__hint { margin-top: 4px; }
+  }
+
   /* ── Tier chip (hero) ────────────────────────── */
   .twin-tier {
     display: inline-flex; align-items: center; gap: 6px;
@@ -652,74 +705,28 @@
     </div>
   </section>
 
-  <!-- ── AUTHORITY ENGINE BRIEF (inline, was modal-only) ───────────────────── -->
-  <section class="twin-section" id="t-aeb-section" style="display:none">
-    <div class="twin-section__head">
-      <span class="twin-section__eyebrow">Authority Engine Brief</span>
-      <span class="twin-section__rule"></span>
-      <span class="twin-section__count" id="t-aeb-refresh"></span>
-    </div>
-
-    <div class="twin-aeb__honest" id="t-aeb-honest">
-      <p class="twin-aeb__honest-label">⚠ The Honest Version</p>
-      <p class="twin-aeb__honest-body" id="t-aeb-disclaimer"></p>
-    </div>
-
-    <div class="twin-aeb__score">
-      <div class="twin-aeb__score-num" id="t-aeb-score">0</div>
-      <div class="twin-aeb__score-meta">
-        <span class="twin-aeb__score-label">Signal Score · 0–100</span>
-        <span class="twin-aeb__score-name" id="t-aeb-score-name"></span>
+  <!-- ── AUTHORITY ENGINE BRIEF — teaser card that opens the canonical drawer ─
+       Mirrors the .p-signal pattern from /profile/index.html exactly: same
+       score ring + title + description + arrow. Click routes to
+       /profile/:slug#audit which auto-opens the drawer. The drawer is the
+       single source of truth — we don't rebuild its 1k+ LOC inline here.
+       Only renders when there's a Signal score to show (renderAebTeaser).
+  -->
+  <section class="twin-section" id="t-aeb-teaser-section" style="display:none">
+    <a class="twin-aeb-teaser" id="t-aeb-teaser" href="#">
+      <div class="twin-aeb-teaser__ring-wrap">
+        <svg class="twin-aeb-teaser__ring-svg" viewBox="0 0 72 72">
+          <circle class="twin-aeb-teaser__ring-bg" cx="36" cy="36" r="30"/>
+          <circle class="twin-aeb-teaser__ring-fill" id="t-aeb-teaser-ring" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+        </svg>
+        <span class="twin-aeb-teaser__ring-num" id="t-aeb-teaser-score">0</span>
       </div>
-    </div>
-
-    <p class="twin-aeb__sub">01 · E-E-A-T Audit <small>Mapped to <a href="https://developers.google.com/search/blog/2022/12/google-raters-guidelines-update" rel="noopener" target="_blank" style="color:var(--gold)">Google’s Search Quality Guidelines § 5.1</a> — the four signals models use to decide who to cite.</small></p>
-    <div class="twin-eeat" id="t-aeb-eeat"></div>
-
-    <p class="twin-aeb__sub">02 · Live LLM Citation Audit</p>
-    <div class="twin-locked" id="t-aeb-citations">
-      <div class="twin-locked__icon"><i class="fas fa-lock"></i></div>
-      <p class="twin-locked__copy">Sign in as the page owner to see the live LLM citation audit — the actual answers we got back from ChatGPT, Perplexity, Claude, and Gemini when we asked who the authority is on your topics.</p>
-      <a class="twin-cta twin-cta--primary" href="https://app.conversationos.live/login">Sign In</a>
-    </div>
-
-    <p class="twin-aeb__sub">03 · Authority Compounding</p>
-    <div class="twin-history" id="t-aeb-history" style="display:none">
-      <svg class="twin-history__chart" id="t-aeb-history-svg" viewBox="0 0 800 120" preserveAspectRatio="none"></svg>
-      <div class="twin-history__rows" id="t-aeb-history-rows"></div>
-    </div>
-    <div class="twin-locked" id="t-aeb-history-empty">
-      <p class="twin-locked__copy">No snapshots yet — the floor never drops. Every appearance, every artifact, every recompute makes you more citable.</p>
-    </div>
-
-    <p class="twin-aeb__sub">04 · Data Sources <small>Every score is computed from named third-party providers. No black box.</small></p>
-    <div class="twin-sources" id="t-aeb-sources"></div>
-  </section>
-
-  <!-- ── STORYTIME (Center Stage embed + shorts strip) ────────────────── -->
-  <!-- 'Become a character in the universe' — the canonical Member-tier framing.
-       Renders only when the guest has a centerStageVideoId. The Storytime
-       sponsor chip appears for Member-tier guests; produced-appearance
-       guests (VIP) get a 'Center Stage' eyebrow instead. -->
-  <section class="twin-section" id="t-storytime-section" style="display:none">
-    <div class="twin-section__head">
-      <span class="twin-section__eyebrow" id="t-storytime-eyebrow">Storytime</span>
-      <span class="twin-section__rule"></span>
-      <span class="twin-section__count" id="t-storytime-tag"></span>
-    </div>
-    <div class="twin-storytime">
-      <div class="twin-storytime__main">
-        <div class="twin-storytime__player" id="t-storytime-player">
-          <img class="twin-storytime__poster" id="t-storytime-poster" alt="Center Stage poster">
-          <div class="twin-storytime__play"><div class="twin-storytime__play-btn"><i class="fas fa-play" aria-hidden="true"></i></div></div>
-        </div>
-        <div class="twin-storytime__caption">
-          <p class="twin-storytime__caption-eyebrow" id="t-storytime-caption-eyebrow">Mornings in the Lab · Center Stage</p>
-          <p class="twin-storytime__caption-title" id="t-storytime-title"></p>
-        </div>
+      <div class="twin-aeb-teaser__info">
+        <div class="twin-aeb-teaser__title">Authority Engine Brief</div>
+        <div class="twin-aeb-teaser__desc">E-E-A-T audit, live LLM citation tests, deliverables — every input behind the score.</div>
       </div>
-      <div class="twin-storytime__side" id="t-storytime-shorts"></div>
-    </div>
+      <div class="twin-aeb-teaser__hint">Open audit <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></div>
+    </a>
   </section>
 
   <!-- ── PITCH LEDGER (locked, owner sign-in unlocks) ───────────────────── -->
@@ -865,24 +872,11 @@
     </div>
   </section>
 
-  <!-- ── PULL QUOTES (storytime / narrative sections) ────────────────── -->
-  <section class="twin-section" id="t-quotes-section" style="display:none">
-    <div class="twin-section__head">
-      <span class="twin-section__eyebrow">Signature Moments</span>
-      <span class="twin-section__rule"></span>
-      <span class="twin-section__count" id="t-quotes-count"></span>
-    </div>
-    <div class="twin-quotes" id="t-quotes"></div>
-  </section>
-
-  <!-- ── TOPICS ─────────────────────────────────────────────────────── -->
-  <section class="twin-section" id="t-topics-section" style="display:none">
-    <div class="twin-section__head">
-      <span class="twin-section__eyebrow">Topics</span>
-      <span class="twin-section__rule"></span>
-    </div>
-    <div class="twin-topics" id="t-topics"></div>
-  </section>
+  <!-- Pull quotes + Topics removed (cleanup PR) — both surfaces live
+       on /profile/:slug at much higher fidelity (Signature Moments tile
+       grid + 6 cinematic story plates + the Expertise wall). The twin
+       page is the snapshot card; the magazine spread is the deep-dive.
+  -->
 </main>
 
 <footer class="twin-footer" id="twin-footer" style="display:none">
@@ -1035,49 +1029,19 @@
     // Each cell is hidden if its number is zero — we never bluff.
     renderReceiptsStrip(profile, audit);
 
-    // ── Authority Engine Brief (inline) ──
-    // Promoted from a hidden modal to a permanent on-page section. Mirrors
-    // the canonical drawer payload at /api/signal/audit/:slug. The locked
-    // sections (citation audit, deliverables) prompt sign-in for the page
-    // owner — same gating pattern as the modal in profile/index.html.
-    if (audit) {
-      renderAuthorityBrief(audit);
-    } else {
-      // Fallback — if audit endpoint failed, render minimal E-E-A-T from
-      // the profile signal columns so we don't lose the section entirely.
-      renderAuthorityBriefFallback(profile);
-    }
+    // ── Authority Engine Brief teaser ──
+    // Slim teaser card matching the .p-signal pattern from /profile/.
+    // Click routes to /profile/:slug#audit which auto-opens the canonical
+    // drawer (the 1k+ LOC AEB modal that's the single source of truth).
+    // The full inline AEB rebuild was removed in the cleanup PR — it
+    // duplicated work the drawer already does at higher fidelity.
+    renderAebTeaser(profile, audit);
 
-    // ── Storytime (Center Stage embed + shorts) ──
-    // The 'become a character' loop made tangible. Center Stage YouTube
-    // embed loads on click (privacy-respecting nocookie, no iframe until
-    // intent), with up to 4 short clips on the side rail. Each short
-    // opens YouTube directly so the page stays light.
-    renderStorytime(profile, authority);
-
-    // ── Pull quotes (narrative_sections.quote) ──
-    var sections = (authority && authority.narrative_sections) || [];
-    var quotes = sections.filter(function(s) { return s && s.quote; }).slice(0, 6);
-    if (quotes.length) {
-      document.getElementById('t-quotes-section').style.display = '';
-      document.getElementById('t-quotes-count').textContent = quotes.length + ' / ' + sections.length;
-      document.getElementById('t-quotes').innerHTML = quotes.map(function(q) {
-        var theme = q.theme || q.topic || q.eyebrow || '';
-        return '<figure class="twin-quote">' +
-          '<div class="twin-quote__mark">"</div>' +
-          '<blockquote class="twin-quote__body">' + esc(q.quote) + '</blockquote>' +
-          (theme ? '<figcaption class="twin-quote__theme">' + esc(theme) + '</figcaption>' : '') +
-          '</figure>';
-      }).join('');
-    }
-
-    // ── Topics ──
-    if (Array.isArray(topics) && topics.length) {
-      document.getElementById('t-topics-section').style.display = '';
-      document.getElementById('t-topics').innerHTML = topics.slice(0, 12).map(function(t) {
-        return '<span class="twin-topic">' + esc(t) + '</span>';
-      }).join('');
-    }
+    // Storytime, Pull Quotes, and Topics sections were removed in the
+    // cleanup PR. Those surfaces live on /profile/:slug at much higher
+    // fidelity (Reel Room with the actual videos, the 6 cinematic story
+    // plates, the Signature Moments tile grid, the Expertise wall).
+    // The twin page is the snapshot card; /profile/ is the deep-dive.
 
     // Reveal
     hide('twin-loading');
@@ -1237,6 +1201,41 @@
         '<span style="color:var(--text-muted)">Daily snapshot</span>' +
       '</div>';
     }).join('');
+  }
+
+  // ───────────────────────────────────────────────────────────────
+  // Authority Engine Brief teaser — slim card matching /profile/'s
+  // .p-signal pattern. Click routes to /profile/:slug#audit which the
+  // sibling page now auto-opens via maybeAutoOpenAuditFromHash().
+  // ───────────────────────────────────────────────────────────────
+  function renderAebTeaser(profile, audit) {
+    // Compute composite score — prefer audit endpoint, fall back to
+    // the profile signal columns so the card never goes missing.
+    var score = 0;
+    if (audit && typeof audit.signalScore === 'number') {
+      score = audit.signalScore;
+    } else {
+      score = (profile.signalReach || 0) + (profile.signalAuthorityScore || 0) +
+              (profile.signalDiscourse || 0) + (profile.signalSocial || 0);
+    }
+
+    show('t-aeb-teaser-section');
+    document.getElementById('t-aeb-teaser-score').textContent = score;
+
+    // Animate the ring to score / 100. Circumference = 2πr where r=30 → 188.5.
+    var ring = document.getElementById('t-aeb-teaser-ring');
+    if (ring) {
+      var circumference = 188.5;
+      var pct = Math.max(0, Math.min(100, score)) / 100;
+      var offset = circumference * (1 - pct);
+      // small delay so the transition runs after layout
+      setTimeout(function() { ring.style.strokeDashoffset = offset; }, 100);
+    }
+
+    // Wire the teaser link to the canonical drawer on /profile/:slug.
+    // The sibling page auto-opens the drawer when it sees `#audit`.
+    var teaser = document.getElementById('t-aeb-teaser');
+    if (teaser) teaser.href = '/profile/' + slug + '#audit';
   }
 
   function renderReceiptsStrip(profile, audit) {
