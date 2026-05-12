@@ -1362,6 +1362,56 @@
   }
   .p-cta__btn:hover { background:#f59e0b; }
 
+  /* VIP self-serve checkout CTA (Phase 1)
+     Sits inside the statbar, just below the tier badge. Only renders
+     for non-VIP profiles. One click fires the public-checkout endpoint
+     and redirects to Stripe - no /join wizard, no producer involvement. */
+  .p-vip-cta {
+    margin-top:0.875rem;
+    display:flex; flex-direction:column; align-items:flex-start; gap:0.4rem;
+  }
+  .p-vip-cta__btn {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.625rem 1.125rem;
+    background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color:#050914; font-family:var(--font-display);
+    font-weight:700; font-size:0.625rem; letter-spacing:0.14em; text-transform:uppercase;
+    border:none; border-radius:8px; cursor:pointer;
+    box-shadow:0 4px 18px rgba(251,191,36,0.25);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+  .p-vip-cta__btn:hover {
+    transform:translateY(-1px);
+    box-shadow:0 6px 22px rgba(251,191,36,0.35);
+  }
+  .p-vip-cta__btn:disabled {
+    opacity:0.6; cursor:wait; transform:none; box-shadow:none;
+  }
+  .p-vip-cta__price {
+    font-size:0.6875rem;
+    letter-spacing:0.06em; font-weight:600; text-transform:none;
+    opacity:0.85;
+  }
+  .p-vip-cta__sub {
+    font-size:0.75rem; color:var(--text-muted);
+    letter-spacing:0.04em;
+  }
+  .p-vip-cta__err {
+    font-size:0.75rem; color:#fca5a5;
+    background:rgba(220,38,38,0.08);
+    border:1px solid rgba(220,38,38,0.2);
+    padding:0.375rem 0.625rem; border-radius:6px;
+    display:none;
+  }
+  .p-vip-cta__success {
+    display:none;
+    font-size:0.75rem; color:#86efac;
+    background:rgba(34,197,94,0.08);
+    border:1px solid rgba(34,197,94,0.2);
+    padding:0.5rem 0.75rem; border-radius:6px;
+    letter-spacing:0.02em;
+  }
+
   /* ── Not Found ─────────────────────────── */
   .p-notfound {
     min-height:60vh; display:flex; align-items:center; justify-content:center;
@@ -1498,6 +1548,10 @@
                canonical home of the Signal Score on the public page. Showing
                the same number twice within 80px was the opposite of premium. -->
           <div class="p-statbar__links" id="p-sb-links"></div>
+          <!-- Phase 1: Self-serve VIP CTA. Rendered by renderVipCta() in the
+               profile bootstrap below. Hidden until JS decides whether to
+               show it (non-VIP profiles only). -->
+          <div class="p-vip-cta" id="p-vip-cta" style="display:none"></div>
         </div>
 
         <!-- Signal Brief / Authority Drawer trigger — click anywhere on this card opens the drawer -->
@@ -2053,6 +2107,110 @@
       var tc = profile.tier === 'vip' ? 'vip' : profile.tier === 'member' ? 'member' : profile.tier === 'featured' ? 'featured' : 'free';
       var tl = profile.tier === 'vip' ? '★ VIP' : profile.tier === 'member' ? '◆ MEMBER' : profile.tier === 'featured' ? '⚡ THE APPEARANCE' : 'DIRECTORY';
       document.getElementById('p-sb-tier').innerHTML = '<span class="p-statbar__tier p-statbar__tier--'+tc+'">'+tl+'</span>';
+
+      // ─── Phase 1: self-serve VIP CTA ───────────────────────────────
+      //
+      // Renders a gold 'Become a VIP' button INSIDE the statbar (right
+      // under the tier badge) for any profile that isn't already VIP.
+      // One click fires POST /api/guest-marketplace/public-checkout and
+      // redirects to the Stripe-hosted checkout page. The existing
+      // checkout.session.completed webhook in conversationos handles the
+      // post-payment upgrade — no producer touch needed.
+      //
+      // Why this is the right surface:
+      //   1. Profile page = moment of maximum desire (the visitor is
+      //      looking at the social proof they want to be the owner of).
+      //   2. The slug is already in the URL, so we can identify the
+      //      buyer without a join wizard.
+      //   3. Stripe Checkout collects email + card on its own hosted
+      //      page — we never touch payment data.
+      //
+      // Gating: only renders when profile.tier !== 'vip'. VIP profiles
+      // get the existing '★ VIP' tier badge with no upsell noise.
+      (function renderVipCta() {
+        try {
+          var slot = document.getElementById('p-vip-cta');
+          if (!slot) return;
+          // Skip for already-VIPs (no upsell on profiles already at the top tier).
+          if (profile.tier === 'vip') return;
+
+          // Detect a post-checkout success bounce (?vip=activated) and
+          // show a confirmation message instead of the button. The
+          // success_url in the server-side checkout session points
+          // back to this slug with this query param.
+          var sp = new URLSearchParams(window.location.search);
+          if (sp.get('vip') === 'activated') {
+            slot.innerHTML =
+              '<div class="p-vip-cta__success" style="display:block">' +
+                '<i class="fa-solid fa-circle-check"></i> ' +
+                'Welcome to VIP. Your Authority Page is being upgraded — check your email for next steps.' +
+              '</div>';
+            slot.style.display = 'flex';
+            // Strip the query param from the URL so a refresh doesn\'t
+            // re-show the banner. The path is preserved.
+            try {
+              history.replaceState(null, '',
+                window.location.pathname + window.location.hash);
+            } catch (e) {}
+            return;
+          }
+
+          slot.innerHTML =
+            '<button type="button" class="p-vip-cta__btn" id="p-vip-cta-btn" data-testid="public-vip-cta">' +
+              '<i class="fa-solid fa-crown"></i>' +
+              'Become a VIP' +
+              '<span class="p-vip-cta__price">$297/mo</span>' +
+            '</button>' +
+            '<div class="p-vip-cta__sub">' +
+              'Permanent placement, weekly Signal Intelligence, quarterly produced appearance.' +
+            '</div>' +
+            '<div class="p-vip-cta__err" id="p-vip-cta-err"></div>';
+          slot.style.display = 'flex';
+
+          var btn = document.getElementById('p-vip-cta-btn');
+          var errEl = document.getElementById('p-vip-cta-err');
+          btn.addEventListener('click', function () {
+            errEl.style.display = 'none';
+            errEl.textContent = '';
+            btn.disabled = true;
+            var originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Opening secure checkout…';
+
+            fetch(API + '/public-checkout', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ slug: slug, tier: 'vip' }),
+            })
+              .then(function (r) {
+                return r.json().then(function (data) { return { ok: r.ok, status: r.status, data: data }; });
+              })
+              .then(function (res) {
+                if (!res.ok || !res.data || !res.data.checkoutUrl) {
+                  var msg = (res.data && res.data.error) ? res.data.error
+                          : ('Checkout failed (' + res.status + '). Please email mornings@bapl.ai if this persists.');
+                  errEl.textContent = msg;
+                  errEl.style.display = 'block';
+                  btn.disabled = false;
+                  btn.innerHTML = originalHtml;
+                  return;
+                }
+                // Hard redirect to Stripe-hosted checkout. The URL is
+                // single-use and signed by Stripe — safe to navigate.
+                window.location.href = res.data.checkoutUrl;
+              })
+              .catch(function (err) {
+                errEl.textContent = 'Network error. Please try again, or email mornings@bapl.ai.';
+                errEl.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+                console.error('[vip-cta] checkout failed:', err);
+              });
+          });
+        } catch (e) {
+          // Defensive: never let a CTA bug break the rest of the profile.
+          console.error('[vip-cta] render failed:', e);
+        }
+      })();
 
       // Signal score: still computed here because the AEB strip ring + the
       // Receipts strip both consume it, but it is no longer rendered as a
