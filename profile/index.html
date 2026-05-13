@@ -9,6 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Calendly inline widget assets. Loaded eagerly (small, cached)
+       because the inline-mount on ?vip=activated needs them ready. -->
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <link rel="stylesheet" href="/style.css?v=20260419">
   <link rel="stylesheet" href="/header.css?v=1776710000">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -1412,6 +1416,58 @@
     letter-spacing:0.02em;
   }
 
+  /* Post-payment Calendly lock-in surface.
+     Mounts when ?vip=activated is in the URL. Replaces the small
+     success banner with a full inline Calendly widget so the buyer's
+     next action is picking a date — the highest-leverage moment for
+     reducing churn. Width spans the content column on desktop; the
+     iframe inside auto-resizes via Calendly's own widget script. */
+  .p-vip-calendar {
+    margin-top:1.5rem;
+    background:linear-gradient(180deg, rgba(251,191,36,0.06) 0%, rgba(251,191,36,0.02) 100%);
+    border:1px solid rgba(251,191,36,0.18);
+    border-radius:14px;
+    padding:1.5rem;
+    display:none;
+  }
+  .p-vip-calendar__head {
+    display:flex; align-items:flex-start; gap:0.75rem;
+    margin-bottom:1.25rem;
+  }
+  .p-vip-calendar__icon {
+    width:44px; height:44px; border-radius:10px; flex-shrink:0;
+    background:linear-gradient(135deg, #fbbf24, #f59e0b);
+    display:flex; align-items:center; justify-content:center;
+    color:#050914; font-size:1.05rem;
+  }
+  .p-vip-calendar__title {
+    margin:0 0 0.25rem;
+    font-family:var(--font-display); font-weight:700;
+    font-size:1.05rem; color:var(--text-primary);
+    letter-spacing:0.01em;
+  }
+  .p-vip-calendar__sub {
+    margin:0; font-size:0.8125rem; color:var(--text-muted);
+    line-height:1.5;
+  }
+  .p-vip-calendar__sub strong { color:var(--text-primary); }
+  .p-vip-calendar__widget {
+    min-height:680px; min-width:320px;
+    background:rgba(0,0,0,0.2);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .p-vip-calendar__booked {
+    display:none;
+    padding:1rem 1.25rem;
+    background:rgba(34,197,94,0.1);
+    border:1px solid rgba(34,197,94,0.25);
+    border-radius:8px;
+    color:#86efac; font-size:0.875rem;
+    line-height:1.55;
+  }
+  .p-vip-calendar__booked strong { color:#bbf7d0; }
+
   /* ── Not Found ─────────────────────────── */
   .p-notfound {
     min-height:60vh; display:flex; align-items:center; justify-content:center;
@@ -1552,6 +1608,11 @@
                profile bootstrap below. Hidden until JS decides whether to
                show it (non-VIP profiles only). -->
           <div class="p-vip-cta" id="p-vip-cta" style="display:none"></div>
+          <!-- Phase 1b: post-payment Calendly lock-in. Mounts inline when
+               the buyer returns from Stripe with ?vip=activated so the
+               next thing they do is pick a date. Reduces churn by
+               anchoring them to a concrete future commitment. -->
+          <div class="p-vip-calendar" id="p-vip-calendar" data-testid="public-vip-calendar"></div>
         </div>
 
         <!-- Signal Brief / Authority Drawer trigger — click anywhere on this card opens the drawer -->
@@ -2134,20 +2195,139 @@
           // Skip for already-VIPs (no upsell on profiles already at the top tier).
           if (profile.tier === 'vip') return;
 
-          // Detect a post-checkout success bounce (?vip=activated) and
-          // show a confirmation message instead of the button. The
-          // success_url in the server-side checkout session points
-          // back to this slug with this query param.
+          // Detect a post-checkout success bounce (?vip=activated).
+          //
+          // Instead of the small "welcome" banner we used to show, we
+          // now mount the Calendly inline widget so the next thing the
+          // buyer does is pick their On The Record appearance date.
+          // This is the single biggest churn-reduction lever right
+          // after payment — a booked date anchors them to a concrete
+          // future commitment.
+          //
+          // Telemetry on Calendly events:
+          //   - calendly.profile_page_viewed | calendly.event_type_viewed
+          //     → fire a 'viewed' beacon (low-signal, informational)
+          //   - calendly.event_scheduled
+          //     → POST the event metadata to the server-side
+          //       /booking-status endpoint so the nudge cron knows to
+          //       stop chasing this customer.
           var sp = new URLSearchParams(window.location.search);
           if (sp.get('vip') === 'activated') {
+            // Keep a small success header inline above the calendar.
             slot.innerHTML =
-              '<div class="p-vip-cta__success" style="display:block">' +
+              '<div class="p-vip-cta__success" style="display:block;margin-bottom:0.5rem">' +
                 '<i class="fa-solid fa-circle-check"></i> ' +
-                'Welcome to VIP. Your Authority Page is being upgraded — check your email for next steps.' +
+                'Welcome to VIP. Pick your appearance date below to lock in production.' +
               '</div>';
             slot.style.display = 'flex';
+
+            // Mount the inline Calendly widget right below.
+            var cal = document.getElementById('p-vip-calendar');
+            if (cal) {
+              var displayName = (profile.firstName || profile.name || '').toString();
+              var emailHint = (profile.email || '').toString();
+              cal.innerHTML =
+                '<div class="p-vip-calendar__head">' +
+                  '<div class="p-vip-calendar__icon"><i class="fa-solid fa-calendar-day"></i></div>' +
+                  '<div>' +
+                    '<p class="p-vip-calendar__title">Lock in your appearance date</p>' +
+                    '<p class="p-vip-calendar__sub">' +
+                      '<strong>One last step.</strong> Pick a slot for your On The Record appearance. ' +
+                      'Once you\'re on the calendar we kick off production prep and your ' +
+                      'first Signal Intelligence Report drops Monday.' +
+                    '</p>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="p-vip-calendar__widget" id="p-vip-calendar-widget"></div>' +
+                '<div class="p-vip-calendar__booked" id="p-vip-calendar-booked">' +
+                  '<i class="fa-solid fa-circle-check"></i> <strong>You\'re booked.</strong> ' +
+                  'A confirmation is on its way and we\'ll be in touch with prep notes.' +
+                '</div>';
+              cal.style.display = 'block';
+
+              // Initialise the Calendly inline widget. The widget script
+              // is loaded eagerly in <head>. We poll briefly because it
+              // loads async — most of the time it's ready by now.
+              var initCalendly = function () {
+                if (!(window).Calendly) return false;
+                try {
+                  (window).Calendly.initInlineWidget({
+                    url: 'https://calendly.com/mornings/on-the-record' +
+                         '?hide_event_type_details=1&hide_landing_page_details=1' +
+                         '&primary_color=fbbf24&text_color=e8e8ec&background_color=15151a',
+                    parentElement: document.getElementById('p-vip-calendar-widget'),
+                    prefill: {
+                      name: displayName,
+                      email: emailHint,
+                      customAnswers: {
+                        a1: 'guestengine.live/profile/' + slug,
+                      },
+                    },
+                    utm: {
+                      utmSource: 'guestengine.live',
+                      utmMedium: 'post-checkout',
+                      utmCampaign: 'vip-first-booking',
+                      utmContent: slug,
+                    },
+                  });
+                  return true;
+                } catch (e) {
+                  console.error('[vip-cta] Calendly init failed:', e);
+                  return false;
+                }
+              };
+              if (!initCalendly()) {
+                var attempts = 0;
+                var iv = setInterval(function () {
+                  attempts++;
+                  if (initCalendly() || attempts > 40) clearInterval(iv);
+                }, 250);
+              }
+
+              // Listen for postMessage events from the Calendly iframe.
+              // 'event_scheduled' = the booking is confirmed.
+              window.addEventListener('message', function (e) {
+                if (!e.data || typeof e.data !== 'object') return;
+                var evt = e.data.event;
+                if (!evt || typeof evt !== 'string') return;
+                if (!evt.startsWith('calendly.')) return;
+
+                if (evt === 'calendly.event_scheduled') {
+                  var payload = e.data.payload || {};
+                  fetch(API + '/booking-status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      slug: slug,
+                      status: 'scheduled',
+                      eventUri: (payload.event && payload.event.uri) || null,
+                      eventAt: (payload.event && payload.event.start_time) || null,
+                    }),
+                  }).catch(function (err) {
+                    console.error('[vip-cta] booking-status callback failed:', err);
+                  });
+                  // Swap the widget for a booked confirmation card.
+                  var w = document.getElementById('p-vip-calendar-widget');
+                  var b = document.getElementById('p-vip-calendar-booked');
+                  if (w) w.style.display = 'none';
+                  if (b) b.style.display = 'block';
+                } else if (
+                  evt === 'calendly.profile_page_viewed' ||
+                  evt === 'calendly.event_type_viewed'
+                ) {
+                  // Low-signal beacon — we POST so the server can
+                  // optionally instrument the funnel later.
+                  fetch(API + '/booking-status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slug: slug, status: 'viewed' }),
+                  }).catch(function () {});
+                }
+              });
+            }
+
             // Strip the query param from the URL so a refresh doesn\'t
-            // re-show the banner. The path is preserved.
+            // re-show the takeover. The path is preserved.
             try {
               history.replaceState(null, '',
                 window.location.pathname + window.location.hash);
