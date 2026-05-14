@@ -131,6 +131,16 @@
       background: var(--surface);
     }
 
+    /* Alias anchors so /join (and other pages) can deep-link with stable
+       slugs even if section IDs evolve. Invisible by design. */
+    .meth-anchor {
+      display: block;
+      position: relative;
+      top: -80px;
+      visibility: hidden;
+      height: 0;
+    }
+
     .meth-container {
       max-width: 880px;
       margin: 0 auto;
@@ -808,6 +818,7 @@
        SUBJECT CONTRACT
        ============================ -->
   <section class="meth-section meth-section--alt" id="subject">
+    <span id="subject-contract" class="meth-anchor" aria-hidden="true"></span>
     <div class="meth-container">
       <p class="meth-section__eyebrow">Contract 6 in detail</p>
       <h2 class="meth-section__title">The Subject Contract.</h2>
@@ -828,6 +839,8 @@
        60 · 75 · 90 CADENCE
        ============================ -->
   <section class="meth-section" id="cadence">
+    <span id="ladder" class="meth-anchor" aria-hidden="true"></span>
+    <span id="activity-matrix" class="meth-anchor" aria-hidden="true"></span>
     <div class="meth-container">
       <p class="meth-section__eyebrow">Inside Contract 1, for recurring tiers</p>
       <h2 class="meth-section__title">Day 60. Day 75. Day 90.</h2>
@@ -871,6 +884,7 @@
        FORBIDDEN PATTERNS
        ============================ -->
   <section class="meth-section" id="forbidden">
+    <span id="forbidden-patterns" class="meth-anchor" aria-hidden="true"></span>
     <div class="meth-container">
       <p class="meth-section__eyebrow">What we will not do</p>
       <h2 class="meth-section__title">Forbidden patterns.</h2>
