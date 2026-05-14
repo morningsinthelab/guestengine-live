@@ -195,6 +195,7 @@ Guest Engine serves these professional verticals with tailored messaging, delive
 | Join / Book | https://guestengine.live/join/ | Three-tier booking wizard: Single ($497), Member ($97/mo), VIP ($297/mo) |
 | Free Signal Report | https://guestengine.live/signal/ | AI-generated audience signal report for prospective guests |
 | Why Guest Engine | https://guestengine.live/why/ | Comparison with guest marketplaces, value proposition |
+| Methodology | https://guestengine.live/methodology/ | Public translation of scoring.md v1.10: four pillars (E-E-A-T), 25-activity matrix with LLM-surface tags, six trust contracts, Subject Contract, day 60/75/90 ladder, seven Forbidden Patterns, 12-source data table |
 | Sample Profile | https://guestengine.live/profile/sample/ | Example of a permanent SEO-indexed guest profile |
 | Tour Hub | https://guestengine.live/tour/ | Public walkthrough of what a $497 appearance produces |
 | Tour: Authority Page | https://guestengine.live/tour/authority-page/ | Sample Authority Page anchored in EJ Snyder's real published profile |
@@ -264,13 +265,29 @@ Hosts create a show profile with:
 
 ## Pricing
 
+Two working tiers and one on-ramp. There is no "Reach Pro" tier and no "depowered lower tier" by design — see Forbidden Patterns in the [Methodology page](https://guestengine.live/methodology/).
+
 | Tier | Price | Billing | Includes |
 |------|-------|---------|----------|
-| Single Appearance | $497 | One-time | 1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel |
-| Member | $97 | Monthly | Monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. No appearance included. Book appearances separately. |
-| VIP | $297 | Monthly | Everything in Member plus quarterly produced appearances, weekly intelligence reports, Center Stage and Deep Dive segment access, priority placement, premium authority profile |
+| Single Appearance | $497 | One-time | On-ramp. 1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel. |
+| Member | $97 | Monthly | 10 pitches/month, monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. |
+| VIP | $297 | Monthly | 50 pitches/month, weekly Signal intelligence reports, daily LLM citation audit, full Sophia (production) + Mack (outreach) access, Center Stage and Deep Dive access, premium authority profile. |
 | Host Listing | Free | — | List show, receive guest applications |
 | Host Pro (ConversationOS) | Contact | — | AI matching, Sophia booking, full production stack |
+
+### Cancellation and the day 60/75/90 ladder
+
+One-click cancel anytime, no clawback. We do not refund — LLM outputs are not controllable, so we sell inputs and measure outputs, never the reverse. In place of refunds, every VIP customer gets a documented ladder:
+
+- **Day 60** — diagnostic: where are the four pillars vs. the starting baseline?
+- **Day 75** — re-scope: which activities are working, which are being swapped, what the next 30 days look like.
+- **Day 90** — written audit: full report of activities run, scores moved, LLM citations earned or missed.
+
+Full spec at [/methodology](https://guestengine.live/methodology/).
+
+### The Subject Contract
+
+Before payment clears, every customer signs a one-line subject string in the form **"[Name] on [exact subject phrase]"**. That string is the LLM query we are optimizing the customer to answer. It is locked at signing and cannot be silently swapped. Customer Zero David Frangioni's subject contract: *"David Frangioni on AI in music production and the future of audio engineering."*
 
 Join page: https://guestengine.live/join/
 

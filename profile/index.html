@@ -1521,6 +1521,7 @@
       <a href="/signal/">Signal</a>
       <a href="/tour/">Tour</a>
       <a href="/why/">Why</a>
+      <a href="/methodology/">Methodology</a>
       <a href="/join/">Join</a>
     </nav>
     <div class="ge-header__actions">
@@ -1538,6 +1539,7 @@
     <a href="/signal/">Signal</a>
     <a href="/tour/">Tour</a>
     <a href="/why/">Why</a>
+      <a href="/methodology/">Methodology</a>
     <a href="/join/">Join</a>
     <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
   </div>
@@ -3343,7 +3345,10 @@
       var fullName = (d.guest && d.guest.fullName) || 'this guest';
       var firstName = fullName.split(' ')[0];
       var tier = (d.guest && d.guest.tier) || '';
-      var tierLabel = tier === 'vip' ? 'VIP' : tier === 'member' ? 'Member' : tier === 'reach_pro' ? 'Reach Pro' : tier === 'featured' ? 'Featured' : '';
+      // Tier label map. Reach Pro was retired in scoring.md v1.10 — keep
+      // the case as a defensive fallback for any legacy guest record that
+      // still has tier=reach_pro, so we don't render an empty badge.
+      var tierLabel = tier === 'vip' ? 'VIP' : tier === 'member' ? 'Member' : tier === 'reach_pro' ? 'Member' : tier === 'featured' ? 'Featured' : '';
       var tierBadge = tierLabel ? '<span class="p-preview__tier">\u2605 ' + tierLabel + '</span>' : '';
       var score = d.signalScore || 0;
 
@@ -3508,21 +3513,13 @@
           items: [
             'Quarterly produced appearance on Mornings in the Lab',
             'Weekly Signal Intelligence Report by email',
-            '25 Authority Reach pitches/mo (sent from MITL warmed inboxes)',
+            'Daily Live LLM Citation Audit (Perplexity · ChatGPT · Claude · Gemini)',
+            '50 Authority Reach pitches/mo (sent from MITL warmed inboxes)',
+            'Sophia (pitch + reply assistant) + Mack (booking assistant)',
             '30-day Distribution Sprint each appearance',
             'Premium Authority Page placement · priority directory listing',
+            'Documented day-60 / day-75 / day-90 accountability ladder',
             'Unlimited Signal viewing in your portal',
-          ],
-        },
-        reach_pro: {
-          label: 'Reach Pro — $197/mo',
-          items: [
-            '50 Authority Reach pitches/mo (sent from MITL warmed inboxes)',
-            'Priority pitch generation + manual MITL ops review of first 3',
-            'Reply tracking with AI-suggested responses',
-            'External appearances auto-added to your Authority Page',
-            'Quarterly category report tuned to pitch targets',
-            'Monthly Signal Intelligence Report by email',
           ],
         },
         member: {

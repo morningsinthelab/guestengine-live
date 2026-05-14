@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology — How Guest Engine Scores Authority</title>
+  <meta name="description" content="The full methodology behind the Signal Score: four-pillar E-E-A-T scoring, six trust contracts, the Subject Contract, the day-60/75/90 accountability ladder, and our forbidden patterns. Owner: Keith Bilous. Currently at v1.10.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Methodology — How Guest Engine Scores Authority">
+  <meta property="og:description" content="Six trust contracts, four-pillar scoring, $0.47 per refresh from twelve named providers, daily live LLM citation audit. Published in full. No black box.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://guestengine.live/methodology/">
+  <meta property="og:site_name" content="Guest Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://guestengine.live/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Methodology — How Guest Engine Scores Authority">
+  <meta name="twitter:description" content="Four pillars (E-E-A-T). Six trust contracts. Twelve named data providers at $0.47 per refresh. Daily live citation audit across ChatGPT, Claude, Perplexity, and Gemini. Published in full.">
+
+  <meta name="author" content="Keith Bilous">
+  <meta name="publisher" content="Guest Engine — Mornings in the Lab">
+  <meta name="theme-color" content="#020617">
+
+  <link rel="canonical" href="https://guestengine.live/methodology/">
+  <link rel="llms-txt" href="https://guestengine.live/llms.txt">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="../style.css?v=20260514a">
+  <link rel="stylesheet" href="../header.css?v=20260514a">
+
+  <style>
+    /* ───────────────────────────────────────────────
+       Methodology Page Styles — public translation of
+       docs/scoring.md v1.10. Visual language matches
+       the /signal and /why pages.
+       ─────────────────────────────────────────────── */
+
+    .meth-page {
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ─── Hero ─── */
+    .meth-hero {
+      padding: 8rem 1.5rem 3.5rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(251, 191, 36, 0.08), transparent 60%),
+        var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meth-hero__eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .meth-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin: 0 auto 1.5rem;
+      max-width: 880px;
+    }
+
+    .meth-hero__sub {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--text-body);
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .meth-hero__meta {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .meth-hero__meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .meth-hero__meta-key {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .meth-hero__meta-val {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── Section frame ─── */
+    .meth-section {
+      padding: 4.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meth-section--alt {
+      background: var(--surface);
+    }
+
+    /* Alias anchors so /join (and other pages) can deep-link with stable
+       slugs even if section IDs evolve. Invisible by design. */
+    .meth-anchor {
+      display: block;
+      position: relative;
+      top: -80px;
+      visibility: hidden;
+      height: 0;
+    }
+
+    .meth-container {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .meth-section__eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .meth-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin: 0 0 1.25rem;
+    }
+
+    .meth-section__lede {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--text-body);
+      line-height: 1.75;
+      margin: 0 0 2rem;
+    }
+
+    .meth-section p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-body);
+      line-height: 1.75;
+      margin: 0 0 1.25rem;
+    }
+
+    .meth-section p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .meth-section p em {
+      color: var(--text-primary);
+      font-style: italic;
+    }
+
+    /* ─── Promise blockquote ─── */
+    .meth-promise {
+      border-left: 3px solid var(--gold);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0 2rem;
+      background: rgba(251, 191, 36, 0.04);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .meth-promise p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    /* ─── Pillar grid ─── */
+    .meth-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .meth-pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .meth-section--alt .meth-pillar {
+      background: var(--bg);
+    }
+
+    .meth-pillar__label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .meth-pillar__name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .meth-pillar__what {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin: 0 0 0.75rem;
+    }
+
+    .meth-pillar__source {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── Contracts ─── */
+    .meth-contract {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 1.75rem 1.5rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .meth-section--alt .meth-contract {
+      background: var(--bg);
+    }
+
+    .meth-contract__num {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .meth-contract__title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 0.75rem;
+      line-height: 1.3;
+    }
+
+    .meth-contract p {
+      font-size: 0.95rem;
+      margin: 0 0 0.75rem;
+    }
+
+    .meth-contract p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ─── Table ─── */
+    .meth-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .meth-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      min-width: 600px;
+    }
+
+    .meth-table thead {
+      background: var(--surface);
+    }
+
+    .meth-section--alt .meth-table thead {
+      background: var(--bg);
+    }
+
+    .meth-table th {
+      text-align: left;
+      padding: 0.85rem 1rem;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meth-table td {
+      padding: 0.95rem 1rem;
+      vertical-align: top;
+      color: var(--text-body);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.55;
+    }
+
+    .meth-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .meth-table td strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ─── Honest version callout ─── */
+    .meth-honest {
+      background:
+        linear-gradient(180deg, rgba(251, 191, 36, 0.06), rgba(251, 191, 36, 0.02));
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .meth-honest__label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .meth-honest p {
+      margin: 0;
+      font-size: 1.02rem;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    /* ─── Subject contract example ─── */
+    .meth-subject-example {
+      background: var(--bg);
+      border: 1px dashed rgba(251, 191, 36, 0.4);
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1rem 0 1.5rem;
+      text-align: center;
+    }
+
+    .meth-section--alt .meth-subject-example {
+      background: var(--surface);
+    }
+
+    .meth-subject-example__label {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .meth-subject-example__quote {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* ─── Cadence cards ─── */
+    .meth-cadence {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .meth-cadence__card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .meth-section--alt .meth-cadence__card {
+      background: var(--bg);
+    }
+
+    .meth-cadence__day {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .meth-cadence__title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .meth-cadence__body {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── Forbidden patterns ─── */
+    .meth-forbidden {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .meth-forbidden__row {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .meth-section--alt .meth-forbidden__row {
+      background: var(--bg);
+    }
+
+    .meth-forbidden__x {
+      color: #ef4444;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .meth-forbidden__text {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    .meth-forbidden__text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ─── CTA ─── */
+    .meth-cta {
+      text-align: center;
+      padding: 5rem 1.5rem;
+      background: var(--bg);
+    }
+
+    .meth-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 auto 1rem;
+      max-width: 720px;
+      line-height: 1.25;
+    }
+
+    .meth-cta__sub {
+      font-family: var(--font-body);
+      font-size: 1.02rem;
+      color: var(--text-body);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.65;
+    }
+
+    .meth-cta__row {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .meth-cta__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.6rem;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .meth-cta__btn--primary {
+      background: var(--gold);
+      color: #020617;
+    }
+
+    .meth-cta__btn--primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+    }
+
+    .meth-cta__btn--ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .meth-cta__btn--ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ─── Source-of-truth footer note ─── */
+    .meth-source-note {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    .meth-source-note a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .meth-source-note a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── In-page table of contents ─── */
+    .meth-toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 0 auto 0;
+      max-width: 720px;
+      margin-top: -2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .meth-toc__label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.85rem;
+      text-align: center;
+    }
+
+    .meth-toc__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .meth-toc__list a {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--text-body);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .meth-toc__list a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+  </style>
+</head>
+<body class="meth-page">
+
+  <header class="ge-header" id="geHeader">
+    <a href="/" class="ge-header__logo">
+      <img src="/assets/c-icon.png" alt="" class="ge-header__logo-icon"><div class="ge-header__logo-text"><span class="ge-header__logo-cos">ConversationOS</span><div class="ge-header__logo-ge"><span class="ge-header__logo-guest">Guest</span><span class="ge-header__logo-engine">Engine</span></div></div>
+    </a>
+    <nav class="ge-header__nav" id="geNav">
+      <a href="/directory/">On The Record</a>
+      <a href="/shows/">Shows</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#network">Network</a>
+      <a href="/signal/">Signal</a>
+      <a href="/tour/">Tour</a>
+      <a href="/why/">Why</a>
+      <a href="/methodology/" aria-current="page">Methodology</a>
+      <a href="/join/">Join</a>
+    </nav>
+    <div class="ge-header__actions">
+      <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
+    </div>
+    <button class="ge-header__hamburger" id="geHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="ge-header__mobile-overlay" id="geMobileMenu">
+    <a href="/directory/">On The Record</a>
+    <a href="/shows/">Shows</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#network">Network</a>
+    <a href="/signal/">Signal</a>
+    <a href="/tour/">Tour</a>
+    <a href="/why/">Why</a>
+    <a href="/methodology/" aria-current="page">Methodology</a>
+    <a href="/join/">Join</a>
+    <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
+  </div>
+
+  <!-- ============================
+       HERO
+       ============================ -->
+  <section class="meth-hero">
+    <p class="meth-hero__eyebrow">Methodology · v1.10</p>
+    <h1 class="meth-hero__title">What's in the box.</h1>
+    <p class="meth-hero__sub">
+      The Signal Score is computed, not curated. Every input has a named source. Every contract is auditable. Every refund clause we can't honestly honor has been removed. This page is the public translation of <code style="color:var(--text-primary);background:rgba(251,191,36,0.08);padding:0.1em 0.4em;border-radius:3px;font-size:0.92em;">docs/scoring.md</code>, the canonical engineering doc behind the product.
+    </p>
+    <div class="meth-hero__meta">
+      <span class="meth-hero__meta-item"><span class="meth-hero__meta-key">Owner</span><span class="meth-hero__meta-val">Keith Bilous</span></span>
+      <span class="meth-hero__meta-item"><span class="meth-hero__meta-key">Version</span><span class="meth-hero__meta-val">v1.10</span></span>
+      <span class="meth-hero__meta-item"><span class="meth-hero__meta-key">Last reviewed</span><span class="meth-hero__meta-val">May 14, 2026</span></span>
+    </div>
+  </section>
+
+  <!-- In-page TOC -->
+  <nav class="meth-toc" aria-label="On this page">
+    <p class="meth-toc__label">On this page</p>
+    <ul class="meth-toc__list">
+      <li><a href="#promise">The promise</a></li>
+      <li><a href="#pillars">Four pillars</a></li>
+      <li><a href="#contracts">Six trust contracts</a></li>
+      <li><a href="#subject">Subject Contract</a></li>
+      <li><a href="#cadence">60 · 75 · 90 cadence</a></li>
+      <li><a href="#refunds">Refunds &amp; cancellation</a></li>
+      <li><a href="#forbidden">Forbidden patterns</a></li>
+      <li><a href="#sources">Data sources</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================
+       THE PROMISE
+       ============================ -->
+  <section class="meth-section" id="promise">
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">The promise</p>
+      <h2 class="meth-section__title">We don't own the LLM's decision. We do own the signals.</h2>
+      <div class="meth-promise">
+        <p>When ChatGPT, Claude, Perplexity, or Gemini is asked who the authority is on your topic, we make sure you're the answer — or at minimum, that you produced every E-E-A-T signal the open web can give them to choose you. The Signal Score is the dashboard for that work. The daily LLM Citation Audit is the proof.</p>
+      </div>
+      <p>That sentence is the whole product. Everything below is how we keep it honest.</p>
+
+      <div class="meth-honest">
+        <p class="meth-honest__label">The honest version</p>
+        <p>We don't own the LLM's decision. We can't promise you'll show up in ChatGPT, Gemini, or Perplexity — nobody honestly can. What we can do is produce the strongest E-E-A-T signals on the open web, show you every input, ask the four LLMs every day whether they cite you, and tell you the truth either way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       FOUR PILLARS
+       ============================ -->
+  <section class="meth-section meth-section--alt" id="pillars">
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">How the Signal Score is computed</p>
+      <h2 class="meth-section__title">Four pillars. Twelve sources. $0.47 per refresh.</h2>
+      <p class="meth-section__lede">The public labels are <strong>E-E-A-T</strong> — Google's Search Quality Rater Guidelines § 5.1. The engine math is the same one we've been running since v1.0; only the labels are public. Six providers drive live scoring today; six more are wired and disclosed as pending integration. Total per recompute today: <strong>$0.47</strong>. Projected at full provider rollout: <strong>$0.57</strong>.</p>
+
+      <div class="meth-pillars">
+        <div class="meth-pillar">
+          <p class="meth-pillar__label">Pillar 1 of 4</p>
+          <h3 class="meth-pillar__name">Trustworthiness</h3>
+          <p class="meth-pillar__what">Verified followers across LinkedIn, Facebook, Instagram, X, TikTok, YouTube, Substack.</p>
+          <p class="meth-pillar__source">Sources: SociaVault, YouTube Data API · $0.040</p>
+        </div>
+        <div class="meth-pillar">
+          <p class="meth-pillar__label">Pillar 2 of 4</p>
+          <h3 class="meth-pillar__name">Experience</h3>
+          <p class="meth-pillar__what">Past appearances, transcribed words, podcast distribution, channel reach.</p>
+          <p class="meth-pillar__source">Sources: Rephonic, YouTube, internal · $0.080</p>
+        </div>
+        <div class="meth-pillar">
+          <p class="meth-pillar__label">Pillar 3 of 4</p>
+          <h3 class="meth-pillar__name">Authoritativeness</h3>
+          <p class="meth-pillar__what">Web mentions in the trailing 90 days, press citations, cross-network references.</p>
+          <p class="meth-pillar__source">Sources: OctoLens, Perplexity Sonar · $0.170</p>
+        </div>
+        <div class="meth-pillar">
+          <p class="meth-pillar__label">Pillar 4 of 4</p>
+          <h3 class="meth-pillar__name">Expertise</h3>
+          <p class="meth-pillar__what">Identity verification, transcript depth, key insights, structured bio, identity URLs.</p>
+          <p class="meth-pillar__source">Sources: Apollo, ConversationOS transcript engine · $0.180</p>
+        </div>
+      </div>
+
+      <p><strong>Pending integration (disclosed in the Authority Drawer, not yet scoring):</strong> Wikipedia + Wikidata, Open Library, Tier 1 Press, Speaker Bureaus, USPTO, and ORCID. When each ships its resolver, it moves from <em>pending</em> to <em>live</em> and the pillar formula is updated in <code style="color:var(--text-primary);background:rgba(255,255,255,0.04);padding:0.05em 0.35em;border-radius:3px;font-size:0.9em;">signal-engine.ts</code>. The math is locked behind the formula change, not behind the disclosure. Disclosure is editorial; scoring is engineering.</p>
+
+      <p><strong>Why this matters.</strong> If a guest pays $97/month for Member tier, that buys roughly thirty daily refreshes — about $14.10 of pure data spend before any LLM cost. They aren't paying for a vanity number; they're paying for continuous, verifiable, third-party-sourced intelligence about their public presence.</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       SIX TRUST CONTRACTS
+       ============================ -->
+  <section class="meth-section" id="contracts">
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">What we owe every paying customer</p>
+      <h2 class="meth-section__title">The six trust contracts.</h2>
+      <p class="meth-section__lede">Every paying guest has a right to these six guarantees. They're not features — they're contracts. We don't refund — we can't, because we don't control the LLM's decision and we won't pretend otherwise — but every contract below is independently auditable, every artifact is itemized, and cancellation is always one click.</p>
+
+      <div class="meth-contract">
+        <p class="meth-contract__num">Contract 1</p>
+        <h3 class="meth-contract__title">Every artifact is itemized, shipped, and audited on a fixed cadence.</h3>
+        <p>When you finish an appearance, you get a single page called <strong>My Deliverables</strong> that lists every promised artifact with the exact URL where it lives. No artifact = no checkmark = the work isn't done. Backed by the <code style="color:var(--text-primary);background:rgba(255,255,255,0.04);padding:0.05em 0.35em;border-radius:3px;font-size:0.9em;">guest_deliverables</code> table with proof-of-work URLs and timestamps. For recurring tiers, the day-60 / day-75 / day-90 cadence (below) replaces the old refund clause with a real ops schedule.</p>
+      </div>
+
+      <div class="meth-contract">
+        <p class="meth-contract__num">Contract 2</p>
+        <h3 class="meth-contract__title">Every score is a receipt, not a vibe.</h3>
+        <p>The Signal Score is calculated from real, named third-party data sources — not by feel, not by us, not by hand. Twelve providers, four pillars, $0.47 per recompute. Snapshotted forever in <code style="color:var(--text-primary);background:rgba(255,255,255,0.04);padding:0.05em 0.35em;border-radius:3px;font-size:0.9em;">signal_score_history</code>, surfaced in your Authority Drawer.</p>
+      </div>
+
+      <div class="meth-contract">
+        <p class="meth-contract__num">Contract 3</p>
+        <h3 class="meth-contract__title">Every input has a clickable receipt.</h3>
+        <p>Your Authority Drawer has six sections — E-E-A-T audit, Live LLM Citation Audit, Close The Gap, Authority Compounding, Deliverables, and Data Sources. Owners see everything: raw provider responses, citation results from all four LLMs, per-pillar scores, every artifact's proof URL, every refresh's cost. Public viewers see locked CTAs that explain what's behind the lock without revealing the data.</p>
+      </div>
+
+      <div class="meth-contract">
+        <p class="meth-contract__num">Contract 4</p>
+        <h3 class="meth-contract__title">Every change is explainable and reversible.</h3>
+        <p>When your score moves, you see exactly why. <em>"Your score moved from 41 to 46 on Apr 29 (+5). Why: OctoLens found 3 new mentions of you → Authoritativeness pillar +5."</em> When it drops, same treatment. No mysterious score drops. No "the algorithm changed." If we ever change the algorithm, we ship a v2 with a date stamp and keep v1 history intact for everyone scored under it.</p>
+      </div>
+
+      <div class="meth-contract">
+        <p class="meth-contract__num">Contract 5</p>
+        <h3 class="meth-contract__title">Every guest can verify the formula themselves.</h3>
+        <p>We publish this document. We publish the formula. We publish the source providers. We publish the cost per refresh — $0.47, itemized in Section 06 of every drawer. We publish a sample raw API response for each provider so a skeptic can recreate the math. Nothing about how we count is proprietary. The proprietary work is producing a great conversation, making it LLM-readable, and turning one appearance into thirty days of presence. The score is just the dashboard.</p>
+      </div>
+
+      <div class="meth-contract">
+        <p class="meth-contract__num">Contract 6 · New in v1.10</p>
+        <h3 class="meth-contract__title">Every customer signs a Subject Contract before payment.</h3>
+        <p>You sign one sentence — <em>"[Your Name] on [your exact subject]"</em> — before payment clears. That sentence is the input every part of the engine scores against. Without it, we'd be measuring the wrong topic against the wrong LLMs. With it, every appearance, every pitch, every Wikidata claim, every Schema.org tag points at the same niche. Full detail below.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       SUBJECT CONTRACT
+       ============================ -->
+  <section class="meth-section meth-section--alt" id="subject">
+    <span id="subject-contract" class="meth-anchor" aria-hidden="true"></span>
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">Contract 6 in detail</p>
+      <h2 class="meth-section__title">The Subject Contract.</h2>
+      <p class="meth-section__lede">Authority is a niche problem. "Becoming known" only works if the niche is named. So before we take your money, you sign one short sentence that names exactly what you want to be the authority on. We point every measurement, every pitch, every artifact at that sentence — and only at that sentence.</p>
+
+      <div class="meth-subject-example">
+        <p class="meth-subject-example__label">Customer Zero · locked May 14, 2026</p>
+        <p class="meth-subject-example__quote">"David Frangioni on AI in music production and the future of audio engineering."</p>
+      </div>
+
+      <p>Your subject string is captured at sign-up, surfaced on your Authority Page header, and used as the literal seed when we ask the four LLMs <em>"Who is the authority on [your subject]?"</em> every day. It's also printed on every Day 0, Day 60, and Day 90 audit artifact so you can see we're measuring the right thing.</p>
+
+      <p><strong>Drift discipline.</strong> You can update your subject string, but only through an explicit <em>"Update subject"</em> action that resets the Day-0 baseline. The history of your previous subject is preserved forever. We never auto-mutate a subject from anywhere else in the engine. The string is yours; it's the producer-of-truth for every downstream surface.</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       60 · 75 · 90 CADENCE
+       ============================ -->
+  <section class="meth-section" id="cadence">
+    <span id="ladder" class="meth-anchor" aria-hidden="true"></span>
+    <span id="activity-matrix" class="meth-anchor" aria-hidden="true"></span>
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">Inside Contract 1, for recurring tiers</p>
+      <h2 class="meth-section__title">Day 60. Day 75. Day 90.</h2>
+      <p class="meth-section__lede">Because we don't control LLM behavior, we don't refund. We replace the refund promise with an accountability ladder that fires inside your first paid quarter. Everything below is system-fired, on a fixed schedule, whether the number moved or not.</p>
+
+      <div class="meth-cadence">
+        <div class="meth-cadence__card">
+          <p class="meth-cadence__day">Day 60</p>
+          <p class="meth-cadence__title">Diagnostic</p>
+          <p class="meth-cadence__body">A side-by-side of your Day-0 Signal Score vs your Day-60 Signal Score, broken out by pillar. Names the pillars that moved. Names the pillars that didn't. Names the LLMs still not citing you on your subject. No spin.</p>
+        </div>
+        <div class="meth-cadence__card">
+          <p class="meth-cadence__day">Day 75</p>
+          <p class="meth-cadence__title">Re-scope</p>
+          <p class="meth-cadence__body">We re-scope the activity mix on the still-flat pillars. New plays, new pitch targets, new Authority Reach campaigns weighted toward the absent LLMs. You sign off before we execute.</p>
+        </div>
+        <div class="meth-cadence__card">
+          <p class="meth-cadence__day">Day 90</p>
+          <p class="meth-cadence__title">Written audit</p>
+          <p class="meth-cadence__body">A PDF (and a permanent entry in your Authority Drawer) covering every artifact shipped, every pillar movement, every Authority Reach pitch sent and reply received, every LLM citation gained or lost. Closes with a recommendation: continue, change, or cancel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       REFUNDS & CANCELLATION
+       ============================ -->
+  <section class="meth-section meth-section--alt" id="refunds">
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">The thing nobody else writes down</p>
+      <h2 class="meth-section__title">We don't refund. Here's why — and what we do instead.</h2>
+      <p>An LLM's decision to cite anyone is theirs, not ours. We can produce the strongest E-E-A-T signals on the open web. We can prove the work shipped. We can show you the citation audit every day. We <em>cannot</em> guarantee what ChatGPT will say tomorrow — and any company that promises you they can is selling you theater.</p>
+      <p>So we replaced the refund clause with three things we <em>can</em> guarantee:</p>
+      <p style="margin-left: 1rem;"><strong>1.</strong> Every artifact you pay for ships, on a checklist, with a URL and a timestamp (Contract 1).<br><strong>2.</strong> The accountability ladder above — Day 60 diagnostic, Day 75 re-scope, Day 90 written audit — fires on a fixed schedule whether the number moved or not.<br><strong>3.</strong> Cancellation is always one click, with no clawback and no friction. You take everything we built with you when you go.</p>
+      <p>If a deliverable is more than fourteen days past its commitment date, the system automatically flags the order for ops review and surfaces a banner in your Authority Drawer. That's not a refund — but it's a visible accountability mechanic we own, on the artifact we control.</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       FORBIDDEN PATTERNS
+       ============================ -->
+  <section class="meth-section" id="forbidden">
+    <span id="forbidden-patterns" class="meth-anchor" aria-hidden="true"></span>
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">What we will not do</p>
+      <h2 class="meth-section__title">Forbidden patterns.</h2>
+      <p class="meth-section__lede">Customer Zero (one of our paying VIPs) walked our own pricing page line by line and circled the theater. The list below is what came out of that audit. These patterns are forbidden in any future tier, page, pitch template, or system prompt. If a future PR introduces any of them, the reviewer rejects it on this contract.</p>
+
+      <div class="meth-forbidden">
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>"Premium" without a definition.</strong> Labels that signal exclusivity without naming the thing being delivered. We name the artifact, the surface, or the cadence — "daily Live LLM Citation Audit," not "premium analytics."</p>
+        </div>
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>Priority placebos.</strong> "Priority support," "priority listing," "priority pitch generation" — unless there's an actual queue with a measurable position difference, that's empty.</p>
+        </div>
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>Departments that don't exist.</strong> Copy that implies a team behind a button when there isn't one. We only name a team or role when there's an org-chart row attached.</p>
+        </div>
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>Communities not yet formed.</strong> Selling Slack, Discord, or Roam access to a community that has zero members or zero activity. Until the community exists and is active, we don't sell access.</p>
+        </div>
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>Feature bundles instead of outcome bundles.</strong> Tiers built by adding more boxes to check ("+ 30 social posts") rather than around a customer outcome ("the LLMs cite you on your subject"). Features live inside the outcome, not in place of it.</p>
+        </div>
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>Depowered product as the lower tier.</strong> A lower tier is a smaller-but-coherent version of the same product. It isn't the same product with random features removed.</p>
+        </div>
+        <div class="meth-forbidden__row">
+          <span class="meth-forbidden__x">✕</span>
+          <p class="meth-forbidden__text"><strong>Promising specific LLM outputs.</strong> "We get you cited by ChatGPT" — we don't control that and saying we do is fraud. We promise the signals and the audit, never the LLM's answer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       DATA SOURCES
+       ============================ -->
+  <section class="meth-section meth-section--alt" id="sources">
+    <div class="meth-container">
+      <p class="meth-section__eyebrow">Twelve named providers</p>
+      <h2 class="meth-section__title">Where the data comes from.</h2>
+      <p class="meth-section__lede">Six of the providers below drive live scoring today. Six more are wired into the Authority Drawer as <em>pending</em> — disclosed for transparency, not yet weighted into the formula. We refresh the live set on a daily cron for VIP guests, and on demand for any customer who hits the "Refresh My Authority" button from their Authority Drawer.</p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Pillar</th>
+              <th>Status</th>
+              <th>Cost / refresh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>SociaVault + YouTube Data API</strong></td><td>Trustworthiness</td><td>Live</td><td>$0.040</td></tr>
+            <tr><td><strong>Rephonic + YouTube + internal</strong></td><td>Experience</td><td>Live</td><td>$0.080</td></tr>
+            <tr><td><strong>OctoLens</strong></td><td>Authoritativeness</td><td>Live</td><td>$0.120</td></tr>
+            <tr><td><strong>Perplexity Sonar</strong></td><td>Authoritativeness</td><td>Live</td><td>$0.050</td></tr>
+            <tr><td><strong>Apollo + ConversationOS transcripts</strong></td><td>Expertise</td><td>Live</td><td>$0.180</td></tr>
+            <tr><td><strong>Wikipedia + Wikidata</strong></td><td>Authoritativeness</td><td>Pending</td><td>$0.000</td></tr>
+            <tr><td><strong>Open Library</strong></td><td>Expertise</td><td>Pending</td><td>$0.000</td></tr>
+            <tr><td><strong>Tier 1 Press</strong></td><td>Authoritativeness</td><td>Pending</td><td>$0.100</td></tr>
+            <tr><td><strong>Speaker Bureaus</strong></td><td>Experience</td><td>Pending</td><td>$0.000</td></tr>
+            <tr><td><strong>USPTO</strong></td><td>Authoritativeness</td><td>Pending</td><td>$0.000</td></tr>
+            <tr><td><strong>ORCID</strong></td><td>Expertise</td><td>Pending</td><td>$0.000</td></tr>
+            <tr><td colspan="3"><strong>Live total today</strong></td><td><strong>$0.47</strong></td></tr>
+            <tr><td colspan="3">Projected total at full rollout</td><td>$0.57</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Beyond the four pillars, the engine runs a separate <strong>Live LLM Citation Audit</strong> every day for VIP guests — asking Perplexity, ChatGPT, Claude, and Gemini three queries each and writing twelve rows of evidence into your drawer. Cost per run: $0.123. You can re-run it yourself from your Authority Drawer (one per twenty-four hours). The full three-step refresh — Signal Score + Citation Audit + history snapshot — runs at about $0.59 end-to-end and is documented in the source-of-truth doc linked at the bottom of this page.</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       CTA
+       ============================ -->
+  <section class="meth-cta">
+    <h2 class="meth-cta__title">Now you know what's in the box.</h2>
+    <p class="meth-cta__sub">Sign the Subject Contract, ship the appearance, watch the score move on the daily audit. Or skip the pitch entirely and read the engineering doc.</p>
+    <div class="meth-cta__row">
+      <a href="/#pricing" class="meth-cta__btn meth-cta__btn--primary">See the pricing</a>
+      <a href="/signal/" class="meth-cta__btn meth-cta__btn--ghost">Free Signal Report</a>
+    </div>
+  </section>
+
+  <!-- Source-of-truth footer note -->
+  <p class="meth-source-note">
+    Canonical engineering doc: <a href="https://github.com/morningsinthelab/conversationos/blob/main/docs/scoring.md" target="_blank" rel="noopener"><code style="background:rgba(251,191,36,0.08);padding:0.1em 0.4em;border-radius:3px;font-size:0.92em;">docs/scoring.md</code></a> in the ConversationOS repo. If anything on this page disagrees with that doc, the doc wins — and we update the page.<br>
+    Owner: Keith Bilous · Version 1.10 · Last reviewed May 14, 2026.
+  </p>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo" aria-label="Site footer" itemscope itemtype="https://schema.org/WPFooter">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" aria-label="Guest Engine home">
+            <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="36" height="36" rx="6" fill="#fbbf24"/>
+              <text x="8" y="26" font-family="Syncopate, sans-serif" font-weight="700" font-size="22" fill="#020617">G</text>
+            </svg>
+            <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
+          </a>
+          <p class="footer__tagline">The live conversation platform where we set the stage, set the conversation, and set you up &mdash; powered by <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a>.</p>
+          <p class="footer__founder">ABOUT THE FOUNDER</p>
+          <p class="footer__founder-text">Founded by <a href="https://keithbilous.com" target="_blank" rel="noopener">Keith Bilous</a>, creator of the MiTL morning format and the ConversationOS production system.</p>
+          <div class="footer__social">
+            <a href="https://youtube.com/@morningsinthelab" target="_blank" rel="noopener" aria-label="YouTube" class="footer__social-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/keithbilous" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer__social-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://x.com/keithbilous" target="_blank" rel="noopener" aria-label="X (Twitter)" class="footer__social-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Guest Engine</h4>
+          <a href="/authors/" class="footer__link">Authors &amp; Speakers</a>
+          <a href="/coaches/" class="footer__link">Coaches &amp; Mentors</a>
+          <a href="/founders/" class="footer__link">Founders</a>
+          <a href="/realestate/" class="footer__link">Real Estate</a>
+          <a href="/podcasters/" class="footer__link">Podcasters</a>
+          <a href="/consultants/" class="footer__link">Consultants</a>
+          <a href="/therapists/" class="footer__link">Therapists</a>
+          <a href="/financial-advisors/" class="footer__link">Financial Advisors</a>
+          <a href="/attorneys/" class="footer__link">Attorneys</a>
+          <a href="/health-wellness/" class="footer__link">Health &amp; Wellness</a>
+          <a href="/nonprofit-leaders/" class="footer__link">Nonprofit Leaders</a>
+          <a href="/corporate-executives/" class="footer__link">Corporate Executives</a>
+          <a href="/why/" class="footer__link footer__link--accent">Why Guest Engine</a>
+          <a href="/methodology/" class="footer__link footer__link--accent">Methodology</a>
+          <a href="/signal/" class="footer__link footer__link--accent">Free Signal Report</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Network Shows</h4>
+          <a href="https://mornings.live" class="footer__link" target="_blank" rel="noopener">Mornings in the Lab</a>
+          <span class="footer__link footer__link--upcoming">It Starts with Joy LIVE</span>
+          <span class="footer__link footer__link--upcoming">The Jason Hewlett Show</span>
+          <span class="footer__link footer__link--upcoming">Kindness Rising</span>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">MiTL Ecosystem</h4>
+          <a href="https://mitl.studio" class="footer__link" target="_blank" rel="noopener">MiTL Studio</a>
+          <a href="https://mornings.live" class="footer__link" target="_blank" rel="noopener">mornings.live</a>
+          <a href="https://keithbilous.com" class="footer__link" target="_blank" rel="noopener">keithbilous.com</a>
+          <a href="https://conversationos.live" class="footer__link" target="_blank" rel="noopener">ConversationOS</a>
+          <a href="https://app.conversationos.live" class="footer__link" target="_blank" rel="noopener">Guest Engine App</a>
+          <a href="https://clips.conversationos.live" class="footer__link" target="_blank" rel="noopener">ClipENGINE</a>
+          <a href="https://production.mitl.studio" class="footer__link" target="_blank" rel="noopener">Production</a>
+          <a href="https://thisis.mitl.studio" class="footer__link" target="_blank" rel="noopener">thisis.mitl.studio</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 GUEST ENGINE. CREATED BY <a href="https://keithbilous.com" target="_blank" rel="noopener">KEITH BILOUS</a>. AI-POWERED MATCHING. HUMAN-LED PRODUCTION. &mdash; Powered by <a href="https://conversationos.live" target="_blank" rel="noopener">ConversationOS</a>, the production platform behind 1,000+ live episodes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../header.js"></script>
+</body>
+</html>

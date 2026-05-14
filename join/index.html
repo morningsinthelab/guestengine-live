@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing — Get Featured, Distributed, and Booked | Guest Engine</title>
-  <meta name="description" content="Four ways to grow your authority on the MITL Live Network. Single Appearance ($497), Member ($97/mo), Reach Pro ($197/mo), VIP ($297/mo). Get featured, get distributed, get booked again.">
+  <meta name="description" content="Three ways to grow your authority on the MITL Live Network. Single Appearance ($497), Member ($97/mo), VIP ($297/mo). Every tier maps to a scored activity in our public methodology.">
 
-  <meta property="og:title" content="Guest Engine Pricing — Four Tiers, One Compounding Asset">
-  <meta property="og:description" content="Single Appearance ($497) · Member ($97/mo) · Reach Pro ($197/mo) · VIP ($297/mo). Every tier includes a permanent, AI-indexed Authority Page.">
+  <meta property="og:title" content="Guest Engine Pricing — Three Tiers, One Compounding Asset">
+  <meta property="og:description" content="Single Appearance ($497) · Member ($97/mo) · VIP ($297/mo). Every tier includes a permanent, AI-indexed Authority Page and ties to a documented activity in our public methodology.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://guestengine.live/join/">
   <meta property="og:image" content="https://guestengine.live/og-image.png">
@@ -217,17 +217,38 @@
 
   /* Tier cards */
   .tier-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    max-width: 1200px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    max-width: 900px;
   }
   .tier-card {
     background: var(--card-bg); border: 2px solid var(--border);
-    border-radius: 16px; padding: 28px 20px;
+    border-radius: 16px; padding: 32px 24px;
     cursor: pointer; transition: all 0.25s;
     position: relative; text-align: center;
   }
 
-  /* Featured hero tier (Single Appearance) — full width above the 3-col grid */
+  /* Activity-row tag on tier features — links to /methodology */
+  .tier-card__features li .activity-tag,
+  .tier-hero__features li .activity-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 7px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--gold);
+    background: rgba(251,191,36,0.10);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 4px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .tier-card__features li .activity-tag:hover,
+  .tier-hero__features li .activity-tag:hover {
+    background: rgba(251,191,36,0.18);
+    color: #fff;
+  }
+
+  /* Featured hero tier (Single Appearance) — full width above the 2-col grid */
   .tier-hero {
     display: grid;
     grid-template-columns: minmax(260px, 320px) 1fr;
@@ -567,25 +588,116 @@
     border-bottom: 2px solid var(--border-strong);
   }
   .compare-table thead th.col-feature { color: var(--text); }
-  .compare-table thead th.col-reachpro {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-  }
   .compare-table tbody th {
     font-weight: 600;
     color: var(--text);
-    width: 32%;
+    width: 38%;
   }
   .compare-table tbody td {
     color: var(--text-secondary);
     text-align: center;
-    width: 17%;
+    width: 20%;
   }
   .compare-table tbody td.cell-empty { color: var(--text-tertiary); }
   .compare-table tbody td.cell-yes { color: var(--gold); font-weight: 700; }
-  .compare-table tbody td.cell-reachpro {
+
+  /* ── Subject Contract / Ladder / Forbidden Patterns blocks ── */
+  .pricing-trust {
+    max-width: 1000px;
+    margin: 80px auto 0;
+    padding: 0 40px;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .pricing-trust__card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+  .pricing-trust__card--wide { grid-column: 1 / -1; }
+  .pricing-trust__eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .pricing-trust__title {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 800;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .pricing-trust__body {
+    font-size: 14px; line-height: 1.65;
+    color: var(--text-secondary);
+  }
+  .pricing-trust__body strong { color: var(--text); font-weight: 600; }
+  .pricing-trust__quote {
+    margin-top: 14px;
+    padding: 14px 18px;
+    border: 1px dashed rgba(251,191,36,0.4);
+    border-radius: 8px;
+    font-style: italic;
+    color: var(--text);
+    font-size: 14px;
     background: rgba(251,191,36,0.04);
-    color: var(--gold); font-weight: 700;
+  }
+  .ladder-row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-row__day {
+    font-family: var(--font-display);
+    font-size: 30px; font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .ladder-row__label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    color: var(--text-tertiary); text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .ladder-row__text {
+    font-size: 14px; line-height: 1.55;
+    color: var(--text-secondary);
+  }
+  .forbidden-list {
+    list-style: none; padding: 0; margin: 8px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 28px;
+  }
+  .forbidden-list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 13px; line-height: 1.55;
+    color: var(--text-secondary);
+  }
+  .forbidden-list li::before {
+    content: "\00d7";
+    position: absolute; left: 0; top: -2px;
+    color: #f87171;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .pricing-trust__footnote {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+  .pricing-trust__footnote a { color: var(--gold); text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .pricing-trust { grid-template-columns: 1fr; padding: 0 20px; }
+    .forbidden-list { grid-template-columns: 1fr; }
   }
 
   /* ── FAQ ── */
@@ -729,7 +841,7 @@
       padding: 24px; gap: 16px;
     }
     .wizard-page { padding: 100px 20px 60px; }
-    .tier-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+    .tier-grid { max-width: 720px; }
     .tier-hero { grid-template-columns: 1fr; gap: 24px; padding: 32px; }
     .tier-hero__features { grid-template-columns: 1fr; }
     .show-grid { grid-template-columns: 1fr; }
@@ -906,33 +1018,13 @@
               "billingDuration": "P1M",
               "billingIncrement": 1
             },
-            "description": "Story Time sponsorship (your AI digital twin appears in show segments), AI digital twin in the ConversationOS character network, monthly Signal intelligence report, Member directory listing, community access, 10 Authority Reach pitches per month, member-rate ($297) appearance booking, membership credit toward launching your own show.",
+            "description": "Story Time sponsorship (your AI digital twin appears in show segments), AI digital twin in the ConversationOS character network, monthly Signal intelligence report, Member directory listing, community access, 10 Authority Reach pitches per month, member-rate ($297) additional appearance booking, membership credit toward launching your own show on the network (3-month minimum).",
             "availability": "https://schema.org/InStock"
           }
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "item": {
-            "@type": "Offer",
-            "name": "Reach Pro Monthly",
-            "price": "197",
-            "priceCurrency": "USD",
-            "category": "Reach Pro",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "197",
-              "priceCurrency": "USD",
-              "billingDuration": "P1M",
-              "billingIncrement": 1
-            },
-            "description": "Everything in Member, plus 25 Authority Reach pitches per month, full-service reply tracking with AI-suggested responses, external-appearance auto-add to your Authority Page, quarterly category report, manual pitch review on first three pitches.",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
           "item": {
             "@type": "Offer",
             "name": "VIP Monthly",
@@ -946,7 +1038,7 @@
               "billingDuration": "P1M",
               "billingIncrement": 1
             },
-            "description": "Everything in Reach Pro, plus a quarterly produced appearance on Mornings in the Lab, 50 Authority Reach pitches per month, weekly Signal intelligence reports, premium Authority Page placement, priority directory listing, 30-day Distribution Sprint each time you appear.",
+            "description": "Everything in Member, plus a quarterly produced appearance on Mornings in the Lab, 50 Authority Reach pitches per month, daily Live LLM Citation Audit, Sophia (pitch + reply assistant), Mack (booking assistant), weekly Signal intelligence reports, premium Authority Page placement, priority directory listing, and a 30-day Distribution Sprint each time you appear. Documented day-60 diagnostic, day-75 re-scope, day-90 written audit ladder. Cancel any time, no clawback.",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -970,6 +1062,7 @@
       <a href="/signal/">Signal</a>
       <a href="/tour/">Tour</a>
       <a href="/why/">Why</a>
+      <a href="/methodology/">Methodology</a>
       <a href="/join/">Join</a>
     </nav>
     <div class="ge-header__actions">
@@ -987,6 +1080,7 @@
     <a href="/signal/">Signal</a>
     <a href="/tour/">Tour</a>
     <a href="/why/">Why</a>
+      <a href="/methodology/">Methodology</a>
     <a href="/join/">Join</a>
     <a href="https://app.conversationos.live/portal/login" class="ge-header__login">Log In</a>
   </div>
@@ -1090,57 +1184,39 @@
 
       <div class="tier-grid">
         <!-- MEMBER -->
-        <div class="tier-card recommended" data-tier="member">
+        <div class="tier-card" data-tier="member">
           <div class="tier-card__name">Member</div>
           <div class="tier-card__price">$97</div>
           <div class="tier-card__billing">Per month</div>
-          <div class="tier-card__subtitle">Become a character. Sponsor a Story Time.</div>
+          <div class="tier-card__subtitle">Stay visible. Compound your authority.</div>
           <ul class="tier-card__features">
-            <li><strong>Story Time sponsorship</strong> &mdash; your AI digital twin appears as a character in show segments (~weekly slot)</li>
-            <li>AI digital twin in the ConversationOS character network</li>
-            <li>Monthly Signal intelligence report</li>
-            <li>Member directory listing</li>
+            <li><strong>Story Time sponsorship</strong> &mdash; your AI digital twin appears as a character in show segments (~weekly slot) <a href="/methodology/#activity-matrix" class="activity-tag" title="How this scores in our methodology">A14</a></li>
+            <li>AI digital twin in the ConversationOS character network <a href="/methodology/#activity-matrix" class="activity-tag">A20</a></li>
+            <li>Monthly Signal intelligence report <a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
+            <li>Member directory listing <a href="/methodology/#activity-matrix" class="activity-tag">A17</a></li>
             <li>Community access (Roam office)</li>
-            <li>10 Authority Reach pitches per month</li>
-            <li>Book additional appearances at the $297 member rate</li>
-            <li>Membership credit toward launching your own show on the network (3-month minimum)</li>
-          </ul>
-        </div>
-
-        <!-- REACH PRO (NEW) -->
-        <div class="tier-card" data-tier="reachpro" id="tier-reachpro">
-          <div class="tier-card__badge--new">New</div>
-          <div class="tier-card__name">Reach Pro</div>
-          <div class="tier-card__price">$197</div>
-          <div class="tier-card__billing">Per month</div>
-          <div class="tier-card__subtitle">Pitch hard. Get booked everywhere.</div>
-          <ul class="tier-card__features">
-            <li>Everything in Member</li>
-            <li><strong>25 Authority Reach pitches per month</strong> (2.5x Member)</li>
-            <li>Priority pitch generation by Sophia</li>
-            <li>Full-service reply tracking with AI-suggested responses</li>
-            <li>External-appearance auto-add to your Authority Page</li>
-            <li>Quarterly category report tuned to your pitch targets</li>
-            <li>Manual review of your first three pitches by MITL ops</li>
-            <li>Membership credit toward launching your own show on the network (3-month minimum)</li>
+            <li><strong>10 Authority Reach pitches per month</strong> <a href="/methodology/#activity-matrix" class="activity-tag">A05</a></li>
+            <li>Book additional appearances at the $297 member rate (3-month min)</li>
+            <li>Membership credit toward launching your own show on the network</li>
           </ul>
         </div>
 
         <!-- VIP -->
-        <div class="tier-card" data-tier="vip">
+        <div class="tier-card recommended" data-tier="vip">
           <div class="tier-card__name">VIP</div>
           <div class="tier-card__price">$297</div>
           <div class="tier-card__billing">Per month</div>
-          <div class="tier-card__subtitle">Everything. Appearances included.</div>
+          <div class="tier-card__subtitle">Compound on your subject. Appearances included.</div>
           <ul class="tier-card__features">
-            <li>Everything in Reach Pro</li>
-            <li>Quarterly produced appearance on Mornings in the Lab</li>
-            <li><strong>50 Authority Reach pitches per month</strong></li>
-            <li>Weekly Signal intelligence reports</li>
-            <li>30-day Distribution Sprint each time you appear</li>
-            <li>Premium Authority Page placement</li>
-            <li>Priority directory listing</li>
-            <li>Membership credit toward launching your own show on the network (3-month minimum)</li>
+            <li>Everything in Member</li>
+            <li><strong>Quarterly produced appearance</strong> on Mornings in the Lab <a href="/methodology/#activity-matrix" class="activity-tag">A03</a></li>
+            <li><strong>50 Authority Reach pitches per month</strong> <a href="/methodology/#activity-matrix" class="activity-tag">A05</a></li>
+            <li><strong>Daily Live LLM Citation Audit</strong> &mdash; Perplexity, ChatGPT, Claude, Gemini <a href="/methodology/#activity-matrix" class="activity-tag">A02</a></li>
+            <li>Sophia (pitch + reply assistant) + Mack (booking assistant) <a href="/methodology/#activity-matrix" class="activity-tag">A06</a></li>
+            <li>Weekly Signal intelligence reports <a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
+            <li>30-day Distribution Sprint each time you appear <a href="/methodology/#activity-matrix" class="activity-tag">A09</a></li>
+            <li>Premium Authority Page placement + priority directory listing</li>
+            <li>Documented day-60 / day-75 / day-90 accountability ladder <a href="/methodology/#ladder" class="activity-tag">LADDER</a></li>
           </ul>
         </div>
       </div>
@@ -1321,7 +1397,6 @@
             <th class="col-feature" scope="col">&nbsp;</th>
             <th scope="col">Single</th>
             <th scope="col">Member</th>
-            <th class="col-reachpro" scope="col">Reach Pro</th>
             <th scope="col">VIP</th>
           </tr>
         </thead>
@@ -1330,95 +1405,154 @@
             <th scope="row">Price</th>
             <td>$497 once</td>
             <td>$97/mo</td>
-            <td class="cell-reachpro">$197/mo</td>
             <td>$297/mo</td>
           </tr>
           <tr>
             <th scope="row">Live appearance</th>
             <td>1 (now)</td>
             <td>book separately</td>
-            <td class="cell-reachpro">book separately</td>
             <td>quarterly produced</td>
           </tr>
           <tr>
             <th scope="row">Authority Page</th>
             <td class="cell-yes">&#10003; permanent</td>
             <td class="cell-yes">&#10003; permanent</td>
-            <td class="cell-reachpro">&#10003; permanent</td>
             <td class="cell-yes">&#10003; premium placement</td>
           </tr>
           <tr>
             <th scope="row">Content Vault</th>
             <td class="cell-yes">&#10003;</td>
             <td>with each appearance</td>
-            <td class="cell-reachpro">with each appearance</td>
             <td>with each appearance</td>
           </tr>
           <tr>
             <th scope="row">Distribution Sprint</th>
             <td>14 days</td>
             <td>30 days</td>
-            <td class="cell-reachpro">30 days</td>
             <td>30 days</td>
           </tr>
           <tr>
             <th scope="row">Authority Reach pitches/mo</th>
             <td class="cell-empty">&mdash;</td>
             <td>10</td>
-            <td class="cell-reachpro"><strong>25</strong></td>
             <td><strong>50</strong></td>
           </tr>
           <tr>
             <th scope="row">Story Time sponsorship</th>
             <td class="cell-empty">&mdash;</td>
             <td class="cell-yes">&#10003;</td>
-            <td class="cell-reachpro">&#10003;</td>
             <td class="cell-yes">&#10003;</td>
           </tr>
           <tr>
             <th scope="row">Membership credit toward your own show</th>
             <td class="cell-empty">&mdash;</td>
             <td class="cell-yes">&#10003;</td>
-            <td class="cell-reachpro">&#10003;</td>
             <td class="cell-yes">&#10003;</td>
           </tr>
           <tr>
             <th scope="row">Signal intelligence report</th>
             <td>once</td>
             <td>monthly</td>
-            <td class="cell-reachpro">monthly + quarterly</td>
             <td>weekly</td>
           </tr>
           <tr>
             <th scope="row">AI digital twin</th>
             <td class="cell-empty">&mdash;</td>
             <td class="cell-yes">&#10003;</td>
-            <td class="cell-reachpro">&#10003;</td>
             <td class="cell-yes">&#10003;</td>
           </tr>
           <tr>
             <th scope="row">Member directory</th>
             <td>featured</td>
             <td>listed</td>
-            <td class="cell-reachpro">listed</td>
             <td>priority placement</td>
           </tr>
           <tr>
-            <th scope="row">Reply tracking &amp; AI suggestions</th>
+            <th scope="row">Daily Live LLM Citation Audit</th>
             <td class="cell-empty">&mdash;</td>
-            <td class="cell-yes">&#10003;</td>
-            <td class="cell-reachpro">&#10003;</td>
-            <td class="cell-yes">&#10003;</td>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-yes">&#10003; Perplexity, ChatGPT, Claude, Gemini</td>
           </tr>
           <tr>
-            <th scope="row">Manual pitch review (first 3)</th>
+            <th scope="row">Sophia + Mack assistants</th>
             <td class="cell-empty">&mdash;</td>
             <td class="cell-empty">&mdash;</td>
-            <td class="cell-reachpro">&#10003;</td>
+            <td class="cell-yes">&#10003; full access</td>
+          </tr>
+          <tr>
+            <th scope="row">Day-60 / 75 / 90 audit ladder</th>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-empty">&mdash;</td>
             <td class="cell-yes">&#10003;</td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- TRUST BLOCKS — Subject Contract, Day 60/75/90 ladder, Forbidden Patterns -->
+  <section class="pricing-trust" aria-labelledby="trust-heading">
+    <h2 id="trust-heading" class="sr-only" style="position:absolute;left:-9999px;">How we work</h2>
+
+    <!-- Subject Contract -->
+    <div class="pricing-trust__card">
+      <div class="pricing-trust__eyebrow">Contract 6 — Subject Contract</div>
+      <div class="pricing-trust__title">You sign one sentence before payment clears.</div>
+      <div class="pricing-trust__body">
+        <p>Every customer signs a one-line subject string in the form <strong>“[Name] on [exact subject phrase].”</strong> That string is the LLM query we&rsquo;re optimizing you to answer &mdash; it locks at signing and cannot be silently swapped. Without it, the scoring engine drifts and the Authority Page can&rsquo;t pick a niche to dominate.</p>
+        <div class="pricing-trust__quote">&ldquo;David Frangioni on AI in music production and the future of audio engineering.&rdquo;</div>
+        <div class="pricing-trust__footnote">Customer Zero example. <a href="/methodology/#subject-contract">Read the full Subject Contract spec</a>.</div>
+      </div>
+    </div>
+
+    <!-- Day 60 / 75 / 90 ladder -->
+    <div class="pricing-trust__card">
+      <div class="pricing-trust__eyebrow">Accountability ladder</div>
+      <div class="pricing-trust__title">We don&rsquo;t refund. We ship a documented day 60 / 75 / 90.</div>
+      <div class="pricing-trust__body">
+        <p>We sell inputs (artifacts, schema, citations, distribution). We don&rsquo;t control whether an LLM cites you, so we don&rsquo;t promise a refund tied to a number we don&rsquo;t own. We replace the false promise with a real cadence:</p>
+        <div class="ladder-row">
+          <div class="ladder-row__day">60</div>
+          <div>
+            <div class="ladder-row__label">Diagnostic</div>
+            <div class="ladder-row__text">Which pillars moved, which didn&rsquo;t, and why — measured against your day-zero baseline.</div>
+          </div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-row__day">75</div>
+          <div>
+            <div class="ladder-row__label">Re-scope</div>
+            <div class="ladder-row__text">We swap the activity mix on the pillars still flat. New plan for the next 30 days, agreed in writing.</div>
+          </div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-row__day">90</div>
+          <div>
+            <div class="ladder-row__label">Written audit</div>
+            <div class="ladder-row__text">Every artifact shipped, every pillar movement, every LLM citation earned or missed. Plus our recommendation: continue, change, or cancel.</div>
+          </div>
+        </div>
+        <div class="pricing-trust__footnote">Cancel any time, one click, no clawback. <a href="/methodology/#ladder">Read the full ladder spec</a>.</div>
+      </div>
+    </div>
+
+    <!-- Forbidden Patterns -->
+    <div class="pricing-trust__card pricing-trust__card--wide">
+      <div class="pricing-trust__eyebrow">Forbidden Patterns</div>
+      <div class="pricing-trust__title">Seven things this pricing page will never do.</div>
+      <div class="pricing-trust__body">
+        <p>Pricing pages drift toward theater. These are the anti-theater rules we hold ourselves to — if you ever see one of these on Guest Engine, it&rsquo;s a bug:</p>
+        <ul class="forbidden-list">
+          <li>No &ldquo;premium&rdquo; without a definition — we name the artifact, surface, or cadence.</li>
+          <li>No priority placebos — we don&rsquo;t charge for &ldquo;priority&rdquo; on work that&rsquo;s already prioritized.</li>
+          <li>No departments that don&rsquo;t exist — there is no &ldquo;MitL ops&rdquo; team behind a curtain.</li>
+          <li>No communities that haven&rsquo;t formed — we don&rsquo;t sell a Discord nobody&rsquo;s in yet.</li>
+          <li>No feature-bundle tiers — every tier sells velocity toward the same outcome.</li>
+          <li>No depowered lower tiers — Member isn&rsquo;t VIP with features turned off.</li>
+          <li>No promising LLM outputs — we sell inputs, we measure outputs, we never promise them.</li>
+        </ul>
+        <div class="pricing-trust__footnote">Codified in <a href="/methodology/#forbidden-patterns">scoring.md v1.10 § Forbidden Patterns</a>.</div>
+      </div>
     </div>
   </section>
 
@@ -1466,8 +1600,18 @@
       </details>
 
       <details>
-        <summary>Do I need to have appeared on MITL to use Reach Pro?</summary>
-        <div class="pricing-faq__body">Yes. Reach is tied to your Authority Page &mdash; without it, the pitch has nothing to point at. Book a Single Appearance first, then upgrade.</div>
+        <summary>Do I need to have appeared on MITL before I can pitch?</summary>
+        <div class="pricing-faq__body">Yes. Pitches are tied to your Authority Page &mdash; without it, the pitch has nothing to point at. Book a Single Appearance first (or join VIP for a quarterly produced appearance), then your Authority Reach pitches start sending.</div>
+      </details>
+
+      <details>
+        <summary>Do you refund?</summary>
+        <div class="pricing-faq__body">No, and we&rsquo;re honest about why: we sell inputs (artifacts, schema, citations, distribution), and the LLM&rsquo;s decision to cite you is not something we control. Refunding a number we don&rsquo;t own would be theater. Instead, every recurring tier gets a documented <strong>day-60 diagnostic, day-75 re-scope, and day-90 written audit</strong>. Cancel any time, one click, no clawback. See <a href="/methodology/#ladder" style="color:var(--gold)">how the ladder works</a>.</div>
+      </details>
+
+      <details>
+        <summary>What is the Subject Contract?</summary>
+        <div class="pricing-faq__body">Before payment clears, every customer signs a one-line subject string in the form &ldquo;[Name] on [exact subject phrase].&rdquo; That string is the LLM query we&rsquo;re optimizing you to answer. It is locked at signing and cannot be silently swapped. Without it, scoring drifts &mdash; we&rsquo;d be measuring the wrong topic against the wrong LLMs. See <a href="/methodology/#subject-contract" style="color:var(--gold)">how the contract works</a>.</div>
       </details>
 
       <details>
@@ -1540,31 +1684,6 @@
   <script>
   (function() {
     // ══════════════════════════════════════
-    // FEATURE FLAGS
-    // ══════════════════════════════════════
-    // REACH_PRO_ENABLED — defaults true now that the live Stripe price
-    // (price_1TQYZoHOIN3f8KXf8yEGLIXG / prod_UPNKz10AvCdMip) is wired in
-    // cos/server/billing-routes.ts. Override to false in the console for
-    // emergency disablement without a redeploy.
-    if (typeof window.REACH_PRO_ENABLED === 'undefined') {
-      window.REACH_PRO_ENABLED = true;
-    }
-
-    // Visual treatment when explicitly disabled (override path only).
-    // Normal flow: flag is true → card is fully clickable, no overlay.
-    (function applyReachProFlag() {
-      var card = document.getElementById('tier-reachpro');
-      if (!card) return;
-      if (window.REACH_PRO_ENABLED !== true) {
-        card.classList.add('disabled');
-        var overlay = document.createElement('div');
-        overlay.className = 'tier-card__coming-soon';
-        overlay.textContent = 'Coming soon';
-        card.appendChild(overlay);
-      }
-    })();
-
-    // ══════════════════════════════════════
     // STATE
     // ══════════════════════════════════════
     var state = {
@@ -1585,31 +1704,27 @@
     // STRIPE_<TIER>_PRICE_ID env var → live price ID at session creation
     // time, so live price IDs are never baked into static HTML.
     var tierData = {
-      single:   { label: 'Single Appearance', price: '$497',    billing: 'one-time', productSlug: 'single'    },
-      member:   { label: 'Member',            price: '$97/mo',  billing: 'monthly',  productSlug: 'member'    },
-      reachpro: { label: 'Reach Pro',         price: '$197/mo', billing: 'monthly',  productSlug: 'reach_pro' },
-      vip:      { label: 'VIP',               price: '$297/mo', billing: 'monthly',  productSlug: 'vip'       }
+      single:   { label: 'Single Appearance', price: '$497',    billing: 'one-time', productSlug: 'single' },
+      member:   { label: 'Member',            price: '$97/mo',  billing: 'monthly',  productSlug: 'member' },
+      vip:      { label: 'VIP',               price: '$297/mo', billing: 'monthly',  productSlug: 'vip'    }
     };
 
     // Which tiers unlock which segment requirements
-    // (reachpro doesn't pick a segment — it has its own flow)
     var tierAccess = {
       single:   ['single'],
       member:   ['single', 'member'],
-      reachpro: ['single', 'member'],
       vip:      ['single', 'member', 'vip']
     };
 
     // ══════════════════════════════════════
     // FLOW DEFINITIONS
     // ══════════════════════════════════════
-    // Single/VIP:           tier → show → segment → confirm
-    // Member / Reach Pro:   tier → details → confirm
+    // Single/VIP:  tier → show → segment → confirm
+    // Member:      tier → details → confirm
     var flows = {
-      single:   ['tier', 'show', 'segment', 'confirm'],
-      member:   ['tier', 'details', 'confirm'],
-      reachpro: ['tier', 'details', 'confirm'],
-      vip:      ['tier', 'show', 'segment', 'confirm']
+      single: ['tier', 'show', 'segment', 'confirm'],
+      member: ['tier', 'details', 'confirm'],
+      vip:    ['tier', 'show', 'segment', 'confirm']
     };
 
     var currentStepId = 'tier';
@@ -1776,10 +1891,10 @@
 
       html += '<div class="summary-row"><span class="label">Tier</span><span class="value">' + tierData[state.tier].label + '</span></div>';
 
-      var isDetailsTier = state.tier === 'member' || state.tier === 'reachpro';
+      var isDetailsTier = state.tier === 'member';
 
       if (isDetailsTier) {
-        // Member / Reach Pro summary — show details
+        // Member summary — show details
         html += '<div class="summary-row"><span class="label">Name</span><span class="value">' + escHtml(state.name) + '</span></div>';
         html += '<div class="summary-row"><span class="label">Email</span><span class="value">' + escHtml(state.email) + '</span></div>';
         if (state.topic) {
@@ -1787,11 +1902,7 @@
         }
         // What happens next
         html += '<div style="padding:16px 0 0;border-top:1px solid var(--border);margin-top:8px;">';
-        if (state.tier === 'reachpro') {
-          html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Sophia starts drafting your first batch of pitches within 24 hours. MITL ops will manually review your first three before they send, and replies route directly to your Gmail. Your Authority Page must be live before pitches send &mdash; if you haven\'t booked a Single Appearance yet, we\'ll prompt you.</p>';
-        } else {
-          html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Signal ENGINE starts researching your world. Within 48 hours you\'ll have your first intelligence report, your digital twin begins building, and your directory listing goes live.</p>';
-        }
+        html += '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;"><strong style="color:var(--gold);">After payment:</strong> Signal ENGINE starts researching your world. Within 48 hours you\'ll have your first intelligence report, your digital twin begins building, and your directory listing goes live.</p>';
         html += '</div>';
       } else {
         // Single/VIP summary — show + segment
@@ -1826,15 +1937,6 @@
 
     // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', function() {
-      // Defensive fallback only — fires if the flag is explicitly toggled
-      // off in the console (emergency disable). Normal path: flag is true,
-      // checkout proceeds with productSlug=reach_pro and cos resolves the
-      // Stripe price from STRIPE_REACH_PRO_PRICE_ID at session creation.
-      if (state.tier === 'reachpro' && window.REACH_PRO_ENABLED !== true) {
-        alert('Reach Pro is temporarily unavailable — book a Single Appearance to get started, then upgrade from your dashboard.');
-        return;
-      }
-
       // 'ref=join' identifies the funnel source (the /join page).
       // 'refGuest=<slug>' attributes the conversion to the guest whose
       // Authority Page sent this visitor here — set by the locked-panel
@@ -1926,15 +2028,22 @@
     // next step in that tier's flow:
     //   single  → step-show     (pick which show)
     //   member  → step-details  (collect name/email/topic)
-    //   reachpro→ step-details  (collect name/email/topic)
     //   vip     → step-show     (pick which show)
+    //
+    // Legacy ?tier=reachpro deep-links from old social posts, search results,
+    // or stale homepage cards are silently redirected to ?tier=member — the
+    // closest still-live tier — so visitors don't hit a dead state.
     //
     // We DO NOT auto-fire checkout — the user still confirms on the
     // final step. This is a pre-selection, not a bypass.
     (function autoSelectFromQuery() {
       var params = new URLSearchParams(window.location.search);
       var requested = (params.get('tier') || '').toLowerCase();
-      var validTiers = ['single', 'member', 'reachpro', 'vip'];
+      // Legacy redirect: Reach Pro was killed in v1.10 (2026-05-14).
+      if (requested === 'reachpro' || requested === 'reach_pro' || requested === 'reach-pro') {
+        requested = 'member';
+      }
+      var validTiers = ['single', 'member', 'vip'];
       if (validTiers.indexOf(requested) === -1) return;
 
       // Find the matching tier card and trigger the same click logic so

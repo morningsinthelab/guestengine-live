@@ -1193,7 +1193,8 @@ img { max-width: 100%; display: block; }
    the guest paid — the reader learns the hierarchy after one visit.
      OTR        — gold solid (the lead)
      VIP        — gold outline
-     REACH PRO  — teal outline
+     REACH PRO  — teal outline (LEGACY — tier retired in scoring.md v1.10;
+                  chip kept as defensive fallback for legacy guest records)
      MEMBER     — white subtle outline
      CENTER STAGE / COMMUNITY CORNER — no chip on dept cards (implied);
                  use the section context instead.
@@ -2200,7 +2201,10 @@ function renderIssue(issue) {
   const onTheRecord = byId("on-the-record");
   const centerStage = byId("center-stage");
   const vip = byId("vip");
-  const reachPro = byId("reach-pro");
+  // Reach Pro tier was retired in scoring.md v1.10. We no longer render a
+  // dedicated Reach Pro section in the directory. Any legacy guest record
+  // still tagged tier=reach-pro will fall back through tierChipHTML() so
+  // the chip renders, but the dedicated full-width section is gone.
   const forHosts = byId("for-hosts");
 
   // OTR section: render only when there are OTR guests OTHER than the cover,
@@ -2212,15 +2216,6 @@ function renderIssue(issue) {
   if (vip) html += (vip.guests && vip.guests.length > 1)
     ? renderTwoUpFeature(vip, false)
     : renderTierFeature(vip, { label: "VIP \u00b7 $297/mo" });
-  // Reach Pro section uses the reverse layout (photo-right) so that when
-  // it sits directly below the VIP section (photo-left), the eye zigzags
-  // down the page instead of seeing two identical layouts back-to-back.
-  // Also exclusive to Reach Pro: a primary "Book <FirstName>" CTA. Reach
-  // Pro's product literally IS bookability — the page makes booking one
-  // click away, not buried behind the authority-page detour.
-  if (reachPro) html += (reachPro.guests && reachPro.guests.length > 1)
-    ? renderTwoUpFeature(reachPro, false)
-    : renderTierFeature(reachPro, { label: "Reach Pro \u00b7 $197/mo", reverse: true, bookCta: true });
   if (forHosts) html += renderDepartments(forHosts);
 
   document.getElementById("issueMain").innerHTML = html;
