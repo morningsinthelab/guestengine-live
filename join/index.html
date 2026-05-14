@@ -227,6 +227,21 @@
     position: relative; text-align: center;
   }
 
+  /* Soft footnote line inside a tier card (e.g. Member's "no produced
+     appearance" disclaimer). Visually demoted so it doesn't read as a
+     feature bullet. */
+  .tier-card__features li.tier-card__note {
+    list-style: none;
+    padding-left: 0;
+    padding-top: 10px;
+    margin-top: 8px;
+    border-top: 1px dashed rgba(255,255,255,0.08);
+    color: var(--text-muted, #94a3b8);
+    font-style: italic;
+    font-size: 13px;
+  }
+  .tier-card__features li.tier-card__note::before { content: none !important; }
+
   /* Activity-row tag on tier features — links to /methodology */
   .tier-card__features li .activity-tag,
   .tier-hero__features li .activity-tag {
@@ -356,12 +371,16 @@
     font-size: 14px; color: var(--text-secondary);
   }
   .tier-card__features li {
-    padding: 5px 0;
-    display: flex; align-items: flex-start; gap: 8px;
+    padding: 5px 0 5px 22px;
+    position: relative;
+    line-height: 1.55;
   }
   .tier-card__features li::before {
     content: '\2713'; color: var(--gold);
-    font-weight: 700; flex-shrink: 0;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    top: 5px;
   }
 
   /* Show cards */
@@ -1018,7 +1037,7 @@
               "billingDuration": "P1M",
               "billingIncrement": 1
             },
-            "description": "Story Time sponsorship (your AI digital twin appears in show segments), AI digital twin in the ConversationOS character network, monthly Signal intelligence report, Member directory listing, community access, 10 Authority Reach pitches per month, member-rate ($297) additional appearance booking, membership credit toward launching your own show on the network (3-month minimum).",
+            "description": "Permanent Authority Page indexed by Google and AI search engines, live Signal Score with daily refresh, monthly Signal intelligence report, 10 Authority Reach pitches per month, and Member directory listing. No produced appearance — keeps you visible between appearances.",
             "availability": "https://schema.org/InStock"
           }
         },
@@ -1190,14 +1209,12 @@
           <div class="tier-card__billing">Per month</div>
           <div class="tier-card__subtitle">Stay visible. Compound your authority.</div>
           <ul class="tier-card__features">
-            <li><strong>Story Time sponsorship</strong> &mdash; your AI digital twin appears as a character in show segments (~weekly slot) <a href="/methodology/#activity-matrix" class="activity-tag" title="How this scores in our methodology">A14</a></li>
-            <li>AI digital twin in the ConversationOS character network <a href="/methodology/#activity-matrix" class="activity-tag">A20</a></li>
-            <li>Monthly Signal intelligence report <a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
-            <li>Member directory listing <a href="/methodology/#activity-matrix" class="activity-tag">A17</a></li>
-            <li>Community access (Roam office)</li>
-            <li><strong>10 Authority Reach pitches per month</strong> <a href="/methodology/#activity-matrix" class="activity-tag">A05</a></li>
-            <li>Book additional appearances at the $297 member rate (3-month min)</li>
-            <li>Membership credit toward launching your own show on the network</li>
+            <li><strong>Permanent Authority Page</strong> indexed by Google and AI search engines&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag" title="How this scores in our methodology">A20</a></li>
+            <li><strong>Live Signal Score</strong> with daily refresh&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
+            <li>Monthly Signal intelligence report&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
+            <li><strong>10 Authority Reach pitches per month</strong>&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A05</a></li>
+            <li>Member directory listing&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A17</a></li>
+            <li class="tier-card__note">No produced appearance — keeps you visible between appearances.</li>
           </ul>
         </div>
 
@@ -1209,14 +1226,14 @@
           <div class="tier-card__subtitle">Compound on your subject. Appearances included.</div>
           <ul class="tier-card__features">
             <li>Everything in Member</li>
-            <li><strong>Quarterly produced appearance</strong> on Mornings in the Lab <a href="/methodology/#activity-matrix" class="activity-tag">A03</a></li>
-            <li><strong>50 Authority Reach pitches per month</strong> <a href="/methodology/#activity-matrix" class="activity-tag">A05</a></li>
-            <li><strong>Daily Live LLM Citation Audit</strong> &mdash; Perplexity, ChatGPT, Claude, Gemini <a href="/methodology/#activity-matrix" class="activity-tag">A02</a></li>
-            <li>Sophia (pitch + reply assistant) + Mack (booking assistant) <a href="/methodology/#activity-matrix" class="activity-tag">A06</a></li>
-            <li>Weekly Signal intelligence reports <a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
-            <li>30-day Distribution Sprint each time you appear <a href="/methodology/#activity-matrix" class="activity-tag">A09</a></li>
+            <li><strong>Quarterly produced appearance</strong> on Mornings in the Lab&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A03</a></li>
+            <li><strong>50 Authority Reach pitches per month</strong>&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A05</a></li>
+            <li><strong>Daily Live LLM Citation Audit</strong> &mdash; Perplexity, ChatGPT, Claude, Gemini&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A02</a></li>
+            <li>Sophia (pitch + reply assistant) + Mack (booking assistant)&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A06</a></li>
+            <li>Weekly Signal intelligence reports&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A01</a></li>
+            <li>30-day Distribution Sprint each time you appear&nbsp;<a href="/methodology/#activity-matrix" class="activity-tag">A09</a></li>
             <li>Premium Authority Page placement + priority directory listing</li>
-            <li>Documented day-60 / day-75 / day-90 accountability ladder <a href="/methodology/#ladder" class="activity-tag">LADDER</a></li>
+            <li>Documented day-60 / day-75 / day-90 accountability ladder&nbsp;<a href="/methodology/#ladder" class="activity-tag">LADDER</a></li>
           </ul>
         </div>
       </div>
@@ -1437,18 +1454,7 @@
             <td>10</td>
             <td><strong>50</strong></td>
           </tr>
-          <tr>
-            <th scope="row">Story Time sponsorship</th>
-            <td class="cell-empty">&mdash;</td>
-            <td class="cell-yes">&#10003;</td>
-            <td class="cell-yes">&#10003;</td>
-          </tr>
-          <tr>
-            <th scope="row">Membership credit toward your own show</th>
-            <td class="cell-empty">&mdash;</td>
-            <td class="cell-yes">&#10003;</td>
-            <td class="cell-yes">&#10003;</td>
-          </tr>
+
           <tr>
             <th scope="row">Signal intelligence report</th>
             <td>once</td>
@@ -1612,6 +1618,11 @@
       <details>
         <summary>What is the Subject Contract?</summary>
         <div class="pricing-faq__body">Before payment clears, every customer signs a one-line subject string in the form &ldquo;[Name] on [exact subject phrase].&rdquo; That string is the LLM query we&rsquo;re optimizing you to answer. It is locked at signing and cannot be silently swapped. Without it, scoring drifts &mdash; we&rsquo;d be measuring the wrong topic against the wrong LLMs. See <a href="/methodology/#subject-contract" style="color:var(--gold)">how the contract works</a>.</div>
+      </details>
+
+      <details>
+        <summary>Can I book extra appearances on top of my plan?</summary>
+        <div class="pricing-faq__body">Yes. Additional produced appearances book at the <strong>$297 member rate</strong> (3-month minimum) for any tier &mdash; the $497 Single Appearance price is the on-ramp; everything recurring is at Member or VIP economics.</div>
       </details>
 
       <details>
