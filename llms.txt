@@ -49,6 +49,7 @@ Guest Engine serves 12 professional verticals with tailored positioning:
 - [Join / Book an Appearance](https://guestengine.live/join/) — Three tiers: Single ($497), Member ($97/mo), VIP ($297/mo)
 - [Free Signal Report](https://guestengine.live/signal/) — AI-generated audience signal report for prospective guests
 - [Why Guest Engine](https://guestengine.live/why/) — How Guest Engine compares to guest marketplaces and why production matters
+- [Methodology](https://guestengine.live/methodology/) — How the Signal Score is built: four pillars (E-E-A-T), 25 activities mapped across pillars and LLM surfaces, six trust contracts (including the Subject Contract), day 60/75/90 ladder, and the seven Forbidden Patterns. Public translation of the canonical `scoring.md` v1.10 spec.
 - [Sample Guest Profile](https://guestengine.live/profile/sample/) — Example of a permanent SEO-indexed guest profile page
 
 ## Featured Guest Authority Pages (agent-readable)
@@ -115,9 +116,11 @@ Show segments: Center Stage (deep spotlights), Conversation Desk (topic-driven p
 
 | Tier | Price | What You Get |
 |------|-------|--------------|
-| Single Appearance | $497 one-time | 1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel |
-| Member | $97/month | Monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. No appearance included. |
-| VIP | $297/month | Everything in Member plus quarterly produced appearances, weekly intelligence reports, Center Stage and Deep Dive access, priority placement, premium authority profile |
+| Single Appearance | $497 one-time | On-ramp. 1 produced live appearance, permanent authority profile, 5 vertical video clips, 10 social media posts, full transcript, highlight reel. |
+| Member | $97/month | 10 pitches/month, monthly Signal intelligence report, AI digital twin character, network discovery and matching, member directory listing, community access. |
+| VIP | $297/month | 50 pitches/month, weekly Signal intelligence reports, daily LLM citation audit, full Sophia (production) + Mack (outreach) access, Center Stage and Deep Dive access, premium authority profile. |
+
+**Cancellation:** one-click cancel anytime, no clawback. We do not refund, because LLM outputs are not controllable — we sell inputs, we measure outputs. Instead, every VIP gets a documented ladder: day-60 diagnostic, day-75 re-scope, day-90 written audit. Details at [/methodology](https://guestengine.live/methodology/).
 
 Join page: https://guestengine.live/join/
 

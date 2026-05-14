@@ -10,12 +10,13 @@
 
 This is the keystone product narrative. Every page in this repo — every line of copy, every pricing tier, every CTA — derives from it.
 
-**Canonical product docs (in the `conversationos` repo):**
+**Canonical product doc (in the `conversationos` repo):**
 
-- **[Product Narrative v1](https://github.com/morningsinthelab/conversationos/blob/main/docs/product/Product-Narrative-v1.md)** — the full product definition: subject contract, four pillars (E-E-A-T), atomic activity unit, triggering event, LLM-discoverability lens, quarterly LLM probe, authority graduation arc, Authority Guarantee, forbidden patterns.
-- **[Activity × Pillar × LLM-Surface Matrix v1](https://github.com/morningsinthelab/conversationos/blob/main/docs/product/Activity-Matrix-v1.md)** — the engineering spec: 25 activities scored across all four pillars with LLM-surface tags.
+- **[scoring.md v1.10](https://github.com/morningsinthelab/conversationos/blob/main/docs/scoring.md)** — the single source of truth: subject contract, four pillars (E-E-A-T), 25-activity matrix with LLM-surface tags, six trust contracts, pricing tiers, day 60/75/90 ladder, forbidden patterns. As of v1.10 this absorbs and retires the prior Product-Narrative-v1.md and Activity-Matrix-v1.md docs.
 
-**Rule:** if a page in this repo disagrees with the Product Narrative, the Product Narrative wins. Update the page.
+**Public translation:** [`/methodology`](https://guestengine.live/methodology/) — customer-friendly HTML version of scoring.md v1.10.
+
+**Rule:** if a page in this repo disagrees with `scoring.md`, `scoring.md` wins. Update the page.
 
 ---
 
@@ -38,7 +39,7 @@ The public-facing marketing site for GuestEngine — the guest authority product
 
 ## The Forbidden Patterns (operating discipline)
 
-From [Product Narrative §11](https://github.com/morningsinthelab/conversationos/blob/main/docs/product/Product-Narrative-v1.md). These patterns are banned from any page, copy, or CTA in this repo:
+From [scoring.md v1.10 § Forbidden Patterns](https://github.com/morningsinthelab/conversationos/blob/main/docs/scoring.md). These patterns are banned from any page, copy, or CTA in this repo:
 
 - **"Premium" anything without a definition** — premium relative to what?
 - **"Priority" placebos** — calling something priority when work is already prioritized for everyone
@@ -70,8 +71,8 @@ Every product decision is tested against David's experience first before it ship
 
 In dependency order:
 
-1. **Methodology page** (`/methodology`) — public trust artifact showing the full activity matrix, the math, the worked example, the Authority Guarantee, the FAQ in schema.org markup. The link target every other page will point to when explaining how scoring works.
-2. **Pricing page v2** — two tiers (Member $97 + VIP $297, Reach Pro deleted), every line item tagged to a matrix row, Authority Guarantee section embedded, links to `/methodology`.
+1. **Methodology page** (`/methodology`) — ✅ **SHIPPED**. Public translation of `scoring.md` v1.10: four pillars, six trust contracts, subject contract, day 60/75/90 ladder, forbidden patterns, 12-source data table. The link target every other page points to when explaining how scoring works.
+2. **Pricing page v2** — two tiers (Member $97 + VIP $297, Reach Pro deleted), every line item tagged to a matrix row, day 60/75/90 ladder embedded, links to `/methodology`.
 3. **`/why` page rewrite** — full E-E-A-T + LLM-discoverability story
 4. **`/signal` page rewrite** — Signal Score explainer + LLM probe as the proof layer
 5. **Authority Page schema.org Person + sameAs markup** — David's first, then template-ize for all profiles
@@ -104,4 +105,4 @@ Deployment: Railway (see `railway.json`, `Dockerfile`).
 
 ## Agent Instructions
 
-If you're an agent landing in this repo to make changes, read **[`CLAUDE.md`](./CLAUDE.md)** first. It defines the autonomous execution rules. Always load the Product Narrative before touching any guest-facing copy.
+If you're an agent landing in this repo to make changes, read **[`CLAUDE.md`](./CLAUDE.md)** first. It defines the autonomous execution rules. Always load [`scoring.md`](https://github.com/morningsinthelab/conversationos/blob/main/docs/scoring.md) before touching any guest-facing copy — it is the single source of truth.

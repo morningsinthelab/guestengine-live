@@ -16,6 +16,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Methodology — public translation of scoring.md v1.10 -->
+  <url>
+    <loc>https://guestengine.live/methodology/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- 12 Vertical Landing Pages -->
   <url>
     <loc>https://guestengine.live/authors/</loc>
