@@ -2643,8 +2643,26 @@
       storyEl.innerHTML = storyHtml;
 
       // ── Reel Room (vertical YouTube Shorts — lazy-loaded, no suggestion grid)
-      // Source order: profile.shorts (future API field), then per-slug fallback for shipped guests.
-      var shorts = parseJSON(profile.shorts) || (SHORTS_BY_SLUG && SHORTS_BY_SLUG[slug]) || [];
+      // Source order: profile.shortsJson (backend, persisted via Authority Page
+      // panel > Set Reel Room Shorts) wins over SHORTS_BY_SLUG (hardcoded
+      // fallback for shipped guests). The DB shape uses {videoId, title,
+      // quote, description, thumbnail}; the hardcoded registry uses {id,
+      // chip, caption, sub, poster}. We normalize here so the render loop
+      // below stays simple.
+      function normalizeShort(s) {
+        if (!s) return null;
+        var videoId = s.id || s.videoId || extractYTId(s.url || '') || '';
+        if (!videoId) return null;
+        return {
+          id: videoId,
+          poster: s.poster || s.thumbnail || ('https://i.ytimg.com/vi/' + videoId + '/maxresdefault.jpg'),
+          chip: s.chip || s.title || '',
+          caption: s.caption || s.quote || '',
+          sub: s.sub || s.description || ''
+        };
+      }
+      var rawShorts = parseJSON(profile.shortsJson) || parseJSON(profile.shorts) || (SHORTS_BY_SLUG && SHORTS_BY_SLUG[slug]) || [];
+      var shorts = (Array.isArray(rawShorts) ? rawShorts : []).map(normalizeShort).filter(Boolean);
       if (shorts.length) {
         document.getElementById('p-reels-section').style.display = 'block';
         var reelsEl = document.getElementById('p-reels');
