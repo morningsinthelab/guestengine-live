@@ -2071,15 +2071,45 @@
       //     wins as a HERO image when no twin portrait exists.
       //
       // See docs/digital-twin-spec.md § "Gap 2 — Portrait wiring".
+      // HERO PRECEDENCE — the YouTube Center Stage maxresdefault
+      // thumbnail is the team's hand-crafted cinematic key art (e.g.
+      // EJ Snyder's "SURVIVING HELL" composite). When a Center Stage
+      // video exists, its YouTube thumbnail is the canonical hero —
+      // even when an AI twin portrait also exists. Twin portrait is
+      // still used for living-portrait overlays and the "Original"
+      // toggle fallback, but it does NOT take the hero from the
+      // curated YouTube thumbnail.
+      //
+      // Order (highest priority first):
+      //   1. profile.heroVideoPoster        — explicit producer pin
+      //                                       (orchestrator writes this
+      //                                       to the YouTube maxres URL
+      //                                       when it resolves a Center
+      //                                       Stage video)
+      //   2. YouTube maxres for csVideo     — derived if heroVideoPoster
+      //                                       isn't set yet
+      //   3. AI twin portrait               — only when there's no
+      //                                       Center Stage video at all
+      //   4. episode_art / authority_portrait / headshot
       var twinPortraitUrl = profile.twinPortraitUrl || null;
       var hasTwinPortrait = !!twinPortraitUrl;
       var ytPoster = csVideo ? 'https://img.youtube.com/vi/'+csVideo+'/maxresdefault.jpg' : null;
-      var twinHeroImg = hasTwinPortrait
-        ? twinPortraitUrl
-        : (ytPoster || findImage(images,'episode_art') || findImage(images,'authority_portrait') || profile.headshotUrl);
-      var originalHeroImg = hasTwinPortrait
-        ? (profile.headshotUrl || ytPoster)
-        : (ytPoster || findImage(images,'episode_art') || profile.headshotUrl);
+      var heroPosterPin = profile.heroVideoPoster || null;
+      var centerStageHero = heroPosterPin || ytPoster;
+      var twinHeroImg = centerStageHero
+        ? centerStageHero
+        : (twinPortraitUrl
+            || findImage(images,'episode_art')
+            || findImage(images,'authority_portrait')
+            || profile.headshotUrl);
+      // "Original" view (the toggle's other state) shows the
+      // unprocessed headshot/twin so the producer can compare. Falls
+      // back to the YouTube thumbnail or twin if no headshot exists.
+      var originalHeroImg = profile.headshotUrl
+        || twinPortraitUrl
+        || centerStageHero
+        || findImage(images,'episode_art')
+        || '';
       var heroImg = twinHeroImg;
       if (heroImg) document.getElementById('p-hero-bg').style.backgroundImage = 'url('+heroImg+')';
 
