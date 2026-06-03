@@ -1468,6 +1468,176 @@
   }
   .p-vip-calendar__booked strong { color:#bbf7d0; }
 
+  /* Step 2 of 2 — digital twin seed photo uploader.
+     Shipped soft-required: persistent gold banner across the page
+     when status ≠ complete, visible "Locked" overlays on premium
+     features. The uploader itself mounts inline below the Calendly
+     confirmation OR is revealed when the banner is clicked. */
+  .p-twin-photos {
+    margin-top:1.5rem;
+    background:linear-gradient(180deg, rgba(168,85,247,0.08) 0%, rgba(168,85,247,0.02) 100%);
+    border:1px solid rgba(168,85,247,0.22);
+    border-radius:14px;
+    padding:1.5rem;
+    display:none;
+  }
+  .p-twin-photos__head {
+    display:flex; align-items:flex-start; gap:0.75rem;
+    margin-bottom:1.25rem;
+  }
+  .p-twin-photos__icon {
+    width:44px; height:44px; border-radius:10px; flex-shrink:0;
+    background:linear-gradient(135deg, #a855f7, #7c3aed);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:1.05rem;
+  }
+  .p-twin-photos__title {
+    margin:0 0 0.25rem;
+    font-family:var(--font-display); font-weight:700;
+    font-size:1.05rem; color:var(--text-primary);
+    letter-spacing:0.01em;
+  }
+  .p-twin-photos__sub {
+    margin:0; font-size:0.8125rem; color:var(--text-muted);
+    line-height:1.5;
+  }
+  .p-twin-photos__sub strong { color:var(--text-primary); }
+  .p-twin-photos__progress {
+    margin:1rem 0 1.25rem;
+    height:6px; background:rgba(168,85,247,0.12);
+    border-radius:3px; overflow:hidden;
+  }
+  .p-twin-photos__progress-fill {
+    height:100%;
+    background:linear-gradient(90deg, #a855f7, #c084fc);
+    width:0%; transition:width 0.3s ease;
+  }
+  .p-twin-photos__grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+    gap:0.875rem;
+  }
+  .p-twin-slot {
+    border:1.5px dashed rgba(168,85,247,0.3);
+    border-radius:10px;
+    aspect-ratio:1 / 1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    cursor:pointer; transition:border-color 0.2s, background 0.2s;
+    position:relative; overflow:hidden;
+    background:rgba(0,0,0,0.2);
+  }
+  .p-twin-slot:hover { border-color:rgba(168,85,247,0.6); background:rgba(168,85,247,0.05); }
+  .p-twin-slot[data-state="uploading"] { border-style:solid; border-color:#a855f7; }
+  .p-twin-slot[data-state="complete"] {
+    border-style:solid; border-color:rgba(34,197,94,0.5);
+  }
+  .p-twin-slot[data-state="error"] {
+    border-style:solid; border-color:rgba(220,38,38,0.5);
+    background:rgba(220,38,38,0.05);
+  }
+  .p-twin-slot__hint {
+    text-align:center; padding:0.5rem;
+    font-size:0.6875rem; color:var(--text-muted);
+    letter-spacing:0.04em; line-height:1.4;
+  }
+  .p-twin-slot__hint b { color:var(--text-primary); font-weight:600; display:block; }
+  .p-twin-slot__preview {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  .p-twin-slot__check, .p-twin-slot__spinner {
+    position:absolute; top:0.5rem; right:0.5rem;
+    width:24px; height:24px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.75rem;
+  }
+  .p-twin-slot__check { background:#22c55e; color:#0b0b0e; display:none; }
+  .p-twin-slot[data-state="complete"] .p-twin-slot__check { display:flex; }
+  .p-twin-slot__spinner { background:#a855f7; color:#fff; display:none; }
+  .p-twin-slot[data-state="uploading"] .p-twin-slot__spinner { display:flex; }
+  .p-twin-slot__file {
+    position:absolute; inset:0; opacity:0; cursor:pointer;
+  }
+  .p-twin-slot__err {
+    position:absolute; bottom:0.4rem; left:0.4rem; right:0.4rem;
+    background:rgba(0,0,0,0.7); color:#fca5a5;
+    padding:0.25rem 0.4rem; border-radius:4px;
+    font-size:0.625rem; letter-spacing:0.03em;
+  }
+  .p-twin-photos__done {
+    display:none;
+    margin-top:1rem;
+    padding:0.875rem 1.125rem;
+    background:rgba(34,197,94,0.1);
+    border:1px solid rgba(34,197,94,0.25);
+    border-radius:8px;
+    color:#86efac; font-size:0.875rem;
+  }
+  .p-twin-photos__done strong { color:#bbf7d0; }
+
+  /* Persistent banner that appears across the page when a paid VIP
+     returns and hasn't completed photo upload. Soft-required. */
+  .p-twin-banner {
+    display:none;
+    margin:1rem 0;
+    padding:1rem 1.25rem;
+    background:linear-gradient(135deg, rgba(168,85,247,0.16), rgba(124,58,237,0.16));
+    border:1px solid rgba(168,85,247,0.35);
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .p-twin-banner:hover { background:linear-gradient(135deg, rgba(168,85,247,0.22), rgba(124,58,237,0.22)); }
+  .p-twin-banner__row { display:flex; align-items:center; gap:0.75rem; }
+  .p-twin-banner__icon {
+    width:32px; height:32px; border-radius:8px;
+    background:linear-gradient(135deg, #a855f7, #7c3aed);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; flex-shrink:0;
+  }
+  .p-twin-banner__title {
+    color:var(--text-primary); font-weight:600; font-size:0.875rem;
+    margin:0 0 0.125rem;
+  }
+  .p-twin-banner__sub {
+    color:var(--text-muted); font-size:0.75rem; margin:0;
+  }
+  .p-twin-banner__cta {
+    margin-left:auto; flex-shrink:0;
+    color:#c084fc; font-weight:600; font-size:0.8125rem;
+    letter-spacing:0.02em;
+  }
+
+  /* "Locked" overlay applied to premium feature blocks until the
+     buyer uploads photos. Soft gate — the underlying block stays
+     visible so they can see what they're unlocking. */
+  .p-locked {
+    position:relative; pointer-events:none; user-select:none;
+  }
+  .p-locked::before {
+    content:"";
+    position:absolute; inset:-2px;
+    background:rgba(8,8,16,0.55);
+    backdrop-filter:blur(2px);
+    border-radius:inherit;
+    z-index:1;
+  }
+  .p-locked::after {
+    content:"\f023  Upload seed photos to unlock";
+    font-family:"Font Awesome 6 Free";
+    font-weight:900;
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%, -50%);
+    z-index:2;
+    color:#e8e8ec;
+    background:rgba(168,85,247,0.18);
+    border:1px solid rgba(168,85,247,0.4);
+    padding:0.6rem 1rem;
+    border-radius:8px;
+    font-size:0.8125rem;
+    letter-spacing:0.04em;
+    white-space:nowrap;
+  }
+
   /* ── Not Found ─────────────────────────── */
   .p-notfound {
     min-height:60vh; display:flex; align-items:center; justify-content:center;
@@ -1615,6 +1785,14 @@
                next thing they do is pick a date. Reduces churn by
                anchoring them to a concrete future commitment. -->
           <div class="p-vip-calendar" id="p-vip-calendar" data-testid="public-vip-calendar"></div>
+          <!-- Phase 2: post-booking digital twin seed-photo uploader.
+               Mounts inline when the buyer is on ?vip=activated AND has
+               already locked their Calendly date. Returning visitors
+               with an incomplete twin-photos status get the persistent
+               gold banner (#p-twin-banner) instead — click → expands
+               into the same uploader. -->
+          <div class="p-twin-banner" id="p-twin-banner" data-testid="public-twin-banner" style="display:none"></div>
+          <div class="p-twin-photos" id="p-twin-photos" data-testid="public-twin-photos" style="display:none"></div>
         </div>
 
         <!-- Signal Brief / Authority Drawer trigger — click anywhere on this card opens the drawer -->
@@ -2343,6 +2521,39 @@
                   var b = document.getElementById('p-vip-calendar-booked');
                   if (w) w.style.display = 'none';
                   if (b) b.style.display = 'block';
+                  // Phase 2 hand-off: booking is locked, now the only
+                  // remaining step is uploading reference photos. Add
+                  // step=photos to the URL so the twin-photos uploader
+                  // recognises this as the hot path on its next mount.
+                  // We then call its render fn directly (no full reload).
+                  try {
+                    var sp2 = new URLSearchParams(window.location.search);
+                    sp2.set('vip', 'activated');
+                    sp2.set('step', 'photos');
+                    history.replaceState(null, '',
+                      window.location.pathname + '?' + sp2.toString() + window.location.hash);
+                  } catch (e2) {}
+                  // Re-trigger the twin-photos render now that we're in
+                  // the post-booking state. The function is idempotent
+                  // and will read the current URL.
+                  try {
+                    var panel = document.getElementById('p-twin-photos');
+                    var banner = document.getElementById('p-twin-banner');
+                    if (panel && banner && panel.style.display === 'none' && banner.style.display === 'none') {
+                      fetch(API + '/twin-photos/status?slug=' + encodeURIComponent(slug))
+                        .then(function (r) { return r.ok ? r.json() : null; })
+                        .then(function (d) {
+                          if (!d || !d.hasCustomer) return;
+                          if (d.status === 'complete' || d.status === 'gave_up') return;
+                          // Trigger a soft reload of just the section.
+                          // Cheapest path: dispatch a no-op event the
+                          // uploader can re-listen on. For now, just
+                          // reload the page — the next mount picks up
+                          // step=photos and auto-expands.
+                          window.location.reload();
+                        });
+                    }
+                  } catch (e3) {}
                 } else if (
                   evt === 'calendly.profile_page_viewed' ||
                   evt === 'calendly.event_type_viewed'
@@ -2421,6 +2632,217 @@
         } catch (e) {
           // Defensive: never let a CTA bug break the rest of the profile.
           console.error('[vip-cta] render failed:', e);
+        }
+      })();
+
+      // ─── Phase 2: digital twin seed-photo uploader ───────────────
+      //
+      // Two entry points:
+      //   1. Hot path: ?vip=activated + step=photos in the URL after the
+      //      buyer schedules their Calendly date. Auto-expands the
+      //      uploader inline.
+      //   2. Returning visitor: profile is a paid customer with an
+      //      incomplete twin-photos status. Mounts the persistent
+      //      gold banner; click expands the same uploader.
+      //
+      // Pipeline: single multipart POST to
+      //   /api/guest-marketplace/twin-photos/upload
+      // which routes through r2-storage → syncGalleryImage →
+      // engine_portrait_gallery (context='twin-seed'). No presign, no
+      // separate complete call, no parallel R2 client — see the matching
+      // server-side rewrite in PR pe-twin-seed-photos.
+      (function renderTwinPhotos() {
+        try {
+          var banner = document.getElementById('p-twin-banner');
+          var panel = document.getElementById('p-twin-photos');
+          if (!banner || !panel) return;
+
+          // We only ever show the uploader for paid customers. Hit the
+          // status endpoint first — it's a cheap slug-keyed read.
+          fetch(API + '/twin-photos/status?slug=' + encodeURIComponent(slug))
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (data) {
+              if (!data || !data.hasCustomer) return;
+              var status = data.status || 'pending';
+              var count = Number(data.count || 0);
+
+              // Terminal happy state — we're done. Don't render anything.
+              if (status === 'complete') return;
+              // Silent terminal — we stopped chasing. Don't surface to the
+              // visitor (avoids a confusing "upload" prompt when we've
+              // already given up). Customer can still upload via email
+              // links if they choose.
+              if (status === 'gave_up') return;
+
+              var sp = new URLSearchParams(window.location.search);
+              var isHotPath = sp.get('vip') === 'activated' && sp.get('step') === 'photos';
+
+              if (isHotPath) {
+                mountUploader(panel, count, true);
+              } else {
+                mountBanner(banner, panel, count, status);
+              }
+            })
+            .catch(function (err) {
+              // Status read shouldn't break the page if it fails.
+              console.error('[twin-photos] status fetch failed:', err);
+            });
+
+          function mountBanner(b, p, count, status) {
+            var remaining = Math.max(0, 5 - count);
+            var headline = count > 0
+              ? 'You\'re ' + remaining + ' photo' + (remaining === 1 ? '' : 's') + ' away from your digital twin'
+              : 'Upload 5 photos to unlock your digital twin';
+            var sub = count > 0
+              ? count + ' uploaded so far — finish in 60 seconds.'
+              : 'The post-show social push you paid for runs on these.';
+            b.innerHTML =
+              '<div class="p-twin-banner__row">' +
+                '<div class="p-twin-banner__icon"><i class="fa-solid fa-user-astronaut"></i></div>' +
+                '<div>' +
+                  '<p class="p-twin-banner__title">' + escapeHtml(headline) + '</p>' +
+                  '<p class="p-twin-banner__sub">' + escapeHtml(sub) + '</p>' +
+                '</div>' +
+                '<button type="button" class="p-twin-banner__cta" data-testid="twin-banner-cta">' +
+                  'Upload now <i class="fa-solid fa-arrow-right"></i>' +
+                '</button>' +
+              '</div>';
+            b.style.display = 'block';
+            var cta = b.querySelector('.p-twin-banner__cta');
+            var expand = function () {
+              b.style.display = 'none';
+              mountUploader(p, count, false);
+              try { p.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+            };
+            cta.addEventListener('click', expand);
+            b.addEventListener('click', function (e) {
+              if (e.target === cta || cta.contains(e.target)) return;
+              expand();
+            });
+          }
+
+          function mountUploader(p, initialCount, autoScroll) {
+            var SLOT_COUNT = 6; // 5 required + 1 optional
+            var slotsHtml = '';
+            for (var i = 0; i < SLOT_COUNT; i++) {
+              var isOptional = i === 5;
+              slotsHtml +=
+                '<label class="p-twin-slot" data-slot="' + i + '" data-state="empty">' +
+                  '<input type="file" class="p-twin-slot__file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" data-slot-input="' + i + '" />' +
+                  '<img class="p-twin-slot__preview" alt="" />' +
+                  '<div class="p-twin-slot__check"><i class="fa-solid fa-check"></i></div>' +
+                  '<div class="p-twin-slot__spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></div>' +
+                  '<div class="p-twin-slot__hint">' +
+                    '<b>' + (isOptional ? 'Optional' : ('Photo ' + (i + 1))) + '</b>' +
+                    (isOptional ? 'Wildcard / fun shot' : (i === 0 ? 'Clear headshot, eyes open' : (i === 1 ? 'Side / 3\u00b04 angle' : (i === 2 ? 'Different lighting' : (i === 3 ? 'Smiling, mouth open' : 'Action / on-stage'))))) +
+                  '</div>' +
+                  '<div class="p-twin-slot__err"></div>' +
+                '</label>';
+            }
+            p.innerHTML =
+              '<div class="p-twin-photos__head">' +
+                '<div class="p-twin-photos__icon"><i class="fa-solid fa-user-astronaut"></i></div>' +
+                '<div>' +
+                  '<p class="p-twin-photos__title">Upload 5 photos to unlock your digital twin</p>' +
+                  '<p class="p-twin-photos__sub">' +
+                    '<strong>JPEG / PNG / WebP / HEIC up to 12MB each.</strong> ' +
+                    'These drive the social-media digital twin we generate around your episode. Better photos = better reach.' +
+                  '</p>' +
+                '</div>' +
+              '</div>' +
+              '<div class="p-twin-photos__progress"><div class="p-twin-photos__progress-fill" id="p-twin-progress-fill" style="width:' + Math.min(100, (initialCount / 5) * 100) + '%"></div></div>' +
+              '<div class="p-twin-photos__grid">' + slotsHtml + '</div>' +
+              '<div class="p-twin-photos__done" id="p-twin-done" style="display:none">' +
+                '<i class="fa-solid fa-circle-check"></i> ' +
+                '<strong>You\'re done.</strong> ' +
+                'We\'re generating your digital twin now — you\'ll see new portraits land in your social drops over the next 48 hours.' +
+              '</div>';
+            p.style.display = 'block';
+
+            var inputs = p.querySelectorAll('input[data-slot-input]');
+            for (var j = 0; j < inputs.length; j++) {
+              inputs[j].addEventListener('change', onPick);
+            }
+
+            function onPick(e) {
+              var input = e.target;
+              var slot = Number(input.getAttribute('data-slot-input'));
+              var file = input.files && input.files[0];
+              if (!file) return;
+              var slotEl = p.querySelector('.p-twin-slot[data-slot="' + slot + '"]');
+              var preview = slotEl.querySelector('.p-twin-slot__preview');
+              var errEl = slotEl.querySelector('.p-twin-slot__err');
+              errEl.style.display = 'none';
+              errEl.textContent = '';
+
+              // Client-side guards (mimic the server-side ALLOWED set).
+              var ALLOWED = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
+              if (ALLOWED.indexOf(file.type) === -1) {
+                showSlotError(slotEl, errEl, 'Use JPEG, PNG, WebP, or HEIC.');
+                input.value = '';
+                return;
+              }
+              if (file.size > 12 * 1024 * 1024) {
+                showSlotError(slotEl, errEl, 'Max 12MB per photo.');
+                input.value = '';
+                return;
+              }
+
+              // Optimistic preview while the upload runs.
+              try {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+              } catch (err) {}
+              slotEl.setAttribute('data-state', 'uploading');
+
+              var fd = new FormData();
+              fd.append('slug', slug);
+              fd.append('slots', JSON.stringify([slot]));
+              fd.append('photos', file);
+
+              fetch(API + '/twin-photos/upload', { method: 'POST', body: fd })
+                .then(function (r) {
+                  return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+                })
+                .then(function (res) {
+                  if (!res.ok) {
+                    showSlotError(slotEl, errEl, (res.data && res.data.error) || 'Upload failed. Try again.');
+                    return;
+                  }
+                  slotEl.setAttribute('data-state', 'complete');
+                  var total = Number(res.data.count || 0);
+                  var fill = document.getElementById('p-twin-progress-fill');
+                  if (fill) fill.style.width = Math.min(100, (total / 5) * 100) + '%';
+                  if (res.data.status === 'complete') {
+                    var done = document.getElementById('p-twin-done');
+                    if (done) done.style.display = 'block';
+                  }
+                })
+                .catch(function (err) {
+                  console.error('[twin-photos] upload failed:', err);
+                  showSlotError(slotEl, errEl, 'Network error. Try again.');
+                });
+            }
+
+            function showSlotError(slotEl, errEl, msg) {
+              slotEl.setAttribute('data-state', 'error');
+              errEl.textContent = msg;
+              errEl.style.display = 'block';
+            }
+
+            if (autoScroll) {
+              try { p.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+            }
+          }
+
+          function escapeHtml(s) {
+            return String(s == null ? '' : s)
+              .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+          }
+        } catch (e) {
+          // Never let the uploader break the rest of the profile.
+          console.error('[twin-photos] render failed:', e);
         }
       })();
 
