@@ -98,13 +98,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Directory & Marketplace -->
-  <url>
-    <loc>https://guestengine.live/directory/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Public guest directory moved to mornings.network; retain product pages here. -->
   <url>
     <loc>https://guestengine.live/marketplace/</loc>
     <lastmod>2026-04-16</lastmod>

@@ -16,6 +16,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const API = 'https://app.conversationos.live/api/guest-marketplace';
 const SITE = 'https://guestengine.live';
+const migrated = new Map(JSON.parse(await fs.readFile(path.join(ROOT, 'docs/legacy-guest-urls.json'), 'utf8'))
+  .map(route => [new URL(route.from).pathname.split('/').pop(), route.to]));
 
 async function fetchJson(url) {
   const r = await fetch(url);
@@ -233,6 +235,10 @@ ${JSON.stringify({
 }
 
 async function processSlug(slug) {
+  if (migrated.has(slug)) {
+    console.log(`  → ${slug}: canonical public exports are served at ${migrated.get(slug)}`);
+    return true;
+  }
   console.log(`\n→ ${slug}`);
   const [profile, authority, visuals] = await Promise.all([
     fetchJson(`${API}/directory/${slug}`),

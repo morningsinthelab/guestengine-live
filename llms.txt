@@ -43,7 +43,7 @@ Guest Engine serves 12 professional verticals with tailored positioning:
 
 ## Key Pages
 
-- [Guest Directory](https://guestengine.live/directory/) — Browse 237+ guest profiles with Signal scores, expertise tags, and authority rankings
+- [Mornings in the Lab Guest Directory](https://mornings.network/shows/center-stage/guests) — Canonical guest stories, conversations, and reviewed appearances. Guest Engine retains guest login, profile management, and VIP tools.
 - [Character Marketplace](https://guestengine.live/marketplace/) — AI digital twin characters built from guest intelligence
 - [Network Shows](https://guestengine.live/shows/) — Four live shows, multiple segment formats, AI-matched guest placement
 - [Join / Book an Appearance](https://guestengine.live/join/) — Three tiers: Single ($497), Member ($97/mo), VIP ($297/mo)
@@ -54,12 +54,12 @@ Guest Engine serves 12 professional verticals with tailored positioning:
 
 ## Featured Guest Authority Pages (agent-readable)
 
-Every guest profile is published in three formats: a cinematic HTML page for humans, a clean Markdown file for AI agents, and a structured JSON file for programmatic ingestion. Crawlers should prefer the .md or .json variants.
+Migrated Mornings in the Lab guest profiles are canonical on mornings.network, with HTML, Markdown, JSON, and transcript views. Legacy Guest Engine public URLs forward to those destinations. Guest Engine management pages are not indexed.
 
 - **EJ Snyder** — 25-year decorated Army combat veteran, 6× Naked & Afraid legend, EVP of Freedom Pickles USA  
-  HTML: https://guestengine.live/profile/ej-snyder  ·  Markdown: https://guestengine.live/profile/ej-snyder.md  ·  JSON: https://guestengine.live/profile/ej-snyder.json  ·  Transcript: https://guestengine.live/profile/ej-snyder/transcript/
+  HTML: https://mornings.network/shows/center-stage/guests/ej-snyder  ·  Markdown: https://mornings.network/shows/center-stage/guests/ej-snyder/profile.md  ·  JSON: https://mornings.network/shows/center-stage/guests/ej-snyder/data.json  ·  Transcript: https://mornings.network/shows/center-stage/guests/ej-snyder/transcript
 - **David Frangioni** — CEO & Publisher, Modern Drummer Magazine; 13-year Aerosmith engineer; built the first all-Pro Tools studio (Livin' La Vida Loca)  
-  HTML: https://guestengine.live/profile/david-frangioni  ·  Markdown: https://guestengine.live/profile/david-frangioni.md  ·  JSON: https://guestengine.live/profile/david-frangioni.json  ·  Transcript: https://guestengine.live/profile/david-frangioni/transcript/
+  HTML: https://mornings.network/shows/center-stage/guests/david-frangioni  ·  Markdown: https://mornings.network/shows/center-stage/guests/david-frangioni/profile.md  ·  JSON: https://mornings.network/shows/center-stage/guests/david-frangioni/data.json  ·  Transcript: https://mornings.network/shows/center-stage/guests/david-frangioni/transcript
 
 ## The Tour — What $497 Produces
 
