@@ -18,6 +18,7 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@gabornings">
+  <script src="/profile/owner-route.js?v=20261101"></script>
   <style>
   :root {
     --gold: #fbbf24;
@@ -1908,7 +1909,7 @@
         // strip any t= portion. history.replaceState is safe — doesn't
         // navigate, just rewrites the URL bar.
         if (hashAuthToken) {
-          history.replaceState(null, '', window.location.pathname + '#audit');
+          history.replaceState(null, '', window.location.pathname + window.location.search + '#audit');
         }
       } catch (e) {}
       // Fall back to a previously-stored token if we just bounced back
@@ -2852,6 +2853,7 @@
       // Show
       document.getElementById('profile-loading').style.display = 'none';
       document.getElementById('profile-content').style.display = 'block';
+      window.dispatchEvent(new Event('guest-profile-ready'));
 
       // Re-init scroll reveal for dynamically added elements
       if (window._initReveal) setTimeout(window._initReveal, 50);
@@ -3045,22 +3047,16 @@
     function maybeAutoOpenAuditFromHash() {
       var h = (window.location.hash || '').toLowerCase();
       if (h === '#audit' || h.indexOf('#audit') === 0) {
-        // Wait until p-signal is hydrated; the trigger card only renders
-        // after profile data lands. Poll briefly, give up after ~3 s.
-        var tries = 0;
-        (function tryOpen() {
-          tries++;
-          var el = document.getElementById('p-signal');
-          if (el && el.style.display !== 'none') {
-            try { window.openAuthorityDrawer(); } catch (e) {}
-            return;
-          }
-          if (tries < 30) setTimeout(tryOpen, 100);
-        })();
+        // Owner access works with a zero score and after a slow profile load.
+        var el = document.getElementById('profile-content');
+        if (window.__P_PROFILE && el && el.style.display !== 'none') {
+          window.openAuthorityDrawer();
+        }
       }
     }
     maybeAutoOpenAuditFromHash();
     window.addEventListener('hashchange', maybeAutoOpenAuditFromHash);
+    window.addEventListener('guest-profile-ready', maybeAutoOpenAuditFromHash);
 
     // ── Fetch ──────────────────────────────────────────────────────────────
     function loadAudit(slug) {
