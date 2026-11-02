@@ -18,6 +18,8 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@gabornings">
+  <meta name="guest-public-url" content="__GUEST_CANONICAL_URL__">
+  <script src="/profile/owner-route.js?v=20261101-cutover"></script>
   <style>
   :root {
     --gold: #fbbf24;
@@ -1908,7 +1910,7 @@
         // strip any t= portion. history.replaceState is safe — doesn't
         // navigate, just rewrites the URL bar.
         if (hashAuthToken) {
-          history.replaceState(null, '', window.location.pathname + '#audit');
+          history.replaceState(null, '', window.location.pathname + window.location.search + '#audit');
         }
       } catch (e) {}
       // Fall back to a previously-stored token if we just bounced back
@@ -2049,7 +2051,7 @@
       if (!document.querySelector('meta[name="twitter:card"]')) {
         var tc = document.createElement('meta'); tc.setAttribute('name', 'twitter:card'); tc.setAttribute('content', 'summary_large_image'); document.head.appendChild(tc);
       }
-      setOG('og:url', 'https://guestengine.live/profile/' + profile.slug);
+      setOG('og:url', window.GuestEnginePublicUrl || 'https://guestengine.live/profile/' + profile.slug);
       setOG('og:type', 'profile');
 
       // ── HERO (UNTOUCHED visual layout) + Digital Twin portrait integration
@@ -2852,6 +2854,7 @@
       // Show
       document.getElementById('profile-loading').style.display = 'none';
       document.getElementById('profile-content').style.display = 'block';
+      window.dispatchEvent(new Event('guest-profile-ready'));
 
       // Re-init scroll reveal for dynamically added elements
       if (window._initReveal) setTimeout(window._initReveal, 50);
@@ -2949,16 +2952,17 @@
     }
 
     function injectSchema(profile, authority) {
+      var publicUrl = window.GuestEnginePublicUrl || 'https://guestengine.live/profile/' + profile.slug;
       var name = profile.guestName||'', headline = (authority&&authority.job_title)||profile.headline||'';
       var bio = (authority&&authority.authority_bio)||profile.bio||'';
       var knowsAbout = (authority&&authority.knows_about)||[];
       var sameAs = (authority&&authority.same_as)||[];
       var faqs = (authority&&authority.faqs)||[];
       var s = {'@context':'https://schema.org','@graph':[
-        {'@type':'Person','@id':'https://guestengine.live/profile/'+profile.slug+'#person',name:name,url:'https://guestengine.live/profile/'+profile.slug,jobTitle:headline,description:bio.substring(0,500),image:profile.headshotUrl||undefined,knowsAbout:knowsAbout,sameAs:sameAs},
-        {'@type':'ProfilePage','@id':'https://guestengine.live/profile/'+profile.slug,name:name+' — '+headline+' | Guest Engine',url:'https://guestengine.live/profile/'+profile.slug,about:{'@id':'https://guestengine.live/profile/'+profile.slug+'#person'},isPartOf:{'@type':'WebSite',name:'Guest Engine',url:'https://guestengine.live'}}
+        {'@type':'Person','@id':publicUrl+'#person',name:name,url:publicUrl,jobTitle:headline,description:bio.substring(0,500),image:profile.headshotUrl||undefined,knowsAbout:knowsAbout,sameAs:sameAs},
+        {'@type':'ProfilePage','@id':publicUrl,name:name+' — '+headline+' | Guest Engine',url:publicUrl,about:{'@id':publicUrl+'#person'},isPartOf:{'@type':'WebSite',name:window.GuestEnginePublicUrl?'Mornings in the Lab':'Guest Engine',url:window.GuestEnginePublicUrl?'https://mornings.network':'https://guestengine.live'}}
       ]};
-      if (faqs.length) s['@graph'].push({'@type':'FAQPage','@id':'https://guestengine.live/profile/'+profile.slug+'#faq',mainEntity:faqs.map(function(f){return{'@type':'Question',name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer}}})});
+      if (faqs.length) s['@graph'].push({'@type':'FAQPage','@id':publicUrl+'#faq',mainEntity:faqs.map(function(f){return{'@type':'Question',name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer}}})});
       if (profile.centerStageVideoId) s['@graph'].push({'@type':'VideoObject',name:name+' — Center Stage Interview | Mornings in the Lab',thumbnailUrl:'https://img.youtube.com/vi/'+profile.centerStageVideoId+'/maxresdefault.jpg',contentUrl:'https://www.youtube.com/watch?v='+profile.centerStageVideoId,embedUrl:'https://www.youtube.com/embed/'+profile.centerStageVideoId,publisher:{'@type':'Organization',name:'Mornings in the Lab',url:'https://mornings.live'}});
       var el = document.createElement('script'); el.type = 'application/ld+json'; el.textContent = JSON.stringify(s); document.head.appendChild(el);
     }
@@ -3045,22 +3049,16 @@
     function maybeAutoOpenAuditFromHash() {
       var h = (window.location.hash || '').toLowerCase();
       if (h === '#audit' || h.indexOf('#audit') === 0) {
-        // Wait until p-signal is hydrated; the trigger card only renders
-        // after profile data lands. Poll briefly, give up after ~3 s.
-        var tries = 0;
-        (function tryOpen() {
-          tries++;
-          var el = document.getElementById('p-signal');
-          if (el && el.style.display !== 'none') {
-            try { window.openAuthorityDrawer(); } catch (e) {}
-            return;
-          }
-          if (tries < 30) setTimeout(tryOpen, 100);
-        })();
+        // Owner access works with a zero score and after a slow profile load.
+        var el = document.getElementById('profile-content');
+        if (window.__P_PROFILE && el && el.style.display !== 'none') {
+          window.openAuthorityDrawer();
+        }
       }
     }
     maybeAutoOpenAuditFromHash();
     window.addEventListener('hashchange', maybeAutoOpenAuditFromHash);
+    window.addEventListener('guest-profile-ready', maybeAutoOpenAuditFromHash);
 
     // ── Fetch ──────────────────────────────────────────────────────────────
     function loadAudit(slug) {

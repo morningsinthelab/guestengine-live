@@ -1,0 +1,6 @@
+.git
+.git/**
+.claude
+node_modules
+.env
+.env.*
