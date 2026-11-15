@@ -5,7 +5,7 @@
   "serverInfo": {
     "name": "Guest Engine",
     "version": "2.0.0",
-    "description": "Guest placement, content production, and authority profile platform. Book live show appearances, receive produced content, and build permanent indexed profiles. Part of the MITL Live Network, powered by ConversationOS.",
+    "description": "Guest placement, content production, and authority profile platform. Book live show appearances, receive produced content, and build permanent indexed profiles. Part of the MiTL Live Network, powered by ConversationOS.",
     "homepage": "https://guestengine.live",
     "documentation": "https://guestengine.live/llms-full.txt",
     "logo": "https://guestengine.live/og-image.png",

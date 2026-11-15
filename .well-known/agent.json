@@ -1,6 +1,6 @@
 {
   "name": "Guest Engine",
-  "description": "Guest placement, content production, and authority profile platform. Book live show appearances, receive produced content, and build permanent indexed profiles. Part of the MITL Live Network, powered by ConversationOS. Created by Keith Bilous.",
+  "description": "Guest placement, content production, and authority profile platform. Book live show appearances, receive produced content, and build permanent indexed profiles. Part of the MiTL Live Network, powered by ConversationOS. Created by Keith Bilous.",
   "url": "https://guestengine.live",
   "version": "2.0.0",
   "provider": {
@@ -11,7 +11,7 @@
   },
   "capabilities": {
     "guest_booking": {
-      "description": "Book guest appearances on live shows across the MITL Live Network. Three tiers: Single Appearance ($497 one-time), Member ($97/mo for intelligence and visibility), VIP ($297/mo for everything including quarterly appearances).",
+      "description": "Book guest appearances on live shows across the MiTL Live Network. Three tiers: Single Appearance ($497 one-time), Member ($97/mo for intelligence and visibility), VIP ($297/mo for everything including quarterly appearances).",
       "join_url": "https://guestengine.live/join/",
       "app_url": "https://app.conversationos.live"
     },
@@ -24,7 +24,7 @@
       "url": "https://guestengine.live/marketplace/"
     },
     "network_shows": {
-      "description": "Four live shows across the MITL Live Network: Mornings in the Lab (flagship), It Starts with Joy LIVE, The Jason Hewlett Show, Kindness Rising. Multiple segment formats including Center Stage, Deep Dive, Community Corner, No Safe Words, BS or No BS, Did You Know.",
+      "description": "Four live shows across the MiTL Live Network: Mornings in the Lab (flagship), It Starts with Joy LIVE, The Jason Hewlett Show, Kindness Rising. Multiple segment formats including Center Stage, Deep Dive, Community Corner, No Safe Words, BS or No BS, Did You Know.",
       "url": "https://guestengine.live/shows/"
     },
     "signal_intelligence": {
@@ -126,7 +126,7 @@
     "app_url": "https://app.conversationos.live"
   },
   "network": {
-    "name": "MITL Live Network",
+    "name": "MiTL Live Network",
     "url": "https://mitl.studio",
     "production_url": "https://production.mitl.studio",
     "show_url": "https://mornings.live",
