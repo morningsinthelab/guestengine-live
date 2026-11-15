@@ -50,7 +50,9 @@
   <link rel="llms-txt" href="https://guestengine.live/llms.txt">
   <link rel="alternate" type="text/plain" href="https://guestengine.live/llms-full.txt" title="LLM Full Documentation">
 
-  <!-- Hero video loaded by <video> element directly -->
+  <!-- Hero: poster image is the LCP element; the video is attached by script (desktop only) -->
+  <link rel="preload" as="image" href="/assets/web/ge-hero-poster-640.webp" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/web/ge-hero-poster-1280.webp" media="(min-width: 768px)" fetchpriority="high">
 
   <!-- Fonts: Syncopate + Inter (family standard) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,7 +85,7 @@
     },
     "provider": {
       "@type": "Organization",
-      "name": "Mornings in the Lab",
+      "name": "MiTL Studio",
       "url": "https://mitl.studio"
     }
   }
@@ -3114,9 +3116,30 @@
         muted
         loop
         playsinline
-        preload="auto"
-        src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/1776215252920-6cbf79537687-guestengine-hero.mp4"
+        preload="none"
+        poster="/assets/web/ge-hero-poster-640.webp"
+        data-src-desktop="/assets/web/ge-hero-720.mp4"
+        data-src-mobile="/assets/web/ge-hero-480.mp4"
       ></video>
+      <script>
+      /* Desktop: load the compressed 720p hero right away. Mobile / Save-Data / slow
+         connections: show the poster only; the video loads when the visitor taps the
+         sound button, so phones don't download video on page load. */
+      (function () {
+        var v = document.getElementById('hero-video');
+        if (!v) return;
+        var c = navigator.connection || {};
+        var light = window.matchMedia('(max-width: 767px)').matches || c.saveData || /(^|-)2g|3g/.test(c.effectiveType || '');
+        if (light) {
+          v.removeAttribute('autoplay');
+          v.setAttribute('data-deferred', '1');
+        } else {
+          v.poster = '/assets/web/ge-hero-poster-1280.webp';
+          v.src = v.getAttribute('data-src-desktop');
+          v.preload = 'auto';
+        }
+      })();
+      </script>
       <img id="hero-section-img" class="hero__section-img" src="" alt="" aria-hidden="true">
       <div class="hero__overlay"></div>
     </div>
@@ -3209,7 +3232,7 @@
     <div class="wyg-showcase-row">
       <!-- Live Appearance — real show footage -->
       <div class="wyg-showcase-card">
-        <video autoplay muted loop playsinline src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/1776723765296-shows-hero.mp4"></video>
+        <video class="lazy-video" muted loop playsinline preload="none" poster="/assets/web/shows-hero-poster.webp" data-src="/assets/web/shows-hero-720.mp4"></video>
         <div class="wyg-overlay"></div>
         <div class="wyg-play-ring">
           <svg viewBox="0 0 24 24"><polygon points="8 5 20 12 8 19"/></svg>
@@ -3222,7 +3245,7 @@
       </div>
       <!-- Authority Page — looping video -->
       <div class="wyg-showcase-card">
-        <video autoplay muted loop playsinline src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/authority-page-loop.mp4"></video>
+        <video class="lazy-video" muted loop playsinline preload="none" poster="/assets/web/authority-page-poster.webp" data-src="/assets/web/authority-page-loop.mp4"></video>
         <div class="wyg-overlay"></div>
         <div class="wyg-card-content">
           <div class="wyg-card-eyebrow">SEO + GEO Optimized &middot; Indexed Everywhere</div>
@@ -3236,8 +3259,8 @@
     <div class="wyg-strip-row">
       <!-- Video Clips — static bg + video composited on phone screen -->
       <div class="wyg-strip-card">
-        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_video_clips.png" alt="Video Clips">
-        <video autoplay muted loop playsinline style="position:absolute;z-index:1;left:23.4%;top:18.8%;width:35.2%;height:42.4%;object-fit:cover;transform:rotate(-4deg);border-radius:2px;pointer-events:none;" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/video-clips-loop.mp4"></video>
+        <img class="wyg-strip-bg" src="/assets/web/deliverable_video_clips-600.webp" srcset="/assets/web/deliverable_video_clips-600.webp 600w, /assets/web/deliverable_video_clips-1000.webp 1000w" sizes="(max-width: 767px) 100vw, 25vw" width="1792" height="2400" loading="lazy" decoding="async" alt="Video Clips">
+        <video autoplay muted loop playsinline style="position:absolute;z-index:1;left:23.4%;top:18.8%;width:35.2%;height:42.4%;object-fit:cover;transform:rotate(-4deg);border-radius:2px;pointer-events:none;" class="lazy-video" preload="none" data-src="/assets/web/video-clips-loop.mp4"></video>
         <div class="wyg-strip-overlay"></div>
         <div class="wyg-strip-content">
           <span class="wyg-count-badge">5 Clips</span>
@@ -3247,7 +3270,7 @@
       </div>
       <!-- Social Posts -->
       <div class="wyg-strip-card">
-        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_social_posts.png" alt="Social Posts">
+        <img class="wyg-strip-bg" src="/assets/web/deliverable_social_posts-600.webp" srcset="/assets/web/deliverable_social_posts-600.webp 600w, /assets/web/deliverable_social_posts-1000.webp 1000w" sizes="(max-width: 767px) 100vw, 25vw" width="1792" height="2400" loading="lazy" decoding="async" alt="Social Posts">
         <div class="wyg-strip-overlay"></div>
         <div class="wyg-strip-content">
           <span class="wyg-count-badge">10 Posts</span>
@@ -3257,7 +3280,7 @@
       </div>
       <!-- Full Transcript -->
       <div class="wyg-strip-card">
-        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_transcript.png" alt="Full Transcript">
+        <img class="wyg-strip-bg" src="/assets/web/deliverable_transcript-600.webp" srcset="/assets/web/deliverable_transcript-600.webp 600w, /assets/web/deliverable_transcript-1000.webp 1000w" sizes="(max-width: 767px) 100vw, 25vw" width="1792" height="2400" loading="lazy" decoding="async" alt="Full Transcript">
         <div class="wyg-strip-overlay"></div>
         <div class="wyg-strip-content">
           <div class="wyg-strip-icon">&#9998;</div>
@@ -3267,7 +3290,7 @@
       </div>
       <!-- Highlight Reel -->
       <div class="wyg-strip-card">
-        <img class="wyg-strip-bg" src="https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/deliverables/deliverable_highlight_reel.png" alt="Highlight Reel">
+        <img class="wyg-strip-bg" src="/assets/web/deliverable_highlight_reel-600.webp" srcset="/assets/web/deliverable_highlight_reel-600.webp 600w, /assets/web/deliverable_highlight_reel-1000.webp 1000w" sizes="(max-width: 767px) 100vw, 25vw" width="1792" height="2400" loading="lazy" decoding="async" alt="Highlight Reel">
         <div class="wyg-strip-overlay"></div>
         <div class="wyg-strip-content">
           <div class="wyg-strip-icon">&#9654;</div>
@@ -4051,6 +4074,29 @@
 
   <script src="main.js"></script>
 
+  <!-- Lazy-load below-the-fold videos: attach src and play only when near the viewport -->
+  <script>
+  (function() {
+    function load(v) {
+      if (!v.getAttribute('data-src')) return;
+      v.src = v.getAttribute('data-src');
+      v.removeAttribute('data-src');
+      v.play().catch(function() {});
+    }
+    var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { load(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '200px 0px' }) : null;
+    window.observeLazyVideos = function(root) {
+      (root || document).querySelectorAll('video.lazy-video[data-src]').forEach(function(v) {
+        if (io) io.observe(v); else load(v);
+      });
+    };
+    window.observeLazyVideos(document);
+  })();
+  </script>
+
   <!-- Hero video unmute toggle -->
   <script>
   (function() {
@@ -4062,6 +4108,12 @@
     var unmutedIcon = btn.querySelector('.hero__unmute-icon--unmuted');
 
     btn.addEventListener('click', function() {
+      if (video.getAttribute('data-deferred') === '1') {
+        video.removeAttribute('data-deferred');
+        video.src = video.getAttribute('data-src-mobile');
+        video.muted = true; // toggled to unmuted just below
+        video.play().catch(function() {});
+      }
       video.muted = !video.muted;
       mutedIcon.style.display = video.muted ? '' : 'none';
       unmutedIcon.style.display = video.muted ? 'none' : '';
@@ -4095,16 +4147,20 @@
   <script>
   (function() {
     var sectionHeroes = {
-      'pricing': '/assets/heroes/hero-pricing.jpg',
-      'network': '/assets/heroes/hero-network.jpg'
+      'pricing': '/assets/web/hero-pricing.webp',
+      'network': '/assets/web/hero-network.webp'
     };
     var heroImg = document.getElementById('hero-section-img');
     if (!heroImg) return;
 
-    // Preload images
-    Object.values(sectionHeroes).forEach(function(src) {
-      var img = new Image();
-      img.src = src;
+    // Preload images after the page has loaded (keeps them off the critical path)
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        Object.values(sectionHeroes).forEach(function(src) {
+          var img = new Image();
+          img.src = src;
+        });
+      }, 1500);
     });
 
     var activeSection = null;
@@ -4359,7 +4415,7 @@
       guestName: 'Tommy Rhee',
       jobTitle: 'President & CEO, RheeGen',
       headshotUrl: 'https://media.licdn.com/dms/image/v2/D4E03AQHj4WUwlzE9LA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1729298124692?e=2147483647&v=beta&t=4AXFM3o1_Em-s6giRnWPBhcIDF0ZPkdqRgAag4D5y_8',
-      livingPortraitVideoUrl: 'https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/directory-portraits/tommy-rhee-living-portrait.mp4',
+      livingPortraitVideoUrl: '/assets/web/tommy-rhee-living-portrait-240.mp4',
       signalScore: 26,
       pastAppearances: [
         { showName: 'Mornings in the Lab', segment: 'Center Stage', date: '2026-03-26', link: 'https://www.youtube.com/watch?v=kIQ_n93qpyU' }
@@ -4370,7 +4426,7 @@
       guestName: 'EJ Snyder',
       jobTitle: 'EVP & Veteran Owner, Freedom Pickles USA',
       headshotUrl: 'https://raw.githubusercontent.com/morningsinthelab/mitl-cdn/main/guest-headshots/ej-snyder.jpg',
-      livingPortraitVideoUrl: 'https://pub-176ab0b7668b46259a6c72d4ad146d40.r2.dev/uploads/directory-portraits/ej-snyder-living-portrait.mp4',
+      livingPortraitVideoUrl: '/assets/web/ej-snyder-living-portrait-240.mp4',
       signalScore: 74,
       pastAppearances: [
         { showName: 'Mornings in the Lab', segment: 'Center Stage', date: '2026-03-24', link: 'https://www.youtube.com/watch?v=vwfz5Nn8NOo' },
@@ -4422,7 +4478,7 @@
 
     var score = typeof g.signalScore === 'number' ? g.signalScore : 0;
     var count = appearances.length;
-    var video = g.livingPortraitVideoUrl ? '<video autoplay muted loop playsinline><source src="' + escapeHtml(g.livingPortraitVideoUrl) + '" type="video/mp4"></video>' : '';
+    var video = g.livingPortraitVideoUrl ? '<video class="lazy-video" muted loop playsinline preload="none" data-src="' + escapeHtml(g.livingPortraitVideoUrl) + '"></video>' : '';
     var fallbackImg = g.headshotUrl ? '<img class="cp-avatar-fallback" src="' + escapeHtml(g.headshotUrl) + '" alt="' + escapeHtml(g.guestName) + '" loading="lazy">' : '';
 
     return (
@@ -4466,6 +4522,7 @@
         '<div class="cp-divider-label">Same platform · more conversations</div>' +
       '</div>' +
       renderCard(right, true);
+    if (window.observeLazyVideos) window.observeLazyVideos(mount);
   }
 
   function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }

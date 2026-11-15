@@ -82,7 +82,7 @@ Object.values(verticals).forEach(v => {
       "url": "https://guestengine.live",
       "parentOrganization": {
         "@type": "Organization",
-        "name": "Mornings in the Lab",
+        "name": "MiTL Studio",
         "url": "https://mitl.studio"
       }
     },

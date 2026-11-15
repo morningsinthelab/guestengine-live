@@ -285,12 +285,13 @@ function buildAdditionalSchemas(p) {
       "jobTitle": "Founder & Creator",
       "worksFor": {
         "@type": "Organization",
-        "name": "Mornings in the Lab"
+        "name": "MiTL Studio",
+        "url": "https://mitl.studio"
       }
     },
     "parentOrganization": {
       "@type": "Organization",
-      "name": "Mornings in the Lab",
+      "name": "MiTL Studio",
       "url": "https://mitl.studio"
     },
     "sameAs": [
