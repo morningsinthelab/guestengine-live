@@ -434,7 +434,7 @@ The podcasting paradox: the more episodes you release, the more content you have
 ---
 
 ### 8. "With Guest Engine" Bullets
-- A live appearance on a network with 1,000+ episodes of credibility — a different audience, not your existing one
+- A live appearance on a network with 800+ episodes of credibility — a different audience, not your existing one
 - Clips from a different stage that you can deploy to drive new listeners back to YOUR show
 - A profile on a platform that AI search engines actually index — so your show surfaces when people ask for recommendations
 - Cross-promotion that's asymmetric (you appear on a bigger stage, your audience grows)
@@ -599,7 +599,7 @@ That's not content. That's authority. And it compounds every day.
 Your profile doesn't expire, disappear behind a paywall, or get buried in a feed. It's indexed by Google and structured for AI search engines — a permanent record of your expertise that grows in authority over time.
 
 **PRODUCED, NOT POLISHED**
-This isn't a selfie video or a ring-light reel. It's a produced segment on a live network with 1,000+ episodes of credibility — the kind of video that says "professional" before they even hit play.
+This isn't a selfie video or a ring-light reel. It's a produced segment on a live network with 800+ episodes of credibility — the kind of video that says "professional" before they even hit play.
 
 **DISCOVERABLE EVERYWHERE**
 Google. LinkedIn. Perplexity. ChatGPT. Gemini. Your Guest Engine profile is structured so every search surface — human and AI — knows exactly who you are, what you do, and why you're the authority.

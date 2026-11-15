@@ -172,7 +172,7 @@ const verticals = [
       'Same audience, no growth'
     ],
     painUs: [
-      'Appear on a daily show with 1,000+ episodes',
+      'Appear on a daily show with 800+ episodes',
       'One flat fee — $497',
       '5 clips that promote YOUR show to OUR audience',
       'Profile page that links directly to your podcast',
