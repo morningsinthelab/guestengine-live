@@ -1,5 +1,5 @@
 /**
- * MITL Character Hero Rotation System
+ * MiTL Character Hero Rotation System
  * Randomly selects a hero image from a pool on each page load.
  * Each persona page has 4+ character-based hero variants stored in /assets/heroes/
  * 

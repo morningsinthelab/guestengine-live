@@ -77,7 +77,7 @@ function getVerticalNav() {
 
 // New unified footer — follows mitl.studio/mornings.live patterns:
 // - "ABOUT THE FOUNDER" section like mitl.studio
-// - MITL NETWORK column with family cross-links like mornings.live
+// - MiTL NETWORK column with family cross-links like mornings.live
 // - "Created by Keith Bilous" in copyright like all family sites
 // - Identity statement like mitl.studio's "AI-POWERED SYSTEMS. HUMAN-LED PRODUCTION."
 function getFooter(prefix) {
@@ -92,7 +92,7 @@ function getFooter(prefix) {
             </svg>
             <span class="nav__wordmark">Guest<strong>ENGINE</strong></span>
           </a>
-          <p class="footer__tagline">The guest placement platform where you leave with content, not just a calendar invite. Powered by the MITL Live Network.</p>
+          <p class="footer__tagline">The guest placement platform where you leave with content, not just a calendar invite. Powered by the MiTL Live Network.</p>
           <p class="footer__founder">ABOUT THE FOUNDER</p>
           <p class="footer__founder-text">Founded by Keith Bilous, creator of the MiTL morning format and the ConversationOS production system.</p>
         </div>
@@ -106,7 +106,7 @@ function getFooter(prefix) {
           <a href="/consultants/" class="footer__link">Consultants</a>
         </div>
         <div class="footer__col">
-          <h4 class="footer__heading">MITL Network</h4>
+          <h4 class="footer__heading">MiTL Network</h4>
           <a href="https://mitl.studio" class="footer__link" target="_blank" rel="noopener">MiTL Studio</a>
           <a href="https://mornings.live" class="footer__link" target="_blank" rel="noopener">Mornings in the Lab</a>
           <a href="https://keithbilous.com" class="footer__link" target="_blank" rel="noopener">Keith Bilous</a>

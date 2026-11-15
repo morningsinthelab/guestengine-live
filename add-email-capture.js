@@ -6,7 +6,7 @@ const verticals = [
   { dir: 'coaches', title: 'Not ready to book?', gold: 'Get the Coach Playbook.', desc: 'A free guide for coaches — how to turn one conversation into a month of content that attracts clients while you work with clients.' },
   { dir: 'founders', title: 'Not ready to book?', gold: 'Get the Founder Playbook.', desc: 'A free guide for founders — how to build press-grade content for your LinkedIn, pitch deck, and investor updates without a PR agency.' },
   { dir: 'realestate', title: 'Not ready to book?', gold: 'Get the Agent Playbook.', desc: 'A free guide for agents — how to build local authority, rank in your market, and turn one conversation into a month of listing content.' },
-  { dir: 'podcasters', title: 'Not ready to book?', gold: 'Get the Host Playbook.', desc: 'A free guide for podcast hosts — how to grow your show through cross-promotion, guest swaps, and the MITL production stack.' },
+  { dir: 'podcasters', title: 'Not ready to book?', gold: 'Get the Host Playbook.', desc: 'A free guide for podcast hosts — how to grow your show through cross-promotion, guest swaps, and the MiTL production stack.' },
   { dir: 'consultants', title: 'Not ready to book?', gold: 'Get the Consultant Playbook.', desc: 'A free guide for consultants — how to build authority content that attracts your next engagement without writing a single post.' },
 ];
 

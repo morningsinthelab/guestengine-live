@@ -161,7 +161,7 @@ const verticals = [
     slug: 'podcasters',
     eyebrow: 'FOR PODCAST HOSTS',
     title: 'Grow Your Show<br><span class="gold">From Someone Else\'s Stage.</span>',
-    subtitle: 'Appear as a guest on the MITL Live Network. Cross-promote your podcast, walk away with clips that promote your show, and experience the production stack that could power your next season.',
+    subtitle: 'Appear as a guest on the MiTL Live Network. Cross-promote your podcast, walk away with clips that promote your show, and experience the production stack that could power your next season.',
     painTitle: 'Great show.<br><span class="gold">Small audience.</span>',
     painSub: 'You\'re putting out episodes every week but growth is flat. You need exposure to new audiences — and the best way to grow a podcast is to be a guest on someone else\'s.',
     painThem: [
@@ -193,7 +193,7 @@ const verticals = [
     closingTitle: 'Your next 1,000 listeners<br><span class="gold">are in someone else\'s audience.</span>',
     closingSub: 'Stop posting episodes into the void. Show up on a stage that already has a crowd, and bring them back to yours.',
     metaTitle: 'Guest Engine for Podcasters — Grow Your Show From Someone Else\'s Stage.',
-    metaDesc: 'Appear as a guest on the MITL Live Network. Get cross-promotion clips, a podcaster profile, and a production stack demo. $497 flat fee.'
+    metaDesc: 'Appear as a guest on the MiTL Live Network. Get cross-promotion clips, a podcaster profile, and a production stack demo. $497 flat fee.'
   },
   {
     slug: 'consultants',
@@ -419,7 +419,7 @@ ${deliverablesHtml}
         </div>
         <div class="footer__col">
           <h4 class="footer__heading">Network</h4>
-          <a href="https://mitl.studio" class="footer__link" target="_blank" rel="noopener">MITL Studio</a>
+          <a href="https://mitl.studio" class="footer__link" target="_blank" rel="noopener">MiTL Studio</a>
           <a href="https://production.mitl.studio" class="footer__link" target="_blank" rel="noopener">Production</a>
           <a href="https://conversationos.live" class="footer__link" target="_blank" rel="noopener">ConversationOS</a>
         </div>

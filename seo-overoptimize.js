@@ -25,7 +25,7 @@ const personas = [
     name: 'Authors & Speakers',
     shortName: 'Authors',
     keywords: 'guest engine for authors, author podcast appearances, book launch visibility, author SEO profile, generative engine optimization for authors, AI search author ranking, author media kit, speaker reel production, author personal brand, podcast booking for authors, author thought leadership, book marketing alternatives, author content production',
-    heroAlt: 'Guest Engine for Authors — cinematic studio scene featuring MITL show characters discussing books and literary topics in a professional broadcast environment',
+    heroAlt: 'Guest Engine for Authors — cinematic studio scene featuring MiTL show characters discussing books and literary topics in a professional broadcast environment',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Publishing & Speaking',
     audienceTypes: 'authors, speakers, thought leaders, writers, non-fiction authors, keynote speakers, book coaches, literary professionals'
@@ -36,7 +36,7 @@ const personas = [
     name: 'Coaches & Mentors',
     shortName: 'Coaches',
     keywords: 'guest engine for coaches, coaching visibility, coach content production, coach SEO profile, life coach marketing, business coach personal brand, coach media kit, coaching podcast appearances, AI search coach ranking, generative engine optimization for coaches, coaching authority building, coach video content, mentor thought leadership',
-    heroAlt: 'Guest Engine for Coaches — cinematic studio scene featuring MITL show characters in a coaching and mentorship conversation setting',
+    heroAlt: 'Guest Engine for Coaches — cinematic studio scene featuring MiTL show characters in a coaching and mentorship conversation setting',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Coaching & Mentorship',
     audienceTypes: 'life coaches, business coaches, executive coaches, mentors, fitness coaches, mindset coaches, career coaches, leadership coaches'
@@ -47,7 +47,7 @@ const personas = [
     name: 'Founders & Entrepreneurs',
     shortName: 'Founders',
     keywords: 'guest engine for founders, founder personal brand, startup visibility, founder media appearances, entrepreneur content production, founder SEO profile, startup pitch clips, founder thought leadership, AI search founder ranking, generative engine optimization for founders, founder speaking opportunities, startup marketing',
-    heroAlt: 'Guest Engine for Founders — cinematic studio scene featuring MITL show characters in an entrepreneurial and startup-focused broadcast environment',
+    heroAlt: 'Guest Engine for Founders — cinematic studio scene featuring MiTL show characters in an entrepreneurial and startup-focused broadcast environment',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Startups & Entrepreneurship',
     audienceTypes: 'founders, entrepreneurs, startup CEOs, co-founders, serial entrepreneurs, solopreneurs, venture-backed founders'
@@ -58,7 +58,7 @@ const personas = [
     name: 'Real Estate Professionals',
     shortName: 'Real Estate',
     keywords: 'guest engine for real estate agents, real estate personal brand, realtor content production, real estate SEO profile, real estate market authority, agent media kit, real estate podcast appearances, AI search real estate ranking, generative engine optimization for realtors, real estate thought leadership, agent video marketing',
-    heroAlt: 'Guest Engine for Real Estate — cinematic studio scene featuring MITL show characters discussing real estate markets and property insights in a professional broadcast setting',
+    heroAlt: 'Guest Engine for Real Estate — cinematic studio scene featuring MiTL show characters discussing real estate markets and property insights in a professional broadcast setting',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Real Estate',
     audienceTypes: 'real estate agents, realtors, brokers, property investors, real estate team leads, luxury agents, commercial real estate professionals'
@@ -69,7 +69,7 @@ const personas = [
     name: 'Podcasters & Creators',
     shortName: 'Podcasters',
     keywords: 'guest engine for podcasters, podcast cross-promotion, podcaster visibility, podcast growth, podcast SEO profile, podcaster content production, podcast guest booking platform, AI search podcast ranking, generative engine optimization for podcasters, podcast audience growth, podcast marketing',
-    heroAlt: 'Guest Engine for Podcasters — cinematic studio scene featuring MITL show characters in a podcast recording environment with professional audio equipment',
+    heroAlt: 'Guest Engine for Podcasters — cinematic studio scene featuring MiTL show characters in a podcast recording environment with professional audio equipment',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Podcasting & Media',
     audienceTypes: 'podcasters, podcast hosts, content creators, media producers, YouTube creators, audio creators'
@@ -80,7 +80,7 @@ const personas = [
     name: 'Consultants & Advisors',
     shortName: 'Consultants',
     keywords: 'guest engine for consultants, consultant personal brand, consulting thought leadership, consultant SEO profile, consultant content production, consulting media appearances, AI search consultant ranking, generative engine optimization for consultants, consultant authority building, consulting inbound marketing, consultant video content',
-    heroAlt: 'Guest Engine for Consultants — cinematic studio scene featuring MITL show characters in a strategic consulting and advisory broadcast setting',
+    heroAlt: 'Guest Engine for Consultants — cinematic studio scene featuring MiTL show characters in a strategic consulting and advisory broadcast setting',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Consulting & Advisory',
     audienceTypes: 'management consultants, strategy consultants, business advisors, independent consultants, consulting firm partners, fractional executives'
@@ -91,7 +91,7 @@ const personas = [
     name: 'Therapists & Counselors',
     shortName: 'Therapists',
     keywords: 'guest engine for therapists, therapist personal brand, mental health thought leadership, therapist SEO profile, therapist content production, therapist media appearances, AI search therapist ranking, generative engine optimization for therapists, therapist authority building, counselor visibility, therapy practice marketing',
-    heroAlt: 'Guest Engine for Therapists — cinematic studio scene featuring MITL show characters in a warm, intimate therapeutic conversation setting',
+    heroAlt: 'Guest Engine for Therapists — cinematic studio scene featuring MiTL show characters in a warm, intimate therapeutic conversation setting',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Mental Health & Therapy',
     audienceTypes: 'therapists, psychologists, counselors, licensed clinical social workers, marriage and family therapists, mental health practitioners, behavioral health professionals'
@@ -102,7 +102,7 @@ const personas = [
     name: 'Financial Advisors & Planners',
     shortName: 'Financial Advisors',
     keywords: 'guest engine for financial advisors, financial advisor personal brand, wealth management thought leadership, financial advisor SEO profile, financial advisor content production, financial advisor media appearances, AI search financial advisor ranking, generative engine optimization for financial advisors, financial planner authority building, CFP marketing',
-    heroAlt: 'Guest Engine for Financial Advisors — cinematic studio scene featuring MITL show characters surrounded by financial data displays and market analysis',
+    heroAlt: 'Guest Engine for Financial Advisors — cinematic studio scene featuring MiTL show characters surrounded by financial data displays and market analysis',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Financial Services & Planning',
     audienceTypes: 'financial advisors, certified financial planners, wealth managers, investment advisors, financial consultants, retirement planners, fiduciary advisors'
@@ -113,7 +113,7 @@ const personas = [
     name: 'Attorneys & Legal Professionals',
     shortName: 'Attorneys',
     keywords: 'guest engine for attorneys, attorney personal brand, legal thought leadership, attorney SEO profile, lawyer content production, attorney media appearances, AI search attorney ranking, generative engine optimization for lawyers, attorney authority building, law firm marketing, legal expert visibility',
-    heroAlt: 'Guest Engine for Attorneys — cinematic studio scene featuring MITL show characters in a legal and judicial-themed broadcast environment',
+    heroAlt: 'Guest Engine for Attorneys — cinematic studio scene featuring MiTL show characters in a legal and judicial-themed broadcast environment',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Legal Services',
     audienceTypes: 'attorneys, lawyers, legal professionals, law firm partners, solo practitioners, legal consultants, in-house counsel'
@@ -124,7 +124,7 @@ const personas = [
     name: 'Health & Wellness Professionals',
     shortName: 'Health & Wellness',
     keywords: 'guest engine for health professionals, wellness practitioner personal brand, health thought leadership, wellness SEO profile, health content production, wellness media appearances, AI search health professional ranking, generative engine optimization for wellness, health authority building, functional medicine marketing, wellness expert visibility',
-    heroAlt: 'Guest Engine for Health & Wellness — cinematic studio scene featuring MITL show characters in a vitality-focused broadcast setting with warm lighting',
+    heroAlt: 'Guest Engine for Health & Wellness — cinematic studio scene featuring MiTL show characters in a vitality-focused broadcast setting with warm lighting',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Health & Wellness',
     audienceTypes: 'health coaches, wellness practitioners, functional medicine doctors, nutritionists, fitness professionals, naturopaths, holistic health experts, personal trainers'
@@ -135,7 +135,7 @@ const personas = [
     name: 'Nonprofit Leaders & Social Impact',
     shortName: 'Nonprofit Leaders',
     keywords: 'guest engine for nonprofit leaders, nonprofit personal brand, social impact thought leadership, nonprofit SEO profile, nonprofit content production, nonprofit media appearances, AI search nonprofit ranking, generative engine optimization for nonprofits, nonprofit authority building, nonprofit marketing, executive director visibility',
-    heroAlt: 'Guest Engine for Nonprofit Leaders — cinematic studio scene featuring MITL show characters with community impact data displays and world maps',
+    heroAlt: 'Guest Engine for Nonprofit Leaders — cinematic studio scene featuring MiTL show characters with community impact data displays and world maps',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Nonprofit & Social Impact',
     audienceTypes: 'nonprofit leaders, executive directors, foundation directors, social entrepreneurs, nonprofit board members, philanthropy professionals, community organizers'
@@ -146,7 +146,7 @@ const personas = [
     name: 'Corporate Executives & C-Suite',
     shortName: 'Corporate Executives',
     keywords: 'guest engine for executives, corporate executive personal brand, C-suite thought leadership, executive SEO profile, executive content production, executive media appearances, AI search executive ranking, generative engine optimization for executives, corporate authority building, executive visibility, CEO personal brand',
-    heroAlt: 'Guest Engine for Corporate Executives — cinematic studio scene featuring MITL show characters in an executive and corporate leadership broadcast setting',
+    heroAlt: 'Guest Engine for Corporate Executives — cinematic studio scene featuring MiTL show characters in an executive and corporate leadership broadcast setting',
     speakableCSS: ['.hero__title', '.hero__sub', '.section__title', '.section__sub'],
     industry: 'Corporate Leadership',
     audienceTypes: 'CEOs, CFOs, COOs, CTOs, C-suite executives, VPs, senior directors, corporate board members, managing directors'

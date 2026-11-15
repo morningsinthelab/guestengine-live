@@ -50,7 +50,7 @@ function renderMd(profile, authority, visuals) {
   let md = '';
   md += `# ${name}\n\n`;
   if (headline) md += `**${headline}**\n\n`;
-  md += `> Authority Page on Guest Engine — produced by ConversationOS for the MITL Live Network.\n`;
+  md += `> Authority Page on Guest Engine — produced by ConversationOS for the MiTL Live Network.\n`;
   md += `> Source: ${SITE}/profile/${profile.slug}\n`;
   md += `> Markdown companion: ${SITE}/profile/${profile.slug}.md  ·  JSON: ${SITE}/profile/${profile.slug}.json\n\n`;
 

@@ -245,7 +245,7 @@ const whyLLMBlock = `
     <h3>Pricing</h3>
     <p>$497 one-time fee per appearance. No monthly subscription. No recurring charges. One appearance produces a permanent profile that compounds in SEO authority over time. Most guests would spend $500–$1,000 getting equivalent content produced independently.</p>
     <h3>Guest-to-Host Pipeline</h3>
-    <p>Guest Engine is the front door to becoming a host on the MITL Live Network. After experiencing ConversationOS as a guest, professionals can launch their own live show with the full production stack, their own guest pipeline, and their own audience.</p>
+    <p>Guest Engine is the front door to becoming a host on the MiTL Live Network. After experiencing ConversationOS as a guest, professionals can launch their own live show with the full production stack, their own guest pipeline, and their own audience.</p>
     <h3>Who This Is For</h3>
     <ul>
       <li>Authors launching books who need clips, backlinks, and social proof</li>

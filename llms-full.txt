@@ -4,7 +4,7 @@
 
 Guest Engine is a two-sided guest placement and production platform. It connects guests seeking live show appearances with hosts who need quality guests — then produces the entire experience end-to-end. Unlike matchmaking platforms (PodMatch, Matchmaker.fm), Guest Engine includes full production: clips, social posts, transcripts, SEO profiles, and highlight reels.
 
-Created by Keith Bilous, founder of the MITL morning format and the ConversationOS production system. AI-powered matching. Human-led production.
+Created by Keith Bilous, founder of the MiTL morning format and the ConversationOS production system. AI-powered matching. Human-led production.
 
 ---
 
@@ -25,9 +25,9 @@ Guest Engine is a product of ConversationOS — a modular show management platfo
 
 ---
 
-## MITL Live Network Shows
+## MiTL Live Network Shows
 
-Guest Engine is the front door to the MITL Live Network. AI matches each guest to the show and segment where their story hits hardest.
+Guest Engine is the front door to the MiTL Live Network. AI matches each guest to the show and segment where their story hits hardest.
 
 ### Mornings in the Lab (Flagship)
 - URL: https://mornings.live
@@ -37,15 +37,15 @@ Guest Engine is the front door to the MITL Live Network. AI matches each guest t
 
 ### It Starts with Joy LIVE
 - Format: Energy, purpose, and conversations that move people
-- Status: Active show on the MITL Live Network
+- Status: Active show on the MiTL Live Network
 
 ### The Jason Hewlett Show
 - Format: Performance, identity, and showing up as yourself
-- Status: Active show on the MITL Live Network
+- Status: Active show on the MiTL Live Network
 
 ### Kindness Rising
 - Format: Kindness-driven conversations and community impact
-- Status: Active show on the MITL Live Network
+- Status: Active show on the MiTL Live Network
 
 ---
 
@@ -72,7 +72,7 @@ Signal ENGINE runs overnight before the appearance:
 - The host walks in knowing the guest's world
 
 ### Step 4: Go Live
-Guest appears on a show in the MITL Live Network. Format options include:
+Guest appears on a show in the MiTL Live Network. Format options include:
 - Center Stage (featured interview)
 - Deep Dive (long-form exploration)
 - Conversation Desk (topic-driven panel)
@@ -136,7 +136,7 @@ Guest Engine serves these professional verticals with tailored messaging, delive
 - Cross-promotion clips driving audience to your show
 - Behind-the-scenes content for your social channels
 - SEO profile with show links and episode archive
-- Access to MITL production stack for your own show
+- Access to MiTL production stack for your own show
 - Audience: podcast hosts, show hosts, content creators, media hosts, livestream hosts
 
 ### Consultants & Fractional Executives — https://guestengine.live/consultants/
@@ -293,7 +293,7 @@ Join page: https://guestengine.live/join/
 
 ---
 
-## MITL Ecosystem — Full Site Graph
+## MiTL Ecosystem — Full Site Graph
 
 | Site | URL | Role |
 |------|-----|------|
@@ -302,9 +302,9 @@ Join page: https://guestengine.live/join/
 | ConversationOS | https://conversationos.live | AI production platform — the operating system behind Guest Engine |
 | ConversationOS App | https://app.conversationos.live | Platform application for hosts and producers |
 | ClipENGINE | https://clips.conversationos.live | Automated clip generation marketplace |
-| MITL Studio | https://mitl.studio | Network headquarters and production company |
-| MITL Production | https://production.mitl.studio | Production services and technical infrastructure |
-| This Is MITL | https://thisis.mitl.studio | Network identity and culture |
+| MiTL Studio | https://mitl.studio | Network headquarters and production company |
+| MiTL Production | https://production.mitl.studio | Production services and technical infrastructure |
+| This Is MiTL | https://thisis.mitl.studio | Network identity and culture |
 | Mornings in the Lab | https://mornings.live | Daily live morning show — flagship of the network |
 | Keith Bilous | https://keithbilous.com | Founder personal site |
 
@@ -330,8 +330,8 @@ Join page: https://guestengine.live/join/
 
 | Platform | URL |
 |----------|-----|
-| YouTube | https://youtube.com/@morningsinthelab |
-| LinkedIn | https://linkedin.com/in/keithbilous |
+| YouTube | https://www.youtube.com/@morningsinthelab |
+| LinkedIn | https://www.linkedin.com/in/keithbilous |
 | X / Twitter | https://x.com/keithbilous |
 
 ---
@@ -341,7 +341,7 @@ Join page: https://guestengine.live/join/
 1. Production included — not just matchmaking
 2. SEO + GEO profiles indexed by Google and AI search engines (Perplexity, ChatGPT, Gemini, Claude)
 3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character, Signal engines)
-4. Part of the MITL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
+4. Part of the MiTL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
 5. AI producer Sophia handles the entire guest lifecycle
 6. Signal ENGINE researches 30 days of community discourse before each appearance
 7. Created by Keith Bilous — AI-powered matching, human-led production
@@ -384,6 +384,6 @@ Guest Engine is built on the ConversationOS platform and integrates with:
 - Show: https://mornings.live
 - Platform inquiries: https://conversationos.live
 - Founder: Keith Bilous — https://keithbilous.com
-- YouTube: https://youtube.com/@morningsinthelab
-- LinkedIn: https://linkedin.com/in/keithbilous
+- YouTube: https://www.youtube.com/@morningsinthelab
+- LinkedIn: https://www.linkedin.com/in/keithbilous
 - X / Twitter: https://x.com/keithbilous

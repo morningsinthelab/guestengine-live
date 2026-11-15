@@ -40,7 +40,7 @@ const verticals = {
     slug: 'podcasters',
     audience: 'podcast hosts, podcasters, show hosts, content creators, media hosts, livestream hosts',
     serviceType: 'Guest Appearance & Content Production for Podcast Hosts',
-    description: 'Guest Engine for podcast hosts — cross-promote your show with a live appearance, get clips for your feed, an SEO profile, and access to the MITL production stack.',
+    description: 'Guest Engine for podcast hosts — cross-promote your show with a live appearance, get clips for your feed, an SEO profile, and access to the MiTL production stack.',
   },
   consultants: {
     name: 'Consultants & Fractional Executives',
@@ -148,7 +148,7 @@ Guest Engine is a two-sided guest placement platform for podcast and live show h
 Guest Engine connects guests who want to be featured on live shows with hosts who need quality guests — and produces the entire experience end-to-end.
 
 ### For Guests
-- Book appearances on live shows across the MITL Live Network
+- Book appearances on live shows across the MiTL Live Network
 - AI producer (Sophia) handles pre-show prep, topic angles, and green room briefing
 - Walk away with 7 deliverables: live appearance, 5 video clips, 10 social posts, full transcript, SEO profile page, backlinks, and highlight reel
 - One flat fee: $497 per appearance
@@ -192,7 +192,7 @@ Guest Engine serves specific professional verticals with tailored positioning:
 1. Production included — not just matchmaking
 2. SEO + GEO profiles indexed by Google and AI search engines (Perplexity, ChatGPT, Gemini)
 3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character engines)
-4. Part of the MITL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
+4. Part of the MiTL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
 5. AI producer Sophia handles the entire guest lifecycle
 6. Created by Keith Bilous — AI-powered matching, human-led production
 
@@ -218,7 +218,7 @@ const llmsFullTxt = `# Guest Engine — Full Documentation
 
 Guest Engine is a two-sided guest placement and production platform. It connects guests seeking live show appearances with hosts who need quality guests — then produces the entire experience end-to-end. Unlike matchmaking platforms (PodMatch, Matchmaker.fm), Guest Engine includes full production: clips, social posts, transcripts, SEO profiles, and highlight reels.
 
-Created by Keith Bilous, founder of the MITL morning format and the ConversationOS production system. AI-powered matching. Human-led production.
+Created by Keith Bilous, founder of the MiTL morning format and the ConversationOS production system. AI-powered matching. Human-led production.
 
 ---
 
@@ -255,7 +255,7 @@ Sophia (AI producer) handles:
 - Guest prep packet delivery
 
 ### Step 4: Go Live
-Guest appears on a show in the MITL Live Network. Format options include:
+Guest appears on a show in the MiTL Live Network. Format options include:
 - Center Stage (featured interview)
 - Deep Dive (long-form exploration)
 - Community Corner (community conversation)
@@ -315,7 +315,7 @@ Guest Engine serves these professional verticals with tailored messaging, delive
 - Cross-promotion clips driving audience to your show
 - Behind-the-scenes content for your social channels
 - SEO profile with show links and episode archive
-- Access to MITL production stack for your own show
+- Access to MiTL production stack for your own show
 - Audience: podcast hosts, show hosts, content creators, media hosts, livestream hosts
 
 ### Consultants & Fractional Executives — https://guestengine.live/consultants/
@@ -368,7 +368,7 @@ Hosts create a show profile with:
 
 ---
 
-## The MITL Live Network
+## The MiTL Live Network
 
 Guest Engine is the front door to the Mornings in the Lab Live Network:
 - 800+ episodes produced
@@ -380,7 +380,7 @@ Guest Engine is the front door to the Mornings in the Lab Live Network:
 
 ---
 
-## MITL Network — Family of Sites
+## MiTL Network — Family of Sites
 
 | Site | URL | Description |
 |------|-----|-------------|
@@ -388,8 +388,8 @@ Guest Engine is the front door to the Mornings in the Lab Live Network:
 | Guest Engine (app) | https://app.conversationos.live | Guest booking and profiles app |
 | ConversationOS | https://conversationos.live | Show production platform |
 | ConversationOS App | https://app.conversationos.live | Platform application |
-| MITL Studio | https://mitl.studio | Network headquarters |
-| MITL Production | https://production.mitl.studio | Production services |
+| MiTL Studio | https://mitl.studio | Network headquarters |
+| MiTL Production | https://production.mitl.studio | Production services |
 | Mornings in the Lab | https://mornings.live | Daily live morning show |
 | Keith Bilous | https://keithbilous.com | Founder personal site |
 
@@ -480,7 +480,7 @@ const agentJson = {
   "version": "1.1.0",
   "capabilities": {
     "guest_booking": {
-      "description": "Book guest appearances on live shows across the MITL Live Network",
+      "description": "Book guest appearances on live shows across the MiTL Live Network",
       "endpoint": "https://app.conversationos.live"
     },
     "guest_profiles": {
@@ -540,7 +540,7 @@ const agentJson = {
     "app_url": "https://app.conversationos.live"
   },
   "network": {
-    "name": "MITL Live Network",
+    "name": "MiTL Live Network",
     "url": "https://mitl.studio",
     "production_url": "https://production.mitl.studio",
     "show_url": "https://mornings.live",
