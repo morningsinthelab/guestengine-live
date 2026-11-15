@@ -192,7 +192,7 @@ Guest Engine serves specific professional verticals with tailored positioning:
 1. Production included — not just matchmaking
 2. SEO + GEO profiles indexed by Google and AI search engines (Perplexity, ChatGPT, Gemini)
 3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character engines)
-4. Part of the MITL Live Network (800+ episodes, 700+ consecutive mornings, 3 years daily LIVE)
+4. Part of the MITL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
 5. AI producer Sophia handles the entire guest lifecycle
 6. Created by Keith Bilous — AI-powered matching, human-led production
 
@@ -372,7 +372,7 @@ Hosts create a show profile with:
 
 Guest Engine is the front door to the Mornings in the Lab Live Network:
 - 800+ episodes produced
-- 700+ consecutive mornings broadcasting
+- 800+ consecutive mornings broadcasting
 - 3 years of daily LIVE content
 - Flagship: Mornings in the Lab with Keith & Jon
 - Multiple show formats across the network

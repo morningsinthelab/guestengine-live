@@ -129,7 +129,7 @@ Join page: https://guestengine.live/join/
 1. Production included — not just matchmaking
 2. SEO + GEO profiles indexed by Google and AI search engines (Perplexity, ChatGPT, Gemini, Claude)
 3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character engines)
-4. Part of the MITL Live Network (800+ episodes, 700+ consecutive mornings, 3 years daily LIVE)
+4. Part of the MITL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
 5. AI producer Sophia handles the entire guest lifecycle
 6. Signal ENGINE researches 30 days of community discourse before each appearance
 7. Created by Keith Bilous — AI-powered matching, human-led production

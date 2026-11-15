@@ -32,7 +32,7 @@ Guest Engine is the front door to the MITL Live Network. AI matches each guest t
 ### Mornings in the Lab (Flagship)
 - URL: https://mornings.live
 - Format: Daily live morning show with Keith Bilous, Jon & Friends
-- 800+ episodes produced, 700+ consecutive mornings, 3 years of daily LIVE broadcasting
+- 800+ episodes produced, 800+ consecutive mornings, 3 years of daily LIVE broadcasting
 - Segments: Center Stage (deep spotlights), Conversation Desk (topic-driven panels), Deep Dive (long-form exploration), Community Corner (community conversations), Did You Know, No Safe Words, BS or No BS, Jon Before You Go, Morning Focus
 
 ### It Starts with Joy LIVE
@@ -341,7 +341,7 @@ Join page: https://guestengine.live/join/
 1. Production included — not just matchmaking
 2. SEO + GEO profiles indexed by Google and AI search engines (Perplexity, ChatGPT, Gemini, Claude)
 3. Powered by ConversationOS (Build, Clip, Distribution, Narrative, Character, Signal engines)
-4. Part of the MITL Live Network (800+ episodes, 700+ consecutive mornings, 3 years daily LIVE)
+4. Part of the MITL Live Network (800+ episodes, 800+ consecutive mornings, 3 years daily LIVE)
 5. AI producer Sophia handles the entire guest lifecycle
 6. Signal ENGINE researches 30 days of community discourse before each appearance
 7. Created by Keith Bilous — AI-powered matching, human-led production
